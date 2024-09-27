@@ -22,14 +22,11 @@ namespace System.CommandLine.Benchmarks.CommandLine
         /// count=1  : { "suggestion0" }
         /// count=5  : { "suggestion0", .., "suggestion5" }
         /// </remarks>
-        private string[] GenerateSuggestionsArray(int count)
-            => Enumerable.Range(0, count)
-                         .Select(i => $"suggestion{i}")
-                         .ToArray();
+        private string[] GenerateSuggestionsArray(int count) =>
+            Enumerable.Range(0, count).Select(i => $"suggestion{i}").ToArray();
 
-        private IEnumerable<CliOption> GenerateOptionsArray(int count)
-            => Enumerable.Range(0, count)
-                         .Select(i => new CliOption<string>($"suggestion{i}"));
+        private IEnumerable<CliOption> GenerateOptionsArray(int count) =>
+            Enumerable.Range(0, count).Select(i => new CliOption<string>($"suggestion{i}"));
 
         [Params(1, 5, 20, 100)]
         public int TestSuggestionsCount;

@@ -1,0 +1,20 @@
+using System;
+
+struct X
+{
+    public static implicit operator string(X x)
+    {
+        return "x";
+    }
+}
+
+class Test
+{
+    public static int Main()
+    {
+        X x = new X();
+        Console.WriteLine(x);
+
+        return 0;
+    }
+}

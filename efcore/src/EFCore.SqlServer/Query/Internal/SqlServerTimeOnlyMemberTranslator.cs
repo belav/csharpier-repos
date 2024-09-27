@@ -13,13 +13,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerTimeOnlyMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMappings = new()
-    {
-        { nameof(TimeOnly.Hour), "hour" },
-        { nameof(TimeOnly.Minute), "minute" },
-        { nameof(TimeOnly.Second), "second" },
-        { nameof(TimeOnly.Millisecond), "millisecond" }
-    };
+    private static readonly Dictionary<string, string> DatePartMappings =
+        new()
+        {
+            { nameof(TimeOnly.Hour), "hour" },
+            { nameof(TimeOnly.Minute), "minute" },
+            { nameof(TimeOnly.Second), "second" },
+            { nameof(TimeOnly.Millisecond), "millisecond" },
+        };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -44,15 +45,21 @@ public class SqlServerTimeOnlyMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (member.DeclaringType == typeof(TimeOnly) && DatePartMappings.TryGetValue(member.Name, out var value))
+        if (
+            member.DeclaringType == typeof(TimeOnly)
+            && DatePartMappings.TryGetValue(member.Name, out var value)
+        )
         {
             return _sqlExpressionFactory.Function(
-                "DATEPART", new[] { _sqlExpressionFactory.Fragment(value), instance! },
+                "DATEPART",
+                new[] { _sqlExpressionFactory.Fragment(value), instance! },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true },
-                returnType);
+                returnType
+            );
         }
 
         return null;

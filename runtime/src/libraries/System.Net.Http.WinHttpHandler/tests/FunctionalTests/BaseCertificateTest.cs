@@ -46,7 +46,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             HttpRequestMessage sender,
             X509Certificate2 certificate,
             X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             _validationCallbackHistory.WasCalled = true;
             _validationCallbackHistory.CertificateSubject = certificate.Subject;
@@ -74,15 +75,16 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         {
             Assert.Equal(SslPolicyErrors.None, _validationCallbackHistory.SslPolicyErrors);
             Assert.True(_validationCallbackHistory.CertificateChain.Count > 0);
-            _output.WriteLine("Certificate.Subject: {0}", _validationCallbackHistory.CertificateSubject);
+            _output.WriteLine(
+                "Certificate.Subject: {0}",
+                _validationCallbackHistory.CertificateSubject
+            );
             _output.WriteLine("Expected HostName: {0}", expectedHostName);
         }
 
         public class CustomException : Exception
         {
-            public CustomException()
-            {
-            }
+            public CustomException() { }
         }
     }
 }

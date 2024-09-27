@@ -1,0 +1,29 @@
+// ==++==
+//
+//   Copyright (c) Microsoft Corporation.  All rights reserved.
+//
+// ==--==
+// ISecurityPolicyEncodable.cs
+//
+// <OWNER>ShawnFa</OWNER>
+//
+// All encodable security classes that support encoding need to
+// implement this interface
+//
+
+namespace System.Security
+{
+    using System;
+    using System.Security.Policy;
+    using System.Security.Util;
+
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface ISecurityPolicyEncodable
+    {
+#if FEATURE_CAS_POLICY
+        SecurityElement ToXml(PolicyLevel level);
+
+        void FromXml(SecurityElement e, PolicyLevel level);
+#endif // FEATURE_CAS_POLICY
+    }
+}

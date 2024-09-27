@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace DefaultNamespace
 {
     public class Bug_Cb4270
@@ -14,11 +13,13 @@ namespace DefaultNamespace
         {
             char c2 = ' ';
 
-            Console.WriteLine("Next will fall into 'short' loop"); Console.Out.Flush();
+            Console.WriteLine("Next will fall into 'short' loop");
+            Console.Out.Flush();
 
             for (short aa = 0; aa <= 128; aa++)
             {
-                Console.WriteLine("aa==" + aa); Console.Out.Flush();
+                Console.WriteLine("aa==" + aa);
+                Console.Out.Flush();
 
                 if (aa <= 127)
                     c2 = (char)aa;

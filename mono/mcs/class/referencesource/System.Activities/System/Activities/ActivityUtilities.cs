@@ -48,7 +48,7 @@ namespace System.Activities
         static Type iDictionaryGenericType = typeof(IDictionary<,>);
         static Type locationReferenceValueType = typeof(LocationReferenceValue<>);
         static Type environmentLocationValueType = typeof(EnvironmentLocationValue<>);
-        static Type environmentLocationReferenceType = typeof(EnvironmentLocationReference<>); 
+        static Type environmentLocationReferenceType = typeof(EnvironmentLocationReference<>);
         static IList<Type> collectionInterfaces;
         static Type inArgumentOfObjectType = typeof(InArgument<object>);
         static Type outArgumentOfObjectType = typeof(OutArgument<object>);
@@ -56,14 +56,12 @@ namespace System.Activities
         static PropertyChangedEventArgs propertyChangedEventArgs;
 
         // Can't delay create this one because we use object.ReferenceEquals on it in WorkflowInstance
-        static ReadOnlyDictionaryInternal<string, object> emptyParameters = new ReadOnlyDictionaryInternal<string, object>(new Dictionary<string, object>(0));
+        static ReadOnlyDictionaryInternal<string, object> emptyParameters =
+            new ReadOnlyDictionaryInternal<string, object>(new Dictionary<string, object>(0));
 
         public static ReadOnlyDictionaryInternal<string, object> EmptyParameters
         {
-            get
-            {
-                return emptyParameters;
-            }
+            get { return emptyParameters; }
         }
 
         internal static PropertyChangedEventArgs ValuePropertyChangedEventArgs
@@ -85,10 +83,10 @@ namespace System.Activities
                 if (collectionInterfaces == null)
                 {
                     collectionInterfaces = new List<Type>(2)
-                        {
-                            typeof(IList<>),
-                            typeof(ICollection<>)
-                        };
+                    {
+                        typeof(IList<>),
+                        typeof(ICollection<>),
+                    };
                 }
                 return collectionInterfaces;
             }
@@ -122,10 +120,14 @@ namespace System.Activities
             return state != ActivityInstanceState.Executing;
         }
 
-        public static bool TryGetArgumentDirectionAndType(Type propertyType, out ArgumentDirection direction, out Type argumentType)
+        public static bool TryGetArgumentDirectionAndType(
+            Type propertyType,
+            out ArgumentDirection direction,
+            out Type argumentType
+        )
         {
             direction = ArgumentDirection.In; // default to In
-            argumentType = TypeHelper.ObjectType;  // default to object
+            argumentType = TypeHelper.ObjectType; // default to object
 
             if (propertyType.IsGenericType)
             {
@@ -199,8 +201,10 @@ namespace System.Activities
                 {
                     foreach (Type interfaceType in type.GetInterfaces())
                     {
-                        if (interfaceType.IsGenericType &&
-                            interfaceType.GetGenericTypeDefinition() == iDictionaryGenericType)
+                        if (
+                            interfaceType.IsGenericType
+                            && interfaceType.GetGenericTypeDefinition() == iDictionaryGenericType
+                        )
                         {
                             implementsIDictionary = true;
                             dictionaryInterfaceType = interfaceType;
@@ -212,8 +216,10 @@ namespace System.Activities
                 if (implementsIDictionary == true)
                 {
                     Type[] genericArguments = dictionaryInterfaceType.GetGenericArguments();
-                    if (genericArguments[0] == TypeHelper.StringType &&
-                        IsArgumentType(genericArguments[1]))
+                    if (
+                        genericArguments[0] == TypeHelper.StringType
+                        && IsArgumentType(genericArguments[1])
+                    )
                     {
                         innerType = genericArguments[1];
                         return true;
@@ -280,7 +286,7 @@ namespace System.Activities
         {
             return TypeHelper.AreTypesCompatible(propertyType, activityDelegateType);
         }
-        
+
         public static bool IsActivityType(Type propertyType)
         {
             return IsActivityType(propertyType, true);
@@ -294,13 +300,18 @@ namespace System.Activities
             }
 
             // sometimes (for reflection analysis of Activity properties) we don't want constraints to count
-            return includeConstraints || !TypeHelper.AreTypesCompatible(propertyType, constraintType);
+            return includeConstraints
+                || !TypeHelper.AreTypesCompatible(propertyType, constraintType);
         }
 
-        public static bool TryGetDelegateArgumentDirectionAndType(Type propertyType, out ArgumentDirection direction, out Type argumentType)
+        public static bool TryGetDelegateArgumentDirectionAndType(
+            Type propertyType,
+            out ArgumentDirection direction,
+            out Type argumentType
+        )
         {
             direction = ArgumentDirection.In; // default to In
-            argumentType = TypeHelper.ObjectType;  // default to object
+            argumentType = TypeHelper.ObjectType; // default to object
 
             if (propertyType.IsGenericType)
             {
@@ -338,7 +349,10 @@ namespace System.Activities
 
         public static bool IsVariableType(Type propertyType, out Type innerType)
         {
-            if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == variableGenericType)
+            if (
+                propertyType.IsGenericType
+                && propertyType.GetGenericTypeDefinition() == variableGenericType
+            )
             {
                 innerType = propertyType.GetGenericArguments()[0];
                 return true;
@@ -350,7 +364,10 @@ namespace System.Activities
 
         public static bool IsVariableType(Type propertyType)
         {
-            if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == variableGenericType)
+            if (
+                propertyType.IsGenericType
+                && propertyType.GetGenericTypeDefinition() == variableGenericType
+            )
             {
                 return true;
             }
@@ -372,15 +389,28 @@ namespace System.Activities
 
         public static object CreateVariableReference(Variable variable)
         {
-            Type genericVariableReferenceType = variableReferenceGenericType.MakeGenericType(variable.Type);
+            Type genericVariableReferenceType = variableReferenceGenericType.MakeGenericType(
+                variable.Type
+            );
             object variableReference = Activator.CreateInstance(genericVariableReferenceType);
-            genericVariableReferenceType.GetProperty("Variable").SetValue(variableReference, variable, null);
+            genericVariableReferenceType
+                .GetProperty("Variable")
+                .SetValue(variableReference, variable, null);
             return variableReference;
         }
 
-        public static ActivityWithResult CreateLocationAccessExpression(LocationReference locationReference, bool isReference, bool useLocationReferenceValue)
+        public static ActivityWithResult CreateLocationAccessExpression(
+            LocationReference locationReference,
+            bool isReference,
+            bool useLocationReferenceValue
+        )
         {
-            return LocationAccessExpressionTypeDefinitionsCache.CreateNewLocationAccessExpression(locationReference.Type, isReference, useLocationReferenceValue, locationReference);
+            return LocationAccessExpressionTypeDefinitionsCache.CreateNewLocationAccessExpression(
+                locationReference.Type,
+                isReference,
+                useLocationReferenceValue,
+                locationReference
+            );
         }
 
         public static Argument CreateArgument(Type type, ArgumentDirection direction)
@@ -422,21 +452,31 @@ namespace System.Activities
             return activityGenericType.MakeGenericType(resultType);
         }
 
-        public static Argument CreateReferenceArgument(Type argumentType, ArgumentDirection direction, string referencedArgumentName)
+        public static Argument CreateReferenceArgument(
+            Type argumentType,
+            ArgumentDirection direction,
+            string referencedArgumentName
+        )
         {
             Argument argument = Argument.Create(argumentType, direction);
-            
+
             object argumentReference = null;
 
             if (direction == ArgumentDirection.In)
             {
                 // If it is an In then we need an ArgumentValue<T>
-                argumentReference = Activator.CreateInstance(argumentValueGenericType.MakeGenericType(argumentType), referencedArgumentName);
+                argumentReference = Activator.CreateInstance(
+                    argumentValueGenericType.MakeGenericType(argumentType),
+                    referencedArgumentName
+                );
             }
             else
             {
                 // If it is InOut or Out we need an ArgumentReference<T>
-                argumentReference = Activator.CreateInstance(argumentReferenceGenericType.MakeGenericType(argumentType), referencedArgumentName);
+                argumentReference = Activator.CreateInstance(
+                    argumentReferenceGenericType.MakeGenericType(argumentType),
+                    referencedArgumentName
+                );
             }
 
             argument.Expression = (ActivityWithResult)argumentReference;
@@ -492,11 +532,11 @@ namespace System.Activities
 
                 // remove the tick+number of parameters "generics format". Note that the
                 // tick won't exist for nested implicitly generic classes, such as Foo`1+Bar
-                if (tickIndex > 0) 
+                if (tickIndex > 0)
                 {
                     displayName = displayName.Substring(0, tickIndex);
                 }
-    
+
                 // and provide a more readable version based on the closure type names
                 Type[] genericArguments = sourceType.GetGenericArguments();
                 StringBuilder stringBuilder = new StringBuilder(displayName);
@@ -505,36 +545,70 @@ namespace System.Activities
                 {
                     stringBuilder.AppendFormat("{0},", GetDisplayName(genericArguments[i]));
                 }
-                stringBuilder.AppendFormat("{0}>", GetDisplayName(genericArguments[genericArguments.Length - 1]));
+                stringBuilder.AppendFormat(
+                    "{0}>",
+                    GetDisplayName(genericArguments[genericArguments.Length - 1])
+                );
                 return stringBuilder.ToString();
             }
             else
             {
-                Fx.Assert(!sourceType.IsGenericTypeDefinition, "we have an actual object, so we should never have a generic type definition");
+                Fx.Assert(
+                    !sourceType.IsGenericTypeDefinition,
+                    "we have an actual object, so we should never have a generic type definition"
+                );
                 return sourceType.Name;
             }
         }
 
         internal static void ValidateOrigin(object origin, Activity activity)
         {
-            if (origin != null &&
-                (origin is Activity || origin is Argument || origin is ActivityDelegate || origin is LocationReference))
+            if (
+                origin != null
+                && (
+                    origin is Activity
+                    || origin is Argument
+                    || origin is ActivityDelegate
+                    || origin is LocationReference
+                )
+            )
             {
-                activity.AddTempValidationError(new ValidationError(SR.OriginCannotBeRuntimeIntrinsic(origin)));
+                activity.AddTempValidationError(
+                    new ValidationError(SR.OriginCannotBeRuntimeIntrinsic(origin))
+                );
             }
         }
 
         // Returns true if there are any children
-        static void ProcessChildren(Activity parent, IList<Activity> children, ActivityCollectionType collectionType, bool addChildren, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining, ref IList<ValidationError> validationErrors)
+        static void ProcessChildren(
+            Activity parent,
+            IList<Activity> children,
+            ActivityCollectionType collectionType,
+            bool addChildren,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining,
+            ref IList<ValidationError> validationErrors
+        )
         {
             for (int i = 0; i < children.Count; i++)
             {
                 Activity childActivity = children[i];
-                if (childActivity.InitializeRelationship(parent, collectionType, ref validationErrors))
+                if (
+                    childActivity.InitializeRelationship(
+                        parent,
+                        collectionType,
+                        ref validationErrors
+                    )
+                )
                 {
                     if (addChildren)
                     {
-                        SetupForProcessing(childActivity, collectionType != ActivityCollectionType.Imports, ref nextActivity, ref activitiesRemaining);
+                        SetupForProcessing(
+                            childActivity,
+                            collectionType != ActivityCollectionType.Imports,
+                            ref nextActivity,
+                            ref activitiesRemaining
+                        );
                     }
                 }
             }
@@ -542,13 +616,24 @@ namespace System.Activities
 
         // Note that we do not need an "isPublicCollection" parameter since all arguments are public
         // Returns true if there are any non-null expressions
-        static void ProcessArguments(Activity parent, IList<RuntimeArgument> arguments, bool addChildren, ref ActivityLocationReferenceEnvironment environment, ref int nextEnvironmentId, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining, ref IList<ValidationError> validationErrors)
+        static void ProcessArguments(
+            Activity parent,
+            IList<RuntimeArgument> arguments,
+            bool addChildren,
+            ref ActivityLocationReferenceEnvironment environment,
+            ref int nextEnvironmentId,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (arguments.Count > 0)
             {
                 if (environment == null)
                 {
-                    environment = new ActivityLocationReferenceEnvironment(parent.GetParentEnvironment());
+                    environment = new ActivityLocationReferenceEnvironment(
+                        parent.GetParentEnvironment()
+                    );
                 }
 
                 for (int i = 0; i < arguments.Count; i++)
@@ -573,19 +658,37 @@ namespace System.Activities
         }
 
         // Returns true if there are any non-null defaults
-        static void ProcessVariables(Activity parent, IList<Variable> variables, ActivityCollectionType collectionType, bool addChildren, ref ActivityLocationReferenceEnvironment environment, ref int nextEnvironmentId, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining, ref IList<ValidationError> validationErrors)
+        static void ProcessVariables(
+            Activity parent,
+            IList<Variable> variables,
+            ActivityCollectionType collectionType,
+            bool addChildren,
+            ref ActivityLocationReferenceEnvironment environment,
+            ref int nextEnvironmentId,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (variables.Count > 0)
             {
                 if (environment == null)
                 {
-                    environment = new ActivityLocationReferenceEnvironment(parent.GetParentEnvironment());
+                    environment = new ActivityLocationReferenceEnvironment(
+                        parent.GetParentEnvironment()
+                    );
                 }
 
                 for (int i = 0; i < variables.Count; i++)
                 {
                     Variable variable = variables[i];
-                    if (variable.InitializeRelationship(parent, collectionType == ActivityCollectionType.Public, ref validationErrors))
+                    if (
+                        variable.InitializeRelationship(
+                            parent,
+                            collectionType == ActivityCollectionType.Public,
+                            ref validationErrors
+                        )
+                    )
                     {
                         variable.Id = nextEnvironmentId;
                         nextEnvironmentId++;
@@ -604,71 +707,167 @@ namespace System.Activities
         }
 
         // Returns true if there are any non-null handlers
-        static void ProcessDelegates(Activity parent, IList<ActivityDelegate> delegates, ActivityCollectionType collectionType, bool addChildren, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining, ref IList<ValidationError> validationErrors)
+        static void ProcessDelegates(
+            Activity parent,
+            IList<ActivityDelegate> delegates,
+            ActivityCollectionType collectionType,
+            bool addChildren,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining,
+            ref IList<ValidationError> validationErrors
+        )
         {
             for (int i = 0; i < delegates.Count; i++)
             {
                 ActivityDelegate activityDelegate = delegates[i];
-                if (activityDelegate.InitializeRelationship(parent, collectionType, ref validationErrors))
+                if (
+                    activityDelegate.InitializeRelationship(
+                        parent,
+                        collectionType,
+                        ref validationErrors
+                    )
+                )
                 {
                     if (addChildren)
                     {
-                        SetupForProcessing(activityDelegate, collectionType != ActivityCollectionType.Imports, ref nextActivity, ref activitiesRemaining);
+                        SetupForProcessing(
+                            activityDelegate,
+                            collectionType != ActivityCollectionType.Imports,
+                            ref nextActivity,
+                            ref activitiesRemaining
+                        );
                     }
                 }
             }
         }
 
-        static void ProcessActivity(ChildActivity childActivity, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining, ActivityCallStack parentChain, ref IList<ValidationError> validationErrors, ProcessActivityTreeOptions options, ProcessActivityCallback callback)
+        static void ProcessActivity(
+            ChildActivity childActivity,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining,
+            ActivityCallStack parentChain,
+            ref IList<ValidationError> validationErrors,
+            ProcessActivityTreeOptions options,
+            ProcessActivityCallback callback
+        )
         {
             Fx.Assert(options != null, "options should not be null.");
 
             if (options.CancellationToken.IsCancellationRequested)
             {
-                throw FxTrace.Exception.AsError(new OperationCanceledException(options.CancellationToken));
+                throw FxTrace.Exception.AsError(
+                    new OperationCanceledException(options.CancellationToken)
+                );
             }
 
             Activity activity = childActivity.Activity;
             IList<Constraint> constraints = activity.RuntimeConstraints;
             IList<ValidationError> tempValidationErrors = null;
 
-            Fx.Assert(validationErrors == null || !options.StoreTempViolations, "Incoming violations should be null if we are storing them in Activity.tempViolations.");
+            Fx.Assert(
+                validationErrors == null || !options.StoreTempViolations,
+                "Incoming violations should be null if we are storing them in Activity.tempViolations."
+            );
 
             if (!activity.HasStartedCachingMetadata)
             {
                 // We need to add this activity to the IdSpace first so that we have a meaningful ID
                 // for any errors that may occur.
-                Fx.Assert(activity.MemberOf != null, "We always set this ahead of time - the root is set in InitializeAsRoot and all others are set in InitializeRelationship.");
+                Fx.Assert(
+                    activity.MemberOf != null,
+                    "We always set this ahead of time - the root is set in InitializeAsRoot and all others are set in InitializeRelationship."
+                );
                 activity.MemberOf.AddMember(activity);
 
                 if (TD.InternalCacheMetadataStartIsEnabled())
                 {
                     TD.InternalCacheMetadataStart(activity.Id);
                 }
-                activity.InternalCacheMetadata(options.CreateEmptyBindings, ref tempValidationErrors);
+                activity.InternalCacheMetadata(
+                    options.CreateEmptyBindings,
+                    ref tempValidationErrors
+                );
                 if (TD.InternalCacheMetadataStopIsEnabled())
                 {
                     TD.InternalCacheMetadataStop(activity.Id);
                 }
 
-                ActivityValidationServices.ValidateArguments(activity, activity.Parent == null, ref tempValidationErrors);
+                ActivityValidationServices.ValidateArguments(
+                    activity,
+                    activity.Parent == null,
+                    ref tempValidationErrors
+                );
 
                 ActivityLocationReferenceEnvironment newPublicEnvironment = null;
-                ActivityLocationReferenceEnvironment newImplementationEnvironment = new ActivityLocationReferenceEnvironment(activity.HostEnvironment)
-                {
-                    InternalRoot = activity
-                };
+                ActivityLocationReferenceEnvironment newImplementationEnvironment =
+                    new ActivityLocationReferenceEnvironment(activity.HostEnvironment)
+                    {
+                        InternalRoot = activity,
+                    };
 
                 int nextEnvironmentId = 0;
 
-                ProcessChildren(activity, activity.Children, ActivityCollectionType.Public, true, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
-                ProcessChildren(activity, activity.ImportedChildren, ActivityCollectionType.Imports, true, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
-                ProcessChildren(activity, activity.ImplementationChildren, ActivityCollectionType.Implementation, !options.SkipPrivateChildren, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
+                ProcessChildren(
+                    activity,
+                    activity.Children,
+                    ActivityCollectionType.Public,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
+                ProcessChildren(
+                    activity,
+                    activity.ImportedChildren,
+                    ActivityCollectionType.Imports,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
+                ProcessChildren(
+                    activity,
+                    activity.ImplementationChildren,
+                    ActivityCollectionType.Implementation,
+                    !options.SkipPrivateChildren,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
 
-                ProcessArguments(activity, activity.RuntimeArguments, true, ref newImplementationEnvironment, ref nextEnvironmentId, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
+                ProcessArguments(
+                    activity,
+                    activity.RuntimeArguments,
+                    true,
+                    ref newImplementationEnvironment,
+                    ref nextEnvironmentId,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
 
-                ProcessVariables(activity, activity.RuntimeVariables, ActivityCollectionType.Public, true, ref newPublicEnvironment, ref nextEnvironmentId, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
-                ProcessVariables(activity, activity.ImplementationVariables, ActivityCollectionType.Implementation, !options.SkipPrivateChildren, ref newImplementationEnvironment, ref nextEnvironmentId, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
+                ProcessVariables(
+                    activity,
+                    activity.RuntimeVariables,
+                    ActivityCollectionType.Public,
+                    true,
+                    ref newPublicEnvironment,
+                    ref nextEnvironmentId,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
+                ProcessVariables(
+                    activity,
+                    activity.ImplementationVariables,
+                    ActivityCollectionType.Implementation,
+                    !options.SkipPrivateChildren,
+                    ref newImplementationEnvironment,
+                    ref nextEnvironmentId,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
 
                 if (activity.HandlerOf != null)
                 {
@@ -679,7 +878,9 @@ namespace System.Activities
 
                     for (int i = 0; i < activity.HandlerOf.RuntimeDelegateArguments.Count; i++)
                     {
-                        RuntimeDelegateArgument delegateArgument = activity.HandlerOf.RuntimeDelegateArguments[i];
+                        RuntimeDelegateArgument delegateArgument = activity
+                            .HandlerOf
+                            .RuntimeDelegateArguments[i];
                         DelegateArgument boundArgument = delegateArgument.BoundArgument;
                         if (boundArgument != null)
                         {
@@ -688,7 +889,12 @@ namespace System.Activities
                             //
                             // And since they don't own an expression, there's no equivalent
                             // SetupForProcessing method for DelegateArguments
-                            if (boundArgument.InitializeRelationship(activity, ref tempValidationErrors))
+                            if (
+                                boundArgument.InitializeRelationship(
+                                    activity,
+                                    ref tempValidationErrors
+                                )
+                            )
                             {
                                 boundArgument.Id = nextEnvironmentId;
                                 nextEnvironmentId++;
@@ -700,7 +906,9 @@ namespace System.Activities
                 // NOTE: At this point the declared environment is complete (either we're using the parent or we've got a new one)
                 if (newPublicEnvironment == null)
                 {
-                    activity.PublicEnvironment = new ActivityLocationReferenceEnvironment(activity.GetParentEnvironment());
+                    activity.PublicEnvironment = new ActivityLocationReferenceEnvironment(
+                        activity.GetParentEnvironment()
+                    );
                 }
                 else
                 {
@@ -715,9 +923,33 @@ namespace System.Activities
                 activity.ImplementationEnvironment = newImplementationEnvironment;
 
                 // ProcessDelegates uses activity.Environment
-                ProcessDelegates(activity, activity.Delegates, ActivityCollectionType.Public, true, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
-                ProcessDelegates(activity, activity.ImportedDelegates, ActivityCollectionType.Imports, true, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
-                ProcessDelegates(activity, activity.ImplementationDelegates, ActivityCollectionType.Implementation, !options.SkipPrivateChildren, ref nextActivity, ref activitiesRemaining, ref tempValidationErrors);
+                ProcessDelegates(
+                    activity,
+                    activity.Delegates,
+                    ActivityCollectionType.Public,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
+                ProcessDelegates(
+                    activity,
+                    activity.ImportedDelegates,
+                    ActivityCollectionType.Imports,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
+                ProcessDelegates(
+                    activity,
+                    activity.ImplementationDelegates,
+                    ActivityCollectionType.Implementation,
+                    !options.SkipPrivateChildren,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    ref tempValidationErrors
+                );
 
                 if (callback != null)
                 {
@@ -732,7 +964,12 @@ namespace System.Activities
                         validationErrors = new List<ValidationError>();
                     }
                     Activity source;
-                    string prefix = ActivityValidationServices.GenerateValidationErrorPrefix(childActivity.Activity, parentChain, options, out source);
+                    string prefix = ActivityValidationServices.GenerateValidationErrorPrefix(
+                        childActivity.Activity,
+                        parentChain,
+                        options,
+                        out source
+                    );
 
                     for (int i = 0; i < tempValidationErrors.Count; i++)
                     {
@@ -768,21 +1005,63 @@ namespace System.Activities
 
                 // Add all the children for processing even though they've already
                 // been seen.
-                SetupForProcessing(activity.Children, true, ref nextActivity, ref activitiesRemaining);
-                SetupForProcessing(activity.ImportedChildren, false, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    activity.Children,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
+                SetupForProcessing(
+                    activity.ImportedChildren,
+                    false,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
 
-                SetupForProcessing(activity.RuntimeArguments, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    activity.RuntimeArguments,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
 
-                SetupForProcessing(activity.RuntimeVariables, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    activity.RuntimeVariables,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
 
-                SetupForProcessing(activity.Delegates, true, ref nextActivity, ref activitiesRemaining);
-                SetupForProcessing(activity.ImportedDelegates, false, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    activity.Delegates,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
+                SetupForProcessing(
+                    activity.ImportedDelegates,
+                    false,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
 
                 if (!options.SkipPrivateChildren)
                 {
-                    SetupForProcessing(activity.ImplementationChildren, true, ref nextActivity, ref activitiesRemaining);
-                    SetupForProcessing(activity.ImplementationDelegates, true, ref nextActivity, ref activitiesRemaining);
-                    SetupForProcessing(activity.ImplementationVariables, ref nextActivity, ref activitiesRemaining);
+                    SetupForProcessing(
+                        activity.ImplementationChildren,
+                        true,
+                        ref nextActivity,
+                        ref activitiesRemaining
+                    );
+                    SetupForProcessing(
+                        activity.ImplementationDelegates,
+                        true,
+                        ref nextActivity,
+                        ref activitiesRemaining
+                    );
+                    SetupForProcessing(
+                        activity.ImplementationVariables,
+                        ref nextActivity,
+                        ref activitiesRemaining
+                    );
                 }
 
                 if (callback != null && !options.OnlyCallCallbackForDeclarations)
@@ -794,19 +1073,37 @@ namespace System.Activities
                 {
                     childActivity.Activity.TransferTempValidationErrors(ref validationErrors);
                 }
-            }           
+            }
 
             // We only run constraints if the activity could possibly
             // execute and we aren't explicitly skipping them.
-            if (!options.SkipConstraints && parentChain.WillExecute && childActivity.CanBeExecuted && constraints.Count > 0)
+            if (
+                !options.SkipConstraints
+                && parentChain.WillExecute
+                && childActivity.CanBeExecuted
+                && constraints.Count > 0
+            )
             {
-                ActivityValidationServices.RunConstraints(childActivity, parentChain, constraints, options, false, ref validationErrors);
-            }           
+                ActivityValidationServices.RunConstraints(
+                    childActivity,
+                    parentChain,
+                    constraints,
+                    options,
+                    false,
+                    ref validationErrors
+                );
+            }
         }
 
         // We explicitly call this CacheRootMetadata since it treats the provided
         // activity as the root of the tree.
-        public static void CacheRootMetadata(Activity activity, LocationReferenceEnvironment hostEnvironment, ProcessActivityTreeOptions options, ProcessActivityCallback callback, ref IList<ValidationError> validationErrors)
+        public static void CacheRootMetadata(
+            Activity activity,
+            LocationReferenceEnvironment hostEnvironment,
+            ProcessActivityTreeOptions options,
+            ProcessActivityCallback callback,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (TD.CacheRootMetadataStartIsEnabled())
             {
@@ -820,17 +1117,32 @@ namespace System.Activities
                     {
                         if (activity.HasBeenAssociatedWithAnInstance)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RootActivityAlreadyAssociatedWithInstance(activity.DisplayName)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR.RootActivityAlreadyAssociatedWithInstance(
+                                        activity.DisplayName
+                                    )
+                                )
+                            );
                         }
 
                         activity.InitializeAsRoot(hostEnvironment);
 
-                        ProcessActivityTreeCore(new ChildActivity(activity, true), null, options, callback, ref validationErrors);
+                        ProcessActivityTreeCore(
+                            new ChildActivity(activity, true),
+                            null,
+                            options,
+                            callback,
+                            ref validationErrors
+                        );
 
                         // Regardless of where the violations came from we only want to
                         // set ourselves RuntimeReady if there are no errors and are
                         // fully cached.
-                        if (!ActivityValidationServices.HasErrors(validationErrors) && options.IsRuntimeReadyOptions)
+                        if (
+                            !ActivityValidationServices.HasErrors(validationErrors)
+                            && options.IsRuntimeReadyOptions
+                        )
                         {
                             // We don't really support progressive caching at runtime so we only set ourselves
                             // as runtime ready if we cached the whole workflow and created empty bindings.
@@ -854,21 +1166,40 @@ namespace System.Activities
 
         // This API is only valid from ProcessActivityCallbacks.  It will cache the rest of the subtree rooted at the
         // provided activity allowing inspection of child metadata before the normal caching pass hits it.
-        public static void FinishCachingSubtree(ChildActivity subtreeRoot, ActivityCallStack parentChain, ProcessActivityTreeOptions options)
+        public static void FinishCachingSubtree(
+            ChildActivity subtreeRoot,
+            ActivityCallStack parentChain,
+            ProcessActivityTreeOptions options
+        )
         {
             IList<ValidationError> discardedValidationErrors = null;
-            ProcessActivityTreeCore(subtreeRoot, parentChain, ProcessActivityTreeOptions.GetFinishCachingSubtreeOptions(options), new ProcessActivityCallback(NoOpCallback), ref discardedValidationErrors);
+            ProcessActivityTreeCore(
+                subtreeRoot,
+                parentChain,
+                ProcessActivityTreeOptions.GetFinishCachingSubtreeOptions(options),
+                new ProcessActivityCallback(NoOpCallback),
+                ref discardedValidationErrors
+            );
         }
 
-        public static void FinishCachingSubtree(ChildActivity subtreeRoot, ActivityCallStack parentChain, ProcessActivityTreeOptions options, ProcessActivityCallback callback)
+        public static void FinishCachingSubtree(
+            ChildActivity subtreeRoot,
+            ActivityCallStack parentChain,
+            ProcessActivityTreeOptions options,
+            ProcessActivityCallback callback
+        )
         {
             IList<ValidationError> discardedValidationErrors = null;
-            ProcessActivityTreeCore(subtreeRoot, parentChain, ProcessActivityTreeOptions.GetFinishCachingSubtreeOptions(options), callback, ref discardedValidationErrors);
+            ProcessActivityTreeCore(
+                subtreeRoot,
+                parentChain,
+                ProcessActivityTreeOptions.GetFinishCachingSubtreeOptions(options),
+                callback,
+                ref discardedValidationErrors
+            );
         }
 
-        static void NoOpCallback(ChildActivity element, ActivityCallStack parentChain)
-        {
-        }
+        static void NoOpCallback(ChildActivity element, ActivityCallStack parentChain) { }
 
         static bool ShouldShortcut(Activity activity, ProcessActivityTreeOptions options)
         {
@@ -880,10 +1211,19 @@ namespace System.Activities
             return false;
         }
 
-        static void ProcessActivityTreeCore(ChildActivity currentActivity, ActivityCallStack parentChain, ProcessActivityTreeOptions options, ProcessActivityCallback callback, ref IList<ValidationError> validationErrors)
+        static void ProcessActivityTreeCore(
+            ChildActivity currentActivity,
+            ActivityCallStack parentChain,
+            ProcessActivityTreeOptions options,
+            ProcessActivityCallback callback,
+            ref IList<ValidationError> validationErrors
+        )
         {
             Fx.Assert(options != null, "We need you to explicitly specify options.");
-            Fx.Assert(currentActivity.Activity.MemberOf != null, "We must have an activity with MemberOf setup or we need to skipIdGeneration.");
+            Fx.Assert(
+                currentActivity.Activity.MemberOf != null,
+                "We must have an activity with MemberOf setup or we need to skipIdGeneration."
+            );
 
             ChildActivity nextActivity = ChildActivity.Empty;
             Stack<ChildActivity> activitiesRemaining = null;
@@ -895,7 +1235,15 @@ namespace System.Activities
 
             if (options.OnlyVisitSingleLevel)
             {
-                ProcessActivity(currentActivity, ref nextActivity, ref activitiesRemaining, parentChain, ref validationErrors, options, callback);
+                ProcessActivity(
+                    currentActivity,
+                    ref nextActivity,
+                    ref activitiesRemaining,
+                    parentChain,
+                    ref validationErrors,
+                    options,
+                    callback
+                );
             }
             else
             {
@@ -904,12 +1252,27 @@ namespace System.Activities
                     if (object.ReferenceEquals(currentActivity.Activity, popActivity))
                     {
                         ChildActivity completedParent = parentChain.Pop();
-                        completedParent.Activity.SetCached(isSkippingPrivateChildren: options.SkipPrivateChildren);
+                        completedParent.Activity.SetCached(
+                            isSkippingPrivateChildren: options.SkipPrivateChildren
+                        );
                     }
                     else
                     {
-                        SetupForProcessing(popActivity, true, ref nextActivity, ref activitiesRemaining);
-                        ProcessActivity(currentActivity, ref nextActivity, ref activitiesRemaining, parentChain, ref validationErrors, options, callback);
+                        SetupForProcessing(
+                            popActivity,
+                            true,
+                            ref nextActivity,
+                            ref activitiesRemaining
+                        );
+                        ProcessActivity(
+                            currentActivity,
+                            ref nextActivity,
+                            ref activitiesRemaining,
+                            parentChain,
+                            ref validationErrors,
+                            options,
+                            callback
+                        );
                         parentChain.Push(currentActivity);
                     }
 
@@ -929,23 +1292,47 @@ namespace System.Activities
             }
         }
 
-        static void SetupForProcessing(IList<Activity> children, bool canBeExecuted, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            IList<Activity> children,
+            bool canBeExecuted,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             for (int i = 0; i < children.Count; i++)
             {
-                SetupForProcessing(children[i], canBeExecuted, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    children[i],
+                    canBeExecuted,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
             }
         }
 
-        static void SetupForProcessing(IList<ActivityDelegate> delegates, bool canBeExecuted, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            IList<ActivityDelegate> delegates,
+            bool canBeExecuted,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             for (int i = 0; i < delegates.Count; i++)
             {
-                SetupForProcessing(delegates[i], canBeExecuted, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    delegates[i],
+                    canBeExecuted,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
             }
         }
 
-        static void SetupForProcessing(IList<Variable> variables, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            IList<Variable> variables,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             for (int i = 0; i < variables.Count; i++)
             {
@@ -953,7 +1340,11 @@ namespace System.Activities
             }
         }
 
-        static void SetupForProcessing(IList<RuntimeArgument> arguments, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            IList<RuntimeArgument> arguments,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             for (int i = 0; i < arguments.Count; i++)
             {
@@ -961,32 +1352,65 @@ namespace System.Activities
             }
         }
 
-        static void SetupForProcessing(ActivityDelegate activityDelegate, bool canBeExecuted, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            ActivityDelegate activityDelegate,
+            bool canBeExecuted,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             if (activityDelegate.Handler != null)
             {
-                SetupForProcessing(activityDelegate.Handler, canBeExecuted, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    activityDelegate.Handler,
+                    canBeExecuted,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
             }
         }
 
-        static void SetupForProcessing(Variable variable, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            Variable variable,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             if (variable.Default != null)
             {
-                SetupForProcessing(variable.Default, true, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    variable.Default,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
             }
         }
 
-        static void SetupForProcessing(RuntimeArgument argument, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            RuntimeArgument argument,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             if (argument.BoundArgument != null && !argument.BoundArgument.IsEmpty)
             {
-                SetupForProcessing(argument.BoundArgument.Expression, true, ref nextActivity, ref activitiesRemaining);
+                SetupForProcessing(
+                    argument.BoundArgument.Expression,
+                    true,
+                    ref nextActivity,
+                    ref activitiesRemaining
+                );
             }
         }
 
         // nextActivity is always the top of the stack
-        static void SetupForProcessing(Activity activity, bool canBeExecuted, ref ChildActivity nextActivity, ref Stack<ChildActivity> activitiesRemaining)
+        static void SetupForProcessing(
+            Activity activity,
+            bool canBeExecuted,
+            ref ChildActivity nextActivity,
+            ref Stack<ChildActivity> activitiesRemaining
+        )
         {
             if (!nextActivity.Equals(ChildActivity.Empty))
             {
@@ -1001,7 +1425,11 @@ namespace System.Activities
             nextActivity = new ChildActivity(activity, canBeExecuted);
         }
 
-        public static void ProcessActivityInstanceTree(ActivityInstance rootInstance, ActivityExecutor executor, Func<ActivityInstance, ActivityExecutor, bool> callback)
+        public static void ProcessActivityInstanceTree(
+            ActivityInstance rootInstance,
+            ActivityExecutor executor,
+            Func<ActivityInstance, ActivityExecutor, bool> callback
+        )
         {
             Queue<IList<ActivityInstance>> instancesRemaining = null;
 
@@ -1014,12 +1442,17 @@ namespace System.Activities
                 nextInstanceList = new TreeProcessingList();
             }
 
-            while ((instancesRemaining != null && instancesRemaining.Count > 0)
-                || currentInstancesList.Count != 0)
+            while (
+                (instancesRemaining != null && instancesRemaining.Count > 0)
+                || currentInstancesList.Count != 0
+            )
             {
                 if (currentInstancesList.Count == 0)
                 {
-                    Fx.Assert(instancesRemaining != null && instancesRemaining.Count > 0, "This must be the clause that caused us to enter");
+                    Fx.Assert(
+                        instancesRemaining != null && instancesRemaining.Count > 0,
+                        "This must be the clause that caused us to enter"
+                    );
                     currentInstancesList.Set(instancesRemaining.Dequeue());
                 }
 
@@ -1029,7 +1462,10 @@ namespace System.Activities
 
                     if (callback(instance, executor) && instance.HasChildren)
                     {
-                        Fx.Assert(nextInstanceList != null, "We should have created this list if we are going to get here.");
+                        Fx.Assert(
+                            nextInstanceList != null,
+                            "We should have created this list if we are going to get here."
+                        );
                         instance.AppendChildren(nextInstanceList, ref instancesRemaining);
                     }
                 }
@@ -1046,9 +1482,15 @@ namespace System.Activities
             }
         }
 
-        public delegate void ProcessActivityCallback(ChildActivity childActivity, ActivityCallStack parentChain);
+        public delegate void ProcessActivityCallback(
+            ChildActivity childActivity,
+            ActivityCallStack parentChain
+        );
 
-        public static FaultBookmark CreateFaultBookmark(FaultCallback onFaulted, ActivityInstance owningInstance)
+        public static FaultBookmark CreateFaultBookmark(
+            FaultCallback onFaulted,
+            ActivityInstance owningInstance
+        )
         {
             if (onFaulted != null)
             {
@@ -1057,29 +1499,44 @@ namespace System.Activities
             return null;
         }
 
-        public static CompletionBookmark CreateCompletionBookmark(CompletionCallback onCompleted, ActivityInstance owningInstance)
+        public static CompletionBookmark CreateCompletionBookmark(
+            CompletionCallback onCompleted,
+            ActivityInstance owningInstance
+        )
         {
             if (onCompleted != null)
             {
-                return new CompletionBookmark(new ActivityCompletionCallbackWrapper(onCompleted, owningInstance));
+                return new CompletionBookmark(
+                    new ActivityCompletionCallbackWrapper(onCompleted, owningInstance)
+                );
             }
             return null;
         }
 
-        public static CompletionBookmark CreateCompletionBookmark(DelegateCompletionCallback onCompleted, ActivityInstance owningInstance)
+        public static CompletionBookmark CreateCompletionBookmark(
+            DelegateCompletionCallback onCompleted,
+            ActivityInstance owningInstance
+        )
         {
             if (onCompleted != null)
             {
-                return new CompletionBookmark(new DelegateCompletionCallbackWrapper(onCompleted, owningInstance));
+                return new CompletionBookmark(
+                    new DelegateCompletionCallbackWrapper(onCompleted, owningInstance)
+                );
             }
             return null;
         }
 
-        public static CompletionBookmark CreateCompletionBookmark<TResult>(CompletionCallback<TResult> onCompleted, ActivityInstance owningInstance)
+        public static CompletionBookmark CreateCompletionBookmark<TResult>(
+            CompletionCallback<TResult> onCompleted,
+            ActivityInstance owningInstance
+        )
         {
             if (onCompleted != null)
             {
-                return new CompletionBookmark(new FuncCompletionCallbackWrapper<TResult>(onCompleted, owningInstance));
+                return new CompletionBookmark(
+                    new FuncCompletionCallbackWrapper<TResult>(onCompleted, owningInstance)
+                );
             }
 
             return null;
@@ -1109,7 +1566,11 @@ namespace System.Activities
             }
             else
             {
-                return string.Format(CultureInfo.InvariantCulture, "<Uninitialized TemporaryId={0}>", bookmarkScope.TemporaryId);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "<Uninitialized TemporaryId={0}>",
+                    bookmarkScope.TemporaryId
+                );
             }
         }
 
@@ -1157,9 +1618,7 @@ namespace System.Activities
             IList<ActivityInstance> multipleItems;
             bool addRequiresNewList;
 
-            public TreeProcessingList()
-            {
-            }
+            public TreeProcessingList() { }
 
             public int Count
             {
@@ -1185,13 +1644,22 @@ namespace System.Activities
                 {
                     if (this.singleItem != null)
                     {
-                        Fx.Assert(index == 0, "We expect users of TreeProcessingList never to be out of range.");
+                        Fx.Assert(
+                            index == 0,
+                            "We expect users of TreeProcessingList never to be out of range."
+                        );
                         return this.singleItem;
                     }
                     else
                     {
-                        Fx.Assert(this.multipleItems != null, "Users shouldn't call this if we have no items.");
-                        Fx.Assert(this.multipleItems.Count > index, "Users should never be out of range.");
+                        Fx.Assert(
+                            this.multipleItems != null,
+                            "Users shouldn't call this if we have no items."
+                        );
+                        Fx.Assert(
+                            this.multipleItems.Count > index,
+                            "Users should never be out of range."
+                        );
 
                         return this.multipleItems[index];
                     }
@@ -1200,7 +1668,11 @@ namespace System.Activities
 
             public void Set(IList<ActivityInstance> listToSet)
             {
-                Fx.Assert(singleItem == null && (this.multipleItems == null || this.multipleItems.Count == 0), "We should not have any items if calling set.");
+                Fx.Assert(
+                    singleItem == null
+                        && (this.multipleItems == null || this.multipleItems.Count == 0),
+                    "We should not have any items if calling set."
+                );
 
                 this.multipleItems = listToSet;
                 this.addRequiresNewList = true;
@@ -1255,7 +1727,11 @@ namespace System.Activities
         // a placeholder for when to pop off our parent stack.
         class Pop : Activity
         {
-            internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+            internal override void InternalExecute(
+                ActivityInstance instance,
+                ActivityExecutor executor,
+                BookmarkManager bookmarkManager
+            )
             {
                 throw Fx.AssertAndThrow("should never get here");
             }
@@ -1277,27 +1753,17 @@ namespace System.Activities
 
             public static ChildActivity Empty
             {
-                get
-                {
-                    return new ChildActivity();
-                }
+                get { return new ChildActivity(); }
             }
 
-            public Activity Activity
-            {
-                get;
-                set;
-            }
+            public Activity Activity { get; set; }
 
-            public bool CanBeExecuted
-            {
-                get;
-                set;
-            }
+            public bool CanBeExecuted { get; set; }
 
             public bool Equals(ChildActivity other)
             {
-                return object.ReferenceEquals(Activity, other.Activity) && CanBeExecuted == other.CanBeExecuted;
+                return object.ReferenceEquals(Activity, other.Activity)
+                    && CanBeExecuted == other.CanBeExecuted;
             }
         }
 
@@ -1313,26 +1779,17 @@ namespace System.Activities
 
             public bool WillExecute
             {
-                get
-                {
-                    return nonExecutingParentCount == 0;
-                }
+                get { return nonExecutingParentCount == 0; }
             }
 
             public ChildActivity this[int index]
             {
-                get
-                {
-                    return this.callStack[index];
-                }
+                get { return this.callStack[index]; }
             }
 
             public int Count
             {
-                get
-                {
-                    return this.callStack.Count;
-                }
+                get { return this.callStack.Count; }
             }
 
             public void Push(ChildActivity childActivity)
@@ -1418,15 +1875,32 @@ namespace System.Activities
         static class LocationAccessExpressionTypeDefinitionsCache
         {
             static object locationReferenceValueTypeDefinitionsLock = new object();
-            static Dictionary<Type, ILocationReferenceExpression> locationReferenceValueTypeDefinitions = new Dictionary<Type, ILocationReferenceExpression>();
+            static Dictionary<
+                Type,
+                ILocationReferenceExpression
+            > locationReferenceValueTypeDefinitions =
+                new Dictionary<Type, ILocationReferenceExpression>();
 
             static object environmentLocationReferenceTypeDefinitionsLock = new object();
-            static Dictionary<Type, ILocationReferenceExpression> environmentLocationReferenceTypeDefinitions = new Dictionary<Type, ILocationReferenceExpression>();
+            static Dictionary<
+                Type,
+                ILocationReferenceExpression
+            > environmentLocationReferenceTypeDefinitions =
+                new Dictionary<Type, ILocationReferenceExpression>();
 
             static object environmentLocationValueTypeDefinitionsLock = new object();
-            static Dictionary<Type, ILocationReferenceExpression> environmentLocationValueTypeDefinitions = new Dictionary<Type, ILocationReferenceExpression>();
+            static Dictionary<
+                Type,
+                ILocationReferenceExpression
+            > environmentLocationValueTypeDefinitions =
+                new Dictionary<Type, ILocationReferenceExpression>();
 
-            public static ActivityWithResult CreateNewLocationAccessExpression(Type type, bool isReference, bool useLocationReferenceValue, LocationReference locationReference)
+            public static ActivityWithResult CreateNewLocationAccessExpression(
+                Type type,
+                bool isReference,
+                bool useLocationReferenceValue,
+                LocationReference locationReference
+            )
             {
                 Dictionary<Type, ILocationReferenceExpression> lookupTable = null;
                 object tableLock = null;
@@ -1438,32 +1912,50 @@ namespace System.Activities
                 }
                 else
                 {
-                    lookupTable = isReference ? environmentLocationReferenceTypeDefinitions : environmentLocationValueTypeDefinitions;
-                    tableLock = isReference ? environmentLocationReferenceTypeDefinitionsLock : environmentLocationValueTypeDefinitionsLock;
+                    lookupTable = isReference
+                        ? environmentLocationReferenceTypeDefinitions
+                        : environmentLocationValueTypeDefinitions;
+                    tableLock = isReference
+                        ? environmentLocationReferenceTypeDefinitionsLock
+                        : environmentLocationValueTypeDefinitionsLock;
                 }
 
                 ILocationReferenceExpression existingInstance;
                 lock (tableLock)
-                {                    
+                {
                     if (!lookupTable.TryGetValue(type, out existingInstance))
                     {
-                        Type locationAccessExpressionType = CreateLocationAccessExpressionType(type, isReference, useLocationReferenceValue);                        
+                        Type locationAccessExpressionType = CreateLocationAccessExpressionType(
+                            type,
+                            isReference,
+                            useLocationReferenceValue
+                        );
 
                         // Create an "empty" (locationReference = null) instance to put in the cache. This empty instance will only be used to create other instances,
                         // including the instance returned from this method. The cached instance will never be included in an activity tree, so the cached instance's
                         // rootActivity field will not be filled in and thus will not pin all the objects in the activity tree. The cached empty instance has a null
                         // locationReference because locationReference also pins parts of activity tree.
-                        existingInstance = (ILocationReferenceExpression)Activator.CreateInstance(
-                            locationAccessExpressionType, BindingFlags.Instance | BindingFlags.NonPublic, null, new object[] { null }, null);
+                        existingInstance = (ILocationReferenceExpression)
+                            Activator.CreateInstance(
+                                locationAccessExpressionType,
+                                BindingFlags.Instance | BindingFlags.NonPublic,
+                                null,
+                                new object[] { null },
+                                null
+                            );
 
                         lookupTable[type] = existingInstance;
-                    }                  
+                    }
                 }
 
                 return existingInstance.CreateNewInstance(locationReference);
             }
 
-            static Type CreateLocationAccessExpressionType(Type type, bool isReference, bool useLocationReferenceValue)
+            static Type CreateLocationAccessExpressionType(
+                Type type,
+                bool isReference,
+                bool useLocationReferenceValue
+            )
             {
                 Type openType;
                 if (useLocationReferenceValue)
@@ -1472,7 +1964,9 @@ namespace System.Activities
                 }
                 else
                 {
-                    openType = isReference ? environmentLocationReferenceType : environmentLocationValueType;
+                    openType = isReference
+                        ? environmentLocationReferenceType
+                        : environmentLocationValueType;
                 }
 
                 return openType.MakeGenericType(type);

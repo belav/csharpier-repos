@@ -9,8 +9,12 @@ namespace System.Net.WebSockets.Tests
 {
     public sealed class WebSocketTests : WebSocketCreateTest
     {
-        protected override WebSocket CreateFromStream(Stream stream, bool isServer, string subProtocol, TimeSpan keepAliveInterval) =>
-            WebSocket.CreateFromStream(stream, isServer, subProtocol, keepAliveInterval);
+        protected override WebSocket CreateFromStream(
+            Stream stream,
+            bool isServer,
+            string subProtocol,
+            TimeSpan keepAliveInterval
+        ) => WebSocket.CreateFromStream(stream, isServer, subProtocol, keepAliveInterval);
 
         [Fact]
         public static void DefaultKeepAliveInterval_ValidValue()
@@ -23,7 +27,10 @@ namespace System.Net.WebSockets.Tests
         [InlineData(0)]
         public static void CreateClientBuffer_InvalidSendValues(int size)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sendBufferSize", () => WebSocket.CreateClientBuffer(256, size));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sendBufferSize",
+                () => WebSocket.CreateClientBuffer(256, size)
+            );
         }
 
         [Theory]
@@ -40,7 +47,10 @@ namespace System.Net.WebSockets.Tests
         [InlineData(0)]
         public static void CreateClientBuffer_InvalidReceiveValues(int size)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () => WebSocket.CreateClientBuffer(size, 16));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "receiveBufferSize",
+                () => WebSocket.CreateClientBuffer(size, 16)
+            );
         }
 
         [Theory]
@@ -57,7 +67,10 @@ namespace System.Net.WebSockets.Tests
         [InlineData(0)]
         public static void CreateServerBuffer_InvalidReceiveValues(int size)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () => WebSocket.CreateServerBuffer(size));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "receiveBufferSize",
+                () => WebSocket.CreateServerBuffer(size)
+            );
         }
 
         [Theory]
@@ -72,20 +85,80 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public static void CreateClientWebSocket_InvalidArguments_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => WebSocket.CreateClientWebSocket(
-                null, "subProtocol", 16480, 9856, TimeSpan.FromSeconds(30), false, WebSocket.CreateClientBuffer(16480, 9856)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    WebSocket.CreateClientWebSocket(
+                        null,
+                        "subProtocol",
+                        16480,
+                        9856,
+                        TimeSpan.FromSeconds(30),
+                        false,
+                        WebSocket.CreateClientBuffer(16480, 9856)
+                    )
+            );
 
-            Assert.Throws<ArgumentException>(() => WebSocket.CreateClientWebSocket(
-                new MemoryStream(), "    ", 16480, 9856, TimeSpan.FromSeconds(30), false, WebSocket.CreateClientBuffer(16480, 9856)));
-            Assert.Throws<ArgumentException>(() => WebSocket.CreateClientWebSocket(
-                new MemoryStream(), "\xFF", 16480, 9856, TimeSpan.FromSeconds(30), false, WebSocket.CreateClientBuffer(16480, 9856)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    WebSocket.CreateClientWebSocket(
+                        new MemoryStream(),
+                        "    ",
+                        16480,
+                        9856,
+                        TimeSpan.FromSeconds(30),
+                        false,
+                        WebSocket.CreateClientBuffer(16480, 9856)
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    WebSocket.CreateClientWebSocket(
+                        new MemoryStream(),
+                        "\xFF",
+                        16480,
+                        9856,
+                        TimeSpan.FromSeconds(30),
+                        false,
+                        WebSocket.CreateClientBuffer(16480, 9856)
+                    )
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => WebSocket.CreateClientWebSocket(
-                new MemoryStream(), "subProtocol", 0, 9856, TimeSpan.FromSeconds(30), false, WebSocket.CreateClientBuffer(16480, 9856)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => WebSocket.CreateClientWebSocket(
-                new MemoryStream(), "subProtocol", 16480, 0, TimeSpan.FromSeconds(30), false, WebSocket.CreateClientBuffer(16480, 9856)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => WebSocket.CreateClientWebSocket(
-                new MemoryStream(), "subProtocol", 16480, 9856, TimeSpan.FromSeconds(-2), false, WebSocket.CreateClientBuffer(16480, 9856)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    WebSocket.CreateClientWebSocket(
+                        new MemoryStream(),
+                        "subProtocol",
+                        0,
+                        9856,
+                        TimeSpan.FromSeconds(30),
+                        false,
+                        WebSocket.CreateClientBuffer(16480, 9856)
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    WebSocket.CreateClientWebSocket(
+                        new MemoryStream(),
+                        "subProtocol",
+                        16480,
+                        0,
+                        TimeSpan.FromSeconds(30),
+                        false,
+                        WebSocket.CreateClientBuffer(16480, 9856)
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    WebSocket.CreateClientWebSocket(
+                        new MemoryStream(),
+                        "subProtocol",
+                        16480,
+                        9856,
+                        TimeSpan.FromSeconds(-2),
+                        false,
+                        WebSocket.CreateClientBuffer(16480, 9856)
+                    )
+            );
         }
 
         [Fact]
@@ -128,10 +201,18 @@ namespace System.Net.WebSockets.Tests
         [Theory]
         [InlineData(WebSocketState.Closed, new WebSocketState[] { })]
         [InlineData(WebSocketState.Closed, new WebSocketState[] { WebSocketState.Open })]
-        [InlineData(WebSocketState.Open, new WebSocketState[] { WebSocketState.Aborted, WebSocketState.CloseSent })]
-        public static void ThrowOnInvalidState_ThrowsIfNotInValidList(WebSocketState state, WebSocketState[] validStates)
+        [InlineData(
+            WebSocketState.Open,
+            new WebSocketState[] { WebSocketState.Aborted, WebSocketState.CloseSent }
+        )]
+        public static void ThrowOnInvalidState_ThrowsIfNotInValidList(
+            WebSocketState state,
+            WebSocketState[] validStates
+        )
         {
-            WebSocketException wse = Assert.Throws<WebSocketException>(() => ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates));
+            WebSocketException wse = Assert.Throws<WebSocketException>(
+                () => ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates)
+            );
             if (PlatformDetection.IsNetCore) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
             {
                 Assert.Equal(WebSocketError.InvalidState, wse.WebSocketErrorCode);
@@ -140,10 +221,37 @@ namespace System.Net.WebSockets.Tests
 
         [Theory]
         [InlineData(WebSocketState.Open, new WebSocketState[] { WebSocketState.Open })]
-        [InlineData(WebSocketState.Open, new WebSocketState[] { WebSocketState.Open, WebSocketState.Aborted, WebSocketState.Closed })]
-        [InlineData(WebSocketState.Open, new WebSocketState[] { WebSocketState.Aborted, WebSocketState.Open, WebSocketState.Closed })]
-        [InlineData(WebSocketState.Open, new WebSocketState[] { WebSocketState.Aborted, WebSocketState.CloseSent, WebSocketState.Open })]
-        public static void ThrowOnInvalidState_SuccessIfInList(WebSocketState state, WebSocketState[] validStates)
+        [InlineData(
+            WebSocketState.Open,
+            new WebSocketState[]
+            {
+                WebSocketState.Open,
+                WebSocketState.Aborted,
+                WebSocketState.Closed,
+            }
+        )]
+        [InlineData(
+            WebSocketState.Open,
+            new WebSocketState[]
+            {
+                WebSocketState.Aborted,
+                WebSocketState.Open,
+                WebSocketState.Closed,
+            }
+        )]
+        [InlineData(
+            WebSocketState.Open,
+            new WebSocketState[]
+            {
+                WebSocketState.Aborted,
+                WebSocketState.CloseSent,
+                WebSocketState.Open,
+            }
+        )]
+        public static void ThrowOnInvalidState_SuccessIfInList(
+            WebSocketState state,
+            WebSocketState[] validStates
+        )
         {
             ExposeProtectedWebSocket.ThrowOnInvalidState(state, validStates);
         }
@@ -151,13 +259,31 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public void ValueWebSocketReceiveResult_Ctor_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => new ValueWebSocketReceiveResult(-1, WebSocketMessageType.Text, true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => new ValueWebSocketReceiveResult(int.MinValue, WebSocketMessageType.Text, true));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => new ValueWebSocketReceiveResult(-1, WebSocketMessageType.Text, true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => new ValueWebSocketReceiveResult(int.MinValue, WebSocketMessageType.Text, true)
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(-1), true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(3), true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MinValue), true));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MaxValue), true));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "messageType",
+                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(-1), true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "messageType",
+                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(3), true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "messageType",
+                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MinValue), true)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "messageType",
+                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MaxValue), true)
+            );
         }
 
         [Theory]
@@ -166,9 +292,17 @@ namespace System.Net.WebSockets.Tests
         [InlineData(42, WebSocketMessageType.Binary, false)]
         [InlineData(int.MaxValue, WebSocketMessageType.Close, false)]
         [InlineData(int.MaxValue, WebSocketMessageType.Close, true)]
-        public void ValueWebSocketReceiveResult_Ctor_ValidArguments_Roundtrip(int count, WebSocketMessageType messageType, bool endOfMessage)
+        public void ValueWebSocketReceiveResult_Ctor_ValidArguments_Roundtrip(
+            int count,
+            WebSocketMessageType messageType,
+            bool endOfMessage
+        )
         {
-            ValueWebSocketReceiveResult r = new ValueWebSocketReceiveResult(count, messageType, endOfMessage);
+            ValueWebSocketReceiveResult r = new ValueWebSocketReceiveResult(
+                count,
+                messageType,
+                endOfMessage
+            );
             Assert.Equal(count, r.Count);
             Assert.Equal(messageType, r.MessageType);
             Assert.Equal(endOfMessage, r.EndOfMessage);
@@ -177,19 +311,40 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public async Task ThrowWhenContinuationWithDifferentCompressionFlags()
         {
-            using WebSocket client = CreateFromStream(new MemoryStream(), isServer: false, null, TimeSpan.Zero);
+            using WebSocket client = CreateFromStream(
+                new MemoryStream(),
+                isServer: false,
+                null,
+                TimeSpan.Zero
+            );
 
-            await client.SendAsync(Memory<byte>.Empty, WebSocketMessageType.Text, WebSocketMessageFlags.DisableCompression, default);
-            Assert.Throws<ArgumentException>("messageFlags", () =>
-               client.SendAsync(Memory<byte>.Empty, WebSocketMessageType.Binary, WebSocketMessageFlags.EndOfMessage, default));
+            await client.SendAsync(
+                Memory<byte>.Empty,
+                WebSocketMessageType.Text,
+                WebSocketMessageFlags.DisableCompression,
+                default
+            );
+            Assert.Throws<ArgumentException>(
+                "messageFlags",
+                () =>
+                    client.SendAsync(
+                        Memory<byte>.Empty,
+                        WebSocketMessageType.Binary,
+                        WebSocketMessageFlags.EndOfMessage,
+                        default
+                    )
+            );
         }
 
         public abstract class ExposeProtectedWebSocket : WebSocket
         {
             public static new bool IsStateTerminal(WebSocketState state) =>
                 WebSocket.IsStateTerminal(state);
-            public static new void ThrowOnInvalidState(WebSocketState state, params WebSocketState[] validStates) =>
-                WebSocket.ThrowOnInvalidState(state, validStates);
+
+            public static new void ThrowOnInvalidState(
+                WebSocketState state,
+                params WebSocketState[] validStates
+            ) => WebSocket.ThrowOnInvalidState(state, validStates);
         }
     }
 }

@@ -19,7 +19,12 @@ namespace RunTests
         public ReadOnlyCollection<string> OutputLines { get; }
         public ReadOnlyCollection<string> ErrorLines { get; }
 
-        public ProcessResult(Process process, int exitCode, ReadOnlyCollection<string> outputLines, ReadOnlyCollection<string> errorLines)
+        public ProcessResult(
+            Process process,
+            int exitCode,
+            ReadOnlyCollection<string> outputLines,
+            ReadOnlyCollection<string> errorLines
+        )
         {
             Process = process;
             ExitCode = exitCode;
@@ -64,20 +69,30 @@ namespace RunTests
             Dictionary<string, string>? environmentVariables = null,
             Action<Process>? onProcessStartHandler = null,
             Action<DataReceivedEventArgs>? onOutputDataReceived = null,
-            CancellationToken cancellationToken = default)
-            => CreateProcess(
-                CreateProcessStartInfo(executable, arguments, workingDirectory, captureOutput, displayWindow, environmentVariables),
+            CancellationToken cancellationToken = default
+        ) =>
+            CreateProcess(
+                CreateProcessStartInfo(
+                    executable,
+                    arguments,
+                    workingDirectory,
+                    captureOutput,
+                    displayWindow,
+                    environmentVariables
+                ),
                 lowPriority: lowPriority,
                 onProcessStartHandler: onProcessStartHandler,
                 onOutputDataReceived: onOutputDataReceived,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
 
         public static ProcessInfo CreateProcess(
             ProcessStartInfo processStartInfo,
             bool lowPriority = false,
             Action<Process>? onProcessStartHandler = null,
             Action<DataReceivedEventArgs>? onOutputDataReceived = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var errorLines = new List<string>();
             var outputLines = new List<string>();
@@ -109,16 +124,20 @@ namespace RunTests
                 // We must call WaitForExit to make sure we've received all OutputDataReceived/ErrorDataReceived calls
                 // or else we'll be returning a list we're still modifying. For paranoia, we'll start a task here rather
                 // than enter right back into the Process type and start a wait which isn't guaranteed to be safe.
-                Task.Run(() =>
-                {
-                    process.WaitForExit();
-                    var result = new ProcessResult(
-                        process,
-                        process.ExitCode,
-                        new ReadOnlyCollection<string>(outputLines),
-                        new ReadOnlyCollection<string>(errorLines));
-                    tcs.TrySetResult(result);
-                }, cancellationToken);
+                Task.Run(
+                    () =>
+                    {
+                        process.WaitForExit();
+                        var result = new ProcessResult(
+                            process,
+                            process.ExitCode,
+                            new ReadOnlyCollection<string>(outputLines),
+                            new ReadOnlyCollection<string>(errorLines)
+                        );
+                        tcs.TrySetResult(result);
+                    },
+                    cancellationToken
+                );
             };
 
             var registration = cancellationToken.Register(() =>
@@ -167,7 +186,8 @@ namespace RunTests
             string? workingDirectory = null,
             bool captureOutput = false,
             bool displayWindow = true,
-            Dictionary<string, string>? environmentVariables = null)
+            Dictionary<string, string>? environmentVariables = null
+        )
         {
             var processStartInfo = new ProcessStartInfo(executable, arguments);
 

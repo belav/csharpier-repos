@@ -8,7 +8,8 @@ using Xunit.Sdk;
 namespace Microsoft.AspNetCore.InternalTesting;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-[XunitTestCaseDiscoverer("Microsoft.AspNetCore.InternalTesting." + nameof(ConditionalFactDiscoverer), "Microsoft.AspNetCore.InternalTesting")]
-public class ConditionalFactAttribute : FactAttribute
-{
-}
+[XunitTestCaseDiscoverer(
+    "Microsoft.AspNetCore.InternalTesting." + nameof(ConditionalFactDiscoverer),
+    "Microsoft.AspNetCore.InternalTesting"
+)]
+public class ConditionalFactAttribute : FactAttribute { }

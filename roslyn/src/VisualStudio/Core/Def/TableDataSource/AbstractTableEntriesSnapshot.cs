@@ -36,7 +36,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private ImmutableArray<ITrackingPoint> _trackingPoints;
         private FrameworkElement[]? _descriptions;
 
-        protected AbstractTableEntriesSnapshot(IThreadingContext threadingContext, int version, ImmutableArray<TItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
+        protected AbstractTableEntriesSnapshot(
+            IThreadingContext threadingContext,
+            int version,
+            ImmutableArray<TItem> items,
+            ImmutableArray<ITrackingPoint> trackingPoints
+        )
         {
             ThreadingContext = threadingContext;
             _version = version;
@@ -44,23 +49,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _trackingPoints = trackingPoints;
         }
 
-        public abstract bool TryNavigateTo(int index, NavigationOptions options, CancellationToken cancellationToken);
-        public abstract bool TryGetValue(int index, string columnName, [NotNullWhen(true)] out object? content);
+        public abstract bool TryNavigateTo(
+            int index,
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        );
+        public abstract bool TryGetValue(
+            int index,
+            string columnName,
+            [NotNullWhen(true)] out object? content
+        );
 
         public int VersionNumber
         {
-            get
-            {
-                return _version;
-            }
+            get { return _version; }
         }
 
         public int Count
         {
-            get
-            {
-                return _items.Length;
-            }
+            get { return _items.Length; }
         }
 
         protected IThreadingContext ThreadingContext { get; }
@@ -73,7 +80,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return -1;
             }
 
-            if (newerSnapshot is not AbstractTableEntriesSnapshot<TItem> ourSnapshot || ourSnapshot.Count == 0)
+            if (
+                newerSnapshot is not AbstractTableEntriesSnapshot<TItem> ourSnapshot
+                || ourSnapshot.Count == 0
+            )
             {
                 // not ours, we don't know how to track index
                 return -1;
@@ -113,8 +123,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _trackingPoints = default;
         }
 
-        public void Dispose()
-            => StopTracking();
+        public void Dispose() => StopTracking();
 
         internal TItem? GetItem(int index)
         {
@@ -155,7 +164,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return GetLinePosition(currentSnapshot, trackingPoint);
         }
 
-        private static LinePosition GetLinePosition(ITextSnapshot snapshot, ITrackingPoint trackingPoint)
+        private static LinePosition GetLinePosition(
+            ITextSnapshot snapshot,
+            ITrackingPoint trackingPoint
+        )
         {
             var point = trackingPoint.GetPoint(snapshot);
             var line = point.GetContainingLine();
@@ -163,18 +175,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return new LinePosition(line.LineNumber, point.Position - line.Start);
         }
 
-        protected bool TryNavigateTo(Workspace workspace, DocumentId documentId, LinePosition position, NavigationOptions options, CancellationToken cancellationToken)
+        protected bool TryNavigateTo(
+            Workspace workspace,
+            DocumentId documentId,
+            LinePosition position,
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var navigationService = workspace.Services.GetService<IDocumentNavigationService>();
             if (navigationService == null)
                 return false;
 
-            return this.ThreadingContext.JoinableTaskFactory.Run(() =>
-                navigationService.TryNavigateToLineAndOffsetAsync(
-                    this.ThreadingContext, workspace, documentId, position.Line, position.Character, options, cancellationToken));
+            return this.ThreadingContext.JoinableTaskFactory.Run(
+                () =>
+                    navigationService.TryNavigateToLineAndOffsetAsync(
+                        this.ThreadingContext,
+                        workspace,
+                        documentId,
+                        position.Line,
+                        position.Character,
+                        options,
+                        cancellationToken
+                    )
+            );
         }
 
-        protected bool TryNavigateToItem(int index, NavigationOptions options, CancellationToken cancellationToken)
+        protected bool TryNavigateToItem(
+            int index,
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var item = GetItem(index);
             if (item is null)
@@ -188,9 +219,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (solution.GetProject(item.ProjectId) is { } project)
                 {
                     // We couldn't find a document ID when the item was created, so it may be a source generator output.
-                    var documents = ThreadingContext.JoinableTaskFactory.Run(() => project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask());
+                    var documents = ThreadingContext.JoinableTaskFactory.Run(
+                        () => project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask()
+                    );
                     var projectDirectory = Path.GetDirectoryName(project.FilePath);
-                    documentId = documents.FirstOrDefault(document => Path.Combine(projectDirectory, document.FilePath) == item.GetOriginalFilePath())?.Id;
+                    documentId = documents
+                        .FirstOrDefault(document =>
+                            Path.Combine(projectDirectory, document.FilePath)
+                            == item.GetOriginalFilePath()
+                        )
+                        ?.Id;
                     if (documentId is null)
                         return false;
                 }
@@ -202,10 +240,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             LinePosition position;
             var document = solution.GetDocument(documentId);
-            if (document is not null
+            if (
+                document is not null
                 && workspace.IsDocumentOpen(documentId)
                 && GetTrackingLineColumn(document, index) is { } trackingLinePosition
-                && trackingLinePosition != LinePosition.Zero)
+                && trackingLinePosition != LinePosition.Zero
+            )
             {
                 // For normal documents already open, try to map the diagnostic location to its current position in a
                 // potentially-edited document.
@@ -226,15 +266,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 #pragma warning restore IDE0060 // Remove unused parameter
             => null;
 
-        public void StartCaching()
-        {
-        }
+        public void StartCaching() { }
 
-        public void StopCaching()
-        {
-        }
+        public void StopCaching() { }
 
-        protected static bool CanCreateDetailsContent(int index, Func<int, DiagnosticTableItem?> getDiagnosticTableItem)
+        protected static bool CanCreateDetailsContent(
+            int index,
+            Func<int, DiagnosticTableItem?> getDiagnosticTableItem
+        )
         {
             var item = getDiagnosticTableItem(index)?.Data;
             if (item == null)
@@ -245,7 +284,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return !string.IsNullOrWhiteSpace(item.Description);
         }
 
-        protected bool TryCreateDetailsContent(int index, Func<int, DiagnosticTableItem?> getDiagnosticTableItem, [NotNullWhen(returnValue: true)] out FrameworkElement? expandedContent)
+        protected bool TryCreateDetailsContent(
+            int index,
+            Func<int, DiagnosticTableItem?> getDiagnosticTableItem,
+            [NotNullWhen(returnValue: true)] out FrameworkElement? expandedContent
+        )
         {
             var item = getDiagnosticTableItem(index)?.Data;
             if (item == null)
@@ -254,11 +297,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return false;
             }
 
-            expandedContent = GetOrCreateTextBlock(ref _descriptions, this.Count, index, item, i => GetDescriptionTextBlock(i));
+            expandedContent = GetOrCreateTextBlock(
+                ref _descriptions,
+                this.Count,
+                index,
+                item,
+                i => GetDescriptionTextBlock(i)
+            );
             return true;
         }
 
-        protected static bool TryCreateDetailsStringContent(int index, Func<int, DiagnosticTableItem?> getDiagnosticTableItem, [NotNullWhen(returnValue: true)] out string? content)
+        protected static bool TryCreateDetailsStringContent(
+            int index,
+            Func<int, DiagnosticTableItem?> getDiagnosticTableItem,
+            [NotNullWhen(returnValue: true)] out string? content
+        )
         {
             var item = getDiagnosticTableItem(index)?.Data;
             if (item == null)
@@ -284,12 +337,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 Background = null,
                 Padding = new Thickness(10, 6, 10, 8),
                 TextWrapping = TextWrapping.Wrap,
-                Text = item.Description
+                Text = item.Description,
             };
         }
 
         private static FrameworkElement GetOrCreateTextBlock(
-            [NotNull] ref FrameworkElement[]? caches, int count, int index, DiagnosticData item, Func<DiagnosticData, FrameworkElement> elementCreator)
+            [NotNull] ref FrameworkElement[]? caches,
+            int count,
+            int index,
+            DiagnosticData item,
+            Func<DiagnosticData, FrameworkElement> elementCreator
+        )
         {
             caches ??= new FrameworkElement[count];
 

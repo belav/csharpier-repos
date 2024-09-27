@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DegenerateQueryExpression()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -41,7 +43,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void FromClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,7 +57,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from i in c select i')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select i')
@@ -81,14 +85,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void QueryContinuation()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -107,7 +117,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void QueryContinuation_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -120,7 +131,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from i in c ...  q select q')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select q')
@@ -164,14 +176,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void Select()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -188,7 +206,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void SelectClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -201,7 +220,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from i in c select i+1')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select i+1')
@@ -232,14 +252,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void GroupBy01()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -256,7 +282,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void GroupByClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -269,7 +296,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Linq.IGrouping<System.Int32, System.Int32>>) (Syntax: 'from i in c ...  i by i % 2')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Linq.IGrouping<System.Int32, System.Int32>> System.Linq.Enumerable.GroupBy<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> keySelector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Linq.IGrouping<System.Int32, System.Int32>>, IsImplicit) (Syntax: 'group i by i % 2')
@@ -300,14 +328,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void GroupBy02()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -323,7 +357,9 @@ class Query
         [Fact]
         public void Cast()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -340,7 +376,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void CastInFromClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -353,7 +390,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from int i in c select i')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select i')
@@ -387,13 +425,19 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void Where()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -410,7 +454,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void WhereClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -423,7 +468,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from int i  ...  5 select i')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Where<System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Boolean> predicate)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'where i < 5')
@@ -461,14 +507,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void FromJoinSelect()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -488,7 +540,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void FromJoinSelect_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -504,7 +557,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from x1 in  ... elect x1+x2')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Join<System.Int32, System.Int32, System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> outer, System.Collections.Generic.IEnumerable<System.Int32> inner, System.Func<System.Int32, System.Int32> outerKeySelector, System.Func<System.Int32, System.Int32> innerKeySelector, System.Func<System.Int32, System.Int32, System.Int32> resultSelector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'join x2 in  ... quals x2/10')
@@ -566,14 +620,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void OrderBy()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -586,14 +646,18 @@ class Query
         Console.WriteLine(r);
     }
 }";
-            CompileAndVerify(csSource, expectedOutput: "[84, 72, 64, 51, 55, 46, 39, 27, 27, 27, 28]");
+            CompileAndVerify(
+                csSource,
+                expectedOutput: "[84, 72, 64, 51, 55, 46, 39, 27, 27, 27, 28]"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void OrderByClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -608,7 +672,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Linq.IOrderedEnumerable<System.Int32>) (Syntax: 'from i in c ... select i')
   Expression: 
     IInvocationOperation (System.Linq.IOrderedEnumerable<System.Int32> System.Linq.Enumerable.ThenBy<System.Int32, System.Int32>(this System.Linq.IOrderedEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> keySelector)) (OperationKind.Invocation, Type: System.Linq.IOrderedEnumerable<System.Int32>, IsImplicit) (Syntax: 'i%10')
@@ -660,14 +725,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Linq.IOrd
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void GroupJoin()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -681,14 +752,18 @@ class Query
         Console.WriteLine(r);
     }
 }";
-            CompileAndVerify(csSource, expectedOutput: "[1:[12], 2:[], 3:[34], 4:[42], 5:[51, 52], 7:[75]]");
+            CompileAndVerify(
+                csSource,
+                expectedOutput: "[1:[12], 2:[], 3:[34], 4:[42], 5:[51, 52], 7:[75]]"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void GroupJoinClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -705,7 +780,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.String>) (Syntax: 'from x1 in  ... .ToString()')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.String> System.Linq.Enumerable.GroupJoin<System.Int32, System.Int32, System.Int32, System.String>(this System.Collections.Generic.IEnumerable<System.Int32> outer, System.Collections.Generic.IEnumerable<System.Int32> inner, System.Func<System.Int32, System.Int32> outerKeySelector, System.Func<System.Int32, System.Int32> innerKeySelector, System.Func<System.Int32, System.Collections.Generic.IEnumerable<System.Int32>, System.String> resultSelector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.String>, IsImplicit) (Syntax: 'join x2 in  ... / 10 into g')
@@ -777,14 +853,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void SelectMany01()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -802,7 +884,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void SelectMany_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -816,7 +899,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from x in c ... elect x + y')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.SelectMany<System.Int32, System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Collections.Generic.IEnumerable<System.Int32>> collectionSelector, System.Func<System.Int32, System.Int32, System.Int32> resultSelector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'from y in c2')
@@ -860,14 +944,20 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void SelectMany02()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -885,7 +975,9 @@ class Query
         [Fact]
         public void Let01()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -906,7 +998,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void LetClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -922,7 +1015,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from int x  ... elect x + z')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<<anonymous type: <anonymous type: System.Int32 x, System.Int32 g> <>h__TransparentIdentifier0, System.Int32 z>, System.Int32>(this System.Collections.Generic.IEnumerable<<anonymous type: <anonymous type: System.Int32 x, System.Int32 g> <>h__TransparentIdentifier0, System.Int32 z>> source, System.Func<<anonymous type: <anonymous type: System.Int32 x, System.Int32 g> <>h__TransparentIdentifier0, System.Int32 z>, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select x + z')
@@ -1046,15 +1140,22 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void TransparentIdentifiers_FromLet()
         {
-            var csSource = @"
-using C = List1<int>;" + LINQ + @"
+            var csSource =
+                @"
+using C = List1<int>;"
+                + LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1072,14 +1173,18 @@ class Query
        Console.WriteLine(r1);
     }
 }";
-            CompileAndVerify(csSource, expectedOutput: "[111, 211, 311, 121, 221, 131, 112, 212, 122, 113]");
+            CompileAndVerify(
+                csSource,
+                expectedOutput: "[111, 211, 311, 121, 221, 131, 112, 212, 122, 113]"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void TransparentIdentifiers_FromLet_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using C = System.Collections.Generic.List<int>;
 using System.Collections.Generic;
 using System.Linq;
@@ -1101,7 +1206,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from int x  ... select g')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<<anonymous type: <anonymous type: <anonymous type: System.Int32 x, System.Int32 y> <>h__TransparentIdentifier0, System.Int32 z> <>h__TransparentIdentifier1, System.Int32 g>, System.Int32>(this System.Collections.Generic.IEnumerable<<anonymous type: <anonymous type: <anonymous type: System.Int32 x, System.Int32 y> <>h__TransparentIdentifier0, System.Int32 z> <>h__TransparentIdentifier1, System.Int32 g>> source, System.Func<<anonymous type: <anonymous type: <anonymous type: System.Int32 x, System.Int32 y> <>h__TransparentIdentifier0, System.Int32 z> <>h__TransparentIdentifier1, System.Int32 g>, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select g')
@@ -1344,15 +1450,22 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(9229, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void TransparentIdentifiers_Join01()
         {
-            var csSource = @"
-using C = List1<int>;" + LINQ + @"
+            var csSource =
+                @"
+using C = List1<int>;"
+                + LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1374,7 +1487,9 @@ class Query
         [Fact]
         public void TransparentIdentifiers_Join02()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1388,13 +1503,18 @@ class Query
         Console.WriteLine(r1);
     }
 }";
-            CompileAndVerify(csSource, expectedOutput: "[1:[12], 2:[], 3:[34], 4:[42], 5:[51, 52]]");
+            CompileAndVerify(
+                csSource,
+                expectedOutput: "[1:[12], 2:[], 3:[34], 4:[42], 5:[51, 52]]"
+            );
         }
 
         [Fact]
         public void CodegenBug()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1423,14 +1543,20 @@ class Query
         return;
     }
 }";
-            CompileAndVerify(csSource, expectedOutput: "[1:[12], 2:[], 3:[34], 4:[42], 5:[51, 52]]");
+            CompileAndVerify(
+                csSource,
+                expectedOutput: "[1:[12], 2:[], 3:[34], 4:[42], 5:[51, 52]]"
+            );
         }
 
         [Fact]
         public void RangeVariables01()
         {
-            var csSource = @"
-using C = List1<int>;" + LINQ + @"
+            var csSource =
+                @"
+using C = List1<int>;"
+                + LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1450,16 +1576,29 @@ class Query
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Query").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Query")
+                .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[3].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[3]
+                .Declaration
+                .Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
             Assert.Equal("x", x.Name);
             Assert.Equal("Cast", info0.CastInfo.Symbol.Name);
-            Assert.NotEqual(MethodKind.ReducedExtension, ((IMethodSymbol)info0.CastInfo.Symbol).MethodKind);
+            Assert.NotEqual(
+                MethodKind.ReducedExtension,
+                ((IMethodSymbol)info0.CastInfo.Symbol).MethodKind
+            );
             Assert.Null(info0.OperationInfo.Symbol);
 
             var info1 = model.GetQueryClauseInfo(q.Body.Clauses[0]);
@@ -1468,7 +1607,10 @@ class Query
             Assert.Equal("y", y.Name);
             Assert.Equal("Cast", info1.CastInfo.Symbol.Name);
             Assert.Equal("SelectMany", info1.OperationInfo.Symbol.Name);
-            Assert.NotEqual(MethodKind.ReducedExtension, ((IMethodSymbol)info1.OperationInfo.Symbol).MethodKind);
+            Assert.NotEqual(
+                MethodKind.ReducedExtension,
+                ((IMethodSymbol)info1.OperationInfo.Symbol).MethodKind
+            );
 
             var info2 = model.GetQueryClauseInfo(q.Body.Clauses[1]);
             var z = model.GetDeclaredSymbol(q.Body.Clauses[1]);
@@ -1481,7 +1623,8 @@ class Query
             Assert.NotNull(info3);
             // what about info3's contents ???
 
-            var xPyPz = (q.Body.SelectOrGroup as SelectClauseSyntax).Expression as BinaryExpressionSyntax;
+            var xPyPz =
+                (q.Body.SelectOrGroup as SelectClauseSyntax).Expression as BinaryExpressionSyntax;
             var xPy = xPyPz.Left as BinaryExpressionSyntax;
             Assert.Equal(x, model.GetSemanticInfoSummary(xPy.Left).Symbol);
             Assert.Equal(y, model.GetSemanticInfoSummary(xPy.Right).Symbol);
@@ -1492,7 +1635,8 @@ class Query
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void RangeVariables_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using C = System.Collections.Generic.List<int>;
 using System.Collections.Generic;
 using System.Linq;
@@ -1512,7 +1656,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from int x  ... t x + y + z')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.SelectMany<<anonymous type: System.Int32 x, System.Int32 y>, System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<<anonymous type: System.Int32 x, System.Int32 y>> source, System.Func<<anonymous type: System.Int32 x, System.Int32 y>, System.Collections.Generic.IEnumerable<System.Int32>> collectionSelector, System.Func<<anonymous type: System.Int32 x, System.Int32 y>, System.Int32, System.Int32> resultSelector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'from int z in c3')
@@ -1630,13 +1775,18 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void RangeVariables02()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 using System.Linq;
 class Query
@@ -1655,20 +1805,34 @@ class Query
     }
 }";
             var compilation = CreateCompilation(csSource);
-            foreach (var dd in compilation.GetDiagnostics()) Console.WriteLine(dd);
+            foreach (var dd in compilation.GetDiagnostics())
+                Console.WriteLine(dd);
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Query").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Query")
+                .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[3].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[3]
+                .Declaration
+                .Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
             Assert.Equal("x", x.Name);
             Assert.Equal("Cast", info0.CastInfo.Symbol.Name);
-            Assert.Equal(MethodKind.ReducedExtension, ((IMethodSymbol)info0.CastInfo.Symbol).MethodKind);
+            Assert.Equal(
+                MethodKind.ReducedExtension,
+                ((IMethodSymbol)info0.CastInfo.Symbol).MethodKind
+            );
             Assert.Null(info0.OperationInfo.Symbol);
 
             var info1 = model.GetQueryClauseInfo(q.Body.Clauses[0]);
@@ -1677,7 +1841,10 @@ class Query
             Assert.Equal("y", y.Name);
             Assert.Equal("Cast", info1.CastInfo.Symbol.Name);
             Assert.Equal("SelectMany", info1.OperationInfo.Symbol.Name);
-            Assert.Equal(MethodKind.ReducedExtension, ((IMethodSymbol)info1.OperationInfo.Symbol).MethodKind);
+            Assert.Equal(
+                MethodKind.ReducedExtension,
+                ((IMethodSymbol)info1.OperationInfo.Symbol).MethodKind
+            );
 
             var info2 = model.GetQueryClauseInfo(q.Body.Clauses[1]);
             var z = model.GetDeclaredSymbol(q.Body.Clauses[1]);
@@ -1690,7 +1857,8 @@ class Query
             Assert.NotNull(info3);
             // what about info3's contents ???
 
-            var xPyPz = (q.Body.SelectOrGroup as SelectClauseSyntax).Expression as BinaryExpressionSyntax;
+            var xPyPz =
+                (q.Body.SelectOrGroup as SelectClauseSyntax).Expression as BinaryExpressionSyntax;
             var xPy = xPyPz.Left as BinaryExpressionSyntax;
             Assert.Equal(x, model.GetSemanticInfoSummary(xPy.Left).Symbol);
             Assert.Equal(y, model.GetSemanticInfoSummary(xPy.Right).Symbol);
@@ -1700,8 +1868,11 @@ class Query
         [Fact]
         public void TestGetSemanticInfo01()
         {
-            var csSource = @"
-using C = List1<int>;" + LINQ + @"
+            var csSource =
+                @"
+using C = List1<int>;"
+                + LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1719,9 +1890,19 @@ class Query
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Query").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Query")
+                .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[2].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[2]
+                .Declaration
+                .Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             Assert.Equal("Cast", info0.CastInfo.Symbol.Name);
@@ -1740,7 +1921,9 @@ class Query
         [Fact]
         public void TestGetSemanticInfo02()
         {
-            var csSource = LINQ + @"
+            var csSource =
+                LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -1757,9 +1940,19 @@ class Query
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Query").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Query")
+                .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[1].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[1]
+                .Declaration
+                .Variables[0]
+                .Initializer
+                .Value;
 
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             Assert.Null(info0.CastInfo.Symbol);
@@ -1785,7 +1978,8 @@ class Query
         [Fact]
         public void MultipleFromClauseIdentifierInExprNotInContext()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 
 class Program
@@ -1798,7 +1992,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from n1 in  ... select n1')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid, IsImplicit) (Syntax: 'from n2 in nums')
@@ -1817,16 +2012,25 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
                 ReturnedValue: 
                   IParameterReferenceOperation: n1 (OperationKind.ParameterReference, Type: ?) (Syntax: 'n1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'nums' does not exist in the current context
-                //         var q2 = /*<bind>*/from n1 in nums 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "nums").WithArguments("nums").WithLocation(8, 39),
+                //         var q2 = /*<bind>*/from n1 in nums
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "nums")
+                    .WithArguments("nums")
+                    .WithLocation(8, 39),
                 // CS0103: The name 'nums' does not exist in the current context
                 //                  from n2 in nums
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "nums").WithArguments("nums").WithLocation(9, 29)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "nums")
+                    .WithArguments("nums")
+                    .WithLocation(9, 29),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -1834,7 +2038,8 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
         [Fact]
         public void NullLiteralFollowingJoinInQuery()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 
 class Program
@@ -1845,7 +2050,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from int i  ... ue select i')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid, IsImplicit) (Syntax: 'join null o ... equals true')
@@ -1888,7 +2094,8 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
                 ReturnedValue: 
                   IParameterReferenceOperation: i (OperationKind.ParameterReference, Type: ?) (Syntax: 'i')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1031: Type expected
                 //         var query = /*<bind>*/from int i in new int[] { 1 } join null on true equals true select i/*</bind>*/; //CS1031
                 Diagnostic(ErrorCode.ERR_TypeExpected, "null").WithLocation(8, 66),
@@ -1897,17 +2104,24 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "null").WithLocation(8, 66),
                 // CS1003: Syntax error, 'in' expected
                 //         var query = /*<bind>*/from int i in new int[] { 1 } join null on true equals true select i/*</bind>*/; //CS1031
-                Diagnostic(ErrorCode.ERR_SyntaxError, "null").WithArguments("in").WithLocation(8, 66)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "null")
+                    .WithArguments("in")
+                    .WithLocation(8, 66),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(541779, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541779")]
         [Fact]
         public void MultipleFromClauseQueryExpr()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 using System.Linq;
 
@@ -1937,7 +2151,8 @@ class Program
         [Fact]
         public void FromSelectQueryExprOnArraysWithTypeImplicit()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 using System.Linq;
 
@@ -1964,7 +2179,8 @@ class Program
         [Fact]
         public void JoinClauseTest()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 using System.Linq;
 
@@ -1993,7 +2209,8 @@ class Program
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void JoinClause_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq;
 
@@ -2015,7 +2232,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from a in E ... select a')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Join<System.Int32, System.Int32, System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> outer, System.Collections.Generic.IEnumerable<System.Int32> inner, System.Func<System.Int32, System.Int32> outerKeySelector, System.Func<System.Int32, System.Int32> innerKeySelector, System.Func<System.Int32, System.Int32, System.Int32> resultSelector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'join b in E ...  a equals b')
@@ -2089,7 +2307,11 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(541789, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541789")]
@@ -2097,7 +2319,8 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
         [Fact]
         public void WhereClauseTest()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 using System.Linq;
 
@@ -2127,7 +2350,8 @@ class Program
         [Fact]
         public void WhereDefinedInType()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System;
 
 class Y
@@ -2157,7 +2381,8 @@ class P
         [Fact]
         public void GetInfoForSelectExpression01()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Linq;
 public class Test2
@@ -2174,7 +2399,10 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            SelectClauseSyntax selectClause = (SelectClauseSyntax)tree.GetCompilationUnitRoot().FindToken(sourceCode.IndexOf("select", StringComparison.Ordinal)).Parent;
+            SelectClauseSyntax selectClause = (SelectClauseSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("select", StringComparison.Ordinal))
+                    .Parent;
             var info = semanticModel.GetSemanticInfoSummary(selectClause.Expression);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
@@ -2186,7 +2414,8 @@ public class Test2
         [Fact]
         public void GetInfoForSelectExpression02()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Linq;
 public class Test2
@@ -2204,7 +2433,10 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            SelectClauseSyntax selectClause = (SelectClauseSyntax)tree.GetCompilationUnitRoot().FindToken(sourceCode.IndexOf("select w", StringComparison.Ordinal)).Parent;
+            SelectClauseSyntax selectClause = (SelectClauseSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("select w", StringComparison.Ordinal))
+                    .Parent;
             var info = semanticModel.GetSemanticInfoSummary(selectClause.Expression);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
@@ -2213,7 +2445,8 @@ public class Test2
         [Fact]
         public void GetInfoForSelectExpression03()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 public class Test2
 {
@@ -2231,13 +2464,19 @@ public class Test2
             compilation.VerifyDiagnostics();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var e = (IdentifierNameSyntax)tree.GetCompilationUnitRoot().FindToken(sourceCode.IndexOf("x+1", StringComparison.Ordinal)).Parent;
+            var e = (IdentifierNameSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("x+1", StringComparison.Ordinal))
+                    .Parent;
             var info = semanticModel.GetSemanticInfoSummary(e);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
             Assert.Equal("x", info.Symbol.Name);
 
-            e = (IdentifierNameSyntax)tree.GetCompilationUnitRoot().FindToken(sourceCode.IndexOf("w+1", StringComparison.Ordinal)).Parent;
+            e = (IdentifierNameSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(sourceCode.IndexOf("w+1", StringComparison.Ordinal))
+                    .Parent;
             info = semanticModel.GetSemanticInfoSummary(e);
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
             Assert.Equal(SymbolKind.RangeVariable, info.Symbol.Kind);
@@ -2246,14 +2485,18 @@ public class Test2
             var e2 = e.Parent as ExpressionSyntax; // w+1
             var info2 = semanticModel.GetSemanticInfoSummary(e2);
             Assert.Equal(SpecialType.System_Int32, info2.Type.SpecialType);
-            Assert.Equal("System.Int32 System.Int32.op_Addition(System.Int32 left, System.Int32 right)", info2.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 System.Int32.op_Addition(System.Int32 left, System.Int32 right)",
+                info2.Symbol.ToTestDisplayString()
+            );
         }
 
         [WorkItem(541806, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541806")]
         [Fact]
         public void GetDeclaredSymbolForQueryContinuation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 public class Test2
 {
     public static void Main()
@@ -2269,7 +2512,9 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var queryContinuation = tree.GetRoot().FindToken(sourceCode.IndexOf("into w", StringComparison.Ordinal)).Parent;
+            var queryContinuation = tree.GetRoot()
+                .FindToken(sourceCode.IndexOf("into w", StringComparison.Ordinal))
+                .Parent;
             var symbol = semanticModel.GetDeclaredSymbol(queryContinuation);
 
             Assert.NotNull(symbol);
@@ -2281,7 +2526,8 @@ public class Test2
         [Fact]
         public void ComputeQueryVariableType()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 public class Test2
 {
@@ -2297,7 +2543,11 @@ public class Test2
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
             var selectExpression = tree.GetCompilationUnitRoot().FindToken(sourceCode.IndexOf('5'));
-            var info = semanticModel.GetSpeculativeTypeInfo(selectExpression.SpanStart, SyntaxFactory.ParseExpression("x"), SpeculativeBindingOption.BindAsExpression);
+            var info = semanticModel.GetSpeculativeTypeInfo(
+                selectExpression.SpanStart,
+                SyntaxFactory.ParseExpression("x"),
+                SpeculativeBindingOption.BindAsExpression
+            );
             Assert.Equal(SpecialType.System_Int32, info.Type.SpecialType);
         }
 
@@ -2305,7 +2555,8 @@ public class Test2
         [Fact]
         public void GetDeclaredSymbolForJoinIntoClause()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Linq;
 
@@ -2322,7 +2573,9 @@ static class Test
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var joinInto = tree.GetRoot().FindToken(sourceCode.IndexOf("into x8", StringComparison.Ordinal)).Parent;
+            var joinInto = tree.GetRoot()
+                .FindToken(sourceCode.IndexOf("into x8", StringComparison.Ordinal))
+                .Parent;
             var symbol = semanticModel.GetDeclaredSymbol(joinInto);
 
             Assert.NotNull(symbol);
@@ -2336,7 +2589,8 @@ static class Test
         [Fact()]
         public void GetDeclaredSymbolAddAccessorDeclIncompleteQuery()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Linq;
 
@@ -2354,8 +2608,12 @@ public class QueryExpressionTest
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var unknownAccessorDecls = tree.GetCompilationUnitRoot().DescendantNodes().OfType<AccessorDeclarationSyntax>();
-            var symbols = unknownAccessorDecls.Select(decl => semanticModel.GetDeclaredSymbol(decl));
+            var unknownAccessorDecls = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<AccessorDeclarationSyntax>();
+            var symbols = unknownAccessorDecls.Select(decl =>
+                semanticModel.GetDeclaredSymbol(decl)
+            );
 
             Assert.True(symbols.All(s => ReferenceEquals(s, null)));
         }
@@ -2364,7 +2622,8 @@ public class QueryExpressionTest
         [Fact]
         public void TwoFromClauseFollowedBySelectClause()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 
 class Test
@@ -2381,9 +2640,25 @@ class Test
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var selectClause = tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.SelectClause)).Single() as SelectClauseSyntax;
-            var fromClause1 = tree.GetCompilationUnitRoot().DescendantNodes().Where(n => (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num1"))).Single() as FromClauseSyntax;
-            var fromClause2 = tree.GetCompilationUnitRoot().DescendantNodes().Where(n => (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num2"))).Single() as FromClauseSyntax;
+            var selectClause =
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .Where(n => n.IsKind(SyntaxKind.SelectClause))
+                    .Single() as SelectClauseSyntax;
+            var fromClause1 =
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .Where(n =>
+                        (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num1"))
+                    )
+                    .Single() as FromClauseSyntax;
+            var fromClause2 =
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .Where(n =>
+                        (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num2"))
+                    )
+                    .Single() as FromClauseSyntax;
 
             var symbolInfoForSelect = semanticModel.GetSemanticInfoSummary(selectClause);
             var queryInfoForFrom1 = semanticModel.GetQueryClauseInfo(fromClause1);
@@ -2404,7 +2679,8 @@ class Test
         [Fact]
         public void SemanticInfoForOrderingClauses()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Linq;
 
@@ -2426,7 +2702,11 @@ public class QueryExpressionTest
             var model = compilation.GetSemanticModel(tree);
             int count = 0;
             string[] names = { "OrderByDescending", "ThenBy", "ThenByDescending" };
-            foreach (var ordering in tree.GetCompilationUnitRoot().DescendantNodes().OfType<OrderingSyntax>())
+            foreach (
+                var ordering in tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .OfType<OrderingSyntax>()
+            )
             {
                 var symbolInfo = model.GetSemanticInfoSummary(ordering);
                 Assert.Equal(names[count++], symbolInfo.Symbol.Name);
@@ -2438,7 +2718,8 @@ public class QueryExpressionTest
         [Fact]
         public void FromOrderBySelectQueryTranslation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -2481,7 +2762,11 @@ class Program
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var selectClause = tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.SelectClause)).Single() as SelectClauseSyntax;
+            var selectClause =
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .Where(n => n.IsKind(SyntaxKind.SelectClause))
+                    .Single() as SelectClauseSyntax;
             var symbolInfoForSelect = semanticModel.GetSemanticInfoSummary(selectClause);
 
             Assert.Null(symbolInfoForSelect.Symbol);
@@ -2491,7 +2776,8 @@ class Program
         [Fact]
         public void FromWhereSelectTranslation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2519,17 +2805,25 @@ class Program
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            semanticModel.GetDiagnostics().Verify(
-                // (21,30): error CS1935: Could not find an implementation of the query pattern for source type 'System.Collections.Generic.IEnumerable<int>'.  'Select' not found.  Are you missing required assembly references or a using directive for 'System.Linq'?
-                //         var q1 = from num in System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)
-                Diagnostic(ErrorCode.ERR_QueryNoProviderStandard, "System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)").WithArguments("System.Collections.Generic.IEnumerable<int>", "Select"));
+            semanticModel
+                .GetDiagnostics()
+                .Verify(
+                    // (21,30): error CS1935: Could not find an implementation of the query pattern for source type 'System.Collections.Generic.IEnumerable<int>'.  'Select' not found.  Are you missing required assembly references or a using directive for 'System.Linq'?
+                    //         var q1 = from num in System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)
+                    Diagnostic(
+                            ErrorCode.ERR_QueryNoProviderStandard,
+                            "System.Linq.Enumerable.Range(4, 5).Where(n => n > 10)"
+                        )
+                        .WithArguments("System.Collections.Generic.IEnumerable<int>", "Select")
+                );
         }
 
         [WorkItem(528760, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528760")]
         [Fact]
         public void FromJoinSelectTranslation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 
 class Program
@@ -2545,7 +2839,11 @@ class Program
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var selectClause = tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.SelectClause)).Single() as SelectClauseSyntax;
+            var selectClause =
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .Where(n => n.IsKind(SyntaxKind.SelectClause))
+                    .Single() as SelectClauseSyntax;
             var symbolInfoForSelect = semanticModel.GetSemanticInfoSummary(selectClause);
 
             Assert.Null(symbolInfoForSelect.Symbol);
@@ -2556,7 +2854,8 @@ class Program
         [Fact]
         public void OrderingSyntaxWithOverloadResolutionFailure()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 
 class Program
@@ -2575,12 +2874,17 @@ class Program
             compilation.VerifyDiagnostics(
                 // (10,30): error CS1936: Could not find an implementation of the query pattern for source type 'int'.  'OrderBy' not found.
                 //         var q1 = from num in numbers.Single()
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "numbers.Single()").WithArguments("int", "OrderBy")
-                );
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "numbers.Single()")
+                    .WithArguments("int", "OrderBy")
+            );
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var orderingClause = tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.AscendingOrdering)).Single() as OrderingSyntax;
+            var orderingClause =
+                tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .Where(n => n.IsKind(SyntaxKind.AscendingOrdering))
+                    .Single() as OrderingSyntax;
             var symbolInfoForOrdering = semanticModel.GetSemanticInfoSummary(orderingClause);
 
             Assert.Null(symbolInfoForOrdering.Symbol);
@@ -2590,7 +2894,8 @@ class Program
         [Fact]
         public void EmitIncompleteQueryWithSyntaxErrors()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 
 class Program
@@ -2604,7 +2909,9 @@ class Program
 ";
             using (var output = new MemoryStream())
             {
-                Assert.False(CreateCompilationWithMscorlib40AndSystemCore(sourceCode).Emit(output).Success);
+                Assert.False(
+                    CreateCompilationWithMscorlib40AndSystemCore(sourceCode).Emit(output).Success
+                );
             }
         }
 
@@ -2612,7 +2919,8 @@ class Program
         [Fact]
         public void EmitQueryWithBindErrors()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 class Program
 {
@@ -2626,7 +2934,9 @@ class Program
 }";
             using (var output = new MemoryStream())
             {
-                Assert.False(CreateCompilationWithMscorlib40AndSystemCore(sourceCode).Emit(output).Success);
+                Assert.False(
+                    CreateCompilationWithMscorlib40AndSystemCore(sourceCode).Emit(output).Success
+                );
             }
         }
 
@@ -2634,7 +2944,8 @@ class Program
         [Fact]
         public void BindToIncompleteSelectManyDecl()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 class P
 {
     static C<X> M2<X>(X x)
@@ -2669,7 +2980,8 @@ class C<T>
         [Fact]
         public void BindIdentifierInWhereErrorTolerance()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2695,7 +3007,8 @@ class Program
         [Fact]
         public void QueryWithMultipleParseErrorsAndScriptParseOption()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Linq;
 
@@ -2710,10 +3023,17 @@ public class QueryExpressionTest
     }
 }";
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(sourceCode, parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                sourceCode,
+                parseOptions: TestOptions.Script
+            );
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
-            var queryExpr = tree.GetCompilationUnitRoot().DescendantNodes().OfType<QueryExpressionSyntax>().Where(x => x.ToFullString() == "from i in expr1 let ").Single();
+            var queryExpr = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<QueryExpressionSyntax>()
+                .Where(x => x.ToFullString() == "from i in expr1 let ")
+                .Single();
             var symbolInfo = semanticModel.GetSemanticInfoSummary(queryExpr);
 
             Assert.Null(symbolInfo.Symbol);
@@ -2723,7 +3043,8 @@ public class QueryExpressionTest
         [Fact]
         public void QueryExpressionInFieldInitReferencingAnotherFieldWithScriptParseOption()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq;
 using System.Collections;
 
@@ -2736,10 +3057,16 @@ class P
                select x + one;
 }";
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(sourceCode, parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                sourceCode,
+                parseOptions: TestOptions.Script
+            );
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
-            var queryExpr = tree.GetCompilationUnitRoot().DescendantNodes().OfType<QueryExpressionSyntax>().Single();
+            var queryExpr = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<QueryExpressionSyntax>()
+                .Single();
             var symbolInfo = semanticModel.GetSemanticInfoSummary(queryExpr);
 
             Assert.Null(symbolInfo.Symbol);
@@ -2750,7 +3077,8 @@ class P
         [ConditionalFact(typeof(DesktopOnly))]
         public void StaticTypeInFromClause()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq;
 
@@ -2763,16 +3091,23 @@ class C
     }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0718: 'GC': static types cannot be used as type arguments
                 //         var q2 = string.Empty.Cast<GC>().Select(x => x);
-                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "string.Empty.Cast<GC>").WithArguments("System.GC").WithLocation(9, 18),
+                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "string.Empty.Cast<GC>")
+                    .WithArguments("System.GC")
+                    .WithLocation(9, 18),
                 // CS0718: 'GC': static types cannot be used as type arguments
                 //         var q1 = /*<bind>*/from GC x in string.Empty select x/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "from GC x in string.Empty").WithArguments("System.GC").WithLocation(10, 28)
+                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "from GC x in string.Empty")
+                    .WithArguments("System.GC")
+                    .WithLocation(10, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, @"
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from GC x i ... ty select x')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsImplicit) (Syntax: 'select x')
@@ -2795,15 +3130,25 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
               IReturnOperation (OperationKind.Return, Type: null, IsImplicit) (Syntax: 'x')
                 ReturnedValue: 
                   IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.GC) (Syntax: 'x')
-", new DiagnosticDescription[] {
-                // CS0718: 'GC': static types cannot be used as type arguments
-                //         var q2 = string.Empty.Cast<GC>().Select(x => x);
-                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "string.Empty.Cast<GC>").WithArguments("System.GC").WithLocation(9, 18),
-                // CS0718: 'GC': static types cannot be used as type arguments
-                //         var q1 = /*<bind>*/from GC x in string.Empty select x/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "from GC x in string.Empty").WithArguments("System.GC").WithLocation(10, 28)
-            }, parseOptions: TestOptions.WithoutImprovedOverloadCandidates);
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, @"
+",
+                new DiagnosticDescription[]
+                {
+                    // CS0718: 'GC': static types cannot be used as type arguments
+                    //         var q2 = string.Empty.Cast<GC>().Select(x => x);
+                    Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "string.Empty.Cast<GC>")
+                        .WithArguments("System.GC")
+                        .WithLocation(9, 18),
+                    // CS0718: 'GC': static types cannot be used as type arguments
+                    //         var q1 = /*<bind>*/from GC x in string.Empty select x/*</bind>*/;
+                    Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "from GC x in string.Empty")
+                        .WithArguments("System.GC")
+                        .WithLocation(10, 28),
+                },
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from GC x i ... ty select x')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsImplicit) (Syntax: 'select x')
@@ -2818,14 +3163,21 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
               IReturnOperation (OperationKind.Return, Type: null, IsImplicit) (Syntax: 'x')
                 ReturnedValue: 
                   IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: ?) (Syntax: 'x')
-", new DiagnosticDescription[] {
-                // file.cs(9,31): error CS0718: 'GC': static types cannot be used as type arguments
-                //         var q2 = string.Empty.Cast<GC>().Select(x => x);
-                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "Cast<GC>").WithArguments("System.GC").WithLocation(9, 31),
-                // file.cs(10,28): error CS0718: 'GC': static types cannot be used as type arguments
-                //         var q1 = /*<bind>*/from GC x in string.Empty select x/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "from GC x in string.Empty").WithArguments("System.GC").WithLocation(10, 28)
-            });
+",
+                new DiagnosticDescription[]
+                {
+                    // file.cs(9,31): error CS0718: 'GC': static types cannot be used as type arguments
+                    //         var q2 = string.Empty.Cast<GC>().Select(x => x);
+                    Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "Cast<GC>")
+                        .WithArguments("System.GC")
+                        .WithLocation(9, 31),
+                    // file.cs(10,28): error CS0718: 'GC': static types cannot be used as type arguments
+                    //         var q1 = /*<bind>*/from GC x in string.Empty select x/*</bind>*/;
+                    Diagnostic(ErrorCode.ERR_GenericArgIsStaticClass, "from GC x in string.Empty")
+                        .WithArguments("System.GC")
+                        .WithLocation(10, 28),
+                }
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -2833,7 +3185,8 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
         [Fact]
         public void MethodGroupInFromClause()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq;
 
@@ -2846,7 +3199,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from y in Main select y')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsImplicit) (Syntax: 'select y')
@@ -2862,23 +3216,33 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
                 ReturnedValue: 
                   IParameterReferenceOperation: y (OperationKind.ParameterReference, Type: ?) (Syntax: 'y')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0119: 'Program.Main()' is a method, which is not valid in the given context
                 //         var q1 = /*<bind>*/from y in Main select y/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "Main").WithArguments("Program.Main()", "method").WithLocation(9, 38),
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "Main")
+                    .WithArguments("Program.Main()", "method")
+                    .WithLocation(9, 38),
                 // CS0119: 'Program.Main()' is a method, which is not valid in the given context
                 //         var q2 = Main.Select(y => y);
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "Main").WithArguments("Program.Main()", "method").WithLocation(10, 18)
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "Main")
+                    .WithArguments("Program.Main()", "method")
+                    .WithLocation(10, 18),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(542558, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542558")]
         [Fact]
         public void SelectFromType01()
         {
-            string sourceCode = @"using System;
+            string sourceCode =
+                @"using System;
 using System.Collections.Generic;
  
 class C
@@ -2894,9 +3258,18 @@ class C
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "C").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "C")
+                .Single();
             dynamic main = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = main.Body.Statements[0].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = main.Body
+                .Statements[0]
+                .Declaration
+                .Variables[0]
+                .Initializer
+                .Value;
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
@@ -2911,7 +3284,8 @@ class C
         [Fact]
         public void SelectFromType02()
         {
-            string sourceCode = @"using System;
+            string sourceCode =
+                @"using System;
 using System.Collections.Generic;
  
 class C
@@ -2927,9 +3301,18 @@ class C
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "C").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "C")
+                .Single();
             dynamic main = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = main.Body.Statements[0].Declaration.Variables[0].Initializer.Value;
+            QueryExpressionSyntax q = main.Body
+                .Statements[0]
+                .Declaration
+                .Variables[0]
+                .Initializer
+                .Value;
             var info0 = model.GetQueryClauseInfo(q.FromClause);
             var x = model.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
@@ -2943,7 +3326,8 @@ class C
         [Fact]
         public void SelectFromType_TypeParameter()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 using System.Collections.Generic;
  
@@ -2956,12 +3340,15 @@ class C
 
     static Func<Func<int, object>, IEnumerable<object>> Select = null;
 }
-");
+"
+            );
 
             comp.VerifyDiagnostics(
                 // (9,27): error CS0119: 'T' is a type parameter, which is not valid in the given context
                 //         var q = from x in T select x;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "T").WithArguments("T", "type parameter").WithLocation(9, 27)
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "T")
+                    .WithArguments("T", "type parameter")
+                    .WithLocation(9, 27)
             );
         }
 
@@ -2969,7 +3356,8 @@ class C
         [Fact]
         public void QueryColorColor()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2997,10 +3385,12 @@ class Program
             compilation.VerifyDiagnostics(
                 // (17,11): warning CS0169: The field 'Program.Color' is never used
                 //     Color Color;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Color").WithArguments("Program.Color"),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Color")
+                    .WithArguments("Program.Color"),
                 // (18,19): warning CS0649: Field 'Program.Flavor' is never assigned to, and will always have its default value null
                 //     static Flavor Flavor;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Flavor").WithArguments("Program.Flavor", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Flavor")
+                    .WithArguments("Program.Flavor", "null")
             );
         }
 
@@ -3008,7 +3398,8 @@ class Program
         [Fact]
         public void QueryOnSourceWithGroupByMethod()
         {
-            string source = @"
+            string source =
+                @"
 delegate T Func<A, T>(A a);
 
 class Y<U>
@@ -3044,7 +3435,8 @@ class Test
         [Fact]
         public void RangeTypeAlreadySpecified()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 using System.Collections;
 
@@ -3063,7 +3455,8 @@ class CastableToArrayList
     public ArrayList Cast<T>() { return null; }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from int x  ... elect x + 1')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsImplicit) (Syntax: 'select x + 1')
@@ -3082,20 +3475,28 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
                     Right: 
                       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1936: Could not find an implementation of the query pattern for source type 'ArrayList'.  'Select' not found.
                 //         var q = /*<bind>*/from int x in list
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "list").WithArguments("System.Collections.ArrayList", "Select").WithLocation(10, 41)
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "list")
+                    .WithArguments("System.Collections.ArrayList", "Select")
+                    .WithLocation(10, 41),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(11414, "DevDiv_Projects/Roslyn")]
         [Fact]
         public void InvalidQueryWithAnonTypesAndKeywords()
         {
-            string source = @"
+            string source =
+                @"
 public class QueryExpressionTest
 {
     public static void Main()
@@ -3113,7 +3514,8 @@ public class QueryExpressionTest
         [ClrOnlyFact]
         public void GetSymbolInfoOfSelectNodeWhenTypeOfRangeVariableIsErrorType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 
 class Test
@@ -3131,7 +3533,8 @@ class Test
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees.First();
             var index = source.IndexOf("select i", StringComparison.Ordinal);
-            var selectNode = tree.GetCompilationUnitRoot().FindToken(index).Parent as SelectClauseSyntax;
+            var selectNode =
+                tree.GetCompilationUnitRoot().FindToken(index).Parent as SelectClauseSyntax;
             var model = compilation.GetSemanticModel(tree);
             var symbolInfo = model.GetSymbolInfo(selectNode);
             // https://github.com/dotnet/roslyn/issues/38509
@@ -3145,7 +3548,8 @@ class Test
         [Fact]
         public void GetQueryClauseInfoForQueryWithSyntaxErrors()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 
 class Test
@@ -3158,8 +3562,12 @@ class Test
 ";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var tree = compilation.SyntaxTrees.First();
-            var index = source.IndexOf("join int delegate in expr2 on i equals delegate", StringComparison.Ordinal);
-            var joinNode = tree.GetCompilationUnitRoot().FindToken(index).Parent as JoinClauseSyntax;
+            var index = source.IndexOf(
+                "join int delegate in expr2 on i equals delegate",
+                StringComparison.Ordinal
+            );
+            var joinNode =
+                tree.GetCompilationUnitRoot().FindToken(index).Parent as JoinClauseSyntax;
             var model = compilation.GetSemanticModel(tree);
             var queryInfo = model.GetQueryClauseInfo(joinNode);
 
@@ -3172,7 +3580,8 @@ class Test
         [Fact]
         public void QueryOnNull()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 static class C
 {
@@ -3187,7 +3596,8 @@ static class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Object, IsInvalid) (Syntax: 'from x in null select x')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: System.Object, IsInvalid, IsImplicit) (Syntax: 'select x')
@@ -3201,13 +3611,18 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Object, I
                 ReturnedValue: 
                   IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: ?, IsInvalid) (Syntax: 'x')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0186: Use of null is not valid in this context
                 //         var q = /*<bind>*/from x in null select x/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NullNotValid, "select x").WithLocation(7, 42)
+                Diagnostic(ErrorCode.ERR_NullNotValid, "select x").WithLocation(7, 42),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -3215,7 +3630,8 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Object, I
         [Fact]
         public void QueryOnLambda()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 static class C
 {
@@ -3230,7 +3646,8 @@ static class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Object, IsInvalid) (Syntax: 'from x in y ...  y select x')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: System.Object, IsInvalid, IsImplicit) (Syntax: 'select x')
@@ -3248,20 +3665,28 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Object, I
                 ReturnedValue: 
                   IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: ?, IsInvalid) (Syntax: 'x')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1936: Could not find an implementation of the query pattern for source type 'anonymous method'.  'Select' not found.
                 //         var q = /*<bind>*/from x in y => y select x/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select x").WithArguments("anonymous method", "Select").WithLocation(7, 44)
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select x")
+                    .WithArguments("anonymous method", "Select")
+                    .WithLocation(7, 44),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(545444, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545444")]
         [Fact]
         public void RefOmittedOnComCall()
         {
-            string source = @"using System;
+            string source =
+                @"using System;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 
@@ -3290,13 +3715,14 @@ class Test
                 // (22,54): error CS2037: An expression tree lambda may not contain a COM call with ref omitted on arguments
                 //        Expression<Func<int, int, int>> F = (x, y) => ref1.M(x, y);
                 Diagnostic(ErrorCode.ERR_ComRefCallInExpressionTree, "ref1.M(x, y)")
-                );
+            );
         }
 
         [Fact, WorkItem(5728, "https://github.com/dotnet/roslyn/issues/5728")]
         public void RefOmittedOnComCallErr()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
@@ -3334,10 +3760,12 @@ class Test1
 }";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-    // (34,32): error CS1525: Invalid expression term ')'
-    //         Test(ref1 => ref1.M(1, ));
-    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(34, 32)
-                );
+                // (34,32): error CS1525: Invalid expression term ')'
+                //         Test(ref1 => ref1.M(1, ));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(34, 32)
+            );
         }
 
         [WorkItem(529350, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529350")]
@@ -3345,7 +3773,7 @@ class Test1
         public void BindLambdaBodyWhenError()
         {
             string source =
-@"using System.Linq;
+                @"using System.Linq;
 
 class A
 {
@@ -3365,16 +3793,18 @@ class A
             compilation.VerifyDiagnostics(
                 // (10,48): error CS1061: 'System.Reflection.Assembly' does not contain a definition for 'UNDEFINED' and no extension method 'UNDEFINED' accepting a first argument of type 'System.Reflection.Assembly' could be found (are you missing a using directive or an assembly reference?)
                 //         var q2 = a.SelectMany(assem2 => assem2.UNDEFINED, (assem2, t) => t);
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "UNDEFINED").WithArguments("System.Reflection.Assembly", "UNDEFINED"),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "UNDEFINED")
+                    .WithArguments("System.Reflection.Assembly", "UNDEFINED"),
                 // (13,35): error CS1061: 'System.Reflection.Assembly' does not contain a definition for 'UNDEFINED' and no extension method 'UNDEFINED' accepting a first argument of type 'System.Reflection.Assembly' could be found (are you missing a using directive or an assembly reference?)
                 //                  from t in assem1.UNDEFINED
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "UNDEFINED").WithArguments("System.Reflection.Assembly", "UNDEFINED")
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "UNDEFINED")
+                    .WithArguments("System.Reflection.Assembly", "UNDEFINED")
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var assem2 =
-                tree.GetCompilationUnitRoot().DescendantNodes(n => n.ToString().Contains("assem2"))
+            var assem2 = tree.GetCompilationUnitRoot()
+                .DescendantNodes(n => n.ToString().Contains("assem2"))
                 .Where(e => e.ToString() == "assem2")
                 .OfType<ExpressionSyntax>()
                 .Single();
@@ -3382,8 +3812,8 @@ class A
             Assert.NotEqual(TypeKind.Error, typeInfo2.Type.TypeKind);
             Assert.Equal("Assembly", typeInfo2.Type.Name);
 
-            var assem1 =
-                tree.GetCompilationUnitRoot().DescendantNodes(n => n.ToString().Contains("assem1"))
+            var assem1 = tree.GetCompilationUnitRoot()
+                .DescendantNodes(n => n.ToString().Contains("assem1"))
                 .Where(e => e.ToString() == "assem1")
                 .OfType<ExpressionSyntax>()
                 .Single();
@@ -3395,8 +3825,11 @@ class A
         [Fact]
         public void TestSpeculativeSemanticModel_GetQueryClauseInfo()
         {
-            var csSource = @"
-using C = List1<int>;" + LINQ + @"
+            var csSource =
+                @"
+using C = List1<int>;"
+                + LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -3405,25 +3838,36 @@ class Query
         C c2 = new C(10, 20, 30);
     }
 }";
-            var speculatedSource = @"
+            var speculatedSource =
+                @"
         C r1 =
             from int x in c1
             from int y in c2
             select x + y;
 ";
-            var queryStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(speculatedSource);
+            var queryStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(speculatedSource);
 
             var compilation = CreateCompilation(csSource);
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Query").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Query")
+                .Single();
             var methodM = (MethodDeclarationSyntax)classC.Members[0];
 
             SemanticModel speculativeModel;
-            bool success = model.TryGetSpeculativeSemanticModel(methodM.Body.Statements[1].Span.End, queryStatement, out speculativeModel);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                methodM.Body.Statements[1].Span.End,
+                queryStatement,
+                out speculativeModel
+            );
             Assert.True(success);
-            var q = (QueryExpressionSyntax)queryStatement.Declaration.Variables[0].Initializer.Value;
+            var q = (QueryExpressionSyntax)
+                queryStatement.Declaration.Variables[0].Initializer.Value;
 
             var info0 = speculativeModel.GetQueryClauseInfo(q.FromClause);
             Assert.Equal("Cast", info0.CastInfo.Symbol.Name);
@@ -3439,8 +3883,11 @@ class Query
         [Fact]
         public void TestSpeculativeSemanticModel_GetSemanticInfoForSelectClause()
         {
-            var csSource = @"
-using C = List1<int>;" + LINQ + @"
+            var csSource =
+                @"
+using C = List1<int>;"
+                + LINQ
+                + @"
 class Query
 {
     public static void Main(string[] args)
@@ -3449,25 +3896,36 @@ class Query
         C c2 = new C(10, 20, 30);
     }
 }";
-            var speculatedSource = @"
+            var speculatedSource =
+                @"
         C r1 =
             from int x in c1
             select x;
 ";
 
-            var queryStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(speculatedSource);
+            var queryStatement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(speculatedSource);
 
             var compilation = CreateCompilation(csSource);
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Query").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Query")
+                .Single();
             var methodM = (MethodDeclarationSyntax)classC.Members[0];
 
             SemanticModel speculativeModel;
-            bool success = model.TryGetSpeculativeSemanticModel(methodM.Body.Statements[1].Span.End, queryStatement, out speculativeModel);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                methodM.Body.Statements[1].Span.End,
+                queryStatement,
+                out speculativeModel
+            );
             Assert.True(success);
-            var q = (QueryExpressionSyntax)queryStatement.Declaration.Variables[0].Initializer.Value;
+            var q = (QueryExpressionSyntax)
+                queryStatement.Declaration.Variables[0].Initializer.Value;
 
             var x = speculativeModel.GetDeclaredSymbol(q.FromClause);
             Assert.Equal(SymbolKind.RangeVariable, x.Kind);
@@ -3488,7 +3946,8 @@ class Query
         [Fact]
         public void TestSpeculativeSemanticModel_GetDeclaredSymbolForJoinIntoClause()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 public class Test
 {
     public static void Main()
@@ -3496,7 +3955,8 @@ public class Test
     }
 }";
 
-            var speculatedSource = @"
+            var speculatedSource =
+                @"
                   var qie = from x3 in new int[] { 0 }
                             join x7 in (new int[] { 1 }) on 5 equals 5 into x8
                             select x8;
@@ -3508,14 +3968,29 @@ public class Test
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Test").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Test")
+                .Single();
             var methodM = (MethodDeclarationSyntax)classC.Members[0];
 
             SemanticModel speculativeModel;
-            bool success = model.TryGetSpeculativeSemanticModel(methodM.Body.SpanStart, queryStatement, out speculativeModel);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                methodM.Body.SpanStart,
+                queryStatement,
+                out speculativeModel
+            );
 
-            var queryExpression = (QueryExpressionSyntax)((LocalDeclarationStatementSyntax)queryStatement).Declaration.Variables[0].Initializer.Value;
-            JoinIntoClauseSyntax joinInto = ((JoinClauseSyntax)queryExpression.Body.Clauses[0]).Into;
+            var queryExpression = (QueryExpressionSyntax)
+                ((LocalDeclarationStatementSyntax)queryStatement)
+                    .Declaration
+                    .Variables[0]
+                    .Initializer
+                    .Value;
+            JoinIntoClauseSyntax joinInto = (
+                (JoinClauseSyntax)queryExpression.Body.Clauses[0]
+            ).Into;
             var symbol = speculativeModel.GetDeclaredSymbol(joinInto);
 
             Assert.NotNull(symbol);
@@ -3527,7 +4002,8 @@ public class Test
         [Fact]
         public void TestSpeculativeSemanticModel_GetDeclaredSymbolForQueryContinuation()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 public class Test2
 {
     public static void Main()
@@ -3535,7 +4011,8 @@ public class Test2
         var nums = new int[] { 1, 2, 3, 4 };
     }
 }";
-            var speculatedSource = @"
+            var speculatedSource =
+                @"
                 var q2 = from x in nums
                          select x into w
                          select w;
@@ -3547,14 +4024,27 @@ public class Test2
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "Test2").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "Test2")
+                .Single();
             var methodM = (MethodDeclarationSyntax)classC.Members[0];
 
             SemanticModel speculativeModel;
-            bool success = model.TryGetSpeculativeSemanticModel(methodM.Body.Statements[0].Span.End, queryStatement, out speculativeModel);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                methodM.Body.Statements[0].Span.End,
+                queryStatement,
+                out speculativeModel
+            );
             Assert.True(success);
 
-            var queryExpression = (QueryExpressionSyntax)((LocalDeclarationStatementSyntax)queryStatement).Declaration.Variables[0].Initializer.Value;
+            var queryExpression = (QueryExpressionSyntax)
+                ((LocalDeclarationStatementSyntax)queryStatement)
+                    .Declaration
+                    .Variables[0]
+                    .Initializer
+                    .Value;
             var queryContinuation = queryExpression.Body.Continuation;
             var symbol = speculativeModel.GetDeclaredSymbol(queryContinuation);
 
@@ -3566,7 +4056,8 @@ public class Test2
         [Fact]
         public void TestSpeculativeSemanticModel_GetSymbolInfoForOrderingClauses()
         {
-            string sourceCode = @"
+            string sourceCode =
+                @"
 using System.Linq; // Needed for speculative code.
 
 public class QueryExpressionTest
@@ -3575,7 +4066,8 @@ public class QueryExpressionTest
     {
     }
 }";
-            var speculatedSource = @"
+            var speculatedSource =
+                @"
         var q1 =
             from x in new int[] { 4, 5 }
             orderby
@@ -3591,15 +4083,24 @@ public class QueryExpressionTest
             compilation.VerifyDiagnostics(
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System.Linq; // Needed for speculative code.
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;"));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Linq;")
+            );
 
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var classC = tree.GetCompilationUnitRoot().ChildNodes().OfType<TypeDeclarationSyntax>().Where(t => t.Identifier.ValueText == "QueryExpressionTest").Single();
+            var classC = tree.GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<TypeDeclarationSyntax>()
+                .Where(t => t.Identifier.ValueText == "QueryExpressionTest")
+                .Single();
             var methodM = (MethodDeclarationSyntax)classC.Members[0];
 
             SemanticModel speculativeModel;
-            bool success = model.TryGetSpeculativeSemanticModel(methodM.Body.SpanStart, queryStatement, out speculativeModel);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                methodM.Body.SpanStart,
+                queryStatement,
+                out speculativeModel
+            );
             Assert.True(success);
 
             int count = 0;
@@ -3616,7 +4117,8 @@ public class QueryExpressionTest
         [Fact]
         public void BrokenQueryPattern()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Q<T>
@@ -3646,7 +4148,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: X, IsInvalid) (Syntax: 'from x in q ... .ToString()')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: X, IsInvalid, IsImplicit) (Syntax: 'select x.ToString()')
@@ -3729,21 +4232,31 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: X, IsInvalid) (S
                                 Children(1):
                                     IParameterReferenceOperation: <>h__TransparentIdentifier0 (OperationKind.ParameterReference, Type: System.Int32, IsInvalid, IsImplicit) (Syntax: 'x')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8016: Transparent identifier member access failed for field 'x' of 'int'.  Does the data being queried implement the query pattern?
                 //             select x.ToString()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsupportedTransparentIdentifierAccess, "x").WithArguments("x", "int").WithLocation(27, 20)
+                Diagnostic(ErrorCode.ERR_UnsupportedTransparentIdentifierAccess, "x")
+                    .WithArguments("x", "int")
+                    .WithLocation(27, 20),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
-        [WorkItem(204561, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit")]
+        [WorkItem(
+            204561,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit"
+        )]
         public void Bug204561_01()
         {
             string sourceCode =
-@"
+                @"
 class C
 {
     public static void Main()
@@ -3769,16 +4282,21 @@ public static class TestExtensions
             compilation.VerifyDiagnostics(
                 // (6,34): error CS1936: Could not find an implementation of the query pattern for source type 'Test'.  'Select' not found.
                 //         var x01 = from a in Test select a + 1;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select a + 1").WithArguments("Test", "Select").WithLocation(6, 34)
-                );
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select a + 1")
+                    .WithArguments("Test", "Select")
+                    .WithLocation(6, 34)
+            );
         }
 
         [Fact]
-        [WorkItem(204561, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit")]
+        [WorkItem(
+            204561,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit"
+        )]
         public void Bug204561_02()
         {
             string sourceCode =
-@"
+                @"
 class C
 {
     public static void Main()
@@ -3808,16 +4326,21 @@ static class TestExtensions
             compilation.VerifyDiagnostics(
                 // (7,34): error CS1936: Could not find an implementation of the query pattern for source type 'Test'.  'Where' not found.
                 //         var x02 = from a in Test where a > 0 select a + 1;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "where a > 0").WithArguments("Test", "Where").WithLocation(7, 34)
-                );
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "where a > 0")
+                    .WithArguments("Test", "Where")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
-        [WorkItem(204561, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit")]
+        [WorkItem(
+            204561,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit"
+        )]
         public void Bug204561_03()
         {
             string sourceCode =
-@"
+                @"
 class C
 {
     public static void Main()
@@ -3848,19 +4371,26 @@ static class TestExtensions
             compilation.VerifyDiagnostics(
                 // (6,34): error CS1936: Could not find an implementation of the query pattern for source type 'Test'.  'Select' not found.
                 //         var y03 = from a in Test select a + 1;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select a + 1").WithArguments("Test", "Select").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select a + 1")
+                    .WithArguments("Test", "Select")
+                    .WithLocation(6, 34),
                 // (7,34): error CS1936: Could not find an implementation of the query pattern for source type 'Test'.  'Where' not found.
                 //         var x03 = from a in Test where a > 0 select a + 1;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "where a > 0").WithArguments("Test", "Where").WithLocation(7, 34)
-                );
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "where a > 0")
+                    .WithArguments("Test", "Where")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
-        [WorkItem(204561, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit")]
+        [WorkItem(
+            204561,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=204561&_a=edit"
+        )]
         public void Bug204561_04()
         {
             string sourceCode =
-@"
+                @"
 class C
 {
     public static void Main()
@@ -3877,7 +4407,10 @@ class Test
         return null;
     }
 }";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(sourceCode, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                sourceCode,
+                options: TestOptions.DebugExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: "Select");
         }
@@ -3886,7 +4419,8 @@ class Test
         [Fact]
         public void ExpressionVariablesInQueryClause_01()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System.Linq;
 
 class Program
@@ -3911,43 +4445,107 @@ class Program
     }
     public static T M<T>(T x, out T z) => z = x;
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(csSource, parseOptions: TestOptions.Regular7_2).VerifyDiagnostics(
-                // (10,53): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zc = from x in a from y in M(a, out var z) select x; // error 1
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(10, 53),
-                // (11,57): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zd = from x in a from int y in M(a, out var z) select x; // error 2
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(11, 57),
-                // (12,53): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var ze = from x in a from y in M(a, out var z) where true select x; // error 3
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(12, 53),
-                // (13,57): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zf = from x in a from int y in M(a, out var z) where true select x; // error 4
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(13, 57),
-                // (14,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zg = from x in a let y = M(a, out var z) select x; // error 5
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(14, 51),
-                // (15,49): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zh = from x in a where M(x, out var z) == 1 select x; // error 6
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(15, 49),
-                // (17,58): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zj = from x in a join y in a on M(x, out var z) equals y select x; // error 7
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(17, 58),
-                // (18,67): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zk = from x in a join y in a on x equals M(y, out var z) select x; // error 8
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(18, 67),
-                // (19,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zl = from x in a orderby M(x, out var z) select x; // error 9
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(19, 51),
-                // (20,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zm = from x in a orderby x, M(x, out var z) select x; // error 10
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(20, 54),
-                // (21,49): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zn = from x in a group M(x, out var z) by x; // error 11
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(21, 49),
-                // (22,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zo = from x in a group x by M(x, out var z); // error 12
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(22, 54)
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    csSource,
+                    parseOptions: TestOptions.Regular7_2
+                )
+                .VerifyDiagnostics(
+                    // (10,53): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zc = from x in a from y in M(a, out var z) select x; // error 1
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(10, 53),
+                    // (11,57): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zd = from x in a from int y in M(a, out var z) select x; // error 2
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(11, 57),
+                    // (12,53): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var ze = from x in a from y in M(a, out var z) where true select x; // error 3
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(12, 53),
+                    // (13,57): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zf = from x in a from int y in M(a, out var z) where true select x; // error 4
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(13, 57),
+                    // (14,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zg = from x in a let y = M(a, out var z) select x; // error 5
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(14, 51),
+                    // (15,49): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zh = from x in a where M(x, out var z) == 1 select x; // error 6
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(15, 49),
+                    // (17,58): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zj = from x in a join y in a on M(x, out var z) equals y select x; // error 7
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(17, 58),
+                    // (18,67): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zk = from x in a join y in a on x equals M(y, out var z) select x; // error 8
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(18, 67),
+                    // (19,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zl = from x in a orderby M(x, out var z) select x; // error 9
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(19, 51),
+                    // (20,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zm = from x in a orderby x, M(x, out var z) select x; // error 10
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(20, 54),
+                    // (21,49): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zn = from x in a group M(x, out var z) by x; // error 11
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(21, 49),
+                    // (22,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zo = from x in a group x by M(x, out var z); // error 12
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(22, 54)
                 );
 
             CreateCompilationWithMscorlib40AndSystemCore(csSource).VerifyDiagnostics();
@@ -3957,7 +4555,8 @@ class Program
         [Fact]
         public void ExpressionVariablesInQueryClause_02()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System.Linq;
 
 class Program
@@ -3982,43 +4581,107 @@ class Program
     }
     public static T M<T>(T x, bool b) => x;
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(csSource, parseOptions: TestOptions.Regular7_2).VerifyDiagnostics(
-                // (10,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zc = from x in a from y in M(a, a is var z) select x; // error 1
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(10, 54),
-                // (11,58): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zd = from x in a from int y in M(a, a is var z) select x; // error 2
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(11, 58),
-                // (12,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var ze = from x in a from y in M(a, a is var z) where true select x; // error 3
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(12, 54),
-                // (13,58): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zf = from x in a from int y in M(a, a is var z) where true select x; // error 4
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(13, 58),
-                // (14,52): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zg = from x in a let y = M(a, a is var z) select x; // error 5
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(14, 52),
-                // (15,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zh = from x in a where M(x, x is var z) == 1 select x; // error 6
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(15, 50),
-                // (17,59): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zj = from x in a join y in a on M(x, x is var z) equals y select x; // error 7
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(17, 59),
-                // (18,68): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zk = from x in a join y in a on x equals M(y, y is var z) select x; // error 8
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(18, 68),
-                // (19,52): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zl = from x in a orderby M(x, x is var z) select x; // error 9
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(19, 52),
-                // (20,55): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zm = from x in a orderby x, M(x, x is var z) select x; // error 10
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(20, 55),
-                // (21,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zn = from x in a group M(x, x is var z) by x; // error 11
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(21, 50),
-                // (22,55): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zo = from x in a group x by M(x, x is var z); // error 12
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(22, 55)
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    csSource,
+                    parseOptions: TestOptions.Regular7_2
+                )
+                .VerifyDiagnostics(
+                    // (10,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zc = from x in a from y in M(a, a is var z) select x; // error 1
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(10, 54),
+                    // (11,58): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zd = from x in a from int y in M(a, a is var z) select x; // error 2
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(11, 58),
+                    // (12,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var ze = from x in a from y in M(a, a is var z) where true select x; // error 3
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(12, 54),
+                    // (13,58): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zf = from x in a from int y in M(a, a is var z) where true select x; // error 4
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(13, 58),
+                    // (14,52): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zg = from x in a let y = M(a, a is var z) select x; // error 5
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(14, 52),
+                    // (15,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zh = from x in a where M(x, x is var z) == 1 select x; // error 6
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(15, 50),
+                    // (17,59): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zj = from x in a join y in a on M(x, x is var z) equals y select x; // error 7
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(17, 59),
+                    // (18,68): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zk = from x in a join y in a on x equals M(y, y is var z) select x; // error 8
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(18, 68),
+                    // (19,52): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zl = from x in a orderby M(x, x is var z) select x; // error 9
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(19, 52),
+                    // (20,55): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zm = from x in a orderby x, M(x, x is var z) select x; // error 10
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(20, 55),
+                    // (21,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zn = from x in a group M(x, x is var z) by x; // error 11
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(21, 50),
+                    // (22,55): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zo = from x in a group x by M(x, x is var z); // error 12
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(22, 55)
                 );
 
             CreateCompilationWithMscorlib40AndSystemCore(csSource).VerifyDiagnostics();
@@ -4028,7 +4691,8 @@ class Program
         [Fact]
         public void ExpressionVariablesInQueryClause_03()
         {
-            var csSource = @"
+            var csSource =
+                @"
 using System.Linq;
 
 class Program
@@ -4067,46 +4731,109 @@ namespace System
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(csSource, parseOptions: TestOptions.Regular7_2)
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    csSource,
+                    parseOptions: TestOptions.Regular7_2
+                )
                 .GetDiagnostics()
                 .Where(d => d.Code != (int)ErrorCode.ERR_DeclarationExpressionNotPermitted)
                 .Verify(
-                // (10,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zc = from x in a from y in M(a, (int z, int w) = x) select x; // error 1
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(10, 50),
-                // (11,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zd = from x in a from int y in M(a, (int z, int w) = x) select x; // error 2
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(11, 54),
-                // (12,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var ze = from x in a from y in M(a, (int z, int w) = x) where true select x; // error 3
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(12, 50),
-                // (13,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zf = from x in a from int y in M(a, (int z, int w) = x) where true select x; // error 4
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(13, 54),
-                // (14,48): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zg = from x in a let y = M(x, (int z, int w) = x) select x; // error 5
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(14, 48),
-                // (15,46): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zh = from x in a where M(x, (int z, int w) = x).Item1 == 1 select x; // error 6
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(15, 46),
-                // (17,55): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zj = from x in a join y in a on M(x, (int z, int w) = x) equals y select x; // error 7
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(17, 55),
-                // (18,64): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zk = from x in a join y in a on x equals M(y, (int z, int w) = y) select x; // error 8
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(18, 64),
-                // (19,48): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zl = from x in a orderby M(x, (int z, int w) = x) select x; // error 9
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(19, 48),
-                // (20,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zm = from x in a orderby x, M(x, (int z, int w) = x) select x; // error 10
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(20, 51),
-                // (21,46): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zn = from x in a group M(x, (int z, int w) = x) by x; // error 11
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(21, 46),
-                // (22,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
-                //         var zo = from x in a group x by M(x, (int z, int w) = x); // error 12
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z").WithArguments("declaration of expression variables in member initializers and queries", "7.3").WithLocation(22, 51)
+                    // (10,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zc = from x in a from y in M(a, (int z, int w) = x) select x; // error 1
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(10, 50),
+                    // (11,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zd = from x in a from int y in M(a, (int z, int w) = x) select x; // error 2
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(11, 54),
+                    // (12,50): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var ze = from x in a from y in M(a, (int z, int w) = x) where true select x; // error 3
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(12, 50),
+                    // (13,54): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zf = from x in a from int y in M(a, (int z, int w) = x) where true select x; // error 4
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(13, 54),
+                    // (14,48): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zg = from x in a let y = M(x, (int z, int w) = x) select x; // error 5
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(14, 48),
+                    // (15,46): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zh = from x in a where M(x, (int z, int w) = x).Item1 == 1 select x; // error 6
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(15, 46),
+                    // (17,55): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zj = from x in a join y in a on M(x, (int z, int w) = x) equals y select x; // error 7
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(17, 55),
+                    // (18,64): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zk = from x in a join y in a on x equals M(y, (int z, int w) = y) select x; // error 8
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(18, 64),
+                    // (19,48): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zl = from x in a orderby M(x, (int z, int w) = x) select x; // error 9
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(19, 48),
+                    // (20,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zm = from x in a orderby x, M(x, (int z, int w) = x) select x; // error 10
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(20, 51),
+                    // (21,46): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zn = from x in a group M(x, (int z, int w) = x) by x; // error 11
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(21, 46),
+                    // (22,51): error CS8320: Feature 'declaration of expression variables in member initializers and queries' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    //         var zo = from x in a group x by M(x, (int z, int w) = x); // error 12
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "z")
+                        .WithArguments(
+                            "declaration of expression variables in member initializers and queries",
+                            "7.3"
+                        )
+                        .WithLocation(22, 51)
                 );
 
             CreateCompilationWithMscorlib40AndSystemCore(csSource)
@@ -4119,7 +4846,8 @@ namespace System
         [Fact, WorkItem(14689, "https://github.com/dotnet/roslyn/issues/14689")]
         public void SelectFromNamespaceShouldGiveAnError()
         {
-            string source = @"
+            string source =
+                @"
 using System.Linq;
 using NSAlias = ParentNamespace.ConsoleApp;
 
@@ -4139,7 +4867,8 @@ namespace ParentNamespace
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (Syntax: 'from c in N ... as select 3')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsImplicit) (Syntax: 'select 3')
@@ -4153,26 +4882,38 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: ?, IsInvalid) (S
                 ReturnedValue: 
                   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3) (Syntax: '3')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(13,35): error CS0119: 'ParentNamespace.ConsoleApp' is a namespace, which is not valid in the given context
                 //                 var x = from c in ConsoleApp select 3;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "ConsoleApp").WithArguments("ParentNamespace.ConsoleApp", "namespace").WithLocation(13, 35),
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "ConsoleApp")
+                    .WithArguments("ParentNamespace.ConsoleApp", "namespace")
+                    .WithLocation(13, 35),
                 // file.cs(14,35): error CS0119: 'ParentNamespace.ConsoleApp' is a namespace, which is not valid in the given context
                 //                 var y = from c in ParentNamespace.ConsoleApp select 3;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "ParentNamespace.ConsoleApp").WithArguments("ParentNamespace.ConsoleApp", "namespace").WithLocation(14, 35),
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "ParentNamespace.ConsoleApp")
+                    .WithArguments("ParentNamespace.ConsoleApp", "namespace")
+                    .WithLocation(14, 35),
                 // file.cs(15,45): error CS0119: 'ParentNamespace.ConsoleApp' is a namespace, which is not valid in the given context
                 //                 var z = /*<bind>*/from c in NSAlias select 3/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "NSAlias").WithArguments("ParentNamespace.ConsoleApp", "namespace").WithLocation(15, 45)
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "NSAlias")
+                    .WithArguments("ParentNamespace.ConsoleApp", "namespace")
+                    .WithLocation(15, 45),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(12052, "https://github.com/dotnet/roslyn/issues/12052")]
         public void LambdaParameterConflictsWithRangeVariable_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq;
 
@@ -4185,7 +4926,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Func<System.Int32, System.Int32>>, IsInvalid) (Syntax: 'from a in n ... t>)(a => 1)')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Func<System.Int32, System.Int32>> System.Linq.Enumerable.Select<System.Int32, System.Func<System.Int32, System.Int32>>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Func<System.Int32, System.Int32>> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Func<System.Int32, System.Int32>>, IsInvalid, IsImplicit) (Syntax: 'select (Fun ... t>)(a => 1)')
@@ -4222,20 +4964,29 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
             InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
             OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0136: A local or parameter named 'a' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   select (Func<int, int>)(a => 1)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "a").WithArguments("a").WithLocation(10, 43)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "a")
+                    .WithArguments("a")
+                    .WithLocation(10, 43),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, parseOptions: TestOptions.Regular7_3);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular7_3
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(12052, "https://github.com/dotnet/roslyn/issues/12052")]
         public void LambdaParameterConflictsWithRangeVariable_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Linq;
 
@@ -4248,7 +4999,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Func<System.Int32, System.Int32>>) (Syntax: 'from a in n ... t>)(a => 1)')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Func<System.Int32, System.Int32>> System.Linq.Enumerable.Select<System.Int32, System.Func<System.Int32, System.Int32>>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Func<System.Int32, System.Int32>> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Func<System.Int32, System.Int32>>, IsImplicit) (Syntax: 'select (Fun ... t>)(a => 1)')
@@ -4286,14 +5038,19 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
             OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void IOperationForQueryClause()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -4306,7 +5063,8 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from i in c select i + 1')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select i + 1')
@@ -4337,14 +5095,19 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void IOperationForRangeVariableDefinition()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -4358,7 +5121,8 @@ class Query
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collections.Generic.IEnumerable<System.Int32>) (Syntax: 'from i in c select i + 1')
   Expression: 
     IInvocationOperation (System.Collections.Generic.IEnumerable<System.Int32> System.Linq.Enumerable.Select<System.Int32, System.Int32>(this System.Collections.Generic.IEnumerable<System.Int32> source, System.Func<System.Int32, System.Int32> selector)) (OperationKind.Invocation, Type: System.Collections.Generic.IEnumerable<System.Int32>, IsImplicit) (Syntax: 'select i + 1')
@@ -4389,14 +5153,19 @@ ITranslatedQueryOperation (OperationKind.TranslatedQuery, Type: System.Collectio
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<QueryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17838, "https://github.com/dotnet/roslyn/issues/17838")]
         public void IOperationForRangeVariableReference()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -4409,18 +5178,24 @@ class Query
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IParameterReferenceOperation: i (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'i')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact, WorkItem(21484, "https://github.com/dotnet/roslyn/issues/21484")]
         public void QueryOnTypeExpression()
         {
-            var code = @"
+            var code =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -4444,35 +5219,58 @@ class Program
             comp.VerifyDiagnostics(
                 // (10,22): error CS0120: An object reference is required for the non-static field, method, or property 'Enumerable.Cast<object>(IEnumerable)'
                 //         var query1 = from object a in IEnumerable select 1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "from object a in IEnumerable").WithArguments("System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)").WithLocation(10, 22),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "from object a in IEnumerable")
+                    .WithArguments(
+                        "System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)"
+                    )
+                    .WithLocation(10, 22),
                 // (11,32): error CS1934: Could not find an implementation of the query pattern for source type 'IEnumerable'.  'Select' not found.  Consider explicitly specifying the type of the range variable 'b'.
                 //         var query2 = from b in IEnumerable select 2;
-                Diagnostic(ErrorCode.ERR_QueryNoProviderCastable, "IEnumerable").WithArguments("System.Collections.IEnumerable", "Select", "b").WithLocation(11, 32),
+                Diagnostic(ErrorCode.ERR_QueryNoProviderCastable, "IEnumerable")
+                    .WithArguments("System.Collections.IEnumerable", "Select", "b")
+                    .WithLocation(11, 32),
                 // (13,22): error CS0120: An object reference is required for the non-static field, method, or property 'Enumerable.Cast<int>(IEnumerable)'
                 //         var query3 = from int c in IEnumerable<int> select 3;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "from int c in IEnumerable<int>").WithArguments("System.Linq.Enumerable.Cast<int>(System.Collections.IEnumerable)").WithLocation(13, 22),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "from int c in IEnumerable<int>")
+                    .WithArguments(
+                        "System.Linq.Enumerable.Cast<int>(System.Collections.IEnumerable)"
+                    )
+                    .WithLocation(13, 22),
                 // (14,49): error CS1936: Could not find an implementation of the query pattern for source type 'IEnumerable<int>'.  'Select' not found.
                 //         var query4 = from d in IEnumerable<int> select 4;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select 4").WithArguments("System.Collections.Generic.IEnumerable<int>", "Select").WithLocation(14, 49),
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "select 4")
+                    .WithArguments("System.Collections.Generic.IEnumerable<int>", "Select")
+                    .WithLocation(14, 49),
                 // (16,22): error CS0120: An object reference is required for the non-static field, method, or property 'Enumerable.Cast<object>(IEnumerable)'
                 //         var query5 = from object d in T select 5;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "from object d in T").WithArguments("System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)").WithLocation(16, 22),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "from object d in T")
+                    .WithArguments(
+                        "System.Linq.Enumerable.Cast<object>(System.Collections.IEnumerable)"
+                    )
+                    .WithLocation(16, 22),
                 // (16,39): error CS0119: 'T' is a type parameter, which is not valid in the given context
                 //         var query5 = from object d in T select 5;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "T").WithArguments("T", "type parameter").WithLocation(16, 39),
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "T")
+                    .WithArguments("T", "type parameter")
+                    .WithLocation(16, 39),
                 // (17,32): error CS0119: 'T' is a type parameter, which is not valid in the given context
                 //         var query6 = from d in T select 6;
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "T").WithArguments("T", "type parameter").WithLocation(17, 32),
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "T")
+                    .WithArguments("T", "type parameter")
+                    .WithLocation(17, 32),
                 // (17,32): error CS1936: Could not find an implementation of the query pattern for source type 'T'.  'Select' not found.
                 //         var query6 = from d in T select 6;
-                Diagnostic(ErrorCode.ERR_QueryNoProvider, "T").WithArguments("T", "Select").WithLocation(17, 32)
-                );
+                Diagnostic(ErrorCode.ERR_QueryNoProvider, "T")
+                    .WithArguments("T", "Select")
+                    .WithLocation(17, 32)
+            );
         }
 
         [Fact, WorkItem(50316, "https://github.com/dotnet/roslyn/issues/50316")]
         public void SetOnlyProperty()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -4486,19 +5284,24 @@ public class C {
         set {}
     }
 }
-", options: TestOptions.ReleaseExe);
+",
+                options: TestOptions.ReleaseExe
+            );
 
             comp.VerifyDiagnostics(
                 // (6,22): error CS0154: The property or indexer 'C.Prop' cannot be used in this context because it lacks the get accessor
                 // var test = from i in c.Prop
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.Prop").WithArguments("C.Prop").WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.Prop")
+                    .WithArguments("C.Prop")
+                    .WithLocation(6, 22)
             );
         }
 
         [Fact, WorkItem(50316, "https://github.com/dotnet/roslyn/issues/50316")]
         public void DefaultIndexedPropertyParameters_IndexerCall()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4515,13 +5318,16 @@ public class C {
         set {}
     }
 }
-", expectedOutput: "2");
+",
+                expectedOutput: "2"
+            );
         }
 
         [Fact, WorkItem(50316, "https://github.com/dotnet/roslyn/issues/50316")]
         public void DefaultIndexedPropertyParameters_PropertyGroup()
         {
-            var vb = CreateVisualBasicCompilation(@"
+            var vb = CreateVisualBasicCompilation(
+                @"
 Imports System.Collections.Generic
 Imports System.Runtime.InteropServices
  
@@ -4542,11 +5348,13 @@ Public Class A
         End Set
     End Property
 End Class
-");
+"
+            );
 
             vb.VerifyDiagnostics();
 
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 using System.Linq;
 
@@ -4554,7 +5362,10 @@ I i = new A();
 var test = from @int in i.X
            select @int + 1;
 Console.WriteLine(string.Join(string.Empty, test));
-", references: new[] { vb.EmitToImageReference() }, expectedOutput: "2");
+",
+                references: new[] { vb.EmitToImageReference() },
+                expectedOutput: "2"
+            );
         }
     }
 }

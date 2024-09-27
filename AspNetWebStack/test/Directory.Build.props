@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="..\Directory.Build.props" />
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <TargetFrameworkVersion
+        Condition=" '$(MSBuildProjectName)' != 'Microsoft.TestCommon' AND
+          '$(MSBuildProjectName)' != 'System.Net.Http.Formatting.ns1_3.Test' AND
+          '$(MSBuildProjectName)' != 'System.Net.Http.Formatting.ns2_0.Test' ">v4.6.2</TargetFrameworkVersion>
+  </PropertyGroup>
+</Project>

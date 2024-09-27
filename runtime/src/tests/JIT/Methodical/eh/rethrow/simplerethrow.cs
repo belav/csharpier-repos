@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// simple rethrow test 
+// simple rethrow test
 
 using System;
 using Xunit;
@@ -28,7 +28,7 @@ namespace hello_simplerethrow_rethrow_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -59,4 +59,3 @@ namespace hello_simplerethrow_rethrow_cs
         }
     }
 }
-

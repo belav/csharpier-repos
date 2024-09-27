@@ -19,7 +19,8 @@ namespace System.Xml.Serialization
     {
         private readonly TypeScope _typeScope;
         private readonly Dictionary<Type, TypeModel> _models = new Dictionary<Type, TypeModel>();
-        private readonly Dictionary<Type, TypeModel> _arrayModels = new Dictionary<Type, TypeModel>();
+        private readonly Dictionary<Type, TypeModel> _arrayModels =
+            new Dictionary<Type, TypeModel>();
 
         internal ModelScope(TypeScope typeScope)
         {
@@ -64,7 +65,10 @@ namespace System.Xml.Serialization
                     model = new StructModel(type, typeDesc, this);
                     break;
                 default:
-                    if (!typeDesc.IsSpecial) throw new NotSupportedException(SR.Format(SR.XmlUnsupportedTypeKind, type.FullName));
+                    if (!typeDesc.IsSpecial)
+                        throw new NotSupportedException(
+                            SR.Format(SR.XmlUnsupportedTypeKind, type.FullName)
+                        );
                     model = new SpecialModel(type, typeDesc, this);
                     break;
             }
@@ -94,6 +98,7 @@ namespace System.Xml.Serialization
     internal abstract class TypeModel
     {
         private readonly TypeDesc _typeDesc;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private readonly Type _type;
         private readonly ModelScope _scope;
@@ -101,7 +106,8 @@ namespace System.Xml.Serialization
         protected TypeModel(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             TypeDesc typeDesc,
-            ModelScope scope)
+            ModelScope scope
+        )
         {
             _scope = scope;
             _type = type;
@@ -128,7 +134,11 @@ namespace System.Xml.Serialization
     internal sealed class ArrayModel : TypeModel
     {
         internal ArrayModel(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, TypeDesc typeDesc, ModelScope scope) : base(type, typeDesc, scope) { }
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
+            TypeDesc typeDesc,
+            ModelScope scope
+        )
+            : base(type, typeDesc, scope) { }
 
         internal TypeModel Element
         {
@@ -140,28 +150,43 @@ namespace System.Xml.Serialization
     internal sealed class PrimitiveModel : TypeModel
     {
         internal PrimitiveModel(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, TypeDesc typeDesc, ModelScope scope) : base(type, typeDesc, scope) { }
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
+            TypeDesc typeDesc,
+            ModelScope scope
+        )
+            : base(type, typeDesc, scope) { }
     }
 
     internal sealed class SpecialModel : TypeModel
     {
         internal SpecialModel(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
-            TypeDesc typeDesc, ModelScope scope) : base(type, typeDesc, scope) { }
+            TypeDesc typeDesc,
+            ModelScope scope
+        )
+            : base(type, typeDesc, scope) { }
     }
 
     internal sealed class StructModel : TypeModel
     {
         internal StructModel(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
-            TypeDesc typeDesc, ModelScope scope) : base(type, typeDesc, scope) { }
+            TypeDesc typeDesc,
+            ModelScope scope
+        )
+            : base(type, typeDesc, scope) { }
 
         internal MemberInfo[] GetMemberInfos()
         {
             // we use to return Type.GetMembers() here, the members were returned in a different order: fields first, properties last
             // Current System.Reflection code returns members in opposite order: properties first, then fields.
             // This code make sure that returns members in the Everett order.
-            MemberInfo[] members = Type.GetMembers(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            MemberInfo[] members = Type.GetMembers(
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
             MemberInfo[] fieldsAndProps = new MemberInfo[members.Length];
 
             int cMember = 0;
@@ -194,7 +219,11 @@ namespace System.Xml.Serialization
                 model = GetPropertyModel((PropertyInfo)memberInfo);
             if (model != null)
             {
-                if (model.ReadOnly && model.FieldTypeDesc.Kind != TypeKind.Collection && model.FieldTypeDesc.Kind != TypeKind.Enumerable)
+                if (
+                    model.ReadOnly
+                    && model.FieldTypeDesc.Kind != TypeKind.Collection
+                    && model.FieldTypeDesc.Kind != TypeKind.Enumerable
+                )
                     return null;
             }
             return model;
@@ -206,8 +235,17 @@ namespace System.Xml.Serialization
                 return;
             if (typeDesc.IsUnsupported)
             {
-                typeDesc.Exception ??= new NotSupportedException(SR.Format(SR.XmlSerializerUnsupportedType, typeDesc.FullName));
-                throw new InvalidOperationException(SR.Format(SR.XmlSerializerUnsupportedMember, $"{member.DeclaringType!.FullName}.{member.Name}", type.FullName), typeDesc.Exception);
+                typeDesc.Exception ??= new NotSupportedException(
+                    SR.Format(SR.XmlSerializerUnsupportedType, typeDesc.FullName)
+                );
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlSerializerUnsupportedMember,
+                        $"{member.DeclaringType!.FullName}.{member.Name}",
+                        type.FullName
+                    ),
+                    typeDesc.Exception
+                );
             }
             CheckSupportedMember(typeDesc.BaseTypeDesc, member, type);
             CheckSupportedMember(typeDesc.ArrayElementTypeDesc, member, type);
@@ -216,11 +254,22 @@ namespace System.Xml.Serialization
         [RequiresUnreferencedCode("calls GetTypeDesc")]
         private FieldModel? GetFieldModel(FieldInfo fieldInfo)
         {
-            if (fieldInfo.IsStatic) return null;
-            if (fieldInfo.DeclaringType != Type) return null;
+            if (fieldInfo.IsStatic)
+                return null;
+            if (fieldInfo.DeclaringType != Type)
+                return null;
 
-            TypeDesc typeDesc = ModelScope.TypeScope.GetTypeDesc(fieldInfo.FieldType, fieldInfo, true, false);
-            if (fieldInfo.IsInitOnly && typeDesc.Kind != TypeKind.Collection && typeDesc.Kind != TypeKind.Enumerable)
+            TypeDesc typeDesc = ModelScope.TypeScope.GetTypeDesc(
+                fieldInfo.FieldType,
+                fieldInfo,
+                true,
+                false
+            );
+            if (
+                fieldInfo.IsInitOnly
+                && typeDesc.Kind != TypeKind.Collection
+                && typeDesc.Kind != TypeKind.Enumerable
+            )
                 return null;
 
             CheckSupportedMember(typeDesc, fieldInfo, fieldInfo.FieldType);
@@ -230,12 +279,22 @@ namespace System.Xml.Serialization
         [RequiresUnreferencedCode("calls GetTypeDesc")]
         private FieldModel? GetPropertyModel(PropertyInfo propertyInfo)
         {
-            if (propertyInfo.DeclaringType != Type) return null;
+            if (propertyInfo.DeclaringType != Type)
+                return null;
             if (CheckPropertyRead(propertyInfo))
             {
-                TypeDesc typeDesc = ModelScope.TypeScope.GetTypeDesc(propertyInfo.PropertyType, propertyInfo, true, false);
+                TypeDesc typeDesc = ModelScope.TypeScope.GetTypeDesc(
+                    propertyInfo.PropertyType,
+                    propertyInfo,
+                    true,
+                    false
+                );
                 // Fix for CSDMain 100492, please contact arssrvlt if you need to change this line
-                if (!propertyInfo.CanWrite && typeDesc.Kind != TypeKind.Collection && typeDesc.Kind != TypeKind.Enumerable)
+                if (
+                    !propertyInfo.CanWrite
+                    && typeDesc.Kind != TypeKind.Collection
+                    && typeDesc.Kind != TypeKind.Enumerable
+                )
                     return null;
                 CheckSupportedMember(typeDesc, propertyInfo, propertyInfo.PropertyType);
                 return new FieldModel(propertyInfo, propertyInfo.PropertyType, typeDesc);
@@ -246,12 +305,15 @@ namespace System.Xml.Serialization
         //CheckProperty
         internal static bool CheckPropertyRead(PropertyInfo propertyInfo)
         {
-            if (!propertyInfo.CanRead) return false;
+            if (!propertyInfo.CanRead)
+                return false;
 
             MethodInfo getMethod = propertyInfo.GetMethod!;
-            if (getMethod.IsStatic) return false;
+            if (getMethod.IsStatic)
+                return false;
             ParameterInfo[] parameters = getMethod.GetParameters();
-            if (parameters.Length > 0) return false;
+            if (parameters.Length > 0)
+                return false;
             return true;
         }
     }
@@ -276,11 +338,23 @@ namespace System.Xml.Serialization
         private readonly string _name;
         private readonly TypeDesc _fieldTypeDesc;
 
-        internal FieldModel(string name, Type fieldType, TypeDesc fieldTypeDesc, bool checkSpecified, bool checkShouldPersist) :
-            this(name, fieldType, fieldTypeDesc, checkSpecified, checkShouldPersist, false)
-        {
-        }
-        internal FieldModel(string name, Type fieldType, TypeDesc fieldTypeDesc, bool checkSpecified, bool checkShouldPersist, bool readOnly)
+        internal FieldModel(
+            string name,
+            Type fieldType,
+            TypeDesc fieldTypeDesc,
+            bool checkSpecified,
+            bool checkShouldPersist
+        )
+            : this(name, fieldType, fieldTypeDesc, checkSpecified, checkShouldPersist, false) { }
+
+        internal FieldModel(
+            string name,
+            Type fieldType,
+            TypeDesc fieldTypeDesc,
+            bool checkSpecified,
+            bool checkShouldPersist,
+            bool readOnly
+        )
         {
             _fieldTypeDesc = fieldTypeDesc;
             _name = name;
@@ -297,32 +371,60 @@ namespace System.Xml.Serialization
             _fieldType = fieldType;
             _fieldTypeDesc = fieldTypeDesc;
             _memberInfo = memberInfo;
-            _checkShouldPersistMethodInfo = memberInfo.DeclaringType!.GetMethod($"ShouldSerialize{memberInfo.Name}", Type.EmptyTypes);
+            _checkShouldPersistMethodInfo = memberInfo.DeclaringType!.GetMethod(
+                $"ShouldSerialize{memberInfo.Name}",
+                Type.EmptyTypes
+            );
             _checkShouldPersist = _checkShouldPersistMethodInfo != null;
 
-            FieldInfo? specifiedField = memberInfo.DeclaringType.GetField($"{memberInfo.Name}Specified");
+            FieldInfo? specifiedField = memberInfo.DeclaringType.GetField(
+                $"{memberInfo.Name}Specified"
+            );
             if (specifiedField != null)
             {
                 if (specifiedField.FieldType != typeof(bool))
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlInvalidSpecifiedType, specifiedField.Name, specifiedField.FieldType.FullName, typeof(bool).FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlInvalidSpecifiedType,
+                            specifiedField.Name,
+                            specifiedField.FieldType.FullName,
+                            typeof(bool).FullName
+                        )
+                    );
                 }
-                _checkSpecified = specifiedField.IsInitOnly ? SpecifiedAccessor.ReadOnly : SpecifiedAccessor.ReadWrite;
+                _checkSpecified = specifiedField.IsInitOnly
+                    ? SpecifiedAccessor.ReadOnly
+                    : SpecifiedAccessor.ReadWrite;
                 _checkSpecifiedMemberInfo = specifiedField;
             }
             else
             {
-                PropertyInfo? specifiedProperty = memberInfo.DeclaringType.GetProperty($"{memberInfo.Name}Specified");
+                PropertyInfo? specifiedProperty = memberInfo.DeclaringType.GetProperty(
+                    $"{memberInfo.Name}Specified"
+                );
                 if (specifiedProperty != null)
                 {
                     if (StructModel.CheckPropertyRead(specifiedProperty))
                     {
-                        _checkSpecified = specifiedProperty.CanWrite ? SpecifiedAccessor.ReadWrite : SpecifiedAccessor.ReadOnly;
+                        _checkSpecified = specifiedProperty.CanWrite
+                            ? SpecifiedAccessor.ReadWrite
+                            : SpecifiedAccessor.ReadOnly;
                         _checkSpecifiedMemberInfo = specifiedProperty;
                     }
-                    if (_checkSpecified != SpecifiedAccessor.None && specifiedProperty.PropertyType != typeof(bool))
+                    if (
+                        _checkSpecified != SpecifiedAccessor.None
+                        && specifiedProperty.PropertyType != typeof(bool)
+                    )
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlInvalidSpecifiedType, specifiedProperty.Name, specifiedProperty.PropertyType.FullName, typeof(bool).FullName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlInvalidSpecifiedType,
+                                specifiedProperty.Name,
+                                specifiedProperty.PropertyType.FullName,
+                                typeof(bool).FullName
+                            )
+                        );
                     }
                 }
             }
@@ -418,8 +520,11 @@ namespace System.Xml.Serialization
         private ConstantModel[]? _constants;
 
         internal EnumModel(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-            Type type, TypeDesc typeDesc, ModelScope scope) : base(type, typeDesc, scope) { }
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
+            TypeDesc typeDesc,
+            ModelScope scope
+        )
+            : base(type, typeDesc, scope) { }
 
         internal ConstantModel[] Constants
         {
@@ -433,7 +538,8 @@ namespace System.Xml.Serialization
                     {
                         FieldInfo field = fields[i];
                         ConstantModel? constant = GetConstantModel(field);
-                        if (constant != null) list.Add(constant);
+                        if (constant != null)
+                            list.Add(constant);
                     }
                     _constants = list.ToArray();
                 }
@@ -443,8 +549,12 @@ namespace System.Xml.Serialization
 
         private static ConstantModel? GetConstantModel(FieldInfo fieldInfo)
         {
-            if (fieldInfo.IsSpecialName) return null;
-            return new ConstantModel(fieldInfo, ((IConvertible)fieldInfo.GetValue(null)!).ToInt64(null));
+            if (fieldInfo.IsSpecialName)
+                return null;
+            return new ConstantModel(
+                fieldInfo,
+                ((IConvertible)fieldInfo.GetValue(null)!).ToInt64(null)
+            );
         }
     }
 }

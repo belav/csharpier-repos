@@ -42,7 +42,7 @@ namespace System.ComponentModel
     {
         Always = 0,
         Never = 1,
-        Advanced = 2
+        Advanced = 2,
     }
 
     [AttributeUsage(AttributeTargets.All)]

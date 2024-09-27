@@ -78,11 +78,19 @@ public class ManifestEntryTests
     public void ScopingAFolderAndTryingToGetAScopedFile_ReturnsSinkDirectory()
     {
         // Arrange
-        var directory = ManifestDirectory.CreateRootDirectory(new[] {
-                ManifestDirectory.CreateDirectory("a",
-                    new[] { new ManifestFile("test1.txt", "text.txt") }),
-                ManifestDirectory.CreateDirectory("b",
-                    new[] { new ManifestFile("test2.txt", "test2.txt") }) });
+        var directory = ManifestDirectory.CreateRootDirectory(
+            new[]
+            {
+                ManifestDirectory.CreateDirectory(
+                    "a",
+                    new[] { new ManifestFile("test1.txt", "text.txt") }
+                ),
+                ManifestDirectory.CreateDirectory(
+                    "b",
+                    new[] { new ManifestFile("test2.txt", "test2.txt") }
+                ),
+            }
+        );
 
         var newRoot = ((ManifestDirectory)directory.Traverse("a")).ToRootDirectory();
 

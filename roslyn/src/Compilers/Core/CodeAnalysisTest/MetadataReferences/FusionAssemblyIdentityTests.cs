@@ -8,8 +8,8 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using Xunit;
 using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
 {
@@ -64,7 +64,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
                 Assert.Equal(name.Flags, rtName.Flags);
                 Assert.Equal(name.ContentType, rtName.ContentType);
 
-                string displayName = FusionAssemblyIdentity.GetDisplayName(obj, FusionAssemblyIdentity.ASM_DISPLAYF.FULL);
+                string displayName = FusionAssemblyIdentity.GetDisplayName(
+                    obj,
+                    FusionAssemblyIdentity.ASM_DISPLAYF.FULL
+                );
                 Assert.Equal(fullName, displayName);
             }
 
@@ -78,7 +81,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.Equal(name.ContentType, rtName.ContentType);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void FusionAssemblyNameRoundTrip()
         {
             RoundTrip(new AssemblyName("goo"));
@@ -89,36 +95,88 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             RoundTrip(new AssemblyIdentity("goo").ToAssemblyName());
 
             // 0xffff version is not included in AssemblyName.FullName for some reason:
-            var name = new AssemblyIdentity("goo", version: new Version(0xffff, 0xffff, 0xffff, 0xffff)).ToAssemblyName();
+            var name = new AssemblyIdentity(
+                "goo",
+                version: new Version(0xffff, 0xffff, 0xffff, 0xffff)
+            ).ToAssemblyName();
             RoundTrip(name, testFullName: false);
             var obj = FusionAssemblyIdentity.ToAssemblyNameObject(name);
-            var display = FusionAssemblyIdentity.GetDisplayName(obj, FusionAssemblyIdentity.ASM_DISPLAYF.FULL);
-            Assert.Equal("goo, Version=65535.65535.65535.65535, Culture=neutral, PublicKeyToken=null", display);
+            var display = FusionAssemblyIdentity.GetDisplayName(
+                obj,
+                FusionAssemblyIdentity.ASM_DISPLAYF.FULL
+            );
+            Assert.Equal(
+                "goo, Version=65535.65535.65535.65535, Culture=neutral, PublicKeyToken=null",
+                display
+            );
 
-            RoundTrip(new AssemblyIdentity("goo", version: new Version(1, 2, 3, 4)).ToAssemblyName());
+            RoundTrip(
+                new AssemblyIdentity("goo", version: new Version(1, 2, 3, 4)).ToAssemblyName()
+            );
             RoundTrip(new AssemblyName("goo") { Version = new Version(1, 2, 3, 4) });
 
-            RoundTrip(new AssemblyIdentity("goo", cultureName: CultureInfo.CurrentCulture.Name).ToAssemblyName());
+            RoundTrip(
+                new AssemblyIdentity(
+                    "goo",
+                    cultureName: CultureInfo.CurrentCulture.Name
+                ).ToAssemblyName()
+            );
             RoundTrip(new AssemblyIdentity("goo", cultureName: "").ToAssemblyName());
             RoundTrip(new AssemblyName("goo") { CultureInfo = CultureInfo.InvariantCulture });
 
-            RoundTrip(new AssemblyIdentity("goo", version: new Version(1, 2, 3, 4), cultureName: "en-US").ToAssemblyName());
-            RoundTrip(new AssemblyIdentity("goo", publicKeyOrToken: new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }.AsImmutableOrNull()).ToAssemblyName());
-            RoundTrip(new AssemblyIdentity("goo", version: new Version(1, 2, 3, 4), cultureName: CultureInfo.CurrentCulture.Name, publicKeyOrToken: new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }.AsImmutableOrNull()).ToAssemblyName());
+            RoundTrip(
+                new AssemblyIdentity(
+                    "goo",
+                    version: new Version(1, 2, 3, 4),
+                    cultureName: "en-US"
+                ).ToAssemblyName()
+            );
+            RoundTrip(
+                new AssemblyIdentity(
+                    "goo",
+                    publicKeyOrToken: new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }.AsImmutableOrNull()
+                ).ToAssemblyName()
+            );
+            RoundTrip(
+                new AssemblyIdentity(
+                    "goo",
+                    version: new Version(1, 2, 3, 4),
+                    cultureName: CultureInfo.CurrentCulture.Name,
+                    publicKeyOrToken: new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }.AsImmutableOrNull()
+                ).ToAssemblyName()
+            );
 
             RoundTrip(new AssemblyIdentity("goo", isRetargetable: true).ToAssemblyName());
-            RoundTrip(new AssemblyIdentity("goo", contentType: AssemblyContentType.WindowsRuntime).ToAssemblyName());
+            RoundTrip(
+                new AssemblyIdentity(
+                    "goo",
+                    contentType: AssemblyContentType.WindowsRuntime
+                ).ToAssemblyName()
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void FusionGetBestMatch()
         {
             var goo = FusionAssemblyIdentity.ToAssemblyNameObject("goo");
-            var goo1 = FusionAssemblyIdentity.ToAssemblyNameObject("goo, Version=1.0.0.0, Culture=neutral");
-            var goo2 = FusionAssemblyIdentity.ToAssemblyNameObject("goo, Version=2.0.0.0, Culture=neutral");
-            var goo3 = FusionAssemblyIdentity.ToAssemblyNameObject("goo, Version=3.0.0.0, Culture=neutral");
-            var goo3_enUS = FusionAssemblyIdentity.ToAssemblyNameObject("goo, Version=3.0.0.0, Culture=en-US");
-            var goo3_deDE = FusionAssemblyIdentity.ToAssemblyNameObject("goo, Version=3.0.0.0, Culture=de-DE");
+            var goo1 = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "goo, Version=1.0.0.0, Culture=neutral"
+            );
+            var goo2 = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "goo, Version=2.0.0.0, Culture=neutral"
+            );
+            var goo3 = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "goo, Version=3.0.0.0, Culture=neutral"
+            );
+            var goo3_enUS = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "goo, Version=3.0.0.0, Culture=en-US"
+            );
+            var goo3_deDE = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "goo, Version=3.0.0.0, Culture=de-DE"
+            );
 
             var m = FusionAssemblyIdentity.GetBestMatch(new[] { goo2, goo1, goo3 }, null);
             Assert.Equal(goo3, m);
@@ -126,22 +184,34 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             m = FusionAssemblyIdentity.GetBestMatch(new[] { goo3, goo2, goo1 }, null);
             Assert.Equal(goo3, m);
 
-            // only simple name is used 
+            // only simple name is used
             m = FusionAssemblyIdentity.GetBestMatch(new[] { goo2, goo3 }, null);
             Assert.Equal(goo3, m);
 
-            // the first match if preferred cultures not specified 
-            m = FusionAssemblyIdentity.GetBestMatch(new[] { goo1, goo3_deDE, goo3_enUS, goo2 }, null);
+            // the first match if preferred cultures not specified
+            m = FusionAssemblyIdentity.GetBestMatch(
+                new[] { goo1, goo3_deDE, goo3_enUS, goo2 },
+                null
+            );
             Assert.Equal(goo3_deDE, m);
 
-            // the first match if preferred cultures not specified 
-            m = FusionAssemblyIdentity.GetBestMatch(new[] { goo1, goo3_deDE, goo3_enUS, goo2 }, null);
+            // the first match if preferred cultures not specified
+            m = FusionAssemblyIdentity.GetBestMatch(
+                new[] { goo1, goo3_deDE, goo3_enUS, goo2 },
+                null
+            );
             Assert.Equal(goo3_deDE, m);
 
-            m = FusionAssemblyIdentity.GetBestMatch(new[] { goo1, goo3, goo3_deDE, goo3_enUS, goo2 }, "en-US");
+            m = FusionAssemblyIdentity.GetBestMatch(
+                new[] { goo1, goo3, goo3_deDE, goo3_enUS, goo2 },
+                "en-US"
+            );
             Assert.Equal(goo3_enUS, m);
 
-            m = FusionAssemblyIdentity.GetBestMatch(new[] { goo1, goo3_deDE, goo3, goo3_enUS, goo2 }, "cz-CZ");
+            m = FusionAssemblyIdentity.GetBestMatch(
+                new[] { goo1, goo3_deDE, goo3, goo3_enUS, goo2 },
+                "cz-CZ"
+            );
             Assert.Equal(goo3, m);
 
             m = FusionAssemblyIdentity.GetBestMatch(new[] { goo3_deDE, goo2 }, "en-US");
@@ -152,7 +222,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.Equal(goo3, m);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void FusionToAssemblyName()
         {
             var nameObject = FusionAssemblyIdentity.ToAssemblyNameObject("mscorlib");
@@ -174,7 +247,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.Null(name.GetPublicKeyToken());
             Assert.Equal(AssemblyContentType.Default, name.ContentType);
 
-            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject("mscorlib, Version=2.0.0.0, Culture=neutral");
+            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "mscorlib, Version=2.0.0.0, Culture=neutral"
+            );
             name = ToAssemblyName(nameObject);
             Assert.Equal("mscorlib", name.Name);
             Assert.Equal(new Version(2, 0, 0, 0), name.Version);
@@ -183,7 +258,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.Null(name.GetPublicKeyToken());
             Assert.Equal(AssemblyContentType.Default, name.ContentType);
 
-            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject("mscorlib, Version=2.0.0.0, Culture=en-US");
+            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "mscorlib, Version=2.0.0.0, Culture=en-US"
+            );
             name = ToAssemblyName(nameObject);
             Assert.Equal("mscorlib", name.Name);
             Assert.Equal(new Version(2, 0, 0, 0), name.Version);
@@ -193,7 +270,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.Null(name.GetPublicKeyToken());
             Assert.Equal(AssemblyContentType.Default, name.ContentType);
 
-            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject("Windows, Version=255.255.255.255, ContentType=WindowsRuntime");
+            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "Windows, Version=255.255.255.255, ContentType=WindowsRuntime"
+            );
             name = ToAssemblyName(nameObject);
             Assert.Equal("Windows", name.Name);
             Assert.Equal(new Version(255, 255, 255, 255), name.Version);
@@ -202,23 +281,36 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
             Assert.Null(name.GetPublicKeyToken());
             Assert.Equal(AssemblyContentType.WindowsRuntime, name.ContentType);
 
-            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject("mscorlib, Version=2.0.0.0, Culture=nonsense");
+            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "mscorlib, Version=2.0.0.0, Culture=nonsense"
+            );
             Assert.NotNull(nameObject);
             Assert.Throws<CultureNotFoundException>(() => ToAssemblyName(nameObject));
 
-            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject("mscorlib, Version=2.0.0.0, Culture=null");
+            nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(
+                "mscorlib, Version=2.0.0.0, Culture=null"
+            );
             Assert.NotNull(nameObject);
             Assert.Throws<CultureNotFoundException>(() => ToAssemblyName(nameObject));
 
-            Assert.Throws<CultureNotFoundException>(() => new AssemblyName("mscorlib, Version=2.0.0.0, Culture=nonsense"));
-            Assert.Throws<CultureNotFoundException>(() => new AssemblyName("mscorlib, Version=2.0.0.0, Culture=null"));
+            Assert.Throws<CultureNotFoundException>(
+                () => new AssemblyName("mscorlib, Version=2.0.0.0, Culture=nonsense")
+            );
+            Assert.Throws<CultureNotFoundException>(
+                () => new AssemblyName("mscorlib, Version=2.0.0.0, Culture=null")
+            );
 
-            Assert.Throws<ArgumentException>(() => FusionAssemblyIdentity.ToAssemblyNameObject(new AssemblyName { Name = "x\0x" }));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    FusionAssemblyIdentity.ToAssemblyNameObject(new AssemblyName { Name = "x\0x" })
+            );
 
             // invalid characters are ok in the name, the FullName can't be built though:
             foreach (char c in AssemblyIdentityTests.ClrInvalidCharacters)
             {
-                nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(new AssemblyName { Name = c.ToString() });
+                nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(
+                    new AssemblyName { Name = c.ToString() }
+                );
                 name = ToAssemblyName(nameObject);
                 Assert.Equal(c.ToString(), name.Name);
                 Assert.Throws<FileLoadException>(() => name.FullName);
@@ -226,4 +318,3 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
         }
     }
 }
-

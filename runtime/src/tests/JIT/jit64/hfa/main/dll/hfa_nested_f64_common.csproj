@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DebugType />
+    <DefineConstants>$(DefineConstants);NESTED_HFA;FLOAT64</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="hfa_common.cs" />
+  </ItemGroup>
+</Project>

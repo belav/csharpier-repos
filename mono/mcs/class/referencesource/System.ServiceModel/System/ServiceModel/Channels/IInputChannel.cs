@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.Collections;
+    using System.ServiceModel;
 
     public interface IInputChannel : IChannel
     {

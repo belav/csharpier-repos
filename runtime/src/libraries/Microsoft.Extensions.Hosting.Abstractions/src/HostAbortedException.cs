@@ -12,15 +12,21 @@ namespace Microsoft.Extensions.Hosting
     public sealed class HostAbortedException : Exception
     {
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
-        private HostAbortedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        private HostAbortedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostAbortedException"/> class
         /// with a system-supplied error message.
         /// </summary>
-        public HostAbortedException() : base(SR.HostAbortedExceptionMessage) { }
+        public HostAbortedException()
+            : base(SR.HostAbortedExceptionMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostAbortedException"/> class
@@ -34,7 +40,8 @@ namespace Microsoft.Extensions.Hosting
         /// The caller of this constructor is required to ensure that this string has been localized for the
         /// current system culture.
         /// </remarks>
-        public HostAbortedException(string? message) : base(message) { }
+        public HostAbortedException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostAbortedException"/> class
@@ -52,6 +59,7 @@ namespace Microsoft.Extensions.Hosting
         /// The caller of this constructor is required to ensure that this string has been localized for the
         /// current system culture.
         /// </remarks>
-        public HostAbortedException(string? message, Exception? innerException) : base(message, innerException) { }
+        public HostAbortedException(string? message, Exception? innerException)
+            : base(message, innerException) { }
     }
 }

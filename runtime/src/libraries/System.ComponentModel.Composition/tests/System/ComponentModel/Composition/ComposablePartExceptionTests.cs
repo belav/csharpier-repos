@@ -45,7 +45,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsMessageArgument_ShouldSetMessagePropertyToDefault()
         {
-            var exception = new ComposablePartException((string)null, ElementFactory.Create(), new Exception());
+            var exception = new ComposablePartException(
+                (string)null,
+                ElementFactory.Create(),
+                new Exception()
+            );
 
             ExceptionAssert.HasDefaultMessage(exception);
         }
@@ -77,7 +81,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor9_NullAsMessageArgument_ShouldSetMessagePropertyToDefault()
         {
-            var exception = new ComposablePartException((string)null, ElementFactory.Create(), new Exception());
+            var exception = new ComposablePartException(
+                (string)null,
+                ElementFactory.Create(),
+                new Exception()
+            );
 
             ExceptionAssert.HasDefaultMessage(exception);
         }
@@ -128,7 +136,11 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var exception = new ComposablePartException(e, ElementFactory.Create(), new Exception());
+                var exception = new ComposablePartException(
+                    e,
+                    ElementFactory.Create(),
+                    new Exception()
+                );
 
                 Assert.Equal(e, exception.Message);
             }
@@ -180,7 +192,11 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var exception = new ComposablePartException(e, ElementFactory.Create(), new Exception());
+                var exception = new ComposablePartException(
+                    e,
+                    ElementFactory.Create(),
+                    new Exception()
+                );
 
                 Assert.Equal(e, exception.Message);
             }
@@ -221,7 +237,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsInnerExceptionArgument_ShouldSetInnerExceptionPropertyToNull()
         {
-            var exception = new ComposablePartException("Message", ElementFactory.Create(), (Exception)null);
+            var exception = new ComposablePartException(
+                "Message",
+                ElementFactory.Create(),
+                (Exception)null
+            );
 
             Assert.Null(exception.InnerException);
         }
@@ -253,7 +273,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor9_NullAsInnerExceptionArgument_ShouldSetInnerExceptionPropertyToNull()
         {
-            var exception = new ComposablePartException("Message", ElementFactory.Create(), (Exception)null);
+            var exception = new ComposablePartException(
+                "Message",
+                ElementFactory.Create(),
+                (Exception)null
+            );
 
             Assert.Null(exception.InnerException);
         }
@@ -345,7 +369,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsElementArgument_ShouldSetElementPropertyToNull()
         {
-            var exception = new ComposablePartException("Message", (ICompositionElement)null, new Exception());
+            var exception = new ComposablePartException(
+                "Message",
+                (ICompositionElement)null,
+                new Exception()
+            );
 
             Assert.Null(exception.Element);
         }
@@ -377,7 +405,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor9_NullAsElementArgument_ShouldSetElementPropertyToNull()
         {
-            var exception = new ComposablePartException("Message", (ICompositionElement)null, new Exception());
+            var exception = new ComposablePartException(
+                "Message",
+                (ICompositionElement)null,
+                new Exception()
+            );
 
             Assert.Null(exception.Element);
         }
@@ -402,7 +434,11 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var exception = new ComposablePartException("Message", (ICompositionElement)e, new Exception());
+                var exception = new ComposablePartException(
+                    "Message",
+                    (ICompositionElement)e,
+                    new Exception()
+                );
 
                 Assert.Same(e, exception.Element);
             }
@@ -428,7 +464,11 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var exception = new ComposablePartException("Message", (ICompositionElement)e, new Exception());
+                var exception = new ComposablePartException(
+                    "Message",
+                    (ICompositionElement)e,
+                    new Exception()
+                );
 
                 Assert.Same(e, exception.Element);
             }
@@ -436,30 +476,64 @@ namespace System.ComponentModel.Composition
 
         private static ComposablePartException CreateComposablePartException()
         {
-            return CreateComposablePartException(CompositionErrorId.Unknown, (string)null, (ICompositionElement)null, (Exception)null);
+            return CreateComposablePartException(
+                CompositionErrorId.Unknown,
+                (string)null,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
         private static ComposablePartException CreateComposablePartException(string message)
         {
-            return CreateComposablePartException(CompositionErrorId.Unknown, message, (ICompositionElement)null, (Exception)null);
+            return CreateComposablePartException(
+                CompositionErrorId.Unknown,
+                message,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
         private static ComposablePartException CreateComposablePartException(CompositionErrorId id)
         {
-            return CreateComposablePartException(CompositionErrorId.Unknown, (string)null, (ICompositionElement)null, (Exception)null);
+            return CreateComposablePartException(
+                CompositionErrorId.Unknown,
+                (string)null,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
-        private static ComposablePartException CreateComposablePartException(ICompositionElement element)
+        private static ComposablePartException CreateComposablePartException(
+            ICompositionElement element
+        )
         {
-            return CreateComposablePartException(CompositionErrorId.Unknown, (string)null, element, (Exception)null);
+            return CreateComposablePartException(
+                CompositionErrorId.Unknown,
+                (string)null,
+                element,
+                (Exception)null
+            );
         }
 
-        private static ComposablePartException CreateComposablePartException(Exception innerException)
+        private static ComposablePartException CreateComposablePartException(
+            Exception innerException
+        )
         {
-            return CreateComposablePartException(CompositionErrorId.Unknown, (string)null, (ICompositionElement)null, innerException);
+            return CreateComposablePartException(
+                CompositionErrorId.Unknown,
+                (string)null,
+                (ICompositionElement)null,
+                innerException
+            );
         }
 
-        private static ComposablePartException CreateComposablePartException(CompositionErrorId id, string message, ICompositionElement element, Exception innerException)
+        private static ComposablePartException CreateComposablePartException(
+            CompositionErrorId id,
+            string message,
+            ICompositionElement element,
+            Exception innerException
+        )
         {
             return new ComposablePartException(message, element, innerException);
         }

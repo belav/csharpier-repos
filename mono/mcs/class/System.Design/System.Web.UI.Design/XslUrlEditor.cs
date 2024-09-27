@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,31 +31,25 @@
 
 using System;
 
-namespace System.Web.UI.Design {
+namespace System.Web.UI.Design
+{
+    public class XslUrlEditor : UrlEditor
+    {
+        public XslUrlEditor() { }
 
-	public class XslUrlEditor : UrlEditor {
+        protected override string Caption
+        {
+            get { return "Select XSL Transform File"; }
+        }
 
-		public XslUrlEditor ()
-		{
-		}
+        protected override string Filter
+        {
+            get { return "XSL Files(*.xsl;*.xslt)|*.xsl;*.xslt|All Files(*.*)|*.*|"; }
+        }
 
-		protected override string Caption {
-			get {
-				return "Select XSL Transform File";
-			}
-		}
-
-		protected override string Filter {
-			get {
-				return "XSL Files(*.xsl;*.xslt)|*.xsl;*.xslt|All Files(*.*)|*.*|";
-			}
-		}
-
-		protected override UrlBuilderOptions Options {
-			get {
-				return UrlBuilderOptions.NoAbsolute;
-			}
-		}
-	}
+        protected override UrlBuilderOptions Options
+        {
+            get { return UrlBuilderOptions.NoAbsolute; }
+        }
+    }
 }
-

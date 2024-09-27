@@ -22,6 +22,6 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Enable solution crawler in remote workspace.
         /// </summary>
-        EnableSolutionCrawler = 1 << 2
+        EnableSolutionCrawler = 1 << 2,
     }
 }

@@ -13,32 +13,158 @@ namespace System.Net.Tests
     {
         public static IEnumerable<object[]> Ctor_ExpectedPropertyValues_MemberData()
         {
-            yield return new object[] { new WebProxy(), null, false, false, Array.Empty<string>(), null };
+            yield return new object[]
+            {
+                new WebProxy(),
+                null,
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
 
-            yield return new object[] { new WebProxy("http://anything"), new Uri("http://anything"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy("http://anything:42"), new Uri("http://anything:42"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy("anything:42"), new Uri("http://anything:42"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy("anything", 42), new Uri("http://anything:42"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy("http://anything", 42), new Uri("http://anything:42"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy("http://anything:123", 42), new Uri("http://anything:42"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy("socks5://anything", 42), new Uri("socks5://anything:42"), false, false, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy(new Uri("http://anything")), new Uri("http://anything"), false, false, Array.Empty<string>(), null };
+            yield return new object[]
+            {
+                new WebProxy("http://anything"),
+                new Uri("http://anything"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy("http://anything:42"),
+                new Uri("http://anything:42"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy("anything:42"),
+                new Uri("http://anything:42"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy("anything", 42),
+                new Uri("http://anything:42"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy("http://anything", 42),
+                new Uri("http://anything:42"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy("http://anything:123", 42),
+                new Uri("http://anything:42"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy("socks5://anything", 42),
+                new Uri("socks5://anything:42"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy(new Uri("http://anything")),
+                new Uri("http://anything"),
+                false,
+                false,
+                Array.Empty<string>(),
+                null,
+            };
 
-            yield return new object[] { new WebProxy("http://anything", true), new Uri("http://anything"), false, true, Array.Empty<string>(), null };
-            yield return new object[] { new WebProxy(new Uri("http://anything"), true), new Uri("http://anything"), false, true, Array.Empty<string>(), null };
+            yield return new object[]
+            {
+                new WebProxy("http://anything", true),
+                new Uri("http://anything"),
+                false,
+                true,
+                Array.Empty<string>(),
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy(new Uri("http://anything"), true),
+                new Uri("http://anything"),
+                false,
+                true,
+                Array.Empty<string>(),
+                null,
+            };
 
-            yield return new object[] { new WebProxy("http://anything.com", true, new[] { ".*.com" }), new Uri("http://anything.com"), false, true, new[] { ".*.com" }, null };
-            yield return new object[] { new WebProxy(new Uri("http://anything.com"), true, new[] { ".*.com" }), new Uri("http://anything.com"), false, true, new[] { ".*.com" }, null };
+            yield return new object[]
+            {
+                new WebProxy("http://anything.com", true, new[] { ".*.com" }),
+                new Uri("http://anything.com"),
+                false,
+                true,
+                new[] { ".*.com" },
+                null,
+            };
+            yield return new object[]
+            {
+                new WebProxy(new Uri("http://anything.com"), true, new[] { ".*.com" }),
+                new Uri("http://anything.com"),
+                false,
+                true,
+                new[] { ".*.com" },
+                null,
+            };
 
             var c = new DummyCredentials();
-            yield return new object[] { new WebProxy("http://anything.com", true, new[] { ".*.com" }, c), new Uri("http://anything.com"), false, true, new[] { ".*.com" }, c };
-            yield return new object[] { new WebProxy(new Uri("http://anything.com"), true, new[] { ".*.com" }, c), new Uri("http://anything.com"), false, true, new[] { ".*.com" }, c };
+            yield return new object[]
+            {
+                new WebProxy("http://anything.com", true, new[] { ".*.com" }, c),
+                new Uri("http://anything.com"),
+                false,
+                true,
+                new[] { ".*.com" },
+                c,
+            };
+            yield return new object[]
+            {
+                new WebProxy(new Uri("http://anything.com"), true, new[] { ".*.com" }, c),
+                new Uri("http://anything.com"),
+                false,
+                true,
+                new[] { ".*.com" },
+                c,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_ExpectedPropertyValues_MemberData))]
         public static void WebProxy_Ctor_ExpectedPropertyValues(
-            WebProxy p, Uri address, bool useDefaultCredentials, bool bypassLocal, string[] bypassedAddresses, ICredentials creds)
+            WebProxy p,
+            Uri address,
+            bool useDefaultCredentials,
+            bool bypassLocal,
+            string[] bypassedAddresses,
+            ICredentials creds
+        )
         {
             Assert.Equal(address, p.Address);
             Assert.Equal(useDefaultCredentials, p.UseDefaultCredentials);
@@ -183,7 +309,11 @@ namespace System.Net.Tests
         [Fact]
         public static void WebProxy_BypassList_ContainsUrl_IsBypassed()
         {
-            var p = new WebProxy("http://microsoft.com", false, new[] { "hello", "bing.*", "world" });
+            var p = new WebProxy(
+                "http://microsoft.com",
+                false,
+                new[] { "hello", "bing.*", "world" }
+            );
             Assert.Equal(new Uri("http://bing.com"), p.GetProxy(new Uri("http://bing.com")));
         }
 
@@ -193,13 +323,24 @@ namespace System.Net.Tests
 
             yield return new object[] { new Uri($"http://nodotinhostname"), true };
             yield return new object[] { new Uri($"http://{Guid.NewGuid():N}"), true };
-            foreach (IPAddress address in Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult().AddressList)
+            foreach (
+                IPAddress address in Dns.GetHostEntryAsync(Dns.GetHostName())
+                    .GetAwaiter()
+                    .GetResult()
+                    .AddressList
+            )
             {
                 if (address.AddressFamily == AddressFamily.InterNetwork)
                 {
                     Uri uri;
-                    try { uri = new Uri($"http://{address}"); }
-                    catch (UriFormatException) { continue; }
+                    try
+                    {
+                        uri = new Uri($"http://{address}");
+                    }
+                    catch (UriFormatException)
+                    {
+                        continue;
+                    }
 
                     yield return new object[] { uri, true };
                 }
@@ -209,7 +350,10 @@ namespace System.Net.Tests
             if (!string.IsNullOrWhiteSpace(domain))
             {
                 Uri uri = null;
-                try { uri = new Uri($"http://{Guid.NewGuid():N}.{domain}"); }
+                try
+                {
+                    uri = new Uri($"http://{Guid.NewGuid():N}.{domain}");
+                }
                 catch (UriFormatException) { }
 
                 if (uri != null)
@@ -236,7 +380,10 @@ namespace System.Net.Tests
                 Assert.Equal(isLocal, new WebProxy(proxyUri, true).IsBypassed(destination));
                 Assert.False(new WebProxy(proxyUri, false).IsBypassed(destination));
 
-                Assert.Equal(isLocal ? destination : proxyUri, new WebProxy(proxyUri, true).GetProxy(destination));
+                Assert.Equal(
+                    isLocal ? destination : proxyUri,
+                    new WebProxy(proxyUri, true).GetProxy(destination)
+                );
                 Assert.Equal(proxyUri, new WebProxy(proxyUri, false).GetProxy(destination));
             }
             catch (SocketException exception)
@@ -244,7 +391,9 @@ namespace System.Net.Tests
                 // On Unix, getaddrinfo returns host not found, if all the machine discovery settings on the local network
                 // is turned off. Hence dns lookup for it's own hostname fails.
                 Assert.Equal(SocketError.HostNotFound, exception.SocketErrorCode);
-                Assert.Throws<SocketException>(() => Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult());
+                Assert.Throws<SocketException>(
+                    () => Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult()
+                );
                 Assert.True(OperatingSystem.IsLinux() || OperatingSystem.IsMacOS());
             }
         }
@@ -255,13 +404,21 @@ namespace System.Net.Tests
             Assert.True(new WebProxy().IsBypassed(new Uri("http://anything.com")));
             Assert.True(new WebProxy((string)null).IsBypassed(new Uri("http://anything.com")));
             Assert.True(new WebProxy((Uri)null).IsBypassed(new Uri("http://anything.com")));
-            Assert.True(new WebProxy("microsoft", BypassOnLocal: true).IsBypassed(new Uri($"http://{IPAddress.Loopback}")));
+            Assert.True(
+                new WebProxy("microsoft", BypassOnLocal: true).IsBypassed(
+                    new Uri($"http://{IPAddress.Loopback}")
+                )
+            );
         }
 
         [Fact]
         public static void WebProxy_BypassOnLocal_ConfiguredToNotBypassLocal()
         {
-            Assert.False(new WebProxy("microsoft", BypassOnLocal: false).IsBypassed(new Uri($"http://{IPAddress.Loopback}")));
+            Assert.False(
+                new WebProxy("microsoft", BypassOnLocal: false).IsBypassed(
+                    new Uri($"http://{IPAddress.Loopback}")
+                )
+            );
         }
 
         [Fact]

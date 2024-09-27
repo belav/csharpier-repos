@@ -1,0 +1,18 @@
+<Project>
+  <Target Name="AddLongNameDacToPlatformManifest" DependsOnTargets="GetAssemblyVersion" BeforeTargets="GetFilesToPackage">
+    <ItemGroup>
+      <PlatformManifestFileEntry Include="mscordaccore_$(_hostArch)_$(_longNameTargetArch)_$(FileVersion).dll" />
+      <PlatformManifestFileEntry Include="mscordaccore_$(_longNameTargetArch)_$(_longNameTargetArch)_$(FileVersion).dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ReturnProductVersion" Returns="$(Version)" />
+
+  <ItemGroup Condition="'$(RuntimeFlavor)' == '$(PrimaryRuntimeFlavor)'">
+    <PackageReference Condition="'$(SkipInstallersPackageReference)' != 'true'" Include="Microsoft.DotNet.Build.Tasks.Installers" Version="$(MicrosoftDotNetBuildTasksInstallersVersion)" />
+  </ItemGroup>
+
+  <UsingTask TaskName="GenerateFileFromTemplate" AssemblyFile="$(WorkloadBuildTasksAssemblyPath)" />
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))" />
+</Project>

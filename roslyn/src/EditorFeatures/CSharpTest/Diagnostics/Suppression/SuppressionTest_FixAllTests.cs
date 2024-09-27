@@ -17,10 +17,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
 
         #region "Pragma disable tests"
 
-        public abstract partial class CSharpPragmaWarningDisableSuppressionTests : CSharpSuppressionTests
+        public abstract partial class CSharpPragmaWarningDisableSuppressionTests
+            : CSharpSuppressionTests
         {
             [Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
-            public partial class UserInfoDiagnosticSuppressionTests : CSharpPragmaWarningDisableSuppressionTests
+            public partial class UserInfoDiagnosticSuppressionTests
+                : CSharpPragmaWarningDisableSuppressionTests
             {
                 [Fact]
                 [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
@@ -452,9 +454,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
 
         #region "SuppressMessageAttribute tests"
 
-        public abstract partial class CSharpGlobalSuppressMessageSuppressionTests : CSharpSuppressionTests
+        public abstract partial class CSharpGlobalSuppressMessageSuppressionTests
+            : CSharpSuppressionTests
         {
-            public partial class UserInfoDiagnosticSuppressionTests : CSharpGlobalSuppressMessageSuppressionTests
+            public partial class UserInfoDiagnosticSuppressionTests
+                : CSharpGlobalSuppressMessageSuppressionTests
             {
                 [Fact]
                 [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
@@ -503,7 +507,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
                         """;
 
                     var addedGlobalSuppressions =
-$@"// This file is used by Code Analysis to maintain SuppressMessage
+                        $@"// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -513,54 +517,55 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""member"", Target = ""~M:Class1.Method~System.Int32"")]
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class1"")]
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class2"")]
-"
-    .Replace("<", "&lt;").Replace(">", "&gt;");
+".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                    var expected = """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                    var expected =
+                        """
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        class Class1
-                        {
-                            int Method()
+                            class Class1
                             {
-                                int x = 0;
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """ + addedGlobalSuppressions +
-        """
-        </Document>
-            </Project>
-            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                <Document>
-        class Class1
-        {
-            int Method()
-            {
-                int x = 0;
-            }
-        }
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document>
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
+                        + addedGlobalSuppressions
+                        + """
+                            </Document>
+                                </Project>
+                                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                    <Document>
+                            class Class1
+                            {
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-        class Class2
-        {
-        }
-                </Document>
-            </Project>
-        </Workspace>
-        """;
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected, index: 1);
                 }
@@ -612,7 +617,7 @@ using System.Diagnostics.CodeAnalysis;
                         """;
 
                     var addedGlobalSuppressions =
-$@"// This file is used by Code Analysis to maintain SuppressMessage
+                        $@"// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -623,59 +628,62 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class1"")]
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class2"")]
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class3"")]
-"
-    .Replace("<", "&lt;").Replace(">", "&gt;");
+".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                    var expected = """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                    var expected =
+                        """
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        class Class1
-                        {
-                            int Method()
+                            class Class1
                             {
-                                int x = 0;
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """ + addedGlobalSuppressions +
-        """
-        </Document>
-            </Project>
-            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                <Document>
-        class Class1
-        {
-            int Method()
-            {
-                int x = 0;
-            }
-        }
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document>
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
+                        + addedGlobalSuppressions
+                        + """
+                            </Document>
+                                </Project>
+                                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                    <Document>
+                            class Class1
+                            {
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-        class Class2
-        {
-        }
-                </Document>
-            </Project>
-        </Workspace>
-        """;
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected, index: 1);
                 }
 
-                [Fact(Skip = "TODO: File a GitHubIssue for test framework unable to handle multiple projects in solution with same file name.")]
+                [Fact(
+                    Skip = "TODO: File a GitHubIssue for test framework unable to handle multiple projects in solution with same file name."
+                )]
                 [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
                 public async Task TestFixAllInSolution()
                 {
@@ -722,7 +730,7 @@ using System.Diagnostics.CodeAnalysis;
                         """;
 
                     var addedGlobalSuppressionsProject1 =
-$@"// This file is used by Code Analysis to maintain SuppressMessage
+                        $@"// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -737,7 +745,7 @@ using System.Diagnostics.CodeAnalysis;
 ".Replace("<", "&lt;").Replace(">", "&gt;");
 
                     var addedGlobalSuppressionsProject2 =
-$@"// This file is used by Code Analysis to maintain SuppressMessage
+                        $@"// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -750,55 +758,58 @@ using System.Diagnostics.CodeAnalysis;
 
 ".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                    var expected = """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                    var expected =
+                        """
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        class Class1
-                        {
-                            int Method()
+                            class Class1
                             {
-                                int x = 0;
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """ + addedGlobalSuppressionsProject1 +
-        """
-        </Document>
-            </Project>
-            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                <Document>
-        class Class1
-        {
-            int Method()
-            {
-                int x = 0;
-            }
-        }
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document>
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
+                        + addedGlobalSuppressionsProject1
+                        + """
+                            </Document>
+                                </Project>
+                                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                    <Document>
+                            class Class1
+                            {
+                                int Method()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-        class Class2
-        {
-        }
-                </Document>
-                <Document FilePath="GlobalSuppressions.cs">
-        """ + addedGlobalSuppressionsProject2 +
-        """
-        </Document>
-            </Project>
-        </Workspace>
-        """;
+                            class Class2
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
+                        + addedGlobalSuppressionsProject2
+                        + """
+                            </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected);
                 }
@@ -872,7 +883,7 @@ using System.Diagnostics.CodeAnalysis;
                         """;
 
                     var addedGlobalSuppressions =
-$@"// This file is used by Code Analysis to maintain SuppressMessage
+                        $@"// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -882,47 +893,48 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""member"", Target = ""~M:Class1.Method1~System.Int32"")]
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""member"", Target = ""~M:Class1.Method2~System.Int32"")]
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class1"")]
-"
-    .Replace("<", "&lt;").Replace(">", "&gt;");
+".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                    var expected = """
-                        <Workspace>
-                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                                <Document>
-                        using System;
+                    var expected =
+                        """
+                            <Workspace>
+                                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                    <Document>
+                            using System;
 
-                        partial class Class1
-                        {
-                            int Method1()
+                            partial class Class1
                             {
-                                int x = 0;
+                                int Method1()
+                                {
+                                    int x = 0;
+                                }
                             }
-                        }
 
-                        class Class2
-                        {
-                        }
-                                </Document>
-                                <Document>
-                        partial class Class1
-                        {
-                            int Method2()
+                            class Class2
                             {
-                                int x = 0;
                             }
-                        }
+                                    </Document>
+                                    <Document>
+                            partial class Class1
+                            {
+                                int Method2()
+                                {
+                                    int x = 0;
+                                }
+                            }
 
-                        class Class3
-                        {
-                        }
-                                </Document>
-                                <Document FilePath="GlobalSuppressions.cs">
-                        """ + addedGlobalSuppressions +
-        """
-        </Document>
-            </Project>
-        </Workspace>
-        """;
+                            class Class3
+                            {
+                            }
+                                    </Document>
+                                    <Document FilePath="GlobalSuppressions.cs">
+                            """
+                        + addedGlobalSuppressions
+                        + """
+                            </Document>
+                                </Project>
+                            </Workspace>
+                            """;
 
                     await TestInRegularAndScriptAsync(input, expected, index: 1);
                 }
@@ -930,7 +942,8 @@ using System.Diagnostics.CodeAnalysis;
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
-        public partial class CSharpDiagnosticWithoutLocationSuppressionTests : CSharpSuppressionTests
+        public partial class CSharpDiagnosticWithoutLocationSuppressionTests
+            : CSharpSuppressionTests
         {
             [Fact]
             [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
@@ -979,7 +992,7 @@ using System.Diagnostics.CodeAnalysis;
                     """;
 
                 var addedGlobalSuppressions =
-$@"// This file is used by Code Analysis to maintain SuppressMessage
+                    $@"// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -987,54 +1000,55 @@ $@"// This file is used by Code Analysis to maintain SuppressMessage
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage(""NoLocationDiagnostic"", ""NoLocationDiagnostic:NoLocationDiagnostic"", Justification = ""{FeaturesResources.Pending}"")]
-"
-    .Replace("<", "&lt;").Replace(">", "&gt;");
+".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document>
-                    using System;
+                var expected =
+                    """
+                        <Workspace>
+                            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                                <Document>
+                        using System;
 
-                    class Class1
-                    {
-                        int Method()
+                        class Class1
                         {
-                            int x = 0;
+                            int Method()
+                            {
+                                int x = 0;
+                            }
                         }
-                    }
 
-                    class Class2
-                    {
-                    }
-                            </Document>
-                            <Document>
-                    class Class3
-                    {
-                    }
-                            </Document>
-                            <Document FilePath="GlobalSuppressions.cs">
-                    """ + addedGlobalSuppressions +
-    """
-    </Document>
-        </Project>
-        <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-            <Document>
-    class Class1
-    {
-        int Method()
-        {
-            int x = 0;
-        }
-    }
+                        class Class2
+                        {
+                        }
+                                </Document>
+                                <Document>
+                        class Class3
+                        {
+                        }
+                                </Document>
+                                <Document FilePath="GlobalSuppressions.cs">
+                        """
+                    + addedGlobalSuppressions
+                    + """
+                        </Document>
+                            </Project>
+                            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                                <Document>
+                        class Class1
+                        {
+                            int Method()
+                            {
+                                int x = 0;
+                            }
+                        }
 
-    class Class2
-    {
-    }
-            </Document>
-        </Project>
-    </Workspace>
-    """;
+                        class Class2
+                        {
+                        }
+                                </Document>
+                            </Project>
+                        </Workspace>
+                        """;
 
                 await TestInRegularAndScriptAsync(input, expected);
             }

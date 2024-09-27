@@ -2,17 +2,15 @@ using System;
 
 class MainClass
 {
-	abstract public class Bar
-	{
-		abstract public bool Condition { get; }
-	}
+    public abstract class Bar
+    {
+        public abstract bool Condition { get; }
+    }
 
-	class Baz: Bar
-	{
-		public override bool Condition { get; } = true;
-	}
+    class Baz : Bar
+    {
+        public override bool Condition { get; } = true;
+    }
 
-	public static void Main (string[] args)
-	{
-	}
+    public static void Main(string[] args) { }
 }

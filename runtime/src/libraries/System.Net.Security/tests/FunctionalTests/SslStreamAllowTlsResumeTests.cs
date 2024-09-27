@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 #if DEBUG
 namespace System.Net.Security.Tests
@@ -16,8 +16,9 @@ namespace System.Net.Security.Tests
     public class SslStreamTlsResumeTests
     {
         private static FieldInfo connectionInfo = typeof(SslStream).GetField(
-                                    "_connectionInfo",
-                                    BindingFlags.Instance | BindingFlags.NonPublic);
+            "_connectionInfo",
+            BindingFlags.Instance | BindingFlags.NonPublic
+        );
 
         private bool CheckResumeFlag(SslStream ssl)
         {
@@ -33,22 +34,27 @@ namespace System.Net.Security.Tests
         public async Task SslStream_ClientDisableTlsResume_Succeeds(bool testClient)
         {
             SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions
-                {
-                    ServerCertificateContext = SslStreamCertificateContext.Create(Configuration.Certificates.GetServerCertificate(), null, false)
-                };
+            {
+                ServerCertificateContext = SslStreamCertificateContext.Create(
+                    Configuration.Certificates.GetServerCertificate(),
+                    null,
+                    false
+                ),
+            };
 
             SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions
-                {
-                    TargetHost = Guid.NewGuid().ToString("N"),
-                    EnabledSslProtocols = SslProtocols.Tls12,
-                    CertificateRevocationCheckMode = X509RevocationMode.NoCheck,
-                    RemoteCertificateValidationCallback = (sender, cert, chain, errors) => true,
-                };
+            {
+                TargetHost = Guid.NewGuid().ToString("N"),
+                EnabledSslProtocols = SslProtocols.Tls12,
+                CertificateRevocationCheckMode = X509RevocationMode.NoCheck,
+                RemoteCertificateValidationCallback = (sender, cert, chain, errors) => true,
+            };
 
             (SslStream client, SslStream server) = TestHelper.GetConnectedSslStreams();
             await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    client.AuthenticateAsClientAsync(clientOptions),
-                    server.AuthenticateAsServerAsync(serverOptions));
+                client.AuthenticateAsClientAsync(clientOptions),
+                server.AuthenticateAsServerAsync(serverOptions)
+            );
 
             Assert.True(client.IsAuthenticated);
             Assert.True(client.IsEncrypted);
@@ -60,8 +66,9 @@ namespace System.Net.Security.Tests
             // create new TLS to the same server. This should resume TLS.
             (client, server) = TestHelper.GetConnectedSslStreams();
             await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    client.AuthenticateAsClientAsync(clientOptions),
-                    server.AuthenticateAsServerAsync(serverOptions));
+                client.AuthenticateAsClientAsync(clientOptions),
+                server.AuthenticateAsServerAsync(serverOptions)
+            );
 
             //Assert.True(CheckResumeFlag(client));
             if (!CheckResumeFlag(client))
@@ -85,12 +92,13 @@ namespace System.Net.Security.Tests
             }
 
             // We do multiple loops to also cover credential cache.
-            for (int i=0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 (client, server) = TestHelper.GetConnectedSslStreams();
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                                    client.AuthenticateAsClientAsync(clientOptions),
-                                    server.AuthenticateAsServerAsync(serverOptions));
+                    client.AuthenticateAsClientAsync(clientOptions),
+                    server.AuthenticateAsServerAsync(serverOptions)
+                );
 
                 Assert.False(CheckResumeFlag(client), $"TLS session resumed in round ${i}");
                 Assert.False(CheckResumeFlag(server), $"TLS session resumed in round ${i}");
@@ -113,15 +121,17 @@ namespace System.Net.Security.Tests
             // On Windows it may take extra round to refresh the session cache.
             (client, server) = TestHelper.GetConnectedSslStreams();
             await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                                client.AuthenticateAsClientAsync(clientOptions),
-                                server.AuthenticateAsServerAsync(serverOptions));
+                client.AuthenticateAsClientAsync(clientOptions),
+                server.AuthenticateAsServerAsync(serverOptions)
+            );
             client.Dispose();
             server.Dispose();
 
             (client, server) = TestHelper.GetConnectedSslStreams();
             await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                                client.AuthenticateAsClientAsync(clientOptions),
-                                server.AuthenticateAsServerAsync(serverOptions));
+                client.AuthenticateAsClientAsync(clientOptions),
+                server.AuthenticateAsServerAsync(serverOptions)
+            );
 
             Assert.True(CheckResumeFlag(client));
             Assert.True(CheckResumeFlag(server));

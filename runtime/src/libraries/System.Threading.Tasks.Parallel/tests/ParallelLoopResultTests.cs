@@ -3,7 +3,6 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-
 using Xunit;
 
 namespace System.Threading.Tasks.Tests
@@ -13,68 +12,98 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void ForPLRTests()
         {
-            ParallelLoopResult plr =
-            Parallel.For(1, 0, delegate (int i, ParallelLoopState ps)
-            {
-                if (i == 10) ps.Stop();
-            });
+            ParallelLoopResult plr = Parallel.For(
+                1,
+                0,
+                delegate(int i, ParallelLoopState ps)
+                {
+                    if (i == 10)
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "For-Empty", true, null);
 
-            plr =
-            Parallel.For(0, 100, delegate (int i, ParallelLoopState ps)
-            {
-                //Thread.Sleep(20);
-                if (i == 10) ps.Stop();
-            });
+            plr = Parallel.For(
+                0,
+                100,
+                delegate(int i, ParallelLoopState ps)
+                {
+                    //Thread.Sleep(20);
+                    if (i == 10)
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "For-Stop", false, null);
 
-            plr =
-            Parallel.For(0, 100, delegate (int i, ParallelLoopState ps)
-            {
-                //Thread.Sleep(20);
-                if (i == 10) ps.Break();
-            });
+            plr = Parallel.For(
+                0,
+                100,
+                delegate(int i, ParallelLoopState ps)
+                {
+                    //Thread.Sleep(20);
+                    if (i == 10)
+                        ps.Break();
+                }
+            );
             PLRcheck(plr, "For-Break", false, 10);
 
-            plr =
-            Parallel.For(0, 100, delegate (int i, ParallelLoopState ps)
-            {
-                //Thread.Sleep(20);
-            });
+            plr = Parallel.For(
+                0,
+                100,
+                delegate(int i, ParallelLoopState ps)
+                {
+                    //Thread.Sleep(20);
+                }
+            );
             PLRcheck(plr, "For-Completion", true, null);
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void ForPLR64Tests()
         {
-            ParallelLoopResult plr =
-Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
-{
-    if (i == 10) ps.Stop();
-});
+            ParallelLoopResult plr = Parallel.For(
+                1L,
+                0L,
+                delegate(long i, ParallelLoopState ps)
+                {
+                    if (i == 10)
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "For64-Empty", true, null);
 
-            plr =
-            Parallel.For(0L, 100L, delegate (long i, ParallelLoopState ps)
-            {
-                //Thread.Sleep(20);
-                if (i == 10) ps.Stop();
-            });
+            plr = Parallel.For(
+                0L,
+                100L,
+                delegate(long i, ParallelLoopState ps)
+                {
+                    //Thread.Sleep(20);
+                    if (i == 10)
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "For64-Stop", false, null);
 
-            plr =
-            Parallel.For(0L, 100L, delegate (long i, ParallelLoopState ps)
-            {
-                //Thread.Sleep(20);
-                if (i == 10) ps.Break();
-            });
+            plr = Parallel.For(
+                0L,
+                100L,
+                delegate(long i, ParallelLoopState ps)
+                {
+                    //Thread.Sleep(20);
+                    if (i == 10)
+                        ps.Break();
+                }
+            );
             PLRcheck(plr, "For64-Break", false, 10);
 
-            plr =
-            Parallel.For(0L, 100L, delegate (long i, ParallelLoopState ps)
-            {
-                //Thread.Sleep(20);
-            });
+            plr = Parallel.For(
+                0L,
+                100L,
+                delegate(long i, ParallelLoopState ps)
+                {
+                    //Thread.Sleep(20);
+                }
+            );
             PLRcheck(plr, "For64-Completion", true, null);
         }
 
@@ -82,11 +111,14 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
         public static void ForEachPLRTests()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            ParallelLoopResult plr =
-            Parallel.ForEach(dict, delegate (KeyValuePair<string, string> kvp, ParallelLoopState ps)
-            {
-                if (kvp.Value.Equals("Purple")) ps.Stop();
-            });
+            ParallelLoopResult plr = Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<string, string> kvp, ParallelLoopState ps)
+                {
+                    if (kvp.Value.Equals("Purple"))
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "ForEach-Empty", true, null);
 
             dict.Add("Apple", "Red");
@@ -98,27 +130,35 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             dict.Add("Carrot", "Orange");
             dict.Add("Eggplant", "Purple");
 
-            plr =
-            Parallel.ForEach(dict, delegate (KeyValuePair<string, string> kvp, ParallelLoopState ps)
-            {
-                if (kvp.Value.Equals("Purple")) ps.Stop();
-            });
+            plr = Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<string, string> kvp, ParallelLoopState ps)
+                {
+                    if (kvp.Value.Equals("Purple"))
+                        ps.Stop();
+                }
+            );
 
             PLRcheck(plr, "ForEach-Stop", false, null);
 
-            plr =
-            Parallel.ForEach(dict, delegate (KeyValuePair<string, string> kvp, ParallelLoopState ps)
-            {
-                if (kvp.Value.Equals("Purple")) ps.Break();
-            });
+            plr = Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<string, string> kvp, ParallelLoopState ps)
+                {
+                    if (kvp.Value.Equals("Purple"))
+                        ps.Break();
+                }
+            );
 
             PLRcheck(plr, "ForEach-Break", false, 7); // right??
 
-            plr =
-            Parallel.ForEach(dict, delegate (KeyValuePair<string, string> kvp, ParallelLoopState ps)
-            {
-                //if (kvp.Value.Equals("Purple")) ps.Stop();
-            });
+            plr = Parallel.ForEach(
+                dict,
+                delegate(KeyValuePair<string, string> kvp, ParallelLoopState ps)
+                {
+                    //if (kvp.Value.Equals("Purple")) ps.Stop();
+                }
+            );
             PLRcheck(plr, "ForEach-Complete", true, null);
         }
 
@@ -133,14 +173,17 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
                 intlist.Add(i * i);
             MyPartitioner<int> mp = new MyPartitioner<int>(intlist);
 
-            ParallelLoopResult plr =
-            Parallel.ForEach(mp, delegate (int item, ParallelLoopState ps)
-            {
-                if (item == 0) ps.Stop();
-            });
+            ParallelLoopResult plr = Parallel.ForEach(
+                mp,
+                delegate(int item, ParallelLoopState ps)
+                {
+                    if (item == 0)
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "Partitioner-ForEach-Stop", false, null);
 
-            plr = Parallel.ForEach(mp, delegate (int item, ParallelLoopState ps) { });
+            plr = Parallel.ForEach(mp, delegate(int item, ParallelLoopState ps) { });
             PLRcheck(plr, "Partitioner-ForEach-Complete", true, null);
         }
 
@@ -152,29 +195,36 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
                 intlist.Add(i * i);
             OrderablePartitioner<int> mop = Partitioner.Create(intlist, true);
 
-
-            ParallelLoopResult plr =
-            Parallel.ForEach(mop, delegate (int item, ParallelLoopState ps, long index)
-            {
-                if (index == 2) ps.Stop();
-            });
+            ParallelLoopResult plr = Parallel.ForEach(
+                mop,
+                delegate(int item, ParallelLoopState ps, long index)
+                {
+                    if (index == 2)
+                        ps.Stop();
+                }
+            );
             PLRcheck(plr, "OrderablePartitioner-ForEach-Stop", false, null);
 
-            plr =
-            Parallel.ForEach(mop, delegate (int item, ParallelLoopState ps, long index)
-            {
-                if (index == 2) ps.Break();
-            });
+            plr = Parallel.ForEach(
+                mop,
+                delegate(int item, ParallelLoopState ps, long index)
+                {
+                    if (index == 2)
+                        ps.Break();
+                }
+            );
             PLRcheck(plr, "OrderablePartitioner-ForEach-Break", false, 2);
 
-            plr =
-            Parallel.ForEach(mop, delegate (int item, ParallelLoopState ps, long index)
-            {
-            });
+            plr = Parallel.ForEach(mop, delegate(int item, ParallelLoopState ps, long index) { });
             PLRcheck(plr, "OrderablePartitioner-ForEach-Complete", true, null);
         }
 
-        private static void PLRcheck(ParallelLoopResult plr, string ttype, bool shouldComplete, int? expectedLBI)
+        private static void PLRcheck(
+            ParallelLoopResult plr,
+            string ttype,
+            bool shouldComplete,
+            int? expectedLBI
+        )
         {
             Assert.Equal(shouldComplete, plr.IsCompleted);
             Assert.Equal(expectedLBI, plr.LowestBreakIteration);
@@ -187,9 +237,19 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool excExpected,
             bool shouldComplete,
             bool shouldStop,
-            bool shouldBreak)
+            bool shouldBreak
+        )
         {
-            ForPLRTest(body, new ParallelOptions(), desc, excExpected, shouldComplete, shouldStop, shouldBreak, false);
+            ForPLRTest(
+                body,
+                new ParallelOptions(),
+                desc,
+                excExpected,
+                shouldComplete,
+                shouldStop,
+                shouldBreak,
+                false
+            );
         }
 
         private static void ForPLRTest(
@@ -200,7 +260,8 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak,
-            bool shouldCancel)
+            bool shouldCancel
+        )
         {
             try
             {
@@ -230,9 +291,19 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool excExpected,
             bool shouldComplete,
             bool shouldStop,
-            bool shouldBreak)
+            bool shouldBreak
+        )
         {
-            For64PLRTest(body, new ParallelOptions(), desc, excExpected, shouldComplete, shouldStop, shouldBreak, false);
+            For64PLRTest(
+                body,
+                new ParallelOptions(),
+                desc,
+                excExpected,
+                shouldComplete,
+                shouldStop,
+                shouldBreak,
+                false
+            );
         }
 
         private static void For64PLRTest(
@@ -243,7 +314,8 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak,
-            bool shouldCancel)
+            bool shouldCancel
+        )
         {
             try
             {
@@ -273,9 +345,19 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool excExpected,
             bool shouldComplete,
             bool shouldStop,
-            bool shouldBreak)
+            bool shouldBreak
+        )
         {
-            ForEachPLRTest(body, new ParallelOptions(), desc, excExpected, shouldComplete, shouldStop, shouldBreak, false);
+            ForEachPLRTest(
+                body,
+                new ParallelOptions(),
+                desc,
+                excExpected,
+                shouldComplete,
+                shouldStop,
+                shouldBreak,
+                false
+            );
         }
 
         private static void ForEachPLRTest(
@@ -286,7 +368,8 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool shouldComplete,
             bool shouldStop,
             bool shouldBreak,
-            bool shouldCancel)
+            bool shouldCancel
+        )
         {
             Dictionary<int, string> dict = new Dictionary<int, string>();
             dict.Add(1, "one");
@@ -319,16 +402,17 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool excExpected,
             bool shouldComplete,
             bool shouldStop,
-            bool shouldBreak)
+            bool shouldBreak
+        )
         {
             List<int> list = new List<int>();
-            for (int i = 0; i < 20; i++) list.Add(i);
+            for (int i = 0; i < 20; i++)
+                list.Add(i);
             MyPartitioner<int> mp = new MyPartitioner<int>(list);
 
             try
             {
-                ParallelLoopResult plr =
-                Parallel.ForEach(mp, body);
+                ParallelLoopResult plr = Parallel.ForEach(mp, body);
 
                 Assert.False(excExpected);
 
@@ -349,10 +433,12 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             bool excExpected,
             bool shouldComplete,
             bool shouldStop,
-            bool shouldBreak)
+            bool shouldBreak
+        )
         {
             List<int> list = new List<int>();
-            for (int i = 0; i < 20; i++) list.Add(i);
+            for (int i = 0; i < 20; i++)
+                list.Add(i);
             OrderablePartitioner<int> mop = Partitioner.Create(list, true);
 
             try
@@ -373,7 +459,11 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
 
         // Perform tests on various combinations of Stop()/Break()
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91579", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91579",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void SimultaneousStopBreakTests()
         {
             //
@@ -381,514 +471,553 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
             //
 
 
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                ps.Break();
-            },
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    ps.Break();
+                },
                 "Break After Stop",
                 true,
                 false,
                 false,
-                false);
+                false
+            );
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Break();
-                ps.Stop();
-            },
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    ps.Stop();
+                },
                 "Stop After Break",
                 true,
                 false,
                 false,
-                false);
+                false
+            );
 
             CancellationTokenSource cts = new CancellationTokenSource();
             ParallelOptions options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Break();
-                cts.Cancel();
-            },
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    cts.Cancel();
+                },
                 options,
                 "Cancel After Break",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                cts.Cancel();
-            },
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    cts.Cancel();
+                },
                 options,
                 "Cancel After Stop",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                cts.Cancel();
-                ps.Stop();
-            },
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    cts.Cancel();
+                    ps.Stop();
+                },
                 options,
                 "Stop After Cancel",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                cts.Cancel();
-                ps.Break();
-            },
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    cts.Cancel();
+                    ps.Break();
+                },
                 options,
                 "Break After Cancel",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Break();
-                try
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
                 {
-                    ps.Stop();
-                }
-                catch { }
-            },
+                    ps.Break();
+                    try
+                    {
+                        ps.Stop();
+                    }
+                    catch { }
+                },
                 "Stop(caught) after Break",
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
-
-            ForPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                try
+            ForPLRTest(
+                delegate(int i, ParallelLoopState ps)
                 {
-                    ps.Break();
-                }
-                catch { }
-            },
+                    ps.Stop();
+                    try
+                    {
+                        ps.Break();
+                    }
+                    catch { }
+                },
                 "Break(caught) after Stop",
                 false,
                 false,
                 true,
-                false);
+                false
+            );
 
             //
             // Test "vanilla" Parallel.ForEach
             //
 
 
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                ps.Break();
-                ps.Stop();
-            },
-               "Stop-After-Break",
-               true,
-               false,
-               false,
-               false);
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    ps.Stop();
+                },
+                "Stop-After-Break",
+                true,
+                false,
+                false,
+                false
+            );
 
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                ps.Stop();
-                ps.Break();
-            },
-               "Break-after-Stop",
-               true,
-               false,
-               false,
-               false);
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    ps.Break();
+                },
+                "Break-after-Stop",
+                true,
+                false,
+                false,
+                false
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                ps.Break();
-                cts.Cancel();
-            },
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    cts.Cancel();
+                },
                 options,
                 "Cancel After Break",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                ps.Stop();
-                cts.Cancel();
-            },
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    cts.Cancel();
+                },
                 options,
                 "Cancel After Stop",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                cts.Cancel();
-                ps.Stop();
-            },
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    cts.Cancel();
+                    ps.Stop();
+                },
                 options,
                 "Stop After Cancel",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                cts.Cancel();
-                ps.Break();
-            },
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    cts.Cancel();
+                    ps.Break();
+                },
                 options,
                 "Break After Cancel",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                ps.Break();
-                try
-                {
-                    ps.Stop();
-                }
-                catch { }
-            },
-               "Stop(caught)-after-Break",
-               false,
-               false,
-               false,
-               true);
-
-
-            ForEachPLRTest(delegate (KeyValuePair<int, string> kvp, ParallelLoopState ps)
-            {
-                ps.Stop();
-                try
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
                 {
                     ps.Break();
-                }
-                catch { }
-            },
-               "Break(caught)-after-Stop",
-               false,
-               false,
-               true,
-               false);
+                    try
+                    {
+                        ps.Stop();
+                    }
+                    catch { }
+                },
+                "Stop(caught)-after-Break",
+                false,
+                false,
+                false,
+                true
+            );
+
+            ForEachPLRTest(
+                delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    try
+                    {
+                        ps.Break();
+                    }
+                    catch { }
+                },
+                "Break(caught)-after-Stop",
+                false,
+                false,
+                true,
+                false
+            );
 
             //
             // Test Parallel.ForEach w/ Partitioner
             //
 
 
-            PartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Break();
-                ps.Stop();
-            },
-               "Stop-After-Break",
-               true,
-               false,
-               false,
-               false);
-
-
-            PartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                ps.Break();
-            },
-               "Break-after-Stop",
-               true,
-               false,
-               false,
-               false);
-
-
-            PartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Break();
-                try
-                {
-                    ps.Stop();
-                }
-                catch { }
-            },
-               "Stop(caught)-after-Break",
-               false,
-               false,
-               false,
-               true);
-
-
-            PartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                try
+            PartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps)
                 {
                     ps.Break();
-                }
-                catch { }
-            },
-               "Break(caught)-after-Stop",
-               false,
-               false,
-               true,
-               false);
+                    ps.Stop();
+                },
+                "Stop-After-Break",
+                true,
+                false,
+                false,
+                false
+            );
+
+            PartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    ps.Break();
+                },
+                "Break-after-Stop",
+                true,
+                false,
+                false,
+                false
+            );
+
+            PartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    try
+                    {
+                        ps.Stop();
+                    }
+                    catch { }
+                },
+                "Stop(caught)-after-Break",
+                false,
+                false,
+                false,
+                true
+            );
+
+            PartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    try
+                    {
+                        ps.Break();
+                    }
+                    catch { }
+                },
+                "Break(caught)-after-Stop",
+                false,
+                false,
+                true,
+                false
+            );
 
             //
             // Test Parallel.ForEach w/ OrderablePartitioner
             //
 
 
-            OrderablePartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps, long index)
-            {
-                ps.Break();
-                ps.Stop();
-            },
-               "Stop-After-Break",
-               true,
-               false,
-               false,
-               false);
-
-
-            OrderablePartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps, long index)
-            {
-                ps.Stop();
-                ps.Break();
-            },
-               "Break-after-Stop",
-               true,
-               false,
-               false,
-               false);
-
-
-            OrderablePartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps, long index)
-            {
-                ps.Break();
-                try
-                {
-                    ps.Stop();
-                }
-                catch { }
-            },
-               "Stop(caught)-after-Break",
-               false,
-               false,
-               false,
-               true);
-
-
-            OrderablePartitionerForEachPLRTest(delegate (int i, ParallelLoopState ps, long index)
-            {
-                ps.Stop();
-                try
+            OrderablePartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps, long index)
                 {
                     ps.Break();
-                }
-                catch { }
-            },
-               "Break(caught)-after-Stop",
-               false,
-               false,
-               true,
-               false);
+                    ps.Stop();
+                },
+                "Stop-After-Break",
+                true,
+                false,
+                false,
+                false
+            );
+
+            OrderablePartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps, long index)
+                {
+                    ps.Stop();
+                    ps.Break();
+                },
+                "Break-after-Stop",
+                true,
+                false,
+                false,
+                false
+            );
+
+            OrderablePartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps, long index)
+                {
+                    ps.Break();
+                    try
+                    {
+                        ps.Stop();
+                    }
+                    catch { }
+                },
+                "Stop(caught)-after-Break",
+                false,
+                false,
+                false,
+                true
+            );
+
+            OrderablePartitionerForEachPLRTest(
+                delegate(int i, ParallelLoopState ps, long index)
+                {
+                    ps.Stop();
+                    try
+                    {
+                        ps.Break();
+                    }
+                    catch { }
+                },
+                "Break(caught)-after-Stop",
+                false,
+                false,
+                true,
+                false
+            );
 
             //
             // Test 64-bit Parallel.For
             //
 
 
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                ps.Break();
-            },
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    ps.Break();
+                },
                 "Break After Stop",
                 true,
                 false,
                 false,
-                false);
+                false
+            );
 
-
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                ps.Break();
-                ps.Stop();
-            },
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    ps.Stop();
+                },
                 "Stop After Break",
                 true,
                 false,
                 false,
-                false);
+                false
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                ps.Break();
-                cts.Cancel();
-            },
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
+                {
+                    ps.Break();
+                    cts.Cancel();
+                },
                 options,
                 "Cancel After Break",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                cts.Cancel();
-            },
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
+                {
+                    ps.Stop();
+                    cts.Cancel();
+                },
                 options,
                 "Cancel After Stop",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                cts.Cancel();
-                ps.Stop();
-            },
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
+                {
+                    cts.Cancel();
+                    ps.Stop();
+                },
                 options,
                 "Stop after Cancel",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
             cts = new CancellationTokenSource();
             options = new ParallelOptions();
             options.CancellationToken = cts.Token;
 
-
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                cts.Cancel();
-                ps.Break();
-            },
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
+                {
+                    cts.Cancel();
+                    ps.Break();
+                },
                 options,
                 "Break after Cancel",
                 false,
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                ps.Break();
-                try
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
                 {
-                    ps.Stop();
-                }
-                catch { }
-            },
+                    ps.Break();
+                    try
+                    {
+                        ps.Stop();
+                    }
+                    catch { }
+                },
                 "Stop(caught) after Break",
                 false,
                 false,
                 false,
-                true);
+                true
+            );
 
-            For64PLRTest(delegate (long i, ParallelLoopState ps)
-            {
-                ps.Stop();
-                try
+            For64PLRTest(
+                delegate(long i, ParallelLoopState ps)
                 {
-                    ps.Break();
-                }
-                catch { }
-            },
+                    ps.Stop();
+                    try
+                    {
+                        ps.Break();
+                    }
+                    catch { }
+                },
                 "Break(caught) after Stop",
                 false,
                 false,
                 true,
-                false);
+                false
+            );
         }
 
         #region Helper Classes and Methods
@@ -912,9 +1041,10 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
                 {
                     throw new ArgumentOutOfRangeException(nameof(partitionCount));
                 }
-                IEnumerator<TSource>[] partitions
-                    = new IEnumerator<TSource>[partitionCount];
-                IEnumerable<KeyValuePair<long, TSource>> partitionEnumerable = Partitioner.Create(_data, true).GetOrderableDynamicPartitions();
+                IEnumerator<TSource>[] partitions = new IEnumerator<TSource>[partitionCount];
+                IEnumerable<KeyValuePair<long, TSource>> partitionEnumerable = Partitioner
+                    .Create(_data, true)
+                    .GetOrderableDynamicPartitions();
                 for (int i = 0; i < partitionCount; i++)
                 {
                     partitions[i] = DropIndices(partitionEnumerable.GetEnumerator());
@@ -927,7 +1057,9 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
                 return DropIndices(Partitioner.Create(_data, true).GetOrderableDynamicPartitions());
             }
 
-            private static IEnumerable<TSource> DropIndices(IEnumerable<KeyValuePair<long, TSource>> source)
+            private static IEnumerable<TSource> DropIndices(
+                IEnumerable<KeyValuePair<long, TSource>> source
+            )
             {
                 foreach (KeyValuePair<long, TSource> pair in source)
                 {
@@ -935,7 +1067,9 @@ Parallel.For(1L, 0L, delegate (long i, ParallelLoopState ps)
                 }
             }
 
-            private static IEnumerator<TSource> DropIndices(IEnumerator<KeyValuePair<long, TSource>> source)
+            private static IEnumerator<TSource> DropIndices(
+                IEnumerator<KeyValuePair<long, TSource>> source
+            )
             {
                 while (source.MoveNext())
                 {

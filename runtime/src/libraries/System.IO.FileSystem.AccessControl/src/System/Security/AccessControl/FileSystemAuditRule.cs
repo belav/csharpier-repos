@@ -10,60 +10,55 @@ namespace System.Security.AccessControl
         public FileSystemAuditRule(
             IdentityReference identity,
             FileSystemRights fileSystemRights,
-            AuditFlags flags)
-            : this(
-                identity,
-                fileSystemRights,
-                InheritanceFlags.None,
-                PropagationFlags.None,
-                flags)
-        {
-        }
+            AuditFlags flags
+        )
+            : this(identity, fileSystemRights, InheritanceFlags.None, PropagationFlags.None, flags)
+        { }
 
         public FileSystemAuditRule(
             IdentityReference identity,
             FileSystemRights fileSystemRights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
+            AuditFlags flags
+        )
             : this(
                 identity,
                 AccessMaskFromRights(fileSystemRights),
                 false,
                 inheritanceFlags,
                 propagationFlags,
-                flags)
-        {
-        }
+                flags
+            ) { }
 
         public FileSystemAuditRule(
             string identity,
             FileSystemRights fileSystemRights,
-            AuditFlags flags)
+            AuditFlags flags
+        )
             : this(
                 new NTAccount(identity),
                 fileSystemRights,
                 InheritanceFlags.None,
                 PropagationFlags.None,
-                flags)
-        {
-        }
+                flags
+            ) { }
 
         public FileSystemAuditRule(
             string identity,
             FileSystemRights fileSystemRights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
+            AuditFlags flags
+        )
             : this(
                 new NTAccount(identity),
                 AccessMaskFromRights(fileSystemRights),
                 false,
                 inheritanceFlags,
                 propagationFlags,
-                flags)
-        {
-        }
+                flags
+            ) { }
 
         internal FileSystemAuditRule(
             IdentityReference identity,
@@ -71,21 +66,21 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                flags)
-        {
-        }
+            AuditFlags flags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         private static int AccessMaskFromRights(FileSystemRights fileSystemRights)
         {
             if (fileSystemRights < 0 || fileSystemRights > FileSystemRights.FullControl)
-                throw new ArgumentOutOfRangeException(nameof(fileSystemRights), SR.Format(SR.Argument_InvalidEnumValue, fileSystemRights, nameof(AccessControl.FileSystemRights)));
+                throw new ArgumentOutOfRangeException(
+                    nameof(fileSystemRights),
+                    SR.Format(
+                        SR.Argument_InvalidEnumValue,
+                        fileSystemRights,
+                        nameof(AccessControl.FileSystemRights)
+                    )
+                );
 
             return (int)fileSystemRights;
         }
