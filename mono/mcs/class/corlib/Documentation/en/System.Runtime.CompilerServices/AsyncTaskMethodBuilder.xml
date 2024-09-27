@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AsyncTaskMethodBuilder" FullName="System.Runtime.CompilerServices.AsyncTaskMethodBuilder">
+<Type
+  Name="AsyncTaskMethodBuilder"
+  FullName="System.Runtime.CompilerServices.AsyncTaskMethodBuilder"
+>
   <TypeSignature Language="C#" Value="public struct AsyncTaskMethodBuilder" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit AsyncTaskMethodBuilder extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit AsyncTaskMethodBuilder extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -21,9 +27,15 @@
     </summary>
   </Docs>
   <Members>
-    <Member MemberName="AwaitOnCompleted&lt;TAwaiter,TStateMachine&gt;">
-      <MemberSignature Language="C#" Value="public void AwaitOnCompleted&lt;TAwaiter,TStateMachine&gt; (ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AwaitOnCompleted&lt;(class System.Runtime.CompilerServices.INotifyCompletion) TAwaiter, (class System.Runtime.CompilerServices.IAsyncStateMachine) TStateMachine&gt;(!!TAwaiter awaiter, !!TStateMachine stateMachine) cil managed" />
+    <Member MemberName="AwaitOnCompleted<TAwaiter,TStateMachine>">
+      <MemberSignature
+        Language="C#"
+        Value="public void AwaitOnCompleted<TAwaiter,TStateMachine> (ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AwaitOnCompleted<(class System.Runtime.CompilerServices.INotifyCompletion) TAwaiter, (class System.Runtime.CompilerServices.IAsyncStateMachine) TStateMachine>(!!TAwaiter awaiter, !!TStateMachine stateMachine) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,8 +56,8 @@
         </TypeParameter>
       </TypeParameters>
       <Parameters>
-        <Parameter Name="awaiter" Type="TAwaiter&amp;" RefType="ref" />
-        <Parameter Name="stateMachine" Type="TStateMachine&amp;" RefType="ref" />
+        <Parameter Name="awaiter" Type="TAwaiter&" RefType="ref" />
+        <Parameter Name="stateMachine" Type="TStateMachine&" RefType="ref" />
       </Parameters>
       <Docs>
         <typeparam name="TAwaiter">To be added.</typeparam>
@@ -56,9 +68,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="AwaitUnsafeOnCompleted&lt;TAwaiter,TStateMachine&gt;">
-      <MemberSignature Language="C#" Value="public void AwaitUnsafeOnCompleted&lt;TAwaiter,TStateMachine&gt; (ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AwaitUnsafeOnCompleted&lt;(class System.Runtime.CompilerServices.ICriticalNotifyCompletion) TAwaiter, (class System.Runtime.CompilerServices.IAsyncStateMachine) TStateMachine&gt;(!!TAwaiter awaiter, !!TStateMachine stateMachine) cil managed" />
+    <Member MemberName="AwaitUnsafeOnCompleted<TAwaiter,TStateMachine>">
+      <MemberSignature
+        Language="C#"
+        Value="public void AwaitUnsafeOnCompleted<TAwaiter,TStateMachine> (ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AwaitUnsafeOnCompleted<(class System.Runtime.CompilerServices.ICriticalNotifyCompletion) TAwaiter, (class System.Runtime.CompilerServices.IAsyncStateMachine) TStateMachine>(!!TAwaiter awaiter, !!TStateMachine stateMachine) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -79,8 +97,8 @@
         </TypeParameter>
       </TypeParameters>
       <Parameters>
-        <Parameter Name="awaiter" Type="TAwaiter&amp;" RefType="ref" />
-        <Parameter Name="stateMachine" Type="TStateMachine&amp;" RefType="ref" />
+        <Parameter Name="awaiter" Type="TAwaiter&" RefType="ref" />
+        <Parameter Name="stateMachine" Type="TStateMachine&" RefType="ref" />
       </Parameters>
       <Docs>
         <typeparam name="TAwaiter">To be added.</typeparam>
@@ -92,8 +110,14 @@
       </Docs>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static System.Runtime.CompilerServices.AsyncTaskMethodBuilder Create ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Runtime.CompilerServices.AsyncTaskMethodBuilder Create() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.CompilerServices.AsyncTaskMethodBuilder Create ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig valuetype System.Runtime.CompilerServices.AsyncTaskMethodBuilder Create() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -109,7 +133,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of the <see cref="T:System.Runtime.CompilerServices.AsyncTaskMethodBuilder" /> class.</para>
+          <para
+            >Creates an instance of the <see
+             cref="T:System.Runtime.CompilerServices.AsyncTaskMethodBuilder" />
+
+             class.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -119,7 +148,10 @@
     </Member>
     <Member MemberName="SetException">
       <MemberSignature Language="C#" Value="public void SetException (Exception exception);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetException(class System.Exception exception) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetException(class System.Exception exception) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -140,12 +172,18 @@
           <para>Marks the task as failed and binds the specified exception to the task.</para>
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception to bind to the task.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception to bind to the task.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetResult">
       <MemberSignature Language="C#" Value="public void SetResult ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetResult() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetResult() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -166,8 +204,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetStateMachine">
-      <MemberSignature Language="C#" Value="public void SetStateMachine (System.Runtime.CompilerServices.IAsyncStateMachine stateMachine);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetStateMachine(class System.Runtime.CompilerServices.IAsyncStateMachine stateMachine) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetStateMachine (System.Runtime.CompilerServices.IAsyncStateMachine stateMachine);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetStateMachine(class System.Runtime.CompilerServices.IAsyncStateMachine stateMachine) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -185,12 +229,21 @@
           <para>Associates the builder with the specified state machine.</para>
         </summary>
         <param name="stateMachine">
-          <attribution license="cc4" from="Microsoft" modified="false" />The state machine instance to associate with the builder.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The state machine instance to associate with the builder.</param
+        >
       </Docs>
     </Member>
-    <Member MemberName="Start&lt;TStateMachine&gt;">
-      <MemberSignature Language="C#" Value="public void Start&lt;TStateMachine&gt; (ref TStateMachine stateMachine) where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Start&lt;(class System.Runtime.CompilerServices.IAsyncStateMachine) TStateMachine&gt;(!!TStateMachine stateMachine) cil managed" />
+    <Member MemberName="Start<TStateMachine>">
+      <MemberSignature
+        Language="C#"
+        Value="public void Start<TStateMachine> (ref TStateMachine stateMachine) where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Start<(class System.Runtime.CompilerServices.IAsyncStateMachine) TStateMachine>(!!TStateMachine stateMachine) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -206,7 +259,7 @@
         </TypeParameter>
       </TypeParameters>
       <Parameters>
-        <Parameter Name="stateMachine" Type="TStateMachine&amp;" RefType="ref" />
+        <Parameter Name="stateMachine" Type="TStateMachine&" RefType="ref" />
       </Parameters>
       <Docs>
         <typeparam name="TStateMachine">To be added.</typeparam>
@@ -217,7 +270,10 @@
     </Member>
     <Member MemberName="Task">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task Task { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Threading.Tasks.Task Task" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Threading.Tasks.Task Task"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

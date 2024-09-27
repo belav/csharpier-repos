@@ -3,7 +3,7 @@
   <div id="GHTSubTest1" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid1">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>1</td>
@@ -37,12 +37,15 @@
       </tr>
     </table>
     <span>
-      <br />False</span>
+      <br />
+
+      False</span
+    >
   </div>
   <div id="Ghtsubtest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>1</td>
@@ -76,12 +79,15 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="Ghtsubtest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>1</td>
@@ -115,12 +121,15 @@
       </tr>
     </table>
     <span>
-      <br />False</span>
+      <br />
+
+      False</span
+    >
   </div>
   <div id="Ghtsubtest4" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid4">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>1</td>
@@ -154,6 +163,9 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
 </testresults>

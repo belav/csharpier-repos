@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TcpStatistics" FullName="System.Net.NetworkInformation.TcpStatistics">
   <TypeSignature Language="C#" Value="public abstract class TcpStatistics" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit TcpStatistics extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit TcpStatistics extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +18,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv4Statistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv6Statistics" /> methods, to give applications access to TCP traffic information.</para>
-      <para>The information in this class correlates to the management information objects described in <see cref="http://www.ietf.org/rfc/rfc2012.txt">http://www.ietf.org/rfc/rfc2012.txt</see>.</para>
+      <para
+        >Instances of this class are returned by the <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv4Statistics" />
+
+         and <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv6Statistics" />
+
+         methods, to give applications access to TCP traffic information.</para
+      >
+      <para
+        >The information in this class correlates to the management information objects described in <see
+         cref="http://www.ietf.org/rfc/rfc2012.txt">http://www.ietf.org/rfc/rfc2012.txt</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected TcpStatistics ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,11 +56,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para>
+          <para
+            >This constructor can be called only by classes that derive from the <see
+             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -61,11 +90,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the SYN-RCVD state from the LISTEN state." </para>
+          <para
+            >IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the SYN-RCVD state from the LISTEN state." </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of accepted Transmission Control Protocol (TCP) connection requests.</para>
+          <para
+            >Gets the number of accepted Transmission Control Protocol (TCP) connection requests.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -85,11 +118,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the SYN-SENT state from the CLOSED state." </para>
+          <para
+            >IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the SYN-SENT state from the CLOSED state." </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of Transmission Control Protocol (TCP) connection requests made by clients.</para>
+          <para
+            >Gets the number of Transmission Control Protocol (TCP) connection requests made by clients.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -110,7 +147,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the total number of Transmission Control Protocol (TCP) connections established.</para>
+          <para
+            >Specifies the total number of Transmission Control Protocol (TCP) connections established.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -130,7 +169,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>IETF RFC 2012 formally defines this value as, "The number of TCP connections for which the current state is either ESTABLISHED or CLOSE-WAIT." </para>
+          <para
+            >IETF RFC 2012 formally defines this value as, "The number of TCP connections for which the current state is either ESTABLISHED or CLOSE-WAIT." </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,7 +201,10 @@
       </Docs>
     </Member>
     <Member MemberName="FailedConnectionAttempts">
-      <MemberSignature Language="C#" Value="public abstract long FailedConnectionAttempts { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long FailedConnectionAttempts { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 FailedConnectionAttempts" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -175,11 +219,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the CLOSED state from either the SYN-SENT state or the SYN-RCVD state, plus the number of times TCP connections have made a direct transition to the LISTEN state from the SYN-RCVD state." </para>
+          <para
+            >IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the CLOSED state from either the SYN-SENT state or the SYN-RCVD state, plus the number of times TCP connections have made a direct transition to the LISTEN state from the SYN-RCVD state." </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of failed Transmission Control Protocol (TCP) connection attempts.</para>
+          <para
+            >Gets the number of failed Transmission Control Protocol (TCP) connection attempts.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -203,13 +251,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the maximum number of supported Transmission Control Protocol (TCP) connections.</para>
+          <para
+            >Gets the maximum number of supported Transmission Control Protocol (TCP) connections.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MaximumTransmissionTimeout">
-      <MemberSignature Language="C#" Value="public abstract long MaximumTransmissionTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 MaximumTransmissionTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long MaximumTransmissionTimeout { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 MaximumTransmissionTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -223,17 +279,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para>
+          <para
+            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer can be set to any value between the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" />
+
+             value and the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the maximum retransmission time-out value for Transmission Control Protocol (TCP) segments.</para>
+          <para
+            >Gets the maximum retransmission time-out value for Transmission Control Protocol (TCP) segments.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MinimumTransmissionTimeout">
-      <MemberSignature Language="C#" Value="public abstract long MinimumTransmissionTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 MinimumTransmissionTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long MinimumTransmissionTimeout { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 MinimumTransmissionTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -247,11 +319,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para>
+          <para
+            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer The timer can be set to any value between the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" />
+
+             value and the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the minimum retransmission time-out value for Transmission Control Protocol (TCP) segments.</para>
+          <para
+            >Gets the minimum retransmission time-out value for Transmission Control Protocol (TCP) segments.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -271,11 +353,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the CLOSED state from either the ESTABLISHED state or the CLOSE-WAIT state." </para>
+          <para
+            >IETF RFC 2012 formally defines this value as, "The number of times TCP connections have made a direct transition to the CLOSED state from either the ESTABLISHED state or the CLOSE-WAIT state." </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of RST packets received by Transmission Control Protocol (TCP) connections.</para>
+          <para
+            >Gets the number of RST packets received by Transmission Control Protocol (TCP) connections.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -299,7 +385,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of Transmission Control Protocol (TCP) segments sent with the reset flag set.</para>
+          <para
+            >Gets the number of Transmission Control Protocol (TCP) segments sent with the reset flag set.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -319,7 +407,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This data includes segments with errors and segments received on currently established connections.</para>
+          <para
+            >This data includes segments with errors and segments received on currently established connections.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -343,7 +433,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TCP segments that are not acknowledged as being received at the destination are retransmitted.</para>
+          <para
+            >TCP segments that are not acknowledged as being received at the destination are retransmitted.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -367,7 +459,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This data includes segments sent for currently established connections but does not include segments containing only retransmitted octets.</para>
+          <para
+            >This data includes segments sent for currently established connections but does not include segments containing only retransmitted octets.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

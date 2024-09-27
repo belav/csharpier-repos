@@ -10,19 +10,28 @@
     <a href="http://www.microsoft.com" id="A2" name="anchor2" target="_blank">
 						anchor2</a>
     <span>
-      <br />_blank</span>
+      <br />
+
+      _blank</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:64px;width:553px">
     <a href="http://www.microsoft.com" id="A3" name="anchor3" target="_self">
 						anchor3</a>
     <span>
-      <br />_self</span>
+      <br />
+
+      _self</span
+    >
   </div>
   <div id="GHTSubTest4" style="height:64px;width:553px">
     <a href="http://www.microsoft.com" id="A4" name="anchor4" target="123">
 						anchor4</a>
     <span>
-      <br />123</span>
+      <br />
+
+      123</span
+    >
   </div>
   <div id="GHTSubTest5" style="height:64px;width:553px">
     <a href="http://www.microsoft.com" id="A5" name="anchor5">

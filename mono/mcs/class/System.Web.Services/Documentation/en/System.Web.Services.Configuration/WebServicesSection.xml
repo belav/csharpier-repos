@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="WebServicesSection" FullName="System.Web.Services.Configuration.WebServicesSection">
-  <TypeSignature Language="C#" Value="public sealed class WebServicesSection : System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WebServicesSection : System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +17,9 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the webServices element in the configuration file. This element controls the settings of XML Web services.</para>
+      <para
+        >Represents the webServices element in the configuration file. This element controls the settings of XML Web services.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +32,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.WebServicesSection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,11 +45,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ConformanceWarnings">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.WsiProfilesElementCollection ConformanceWarnings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.WsiProfilesElementCollection ConformanceWarnings { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("conformanceWarnings")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("conformanceWarnings")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -51,7 +66,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of conformance warnings for the Web Service. This property corresponds to the configurationWarnings element in the configuration file.</para>
+          <para
+            >Gets the collection of conformance warnings for the Web Service. This property corresponds to the configurationWarnings element in the configuration file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,7 +76,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Current">
-      <MemberSignature Language="C#" Value="public static System.Web.Services.Configuration.WebServicesSection Current { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Web.Services.Configuration.WebServicesSection Current { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Configuration.WebServicesSection</ReturnType>
@@ -70,7 +90,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.Configuration.WebServicesSection" /> object that represents the current section.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+             object that represents the current section.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -78,7 +103,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Diagnostics">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.DiagnosticsElement Diagnostics { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.DiagnosticsElement Diagnostics { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Configuration.DiagnosticsElement</ReturnType>
@@ -89,7 +117,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Services.Configuration.DiagnosticsElement" /> for the <see cref="T:System.Web.Services.Configuration.WebServicesSection" /> object.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Services.Configuration.DiagnosticsElement" />
+
+             for the <see
+             cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,7 +133,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EnabledProtocols">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.WebServiceProtocols EnabledProtocols { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.WebServiceProtocols EnabledProtocols { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Configuration.WebServiceProtocols</ReturnType>
@@ -108,7 +147,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets one of the <see cref="T:System.Web.Services.Configuration.WebServiceProtocols" /> values that indicates the Web service protocol.</para>
+          <para
+            >Gets one of the <see
+             cref="T:System.Web.Services.Configuration.WebServiceProtocols" />
+
+             values that indicates the Web service protocol.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -116,7 +160,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetSection">
-      <MemberSignature Language="C#" Value="public static System.Web.Services.Configuration.WebServicesSection GetSection (System.Configuration.Configuration config);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Web.Services.Configuration.WebServicesSection GetSection (System.Configuration.Configuration config);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Configuration.WebServicesSection</ReturnType>
@@ -133,10 +180,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Web.Services.Configuration.WebServicesSection" /> object that represents the section being retrieved.</para>
+          <para
+            >A <see
+             cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+             object that represents the section being retrieved.</para
+          >
         </returns>
         <param name="config">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.Configuration" /> object that represents the section to be retrieved.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.Configuration" />
+
+           object that represents the section to be retrieved.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -159,7 +217,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -175,7 +236,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Protocols">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.ProtocolElementCollection Protocols { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.ProtocolElementCollection Protocols { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -190,11 +254,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The data sent in an HTTP request to an XML Web service can contain method calls and parameters.</para>
+          <para
+            >The data sent in an HTTP request to an XML Web service can contain method calls and parameters.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the transmission protocol that is used to decrypt data sent from a client browser in an HTTP request.</para>
+          <para
+            >Gets the transmission protocol that is used to decrypt data sent from a client browser in an HTTP request.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -202,7 +270,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Reset">
-      <MemberSignature Language="C#" Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -221,11 +292,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ServiceDescriptionFormatExtensionTypes">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.TypeElementCollection ServiceDescriptionFormatExtensionTypes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.TypeElementCollection ServiceDescriptionFormatExtensionTypes { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("serviceDescriptionFormatExtensionTypes")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("serviceDescriptionFormatExtensionTypes")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -237,7 +313,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Configuration.TypeElementCollection" /> that specifies the service description format extension to run within the scope of the configuration file.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Configuration.TypeElementCollection" />
+
+             that specifies the service description format extension to run within the scope of the configuration file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -245,11 +326,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SoapEnvelopeProcessing">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.SoapEnvelopeProcessingElement SoapEnvelopeProcessing { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.SoapEnvelopeProcessingElement SoapEnvelopeProcessing { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("soapEnvelopeProcessing")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("soapEnvelopeProcessing")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -261,7 +347,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" /> for the <see cref="T:System.Web.Services.Configuration.WebServicesSection" /> object.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Services.Configuration.SoapEnvelopeProcessingElement" />
+
+             for the <see
+             cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -269,11 +363,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SoapExtensionImporterTypes">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.TypeElementCollection SoapExtensionImporterTypes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.TypeElementCollection SoapExtensionImporterTypes { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("soapExtensionImporterTypes")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("soapExtensionImporterTypes")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -285,7 +384,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Configuration.TypeElementCollection" /> that specifies the SOAP extensions to run when a service description for an XML Web service within the scope of the configuration file is accessed.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Configuration.TypeElementCollection" />
+
+             that specifies the SOAP extensions to run when a service description for an XML Web service within the scope of the configuration file is accessed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -293,11 +397,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SoapExtensionReflectorTypes">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.TypeElementCollection SoapExtensionReflectorTypes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.TypeElementCollection SoapExtensionReflectorTypes { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("soapExtensionReflectorTypes")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("soapExtensionReflectorTypes")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -309,7 +418,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Configuration.TypeElementCollection" /> that specifies the SOAP extensions to run when a service description is generated for all XML Web services within the scope of the configuration file.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Configuration.TypeElementCollection" />
+
+             that specifies the SOAP extensions to run when a service description is generated for all XML Web services within the scope of the configuration file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -317,15 +431,22 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SoapExtensionTypes">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.SoapExtensionTypeElementCollection SoapExtensionTypes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.SoapExtensionTypeElementCollection SoapExtensionTypes { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("soapExtensionTypes")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("soapExtensionTypes")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>System.Web.Services.Configuration.SoapExtensionTypeElementCollection</ReturnType>
+        <ReturnType
+          >System.Web.Services.Configuration.SoapExtensionTypeElementCollection</ReturnType
+        >
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
@@ -333,7 +454,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Services.Configuration.SoapExtensionTypeElementCollection" /> that specifies the SOAP extensions to run with all XML Web services within the scope of the configuration file.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Services.Configuration.SoapExtensionTypeElementCollection" />
+
+             that specifies the SOAP extensions to run with all XML Web services within the scope of the configuration file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -341,11 +467,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SoapServerProtocolFactoryType">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.TypeElement SoapServerProtocolFactoryType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.TypeElement SoapServerProtocolFactoryType { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("soapServerProtocolFactory")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("soapServerProtocolFactory")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -357,7 +488,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.Configuration.TypeElement" /> object that corresponds to the protocol used to call the Web service.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.Configuration.TypeElement" />
+
+             object that corresponds to the protocol used to call the Web service.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -365,11 +501,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SoapTransportImporterTypes">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.TypeElementCollection SoapTransportImporterTypes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.TypeElementCollection SoapTransportImporterTypes { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("soapTransportImporterTypes")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("soapTransportImporterTypes")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -381,7 +522,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.Configuration.TypeElementCollection" /> object that represents the SoapTransportImporterTypes configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.Configuration.TypeElementCollection" />
+
+             object that represents the SoapTransportImporterTypes configuration element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -389,11 +535,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WsdlHelpGenerator">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.WsdlHelpGeneratorElement WsdlHelpGenerator { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.WsdlHelpGeneratorElement WsdlHelpGenerator { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("wsdlHelpGenerator")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("wsdlHelpGenerator")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -405,7 +556,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the Web service Help page (an .aspx file) that is displayed to a browser when the browser navigates directly to an ASMX page.</para>
+          <para
+            >Gets the Web service Help page (an .aspx file) that is displayed to a browser when the browser navigates directly to an ASMX page.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

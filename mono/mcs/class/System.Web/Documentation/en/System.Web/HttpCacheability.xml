@@ -3,19 +3,25 @@
   <TypeSignature Language="C#" Maintainer="auto" Value="public enum HttpCacheability" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information, go to RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, on the <see cref="http://go.microsoft.com/fwlink/?linkid=37125">World Wide Web Consortium (W3C)</see> Web site. In particular, for complete details, see Section 14.9 "Cache-Control" and Section 13, "Caching in HTTP."</para>
+      <para
+        >For more information, go to RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, on the <see
+         cref="http://go.microsoft.com/fwlink/?linkid=37125">World Wide Web Consortium (W3C)</see>
+
+         Web site. In particular, for complete details, see Section 14.9 "Cache-Control" and Section 13, "Caching in HTTP."</para
+      >
       <block subset="none" type="note">
         <para>NoCache does not send the common HTTP 1.0 request directive Pragma: no-cache.</para>
       </block>
@@ -32,13 +38,14 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpCacheability</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the Cache-Control: no-cache header. Without a field name, the directive applies to the entire request and a shared (proxy server) cache must force a successful revalidation with the origin Web server before satisfying the request. With a field name, the directive applies only to the named field; the rest of the response may be supplied from a shared cache. </para>
+          <para
+            >Sets the Cache-Control: no-cache header. Without a field name, the directive applies to the entire request and a shared (proxy server) cache must force a successful revalidation with the origin Web server before satisfying the request. With a field name, the directive applies only to the named field; the rest of the response may be supplied from a shared cache. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,13 +59,14 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpCacheability</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Default value. Sets Cache-Control: private to specify that the response is cacheable only on the client and not by shared (proxy server) caches. </para>
+          <para
+            >Default value. Sets Cache-Control: private to specify that the response is cacheable only on the client and not by shared (proxy server) caches. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,13 +80,14 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpCacheability</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets Cache-Control: public to specify that the response is cacheable by clients and shared (proxy) caches. </para>
+          <para
+            >Sets Cache-Control: public to specify that the response is cacheable by clients and shared (proxy) caches. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -92,13 +101,20 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpCacheability</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the response is cached only at the origin server. Similar to the <see cref="F:System.Web.HttpCacheability.NoCache" /> option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see cref="F:System.Web.HttpCacheability.ServerAndNoCache" />.</para>
+          <para
+            >Specifies that the response is cached only at the origin server. Similar to the <see
+             cref="F:System.Web.HttpCacheability.NoCache" />
+
+             option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see
+             cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -117,7 +133,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Applies the settings of both <see cref="F:System.Web.HttpCacheability.Server" /> and <see cref="F:System.Web.HttpCacheability.NoCache" /> to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response. </para>
+          <para
+            >Applies the settings of both <see
+             cref="F:System.Web.HttpCacheability.Server" />
+
+             and <see
+             cref="F:System.Web.HttpCacheability.NoCache" />
+
+             to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,7 +160,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates that the response is cached at the server and at the client but nowhere else. Proxy servers are not allowed to cache the response. </para>
+          <para
+            >Indicates that the response is cached at the server and at the client but nowhere else. Proxy servers are not allowed to cache the response. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -18,7 +18,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines identifiers for settings of a <see cref="T:System.Web.UI.Design.UrlBuilder" />.</para>
+      <para
+        >Defines identifiers for settings of a <see
+         cref="T:System.Web.UI.Design.UrlBuilder" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +36,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Build a URL that references a path relative to the current path, rather than one that references a fully qualified, absolute path.</para>
+          <para
+            >Build a URL that references a path relative to the current path, rather than one that references a fully qualified, absolute path.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -48,7 +55,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use no additional options for the <see cref="T:System.Web.UI.Design.UrlBuilder" />.</para>
+          <para
+            >Use no additional options for the <see
+             cref="T:System.Web.UI.Design.UrlBuilder" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

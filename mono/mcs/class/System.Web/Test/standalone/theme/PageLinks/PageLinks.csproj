@@ -5,7 +5,9 @@
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9804A80F-B4EA-4E4D-9653-8AF5196B856E}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids
+      >{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids
+    >
     <OutputType>Library</OutputType>
     <RootNamespace>PageLinks</RootNamespace>
     <AssemblyName>PageLinks</AssemblyName>

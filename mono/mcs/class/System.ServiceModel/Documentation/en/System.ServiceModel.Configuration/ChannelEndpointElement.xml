@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ChannelEndpointElement" FullName="System.ServiceModel.Configuration.ChannelEndpointElement">
-  <TypeSignature Language="C#" Value="public sealed class ChannelEndpointElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ChannelEndpointElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="ChannelEndpointElement"
+  FullName="System.ServiceModel.Configuration.ChannelEndpointElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ChannelEndpointElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ChannelEndpointElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +23,18 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides options for configuring contract, binding, and address properties of the channel endpoint, which are used by clients to connect to service endpoints on the server. This class cannot be inherited. </para>
+      <para
+        >Provides options for configuring contract, binding, and address properties of the channel endpoint, which are used by clients to connect to service endpoints on the server. This class cannot be inherited. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ChannelEndpointElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +44,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ChannelEndpointElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ChannelEndpointElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -43,7 +62,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("address", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("address", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -67,10 +88,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("behaviorConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("behaviorConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -81,7 +106,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the behavior name of the behavior to be used to instantiate the endpoint.</para>
+          <para
+            >Gets or sets the behavior name of the behavior to be used to instantiate the endpoint.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -94,10 +121,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("binding", IsRequired=true, Options=System.Configuration.ConfigurationPropertyOptions.IsRequired)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("binding", IsRequired=true, Options=System.Configuration.ConfigurationPropertyOptions.IsRequired)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -121,10 +152,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("bindingConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("bindingConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -135,7 +170,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the binding name of the binding to use when the endpoint is instantiated.</para>
+          <para
+            >Gets or sets the binding name of the binding to use when the endpoint is instantiated.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -148,10 +185,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("contract", IsKey=true, IsRequired=true, Options=System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("contract", IsKey=true, IsRequired=true, Options=System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -175,7 +216,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("endpointConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("endpointConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=0)</AttributeName>
@@ -189,20 +232,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the standard endpoint that is set by the <see cref="P:System.ServiceModel.Configuration.ChannelEndpointElement.Kind" /> property, which references to the additional configuration information of this standard endpoint. The same name must be defined in the <see cref="T:System.ServiceModel.Configuration.StandardEndpointsSection" />.</para>
+          <para
+            >Gets or sets the name of the standard endpoint that is set by the <see
+             cref="P:System.ServiceModel.Configuration.ChannelEndpointElement.Kind" />
+
+             property, which references to the additional configuration information of this standard endpoint. The same name must be defined in the <see
+             cref="T:System.ServiceModel.Configuration.StandardEndpointsSection" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Headers">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.AddressHeaderCollectionElement Headers { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.AddressHeaderCollectionElement Headers" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.AddressHeaderCollectionElement Headers { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.AddressHeaderCollectionElement Headers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("headers", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("headers", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -218,15 +277,23 @@
       </Docs>
     </Member>
     <Member MemberName="Identity">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.IdentityElement Identity { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.IdentityElement Identity" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.IdentityElement Identity { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.IdentityElement Identity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("identity", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("identity", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -237,7 +304,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an identity that enables the authentication of an endpoint by other endpoints that are exchanging messages with it.</para>
+          <para
+            >Gets an identity that enables the authentication of an endpoint by other endpoints that are exchanging messages with it.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -250,7 +319,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("kind", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("kind", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=0)</AttributeName>
@@ -264,7 +335,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the type of standard endpoint applied. The type must be registered in the &lt;extensions&gt; section or in machine.config. If nothing is specified, a common channel endpoint is created.</para>
+          <para
+            >Gets or sets the type of standard endpoint applied. The type must be registered in the <extensions> section or in machine.config. If nothing is specified, a common channel endpoint is created.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -277,10 +350,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("name", DefaultValue=Mono.Cecil.CustomAttributeArgument, IsKey=true, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("name", DefaultValue=Mono.Cecil.CustomAttributeArgument, IsKey=true, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -290,7 +367,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The service model allows the user to define multiple clients for a given contract type. Each definition must be differentiated by a unique configuration name. If this property is omitted, the corresponding endpoint is used as the default endpoint associated with the specified contract type. </para>
+          <para
+            >The service model allows the user to define multiple clients for a given contract type. Each definition must be differentiated by a unique configuration name. If this property is omitted, the corresponding endpoint is used as the default endpoint associated with the specified contract type. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -299,8 +378,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SmtpNetworkElement" FullName="System.Net.Configuration.SmtpNetworkElement">
-  <TypeSignature Language="C#" Value="public sealed class SmtpNetworkElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SmtpNetworkElement extends System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SmtpNetworkElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SmtpNetworkElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,13 +25,18 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the network element in the SMTP configuration file. This class cannot be inherited.</para>
+      <para
+        >Represents the network element in the SMTP configuration file. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SmtpNetworkElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,7 +48,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Configuration.SmtpNetworkElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Configuration.SmtpNetworkElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -51,7 +67,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("defaultCredentials", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("defaultCredentials", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -63,7 +81,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether or not default user credentials are used to access an SMTP server. The default value is false.</para>
+          <para
+            >Determines whether or not default user credentials are used to access an SMTP server. The default value is false.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -76,7 +96,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("enableSsl", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("enableSsl", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -86,12 +108,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Net.Configuration.SmtpNetworkElement.EnableSsl" /> property indicates if SSL is used to access an SMTP mail server. The <see cref="T:System.Net.Mail.SmtpClient" /> class only supports the SMTP Service Extension for Secure SMTP over Transport Layer Security as defined in RFC 3207. In this mode, the SMTP session begins on an unencrypted channel, then a STARTTLS command is issued by the client to the server to switch to secure communication using SSL. See RFC 3207 published by the Internet Engineering Task Force (IETF) for more information. </para>
-          <para>An alternate connection method is where an SSL session is established up front before any protocol commands are sent. This connection method is sometimes called SMTPS and by default uses port 465. This alternate connection method using SSL is not currently supported.</para>
+          <para
+            >The <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.EnableSsl" />
+
+             property indicates if SSL is used to access an SMTP mail server. The <see
+             cref="T:System.Net.Mail.SmtpClient" />
+
+             class only supports the SMTP Service Extension for Secure SMTP over Transport Layer Security as defined in RFC 3207. In this mode, the SMTP session begins on an unencrypted channel, then a STARTTLS command is issued by the client to the server to switch to secure communication using SSL. See RFC 3207 published by the Internet Engineering Task Force (IETF) for more information. </para
+          >
+          <para
+            >An alternate connection method is where an SSL session is established up front before any protocol commands are sent. This connection method is sometimes called SMTPS and by default uses port 465. This alternate connection method using SSL is not currently supported.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets whether SSL is used to access an SMTP mail server. The default value is false.</para>
+          <para
+            >Gets or sets whether SSL is used to access an SMTP mail server. The default value is false.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -142,7 +176,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" /> takes precedence over setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" /> and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />. <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" /> and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" /> are used only if <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" /> is set to false.</para>
+          <para
+            >Setting <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+
+             takes precedence over setting <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+
+             and <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+
+            . <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+
+             and <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+
+             are used only if <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+
+             is set to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,7 +214,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("port", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("port", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -172,13 +228,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the port that SMTP clients use to connect to an SMTP mail server. The default value is 25.</para>
+          <para
+            >Gets or sets the port that SMTP clients use to connect to an SMTP mail server. The default value is 25.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="PostDeserialize">
       <MemberSignature Language="C#" Value="protected override void PostDeserialize ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -194,8 +255,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -219,7 +286,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("targetName", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("targetName", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -229,12 +298,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" /> property allows an application to get or set the SPN to use for authentication when integrated Windows authentication with extended protection. If the <see cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" /> property is not set, the default value for this SPN is of the form "SMTPSVC/&lt;host&gt;" where &lt;host&gt; is the hostname of the SMTP mail server. </para>
-          <para>The default value for this network element in the SMTP configuration file can also be changed by manually editing the machine or application configuration files directly.</para>
+          <para
+            >The <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
+
+             property allows an application to get or set the SPN to use for authentication when integrated Windows authentication with extended protection. If the <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.TargetName" />
+
+             property is not set, the default value for this SPN is of the form "SMTPSVC/<host>" where <host> is the hostname of the SMTP mail server. </para
+          >
+          <para
+            >The default value for this network element in the SMTP configuration file can also be changed by manually editing the machine or application configuration files directly.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the Service Provider Name (SPN) to use for authentication when using extended protection to connect to an SMTP mail server.</para>
+          <para
+            >Gets or sets the Service Provider Name (SPN) to use for authentication when using extended protection to connect to an SMTP mail server.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -248,7 +329,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("userName", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("userName", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -259,7 +342,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" /> takes precedence over setting <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" /> and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />. <see cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" /> and <see cref="P:System.Net.Configuration.SmtpNetworkElement.Password" /> are used only if <see cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" /> is set to false.</para>
+          <para
+            >Setting <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+
+             takes precedence over setting <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+
+             and <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+
+            . <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.UserName" />
+
+             and <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.Password" />
+
+             are used only if <see
+             cref="P:System.Net.Configuration.SmtpNetworkElement.DefaultCredentials" />
+
+             is set to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

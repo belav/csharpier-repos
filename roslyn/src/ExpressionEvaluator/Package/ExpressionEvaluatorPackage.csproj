@@ -5,17 +5,19 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net472</TargetFramework>
     <IsShippingAssembly>false</IsShippingAssembly>
-
     <!-- VSIX -->
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
     <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
     <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
     <ExtensionInstallationRoot>$(CommonExtensionInstallationRoot)</ExtensionInstallationRoot>
-    <ExtensionInstallationFolder>Microsoft\VBCSharp\ExpressionEvaluators</ExtensionInstallationFolder>
-
+    <ExtensionInstallationFolder
+      >Microsoft\VBCSharp\ExpressionEvaluators</ExtensionInstallationFolder
+    >
     <!-- VS Insertion -->
-    <VisualStudioInsertionComponent>Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent>
+    <VisualStudioInsertionComponent
+      >Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent
+    >
   </PropertyGroup>
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\VisualStudio\Setup\Roslyn.VisualStudio.Setup.csproj">
@@ -24,53 +26,95 @@
       <IncludeOutputGroupsInVSIX>SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Source\ExpressionCompiler\Microsoft.CodeAnalysis.ExpressionCompiler.csproj">
+    <ProjectReference
+      Include="..\Core\Source\ExpressionCompiler\Microsoft.CodeAnalysis.ExpressionCompiler.csproj"
+    >
       <Name>ExpressionCompiler</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Source\FunctionResolver\Microsoft.CodeAnalysis.FunctionResolver.csproj">
+    <ProjectReference
+      Include="..\Core\Source\FunctionResolver\Microsoft.CodeAnalysis.FunctionResolver.csproj"
+    >
       <Name>FunctionResolver</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <AdditionalProperties>TargetFramework=netstandard2.0</AdditionalProperties>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Source\ResultProvider\Portable\Microsoft.CodeAnalysis.ResultProvider.csproj">
+    <ProjectReference
+      Include="..\Core\Source\ResultProvider\Portable\Microsoft.CodeAnalysis.ResultProvider.csproj"
+    >
       <Name>ResultProvider.Portable</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
-    <ProjectReference Include="..\CSharp\Source\ExpressionCompiler\Microsoft.CodeAnalysis.CSharp.ExpressionCompiler.csproj">
+    <ProjectReference
+      Include="..\CSharp\Source\ExpressionCompiler\Microsoft.CodeAnalysis.CSharp.ExpressionCompiler.csproj"
+    >
       <Name>CSharpExpressionCompiler</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
-    <ProjectReference Include="..\CSharp\Source\ResultProvider\Portable\Microsoft.CodeAnalysis.CSharp.ResultProvider.csproj">
+    <ProjectReference
+      Include="..\CSharp\Source\ResultProvider\Portable\Microsoft.CodeAnalysis.CSharp.ResultProvider.csproj"
+    >
       <Name>CSharpResultProvider.Portable</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
-    <ProjectReference Include="..\VisualBasic\Source\ExpressionCompiler\Microsoft.CodeAnalysis.VisualBasic.ExpressionCompiler.vbproj">
+    <ProjectReference
+      Include="..\VisualBasic\Source\ExpressionCompiler\Microsoft.CodeAnalysis.VisualBasic.ExpressionCompiler.vbproj"
+    >
       <Name>BasicExpressionCompiler</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
-    <ProjectReference Include="..\VisualBasic\Source\ResultProvider\Portable\Microsoft.CodeAnalysis.VisualBasic.ResultProvider.vbproj">
+    <ProjectReference
+      Include="..\VisualBasic\Source\ResultProvider\Portable\Microsoft.CodeAnalysis.VisualBasic.ResultProvider.vbproj"
+    >
       <Name>BasicResultProvider.Portable</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bVsdConfigOutputGroup;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
@@ -84,12 +128,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceHub.Framework" Version="$(MicrosoftServiceHubFrameworkVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime" Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers" Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="$(MicrosoftVisualStudioShell150Version)" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="$(MicrosoftVisualStudioThreadingVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="$(MicrosoftVisualStudioValidationVersion)" />
+    <PackageReference
+      Include="Microsoft.ServiceHub.Framework"
+      Version="$(MicrosoftServiceHubFrameworkVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime"
+      Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.SDK.Analyzers"
+      Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.15.0"
+      Version="$(MicrosoftVisualStudioShell150Version)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading"
+      Version="$(MicrosoftVisualStudioThreadingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Validation"
+      Version="$(MicrosoftVisualStudioValidationVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 </Project>

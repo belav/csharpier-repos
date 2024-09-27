@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NetTcpBindingElement" FullName="System.ServiceModel.Configuration.NetTcpBindingElement">
-  <TypeSignature Language="C#" Value="public class NetTcpBindingElement : System.ServiceModel.Configuration.StandardBindingElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NetTcpBindingElement extends System.ServiceModel.Configuration.StandardBindingElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NetTcpBindingElement : System.ServiceModel.Configuration.StandardBindingElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NetTcpBindingElement extends System.ServiceModel.Configuration.StandardBindingElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,17 +19,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The netTcpBinding is a secure, reliable, optimized binding suitable for cross-machine communication. By default, it generates a run-time communication stack with WS-ReliableMessaging for reliability, Windows Security for message security and authentication, TCP for message delivery, and binary message encoding.</para>
+      <para
+        >The netTcpBinding is a secure, reliable, optimized binding suitable for cross-machine communication. By default, it generates a run-time communication stack with WS-ReliableMessaging for reliability, Windows Security for message security and authentication, TCP for message delivery, and binary message encoding.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents an XML element that specifies a binding for peer channel-specific TCP messaging.</para>
+      <para
+        >Represents an XML element that specifies a binding for peer channel-specific TCP messaging.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetTcpBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +46,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetTcpBindingElement (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,15 +72,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" /> class with the specified configuration name. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" />
+
+             class with the specified configuration name. </para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="protected override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,15 +109,23 @@
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("hostNameComparisonMode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("hostNameComparisonMode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -96,7 +136,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether the hostname is used to reach the service when matching the URI.</para>
+          <para
+            >Gets or sets a value that indicates whether the hostname is used to reach the service when matching the URI.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -109,10 +151,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("listenBacklog", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("listenBacklog", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -122,11 +168,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Connections in excess of this limit are queued until space below the limit becomes available. </para>
+          <para
+            >Connections in excess of this limit are queued until space below the limit becomes available. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies the maximum number of channels that can wait to be accepted on the listener.</para>
+          <para
+            >Gets or sets a value that specifies the maximum number of channels that can wait to be accepted on the listener.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -139,10 +189,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("maxBufferPoolSize", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("maxBufferPoolSize", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.LongValidator(ExcludeRange=false, MaxValue=9223372036854775807, MinValue=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.LongValidator(ExcludeRange=false, MaxValue=9223372036854775807, MinValue=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -153,7 +207,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the maximum size, in bytes, for a buffer pool that stores TCP messages processed by the binding.</para>
+          <para
+            >Gets or sets the maximum size, in bytes, for a buffer pool that stores TCP messages processed by the binding.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -166,10 +222,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("maxBufferSize", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("maxBufferSize", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -179,12 +239,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the buffer is full, excess data remains in the underlying socket until the buffer has space again. </para>
-          <para>This value cannot be less than <see cref="P:System.ServiceModel.Configuration.NetTcpBindingElement.MaxReceivedMessageSize" />, whose default value is also 65,536 (64 KB). </para>
+          <para
+            >If the buffer is full, excess data remains in the underlying socket until the buffer has space again. </para
+          >
+          <para
+            >This value cannot be less than <see
+
+              cref="P:System.ServiceModel.Configuration.NetTcpBindingElement.MaxReceivedMessageSize"
+            />
+
+            , whose default value is also 65,536 (64 KB). </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies the maximum size, in bytes, of the buffer used to store messages in memory.</para>
+          <para
+            >Gets or sets a value that specifies the maximum size, in bytes, of the buffer used to store messages in memory.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -197,10 +268,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("maxConnections", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("maxConnections", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -210,11 +285,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Incoming and outgoing connections are counted against a separate limit specified by this property. Any connection in excess of the limit is queued until a space below the limit becomes available.</para>
+          <para
+            >Incoming and outgoing connections are counted against a separate limit specified by this property. Any connection in excess of the limit is queued until a space below the limit becomes available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies the maximum number of outbound and inbound connections the service creates and accepts respectively.</para>
+          <para
+            >Gets or sets a value that specifies the maximum number of outbound and inbound connections the service creates and accepts respectively.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -227,10 +306,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("maxReceivedMessageSize", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("maxReceivedMessageSize", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.LongValidator(ExcludeRange=false, MaxValue=9223372036854775807, MinValue=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.LongValidator(ExcludeRange=false, MaxValue=9223372036854775807, MinValue=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -241,13 +324,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the maximum size, in bytes, of a message that can be received on a channel configured with this binding.</para>
+          <para
+            >Gets or sets the maximum size, in bytes, of a message that can be received on a channel configured with this binding.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnApplyConfiguration">
-      <MemberSignature Language="C#" Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -262,10 +353,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Applies the specified binding to this <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> instance.</para>
+          <para
+            >Applies the specified binding to this <see
+             cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" />
+
+             instance.</para
+          >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding to be applied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding to be applied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PortSharingEnabled">
@@ -277,7 +376,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("portSharingEnabled", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("portSharingEnabled", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -288,13 +389,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a boolean value that specifies whether TCP port sharing is enabled for this connection.</para>
+          <para
+            >Gets or sets a boolean value that specifies whether TCP port sharing is enabled for this connection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -307,20 +416,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             instance that contains a collection of <see
+             cref="T:System.Configuration.ConfigurationProperty" />
+
+             objects that can be attributes or <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             objects of this configuration element.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReaderQuotas">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement ReaderQuotas"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("readerQuotas", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("readerQuotas", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -330,48 +458,72 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The complexity constraints include items such as a maximum element depth, a maximum length for string content within the message. The constraints protect against a class of denial of service (DOS) attacks that attempt to use message complexity to tie up endpoint processing resources. </para>
+          <para
+            >The complexity constraints include items such as a maximum element depth, a maximum length for string content within the message. The constraints protect against a class of denial of service (DOS) attacks that attempt to use message complexity to tie up endpoint processing resources. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the constraints on the complexity of SOAP messages that can be processed by endpoints configured with this binding.</para>
+          <para
+            >Gets the constraints on the complexity of SOAP messages that can be processed by endpoints configured with this binding.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReliableSession">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement ReliableSession"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("reliableSession", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("reliableSession", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement</ReturnType>
+        <ReturnType
+          >System.ServiceModel.Configuration.StandardBindingOptionalReliableSessionElement</ReturnType
+        >
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a configuration element that specifies whether reliable sessions are established between channel endpoints.</para>
+          <para
+            >Gets a configuration element that specifies whether reliable sessions are established between channel endpoints.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Security">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.NetTcpSecurityElement Security { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.NetTcpSecurityElement Security" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.NetTcpSecurityElement Security { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.NetTcpSecurityElement Security"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("security", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("security", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -395,7 +547,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("transactionFlow", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("transactionFlow", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -406,23 +560,35 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a Boolean value that specifies whether the binding supports flowing WS-Transactions.</para>
+          <para
+            >Gets or sets a Boolean value that specifies whether the binding supports flowing WS-Transactions.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="TransactionProtocol">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransactionProtocol TransactionProtocol { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.TransactionProtocol TransactionProtocol" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransactionProtocol TransactionProtocol { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.TransactionProtocol TransactionProtocol"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.TypeConverter(typeof(System.ServiceModel.Configuration.TransactionProtocolConverter))</AttributeName>
+          <AttributeName
+            >System.ComponentModel.TypeConverter(typeof(System.ServiceModel.Configuration.TransactionProtocolConverter))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("transactionProtocol", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("transactionProtocol", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -438,15 +604,23 @@
       </Docs>
     </Member>
     <Member MemberName="TransferMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransferMode TransferMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransferMode TransferMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("transferMode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("transferMode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -457,7 +631,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies whether messages are buffered or streamed or a request or response.</para>
+          <para
+            >Gets or sets a value that specifies whether messages are buffered or streamed or a request or response.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -12,11 +12,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration when calling the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" /> and <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" /> methods of the <see cref="T:System.Windows.Forms.RichTextBox" /> control.</para>
+      <para
+        >Use the members of this enumeration when calling the <see
+         cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+
+         and <see
+         cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+
+         methods of the <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the types of input and output streams used to load and save data in the <see cref="T:System.Windows.Forms.RichTextBox" /> control.</para>
+      <para
+        >Specifies the types of input and output streams used to load and save data in the <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -29,7 +45,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A plain text stream that includes spaces in places of Object Linking and Embedding (OLE) objects.</para>
+          <para
+            >A plain text stream that includes spaces in places of Object Linking and Embedding (OLE) objects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -46,7 +64,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A Rich Text Format (RTF) stream with spaces in place of OLE objects. This value is only valid for use with the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" /> method of the <see cref="T:System.Windows.Forms.RichTextBox" /> control.</para>
+          <para
+            >A Rich Text Format (RTF) stream with spaces in place of OLE objects. This value is only valid for use with the <see
+             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+
+             method of the <see
+             cref="T:System.Windows.Forms.RichTextBox" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +106,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A plain text stream with a textual representation of OLE objects. This value is only valid for use with the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" /> method of the <see cref="T:System.Windows.Forms.RichTextBox" /> control.</para>
+          <para
+            >A plain text stream with a textual representation of OLE objects. This value is only valid for use with the <see
+             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+
+             method of the <see
+             cref="T:System.Windows.Forms.RichTextBox" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,7 +131,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A text stream that contains spaces in place of Object Linking and Embedding (OLE) objects. The text is encoded in Unicode.</para>
+          <para
+            >A text stream that contains spaces in place of Object Linking and Embedding (OLE) objects. The text is encoded in Unicode.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

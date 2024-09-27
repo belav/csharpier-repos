@@ -1,7 +1,8 @@
 <Project>
   <PropertyGroup>
     <!-- The trailing semicolon is important for each entry! -->
-    <NetFxReference>
+    <NetFxReference
+      >
       mscorlib;
       Microsoft.VisualBasic;
       System;
@@ -24,8 +25,10 @@
       System.Xml.Serialization;
       System.Xml.Linq;
       WindowsBase;
-    </NetFxReference>
-    <NetCoreAppLibrary>
+    </NetFxReference
+    >
+    <NetCoreAppLibrary
+      >
       $(NetFxReference)
       netstandard;
       Microsoft.CSharp;
@@ -173,17 +176,21 @@
       System.Xml.XmlSerializer;
       System.Xml.XPath;
       System.Xml.XPath.XDocument;
-    </NetCoreAppLibrary>
+    </NetCoreAppLibrary
+    >
     <!-- List .NETCoreApp shared framework generator project names below. -->
-    <NetCoreAppLibraryGenerator>
+    <NetCoreAppLibraryGenerator
+      >
       ComInterfaceGenerator;
       LibraryImportGenerator;
       JSImportGenerator;
       Microsoft.Interop.SourceGeneration;
       System.Text.Json.SourceGeneration.Roslyn4.4;
       System.Text.RegularExpressions.Generator;
-    </NetCoreAppLibraryGenerator>
-    <AspNetCoreAppLibrary>
+    </NetCoreAppLibraryGenerator
+    >
+    <AspNetCoreAppLibrary
+      >
       Microsoft.Extensions.Caching.Abstractions;
       Microsoft.Extensions.Caching.Memory;
       Microsoft.Extensions.Configuration;
@@ -223,8 +230,10 @@
       System.IO.Pipelines;
       System.Security.Cryptography.Xml;
       System.Threading.RateLimiting;
-    </AspNetCoreAppLibrary>
-    <WindowsDesktopCoreAppLibrary>
+    </AspNetCoreAppLibrary
+    >
+    <WindowsDesktopCoreAppLibrary
+      >
       Microsoft.Win32.Registry.AccessControl;
       Microsoft.Win32.SystemEvents;
       System.CodeDom;
@@ -240,7 +249,8 @@
       System.Security.Permissions;
       System.Threading.AccessControl;
       System.Windows.Extensions;
-    </WindowsDesktopCoreAppLibrary>
+    </WindowsDesktopCoreAppLibrary
+    >
   </PropertyGroup>
   <!-- Make available as an item. -->
   <ItemGroup>

@@ -17,7 +17,9 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>These identifiers indicate whether a component has some form of visible user interface and whether the user can take actions to move or alter the size of the component.</para>
+      <para
+        >These identifiers indicate whether a component has some form of visible user interface and whether the user can take actions to move or alter the size of the component.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,7 +87,27 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the component is locked to its container. Overrides the <see cref="F:System.Windows.Forms.Design.SelectionRules.Moveable" />, <see cref="F:System.Windows.Forms.Design.SelectionRules.AllSizeable" />, <see cref="F:System.Windows.Forms.Design.SelectionRules.BottomSizeable" />, <see cref="F:System.Windows.Forms.Design.SelectionRules.LeftSizeable" />, <see cref="F:System.Windows.Forms.Design.SelectionRules.RightSizeable" />, and <see cref="F:System.Windows.Forms.Design.SelectionRules.TopSizeable" /> bit flags of this enumeration.</para>
+          <para
+            >Indicates the component is locked to its container. Overrides the <see
+             cref="F:System.Windows.Forms.Design.SelectionRules.Moveable" />
+
+            , <see
+             cref="F:System.Windows.Forms.Design.SelectionRules.AllSizeable" />
+
+            , <see
+             cref="F:System.Windows.Forms.Design.SelectionRules.BottomSizeable" />
+
+            , <see
+             cref="F:System.Windows.Forms.Design.SelectionRules.LeftSizeable" />
+
+            , <see
+             cref="F:System.Windows.Forms.Design.SelectionRules.RightSizeable" />
+
+            , and <see
+             cref="F:System.Windows.Forms.Design.SelectionRules.TopSizeable" />
+
+             bit flags of this enumeration.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +124,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the component supports a location property that allows it to be moved on the screen.</para>
+          <para
+            >Indicates the component supports a location property that allows it to be moved on the screen.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -170,7 +194,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the component has some form of visible user interface and the selection service is drawing a selection border around this user interface. If a selected component has this rule set, you can assume that the component implements <see cref="T:System.ComponentModel.IComponent" /> and that it is associated with a corresponding designer instance.</para>
+          <para
+            >Indicates the component has some form of visible user interface and the selection service is drawing a selection border around this user interface. If a selected component has this rule set, you can assume that the component implements <see
+             cref="T:System.ComponentModel.IComponent" />
+
+             and that it is associated with a corresponding designer instance.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

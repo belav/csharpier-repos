@@ -7,28 +7,40 @@
           <AttributeName>System.CLSCompliant(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("Mono development team")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) Various Mono authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) Various Mono authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDefaultAlias("System.Xml.Linq.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDefaultAlias("System.Xml.Linq.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDescription("System.Xml.Linq.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDescription("System.Xml.Linq.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyFileVersion("4.0.30319.17020")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("4.0.30319.17020")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("4.0.30319.17020")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("Mono Common Language Infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("Mono Common Language Infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyTitle("System.Xml.Linq.dll")</AttributeName>
@@ -40,10 +52,14 @@
           <AttributeName>System.Resources.SatelliteContractVersion("4.0.0.0")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.InteropServices.ComVisible(false)</AttributeName>
@@ -95,12 +111,18 @@
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Ancestors&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; Ancestors&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XNode;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; Ancestors&lt;(class System.Xml.Linq.XNode) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="Ancestors<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XNode;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> Ancestors<(class System.Xml.Linq.XNode) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -110,26 +132,39 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Ancestors``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Ancestors``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Ancestors&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; Ancestors&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source, System.Xml.Linq.XName name) where T : System.Xml.Linq.XNode;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; Ancestors&lt;(class System.Xml.Linq.XNode) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source, class System.Xml.Linq.XName name) cil managed" />
+      <Member MemberName="Ancestors<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors<T> (this System.Collections.Generic.IEnumerable<T> source, System.Xml.Linq.XName name) where T : System.Xml.Linq.XNode;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> Ancestors<(class System.Xml.Linq.XNode) T>(class System.Collections.Generic.IEnumerable`1<!!T> source, class System.Xml.Linq.XName name) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -139,7 +174,11 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
           <Parameter Name="name" Type="System.Xml.Linq.XName" />
         </Parameters>
         <Docs>
@@ -148,7 +187,10 @@
           <param name="name">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Ancestors``1(System.Collections.Generic.IEnumerable{``0},System.Xml.Linq.XName)" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Ancestors``1(System.Collections.Generic.IEnumerable{``0},System.Xml.Linq.XName)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -156,20 +198,33 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="AncestorsAndSelf">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; AncestorsAndSelf (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; AncestorsAndSelf(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> AncestorsAndSelf(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.AncestorsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.AncestorsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -177,14 +232,24 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="AncestorsAndSelf">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; AncestorsAndSelf (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source, System.Xml.Linq.XName name);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; AncestorsAndSelf(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source, class System.Xml.Linq.XName name) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> AncestorsAndSelf (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source, System.Xml.Linq.XName name);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> AncestorsAndSelf(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source, class System.Xml.Linq.XName name) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
           <Parameter Name="name" Type="System.Xml.Linq.XName" />
         </Parameters>
         <Docs>
@@ -192,7 +257,10 @@
           <param name="name">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.AncestorsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Xml.Linq.XName)" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.AncestorsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Xml.Linq.XName)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -200,20 +268,35 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="Attributes">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt; Attributes (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XAttribute&gt; Attributes(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XAttribute> Attributes(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt;</ReturnType>
+          <ReturnType
+            >System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute></ReturnType
+          >
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Attributes(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Attributes(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -221,14 +304,26 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="Attributes">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt; Attributes (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source, System.Xml.Linq.XName name);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XAttribute&gt; Attributes(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source, class System.Xml.Linq.XName name) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> Attributes (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source, System.Xml.Linq.XName name);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XAttribute> Attributes(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source, class System.Xml.Linq.XName name) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt;</ReturnType>
+          <ReturnType
+            >System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute></ReturnType
+          >
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
           <Parameter Name="name" Type="System.Xml.Linq.XName" />
         </Parameters>
         <Docs>
@@ -236,19 +331,28 @@
           <param name="name">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Attributes(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Xml.Linq.XName)" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Attributes(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Xml.Linq.XName)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="DescendantNodes&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt; DescendantNodes&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XContainer;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XNode&gt; DescendantNodes&lt;(class System.Xml.Linq.XContainer) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="DescendantNodes<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodes<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XContainer;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XNode> DescendantNodes<(class System.Xml.Linq.XContainer) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -258,14 +362,21 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.DescendantNodes``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.DescendantNodes``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -273,32 +384,51 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="DescendantNodesAndSelf">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt; DescendantNodesAndSelf (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XNode&gt; DescendantNodesAndSelf(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodesAndSelf (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XNode> DescendantNodesAndSelf(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode></ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.DescendantNodesAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.DescendantNodesAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Descendants&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; Descendants&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XContainer;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; Descendants&lt;(class System.Xml.Linq.XContainer) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="Descendants<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Descendants<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XContainer;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> Descendants<(class System.Xml.Linq.XContainer) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -308,26 +438,39 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Descendants``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Descendants``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Descendants&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; Descendants&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source, System.Xml.Linq.XName name) where T : System.Xml.Linq.XContainer;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; Descendants&lt;(class System.Xml.Linq.XContainer) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source, class System.Xml.Linq.XName name) cil managed" />
+      <Member MemberName="Descendants<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Descendants<T> (this System.Collections.Generic.IEnumerable<T> source, System.Xml.Linq.XName name) where T : System.Xml.Linq.XContainer;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> Descendants<(class System.Xml.Linq.XContainer) T>(class System.Collections.Generic.IEnumerable`1<!!T> source, class System.Xml.Linq.XName name) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -337,7 +480,11 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
           <Parameter Name="name" Type="System.Xml.Linq.XName" />
         </Parameters>
         <Docs>
@@ -346,7 +493,10 @@
           <param name="name">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Descendants``1(System.Collections.Generic.IEnumerable{``0},System.Xml.Linq.XName)" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Descendants``1(System.Collections.Generic.IEnumerable{``0},System.Xml.Linq.XName)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -354,20 +504,33 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="DescendantsAndSelf">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; DescendantsAndSelf (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; DescendantsAndSelf(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> DescendantsAndSelf(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.DescendantsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.DescendantsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -375,14 +538,24 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="DescendantsAndSelf">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; DescendantsAndSelf (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; source, System.Xml.Linq.XName name);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; DescendantsAndSelf(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; source, class System.Xml.Linq.XName name) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> DescendantsAndSelf (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> source, System.Xml.Linq.XName name);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> DescendantsAndSelf(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> source, class System.Xml.Linq.XName name) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>"
+            RefType="this"
+          />
           <Parameter Name="name" Type="System.Xml.Linq.XName" />
         </Parameters>
         <Docs>
@@ -390,19 +563,28 @@
           <param name="name">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.DescendantsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Xml.Linq.XName)" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.DescendantsAndSelf(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Xml.Linq.XName)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Elements&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; Elements&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XContainer;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; Elements&lt;(class System.Xml.Linq.XContainer) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="Elements<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Elements<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XContainer;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> Elements<(class System.Xml.Linq.XContainer) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -412,26 +594,39 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Elements``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Elements``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Elements&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; Elements&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source, System.Xml.Linq.XName name) where T : System.Xml.Linq.XContainer;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; Elements&lt;(class System.Xml.Linq.XContainer) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source, class System.Xml.Linq.XName name) cil managed" />
+      <Member MemberName="Elements<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Elements<T> (this System.Collections.Generic.IEnumerable<T> source, System.Xml.Linq.XName name) where T : System.Xml.Linq.XContainer;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> Elements<(class System.Xml.Linq.XContainer) T>(class System.Collections.Generic.IEnumerable`1<!!T> source, class System.Xml.Linq.XName name) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -441,7 +636,11 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
           <Parameter Name="name" Type="System.Xml.Linq.XName" />
         </Parameters>
         <Docs>
@@ -450,19 +649,28 @@
           <param name="name">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Elements``1(System.Collections.Generic.IEnumerable{``0},System.Xml.Linq.XName)" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Elements``1(System.Collections.Generic.IEnumerable{``0},System.Xml.Linq.XName)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="InDocumentOrder&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;T&gt; InDocumentOrder&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XNode;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; InDocumentOrder&lt;(class System.Xml.Linq.XNode) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="InDocumentOrder<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<T> InDocumentOrder<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XNode;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<!!T> InDocumentOrder<(class System.Xml.Linq.XNode) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;T&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<T></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -472,26 +680,39 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Nodes&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt; Nodes&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XContainer;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XNode&gt; Nodes&lt;(class System.Xml.Linq.XContainer) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="Nodes<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> Nodes<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XContainer;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XNode> Nodes<(class System.Xml.Linq.XContainer) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XNode&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode></ReturnType>
         </ReturnValue>
         <TypeParameters>
           <TypeParameter Name="T">
@@ -501,14 +722,21 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Nodes``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Nodes``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -516,29 +744,48 @@
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
       <Member MemberName="Remove">
-        <MemberSignature Language="C#" Value="public static void Remove (this System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt; source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Remove(class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XAttribute&gt; source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Remove (this System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute> source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Remove(class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XAttribute> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XAttribute&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<System.Xml.Linq.XAttribute>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Remove(System.Collections.Generic.IEnumerable{System.Xml.Linq.XAttribute})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Remove(System.Collections.Generic.IEnumerable{System.Xml.Linq.XAttribute})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:System.Collections.Generic.IEnumerable`1" />
       </Targets>
-      <Member MemberName="Remove&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static void Remove&lt;T&gt; (this System.Collections.Generic.IEnumerable&lt;T&gt; source) where T : System.Xml.Linq.XNode;" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Remove&lt;(class System.Xml.Linq.XNode) T&gt;(class System.Collections.Generic.IEnumerable`1&lt;!!T&gt; source) cil managed" />
+      <Member MemberName="Remove<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static void Remove<T> (this System.Collections.Generic.IEnumerable<T> source) where T : System.Xml.Linq.XNode;"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Remove<(class System.Xml.Linq.XNode) T>(class System.Collections.Generic.IEnumerable`1<!!T> source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -551,14 +798,21 @@
           </TypeParameter>
         </TypeParameters>
         <Parameters>
-          <Parameter Name="source" Type="System.Collections.Generic.IEnumerable&lt;T&gt;" RefType="this" />
+          <Parameter
+            Name="source"
+            Type="System.Collections.Generic.IEnumerable<T>"
+            RefType="this"
+          />
         </Parameters>
         <Docs>
           <typeparam name="T">To be added.</typeparam>
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Linq.Extensions" Member="M:System.Xml.Linq.Extensions.Remove``1(System.Collections.Generic.IEnumerable{``0})" />
+        <Link
+          Type="System.Xml.Linq.Extensions"
+          Member="M:System.Xml.Linq.Extensions.Remove``1(System.Collections.Generic.IEnumerable{``0})"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -566,8 +820,14 @@
         <Target Type="T:System.Xml.Linq.XAttribute" />
       </Targets>
       <Member MemberName="GetSchemaInfo">
-        <MemberSignature Language="C#" Value="public static System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo (this System.Xml.Linq.XAttribute source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo(class System.Xml.Linq.XAttribute source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo (this System.Xml.Linq.XAttribute source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo(class System.Xml.Linq.XAttribute source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Xml.Schema.IXmlSchemaInfo</ReturnType>
@@ -579,7 +839,10 @@
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XAttribute)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -587,8 +850,14 @@
         <Target Type="T:System.Xml.Linq.XElement" />
       </Targets>
       <Member MemberName="GetSchemaInfo">
-        <MemberSignature Language="C#" Value="public static System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo (this System.Xml.Linq.XElement source);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo(class System.Xml.Linq.XElement source) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo (this System.Xml.Linq.XElement source);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Xml.Schema.IXmlSchemaInfo GetSchemaInfo(class System.Xml.Linq.XElement source) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Xml.Schema.IXmlSchemaInfo</ReturnType>
@@ -600,7 +869,10 @@
           <param name="source">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XElement)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.GetSchemaInfo(System.Xml.Linq.XElement)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -608,8 +880,14 @@
         <Target Type="T:System.Xml.Linq.XAttribute" />
       </Targets>
       <Member MemberName="Validate">
-        <MemberSignature Language="C#" Value="public static void Validate (this System.Xml.Linq.XAttribute source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Validate(class System.Xml.Linq.XAttribute source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Validate (this System.Xml.Linq.XAttribute source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Validate(class System.Xml.Linq.XAttribute source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -618,7 +896,10 @@
           <Parameter Name="source" Type="System.Xml.Linq.XAttribute" RefType="this" />
           <Parameter Name="partialValidationType" Type="System.Xml.Schema.XmlSchemaObject" />
           <Parameter Name="schemas" Type="System.Xml.Schema.XmlSchemaSet" />
-          <Parameter Name="validationEventHandler" Type="System.Xml.Schema.ValidationEventHandler" />
+          <Parameter
+            Name="validationEventHandler"
+            Type="System.Xml.Schema.ValidationEventHandler"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
@@ -627,7 +908,10 @@
           <param name="validationEventHandler">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XAttribute,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XAttribute,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -635,8 +919,14 @@
         <Target Type="T:System.Xml.Linq.XAttribute" />
       </Targets>
       <Member MemberName="Validate">
-        <MemberSignature Language="C#" Value="public static void Validate (this System.Xml.Linq.XAttribute source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Validate(class System.Xml.Linq.XAttribute source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Validate (this System.Xml.Linq.XAttribute source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Validate(class System.Xml.Linq.XAttribute source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -645,7 +935,10 @@
           <Parameter Name="source" Type="System.Xml.Linq.XAttribute" RefType="this" />
           <Parameter Name="partialValidationType" Type="System.Xml.Schema.XmlSchemaObject" />
           <Parameter Name="schemas" Type="System.Xml.Schema.XmlSchemaSet" />
-          <Parameter Name="validationEventHandler" Type="System.Xml.Schema.ValidationEventHandler" />
+          <Parameter
+            Name="validationEventHandler"
+            Type="System.Xml.Schema.ValidationEventHandler"
+          />
           <Parameter Name="addSchemaInfo" Type="System.Boolean" />
         </Parameters>
         <Docs>
@@ -656,7 +949,10 @@
           <param name="addSchemaInfo">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XAttribute,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XAttribute,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler,System.Boolean)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -664,8 +960,14 @@
         <Target Type="T:System.Xml.Linq.XDocument" />
       </Targets>
       <Member MemberName="Validate">
-        <MemberSignature Language="C#" Value="public static void Validate (this System.Xml.Linq.XDocument source, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Validate(class System.Xml.Linq.XDocument source, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Validate (this System.Xml.Linq.XDocument source, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Validate(class System.Xml.Linq.XDocument source, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -673,7 +975,10 @@
         <Parameters>
           <Parameter Name="source" Type="System.Xml.Linq.XDocument" RefType="this" />
           <Parameter Name="schemas" Type="System.Xml.Schema.XmlSchemaSet" />
-          <Parameter Name="validationEventHandler" Type="System.Xml.Schema.ValidationEventHandler" />
+          <Parameter
+            Name="validationEventHandler"
+            Type="System.Xml.Schema.ValidationEventHandler"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
@@ -681,7 +986,10 @@
           <param name="validationEventHandler">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XDocument,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XDocument,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -689,8 +997,14 @@
         <Target Type="T:System.Xml.Linq.XDocument" />
       </Targets>
       <Member MemberName="Validate">
-        <MemberSignature Language="C#" Value="public static void Validate (this System.Xml.Linq.XDocument source, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Validate(class System.Xml.Linq.XDocument source, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Validate (this System.Xml.Linq.XDocument source, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Validate(class System.Xml.Linq.XDocument source, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -698,7 +1012,10 @@
         <Parameters>
           <Parameter Name="source" Type="System.Xml.Linq.XDocument" RefType="this" />
           <Parameter Name="schemas" Type="System.Xml.Schema.XmlSchemaSet" />
-          <Parameter Name="validationEventHandler" Type="System.Xml.Schema.ValidationEventHandler" />
+          <Parameter
+            Name="validationEventHandler"
+            Type="System.Xml.Schema.ValidationEventHandler"
+          />
           <Parameter Name="addSchemaInfo" Type="System.Boolean" />
         </Parameters>
         <Docs>
@@ -708,7 +1025,10 @@
           <param name="addSchemaInfo">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XDocument,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XDocument,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler,System.Boolean)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -716,8 +1036,14 @@
         <Target Type="T:System.Xml.Linq.XElement" />
       </Targets>
       <Member MemberName="Validate">
-        <MemberSignature Language="C#" Value="public static void Validate (this System.Xml.Linq.XElement source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Validate(class System.Xml.Linq.XElement source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Validate (this System.Xml.Linq.XElement source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Validate(class System.Xml.Linq.XElement source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -726,7 +1052,10 @@
           <Parameter Name="source" Type="System.Xml.Linq.XElement" RefType="this" />
           <Parameter Name="partialValidationType" Type="System.Xml.Schema.XmlSchemaObject" />
           <Parameter Name="schemas" Type="System.Xml.Schema.XmlSchemaSet" />
-          <Parameter Name="validationEventHandler" Type="System.Xml.Schema.ValidationEventHandler" />
+          <Parameter
+            Name="validationEventHandler"
+            Type="System.Xml.Schema.ValidationEventHandler"
+          />
         </Parameters>
         <Docs>
           <param name="source">To be added.</param>
@@ -735,7 +1064,10 @@
           <param name="validationEventHandler">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XElement,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XElement,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -743,8 +1075,14 @@
         <Target Type="T:System.Xml.Linq.XElement" />
       </Targets>
       <Member MemberName="Validate">
-        <MemberSignature Language="C#" Value="public static void Validate (this System.Xml.Linq.XElement source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Validate(class System.Xml.Linq.XElement source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void Validate (this System.Xml.Linq.XElement source, System.Xml.Schema.XmlSchemaObject partialValidationType, System.Xml.Schema.XmlSchemaSet schemas, System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig void Validate(class System.Xml.Linq.XElement source, class System.Xml.Schema.XmlSchemaObject partialValidationType, class System.Xml.Schema.XmlSchemaSet schemas, class System.Xml.Schema.ValidationEventHandler validationEventHandler, bool addSchemaInfo) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -753,7 +1091,10 @@
           <Parameter Name="source" Type="System.Xml.Linq.XElement" RefType="this" />
           <Parameter Name="partialValidationType" Type="System.Xml.Schema.XmlSchemaObject" />
           <Parameter Name="schemas" Type="System.Xml.Schema.XmlSchemaSet" />
-          <Parameter Name="validationEventHandler" Type="System.Xml.Schema.ValidationEventHandler" />
+          <Parameter
+            Name="validationEventHandler"
+            Type="System.Xml.Schema.ValidationEventHandler"
+          />
           <Parameter Name="addSchemaInfo" Type="System.Boolean" />
         </Parameters>
         <Docs>
@@ -764,7 +1105,10 @@
           <param name="addSchemaInfo">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.Schema.Extensions" Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XElement,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+        <Link
+          Type="System.Xml.Schema.Extensions"
+          Member="M:System.Xml.Schema.Extensions.Validate(System.Xml.Linq.XElement,System.Xml.Schema.XmlSchemaObject,System.Xml.Schema.XmlSchemaSet,System.Xml.Schema.ValidationEventHandler,System.Boolean)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -772,8 +1116,14 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="CreateNavigator">
-        <MemberSignature Language="C#" Value="public static System.Xml.XPath.XPathNavigator CreateNavigator (this System.Xml.Linq.XNode node);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.XPath.XPathNavigator CreateNavigator(class System.Xml.Linq.XNode node) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Xml.XPath.XPathNavigator CreateNavigator (this System.Xml.Linq.XNode node);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Xml.XPath.XPathNavigator CreateNavigator(class System.Xml.Linq.XNode node) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Xml.XPath.XPathNavigator</ReturnType>
@@ -785,7 +1135,10 @@
           <param name="node">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.CreateNavigator(System.Xml.Linq.XNode)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.CreateNavigator(System.Xml.Linq.XNode)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -793,8 +1146,14 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="CreateNavigator">
-        <MemberSignature Language="C#" Value="public static System.Xml.XPath.XPathNavigator CreateNavigator (this System.Xml.Linq.XNode node, System.Xml.XmlNameTable nameTable);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.XPath.XPathNavigator CreateNavigator(class System.Xml.Linq.XNode node, class System.Xml.XmlNameTable nameTable) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Xml.XPath.XPathNavigator CreateNavigator (this System.Xml.Linq.XNode node, System.Xml.XmlNameTable nameTable);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Xml.XPath.XPathNavigator CreateNavigator(class System.Xml.Linq.XNode node, class System.Xml.XmlNameTable nameTable) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Xml.XPath.XPathNavigator</ReturnType>
@@ -808,7 +1167,10 @@
           <param name="nameTable">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.CreateNavigator(System.Xml.Linq.XNode,System.Xml.XmlNameTable)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.CreateNavigator(System.Xml.Linq.XNode,System.Xml.XmlNameTable)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -816,8 +1178,14 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="XPathEvaluate">
-        <MemberSignature Language="C#" Value="public static object XPathEvaluate (this System.Xml.Linq.XNode node, string expression);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig object XPathEvaluate(class System.Xml.Linq.XNode node, string expression) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static object XPathEvaluate (this System.Xml.Linq.XNode node, string expression);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig object XPathEvaluate(class System.Xml.Linq.XNode node, string expression) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Object</ReturnType>
@@ -831,7 +1199,10 @@
           <param name="expression">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.XPathEvaluate(System.Xml.Linq.XNode,System.String)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.XPathEvaluate(System.Xml.Linq.XNode,System.String)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -839,8 +1210,14 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="XPathEvaluate">
-        <MemberSignature Language="C#" Value="public static object XPathEvaluate (this System.Xml.Linq.XNode node, string expression, System.Xml.IXmlNamespaceResolver resolver);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig object XPathEvaluate(class System.Xml.Linq.XNode node, string expression, class System.Xml.IXmlNamespaceResolver resolver) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static object XPathEvaluate (this System.Xml.Linq.XNode node, string expression, System.Xml.IXmlNamespaceResolver resolver);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig object XPathEvaluate(class System.Xml.Linq.XNode node, string expression, class System.Xml.IXmlNamespaceResolver resolver) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Object</ReturnType>
@@ -856,7 +1233,10 @@
           <param name="resolver">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.XPathEvaluate(System.Xml.Linq.XNode,System.String,System.Xml.IXmlNamespaceResolver)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.XPathEvaluate(System.Xml.Linq.XNode,System.String,System.Xml.IXmlNamespaceResolver)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -864,8 +1244,14 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="XPathSelectElement">
-        <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement XPathSelectElement (this System.Xml.Linq.XNode node, string expression);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement XPathSelectElement(class System.Xml.Linq.XNode node, string expression) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Xml.Linq.XElement XPathSelectElement (this System.Xml.Linq.XNode node, string expression);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Xml.Linq.XElement XPathSelectElement(class System.Xml.Linq.XNode node, string expression) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Xml.Linq.XElement</ReturnType>
@@ -879,7 +1265,10 @@
           <param name="expression">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.XPathSelectElement(System.Xml.Linq.XNode,System.String)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.XPathSelectElement(System.Xml.Linq.XNode,System.String)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -887,8 +1276,14 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="XPathSelectElement">
-        <MemberSignature Language="C#" Value="public static System.Xml.Linq.XElement XPathSelectElement (this System.Xml.Linq.XNode node, string expression, System.Xml.IXmlNamespaceResolver resolver);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.Linq.XElement XPathSelectElement(class System.Xml.Linq.XNode node, string expression, class System.Xml.IXmlNamespaceResolver resolver) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Xml.Linq.XElement XPathSelectElement (this System.Xml.Linq.XNode node, string expression, System.Xml.IXmlNamespaceResolver resolver);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Xml.Linq.XElement XPathSelectElement(class System.Xml.Linq.XNode node, string expression, class System.Xml.IXmlNamespaceResolver resolver) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Xml.Linq.XElement</ReturnType>
@@ -904,7 +1299,10 @@
           <param name="resolver">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.XPathSelectElement(System.Xml.Linq.XNode,System.String,System.Xml.IXmlNamespaceResolver)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.XPathSelectElement(System.Xml.Linq.XNode,System.String,System.Xml.IXmlNamespaceResolver)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -912,11 +1310,17 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="XPathSelectElements">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; XPathSelectElements (this System.Xml.Linq.XNode node, string expression);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; XPathSelectElements(class System.Xml.Linq.XNode node, string expression) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> XPathSelectElements (this System.Xml.Linq.XNode node, string expression);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> XPathSelectElements(class System.Xml.Linq.XNode node, string expression) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <Parameters>
           <Parameter Name="node" Type="System.Xml.Linq.XNode" RefType="this" />
@@ -927,7 +1331,10 @@
           <param name="expression">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.XPathSelectElements(System.Xml.Linq.XNode,System.String)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.XPathSelectElements(System.Xml.Linq.XNode,System.String)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -935,11 +1342,17 @@
         <Target Type="T:System.Xml.Linq.XNode" />
       </Targets>
       <Member MemberName="XPathSelectElements">
-        <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt; XPathSelectElements (this System.Xml.Linq.XNode node, string expression, System.Xml.IXmlNamespaceResolver resolver);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Xml.Linq.XElement&gt; XPathSelectElements(class System.Xml.Linq.XNode node, string expression, class System.Xml.IXmlNamespaceResolver resolver) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> XPathSelectElements (this System.Xml.Linq.XNode node, string expression, System.Xml.IXmlNamespaceResolver resolver);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Xml.Linq.XElement> XPathSelectElements(class System.Xml.Linq.XNode node, string expression, class System.Xml.IXmlNamespaceResolver resolver) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Xml.Linq.XElement&gt;</ReturnType>
+          <ReturnType>System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement></ReturnType>
         </ReturnValue>
         <Parameters>
           <Parameter Name="node" Type="System.Xml.Linq.XNode" RefType="this" />
@@ -952,7 +1365,10 @@
           <param name="resolver">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="System.Xml.XPath.Extensions" Member="M:System.Xml.XPath.Extensions.XPathSelectElements(System.Xml.Linq.XNode,System.String,System.Xml.IXmlNamespaceResolver)" />
+        <Link
+          Type="System.Xml.XPath.Extensions"
+          Member="M:System.Xml.XPath.Extensions.XPathSelectElements(System.Xml.Linq.XNode,System.String,System.Xml.IXmlNamespaceResolver)"
+        />
       </Member>
     </ExtensionMethod>
   </ExtensionMethods>

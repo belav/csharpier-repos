@@ -6,7 +6,9 @@
     <MonoAotIncompatible>true</MonoAotIncompatible>
     <NativeAotIncompatible>true</NativeAotIncompatible>
     <CLRTestExitCode>134</CLRTestExitCode>
-    <CLRTestExitCode Condition="'$(TestWrapperTargetsWindows)' == 'true'">-2146233082</CLRTestExitCode>
+    <CLRTestExitCode Condition="'$(TestWrapperTargetsWindows)' == 'true'"
+      >-2146233082</CLRTestExitCode
+    >
     <CLRTestPriority>1</CLRTestPriority>
     <ReferenceXUnitWrapperGenerator>false</ReferenceXUnitWrapperGenerator>
     <GCStressIncompatible>true</GCStressIncompatible>
@@ -17,7 +19,9 @@
   <ItemGroup>
     <!-- This is needed to make sure native binary gets installed in the right location -->
     <CMakeProjectReference Include="CMakeLists.txt" />
-    <ProjectReference Include="$(TestSourceDir)Common/CoreCLRTestLibrary/CoreCLRTestLibrary.csproj" />
+    <ProjectReference
+      Include="$(TestSourceDir)Common/CoreCLRTestLibrary/CoreCLRTestLibrary.csproj"
+    />
     <ProjectReference Include="InvalidCSharp.ilproj" />
   </ItemGroup>
 </Project>

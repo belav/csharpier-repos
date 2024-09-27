@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SessionSwitchReason" FullName="Microsoft.Win32.SessionSwitchReason">
   <TypeSignature Language="C#" Value="public enum SessionSwitchReason" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SessionSwitchReason extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SessionSwitchReason extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +17,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:Microsoft.Win32.SessionSwitchEventArgs" /> class uses the <see cref="T:Microsoft.Win32.SessionSwitchReason" /> class to represent the type of a session switch event.</para>
+      <para
+        >The <see
+         cref="T:Microsoft.Win32.SessionSwitchEventArgs" />
+
+         class uses the <see
+         cref="T:Microsoft.Win32.SessionSwitchReason" />
+
+         class to represent the type of a session switch event.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +35,10 @@
   <Members>
     <Member MemberName="ConsoleConnect">
       <MemberSignature Language="C#" Value="ConsoleConnect" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason ConsoleConnect = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason ConsoleConnect = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +57,10 @@
     </Member>
     <Member MemberName="ConsoleDisconnect">
       <MemberSignature Language="C#" Value="ConsoleDisconnect" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason ConsoleDisconnect = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason ConsoleDisconnect = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +79,10 @@
     </Member>
     <Member MemberName="RemoteConnect">
       <MemberSignature Language="C#" Value="RemoteConnect" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason RemoteConnect = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason RemoteConnect = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -81,7 +101,10 @@
     </Member>
     <Member MemberName="RemoteDisconnect">
       <MemberSignature Language="C#" Value="RemoteDisconnect" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason RemoteDisconnect = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason RemoteDisconnect = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,7 +123,10 @@
     </Member>
     <Member MemberName="SessionLock">
       <MemberSignature Language="C#" Value="SessionLock" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionLock = int32(7)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionLock = int32(7)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -119,7 +145,10 @@
     </Member>
     <Member MemberName="SessionLogoff">
       <MemberSignature Language="C#" Value="SessionLogoff" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionLogoff = int32(6)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionLogoff = int32(6)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -138,7 +167,10 @@
     </Member>
     <Member MemberName="SessionLogon">
       <MemberSignature Language="C#" Value="SessionLogon" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionLogon = int32(5)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionLogon = int32(5)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -157,7 +189,10 @@
     </Member>
     <Member MemberName="SessionRemoteControl">
       <MemberSignature Language="C#" Value="SessionRemoteControl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionRemoteControl = int32(9)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionRemoteControl = int32(9)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -176,7 +211,10 @@
     </Member>
     <Member MemberName="SessionUnlock">
       <MemberSignature Language="C#" Value="SessionUnlock" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionUnlock = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Microsoft.Win32.SessionSwitchReason SessionUnlock = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

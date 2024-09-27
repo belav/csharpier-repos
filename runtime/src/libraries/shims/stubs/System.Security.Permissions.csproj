@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="System.ApplicationIdentity" />
     <ForwardedType Include="System.Configuration.ConfigurationPermission" />
@@ -36,7 +35,9 @@
     <ForwardedType Include="System.Net.NetworkInformation.NetworkInformationPermission" />
     <ForwardedType Include="System.Net.NetworkInformation.NetworkInformationPermissionAttribute" />
     <ForwardedType Include="System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" />
-    <ForwardedType Include="System.Net.PeerToPeer.Collaboration.PeerCollaborationPermissionAttribute" />
+    <ForwardedType
+      Include="System.Net.PeerToPeer.Collaboration.PeerCollaborationPermissionAttribute"
+    />
     <ForwardedType Include="System.Net.PeerToPeer.PnrpPermission" />
     <ForwardedType Include="System.Net.PeerToPeer.PnrpPermissionAttribute" />
     <ForwardedType Include="System.Net.PeerToPeer.PnrpScope" />
@@ -76,8 +77,12 @@
     <ForwardedType Include="System.Security.Permissions.IsolatedStoragePermissionAttribute" />
     <ForwardedType Include="System.Security.Permissions.KeyContainerPermission" />
     <ForwardedType Include="System.Security.Permissions.KeyContainerPermissionAccessEntry" />
-    <ForwardedType Include="System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
-    <ForwardedType Include="System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+    <ForwardedType
+      Include="System.Security.Permissions.KeyContainerPermissionAccessEntryCollection"
+    />
+    <ForwardedType
+      Include="System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator"
+    />
     <ForwardedType Include="System.Security.Permissions.KeyContainerPermissionAttribute" />
     <ForwardedType Include="System.Security.Permissions.KeyContainerPermissionFlags" />
     <ForwardedType Include="System.Security.Permissions.MediaPermission" />
@@ -175,5 +180,4 @@
     <ForwardedType Include="System.Web.AspNetHostingPermissionAttribute" />
     <ForwardedType Include="System.Web.AspNetHostingPermissionLevel" />
   </ItemGroup>
-
 </Project>

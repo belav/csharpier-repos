@@ -10,8 +10,7 @@
   </Base>
   <Docs>
     <summary>Specifies the type of antialiasing to do when rendering text or shapes.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="Default">
@@ -35,7 +34,9 @@
         <ReturnType>Cairo.Antialias</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary> Perform single-color antialiasing (using shades of gray for black text on a white background, for example).</summary>
+        <summary
+          > Perform single-color antialiasing (using shades of gray for black text on a white background, for example).</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -63,7 +64,9 @@
         <ReturnType>Cairo.Antialias</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Perform antialiasing by taking advantage of the order of subpixel elements on devices such as LCD panels</summary>
+        <summary
+          >Perform antialiasing by taking advantage of the order of subpixel elements on devices such as LCD panels</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -9,16 +9,22 @@
           <AttributeName>System.Reflection.AssemblyConfiguration("")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("2001 - 2008 Novell, Inc.")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("2001 - 2008 Novell, Inc.")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyProduct("Mono")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyTitle("Embedded C# Compiler and Library")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyTitle("Embedded C# Compiler and Library")</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>

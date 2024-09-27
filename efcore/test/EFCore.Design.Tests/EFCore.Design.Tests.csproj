@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
@@ -7,12 +6,16 @@
     <RootNamespace>Microsoft.EntityFrameworkCore</RootNamespace>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
-    <EmbeddedResource Include="..\..\src\EFCore.Design\Scaffolding\Internal\CSharpDbContextGenerator.tt" Link="Resources\CSharpDbContextGenerator.tt" />
-    <EmbeddedResource Include="..\..\src\EFCore.Design\Scaffolding\Internal\CSharpEntityTypeGenerator.tt" Link="Resources\CSharpEntityTypeGenerator.tt" />
+    <EmbeddedResource
+      Include="..\..\src\EFCore.Design\Scaffolding\Internal\CSharpDbContextGenerator.tt"
+      Link="Resources\CSharpDbContextGenerator.tt"
+    />
+    <EmbeddedResource
+      Include="..\..\src\EFCore.Design\Scaffolding\Internal\CSharpEntityTypeGenerator.tt"
+      Link="Resources\CSharpEntityTypeGenerator.tt"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -43,21 +46,28 @@
     <Using Include="Xunit" />
     <Using Include="Xunit.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\EFCore.InMemory\EFCore.InMemory.csproj" />
     <ProjectReference Include="..\..\src\EFCore.Design\EFCore.Design.csproj" />
     <ProjectReference Include="..\..\src\EFCore.SqlServer.NTS\EFCore.SqlServer.NTS.csproj" />
     <ProjectReference Include="..\..\src\EFCore.Sqlite.NTS\EFCore.Sqlite.NTS.csproj" />
     <ProjectReference Include="..\EFCore.Relational.Tests\EFCore.Relational.Tests.csproj" />
-    <ProjectReference Include="..\EFCore.SqlServer.FunctionalTests\EFCore.SqlServer.FunctionalTests.csproj" />
-    <ProjectReference Include="..\EFCore.Sqlite.FunctionalTests\EFCore.Sqlite.FunctionalTests.csproj" />
+    <ProjectReference
+      Include="..\EFCore.SqlServer.FunctionalTests\EFCore.SqlServer.FunctionalTests.csproj"
+    />
+    <ProjectReference
+      Include="..\EFCore.Sqlite.FunctionalTests\EFCore.Sqlite.FunctionalTests.csproj"
+    />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(MicrosoftExtensionsDependencyModelVersion)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyModel"
+      Version="$(MicrosoftExtensionsDependencyModelVersion)"
+    />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.6" />
   </ItemGroup>
-
 </Project>

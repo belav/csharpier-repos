@@ -3,9 +3,9 @@
   <div id="GHTSubTest1" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid1">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -119,18 +119,27 @@
       </tr>
     </table>
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
   </div>
   <div id="Ghtsubtest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -244,18 +253,27 @@
       </tr>
     </table>
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
   </div>
   <div id="Ghtsubtest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -369,18 +387,27 @@
       </tr>
     </table>
     <span>
-      <br />PushButton</span>
+      <br />
+
+      PushButton</span
+    >
     <span>
-      <br />PushButton</span>
+      <br />
+
+      PushButton</span
+    >
     <span>
-      <br />PushButton</span>
+      <br />
+
+      PushButton</span
+    >
   </div>
   <div id="Ghtsubtest4" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid4">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -494,18 +521,27 @@
       </tr>
     </table>
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
   </div>
   <div id="Ghtsubtest5" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid5">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -619,18 +655,27 @@
       </tr>
     </table>
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
     <span>
-      <br />LinkButton</span>
+      <br />
+
+      LinkButton</span
+    >
   </div>
   <div id="Ghtsubtest6" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid6">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -744,10 +789,19 @@
       </tr>
     </table>
     <span>
-      <br />PushButton</span>
+      <br />
+
+      PushButton</span
+    >
     <span>
-      <br />PushButton</span>
+      <br />
+
+      PushButton</span
+    >
     <span>
-      <br />PushButton</span>
+      <br />
+
+      PushButton</span
+    >
   </div>
 </testresults>

@@ -3,7 +3,9 @@
     <type fullname="Mono.Linker.Tests.Cases.RequiresCapability.RequiresViaXml">
       <method name="RequiresOnlyViaDescriptor" />
     </type>
-    <type fullname="Mono.Linker.Tests.Cases.RequiresCapability.RequiresViaXml/RequiresOnFieldOnlyViaDescriptor">
+    <type
+      fullname="Mono.Linker.Tests.Cases.RequiresCapability.RequiresViaXml/RequiresOnFieldOnlyViaDescriptor"
+    >
       <field name="Field" />
     </type>
   </assembly>

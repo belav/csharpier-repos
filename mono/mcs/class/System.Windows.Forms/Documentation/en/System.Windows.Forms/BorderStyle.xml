@@ -17,7 +17,9 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the border style for controls that have a changeable border.</para>
+      <para
+        >Use the members of this enumeration to set the border style for controls that have a changeable border.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Suppressions
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
   <!-- net6.0 and net7.0 aren't supported by the current package and any errors should be suppressed. -->
   <Suppression>
     <Left>lib/net6.0/System.Security.Cryptography.Pkcs.dll</Left>
@@ -14,13 +17,17 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.AsymmetricAlgorithm)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.AsymmetricAlgorithm)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
@@ -38,55 +45,73 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.set_PrivateKey(System.Security.Cryptography.AsymmetricAlgorithm)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.set_PrivateKey(System.Security.Cryptography.AsymmetricAlgorithm)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.set_SignaturePadding(System.Security.Cryptography.RSASignaturePadding)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.set_SignaturePadding(System.Security.Cryptography.RSASignaturePadding)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.ContentInfo.GetContentType(System.ReadOnlySpan{System.Byte})</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.ContentInfo.GetContentType(System.ReadOnlySpan{System.Byte})</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decode(System.ReadOnlySpan{System.Byte})</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decode(System.ReadOnlySpan{System.Byte})</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.AsymmetricAlgorithm)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.AsymmetricAlgorithm)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.AddCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.AddCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.ReadOnlySpan{System.Byte})</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.ReadOnlySpan{System.Byte})</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.RemoveCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.RemoveCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignerInfo.AddUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignerInfo.AddUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
@@ -104,25 +129,33 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignerInfo.RemoveUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignerInfo.RemoveUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SubjectIdentifier.MatchesCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SubjectIdentifier.MatchesCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.AsymmetricAlgorithm)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.AsymmetricAlgorithm)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.RSA,System.Security.Cryptography.RSASignaturePadding)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
@@ -140,55 +173,73 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.set_PrivateKey(System.Security.Cryptography.AsymmetricAlgorithm)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.set_PrivateKey(System.Security.Cryptography.AsymmetricAlgorithm)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.set_SignaturePadding(System.Security.Cryptography.RSASignaturePadding)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.set_SignaturePadding(System.Security.Cryptography.RSASignaturePadding)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.ContentInfo.GetContentType(System.ReadOnlySpan{System.Byte})</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.ContentInfo.GetContentType(System.ReadOnlySpan{System.Byte})</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decode(System.ReadOnlySpan{System.Byte})</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decode(System.ReadOnlySpan{System.Byte})</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.AsymmetricAlgorithm)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.AsymmetricAlgorithm)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.AddCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.AddCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.ReadOnlySpan{System.Byte})</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.ReadOnlySpan{System.Byte})</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.RemoveCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.RemoveCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignerInfo.AddUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignerInfo.AddUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
@@ -206,31 +257,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignerInfo.RemoveUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignerInfo.RemoveUnsignedAttribute(System.Security.Cryptography.AsnEncodedData)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SubjectIdentifier.MatchesCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SubjectIdentifier.MatchesCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)</Target
+    >
     <Left>ref/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters):[T:System.ComponentModel.EditorBrowsableAttribute]</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.CmsSigner.#ctor(System.Security.Cryptography.CspParameters):[T:System.ComponentModel.EditorBrowsableAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature:[T:System.ComponentModel.EditorBrowsableAttribute]</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature:[T:System.ComponentModel.EditorBrowsableAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Cryptography.Pkcs.SignerInfo.ComputeCounterSignature:[T:System.ComponentModel.EditorBrowsableAttribute]</Target>
+    <Target
+      >M:System.Security.Cryptography.Pkcs.SignerInfo.ComputeCounterSignature:[T:System.ComponentModel.EditorBrowsableAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll</Left>
     <Right>lib/net462/System.Security.Cryptography.Pkcs.dll</Right>
   </Suppression>

@@ -14,12 +14,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="M:System.Data.DataTable.Clear" /> method.</para>
+      <para
+        >Provides data for the <see
+         cref="M:System.Data.DataTable.Clear" />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataTableClearEventArgs (System.Data.DataTable table);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataTableClearEventArgs (System.Data.DataTable table);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="table" Type="System.Data.DataTable" />
@@ -30,7 +38,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.DataTableClearEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.DataTableClearEventArgs" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

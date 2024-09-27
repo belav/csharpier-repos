@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PrintDialog" FullName="System.Windows.Forms.PrintDialog">
-  <TypeSignature Language="C#" Value="public sealed class PrintDialog : System.Windows.Forms.CommonDialog" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class PrintDialog : System.Windows.Forms.CommonDialog"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -15,18 +18,44 @@
       <AttributeName>System.ComponentModel.DefaultProperty("Document")</AttributeName>
     </Attribute>
     <Attribute>
-      <AttributeName>System.ComponentModel.Designer("System.Windows.Forms.Design.PrintDialogDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.ComponentModel.Design.IDesigner")</AttributeName>
+      <AttributeName
+        >System.ComponentModel.Designer("System.Windows.Forms.Design.PrintDialogDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.ComponentModel.Design.IDesigner")</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />, the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PrintDialog.#ctor" /> constructor. To get printer settings that are modified by the user with the <see cref="T:System.Windows.Forms.PrintDialog" />, use the <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> property.</para>
-      <para>For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" /> namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" /> namespace.</para>
+      <para
+        >When you create an instance of <see
+         cref="T:System.Windows.Forms.PrintDialog" />
+
+        , the read/write properties are set to initial values. For a list of these values, see the <see
+         cref="M:System.Windows.Forms.PrintDialog.#ctor" />
+
+         constructor. To get printer settings that are modified by the user with the <see
+         cref="T:System.Windows.Forms.PrintDialog" />
+
+        , use the <see
+         cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+
+         property.</para
+      >
+      <para
+        >For more information about printing with Windows Forms, see the <see
+         cref="N:System.Drawing.Printing" />
+
+         namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see
+         cref="N:System.Printing" />
+
+         namespace.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Lets users select a printer and choose which sections of the document to print from a Windows Forms application.</para>
+      <para
+        >Lets users select a printer and choose which sections of the document to print from a Windows Forms application.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -37,7 +66,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />, the following read/write properties are set to initial values.</para>
+          <para
+            >When you create an instance of <see
+             cref="T:System.Windows.Forms.PrintDialog" />
+
+            , the following read/write properties are set to initial values.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -52,7 +86,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" />
+                </para>
               </term>
               <description>
                 <para>false </para>
@@ -61,7 +96,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.AllowPrintToFile" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.AllowPrintToFile" />
+                </para>
               </term>
               <description>
                 <para>true </para>
@@ -70,7 +106,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.AllowSelection" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.AllowSelection" />
+                </para>
               </term>
               <description>
                 <para>false </para>
@@ -79,7 +116,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.Document" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.Document" />
+                </para>
               </term>
               <description>
                 <para>null </para>
@@ -88,7 +126,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+                </para>
               </term>
               <description>
                 <para>null </para>
@@ -97,7 +136,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.PrintToFile" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.PrintToFile" />
+                </para>
               </term>
               <description>
                 <para>false </para>
@@ -106,7 +146,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" />
+                </para>
               </term>
               <description>
                 <para>false </para>
@@ -115,18 +156,26 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" /> </para>
+                  <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" />
+                </para>
               </term>
               <description>
                 <para>true </para>
               </description>
             </item>
           </list>
-          <para>You can change the value for any one of these properties through a separate call to the property.</para>
+          <para
+            >You can change the value for any one of these properties through a separate call to the property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.PrintDialog" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.PrintDialog" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -145,11 +194,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is valid for Windows 2000 and later versions of Windows operating systems. On operating systems earlier than Windows 2000, the <see cref="P:System.Windows.Forms.PrintDialog.AllowCurrentPage" /> property has no effect.</para>
+          <para
+            >This property is valid for Windows 2000 and later versions of Windows operating systems. On operating systems earlier than Windows 2000, the <see
+             cref="P:System.Windows.Forms.PrintDialog.AllowCurrentPage" />
+
+             property has no effect.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Current Page</ui> option button is displayed.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Current Page</ui>
+
+             option button is displayed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -177,7 +236,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Print to file</ui> check box is enabled.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Print to file</ui>
+
+             check box is enabled.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -201,7 +265,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Selection</ui> option button is enabled.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Selection</ui>
+
+             option button is enabled.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -225,7 +294,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Pages</ui> option button is enabled.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Pages</ui>
+
+             option button is enabled.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,7 +308,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Document">
-      <MemberSignature Language="C#" Value="public System.Drawing.Printing.PrintDocument Document { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Printing.PrintDocument Document { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -249,7 +326,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" /> used to obtain <see cref="T:System.Drawing.Printing.PrinterSettings" />.</para>
+          <para
+            >Gets or sets a value indicating the <see
+             cref="T:System.Drawing.Printing.PrintDocument" />
+
+             used to obtain <see
+             cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -258,11 +343,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PrinterSettings">
-      <MemberSignature Language="C#" Value="public System.Drawing.Printing.PrinterSettings PrinterSettings { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Printing.PrinterSettings PrinterSettings { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
@@ -278,7 +368,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> property must be set before you call <see cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" /> or an exception will occur.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+
+             property must be set before you call <see
+             cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+             or an exception will occur.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -306,7 +404,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Print to file</ui> check box is selected.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Print to file</ui>
+
+             check box is selected.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -325,7 +428,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Resets all options, the last selected printer, and the page settings to their default values.</para>
+          <para
+            >Resets all options, the last selected printer, and the page settings to their default values.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -334,7 +439,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RunDialog">
-      <MemberSignature Language="C#" Value="protected override bool RunDialog (IntPtr hwndOwner);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool RunDialog (IntPtr hwndOwner);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -368,11 +476,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property was marked obsolete in Windows 2000 and does not affect this and later versions of Windows.</para>
+          <para
+            >This property was marked obsolete in Windows 2000 and does not affect this and later versions of Windows.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Help</ui> button is displayed.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Help</ui>
+
+             button is displayed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -395,11 +510,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property was marked obsolete in Windows 2000 and does not affect this and later versions of Windows.</para>
+          <para
+            >This property was marked obsolete in Windows 2000 and does not affect this and later versions of Windows.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <ui>Network</ui> button is displayed.</para>
+          <para
+            >Gets or sets a value indicating whether the <ui
+            >Network</ui>
+
+             button is displayed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -425,11 +547,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When this property is set to true, <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" /> and <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" /> will be ignored as these properties were made obsolete for Windows 2000 and later versions of Windows. </para>
+          <para
+            >When this property is set to true, <see
+             cref="P:System.Windows.Forms.PrintDialog.ShowHelp" />
+
+             and <see
+             cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" />
+
+             will be ignored as these properties were made obsolete for Windows 2000 and later versions of Windows. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the dialog should be shown in the Windows XP style for systems running WinXpFamily or later.</para>
+          <para
+            >Gets or sets a value indicating whether the dialog should be shown in the Windows XP style for systems running WinXpFamily or later.</para
+          >
         </summary>
       </Docs>
     </Member>

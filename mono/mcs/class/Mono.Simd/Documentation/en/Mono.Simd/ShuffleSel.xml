@@ -9,17 +9,21 @@
   </Base>
   <Docs>
     <summary>Determines how values are propagaged on initialization.</summary>
-    <remarks>
+    <remarks
+      >
 
       This enumeration is used creating new Vectors from existing
       Vectors and determines how the values in the source Vector are
       copied into the target vector. 
 
-    </remarks>
-    <remarks> The core values are the AFromB enumeration, the other
+    </remarks
+    >
+    <remarks
+      > The core values are the AFromB enumeration, the other
        enumeration values are just common patterns defined in terms of
        the AFromB enumeration values.
-    </remarks>
+    </remarks
+    >
   </Docs>
   <Members>
     <Member MemberName="ExpandInterleavedXY">
@@ -136,7 +140,9 @@
         <ReturnType>Mono.Simd.ShuffleSel</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Helper: Rotates the vector elements to the left (x, y, z, w) becomes (w, x, y, z).</summary>
+        <summary
+          >Helper: Rotates the vector elements to the left (x, y, z, w) becomes (w, x, y, z).</summary
+        >
       </Docs>
     </Member>
     <Member MemberName="RotateRight">
@@ -149,7 +155,9 @@
         <ReturnType>Mono.Simd.ShuffleSel</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Helper: Rotates the vector elements to the right.   (x, y, z, w) becomes (y, z, w, x).</summary>
+        <summary
+          >Helper: Rotates the vector elements to the right.   (x, y, z, w) becomes (y, z, w, x).</summary
+        >
       </Docs>
     </Member>
     <Member MemberName="Swap">

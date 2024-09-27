@@ -17,7 +17,17 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration when calling the <see cref="M:System.Windows.Forms.ControlPaint.DrawBorder3D(System.Drawing.Graphics,System.Drawing.Rectangle)" /> method of the <see cref="T:System.Windows.Forms.ControlPaint" /> class.</para>
+      <para
+        >Use the members of this enumeration when calling the <see
+
+          cref="M:System.Windows.Forms.ControlPaint.DrawBorder3D(System.Drawing.Graphics,System.Drawing.Rectangle)"
+        />
+
+         method of the <see
+         cref="T:System.Windows.Forms.ControlPaint" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,7 +44,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The border is drawn outside the specified rectangle, preserving the dimensions of the rectangle for drawing.</para>
+          <para
+            >The border is drawn outside the specified rectangle, preserving the dimensions of the rectangle for drawing.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -6,7 +6,9 @@
     <NoStandardLib>true</NoStandardLib>
     <NoCompilerStandardLib>true</NoCompilerStandardLib>
     <FrameworkPathOverride>..\..\..\..\References\Debugger\CoreSystem</FrameworkPathOverride>
-    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch
+      >None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch
+    >
     <SkipGenerateVsdconfig>true</SkipGenerateVsdconfig>
   </PropertyGroup>
   <Target Name="CopyFilesToOutputDirectory">

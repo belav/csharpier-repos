@@ -1,9 +1,11 @@
 ﻿<feed xml:base="http://mypage.com/" xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Contoso News</title>
-  <subtitle type="text">&lt;div&gt;Most recent news from Contoso&lt;/div&gt;</subtitle>
+  <subtitle type="text"><div>Most recent news from Contoso</div></subtitle>
   <id>123FeedID</id>
   <updated>2017-06-26T14:41:43-07:00</updated>
-  <logo>http://2.bp.blogspot.com/-NA5Jb-64eUg/URx8CSdcj_I/AAAAAAAAAUo/eCx0irI0rq0/s1600/bg_Contoso_logo3-20120824073001907469-620x349.jpg</logo>
+  <logo
+    >http://2.bp.blogspot.com/-NA5Jb-64eUg/URx8CSdcj_I/AAAAAAAAAUo/eCx0irI0rq0/s1600/bg_Contoso_logo3-20120824073001907469-620x349.jpg</logo
+  >
   <author>
     <email>jerry@Contoso.com</email>
   </author>

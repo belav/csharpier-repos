@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\library-dependency-debugger-test2\library-dependency-debugger-test2.csproj" />
+    <ProjectReference
+      Include="..\library-dependency-debugger-test2\library-dependency-debugger-test2.csproj"
+    />
   </ItemGroup>
 </Project>

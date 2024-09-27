@@ -5,10 +5,16 @@
     <MONO_PATH>$(MONO_PATH);$(MONO_MINI_REGRESSION_TEST_DIR)</MONO_PATH>
     <MONO_CFG_DIR>$(MONO_DIR)/runtime/etc</MONO_CFG_DIR>
     <MONO_CONFIG_ARG>--config "$(MONO_CFG_DIR)/mono/config"</MONO_CONFIG_ARG>
-    <MONO_MINI_REGRESSION_TESTS>basic.exe basic-float.exe basic-long.exe basic-calls.exe objects.exe arrays.exe basic-math.exe exceptions.exe iltests.exe devirtualization.exe generics.exe basic-simd.exe</MONO_MINI_REGRESSION_TESTS>
-    <MONO_MINI_ALL_REGRESSION_TEST_ARG>--regression $(MONO_MINI_REGRESSION_TESTS)</MONO_MINI_ALL_REGRESSION_TEST_ARG>
+    <MONO_MINI_REGRESSION_TESTS
+      >basic.exe basic-float.exe basic-long.exe basic-calls.exe objects.exe arrays.exe basic-math.exe exceptions.exe iltests.exe devirtualization.exe generics.exe basic-simd.exe</MONO_MINI_REGRESSION_TESTS
+    >
+    <MONO_MINI_ALL_REGRESSION_TEST_ARG
+      >--regression $(MONO_MINI_REGRESSION_TESTS)</MONO_MINI_ALL_REGRESSION_TEST_ARG
+    >
     <MONO_MINI_ONE_REGRESSION_TEST_ARG>--regression basic.exe</MONO_MINI_ONE_REGRESSION_TEST_ARG>
-    <MONO_MINI_REGRESSION_TEST_ARGS>--handlers=atexit-waitkeypress $(MONO_CONFIG_ARG) $(MONO_MINI_ALL_REGRESSION_TEST_ARG)</MONO_MINI_REGRESSION_TEST_ARGS>
+    <MONO_MINI_REGRESSION_TEST_ARGS
+      >--handlers=atexit-waitkeypress $(MONO_CONFIG_ARG) $(MONO_MINI_ALL_REGRESSION_TEST_ARG)</MONO_MINI_REGRESSION_TEST_ARGS
+    >
   </PropertyGroup>
   <ItemGroup>
     <BuildMacro Include="MONO_MINI_REGRESSION_TEST_DIR">

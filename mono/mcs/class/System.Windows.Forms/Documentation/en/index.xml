@@ -3,28 +3,42 @@
     <Assembly Name="System.Windows.Forms" Version="2.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.InternalsVisibleTo("UIAutomationWinforms, PublicKey=00240000048000009400000006020000002400005253413100040000110000004bb98b1af6c1df0df8c02c380e116b7a7f0c8c827aecfccddc6e29b7c754cd608b49dfcef4df9699ad182e50f66afa4e68dabc7b6aeeec0aa4719a5f8e0aae8c193080a706adc3443a8356b1f254142034995532ac176398e12a30f6a74a119a89ac47672c9ae24d7e90de686557166e3b873cd707884431a0451d9d6f7fe795")</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.InternalsVisibleTo("UIAutomationWinforms, PublicKey=00240000048000009400000006020000002400005253413100040000110000004bb98b1af6c1df0df8c02c380e116b7a7f0c8c827aecfccddc6e29b7c754cd608b49dfcef4df9699ad182e50f66afa4e68dabc7b6aeeec0aa4719a5f8e0aae8c193080a706adc3443a8356b1f254142034995532ac176398e12a30f6a74a119a89ac47672c9ae24d7e90de686557166e3b873cd707884431a0451d9d6f7fe795")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.InteropServices.ComCompatibleVersion(1, 0, 3300, 0)</AttributeName>
+          <AttributeName
+            >System.Runtime.InteropServices.ComCompatibleVersion(1, 0, 3300, 0)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.StringFreezing</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.Dependency("System,", System.Runtime.CompilerServices.LoadHint.Always)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.Dependency("System,", System.Runtime.CompilerServices.LoadHint.Always)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.Dependency("System.Drawing,", System.Runtime.CompilerServices.LoadHint.Always)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.Dependency("System.Drawing,", System.Runtime.CompilerServices.LoadHint.Always)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyFileVersion("2.0.50727.1433")</AttributeName>
@@ -42,25 +56,35 @@
           <AttributeName>System.CLSCompliant(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Resources.SatelliteContractVersion("2.0.0.0")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("MONO development team")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDefaultAlias("System.Windows.Forms.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDefaultAlias("System.Windows.Forms.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDescription("System.Windows.Forms.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDescription("System.Windows.Forms.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyTitle("System.Windows.Forms.dll")</AttributeName>
@@ -1117,8 +1141,7 @@
       <Type Name="Window+VerticalScroll" Kind="Class" />
       <Type Name="Window+VerticalThumb" Kind="Class" />
     </Namespace>
-    <Namespace Name="System.Windows.Forms.X11Internal">
-    </Namespace>
+    <Namespace Name="System.Windows.Forms.X11Internal"></Namespace>
   </Types>
   <Title>System.Windows.Forms</Title>
 </Overview>

@@ -15,12 +15,10 @@
     </span>
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.HyperLink: Enabled">
-    <a id="ctrl_4">
-    </a>
+    <a id="ctrl_4"></a>
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.HyperLink: Disabled">
-    <a id="ctrl_5" disabled="disabled">
-    </a>
+    <a id="ctrl_5" disabled="disabled"></a>
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.Image: Enabled">
     <img id="ctrl_6" alt="" border="0" />
@@ -35,28 +33,22 @@
     <input id="ctrl_9" alt="" border="0" disabled="disabled" type="image" name="ctrl_9" />
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.Label: Enabled">
-    <span id="ctrl_10">
-    </span>
+    <span id="ctrl_10"></span>
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.Label: Disabled">
-    <span id="ctrl_11" disabled="disabled">
-    </span>
+    <span id="ctrl_11" disabled="disabled"></span>
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.LinkButton: Enabled">
-    <a href="javascript:__doPostBack('ctrl_12','')" id="ctrl_12">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_12','')" id="ctrl_12"></a>
   </div>
   <div id="GHTSubTest14" testname="System.Web.UI.WebControls.LinkButton: Disabled">
-    <a id="ctrl_13" disabled="disabled">
-    </a>
+    <a id="ctrl_13" disabled="disabled"></a>
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.Panel: Enabled">
-    <div id="ctrl_14">
-    </div>
+    <div id="ctrl_14"></div>
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.Panel: Disabled">
-    <div id="ctrl_15" disabled="disabled">
-    </div>
+    <div id="ctrl_15" disabled="disabled"></div>
   </div>
   <div id="GHTSubTest17" testname="System.Web.UI.WebControls.RadioButton: Enabled">
     <input id="ctrl_16" type="radio" name="ctrl_16" value="ctrl_16" />
@@ -74,39 +66,87 @@
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.DropDownList: Enabled">
     <select id="ctrl_20" name="ctrl_20">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.DropDownList: Disabled">
     <select id="ctrl_21" disabled="disabled" name="ctrl_21">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.ListBox: Enabled">
     <select id="ctrl_22" size="4" name="ctrl_22">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.ListBox: Disabled">
     <select id="ctrl_23" size="4" disabled="disabled" name="ctrl_23">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.RadioButtonList: Enabled">
     <table id="ctrl_24" border="0">
@@ -261,7 +301,14 @@
     </table>
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.DataGrid: Disabled">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" disabled="disabled" rules="all" id="ctrl_29">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      disabled="disabled"
+      rules="all"
+      id="ctrl_29"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>

@@ -3,12 +3,16 @@
   <TypeSignature Language="C#" Maintainer="auto" Value="public enum HatchStyle" />
   <AssemblyInfo>
     <AssemblyName>System.Drawing</AssemblyName>
-    <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 07 D1 FA 57 C4 AE D9 F0 A3 2E 84 AA 0F AE FD 0D E9 E8 FD 6A EC 8F 87 FB 03 76 6C 83 4C 99 92 1E B2 3B E7 9A D9 D5 DC C1 DD 9A D2 36 13 21 02 90 0B 72 3C F9 80 95 7F C4 E1 77 10 8F C6 07 77 4F 29 E8 32 0E 92 EA 05 EC E4 E8 21 C0 A5 EF E8 F1 64 5C 4C 0C 93 C1 AB 99 28 5D 62 2C AA 65 2C 1D FA D6 3D 74 5D 6F 2D E5 F1 7E 5E AF 0F C4 96 3D 26 1C 8A 12 43 65 18 20 6D C0 93 34 4D 5A D2 93]</AssemblyPublicKey>
+    <AssemblyPublicKey
+      >[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 07 D1 FA 57 C4 AE D9 F0 A3 2E 84 AA 0F AE FD 0D E9 E8 FD 6A EC 8F 87 FB 03 76 6C 83 4C 99 92 1E B2 3B E7 9A D9 D5 DC C1 DD 9A D2 36 13 21 02 90 0B 72 3C F9 80 95 7F C4 E1 77 10 8F C6 07 77 4F 29 E8 32 0E 92 EA 05 EC E4 E8 21 C0 A5 EF E8 F1 64 5C 4C 0C 93 C1 AB 99 28 5D 62 2C AA 65 2C 1D FA D6 3D 74 5D 6F 2D E5 F1 7E 5E AF 0F C4 96 3D 26 1C 8A 12 43 65 18 20 6D C0 93 34 4D 5A D2 93]</AssemblyPublicKey
+    >
     <AssemblyVersion>1.0.3300.0</AssemblyVersion>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
@@ -16,7 +20,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the different patterns available for <see cref="T:System.Drawing.Drawing2D.HatchBrush" /> objects.</para>
+      <para
+        >Specifies the different patterns available for <see
+         cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+         objects.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -69,7 +78,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies diagonal lines that slant to the right from top points to bottom points, are spaced 50 percent closer together than, and are twice the width of <see cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />. This hatch pattern is not antialiased.</para>
+          <para
+            >Specifies diagonal lines that slant to the right from top points to bottom points, are spaced 50 percent closer together than, and are twice the width of <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />
+
+            . This hatch pattern is not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -88,7 +102,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies horizontal lines that are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" /> and are twice the width of <see cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />.</para>
+          <para
+            >Specifies horizontal lines that are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />
+
+             and are twice the width of <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -107,7 +129,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies diagonal lines that slant to the left from top points to bottom points, are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />, and are twice its width, but the lines are not antialiased.</para>
+          <para
+            >Specifies diagonal lines that slant to the left from top points to bottom points, are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />
+
+            , and are twice its width, but the lines are not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -126,7 +153,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies vertical lines that are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" /> and are twice its width.</para>
+          <para
+            >Specifies vertical lines that are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" />
+
+             and are twice its width.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -145,7 +177,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies dashed diagonal lines, that slant to the right from top points to bottom points.</para>
+          <para
+            >Specifies dashed diagonal lines, that slant to the right from top points to bottom points.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -183,7 +217,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies dashed diagonal lines, that slant to the left from top points to bottom points.</para>
+          <para
+            >Specifies dashed diagonal lines, that slant to the left from top points to bottom points.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -221,7 +257,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a hatch that has the appearance of layered bricks that slant to the left from top points to bottom points.</para>
+          <para
+            >Specifies a hatch that has the appearance of layered bricks that slant to the left from top points to bottom points.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -278,7 +316,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies forward diagonal and backward diagonal lines, each of which is composed of dots, that cross.</para>
+          <para
+            >Specifies forward diagonal and backward diagonal lines, each of which is composed of dots, that cross.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -297,7 +337,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies horizontal and vertical lines, each of which is composed of dots, that cross.</para>
+          <para
+            >Specifies horizontal and vertical lines, each of which is composed of dots, that cross.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -373,7 +415,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a hatch that has the appearance of a checkerboard with squares that are twice the size of <see cref="F:System.Drawing.Drawing2D.HatchStyle.SmallCheckerBoard" />.</para>
+          <para
+            >Specifies a hatch that has the appearance of a checkerboard with squares that are twice the size of <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.SmallCheckerBoard" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -392,7 +439,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a hatch that has the appearance of confetti, and is composed of larger pieces than <see cref="F:System.Drawing.Drawing2D.HatchStyle.SmallConfetti" />.</para>
+          <para
+            >Specifies a hatch that has the appearance of confetti, and is composed of larger pieces than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.SmallConfetti" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -411,7 +463,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.Cross" />.</para>
+          <para
+            >Specifies the hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Cross" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -430,7 +487,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies diagonal lines that slant to the right from top points to bottom points and are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />, but are not antialiased.</para>
+          <para
+            >Specifies diagonal lines that slant to the right from top points to bottom points and are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />
+
+            , but are not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -449,7 +511,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies horizontal lines that are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />.</para>
+          <para
+            >Specifies horizontal lines that are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -468,7 +535,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies diagonal lines that slant to the left from top points to bottom points and are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />, but they are not antialiased.</para>
+          <para
+            >Specifies diagonal lines that slant to the left from top points to bottom points and are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />
+
+            , but they are not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -487,7 +559,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies vertical lines that are spaced 50 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" />.</para>
+          <para
+            >Specifies vertical lines that are spaced 50 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -506,7 +583,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.SolidDiamond" />.</para>
+          <para
+            >Specifies hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.SolidDiamond" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -525,7 +607,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />.</para>
+          <para
+            >Specifies hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -544,7 +631,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies horizontal lines that are spaced 75 percent closer together than hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" /> (or 25 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.LightHorizontal" />).</para>
+          <para
+            >Specifies horizontal lines that are spaced 75 percent closer together than hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Horizontal" />
+
+             (or 25 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.LightHorizontal" />
+
+            ).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -563,7 +658,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies vertical lines that are spaced 75 percent closer together than hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" /> (or 25 percent closer together than <see cref="F:System.Drawing.Drawing2D.HatchStyle.LightVertical" />).</para>
+          <para
+            >Specifies vertical lines that are spaced 75 percent closer together than hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Vertical" />
+
+             (or 25 percent closer together than <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.LightVertical" />
+
+            ).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -582,7 +685,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies forward diagonal and backward diagonal lines that cross but are not antialiased.</para>
+          <para
+            >Specifies forward diagonal and backward diagonal lines that cross but are not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -601,7 +706,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 5-percent hatch. The ratio of foreground color to background color is 5:95.</para>
+          <para
+            >Specifies a 5-percent hatch. The ratio of foreground color to background color is 5:95.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -620,7 +727,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 10-percent hatch. The ratio of foreground color to background color is 10:90.</para>
+          <para
+            >Specifies a 10-percent hatch. The ratio of foreground color to background color is 10:90.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -639,7 +748,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 20-percent hatch. The ratio of foreground color to background color is 20:80.</para>
+          <para
+            >Specifies a 20-percent hatch. The ratio of foreground color to background color is 20:80.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -658,7 +769,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 25-percent hatch. The ratio of foreground color to background color is 25:75.</para>
+          <para
+            >Specifies a 25-percent hatch. The ratio of foreground color to background color is 25:75.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -677,7 +790,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 30-percent hatch. The ratio of foreground color to background color is 30:70.</para>
+          <para
+            >Specifies a 30-percent hatch. The ratio of foreground color to background color is 30:70.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -696,7 +811,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 40-percent hatch. The ratio of foreground color to background color is 40:60.</para>
+          <para
+            >Specifies a 40-percent hatch. The ratio of foreground color to background color is 40:60.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -715,7 +832,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 50-percent hatch. The ratio of foreground color to background color is 50:50.</para>
+          <para
+            >Specifies a 50-percent hatch. The ratio of foreground color to background color is 50:50.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -734,7 +853,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 60-percent hatch. The ratio of foreground color to background color is 60:40.</para>
+          <para
+            >Specifies a 60-percent hatch. The ratio of foreground color to background color is 60:40.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -753,7 +874,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 70-percent hatch. The ratio of foreground color to background color is 70:30.</para>
+          <para
+            >Specifies a 70-percent hatch. The ratio of foreground color to background color is 70:30.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -772,7 +895,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 75-percent hatch. The ratio of foreground color to background color is 75:25.</para>
+          <para
+            >Specifies a 75-percent hatch. The ratio of foreground color to background color is 75:25.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -791,7 +916,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 80-percent hatch. The ratio of foreground color to background color is 80:100.</para>
+          <para
+            >Specifies a 80-percent hatch. The ratio of foreground color to background color is 80:100.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -810,7 +937,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a 90-percent hatch. The ratio of foreground color to background color is 90:10.</para>
+          <para
+            >Specifies a 90-percent hatch. The ratio of foreground color to background color is 90:10.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -848,7 +977,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a hatch that has the appearance of diagonally layered shingles that slant to the right from top points to bottom points.</para>
+          <para
+            >Specifies a hatch that has the appearance of diagonally layered shingles that slant to the right from top points to bottom points.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -905,7 +1036,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies horizontal and vertical lines that cross and are spaced 50 percent closer together than hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.Cross" />.</para>
+          <para
+            >Specifies horizontal and vertical lines that cross and are spaced 50 percent closer together than hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.Cross" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -924,7 +1060,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a hatch that has the appearance of a checkerboard placed diagonally.</para>
+          <para
+            >Specifies a hatch that has the appearance of a checkerboard placed diagonally.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -943,7 +1081,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a hatch that has the appearance of spheres laid adjacent to one another.</para>
+          <para
+            >Specifies a hatch that has the appearance of spheres laid adjacent to one another.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1038,7 +1178,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies diagonal lines that slant to the right from top points to bottom points, have the same spacing as hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />, and are triple its width, but are not antialiased.</para>
+          <para
+            >Specifies diagonal lines that slant to the right from top points to bottom points, have the same spacing as hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal" />
+
+            , and are triple its width, but are not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1057,7 +1202,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies diagonal lines that slant to the left from top points to bottom points, have the same spacing as hatch style <see cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />, and are triple its width, but are not antialiased.</para>
+          <para
+            >Specifies diagonal lines that slant to the left from top points to bottom points, have the same spacing as hatch style <see
+             cref="F:System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal" />
+
+            , and are triple its width, but are not antialiased.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

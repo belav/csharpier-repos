@@ -28,6 +28,8 @@
     <Compile Include="VectorMath.cs" />
   </ItemGroup>
   <PropertyGroup>
-    <ProjectAssetsFile>$(JitPackagesConfigFileDirectory)benchmark+intrinsic\obj\project.assets.json</ProjectAssetsFile>
+    <ProjectAssetsFile
+      >$(JitPackagesConfigFileDirectory)benchmark+intrinsic\obj\project.assets.json</ProjectAssetsFile
+    >
   </PropertyGroup>
 </Project>

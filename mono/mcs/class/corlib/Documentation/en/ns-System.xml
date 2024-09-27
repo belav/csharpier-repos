@@ -1,10 +1,12 @@
 <Namespace Name="System" FullName="System" FullNameSP="System" Maintainer="Mono">
   <Docs>
-    <summary>
+    <summary
+      >
     	The System namespace contains the fundamental types of the runtime, including the Object, Int32, and String types.
-    </summary>
+    </summary
+    >
     <remarks>
-    	<para>The System namespace contains the fundamental types of the runtime.  </para>
+      <para>The System namespace contains the fundamental types of the runtime.  </para>
     </remarks>
   </Docs>
 </Namespace>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SettingElementCollection" FullName="System.Configuration.SettingElementCollection">
-  <TypeSignature Language="C#" Value="public sealed class SettingElementCollection : System.Configuration.ConfigurationElementCollection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SettingElementCollection extends System.Configuration.ConfigurationElementCollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SettingElementCollection : System.Configuration.ConfigurationElementCollection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SettingElementCollection extends System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,17 +21,36 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Configuration.SettingElementCollection" /> object contains a collection of <see cref="T:System.Configuration.SettingElement" /> objects. A <see cref="T:System.Configuration.SettingElement" /> object is used to set the value of an element within the configuration.</para>
+      <para
+        >The <see
+         cref="T:System.Configuration.SettingElementCollection" />
+
+         object contains a collection of <see
+         cref="T:System.Configuration.SettingElement" />
+
+         objects. A <see
+         cref="T:System.Configuration.SettingElement" />
+
+         object is used to set the value of an element within the configuration.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains a collection of <see cref="T:System.Configuration.SettingElement" /> objects. This class cannot be inherited.</para>
+      <para
+        >Contains a collection of <see
+         cref="T:System.Configuration.SettingElement" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SettingElementCollection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,13 +62,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.SettingElementCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.SettingElementCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Configuration.SettingElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(class System.Configuration.SettingElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Configuration.SettingElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Add(class System.Configuration.SettingElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -60,15 +96,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Configuration.SettingElement" /> object to the collection.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Configuration.SettingElement" />
+
+             object to the collection.</para
+          >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Configuration.SettingElement" /> object to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Configuration.SettingElement" />
+
+           object to add to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -83,13 +133,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Configuration.SettingElement" /> objects from the collection.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Configuration.SettingElement" />
+
+             objects from the collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CollectionType">
-      <MemberSignature Language="C#" Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Configuration.ConfigurationElementCollectionType CollectionType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Configuration.ConfigurationElementCollectionType CollectionType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,8 +170,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Configuration.ConfigurationElement CreateNewElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Configuration.ConfigurationElement CreateNewElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -146,8 +213,14 @@
       </Docs>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public System.Configuration.SettingElement Get (string elementKey);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Configuration.SettingElement Get(string elementKey) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.SettingElement Get (string elementKey);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Configuration.SettingElement Get(string elementKey) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -164,19 +237,41 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.SettingElement" /> object from the collection. </para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.SettingElement" />
+
+             object from the collection. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Configuration.SettingElement" /> object.</para>
+          <para
+            >A <see
+             cref="T:System.Configuration.SettingElement" />
+
+             object.</para
+          >
         </returns>
         <param name="elementKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string value representing the <see cref="T:System.Configuration.SettingElement" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string value representing the <see
+           cref="T:System.Configuration.SettingElement" />
+
+           object in the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object GetElementKey(class System.Configuration.ConfigurationElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance object GetElementKey(class System.Configuration.ConfigurationElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -197,8 +292,14 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Configuration.SettingElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(class System.Configuration.SettingElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Configuration.SettingElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Remove(class System.Configuration.SettingElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -215,10 +316,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Configuration.SettingElement" /> object from the collection.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Configuration.SettingElement" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.SettingElement" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.SettingElement" />
+
+           object.</param
+        >
       </Docs>
     </Member>
   </Members>

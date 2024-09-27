@@ -59,7 +59,10 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
@@ -126,7 +129,10 @@
       </tr>
     </table>
     <span>
-      <br />1</span>
+      <br />
+
+      1</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
@@ -187,11 +193,17 @@
       </tr>
     </table>
     <span>
-      <br />20</span>
+      <br />
+
+      20</span
+    >
   </div>
   <div id="GHTSubTest4" style="height:120px;width:553px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest5" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid5">
@@ -252,6 +264,9 @@
       </tr>
     </table>
     <span>
-      <br />200</span>
+      <br />
+
+      200</span
+    >
   </div>
 </testresults>

@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Description>
+    <Description
+      >
       ASP.NET Core middleware for filtering out requests with unknown HTTP host headers.
-    </Description>
+    </Description
+    >
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -11,7 +12,6 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http" />
     <Reference Include="Microsoft.AspNetCore.Http.Extensions" />

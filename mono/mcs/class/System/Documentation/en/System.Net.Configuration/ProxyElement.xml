@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ProxyElement" FullName="System.Net.Configuration.ProxyElement">
-  <TypeSignature Language="C#" Value="public sealed class ProxyElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ProxyElement extends System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ProxyElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ProxyElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +21,14 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The following table shows the configuration attributes of the <format type="text/html"><a href="37a548d8-fade-4ac5-82ec-b49b6c6cb22a">Proxy Element (Network Settings)</a></format> configuration element to which this class corresponds.</para>
+      <para
+        >The following table shows the configuration attributes of the <format
+         type="text/html">
+          <a href="37a548d8-fade-4ac5-82ec-b49b6c6cb22a">Proxy Element (Network Settings)</a>
+        </format>
+
+         configuration element to which this class corresponds.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -56,7 +69,9 @@
             <para>useDefaultCredentialsForScriptDownload</para>
           </term>
           <description>
-            <para>Controls whether default credentials are used when accessing the configuration script.</para>
+            <para
+              >Controls whether default credentials are used when accessing the configuration script.</para
+            >
           </description>
         </item>
         <item>
@@ -64,7 +79,9 @@
             <para>scriptDownloadInterval</para>
           </term>
           <description>
-            <para>Specifies the number of seconds that elapse before the configuration script is refreshed.</para>
+            <para
+              >Specifies the number of seconds that elapse before the configuration script is refreshed.</para
+            >
           </description>
         </item>
         <item>
@@ -72,7 +89,9 @@
             <para>scriptDownloadTimeout</para>
           </term>
           <description>
-            <para>Specifies the number of seconds allowed for the configuration script to be downloaded.</para>
+            <para
+              >Specifies the number of seconds allowed for the configuration script to be downloaded.</para
+            >
           </description>
         </item>
         <item>
@@ -84,18 +103,33 @@
           </description>
         </item>
       </list>
-      <para>This class is used to specify and configure the Web proxy server to use for requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para>
-      <para>This class provides programmatic access to information that can be stored in configuration files.</para>
+      <para
+        >This class is used to specify and configure the Web proxy server to use for requests made with the <see
+         cref="T:System.Net.WebRequest" />
+
+         and <see
+         cref="T:System.Net.WebClient" />
+
+         classes. </para
+      >
+      <para
+        >This class provides programmatic access to information that can be stored in configuration files.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Identifies the configuration settings for Web proxy server. This class cannot be inherited.</para>
+      <para
+        >Identifies the configuration settings for Web proxy server. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ProxyElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -107,13 +141,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Configuration.ProxyElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Configuration.ProxyElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AutoDetect">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.ProxyElement.AutoDetectValues AutoDetect { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Configuration.ProxyElement/AutoDetectValues AutoDetect" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.ProxyElement.AutoDetectValues AutoDetect { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Configuration.ProxyElement/AutoDetectValues AutoDetect"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -121,7 +166,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("autoDetect", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("autoDetect", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -133,13 +180,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an <see cref="T:System.Net.Configuration.ProxyElement.AutoDetectValues" /> value that controls whether the Web proxy is automatically detected.</para>
+          <para
+            >Gets or sets an <see
+             cref="T:System.Net.Configuration.ProxyElement.AutoDetectValues" />
+
+             value that controls whether the Web proxy is automatically detected.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BypassOnLocal">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.ProxyElement.BypassOnLocalValues BypassOnLocal { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues BypassOnLocal" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.ProxyElement.BypassOnLocalValues BypassOnLocal { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues BypassOnLocal"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -147,7 +205,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("bypassonlocal", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("bypassonlocal", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -158,17 +218,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This configuration element controls whether requests for resources on the LAN are sent to the proxy server or sent directly to the host where the resource resides.</para>
+          <para
+            >This configuration element controls whether requests for resources on the LAN are sent to the proxy server or sent directly to the host where the resource resides.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether local resources are retrieved by using a Web proxy server.</para>
+          <para
+            >Gets or sets a value that indicates whether local resources are retrieved by using a Web proxy server.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -212,7 +282,10 @@
     </Member>
     <Member MemberName="ScriptLocation">
       <MemberSignature Language="C#" Value="public Uri ScriptLocation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri ScriptLocation" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri ScriptLocation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -220,7 +293,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("scriptLocation")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("scriptLocation")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -232,13 +307,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an <see cref="T:System.Uri" /> value that specifies the location of the automatic proxy detection script.</para>
+          <para
+            >Gets or sets an <see
+             cref="T:System.Uri" />
+
+             value that specifies the location of the automatic proxy detection script.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="UseSystemDefault">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.ProxyElement.UseSystemDefaultValues UseSystemDefault { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Configuration.ProxyElement/UseSystemDefaultValues UseSystemDefault" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.ProxyElement.UseSystemDefaultValues UseSystemDefault { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Configuration.ProxyElement/UseSystemDefaultValues UseSystemDefault"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -246,7 +332,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("usesystemdefault", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("usesystemdefault", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -258,7 +346,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.Boolean" /> value that controls whether the Internet Explorer Web proxy settings are used.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.Boolean" />
+
+             value that controls whether the Internet Explorer Web proxy settings are used.</para
+          >
         </summary>
       </Docs>
     </Member>

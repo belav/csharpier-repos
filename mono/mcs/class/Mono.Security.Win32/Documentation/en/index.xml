@@ -3,7 +3,9 @@
     <Assembly Name="Mono.Security.Win32" Version="2.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Resources.NeutralResourcesLanguage("en-US")</AttributeName>
@@ -21,10 +23,14 @@
           <AttributeName>System.Reflection.AssemblyProduct("MONO CLI")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDescription("Mono.Security.Win32.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDescription("Mono.Security.Win32.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) 2003-2004 Various Authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) 2003-2004 Various Authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("MONO development team")</AttributeName>

@@ -10,16 +10,29 @@
     <since version="2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>All task classes must implement this interface to be recognized by the build engine. Instead of implenting this interface directly, you can also derive your class from the helper class, <see cref="T:Microsoft.Build.Utilities.Task" />, which provides default implementations of some <see cref="T:Microsoft.Build.Framework.ITask" /> members.</para>
+      <para
+        >All task classes must implement this interface to be recognized by the build engine. Instead of implenting this interface directly, you can also derive your class from the helper class, <see
+         cref="T:Microsoft.Build.Utilities.Task" />
+
+        , which provides default implementations of some <see
+         cref="T:Microsoft.Build.Framework.ITask" />
+
+         members.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines a task, which is a unit of executable code used by vstecmsbuild to perform build operations.</para>
+      <para
+        >Defines a task, which is a unit of executable code used by vstecmsbuild to perform build operations.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="BuildEngine">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.Framework.IBuildEngine BuildEngine { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.Framework.IBuildEngine BuildEngine { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.IBuildEngine</ReturnType>
@@ -48,7 +61,9 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called by the build engine to execute a task. Upon termination of this method, a task should indicate if the execution was successful. If a task throws an exception from this method, the engine assumes that the task has failed.</para>
+          <para
+            >This method is called by the build engine to execute a task. Upon termination of this method, a task should indicate if the execution was successful. If a task throws an exception from this method, the engine assumes that the task has failed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,7 +79,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HostObject">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.Framework.ITaskHost HostObject { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.Framework.ITaskHost HostObject { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.ITaskHost</ReturnType>

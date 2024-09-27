@@ -8,7 +8,9 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -16,14 +18,34 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each field in the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class maps to an OLE DB schema rowset.</para>
+      <para
+        >Each field in the <see
+         cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+
+         class maps to an OLE DB schema rowset.</para
+      >
       <block subset="none" type="note">
-        <para>Some members of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class, (such as <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> schema) may not be supported by your OLE DB provider. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para>
+        <para
+          >Some members of the <see
+           cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+
+           class, (such as <see
+           cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
+
+           schema) may not be supported by your OLE DB provider. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Returns the type of schema table specified by the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" /> method.</para>
+      <para
+        >Returns the type of schema table specified by the <see
+
+          cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])"
+        />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -36,7 +58,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -45,7 +72,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Assertions">
-      <MemberSignature Language="C#" Value="public static readonly Guid Assertions = df855bea-fb95-4abc-8932-e57e45c7ddae;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Assertions = df855bea-fb95-4abc-8932-e57e45c7ddae;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -55,7 +85,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Assertions" /> maps to the OLE DB ASSERTIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Assertions" />
+
+             maps to the OLE DB ASSERTIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -89,7 +122,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -117,7 +152,10 @@
       <MemberValue>df855bea-fb95-4abc-8932-e57e45c7ddae</MemberValue>
     </Member>
     <Member MemberName="Catalogs">
-      <MemberSignature Language="C#" Value="public static readonly Guid Catalogs = e4a67334-f03c-45af-8b1d-531f99268045;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Catalogs = e4a67334-f03c-45af-8b1d-531f99268045;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -127,7 +165,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Catalogs" /> maps to the OLE DB CATALOGS rowset and returns the following restriction column.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Catalogs" />
+
+             maps to the OLE DB CATALOGS rowset and returns the following restriction column.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -157,7 +198,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the physical attributes associated with catalogs accessible from the data source. Returns the assertions defined in the catalog that is owned by a given user.</para>
+          <para
+            >Returns the physical attributes associated with catalogs accessible from the data source. Returns the assertions defined in the catalog that is owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -167,7 +210,10 @@
       <MemberValue>e4a67334-f03c-45af-8b1d-531f99268045</MemberValue>
     </Member>
     <Member MemberName="Character_Sets">
-      <MemberSignature Language="C#" Value="public static readonly Guid Character_Sets = e4533bdb-0b55-48ee-986d-17d07143657d;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Character_Sets = e4533bdb-0b55-48ee-986d-17d07143657d;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -177,7 +223,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Character_Sets" /> maps to the OLE DB CHARACTER_SETS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Character_Sets" />
+
+             maps to the OLE DB CHARACTER_SETS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -211,7 +260,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -229,7 +280,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the character sets defined in the catalog that is accessible to a given user.</para>
+          <para
+            >Returns the character sets defined in the catalog that is accessible to a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -239,7 +292,10 @@
       <MemberValue>e4533bdb-0b55-48ee-986d-17d07143657d</MemberValue>
     </Member>
     <Member MemberName="Check_Constraints">
-      <MemberSignature Language="C#" Value="public static readonly Guid Check_Constraints = fedf7f5d-cfb4-4635-af02-45eb4bb4e8f3;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Check_Constraints = fedf7f5d-cfb4-4635-af02-45eb4bb4e8f3;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -249,7 +305,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" /> maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" />
+
+             maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -283,7 +342,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -301,7 +362,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the check constraints defined in the catalog that is owned by a given user.</para>
+          <para
+            >Returns the check constraints defined in the catalog that is owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -311,7 +374,10 @@
       <MemberValue>fedf7f5d-cfb4-4635-af02-45eb4bb4e8f3</MemberValue>
     </Member>
     <Member MemberName="Check_Constraints_By_Table">
-      <MemberSignature Language="C#" Value="public static readonly Guid Check_Constraints_By_Table = d76547ef-837d-413c-8d76-bab1d7bb014a;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Check_Constraints_By_Table = d76547ef-837d-413c-8d76-bab1d7bb014a;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -321,7 +387,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" /> maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" />
+
+             maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -355,7 +424,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -373,7 +444,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the check constraints defined in the catalog that is owned by a given user.</para>
+          <para
+            >Returns the check constraints defined in the catalog that is owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -383,7 +456,10 @@
       <MemberValue>d76547ef-837d-413c-8d76-bab1d7bb014a</MemberValue>
     </Member>
     <Member MemberName="Collations">
-      <MemberSignature Language="C#" Value="public static readonly Guid Collations = 5145b85c-c448-4b9e-8929-4c2de31ffa30;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Collations = 5145b85c-c448-4b9e-8929-4c2de31ffa30;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -393,7 +469,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Collations" /> maps to the OLE DB COLLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Collations" />
+
+             maps to the OLE DB COLLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -427,7 +506,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -445,7 +526,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the character collations defined in the catalog that is accessible to a given user.</para>
+          <para
+            >Returns the character collations defined in the catalog that is accessible to a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -455,7 +538,10 @@
       <MemberValue>5145b85c-c448-4b9e-8929-4c2de31ffa30</MemberValue>
     </Member>
     <Member MemberName="Column_Domain_Usage">
-      <MemberSignature Language="C#" Value="public static readonly Guid Column_Domain_Usage = 058acb5e-eb1d-4b6e-8e98-a7d59a959ff1;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Column_Domain_Usage = 058acb5e-eb1d-4b6e-8e98-a7d59a959ff1;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -465,7 +551,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Domain_Usage" /> maps to the OLE DB COLUMN_DOMAIN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Domain_Usage" />
+
+             maps to the OLE DB COLUMN_DOMAIN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -499,7 +588,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -521,14 +612,18 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Column name. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. (DBID is a formal structure serialized into the COLUMN_NAME column of the COLUMN_DOMAIN_USAGE rowset.)</para>
+                <para
+                  >Column name. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. (DBID is a formal structure serialized into the COLUMN_NAME column of the COLUMN_DOMAIN_USAGE rowset.)</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the columns defined in the catalog that are dependent on a domain defined in the catalog and owned by a given user.</para>
+          <para
+            >Returns the columns defined in the catalog that are dependent on a domain defined in the catalog and owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -538,7 +633,10 @@
       <MemberValue>058acb5e-eb1d-4b6e-8e98-a7d59a959ff1</MemberValue>
     </Member>
     <Member MemberName="Column_Privileges">
-      <MemberSignature Language="C#" Value="public static readonly Guid Column_Privileges = 43152796-f3b4-4342-9647-008f1060e352;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Column_Privileges = 43152796-f3b4-4342-9647-008f1060e352;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -548,7 +646,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Privileges" /> maps to the OLE DB COLUMN_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Privileges" />
+
+             maps to the OLE DB COLUMN_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -571,7 +672,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -582,7 +685,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -604,7 +709,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Column name. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. </para>
+                <para
+                  >Column name. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. </para
+                >
               </description>
             </item>
             <item>
@@ -633,7 +740,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the privileges on columns of tables defined in the catalog that are available to or granted by a given user.</para>
+          <para
+            >Returns the privileges on columns of tables defined in the catalog that are available to or granted by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -643,7 +752,10 @@
       <MemberValue>43152796-f3b4-4342-9647-008f1060e352</MemberValue>
     </Member>
     <Member MemberName="Columns">
-      <MemberSignature Language="C#" Value="public static readonly Guid Columns = 86dcd6e2-9a8c-4c6d-bc1c-e0e334c727c9;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Columns = 86dcd6e2-9a8c-4c6d-bc1c-e0e334c727c9;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -653,7 +765,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Columns" /> maps to the OLE DB COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Columns" />
+
+             maps to the OLE DB COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -687,7 +802,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -709,14 +826,18 @@
                 <para>string </para>
               </description>
               <description>
-                <para>The name of the column; this might not be unique. If this cannot be determined, a null value is returned. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. (DBID is a formal structure serialized into the COLUMN_NAME column of the COLUMN_DOMAIN_USAGE rowset.) If possible, the resulting column ID should be persistent. However, some providers do not support persistent identifiers for columns. The column ID of a base table should be invariant under views. </para>
+                <para
+                  >The name of the column; this might not be unique. If this cannot be determined, a null value is returned. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. (DBID is a formal structure serialized into the COLUMN_NAME column of the COLUMN_DOMAIN_USAGE rowset.) If possible, the resulting column ID should be persistent. However, some providers do not support persistent identifiers for columns. The column ID of a base table should be invariant under views. </para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the columns of tables (including views) defined in the catalog that is accessible to a given user.</para>
+          <para
+            >Returns the columns of tables (including views) defined in the catalog that is accessible to a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -726,7 +847,10 @@
       <MemberValue>86dcd6e2-9a8c-4c6d-bc1c-e0e334c727c9</MemberValue>
     </Member>
     <Member MemberName="Constraint_Column_Usage">
-      <MemberSignature Language="C#" Value="public static readonly Guid Constraint_Column_Usage = 3a39f999-f481-4293-8b9f-af7e91b4ee7d;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Constraint_Column_Usage = 3a39f999-f481-4293-8b9f-af7e91b4ee7d;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -736,7 +860,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Column_Usage" /> maps to the OLE DB CONSTRAINT_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Column_Usage" />
+
+             maps to the OLE DB CONSTRAINT_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -759,7 +886,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -770,7 +899,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -792,7 +923,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Column name. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. </para>
+                <para
+                  >Column name. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. </para
+                >
               </description>
             </item>
             <item>
@@ -814,7 +947,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -832,7 +967,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the columns used by referential constraints, unique constraints, check constraints, and assertions, defined in the catalog and owned by a given user.</para>
+          <para
+            >Returns the columns used by referential constraints, unique constraints, check constraints, and assertions, defined in the catalog and owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -842,7 +979,10 @@
       <MemberValue>3a39f999-f481-4293-8b9f-af7e91b4ee7d</MemberValue>
     </Member>
     <Member MemberName="Constraint_Table_Usage">
-      <MemberSignature Language="C#" Value="public static readonly Guid Constraint_Table_Usage = d689719b-24b0-4963-a635-097c480edcd2;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Constraint_Table_Usage = d689719b-24b0-4963-a635-097c480edcd2;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -852,7 +992,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Table_Usage" /> maps to the OLE DB CONSTRAINT_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Table_Usage" />
+
+             maps to the OLE DB CONSTRAINT_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -875,7 +1018,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -886,7 +1031,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -919,7 +1066,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -937,7 +1086,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the tables that are used by referential constraints, unique constraints, check constraints, and assertions defined in the catalog and owned by a given user.</para>
+          <para
+            >Returns the tables that are used by referential constraints, unique constraints, check constraints, and assertions defined in the catalog and owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -947,7 +1098,10 @@
       <MemberValue>d689719b-24b0-4963-a635-097c480edcd2</MemberValue>
     </Member>
     <Member MemberName="DbInfoLiterals">
-      <MemberSignature Language="C#" Value="public static readonly Guid DbInfoLiterals = 7a564da6-f3bc-474b-9e66-71cb47bde5b0;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid DbInfoLiterals = 7a564da6-f3bc-474b-9e66-71cb47bde5b0;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -956,8 +1110,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Using <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" /> is equivalent to calling the OLE DB IDBInfo::GetLiteralInfo interface, or the ADO Connection.OpenSchema method with the adSchemaDBInfoLiterals constant.</para>
-          <para>When using the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" /> method, if the <paramref name="schema" /> parameter contains a value of <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" /> and the <paramref name="restrictions" /> parameter contains one or more restrictions, an <see cref="T:System.ArgumentException" /> is generated.</para>
+          <para
+            >Using <see
+             cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
+
+             is equivalent to calling the OLE DB IDBInfo::GetLiteralInfo interface, or the ADO Connection.OpenSchema method with the adSchemaDBInfoLiterals constant.</para
+          >
+          <para
+            >When using the <see
+
+              cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])"
+            />
+
+             method, if the <paramref
+             name="schema" />
+
+             parameter contains a value of <see
+             cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
+
+             and the <paramref
+             name="restrictions" />
+
+             parameter contains one or more restrictions, an <see
+             cref="T:System.ArgumentException" />
+
+             is generated.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -971,7 +1149,10 @@
       <MemberValue>7a564da6-f3bc-474b-9e66-71cb47bde5b0</MemberValue>
     </Member>
     <Member MemberName="Foreign_Keys">
-      <MemberSignature Language="C#" Value="public static readonly Guid Foreign_Keys = d9e547ce-e62d-4200-b849-566bc3dc29de;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Foreign_Keys = d9e547ce-e62d-4200-b849-566bc3dc29de;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -981,7 +1162,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Foreign_Keys" /> maps to the OLE DB FOREIGN_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Foreign_Keys" />
+
+             maps to the OLE DB FOREIGN_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1004,7 +1188,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the primary key table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the primary key table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -1015,7 +1201,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the primary key table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the primary key table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1037,7 +1225,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the foreign key table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the foreign key table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -1048,7 +1238,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the foreign key table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the foreign key table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1076,7 +1268,10 @@
       <MemberValue>d9e547ce-e62d-4200-b849-566bc3dc29de</MemberValue>
     </Member>
     <Member MemberName="Indexes">
-      <MemberSignature Language="C#" Value="public static readonly Guid Indexes = 69d8523c-96ad-40cb-a89a-ee98d2d6fcec;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Indexes = 69d8523c-96ad-40cb-a89a-ee98d2d6fcec;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1086,7 +1281,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Indexes" /> maps to the OLE DB INDEXES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Indexes" />
+
+             maps to the OLE DB INDEXES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1120,7 +1318,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1144,7 +1344,9 @@
               <description>
                 <para>The type of the index. One of the following: </para>
                 <para>DBPROPVAL_IT_BTREE-The index is a B+-tree.</para>
-                <para>DBPROPVAL_IT_HASH-The index is a hash file using, for example, linear or extensible hashing.</para>
+                <para
+                  >DBPROPVAL_IT_HASH-The index is a hash file using, for example, linear or extensible hashing.</para
+                >
                 <para>DBPROPVAL_IT_CONTENT-The index is a content index.</para>
                 <para>DBPROPVAL_IT_OTHER-The index is some other type of index. </para>
               </description>
@@ -1174,7 +1376,10 @@
       <MemberValue>69d8523c-96ad-40cb-a89a-ee98d2d6fcec</MemberValue>
     </Member>
     <Member MemberName="Key_Column_Usage">
-      <MemberSignature Language="C#" Value="public static readonly Guid Key_Column_Usage = 65423211-805e-4822-8eb4-f4f6d540056e;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Key_Column_Usage = 65423211-805e-4822-8eb4-f4f6d540056e;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1184,7 +1389,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Key_Column_Usage" /> maps to the OLE DB KEY_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Key_Column_Usage" />
+
+             maps to the OLE DB KEY_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1218,7 +1426,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1240,7 +1450,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table containing the key column is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table containing the key column is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -1251,7 +1463,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table containing the key column is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table containing the key column is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1273,14 +1487,18 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Name of the column participating in the unique, primary, or foreign key. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. (DBID is a formal structure serialized into the COLUMN_NAME column of the COLUMN_DOMAIN_USAGE rowset.)</para>
+                <para
+                  >Name of the column participating in the unique, primary, or foreign key. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. (DBID is a formal structure serialized into the COLUMN_NAME column of the COLUMN_DOMAIN_USAGE rowset.)</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the columns defined in the catalog that is constrained as keys by a given user.</para>
+          <para
+            >Returns the columns defined in the catalog that is constrained as keys by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1290,7 +1508,10 @@
       <MemberValue>65423211-805e-4822-8eb4-f4f6d540056e</MemberValue>
     </Member>
     <Member MemberName="Primary_Keys">
-      <MemberSignature Language="C#" Value="public static readonly Guid Primary_Keys = c6e5b174-fbd8-4055-b757-8585040e463f;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Primary_Keys = c6e5b174-fbd8-4055-b757-8585040e463f;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1300,7 +1521,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Primary_Keys" /> maps to the OLE DB PRIMARY_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Primary_Keys" />
+
+             maps to the OLE DB PRIMARY_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1323,7 +1547,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -1334,7 +1560,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1362,7 +1590,10 @@
       <MemberValue>c6e5b174-fbd8-4055-b757-8585040e463f</MemberValue>
     </Member>
     <Member MemberName="Procedure_Columns">
-      <MemberSignature Language="C#" Value="public static readonly Guid Procedure_Columns = 7148080d-e053-4ada-b79a-9a2ff614a3d4;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Procedure_Columns = 7148080d-e053-4ada-b79a-9a2ff614a3d4;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1372,7 +1603,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> maps to the OLE DB PROCEDURE_COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
+
+             maps to the OLE DB PROCEDURE_COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1406,7 +1640,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1428,12 +1664,19 @@
                 <para>string </para>
               </description>
               <description>
-                <para>The name of the column; this might not be unique. If this cannot be determined, a null value is returned. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. </para>
+                <para
+                  >The name of the column; this might not be unique. If this cannot be determined, a null value is returned. This column, together with the COLUMN_GUID and COLUMN_PROPID columns, forms the column ID. One or more of these columns will be a null value, depending on which elements of the DBID structure the provider uses. </para
+                >
               </description>
             </item>
           </list>
           <block subset="none" type="note">
-            <para>The <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> schema is not supported by any OLE DB providers that ship in MDAC version 2.7. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para>
+            <para
+              >The <see
+               cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
+
+               schema is not supported by any OLE DB providers that ship in MDAC version 2.7. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1448,7 +1691,10 @@
       <MemberValue>7148080d-e053-4ada-b79a-9a2ff614a3d4</MemberValue>
     </Member>
     <Member MemberName="Procedure_Parameters">
-      <MemberSignature Language="C#" Value="public static readonly Guid Procedure_Parameters = 984af700-8fe7-476f-81c2-4b814df67907;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Procedure_Parameters = 984af700-8fe7-476f-81c2-4b814df67907;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1458,7 +1704,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Parameters" /> maps to the OLE DB PROCEDURE_PARAMETERS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Parameters" />
+
+             maps to the OLE DB PROCEDURE_PARAMETERS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1531,7 +1780,10 @@
       <MemberValue>984af700-8fe7-476f-81c2-4b814df67907</MemberValue>
     </Member>
     <Member MemberName="Procedures">
-      <MemberSignature Language="C#" Value="public static readonly Guid Procedures = 61f276ad-4f25-4c26-b4ae-8238e06d56db;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Procedures = 61f276ad-4f25-4c26-b4ae-8238e06d56db;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1541,7 +1793,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedures" /> maps to the OLE DB PROCEDURES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedures" />
+
+             maps to the OLE DB PROCEDURES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1575,7 +1830,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1616,7 +1873,10 @@
       <MemberValue>61f276ad-4f25-4c26-b4ae-8238e06d56db</MemberValue>
     </Member>
     <Member MemberName="Provider_Types">
-      <MemberSignature Language="C#" Value="public static readonly Guid Provider_Types = 0bc2da44-d834-4136-9ff0-3cef477784b9;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Provider_Types = 0bc2da44-d834-4136-9ff0-3cef477784b9;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1626,7 +1886,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Provider_Types" /> maps to the OLE DB PROVIDER_TYPES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Provider_Types" />
+
+             maps to the OLE DB PROVIDER_TYPES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1660,15 +1923,21 @@
                 <para>Int16 </para>
               </description>
               <description>
-                <para>VARIANT_TRUE-The data type is the best match between all data types in the data store and the OLE DB data type indicated by the value in the DATA_TYPE column.</para>
-                <para>VARIANT_FALSE-The data type is not the best match. For each set of rows in which the value of the DATA_TYPE column is the same, the BEST_MATCH column is set to VARIANT_TRUE in only one row. </para>
+                <para
+                  >VARIANT_TRUE-The data type is the best match between all data types in the data store and the OLE DB data type indicated by the value in the DATA_TYPE column.</para
+                >
+                <para
+                  >VARIANT_FALSE-The data type is not the best match. For each set of rows in which the value of the DATA_TYPE column is the same, the BEST_MATCH column is set to VARIANT_TRUE in only one row. </para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the base data types supported by the .NET Framework Data Provider for OLE DB.</para>
+          <para
+            >Returns the base data types supported by the .NET Framework Data Provider for OLE DB.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1678,7 +1947,10 @@
       <MemberValue>0bc2da44-d834-4136-9ff0-3cef477784b9</MemberValue>
     </Member>
     <Member MemberName="Referential_Constraints">
-      <MemberSignature Language="C#" Value="public static readonly Guid Referential_Constraints = d2eab85e-49a7-462d-aa22-1d97c74178ae;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Referential_Constraints = d2eab85e-49a7-462d-aa22-1d97c74178ae;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1688,7 +1960,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Referential_Constraints" /> maps to the OLE DB REFERENTIAL_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Referential_Constraints" />
+
+             maps to the OLE DB REFERENTIAL_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1722,7 +1997,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -1740,7 +2017,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the referential constraints defined in the catalog that is owned by a given user.</para>
+          <para
+            >Returns the referential constraints defined in the catalog that is owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1750,7 +2029,10 @@
       <MemberValue>d2eab85e-49a7-462d-aa22-1d97c74178ae</MemberValue>
     </Member>
     <Member MemberName="Schemata">
-      <MemberSignature Language="C#" Value="public static readonly Guid Schemata = 2fbd7503-0af3-43d2-92c6-51e78b84dd37;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Schemata = 2fbd7503-0af3-43d2-92c6-51e78b84dd37;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1760,7 +2042,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Schemata" /> maps to the OLE DB SCHEMATAS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Schemata" />
+
+             maps to the OLE DB SCHEMATAS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1822,7 +2107,10 @@
       <MemberValue>2fbd7503-0af3-43d2-92c6-51e78b84dd37</MemberValue>
     </Member>
     <Member MemberName="Sql_Languages">
-      <MemberSignature Language="C#" Value="public static readonly Guid Sql_Languages = d60a511d-a07f-4e59-aac2-71c25fab5b02;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Sql_Languages = d60a511d-a07f-4e59-aac2-71c25fab5b02;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1832,7 +2120,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Sql_Languages" /> maps to the OLE DB SQL_LANGUAGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Sql_Languages" />
+
+             maps to the OLE DB SQL_LANGUAGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1929,7 +2220,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the conformance levels, options, and dialects supported by the SQL-implementation processing data defined in the catalog.</para>
+          <para
+            >Returns the conformance levels, options, and dialects supported by the SQL-implementation processing data defined in the catalog.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1939,7 +2232,10 @@
       <MemberValue>d60a511d-a07f-4e59-aac2-71c25fab5b02</MemberValue>
     </Member>
     <Member MemberName="Statistics">
-      <MemberSignature Language="C#" Value="public static readonly Guid Statistics = 03ed9f7d-35bc-45fe-993f-ee7a5f29fb74;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Statistics = 03ed9f7d-35bc-45fe-993f-ee7a5f29fb74;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -1949,7 +2245,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Statistics" /> maps to the OLE DB STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Statistics" />
+
+             maps to the OLE DB STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -1983,7 +2282,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2011,7 +2312,10 @@
       <MemberValue>03ed9f7d-35bc-45fe-993f-ee7a5f29fb74</MemberValue>
     </Member>
     <Member MemberName="Table_Constraints">
-      <MemberSignature Language="C#" Value="public static readonly Guid Table_Constraints = 62883c55-082d-42cb-bb00-747985ca6047;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Table_Constraints = 62883c55-082d-42cb-bb00-747985ca6047;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2021,7 +2325,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Constraints" /> maps to the OLE DB TABLE_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Constraints" />
+
+             maps to the OLE DB TABLE_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2055,7 +2362,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2077,7 +2386,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -2088,7 +2399,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2110,14 +2423,18 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Constraint type. One of the following: UNIQUE, PRIMARY KEY, FOREIGN KEY, or CHECK. </para>
+                <para
+                  >Constraint type. One of the following: UNIQUE, PRIMARY KEY, FOREIGN KEY, or CHECK. </para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the table constraints defined in the catalog that is owned by a given user.</para>
+          <para
+            >Returns the table constraints defined in the catalog that is owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2127,7 +2444,10 @@
       <MemberValue>62883c55-082d-42cb-bb00-747985ca6047</MemberValue>
     </Member>
     <Member MemberName="Table_Privileges">
-      <MemberSignature Language="C#" Value="public static readonly Guid Table_Privileges = 1a73f478-8c8e-4ede-b3ec-22ba13ab55a0;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Table_Privileges = 1a73f478-8c8e-4ede-b3ec-22ba13ab55a0;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2137,7 +2457,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Privileges" /> maps to the OLE DB TABLE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Privileges" />
+
+             maps to the OLE DB TABLE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2160,7 +2483,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the table is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -2171,7 +2496,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the table is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2211,7 +2538,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the privileges on tables defined in the catalog that are available to, or granted by, a given user.</para>
+          <para
+            >Returns the privileges on tables defined in the catalog that are available to, or granted by, a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2221,7 +2550,10 @@
       <MemberValue>1a73f478-8c8e-4ede-b3ec-22ba13ab55a0</MemberValue>
     </Member>
     <Member MemberName="Table_Statistics">
-      <MemberSignature Language="C#" Value="public static readonly Guid Table_Statistics = 9c944744-cd51-448a-8be4-7095f039d0ef;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Table_Statistics = 9c944744-cd51-448a-8be4-7095f039d0ef;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2231,7 +2563,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Statistics" /> maps to the OLE DB TABLE_STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Statistics" />
+
+             maps to the OLE DB TABLE_STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2254,7 +2589,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name of the table of this statistic. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name of the table of this statistic. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -2265,7 +2602,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Schema name of the table. A null value if the provider does not support schemas. </para>
+                <para
+                  >Schema name of the table. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2287,7 +2626,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name of the statistic. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name of the statistic. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -2298,7 +2639,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Schema name of the statistic. A null value if the provider does not support schemas. </para>
+                <para
+                  >Schema name of the statistic. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2320,11 +2663,15 @@
                 <para>UInt16 (Int32) </para>
               </description>
               <description>
-                <para>Bitmask specifying the kinds of statistics supported by this statistic: </para>
+                <para
+                  >Bitmask specifying the kinds of statistics supported by this statistic: </para
+                >
                 <para>DBSTAT_HISTOGRAM—Indicates histogram support.</para>
                 <para>DBSTAT_COLUMN_CARDINALITY— Indicates column cardinality support.</para>
                 <para>DBSTAT_TUPLE_CARDINALITY—Indicates tuple cardinality support.</para>
-                <para>Note: Histograms correspond to only the first column for a multi-column statistic. </para>
+                <para
+                  >Note: Histograms correspond to only the first column for a multi-column statistic. </para
+                >
               </description>
             </item>
           </list>
@@ -2341,7 +2688,10 @@
       <MemberValue>9c944744-cd51-448a-8be4-7095f039d0ef</MemberValue>
     </Member>
     <Member MemberName="Tables">
-      <MemberSignature Language="C#" Value="public static readonly Guid Tables = ceac88ba-240c-4bb4-821e-4a49fc013371;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Tables = ceac88ba-240c-4bb4-821e-4a49fc013371;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2351,7 +2701,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables" /> maps to the OLE DB TABLES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables" />
+
+             maps to the OLE DB TABLES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2385,7 +2738,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2407,14 +2762,18 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Table type. One of the following or a provider-specific value: "ALIAS", "TABLE" "SYNONYM", "SYSTEM TABLE", "VIEW", "GLOBAL TEMPORARY", "LOCAL TEMPORARY", or "SYSTEM VIEW". The column returned cannot contain a null value. </para>
+                <para
+                  >Table type. One of the following or a provider-specific value: "ALIAS", "TABLE" "SYNONYM", "SYSTEM TABLE", "VIEW", "GLOBAL TEMPORARY", "LOCAL TEMPORARY", or "SYSTEM VIEW". The column returned cannot contain a null value. </para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the tables (including views) defined in the catalog that are accessible to a given user.</para>
+          <para
+            >Returns the tables (including views) defined in the catalog that are accessible to a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2424,7 +2783,10 @@
       <MemberValue>ceac88ba-240c-4bb4-821e-4a49fc013371</MemberValue>
     </Member>
     <Member MemberName="Tables_Info">
-      <MemberSignature Language="C#" Value="public static readonly Guid Tables_Info = 9ff81c59-2b1e-4371-a08b-3a2d373189fa;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Tables_Info = 9ff81c59-2b1e-4371-a08b-3a2d373189fa;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2434,7 +2796,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables_Info" /> maps to the OLE DB TABLES_INFO rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables_Info" />
+
+             maps to the OLE DB TABLES_INFO rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2457,7 +2822,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Table type. One of the following or a provider-specific value: ALIAS, TABLE, SYNONYM, SYSTEM TABLE, VIEW, GLOBAL TEMPORARY, LOCAL TEMPORARY, EXTERNAL TABLE, or SYSTEM VIEW. </para>
+                <para
+                  >Table type. One of the following or a provider-specific value: ALIAS, TABLE, SYNONYM, SYSTEM TABLE, VIEW, GLOBAL TEMPORARY, LOCAL TEMPORARY, EXTERNAL TABLE, or SYSTEM VIEW. </para
+                >
               </description>
             </item>
             <item>
@@ -2479,7 +2846,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2507,7 +2876,10 @@
       <MemberValue>9ff81c59-2b1e-4371-a08b-3a2d373189fa</MemberValue>
     </Member>
     <Member MemberName="Translations">
-      <MemberSignature Language="C#" Value="public static readonly Guid Translations = 5578b57e-a682-4f1b-bdb4-f8a14ad6f61e;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Translations = 5578b57e-a682-4f1b-bdb4-f8a14ad6f61e;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2517,7 +2889,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Translations" /> maps to the OLE DB TRANSLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Translations" />
+
+             maps to the OLE DB TRANSLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2551,7 +2926,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2569,7 +2946,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the character translations defined in the catalog that is accessible to a given user.</para>
+          <para
+            >Returns the character translations defined in the catalog that is accessible to a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2579,7 +2958,10 @@
       <MemberValue>5578b57e-a682-4f1b-bdb4-f8a14ad6f61e</MemberValue>
     </Member>
     <Member MemberName="Trustee">
-      <MemberSignature Language="C#" Value="public static readonly Guid Trustee = 521207e2-3a23-42b6-ac78-810a3fce3271;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Trustee = 521207e2-3a23-42b6-ac78-810a3fce3271;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2589,7 +2971,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Trustee" /> maps to the OLE DB TRUSTEE schema. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Trustee" />
+
+             maps to the OLE DB TRUSTEE schema. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2623,7 +3008,9 @@
                 <para>guid </para>
               </description>
               <description>
-                <para>GUID that uniquely identifies the trustee. Providers that do no use GUIDs to identify trustees should return a null value in this column. </para>
+                <para
+                  >GUID that uniquely identifies the trustee. Providers that do no use GUIDs to identify trustees should return a null value in this column. </para
+                >
               </description>
             </item>
             <item>
@@ -2634,7 +3021,9 @@
                 <para>UInt32 (Int64) </para>
               </description>
               <description>
-                <para>PropID that uniquely identifies the trustee. Providers that do not use PropIDs to identify trustees should return a null value in this column. </para>
+                <para
+                  >PropID that uniquely identifies the trustee. Providers that do not use PropIDs to identify trustees should return a null value in this column. </para
+                >
               </description>
             </item>
             <item>
@@ -2646,7 +3035,9 @@
               </description>
               <description>
                 <para>Trustee type. One of the following: </para>
-                <para>TRUSTEE_IS_UNKNOWN - The trustee is an unknown type, but not necessarily an invalid type.</para>
+                <para
+                  >TRUSTEE_IS_UNKNOWN - The trustee is an unknown type, but not necessarily an invalid type.</para
+                >
                 <para>TRUSTEE_IS_USER - The trustee account is a user account.</para>
                 <para>TRUSTEE_IS_GROUP - The trustee is a group account. </para>
               </description>
@@ -2665,7 +3056,10 @@
       <MemberValue>521207e2-3a23-42b6-ac78-810a3fce3271</MemberValue>
     </Member>
     <Member MemberName="Usage_Privileges">
-      <MemberSignature Language="C#" Value="public static readonly Guid Usage_Privileges = f8113a2b-2934-4c67-ab7b-adbe3ab74973;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Usage_Privileges = f8113a2b-2934-4c67-ab7b-adbe3ab74973;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2675,7 +3069,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Usage_Privileges" /> maps to the OLE DB USAGE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Usage_Privileges" />
+
+             maps to the OLE DB USAGE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2698,7 +3095,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Catalog name in which the object is defined. A null value if the provider does not support catalogs. </para>
+                <para
+                  >Catalog name in which the object is defined. A null value if the provider does not support catalogs. </para
+                >
               </description>
             </item>
             <item>
@@ -2709,7 +3108,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name in which the object is defined. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name in which the object is defined. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2731,7 +3132,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Object type. One of the following: DOMAIN, CHARACTER SET, COLLATION, or TRANSLATION. </para>
+                <para
+                  >Object type. One of the following: DOMAIN, CHARACTER SET, COLLATION, or TRANSLATION. </para
+                >
               </description>
             </item>
             <item>
@@ -2760,7 +3163,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the USAGE privileges on objects defined in the catalog that are available to or granted by a given user.</para>
+          <para
+            >Returns the USAGE privileges on objects defined in the catalog that are available to or granted by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2770,7 +3175,10 @@
       <MemberValue>f8113a2b-2934-4c67-ab7b-adbe3ab74973</MemberValue>
     </Member>
     <Member MemberName="View_Column_Usage">
-      <MemberSignature Language="C#" Value="public static readonly Guid View_Column_Usage = 2c91ef91-02d8-4d38-ae5a-1e826873d6ea;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid View_Column_Usage = 2c91ef91-02d8-4d38-ae5a-1e826873d6ea;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2780,7 +3188,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Column_Usage" /> maps to the OLE DB VIEW_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Column_Usage" />
+
+             maps to the OLE DB VIEW_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2814,7 +3225,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2832,7 +3245,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the columns on which viewed tables depend, as defined in the catalog and owned by a given user.</para>
+          <para
+            >Returns the columns on which viewed tables depend, as defined in the catalog and owned by a given user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2842,7 +3257,10 @@
       <MemberValue>2c91ef91-02d8-4d38-ae5a-1e826873d6ea</MemberValue>
     </Member>
     <Member MemberName="View_Table_Usage">
-      <MemberSignature Language="C#" Value="public static readonly Guid View_Table_Usage = 7dcb7f53-1045-4fdf-86a1-d3caaf27c7f5;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid View_Table_Usage = 7dcb7f53-1045-4fdf-86a1-d3caaf27c7f5;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2852,7 +3270,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Table_Usage" /> maps to the OLE DB VIEW_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Table_Usage" />
+
+             maps to the OLE DB VIEW_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2886,7 +3307,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>
@@ -2904,7 +3327,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the tables on which viewed tables, defined in the catalog and owned by a given user, are dependent.</para>
+          <para
+            >Returns the tables on which viewed tables, defined in the catalog and owned by a given user, are dependent.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2914,7 +3339,10 @@
       <MemberValue>7dcb7f53-1045-4fdf-86a1-d3caaf27c7f5</MemberValue>
     </Member>
     <Member MemberName="Views">
-      <MemberSignature Language="C#" Value="public static readonly Guid Views = 9a6345b6-61a0-40fd-9b45-402f3c9c9c3e;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Guid Views = 9a6345b6-61a0-40fd-9b45-402f3c9c9c3e;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -2924,7 +3352,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Views" /> maps to the OLE DB VIEWS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Views" />
+
+             maps to the OLE DB VIEWS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -2958,7 +3389,9 @@
                 <para>string </para>
               </description>
               <description>
-                <para>Unqualified schema name. A null value if the provider does not support schemas. </para>
+                <para
+                  >Unqualified schema name. A null value if the provider does not support schemas. </para
+                >
               </description>
             </item>
             <item>

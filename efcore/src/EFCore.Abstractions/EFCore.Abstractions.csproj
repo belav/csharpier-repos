@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Description>Provides abstractions and attributes that are used to configure Entity Framework Core</Description>
+    <Description
+      >Provides abstractions and attributes that are used to configure Entity Framework Core</Description
+    >
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <MinClientVersion>3.6</MinClientVersion>
     <AssemblyName>Microsoft.EntityFrameworkCore.Abstractions</AssemblyName>
@@ -10,7 +11,6 @@
     <ImplicitUsings>true</ImplicitUsings>
     <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -18,12 +18,10 @@
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.EntityFrameworkCore.Diagnostics" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\CodeAnnotations.cs" />
     <Compile Include="..\Shared\Check.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\AbstractionsStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -31,11 +29,9 @@
       <CustomToolNamespace>Microsoft.EntityFrameworkCore.Diagnostics</CustomToolNamespace>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\AbstractionsStrings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -43,5 +39,4 @@
       <DependentUpon>AbstractionsStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

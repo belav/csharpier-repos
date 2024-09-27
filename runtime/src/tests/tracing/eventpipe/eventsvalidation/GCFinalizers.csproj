@@ -13,7 +13,9 @@
   <ItemGroup>
     <Compile Include="GCFinalizers.cs" />
     <ProjectReference Include="../common/eventpipe_common.csproj" />
-    <ProjectReference Include="../common/Microsoft.Diagnostics.NETCore.Client/Microsoft.Diagnostics.NETCore.Client.csproj" />
+    <ProjectReference
+      Include="../common/Microsoft.Diagnostics.NETCore.Client/Microsoft.Diagnostics.NETCore.Client.csproj"
+    />
     <ProjectReference Include="$(TestLibraryProjectPath)" />
   </ItemGroup>
 </Project>

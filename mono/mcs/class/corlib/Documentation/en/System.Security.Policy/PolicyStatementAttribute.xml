@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PolicyStatementAttribute" FullName="System.Security.Policy.PolicyStatementAttribute">
   <TypeSignature Maintainer="auto" Language="C#" Value="public enum PolicyStatementAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed PolicyStatementAttribute extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed PolicyStatementAttribute extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -9,7 +12,9 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
@@ -24,7 +29,9 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Attribute flags set on policy statements control how code groups merge with other code groups and other policy levels.</para>
+      <para
+        >Attribute flags set on policy statements control how code groups merge with other code groups and other policy levels.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,7 +41,10 @@
   <Members>
     <Member MemberName="All">
       <MemberSignature Language="C#" Value="All" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute All = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute All = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -55,7 +65,10 @@
     </Member>
     <Member MemberName="Exclusive">
       <MemberSignature Language="C#" Value="Exclusive" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute Exclusive = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute Exclusive = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -70,13 +83,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The exclusive code group flag. When a code group has this flag set, only the permissions associated with that code group are granted to code belonging to the code group. At most, one code group matching a given piece of code can be set as exclusive.</para>
+          <para
+            >The exclusive code group flag. When a code group has this flag set, only the permissions associated with that code group are granted to code belonging to the code group. At most, one code group matching a given piece of code can be set as exclusive.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="LevelFinal">
       <MemberSignature Language="C#" Value="LevelFinal" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute LevelFinal = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute LevelFinal = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -91,13 +109,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The flag representing a policy statement that causes lower policy levels to not be evaluated as part of the resolve operation, effectively allowing the policy level to override lower levels.</para>
+          <para
+            >The flag representing a policy statement that causes lower policy levels to not be evaluated as part of the resolve operation, effectively allowing the policy level to override lower levels.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Nothing">
       <MemberSignature Language="C#" Value="Nothing" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute Nothing = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Policy.PolicyStatementAttribute Nothing = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

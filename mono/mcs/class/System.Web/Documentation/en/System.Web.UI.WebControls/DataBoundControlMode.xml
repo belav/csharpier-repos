@@ -12,7 +12,9 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the different data-entry modes for a data-bound control or a particular field in ASP.NET Dynamic Data.</para>
+      <para
+        >Represents the different data-entry modes for a data-bound control or a particular field in ASP.NET Dynamic Data.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -28,7 +30,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents the edit mode, which enables users to update the values of an existing record or data field. </para>
+          <para
+            >Represents the edit mode, which enables users to update the values of an existing record or data field. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -44,7 +48,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents the insert mode, which enables users to enter values for a new record or data field.</para>
+          <para
+            >Represents the insert mode, which enables users to enter values for a new record or data field.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -60,7 +66,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents the display mode, which prevents the user from modifying the values of a record or a data field.</para>
+          <para
+            >Represents the display mode, which prevents the user from modifying the values of a record or a data field.</para
+          >
         </summary>
       </Docs>
     </Member>

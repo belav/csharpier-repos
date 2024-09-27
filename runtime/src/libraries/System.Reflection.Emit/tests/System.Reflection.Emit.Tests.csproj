@@ -24,16 +24,24 @@
     <Compile Include="FieldBuilder\FieldBuilderSetConstant.cs" />
     <Compile Include="FieldBuilder\FieldBuilderSetCustomAttribute.cs" />
     <Compile Include="FieldBuilder\FieldBuilderSetOffset.cs" />
-    <Compile Include="GenericTypeParameterBuilder\GenericTyepParameterBuilderSetBaseTypeConstraint.cs" />
+    <Compile
+      Include="GenericTypeParameterBuilder\GenericTyepParameterBuilderSetBaseTypeConstraint.cs"
+    />
     <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderGUID.cs" />
     <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderIsByRefLike.cs" />
     <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderMakeArrayType.cs" />
     <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderMakeByRefType.cs" />
     <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderMakeGenericType.cs" />
     <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderMakePointerType.cs" />
-    <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderSetCustomAttribute.cs" />
-    <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderSetGenericParameterAttributes.cs" />
-    <Compile Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderSetInterfaceConstraints.cs" />
+    <Compile
+      Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderSetCustomAttribute.cs"
+    />
+    <Compile
+      Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderSetGenericParameterAttributes.cs"
+    />
+    <Compile
+      Include="GenericTypeParameterBuilder\GenericTypeParameterBuilderSetInterfaceConstraints.cs"
+    />
     <Compile Include="MethodBuilder\MethodBuilderByRefs.cs" />
     <Compile Include="MethodBuilder\MethodBuilderContainsGenericParameters.cs" />
     <Compile Include="MethodBuilder\MethodBuilderDefineGenericParameters.cs" />
@@ -125,6 +133,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\System.Reflection.Emit.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Reflection.MetadataLoadContext\src\System.Reflection.MetadataLoadContext.csproj" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Reflection.MetadataLoadContext\src\System.Reflection.MetadataLoadContext.csproj"
+    />
   </ItemGroup>
 </Project>

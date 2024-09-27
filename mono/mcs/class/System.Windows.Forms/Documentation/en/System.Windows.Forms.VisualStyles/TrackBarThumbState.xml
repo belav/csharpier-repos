@@ -12,7 +12,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" /> values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects exposed by the following classes:</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+
+         values correspond to the states of the <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+         objects exposed by the following classes:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -21,7 +29,10 @@
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar.ThumbBottom" /> </para>
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar.ThumbBottom"
+            />
+          </para>
         </item>
         <item>
           <para>
@@ -30,7 +41,9 @@
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar.ThumbRight" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar.ThumbRight"
+            />
           </para>
         </item>
         <item>
@@ -40,15 +53,27 @@
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar.ThumbVertical" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar.ThumbVertical"
+            />
           </para>
         </item>
       </list>
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" /> values are also used as an argument in the <see cref="T:System.Windows.Forms.TrackBarRenderer" /> class methods that draw the track bar slider. </para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.TrackBarThumbState" />
+
+         values are also used as an argument in the <see
+         cref="T:System.Windows.Forms.TrackBarRenderer" />
+
+         class methods that draw the track bar slider. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the visual state of a track bar slider (also known as a thumb) that is drawn with visual styles.</para>
+      <para
+        >Specifies the visual state of a track bar slider (also known as a thumb) that is drawn with visual styles.</para
+      >
     </summary>
   </Docs>
   <Members>

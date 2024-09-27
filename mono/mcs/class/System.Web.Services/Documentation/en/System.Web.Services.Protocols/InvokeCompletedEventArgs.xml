@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="InvokeCompletedEventArgs" FullName="System.Web.Services.Protocols.InvokeCompletedEventArgs">
-  <TypeSignature Language="C#" Value="public class InvokeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs" />
+<Type
+  Name="InvokeCompletedEventArgs"
+  FullName="System.Web.Services.Protocols.InvokeCompletedEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class InvokeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +19,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is accepted as an argument by delegates of the type <see cref="T:System.Web.Services.Protocols.InvokeCompletedEventHandler" />.</para>
+      <para
+        >This class is accepted as an argument by delegates of the type <see
+         cref="T:System.Web.Services.Protocols.InvokeCompletedEventHandler" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

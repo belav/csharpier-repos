@@ -12,40 +12,68 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" /> values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" /> objects exposed by the following classes:</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+         values correspond to the states of the <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+         objects exposed by the following classes:</para
+      >
       <list type="bullet">
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.LeftTrackHorizontal" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.LeftTrackHorizontal"
+            />
           </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.RightTrackHorizontal" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.RightTrackHorizontal"
+            />
           </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.LowerTrackVertical" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.LowerTrackVertical"
+            />
           </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.UpperTrackVertical" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.UpperTrackVertical"
+            />
           </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.ThumbButtonHorizontal" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.ThumbButtonHorizontal"
+            />
           </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.ThumbButtonVertical" />
+            <see
+              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar.ThumbButtonVertical"
+            />
           </para>
         </item>
       </list>
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" /> values are also used as an argument in the <see cref="T:System.Windows.Forms.ScrollBarRenderer" /> class methods that draw the scroll bar track, scroll box (also known as the thumb), and scroll box grip.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.ScrollBarState" />
+
+         values are also used as an argument in the <see
+         cref="T:System.Windows.Forms.ScrollBarRenderer" />
+
+         class methods that draw the scroll bar track, scroll box (also known as the thumb), and scroll box grip.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

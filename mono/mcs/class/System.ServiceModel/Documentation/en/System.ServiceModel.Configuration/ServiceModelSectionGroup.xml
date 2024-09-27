@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceModelSectionGroup" FullName="System.ServiceModel.Configuration.ServiceModelSectionGroup">
-  <TypeSignature Language="C#" Value="public sealed class ServiceModelSectionGroup : System.Configuration.ConfigurationSectionGroup" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ServiceModelSectionGroup extends System.Configuration.ConfigurationSectionGroup" />
+<Type
+  Name="ServiceModelSectionGroup"
+  FullName="System.ServiceModel.Configuration.ServiceModelSectionGroup"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ServiceModelSectionGroup : System.Configuration.ConfigurationSectionGroup"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ServiceModelSectionGroup extends System.Configuration.ConfigurationSectionGroup"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,17 +22,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>All indigo2 configuration elements are nested in the system.serviceModel element of the configuration file. indigo2 does not add elements to the configuration sections of other products.</para>
+      <para
+        >All indigo2 configuration elements are nested in the system.serviceModel element of the configuration file. indigo2 does not add elements to the configuration sections of other products.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the main configuration section for indigo1. This class cannot be inherited.</para>
+      <para
+        >Represents the main configuration section for indigo1. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceModelSectionGroup ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +49,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Behaviors">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.BehaviorsSection Behaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.BehaviorsSection Behaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.BehaviorsSection Behaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.BehaviorsSection Behaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,17 +78,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The behavior section defines behavior elements. Each entry is identified by its unique name, which is used by services when linking to behaviors.</para>
+          <para
+            >The behavior section defines behavior elements. Each entry is identified by its unique name, which is used by services when linking to behaviors.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration section that contains child entries that are behavior elements.</para>
+          <para
+            >Gets the configuration section that contains child entries that are behavior elements.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Bindings">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.BindingsSection Bindings { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.BindingsSection Bindings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.BindingsSection Bindings { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.BindingsSection Bindings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -73,7 +110,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This section holds a collection of standard and custom bindings. Each entry is identified by its unique name, which is used by services when linking to bindings.</para>
+          <para
+            >This section holds a collection of standard and custom bindings. Each entry is identified by its unique name, which is used by services when linking to bindings.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -82,8 +121,14 @@
       </Docs>
     </Member>
     <Member MemberName="Client">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ClientSection Client { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ClientSection Client" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ClientSection Client { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ClientSection Client"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -96,13 +141,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration section that contains a list of endpoints that a client uses to connect to a service.</para>
+          <para
+            >Gets the configuration section that contains a list of endpoints that a client uses to connect to a service.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CommonBehaviors">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.CommonBehaviorsSection CommonBehaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.CommonBehaviorsSection CommonBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.CommonBehaviorsSection CommonBehaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.CommonBehaviorsSection CommonBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -114,17 +167,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This section is defined in the Machine.config file. It contains a list of behaviors that is applied to all indigo2 services on the machine before the behaviors in the behaviors collection are applied. If a behavior is defined in both sections, the behavior in the behaviors sections is given preference.</para>
+          <para
+            >This section is defined in the Machine.config file. It contains a list of behaviors that is applied to all indigo2 services on the machine before the behaviors in the behaviors collection are applied. If a behavior is defined in both sections, the behavior in the behaviors sections is given preference.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration section that contains a list of behaviors that is applied to all indigo2 services on the machine before the behaviors in the behaviors section are applied.</para>
+          <para
+            >Gets the configuration section that contains a list of behaviors that is applied to all indigo2 services on the machine before the behaviors in the behaviors section are applied.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Diagnostic">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.DiagnosticSection Diagnostic { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.DiagnosticSection Diagnostic" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.DiagnosticSection Diagnostic { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.DiagnosticSection Diagnostic"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,7 +199,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The diagnostics section contains settings for the diagnostics features of indigo2. The user can enable/disable tracing, performance counters, and the WMI provider, and can add custom message filters.</para>
+          <para
+            >The diagnostics section contains settings for the diagnostics features of indigo2. The user can enable/disable tracing, performance counters, and the WMI provider, and can add custom message filters.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,8 +210,14 @@
       </Docs>
     </Member>
     <Member MemberName="Extensions">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ExtensionsSection Extensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ExtensionsSection Extensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ExtensionsSection Extensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ExtensionsSection Extensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -164,8 +235,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetSectionGroup">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.Configuration.ServiceModelSectionGroup GetSectionGroup (System.Configuration.Configuration config);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.ServiceModel.Configuration.ServiceModelSectionGroup GetSectionGroup(class System.Configuration.Configuration config) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.Configuration.ServiceModelSectionGroup GetSectionGroup (System.Configuration.Configuration config);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.ServiceModel.Configuration.ServiceModelSectionGroup GetSectionGroup(class System.Configuration.Configuration config) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,19 +257,38 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the system.ServiceModel configuration section group from the specified configuration file.</para>
+          <para
+            >Gets the system.ServiceModel configuration section group from the specified configuration file.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" /> that represents the system.ServiceModel settings in configuration.</para>
+          <para
+            >A <see
+             cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" />
+
+             that represents the system.ServiceModel settings in configuration.</para
+          >
         </returns>
         <param name="config">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.Configuration" /> that represents a configuration file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.Configuration" />
+
+           that represents a configuration file.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ProtocolMapping">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ProtocolMappingSection ProtocolMapping { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ProtocolMappingSection ProtocolMapping" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ProtocolMappingSection ProtocolMapping { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ProtocolMappingSection ProtocolMapping"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -205,13 +301,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an endpoint configuration section that defines the communications protocol.</para>
+          <para
+            >Gets an endpoint configuration section that defines the communications protocol.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ServiceHostingEnvironment">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ServiceHostingEnvironmentSection ServiceHostingEnvironment { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ServiceHostingEnvironmentSection ServiceHostingEnvironment" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ServiceHostingEnvironmentSection ServiceHostingEnvironment { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ServiceHostingEnvironmentSection ServiceHostingEnvironment"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -224,13 +328,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration section that defines what type the service hosting environment instantiates for a particular transport.</para>
+          <para
+            >Gets the configuration section that defines what type the service hosting environment instantiates for a particular transport.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Services">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ServicesSection Services { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ServicesSection Services" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ServicesSection Services { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ServicesSection Services"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -242,7 +354,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For each service defined in the assembly, this section contains a service element with the settings for the service.</para>
+          <para
+            >For each service defined in the assembly, this section contains a service element with the settings for the service.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -251,8 +365,14 @@
       </Docs>
     </Member>
     <Member MemberName="StandardEndpoints">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.StandardEndpointsSection StandardEndpoints { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.StandardEndpointsSection StandardEndpoints" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.StandardEndpointsSection StandardEndpoints { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.StandardEndpointsSection StandardEndpoints"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -13,7 +13,9 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implements the basic functionality required by a single data source at the EnvDTE.Project level.</para>
+      <para
+        >Implements the basic functionality required by a single data source at the EnvDTE.Project level.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -28,12 +30,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Data.DataSourceGroup" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DataSources">
-      <MemberSignature Language="C#" Value="public abstract System.ComponentModel.Design.Data.DataSourceDescriptorCollection DataSources { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ComponentModel.Design.Data.DataSourceDescriptorCollection DataSources { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,7 +56,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the collection of descriptors for the data sources in this group.</para>
+          <para
+            >When overridden in a derived class, gets the collection of descriptors for the data sources in this group.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -63,11 +75,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Bitmap" /> image that represents the group is typically used in design-time pickers. The image may be null.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Bitmap" />
+
+             image that represents the group is typically used in design-time pickers. The image may be null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the <see cref="T:System.Drawing.Bitmap" /> image that represents the group.</para>
+          <para
+            >When overridden in a derived class, gets the <see
+             cref="T:System.Drawing.Bitmap" />
+
+             image that represents the group.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -85,7 +107,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the value indicating whether this group is the default group.</para>
+          <para
+            >When overridden in a derived class, gets the value indicating whether this group is the default group.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -102,7 +126,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The name of the group must be unique across all data sources groups at the EnvDTE.Project level.</para>
+          <para
+            >The name of the group must be unique across all data sources groups at the EnvDTE.Project level.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

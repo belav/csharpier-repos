@@ -3,13 +3,19 @@
     <Assembly Name="Microsoft.Build.Engine" Version="2.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyFileVersion("2.0.50727.1433")</AttributeName>
@@ -24,28 +30,40 @@
           <AttributeName>System.Resources.NeutralResourcesLanguage("en-US")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Resources.SatelliteContractVersion("2.0.0.0")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("MONO development team")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDefaultAlias("Microsoft.Build.Engine.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDefaultAlias("Microsoft.Build.Engine.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDescription("Microsoft.Build.Engine.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDescription("Microsoft.Build.Engine.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyTitle("Microsoft.Build.Engine.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyTitle("Microsoft.Build.Engine.dll")</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>

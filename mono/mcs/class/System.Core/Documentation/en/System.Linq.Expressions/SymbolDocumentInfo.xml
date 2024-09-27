@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SymbolDocumentInfo" FullName="System.Linq.Expressions.SymbolDocumentInfo">
   <TypeSignature Language="C#" Value="public class SymbolDocumentInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SymbolDocumentInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SymbolDocumentInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +17,18 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Stores information necessary to emit debugging symbol information for a source file, in particular the file name and unique language identifier.</para>
+      <para
+        >Stores information necessary to emit debugging symbol information for a source file, in particular the file name and unique language identifier.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="DocumentType">
       <MemberSignature Language="C#" Value="public virtual Guid DocumentType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid DocumentType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Guid DocumentType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +41,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the document type's unique identifier, if any. Defaults to the GUID for a text file.</para>
+          <para
+            >Returns the document type's unique identifier, if any. Defaults to the GUID for a text file.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -77,7 +87,10 @@
     </Member>
     <Member MemberName="LanguageVendor">
       <MemberSignature Language="C#" Value="public virtual Guid LanguageVendor { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid LanguageVendor" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Guid LanguageVendor"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

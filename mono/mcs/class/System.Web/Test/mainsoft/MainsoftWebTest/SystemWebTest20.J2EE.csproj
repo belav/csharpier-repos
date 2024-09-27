@@ -5,7 +5,9 @@
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D4465041-A56A-476B-9C71-E71CDAF0ACC2}</ProjectGuid>
-    <ProjectTypeGuids>{F6B19D50-1E2E-4e87-ADFB-10393B439DE0};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids
+      >{F6B19D50-1E2E-4e87-ADFB-10393B439DE0};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids
+    >
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SystemWebTest</RootNamespace>
@@ -13,8 +15,7 @@
     <JDKName>1.5.0_05</JDKName>
     <GHProjectType>1</GHProjectType>
     <Version>2.0</Version>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <jarserver>ipa</jarserver>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_Java|AnyCPU' ">
@@ -29,8 +30,7 @@
     <SkipValidation>True</SkipValidation>
     <KeepIntermediate>False</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_Java|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,8 +43,7 @@
     <SkipValidation>false</SkipValidation>
     <KeepIntermediate>false</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_Java_Nunit|AnyCPU' ">
     <DefineConstants>TRACE;DEBUG;JAVA;NUNIT</DefineConstants>
@@ -58,8 +57,7 @@
     <SkipValidation>True</SkipValidation>
     <KeepIntermediate>False</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.core, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -67,7 +65,9 @@
       <HintPath>..\..\..\..\..\nunit20\nunit-console\bin\Debug_Java20\nunit.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference
+      Include="nunit.framework, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+    >
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\nunit20\framework\bin\Debug_Java20\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -76,17 +76,25 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath>
+      <HintPath
+        >..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll</HintPath
+      >
     </Reference>
     <Reference Include="System.Data">
-      <HintPath>..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath>
+      <HintPath
+        >..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll</HintPath
+      >
     </Reference>
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Services">
-      <HintPath>..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll</HintPath>
+      <HintPath
+        >..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll</HintPath
+      >
     </Reference>
     <Reference Include="System.Xml">
-      <HintPath>..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath>
+      <HintPath
+        >..\..\..\..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll</HintPath
+      >
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +135,16 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties REFS-JarPath-system-web-services="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.Web.Services.jar" REFS-JarPath-rt="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\jre5\lib\rt.jar" REFS-JarPath-system-xml="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.Xml.jar" REFS-JarPath-system-data="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.Data.jar" REFS-JarPath-system="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.jar" REFS-JarPath-mscorlib="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\mscorlib.jar" REFS-JarPath-nunit-framework="..\..\..\..\..\nunit20\framework\bin\Debug_Java20\nunit.framework.jar" REFS-JarPath-nunit-core="..\..\..\..\..\nunit20\nunit-console\bin\Debug_Java20\nunit.core.jar" />
+      <UserProperties
+        REFS-JarPath-system-web-services="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.Web.Services.jar"
+        REFS-JarPath-rt="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\jre5\lib\rt.jar"
+        REFS-JarPath-system-xml="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.Xml.jar"
+        REFS-JarPath-system-data="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.Data.jar"
+        REFS-JarPath-system="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\System.jar"
+        REFS-JarPath-mscorlib="..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\mscorlib.jar"
+        REFS-JarPath-nunit-framework="..\..\..\..\..\nunit20\framework\bin\Debug_Java20\nunit.framework.jar"
+        REFS-JarPath-nunit-core="..\..\..\..\..\nunit20\nunit-console\bin\Debug_Java20\nunit.core.jar"
+      />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -8,7 +8,9 @@
   <PropertyGroup>
     <DebugType>Full</DebugType>
     <Optimize>True</Optimize>
-    <CLRTestExecutionArguments>--tailcalls --num-calls 1000 --no-ctrlc-summary</CLRTestExecutionArguments>
+    <CLRTestExecutionArguments
+      >--tailcalls --num-calls 1000 --no-ctrlc-summary</CLRTestExecutionArguments
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="*.cs" />

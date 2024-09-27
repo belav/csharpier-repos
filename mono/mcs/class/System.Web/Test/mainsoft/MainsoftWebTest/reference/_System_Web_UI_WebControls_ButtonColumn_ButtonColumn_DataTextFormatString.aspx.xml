@@ -3,9 +3,9 @@
   <div id="GHTSubTest1" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid1">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -122,16 +122,22 @@
       <br />
     </span>
     <span>
-      <br />(format str)</span>
+      <br />
+
+      (format str)</span
+    >
     <span>
-      <br />{0:c5}</span>
+      <br />
+
+      {0:c5}</span
+    >
   </div>
   <div id="Ghtsubtest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -248,16 +254,22 @@
       <br />
     </span>
     <span>
-      <br />(format str)</span>
+      <br />
+
+      (format str)</span
+    >
     <span>
-      <br />{0:c5}</span>
+      <br />
+
+      {0:c5}</span
+    >
   </div>
   <div id="Ghtsubtest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -374,16 +386,22 @@
       <br />
     </span>
     <span>
-      <br />(format str)</span>
+      <br />
+
+      (format str)</span
+    >
     <span>
-      <br />{0:c5}</span>
+      <br />
+
+      {0:c5}</span
+    >
   </div>
   <div id="Ghtsubtest4" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid4">
       <tr>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
         <td>
@@ -500,8 +518,14 @@
       <br />
     </span>
     <span>
-      <br />(format str)</span>
+      <br />
+
+      (format str)</span
+    >
     <span>
-      <br />{0:c5}</span>
+      <br />
+
+      {0:c5}</span
+    >
   </div>
 </testresults>

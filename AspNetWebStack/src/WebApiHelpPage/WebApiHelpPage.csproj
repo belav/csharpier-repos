@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),Runtime.sln))\tools\WebStack.settings.targets" />
+<Project
+  ToolsVersion="4.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
+  <Import
+    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),Runtime.sln))\tools\WebStack.settings.targets"
+  />
   <Import Project="WebApiHelpPageMsBuildTasks.targets" />
   <PropertyGroup>
     <ProjectGuid>{FEDFE6CA-8282-4C5B-A756-E97189690982}</ProjectGuid>
@@ -15,7 +21,9 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference
+      Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+    >
       <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
@@ -75,7 +83,9 @@
     <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
     <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
-    <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <None
+      Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml"
+    />
     <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
     <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
     <None Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
@@ -126,7 +136,9 @@
       <Project>{8f18041b-9410-4c36-a9c5-067813df5f31}</Project>
       <Name>System.Web.Razor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\System.Web.WebPages.Deployment\System.Web.WebPages.Deployment.csproj">
+    <ProjectReference
+      Include="..\System.Web.WebPages.Deployment\System.Web.WebPages.Deployment.csproj"
+    >
       <Project>{22babb60-8f02-4027-affc-acf069954536}</Project>
       <Name>System.Web.WebPages.Deployment</Name>
     </ProjectReference>
@@ -146,7 +158,17 @@
       <SourceFiles Include="Areas/**/*.*" />
     </ItemGroup>
     <MakeDir Directories="$(OutputPath)\NuGet" />
-    <ConvertToNuGetTransformationFiles SourceFiles="@(SourceFiles)" OutputPath="$(OutputPath)" OriginalNamespaceToken="ROOT_PROJECT_NAMESPACE" ReplacementNamespaceToken="$rootnamespace$" />
-    <NuGetPack NuGetExe="..\..\.nuget\NuGet.exe" Source="$(ProjectDir)WebApiHelpPage.nuspec" BasePath="$(OutputPath)." OutputDirectory="$(OutputPath)NuGet" />
+    <ConvertToNuGetTransformationFiles
+      SourceFiles="@(SourceFiles)"
+      OutputPath="$(OutputPath)"
+      OriginalNamespaceToken="ROOT_PROJECT_NAMESPACE"
+      ReplacementNamespaceToken="$rootnamespace$"
+    />
+    <NuGetPack
+      NuGetExe="..\..\.nuget\NuGet.exe"
+      Source="$(ProjectDir)WebApiHelpPage.nuspec"
+      BasePath="$(OutputPath)."
+      OutputDirectory="$(OutputPath)NuGet"
+    />
   </Target>
 </Project>

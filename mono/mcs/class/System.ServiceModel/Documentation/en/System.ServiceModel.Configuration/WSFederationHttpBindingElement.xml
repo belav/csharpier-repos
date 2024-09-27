@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WSFederationHttpBindingElement" FullName="System.ServiceModel.Configuration.WSFederationHttpBindingElement">
-  <TypeSignature Language="C#" Value="public class WSFederationHttpBindingElement : System.ServiceModel.Configuration.WSHttpBindingBaseElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi WSFederationHttpBindingElement extends System.ServiceModel.Configuration.WSHttpBindingBaseElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement" />
+<Type
+  Name="WSFederationHttpBindingElement"
+  FullName="System.ServiceModel.Configuration.WSFederationHttpBindingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class WSFederationHttpBindingElement : System.ServiceModel.Configuration.WSHttpBindingBaseElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi WSFederationHttpBindingElement extends System.ServiceModel.Configuration.WSHttpBindingBaseElement implements class System.ServiceModel.Configuration.IBindingConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +23,18 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a configuration element that defines a binding that supports WS-Federation.</para>
+      <para
+        >Represents a configuration element that defines a binding that supports WS-Federation.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WSFederationHttpBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +44,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="protected override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,8 +76,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnApplyConfiguration">
-      <MemberSignature Language="C#" Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnApplyConfiguration (System.ServiceModel.Channels.Binding binding);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void OnApplyConfiguration(class System.ServiceModel.Channels.Binding binding) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -70,22 +98,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Called when the content of a specified binding collection is applied to this binding configuration element.</para>
+          <para
+            >Called when the content of a specified binding collection is applied to this binding configuration element.</para
+          >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />A collection of binding elements.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A collection of binding elements.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PrivacyNoticeAt">
       <MemberSignature Language="C#" Value="public Uri PrivacyNoticeAt { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri PrivacyNoticeAt" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri PrivacyNoticeAt"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("privacyNoticeAt", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("privacyNoticeAt", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -109,10 +147,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("privacyNoticeVersion", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("privacyNoticeVersion", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -123,13 +165,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an integer that specifies the version of the current privacy notice.</para>
+          <para
+            >Gets or sets an integer that specifies the version of the current privacy notice.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -142,20 +192,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             instance that contains a collection of <see
+             cref="T:System.Configuration.ConfigurationProperty" />
+
+             objects that can be attributes or <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             objects of this configuration element.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Security">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.WSFederationHttpSecurityElement Security { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.WSFederationHttpSecurityElement Security" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.WSFederationHttpSecurityElement Security { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.WSFederationHttpSecurityElement Security"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("security", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("security", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>

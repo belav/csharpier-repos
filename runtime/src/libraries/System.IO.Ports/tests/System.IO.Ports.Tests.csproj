@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)-linux;$(NetCoreAppCurrent)-osx;$(NetCoreAppCurrent)-freebsd;$(NetFrameworkMinimum)</TargetFrameworks>
+    <TargetFrameworks
+      >$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)-linux;$(NetCoreAppCurrent)-osx;$(NetCoreAppCurrent)-freebsd;$(NetFrameworkMinimum)</TargetFrameworks
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -109,7 +111,9 @@
     <Compile Include="Support\PortsTest.cs" />
     <Compile Include="Support\TestEventHandler.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows' or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
+  <ItemGroup
+    Condition="'$(TargetPlatformIdentifier)' == 'windows' or '$(TargetFrameworkIdentifier)' == '.NETFramework'"
+  >
     <Compile Include="SerialPort\DosDevices.cs" />
     <Compile Include="SerialPort\PortName.cs" />
     <Compile Include="SerialPort\OpenDevices.cs" />
@@ -121,6 +125,8 @@
     <ProjectReference Include="..\src\System.IO.Ports.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Text.Encoding.CodePages\src\System.Text.Encoding.CodePages.csproj" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Text.Encoding.CodePages\src\System.Text.Encoding.CodePages.csproj"
+    />
   </ItemGroup>
 </Project>

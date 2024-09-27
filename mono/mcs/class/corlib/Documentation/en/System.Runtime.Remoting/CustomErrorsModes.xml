@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CustomErrorsModes" FullName="System.Runtime.Remoting.CustomErrorsModes">
   <TypeSignature Language="C#" Value="public enum CustomErrorsModes" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed CustomErrorsModes extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed CustomErrorsModes extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,7 +21,9 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Complete exception information includes the exact server exception and the server stack trace. Filtered information includes a standard remoting exception but no server stack trace.</para>
+      <para
+        >Complete exception information includes the exact server exception and the server stack trace. Filtered information includes a standard remoting exception but no server stack trace.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +33,10 @@
   <Members>
     <Member MemberName="Off">
       <MemberSignature Language="C#" Value="Off" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Remoting.CustomErrorsModes Off = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Remoting.CustomErrorsModes Off = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,7 +54,10 @@
     </Member>
     <Member MemberName="On">
       <MemberSignature Language="C#" Value="On" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Remoting.CustomErrorsModes On = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Remoting.CustomErrorsModes On = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -64,7 +75,10 @@
     </Member>
     <Member MemberName="RemoteOnly">
       <MemberSignature Language="C#" Value="RemoteOnly" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Remoting.CustomErrorsModes RemoteOnly = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Remoting.CustomErrorsModes RemoteOnly = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -76,7 +90,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Local callers receive complete exception information; remote callers receive filtered exception information.</para>
+          <para
+            >Local callers receive complete exception information; remote callers receive filtered exception information.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -17,15 +17,37 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An Input Method Editor (IME) allows users to enter and edit Chinese, Japanese, and Korean characters. The IME is an essential component for writing Chinese, Japanese, and Korean scripts. These writing systems have more characters than can be encoded for a regular keyboard. The IMEs for these languages use sequences of base characters that describe an individual character or group of characters to allow you to enter a larger set of characters. Base characters can be component letters from Hangul syllables, phonetic components for Japanese Kanji characters, or various combinations for Chinese characters.</para>
+      <para
+        >An Input Method Editor (IME) allows users to enter and edit Chinese, Japanese, and Korean characters. The IME is an essential component for writing Chinese, Japanese, and Korean scripts. These writing systems have more characters than can be encoded for a regular keyboard. The IMEs for these languages use sequences of base characters that describe an individual character or group of characters to allow you to enter a larger set of characters. Base characters can be component letters from Hangul syllables, phonetic components for Japanese Kanji characters, or various combinations for Chinese characters.</para
+      >
       <block subset="none" type="note">
-        <para>The user can interactively change the <see cref="P:System.Windows.Forms.Control.ImeMode" /> unless it has been programmatically set to <see cref="F:System.Windows.Forms.ImeMode.Disable" />. In this case, the user will not be able to use the IME.</para>
-        <para>The <see cref="P:System.Windows.Forms.Control.ImeMode" /> property is ignored on Windows 8 when the global input mode is in effect. For more info, see <see cref="http://go.microsoft.com/fwlink/?LinkID=256509">Switch Text Input Changed from Per-Thread to Per-User</see>.</para>
+        <para
+          >The user can interactively change the <see
+           cref="P:System.Windows.Forms.Control.ImeMode" />
+
+           unless it has been programmatically set to <see
+           cref="F:System.Windows.Forms.ImeMode.Disable" />
+
+          . In this case, the user will not be able to use the IME.</para
+        >
+        <para
+          >The <see
+           cref="P:System.Windows.Forms.Control.ImeMode" />
+
+           property is ignored on Windows 8 when the global input mode is in effect. For more info, see <see
+           cref="http://go.microsoft.com/fwlink/?LinkID=256509"
+            >Switch Text Input Changed from Per-Thread to Per-User</see
+          >
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies a value that determines the Input Method Editor (IME) status of an object when the object is selected.</para>
+      <para
+        >Specifies a value that determines the Input Method Editor (IME) status of an object when the object is selected.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -38,7 +60,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Alphanumeric single-byte characters(SBC). This setting is valid for Korean and Japanese IME only.</para>
+          <para
+            >Alphanumeric single-byte characters(SBC). This setting is valid for Korean and Japanese IME only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -55,7 +79,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Alphanumeric double-byte characters. This setting is valid for Korean and Japanese IME only.</para>
+          <para
+            >Alphanumeric double-byte characters. This setting is valid for Korean and Japanese IME only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,7 +115,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The IME is disabled. With this setting, the users cannot turn the IME on from the keyboard, and the IME floating window is hidden.</para>
+          <para
+            >The IME is disabled. With this setting, the users cannot turn the IME on from the keyboard, and the IME floating window is hidden.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -225,7 +253,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The IME is off. This mode indicates that the IME is off, meaning that the object behaves the same as English entry mode. This setting is valid for Japanese, Simplified Chinese, and Traditional Chinese IME only.</para>
+          <para
+            >The IME is off. This mode indicates that the IME is off, meaning that the object behaves the same as English entry mode. This setting is valid for Japanese, Simplified Chinese, and Traditional Chinese IME only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -242,7 +272,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The IME is on. This value indicates that the IME is on and characters specific to Chinese or Japanese can be entered. This setting is valid for Japanese, Simplified Chinese, and Traditional Chinese IME only.</para>
+          <para
+            >The IME is on. This value indicates that the IME is on and characters specific to Chinese or Japanese can be entered. This setting is valid for Japanese, Simplified Chinese, and Traditional Chinese IME only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

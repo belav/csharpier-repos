@@ -19,6 +19,8 @@
     <Compile Include="VectorHelpers.cs" />
   </ItemGroup>
   <PropertyGroup>
-    <ProjectAssetsFile>$(JitPackagesConfigFileDirectory)benchmark\obj\project.assets.json</ProjectAssetsFile>
+    <ProjectAssetsFile
+      >$(JitPackagesConfigFileDirectory)benchmark\obj\project.assets.json</ProjectAssetsFile
+    >
   </PropertyGroup>
 </Project>

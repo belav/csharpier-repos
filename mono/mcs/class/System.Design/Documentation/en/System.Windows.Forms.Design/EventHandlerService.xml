@@ -13,12 +13,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Developers may want to be able to write code in one place that handles events of a certain type.</para>
-      <para>Also, developers may need to globally change the behavior of the handlers for specific events or types of events, which may be distributed among designer components.</para>
-      <para>The designers for a typical project are many different objects so it can be useful to list and store reference to these events from a common place.</para>
-      <para>This service implements an "event stack" that contains the current set of event handlers. The stack may have a variety of different types of handlers on the stack.</para>
-      <para>For example, a designer might push, or add, a keyboard handler and a mouse handler onto the stack. When a designer requests an event handler, the service will find the topmost handler on the stack that matches the class you requested.</para>
-      <para>This way the service can be extended to any eventing scheme, and it also allows specific types of event handlers to be replaced. For example, you can replace mouse event handlers without affecting menu event handlers or keyboard event handlers.</para>
+      <para
+        >Developers may want to be able to write code in one place that handles events of a certain type.</para
+      >
+      <para
+        >Also, developers may need to globally change the behavior of the handlers for specific events or types of events, which may be distributed among designer components.</para
+      >
+      <para
+        >The designers for a typical project are many different objects so it can be useful to list and store reference to these events from a common place.</para
+      >
+      <para
+        >This service implements an "event stack" that contains the current set of event handlers. The stack may have a variety of different types of handlers on the stack.</para
+      >
+      <para
+        >For example, a designer might push, or add, a keyboard handler and a mouse handler onto the stack. When a designer requests an event handler, the service will find the topmost handler on the stack that matches the class you requested.</para
+      >
+      <para
+        >This way the service can be extended to any eventing scheme, and it also allows specific types of event handlers to be replaced. For example, you can replace mouse event handlers without affecting menu event handlers or keyboard event handlers.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +39,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public EventHandlerService (System.Windows.Forms.Control focusWnd);" />
+      <MemberSignature
+        Language="C#"
+        Value="public EventHandlerService (System.Windows.Forms.Control focusWnd);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="focusWnd" Type="System.Windows.Forms.Control" />
@@ -36,10 +51,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.EventHandlerService" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.EventHandlerService" />
+
+             class. </para
+          >
         </summary>
         <param name="focusWnd">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Control" /> which is being designed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Control" />
+
+           which is being designed.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -65,7 +91,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FocusWindow">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Control FocusWindow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Control FocusWindow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Control</ReturnType>
@@ -95,7 +124,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You should never cache this value because other components are free to change it. This call is fairly quick, however, especially for cases when you are always asking for the same type of handler.</para>
+          <para
+            >You should never cache this value because other components are free to change it. This call is fairly quick, however, especially for cases when you are always asking for the same type of handler.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,10 +134,15 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of the handler, or null if there is no handler of the requested type.</para>
+          <para
+            >An instance of the handler, or null if there is no handler of the requested type.</para
+          >
         </returns>
         <param name="handlerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the handler to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the handler to get. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -125,14 +161,19 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the handler is not the topmost component on the stack, this will pop all handlers up to and including handler.</para>
+          <para
+            >If the handler is not the topmost component on the stack, this will pop all handlers up to and including handler.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Pops the given handler off of the stack.</para>
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handler to remove from the stack. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handler to remove from the stack. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -151,14 +192,19 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This handler will be used by all components that request a compatible handler type. If this handler does not support the requested type, the next handler on the stack will be used.</para>
+          <para
+            >This handler will be used by all components that request a compatible handler type. If this handler does not support the requested type, the next handler on the stack will be used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Pushes a new event handler on the stack.</para>
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handler to add to the stack. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handler to add to the stack. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

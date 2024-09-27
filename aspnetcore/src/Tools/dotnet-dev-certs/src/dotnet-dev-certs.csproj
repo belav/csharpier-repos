@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>exe</OutputType>
-    <Description>Command line tool to generate certificates used in ASP.NET Core during development.</Description>
+    <Description
+      >Command line tool to generate certificates used in ASP.NET Core during development.</Description
+    >
     <RootNamespace>Microsoft.AspNetCore.DeveloperCertificates.Tools</RootNamespace>
     <PackageTags>dotnet;developercertificates</PackageTags>
     <PackAsTool>true</PackAsTool>
@@ -11,15 +12,12 @@
     <IsShippingPackage>false</IsShippingPackage>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)CommandLineUtils\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)CertificateGeneration\**\*.cs" />
     <Compile Include="$(ToolSharedSourceRoot)CommandLine\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.DeveloperCertificates.XPlat.Tests" />
   </ItemGroup>
-
 </Project>

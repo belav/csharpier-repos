@@ -34,10 +34,11 @@
     <AspNetCoreAppReferenceAndPackage Include="Microsoft.Extensions.ObjectPool" />
     <AspNetCoreAppReferenceAndPackage Include="Microsoft.JSInterop" />
     <AspNetCoreAppReferenceAndPackage Include="Microsoft.Extensions.WebEncoders" />
-    <AspNetCoreAppReferenceAndPackage Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" />
+    <AspNetCoreAppReferenceAndPackage
+      Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions"
+    />
     <AspNetCoreAppReferenceAndPackage Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
     <AspNetCoreAppReferenceAndPackage Include="Microsoft.Extensions.Features" />
-
     <!-- These assemblies are only in the shared framework -->
     <AspNetCoreAppReference Include="Microsoft.AspNetCore" />
     <AspNetCoreAppReference Include="Microsoft.AspNetCore.Antiforgery" />

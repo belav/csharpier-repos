@@ -11,7 +11,9 @@
     <Compile Include="AccessRule.Tests.cs" />
     <Compile Include="AuditRule.Tests.cs" />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_Constructor.cs" />
-    <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_CreateFromRawSecurityDescriptor.cs" />
+    <Compile
+      Include="CommonSecurityDescriptor\CommonSecurityDescriptor_CreateFromRawSecurityDescriptor.cs"
+    />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_CreateFromSddlForm.cs" />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_DiscretionaryAcl.cs" />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_GetBinaryForm.cs" />
@@ -20,11 +22,19 @@
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_Owner.cs" />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_PurgeAccessControl.cs" />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_PurgeAudit.cs" />
-    <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_SetDiscretionaryAclProtection.cs" />
-    <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_SetSystemAclProtection.cs" />
+    <Compile
+      Include="CommonSecurityDescriptor\CommonSecurityDescriptor_SetDiscretionaryAclProtection.cs"
+    />
+    <Compile
+      Include="CommonSecurityDescriptor\CommonSecurityDescriptor_SetSystemAclProtection.cs"
+    />
     <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_SystemAcl.cs" />
-    <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_WasDiscretionaryAclCanonicalInitially.cs" />
-    <Compile Include="CommonSecurityDescriptor\CommonSecurityDescriptor_WasSystemAclCanonicalInitially.cs" />
+    <Compile
+      Include="CommonSecurityDescriptor\CommonSecurityDescriptor_WasDiscretionaryAclCanonicalInitially.cs"
+    />
+    <Compile
+      Include="CommonSecurityDescriptor\CommonSecurityDescriptor_WasSystemAclCanonicalInitially.cs"
+    />
     <Compile Include="DiscretionaryAcl\DiscretionaryAcl_AceCount.cs" />
     <Compile Include="DiscretionaryAcl\DiscretionaryAcl_AddAccess.cs" />
     <Compile Include="DiscretionaryAcl\DiscretionaryAcl_BinaryLength.cs" />
@@ -68,6 +78,8 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.IO.FileSystem.AccessControl\src\System.IO.FileSystem.AccessControl.csproj" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.IO.FileSystem.AccessControl\src\System.IO.FileSystem.AccessControl.csproj"
+    />
   </ItemGroup>
 </Project>

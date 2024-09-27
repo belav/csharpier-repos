@@ -1,10 +1,12 @@
 ﻿<out>
-  <test1>
+  <test1
+    >
 Part 1 = http://www.bayes.co.uk/xml/index.xml?/xml/utils/rechecker.xml
 Part 2 = http
 Part 3 = www.bayes.co.uk
 Part 4 = 
-Part 5 = /xml/index.xml?/xml/utils/rechecker.xml</test1>
+Part 5 = /xml/index.xml?/xml/utils/rechecker.xml</test1
+  >
   <test2>
 Part 1 = This
 Part 2 = is

@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.TrackBar.TickStyle" /> property of the <see cref="T:System.Windows.Forms.TrackBar" /> control.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.TrackBar.TickStyle" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.TrackBar" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the location of tick marks in a <see cref="T:System.Windows.Forms.TrackBar" /> control.</para>
+      <para
+        >Specifies the location of tick marks in a <see
+         cref="T:System.Windows.Forms.TrackBar" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -46,7 +59,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tick marks are located on the bottom of a horizontal control or on the right side of a vertical control.</para>
+          <para
+            >Tick marks are located on the bottom of a horizontal control or on the right side of a vertical control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +95,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tick marks are located on the top of a horizontal control or on the left of a vertical control.</para>
+          <para
+            >Tick marks are located on the top of a horizontal control or on the left of a vertical control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

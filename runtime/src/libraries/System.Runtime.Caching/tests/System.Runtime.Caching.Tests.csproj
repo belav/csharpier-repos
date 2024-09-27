@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppCurrent)-windows;$(NetFrameworkCurrent)</TargetFrameworks>
+    <TargetFrameworks
+      >$(NetCoreAppCurrent);$(NetCoreAppCurrent)-windows;$(NetFrameworkCurrent)</TargetFrameworks
+    >
     <EventSourceSupport>true</EventSourceSupport>
   </PropertyGroup>
   <ItemGroup>
@@ -14,8 +16,10 @@
     <Compile Include="System.Runtime.Caching\CountersTest.cs" />
     <Compile Include="System.Runtime.Caching\ObjectCacheTest.cs" />
     <Compile Include="System.Runtime.Caching\MemoryCacheTest.cs" />
-    <Compile Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs" Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
-
+    <Compile
+      Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs"
+      Link="Common\System\Diagnostics\Tracing\TestEventListener.cs"
+    />
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">

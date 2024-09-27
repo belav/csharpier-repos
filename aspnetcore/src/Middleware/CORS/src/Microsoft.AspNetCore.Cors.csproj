@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Description>CORS middleware and policy for ASP.NET Core to enable cross-origin resource sharing.
+    <Description
+      >CORS middleware and policy for ASP.NET Core to enable cross-origin resource sharing.
 Commonly used types:
 Microsoft.AspNetCore.Cors.DisableCorsAttribute
-Microsoft.AspNetCore.Cors.EnableCorsAttribute</Description>
+Microsoft.AspNetCore.Cors.EnableCorsAttribute</Description
+    >
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +13,6 @@ Microsoft.AspNetCore.Cors.EnableCorsAttribute</Description>
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http.Extensions" />
     <Reference Include="Microsoft.AspNetCore.Routing" />
@@ -21,10 +21,8 @@ Microsoft.AspNetCore.Cors.EnableCorsAttribute</Description>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
     <Reference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Cors.Test" />
-
     <Compile Include="$(SharedSourceRoot)Debugger\DebuggerHelpers.cs" LinkBase="Shared" />
   </ItemGroup>
 </Project>

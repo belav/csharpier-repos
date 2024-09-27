@@ -1,5 +1,11 @@
-<Type Name="ListView+ColumnHeaderCollection" FullName="System.Windows.Forms.ListView+ColumnHeaderCollection">
-  <TypeSignature Language="C#" Value="public class ListView.ColumnHeaderCollection : System.Collections.IList" />
+<Type
+  Name="ListView+ColumnHeaderCollection"
+  FullName="System.Windows.Forms.ListView+ColumnHeaderCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ListView.ColumnHeaderCollection : System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -24,7 +30,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ColumnHeaderCollection (System.Windows.Forms.ListView owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ColumnHeaderCollection (System.Windows.Forms.ListView owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.ListView" />
@@ -40,7 +49,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string text);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string text);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -59,7 +71,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual int Add (System.Windows.Forms.ColumnHeader value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int Add (System.Windows.Forms.ColumnHeader value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -79,7 +94,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string text, int width);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string text, int width);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,7 +118,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -121,7 +142,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string text, int width, System.Windows.Forms.HorizontalAlignment textAlign);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string text, int width, System.Windows.Forms.HorizontalAlignment textAlign);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ColumnHeader</ReturnType>
@@ -145,7 +169,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text, int width);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text, int width);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -168,7 +195,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, int imageIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, int imageIndex);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -195,7 +225,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, string imageKey);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader Add (string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, string imageKey);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -222,7 +255,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public virtual void AddRange (System.Windows.Forms.ColumnHeader[] values);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void AddRange (System.Windows.Forms.ColumnHeader[] values);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -257,7 +293,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (System.Windows.Forms.ColumnHeader value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (System.Windows.Forms.ColumnHeader value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -317,7 +356,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -334,7 +376,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Windows.Forms.ColumnHeader value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Windows.Forms.ColumnHeader value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -393,7 +438,10 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Windows.Forms.ColumnHeader value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Windows.Forms.ColumnHeader value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -414,7 +462,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, string text, int width);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, string text, int width);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -436,7 +487,10 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, string key, string text);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, string key, string text);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -458,7 +512,10 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -483,7 +540,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, string key, string text, int width);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, string key, string text, int width);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -507,7 +567,10 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, int imageIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, int imageIndex);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -535,7 +598,10 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, string imageKey);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, string key, string text, int width, System.Windows.Forms.HorizontalAlignment textAlign, string imageKey);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -579,7 +645,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader this[int index] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader this[int index] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ColumnHeader</ReturnType>
@@ -599,7 +668,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ColumnHeader this[string key] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ColumnHeader this[string key] { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -618,7 +690,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public virtual void Remove (System.Windows.Forms.ColumnHeader column);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Remove (System.Windows.Forms.ColumnHeader column);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -695,7 +770,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -711,7 +789,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -824,7 +905,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

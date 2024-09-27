@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="VisualStyleInformation" FullName="System.Windows.Forms.VisualStyles.VisualStyleInformation">
+<Type
+  Name="VisualStyleInformation"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleInformation"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleInformation" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -13,7 +16,9 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class exposes static properties that provide details about the current visual style of the operating system.</para>
+      <para
+        >This class exposes static properties that provide details about the current visual style of the operating system.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,7 +37,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,7 +64,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The Windows XP visual style provides three color schemes. This property returns "NormalColor" if the blue color scheme is active, "HomeStead" if the olive green color scheme is active, and "Metallic" if the silver color scheme is active. </para>
+          <para
+            >The Windows XP visual style provides three color schemes. This property returns "NormalColor" if the blue color scheme is active, "HomeStead" if the olive green color scheme is active, and "Metallic" if the silver color scheme is active. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,7 +88,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -88,7 +105,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlHighlightHot">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color ControlHighlightHot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color ControlHighlightHot { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -98,11 +118,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the values of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" /> properties internally.</para>
+          <para
+            >This property checks the values of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             and <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+             properties internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the color that the current visual style uses to indicate the hot state of a control.</para>
+          <para
+            >Gets the color that the current visual style uses to indicate the hot state of a control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -120,7 +150,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,7 +177,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -164,7 +204,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -186,11 +231,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Users can enable visual styles in the <ui>Appearance</ui> tab of the <ui>Display</ui> option in Control Panel. This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsSupportedByOS" /> property internally.</para>
+          <para
+            >Users can enable visual styles in the <ui
+            >Appearance</ui>
+
+             tab of the <ui
+            >Display</ui>
+
+             option in Control Panel. This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsSupportedByOS" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the user has enabled visual styles in the operating system.</para>
+          <para
+            >Gets a value indicating whether the user has enabled visual styles in the operating system.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -208,7 +266,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Visual styles are supported only on Windows XP Home Edition, Windows XP Professional, and Windows Server 2003.</para>
+          <para
+            >Visual styles are supported only on Windows XP Home Edition, Windows XP Professional, and Windows Server 2003.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -230,7 +290,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the values of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" /> properties internally.</para>
+          <para
+            >This property checks the values of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             and <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+             properties internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -252,7 +320,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property returns "NormalSize", "LargeFonts" or "ExtraLargeFonts". This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property returns "NormalSize", "LargeFonts" or "ExtraLargeFonts". This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -274,7 +347,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the values of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" /> properties internally.</para>
+          <para
+            >This property checks the values of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             and <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+             properties internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -286,7 +367,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TextControlBorder">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Color TextControlBorder { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Color TextControlBorder { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
@@ -296,11 +380,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property specifies the border color of controls such as <see cref="T:System.Windows.Forms.TextBox" /> and <see cref="T:System.Windows.Forms.ComboBox" />. This property checks the values of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> and <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" /> properties internally.</para>
+          <para
+            >This property specifies the border color of controls such as <see
+             cref="T:System.Windows.Forms.TextBox" />
+
+             and <see
+             cref="T:System.Windows.Forms.ComboBox" />
+
+            . This property checks the values of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             and <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+             properties internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the color that the current visual style uses to paint the borders of controls that contain text.</para>
+          <para
+            >Gets the color that the current visual style uses to paint the borders of controls that contain text.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -318,7 +418,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -340,7 +445,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property checks the value of the <see cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" /> property internally.</para>
+          <para
+            >This property checks the value of the <see
+             cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+             property internally.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

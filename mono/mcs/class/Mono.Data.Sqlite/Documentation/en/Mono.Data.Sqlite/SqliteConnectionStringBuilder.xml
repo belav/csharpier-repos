@@ -1,6 +1,15 @@
-<Type Name="SqliteConnectionStringBuilder" FullName="Mono.Data.Sqlite.SqliteConnectionStringBuilder">
-  <TypeSignature Language="C#" Value="public sealed class SqliteConnectionStringBuilder : System.Data.Common.DbConnectionStringBuilder" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteConnectionStringBuilder extends System.Data.Common.DbConnectionStringBuilder" />
+<Type
+  Name="SqliteConnectionStringBuilder"
+  FullName="Mono.Data.Sqlite.SqliteConnectionStringBuilder"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteConnectionStringBuilder : System.Data.Common.DbConnectionStringBuilder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteConnectionStringBuilder extends System.Data.Common.DbConnectionStringBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteConnectionStringBuilder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -40,8 +52,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteConnectionStringBuilder (string connectionString);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string connectionString) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteConnectionStringBuilder (string connectionString);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string connectionString) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,9 +69,11 @@
       </Parameters>
       <Docs>
         <param name="connectionString">The connection string to parse</param>
-        <summary>
+        <summary
+          >
             Constructs a new instance of the class using the specified connection string.
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -76,10 +96,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets whethor not to store GUID's in binary format.  The default is True
             which saves space in the database.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -135,16 +157,24 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets the filename to open on the connection string.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DateTimeFormat">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SQLiteDateFormats DateTimeFormat { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Data.Sqlite.SQLiteDateFormats DateTimeFormat" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SQLiteDateFormats DateTimeFormat { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Data.Sqlite.SQLiteDateFormats DateTimeFormat"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -154,23 +184,33 @@
           <AttributeName>System.ComponentModel.Browsable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>Mono.Data.Sqlite.SQLiteDateFormats</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets the datetime format for the connection.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DefaultIsolationLevel">
-      <MemberSignature Language="C#" Value="public System.Data.IsolationLevel DefaultIsolationLevel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.IsolationLevel DefaultIsolationLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.IsolationLevel DefaultIsolationLevel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.IsolationLevel DefaultIsolationLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,19 +220,25 @@
           <AttributeName>System.ComponentModel.Browsable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DisplayName("Default Isolation Level")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DisplayName("Default Isolation Level")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>System.Data.IsolationLevel</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Sets the default isolation level for transactions on the connection.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -219,10 +265,12 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/sets the default command timeout for newly-created commands.  This is especially useful for
             commands used internally such as inside a SqliteTransaction, where setting the timeout is not possible.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -246,10 +294,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Determines whether or not the connection will automatically participate
             in the current distributed transaction (if one exists)
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -273,17 +323,25 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             If set to true, will throw an exception if the database specified in the connection
             string does not exist.  If false, the database will be created automatically.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="JournalMode">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SQLiteJournalModeEnum JournalMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Data.Sqlite.SQLiteJournalModeEnum JournalMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SQLiteJournalModeEnum JournalMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Data.Sqlite.SQLiteJournalModeEnum JournalMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -293,7 +351,9 @@
           <AttributeName>System.ComponentModel.Browsable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.DisplayName("Journal Mode")</AttributeName>
@@ -303,9 +363,11 @@
         <ReturnType>Mono.Data.Sqlite.SQLiteJournalModeEnum</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Determines how SQLite handles the transaction journal file.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -332,10 +394,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             If enabled, uses the legacy 3.xx format for maximum compatibility, but results in larger
             database sizes.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -362,9 +426,11 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets the maximum number of pages the database may hold
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -446,9 +512,11 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets whether or not to use connection pooling.  The default is "False"
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -475,16 +543,24 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             When enabled, the database will be opened for read-only access and writing will be disabled.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SyncMode">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SynchronizationModes SyncMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Data.Sqlite.SynchronizationModes SyncMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SynchronizationModes SyncMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Data.Sqlite.SynchronizationModes SyncMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -494,7 +570,9 @@
           <AttributeName>System.ComponentModel.Browsable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.DisplayName("Synchronous")</AttributeName>
@@ -504,16 +582,24 @@
         <ReturnType>Mono.Data.Sqlite.SynchronizationModes</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets the synchronization mode (file flushing) of the connection string.  Default is "Normal".
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="TryGetValue">
-      <MemberSignature Language="C#" Value="public override bool TryGetValue (string keyword, out object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool TryGetValue(string keyword, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool TryGetValue (string keyword, out object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool TryGetValue(string keyword, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -523,14 +609,16 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="keyword" Type="System.String" />
-        <Parameter Name="value" Type="System.Object&amp;" RefType="out" />
+        <Parameter Name="value" Type="System.Object&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="keyword">The keyword to retrieve settings for</param>
         <param name="value">The resulting parameter value</param>
-        <summary>
+        <summary
+          >
             Helper function for retrieving values from the connectionstring
-            </summary>
+            </summary
+        >
         <returns>Returns true if the value was found and returned</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -577,9 +665,11 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets the encoding for the connection string.  The default is "False" which indicates UTF-8 encoding.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -603,9 +693,11 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/Sets the default version of the SQLite engine to instantiate.  Currently the only valid value is 3, indicating version 3 of the sqlite library.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

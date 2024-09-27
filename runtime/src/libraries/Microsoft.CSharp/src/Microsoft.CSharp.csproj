@@ -1,26 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)</TargetFrameworks>
     <NoWarn>$(NoWarn);nullable;CA1859</NoWarn>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
-    <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
+    <TargetPlatformIdentifier
+      >$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier
+    >
     <EnableComBinder Condition="'$(TargetPlatformIdentifier)' == 'windows'">true</EnableComBinder>
-    <DefineConstants Condition="'$(EnableComBinder)' == 'true'">$(DefineConstants);ENABLECOMBINDER</DefineConstants>
+    <DefineConstants Condition="'$(EnableComBinder)' == 'true'"
+      >$(DefineConstants);ENABLECOMBINDER</DefineConstants
+    >
     <AllowUnsafeBlocks Condition="'$(EnableComBinder)' == 'true'">true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);LEGACY_GETRESOURCESTRING_USER</DefineConstants>
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkDescriptorsXmls Include="$(ILLinkDirectory)ILLink.Descriptors.Shared.xml" />
-    <ILLinkDescriptorsXmls Condition="'$(TargetPlatformIdentifier)' == 'windows'" Include="$(ILLinkDirectory)ILLink.Descriptors.Windows.xml" />
+    <ILLinkDescriptorsXmls
+      Condition="'$(TargetPlatformIdentifier)' == 'windows'"
+      Include="$(ILLinkDirectory)ILLink.Descriptors.Windows.xml"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Microsoft\CSharp\RuntimeBinder\ArgumentObject.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Binder.cs" />
@@ -97,7 +100,9 @@
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\LocalVariableSymbol.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\MethodOrPropertySymbol.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\MethodSymbol.cs" />
-    <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\NamespaceOrAggregateSymbol.cs" />
+    <Compile
+      Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\NamespaceOrAggregateSymbol.cs"
+    />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\NamespaceSymbol.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\ParentSymbol.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Symbols\PropertySymbol.cs" />
@@ -132,15 +137,21 @@
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\LocalVariable.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\MemberGroup.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\MethodInfo.cs" />
-    <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\NamedArgumentSpecification.cs" />
+    <Compile
+      Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\NamedArgumentSpecification.cs"
+    />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\Property.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\PropertyInfo.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\Temporary.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\TypeOf.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\UnaryOperator.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\UserDefinedConversion.cs" />
-    <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\UserDefinedLogicalOperator.cs" />
-    <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\Visitors\ExpressionTreeRewriter.cs" />
+    <Compile
+      Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\UserDefinedLogicalOperator.cs"
+    />
+    <Compile
+      Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\Visitors\ExpressionTreeRewriter.cs"
+    />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\Visitors\ExprVisitorBase.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\Tree\ZeroInitialize.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Semantics\TypeBind.cs" />
@@ -172,20 +183,34 @@
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Syntax\PredefinedType.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Syntax\TokenFacts.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\Syntax\TokenKind.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Numerics\Hashing\HashHelpers.cs" Link="Common\System\Collections\HashHelpers.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Numerics\Hashing\HashHelpers.cs"
+      Link="Common\System\Collections\HashHelpers.cs"
+    />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(EnableComBinder)'=='true'">
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs" Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\OleAut32\Interop.VariantClear.cs" Link="Common\Interop\Windows\OleAut32\Interop.VariantClear.cs" />
-    <Compile Include="$(CommonPath)System\Runtime\InteropServices\ComEventsSink.cs" Link="Common\System\Runtime\InteropServices\ComEventsSink.cs" />
-    <Compile Include="$(CommonPath)System\Runtime\InteropServices\ComEventsMethod.cs" Link="Common\System\Runtime\InteropServices\ComEventsMethod.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\OleAut32\Interop.VariantClear.cs"
+      Link="Common\Interop\Windows\OleAut32\Interop.VariantClear.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Runtime\InteropServices\ComEventsSink.cs"
+      Link="Common\System\Runtime\InteropServices\ComEventsSink.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Runtime\InteropServices\ComEventsMethod.cs"
+      Link="Common\System\Runtime\InteropServices\ComEventsMethod.cs"
+    />
     <Compile Include="$(CommonPath)System\Runtime\InteropServices\IDispatch.cs">
-        <Link>Common\System\Runtime\InteropServices\IDispatch.cs</Link>
+      <Link>Common\System\Runtime\InteropServices\IDispatch.cs</Link>
     </Compile>
     <Compile Include="$(CommonPath)System\Runtime\InteropServices\BuiltInVariantExtensions.cs">
-        <Link>Common\System\Runtime\InteropServices\BuiltInVariantExtensions.cs</Link>
+      <Link>Common\System\Runtime\InteropServices\BuiltInVariantExtensions.cs</Link>
     </Compile>
     <Compile Include="Microsoft\CSharp\RuntimeBinder\ComInterop\ArgBuilder.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\ComInterop\BoolArgBuilder.cs" />
@@ -238,13 +263,11 @@
     <Compile Include="Microsoft\CSharp\RuntimeBinder\ComInterop\VariantArgBuilder.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\ComInterop\VariantArray.cs" />
     <Compile Include="Microsoft\CSharp\RuntimeBinder\ComInterop\VariantBuilder.cs" />
-
     <Reference Include="System.Reflection.Emit" />
     <Reference Include="System.Reflection.Emit.ILGeneration" />
     <Reference Include="System.Reflection.Emit.Lightweight" />
     <Reference Include="System.Reflection.Primitives" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
@@ -256,5 +279,4 @@
     <Reference Include="System.Runtime.InteropServices" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

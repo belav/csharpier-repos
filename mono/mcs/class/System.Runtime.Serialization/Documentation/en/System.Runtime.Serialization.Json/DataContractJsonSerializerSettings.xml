@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataContractJsonSerializerSettings" FullName="System.Runtime.Serialization.Json.DataContractJsonSerializerSettings">
+<Type
+  Name="DataContractJsonSerializerSettings"
+  FullName="System.Runtime.Serialization.Json.DataContractJsonSerializerSettings"
+>
   <TypeSignature Language="C#" Value="public class DataContractJsonSerializerSettings" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DataContractJsonSerializerSettings extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit DataContractJsonSerializerSettings extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +20,21 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> settings.</para>
+      <para
+        >Specifies <see
+         cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" />
+
+         settings.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DataContractJsonSerializerSettings ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +44,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializerSettings" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializerSettings" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DataContractSurrogate">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,13 +74,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a surrogate type that is currently active for given IDataContractSurrogate instance.</para>
+          <para
+            >Gets or sets a surrogate type that is currently active for given IDataContractSurrogate instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DateTimeFormat">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.DateTimeFormat DateTimeFormat { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Serialization.DateTimeFormat DateTimeFormat" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.DateTimeFormat DateTimeFormat { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Serialization.DateTimeFormat DateTimeFormat"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -68,13 +101,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a DateTimeFormat that defines the culturally appropriate format of displaying dates and times.</para>
+          <para
+            >Gets or sets a DateTimeFormat that defines the culturally appropriate format of displaying dates and times.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EmitTypeInformation">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.EmitTypeInformation EmitTypeInformation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Runtime.Serialization.EmitTypeInformation EmitTypeInformation" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.EmitTypeInformation EmitTypeInformation { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Runtime.Serialization.EmitTypeInformation EmitTypeInformation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -87,7 +128,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the data contract JSON serializer settings to emit type information.</para>
+          <para
+            >Gets or sets the data contract JSON serializer settings to emit type information.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -106,26 +149,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies whether to ignore data supplied by an extension of the class when the class is being serialized or deserialized.</para>
+          <para
+            >Gets or sets a value that specifies whether to ignore data supplied by an extension of the class when the class is being serialized or deserialized.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="KnownTypes">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;Type&gt; KnownTypes { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; KnownTypes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<Type> KnownTypes { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IEnumerable`1<class System.Type> KnownTypes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Type&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable<System.Type></ReturnType>
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a collection of types that may be present in the object graph serialized using this instance the DataContractJsonSerializerSettings.</para>
+          <para
+            >Gets or sets a collection of types that may be present in the object graph serialized using this instance the DataContractJsonSerializerSettings.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -144,7 +197,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the maximum number of items in an object graph to serialize or deserialize.</para>
+          <para
+            >Gets or sets the maximum number of items in an object graph to serialize or deserialize.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -201,7 +256,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies whether to use a simple dictionary format.</para>
+          <para
+            >Gets or sets a value that specifies whether to use a simple dictionary format.</para
+          >
         </summary>
       </Docs>
     </Member>

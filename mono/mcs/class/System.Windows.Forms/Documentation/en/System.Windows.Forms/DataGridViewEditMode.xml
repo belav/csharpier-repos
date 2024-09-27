@@ -12,12 +12,33 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.DataGridView.EditMode" /> property of the <see cref="T:System.Windows.Forms.DataGridView" /> control. </para>
-      <para>All <see cref="T:System.Windows.Forms.DataGridViewEditMode" /> values except for <see cref="F:System.Windows.Forms.DataGridViewEditMode.EditProgrammatically" /> allow a user to double-click a cell to begin editing it.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.DataGridView.EditMode" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         control. </para
+      >
+      <para
+        >All <see
+         cref="T:System.Windows.Forms.DataGridViewEditMode" />
+
+         values except for <see
+         cref="F:System.Windows.Forms.DataGridViewEditMode.EditProgrammatically" />
+
+         allow a user to double-click a cell to begin editing it.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how a user starts cell editing in the <see cref="T:System.Windows.Forms.DataGridView" /> control.</para>
+      <para
+        >Specifies how a user starts cell editing in the <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +52,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Editing begins when the cell receives focus. This mode is useful when pressing the TAB key to enter values across a row, or when pressing the ENTER key to enter values down a column.</para>
+          <para
+            >Editing begins when the cell receives focus. This mode is useful when pressing the TAB key to enter values across a row, or when pressing the ENTER key to enter values down a column.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -48,7 +71,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Editing begins when F2 is pressed while the cell has focus. This mode places the selection point at the end of the cell contents.</para>
+          <para
+            >Editing begins when F2 is pressed while the cell has focus. This mode places the selection point at the end of the cell contents.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -82,7 +107,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Editing begins when any alphanumeric key or F2 is pressed while the cell has focus.</para>
+          <para
+            >Editing begins when any alphanumeric key or F2 is pressed while the cell has focus.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -99,7 +126,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Editing begins only when the <see cref="M:System.Windows.Forms.DataGridView.BeginEdit(System.Boolean)" /> method is called. </para>
+          <para
+            >Editing begins only when the <see
+             cref="M:System.Windows.Forms.DataGridView.BeginEdit(System.Boolean)" />
+
+             method is called. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

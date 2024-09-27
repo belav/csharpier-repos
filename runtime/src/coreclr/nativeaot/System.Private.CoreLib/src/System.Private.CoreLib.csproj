@@ -4,7 +4,6 @@
     <!-- AD0001 : https://github.com/dotnet/runtime/issues/90356 -->
     <NoWarn>$(NoWarn);AD0001</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkSubstitutionsXmls Include="ILLink\ILLink.Substitutions.xml" />
     <ILLinkLinkAttributesXmls Include="ILLink\ILLink.LinkAttributes.xml" />
@@ -12,22 +11,21 @@
   <ItemGroup Condition="'$(TargetsUnix)'=='true'">
     <ILLinkSubstitutionsXmls Include="ILLink\ILLink.Substitutions.Unix.xml" />
   </ItemGroup>
-
   <!-- Note that various places in SPCL depend on this resource name i.e. TplEventSource -->
   <ItemGroup Label="Embedded Resources">
-    <EmbeddedResource Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\Resources\Strings.resx">
+    <EmbeddedResource
+      Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\Resources\Strings.resx"
+    >
       <GenerateSource>true</GenerateSource>
       <ClassName>System.SR</ClassName>
     </EmbeddedResource>
   </ItemGroup>
-
   <PropertyGroup>
     <DefineConstants>SYSTEM_PRIVATE_CORELIB;$(DefineConstants)</DefineConstants>
     <SkipCommonResourcesIncludes>true</SkipCommonResourcesIncludes>
     <FeatureNativeAot>true</FeatureNativeAot>
     <RuntimeBasePath>..\..\Runtime.Base\src\</RuntimeBasePath>
   </PropertyGroup>
-
   <PropertyGroup>
     <FeaturePortableThreadPool>true</FeaturePortableThreadPool>
   </PropertyGroup>
@@ -38,7 +36,6 @@
     <FeatureHardwareIntrinsics>true</FeatureHardwareIntrinsics>
     <FeatureSharedLowLevelLock>true</FeatureSharedLowLevelLock>
   </PropertyGroup>
-
   <!-- Sources -->
   <ItemGroup>
     <Compile Include="$(CompilerCommonPath)\Internal\Runtime\DehydratedData.cs">
@@ -59,7 +56,9 @@
     <Compile Include="Internal\Runtime\CompilerHelpers\LibraryInitializer.cs" />
     <Compile Include="Internal\Runtime\CompilerHelpers\ReflectionHelpers.cs" />
     <Compile Include="Internal\Runtime\CompilerHelpers\SharedCodeHelpers.cs" />
-    <Compile Include="Internal\Runtime\CompilerHelpers\StartupCode\StartupCodeHelpers.Reflection.cs" />
+    <Compile
+      Include="Internal\Runtime\CompilerHelpers\StartupCode\StartupCodeHelpers.Reflection.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(AotCommonPath)\Internal\Runtime\CompilerHelpers\StartupCodeHelpers.cs">
@@ -96,7 +95,9 @@
     </Compile>
     <Compile Include="Internal\Runtime\FrozenObjectHeapManager.cs" />
     <Compile Include="Internal\Runtime\ThreadStatics.cs" />
-    <Compile Include="Internal\Runtime\CompilerHelpers\StartupCode\StartupCodeHelpers.Extensions.cs" />
+    <Compile
+      Include="Internal\Runtime\CompilerHelpers\StartupCode\StartupCodeHelpers.Extensions.cs"
+    />
     <Compile Include="Internal\Runtime\CompilerHelpers\ArrayHelpers.cs" />
     <Compile Include="Internal\Runtime\CompilerHelpers\InteropHelpers.cs" />
     <Compile Include="Internal\Runtime\CompilerHelpers\LdTokenHelpers.cs" />
@@ -127,7 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internal\Reflection\Core\NonPortable\RuntimeTypeUnifier.cs" />
-    <Compile Include="Internal\Reflection\Extensions\NonPortable\CustomAttributeInheritanceRules.cs" />
+    <Compile
+      Include="Internal\Reflection\Extensions\NonPortable\CustomAttributeInheritanceRules.cs"
+    />
     <Compile Include="Internal\Reflection\Extensions\NonPortable\CustomAttributeInstantiator.cs" />
     <Compile Include="Internal\Reflection\Extensions\NonPortable\CustomAttributeSearcher.cs" />
   </ItemGroup>
@@ -154,7 +157,9 @@
     <Compile Include="System\Reflection\MethodInvoker.cs" />
     <Compile Include="System\Reflection\ModifiedType.NativeAot.cs" />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeFunctionPointerTypeInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeFunctionPointerTypeInfo.UnificationKey.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\RuntimeFunctionPointerTypeInfo.UnificationKey.cs"
+    />
     <Compile Include="System\CrashInfo.cs" />
     <Compile Include="System\Runtime\InteropServices\CriticalHandle.NativeAot.cs" />
     <Compile Include="System\Activator.NativeAot.cs" />
@@ -178,7 +183,9 @@
     <Compile Include="System\Diagnostics\StackFrameExtensions.cs" />
     <Compile Include="System\Diagnostics\StackTrace.NativeAot.cs" />
     <Compile Include="System\Diagnostics\Eventing\EventPipe.NativeAot.cs" />
-    <Compile Include="System\Diagnostics\Eventing\NativeRuntimeEventSource.Threading.NativeSinks.NativeAot.cs" />
+    <Compile
+      Include="System\Diagnostics\Eventing\NativeRuntimeEventSource.Threading.NativeSinks.NativeAot.cs"
+    />
     <Compile Include="System\Enum.NativeAot.cs" />
     <Compile Include="System\Environment.NativeAot.cs" />
     <Compile Include="System\GC.NativeAot.cs" />
@@ -201,20 +208,38 @@
     <Compile Include="System\Runtime\TypeLoaderExports.cs" />
     <Compile Include="System\Runtime\ThunkPool.cs" />
     <Compile Include="System\Runtime\InitializeFinalizerThread.cs" />
-    <Compile Include="System\Runtime\InteropServices\ComEventsHelper.NativeAot.cs" Condition="'$(FeatureCominterop)' == 'true'" />
-    <Compile Include="System\Runtime\InteropServices\ComWrappers.NativeAot.cs" Condition="'$(FeatureComWrappers)' == 'true'" />
+    <Compile
+      Include="System\Runtime\InteropServices\ComEventsHelper.NativeAot.cs"
+      Condition="'$(FeatureCominterop)' == 'true'"
+    />
+    <Compile
+      Include="System\Runtime\InteropServices\ComWrappers.NativeAot.cs"
+      Condition="'$(FeatureComWrappers)' == 'true'"
+    />
     <Compile Include="System\Runtime\InteropServices\GCHandle.NativeAot.cs" />
     <Compile Include="System\Runtime\InteropServices\InteropExtensions.cs" />
     <Compile Include="System\Runtime\InteropServices\NativeFunctionPointerWrapper.cs" />
     <Compile Include="System\Runtime\InteropServices\NativeLibrary.NativeAot.cs" />
     <Compile Include="System\Runtime\InteropServices\PInvokeMarshal.cs" />
     <Compile Include="System\Runtime\InteropServices\Marshal.NativeAot.cs" />
-    <Compile Include="System\Runtime\InteropServices\Marshal.Com.cs" Condition="'$(FeatureCominterop)' == 'true'" />
+    <Compile
+      Include="System\Runtime\InteropServices\Marshal.Com.cs"
+      Condition="'$(FeatureCominterop)' == 'true'"
+    />
     <Compile Include="System\Runtime\InteropServices\MemoryMarshal.NativeAot.cs" />
-    <Compile Include="System\Runtime\InteropServices\TrackerObjectManager.NativeAot.cs" Condition="'$(FeatureComWrappers)' == 'true'" />    
-    <Compile Include="System\Runtime\InteropServices\ObjectiveCMarshal.NativeAot.cs" Condition="'$(FeatureObjCMarshal)' == 'true'" />
+    <Compile
+      Include="System\Runtime\InteropServices\TrackerObjectManager.NativeAot.cs"
+      Condition="'$(FeatureComWrappers)' == 'true'"
+    />
+    <Compile
+      Include="System\Runtime\InteropServices\ObjectiveCMarshal.NativeAot.cs"
+      Condition="'$(FeatureObjCMarshal)' == 'true'"
+    />
     <Compile Include="System\Runtime\InteropServices\UnsafeGCHandle.cs" />
-    <Compile Include="System\Runtime\Intrinsics\X86\X86Base.NativeAot.cs" Condition="'$(SupportsX86Intrinsics)' == 'true'" />
+    <Compile
+      Include="System\Runtime\Intrinsics\X86\X86Base.NativeAot.cs"
+      Condition="'$(SupportsX86Intrinsics)' == 'true'"
+    />
     <Compile Include="System\Runtime\JitInfo.NativeAot.cs" />
     <Compile Include="System\Runtime\Loader\AssemblyLoadContext.NativeAot.cs" />
     <Compile Include="System\String.NativeAot.cs" />
@@ -276,7 +301,7 @@
     </Compile>
     <Compile Include="$(CommonPath)\Interop\Windows\Ole32\Interop.CoGetContextToken.cs">
       <Link>Interop\Windows\Ole32\Interop.CoGetContextToken.cs</Link>
-    </Compile>    
+    </Compile>
     <Compile Include="$(CommonPath)\Interop\Windows\OleAut32\Interop.VariantClear.cs">
       <Link>Interop\Windows\OleAut32\Interop.VariantClear.cs</Link>
     </Compile>
@@ -376,9 +401,15 @@
   <!-- Reflection.Core -->
   <ItemGroup>
     <Compile Include="System\ActivatorImplementation.cs" />
-    <Compile Include="System\Reflection\Runtime\Assemblies\NativeFormat\NativeFormatRuntimeAssembly.cs" />
-    <Compile Include="System\Reflection\Runtime\Assemblies\NativeFormat\NativeFormatRuntimeAssembly.GetTypeCore.CaseInsensitive.cs" />
-    <Compile Include="System\Reflection\Runtime\Assemblies\NativeFormat\NativeFormatRuntimeAssembly.GetTypeCore.CaseSensitive.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\Assemblies\NativeFormat\NativeFormatRuntimeAssembly.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\Assemblies\NativeFormat\NativeFormatRuntimeAssembly.GetTypeCore.CaseInsensitive.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\Assemblies\NativeFormat\NativeFormatRuntimeAssembly.GetTypeCore.CaseSensitive.cs"
+    />
     <Compile Include="System\Reflection\Runtime\Assemblies\RuntimeAssemblyInfo.cs" />
     <Compile Include="System\Reflection\Runtime\BindingFlagSupport\ConstructorPolicies.cs" />
     <Compile Include="System\Reflection\Runtime\BindingFlagSupport\EventPolicies.cs" />
@@ -394,9 +425,13 @@
     <Compile Include="System\Reflection\Runtime\BindingFlagSupport\QueryResult.cs" />
     <Compile Include="System\Reflection\Runtime\BindingFlagSupport\QueryResult.Enumerator.cs" />
     <Compile Include="System\Reflection\Runtime\BindingFlagSupport\Shared.cs" />
-    <Compile Include="System\Reflection\Runtime\CustomAttributes\NativeFormat\NativeFormatCustomAttributeData.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\CustomAttributes\NativeFormat\NativeFormatCustomAttributeData.cs"
+    />
     <Compile Include="System\Reflection\Runtime\CustomAttributes\RuntimeCustomAttributeData.cs" />
-    <Compile Include="System\Reflection\Runtime\CustomAttributes\RuntimePseudoCustomAttributeData.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\CustomAttributes\RuntimePseudoCustomAttributeData.cs"
+    />
     <Compile Include="System\Reflection\Runtime\Dispensers\DefaultDispenserPolicy.cs" />
     <Compile Include="System\Reflection\Runtime\Dispensers\Dispenser.cs" />
     <Compile Include="System\Reflection\Runtime\Dispensers\DispenserAlgorithm.cs" />
@@ -405,11 +440,19 @@
     <Compile Include="System\Reflection\Runtime\Dispensers\DispenserScenario.cs" />
     <Compile Include="System\Reflection\Runtime\Dispensers\DispenserThatAlwaysCreates.cs" />
     <Compile Include="System\Reflection\Runtime\Dispensers\DispenserThatAlwaysReuses.cs" />
-    <Compile Include="System\Reflection\Runtime\Dispensers\DispenserThatReusesAsLongAsKeyIsAlive.cs" />
-    <Compile Include="System\Reflection\Runtime\Dispensers\DispenserThatReusesAsLongAsValueIsAlive.cs" />
-    <Compile Include="System\Reflection\Runtime\EventInfos\NativeFormat\NativeFormatRuntimeEventInfo.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\Dispensers\DispenserThatReusesAsLongAsKeyIsAlive.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\Dispensers\DispenserThatReusesAsLongAsValueIsAlive.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\EventInfos\NativeFormat\NativeFormatRuntimeEventInfo.cs"
+    />
     <Compile Include="System\Reflection\Runtime\EventInfos\RuntimeEventInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\FieldInfos\NativeFormat\NativeFormatRuntimeFieldInfo.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\FieldInfos\NativeFormat\NativeFormatRuntimeFieldInfo.cs"
+    />
     <Compile Include="System\Reflection\Runtime\FieldInfos\RuntimeFieldInfo.cs" />
     <Compile Include="System\Reflection\Runtime\General\Assignability.cs" />
     <Compile Include="System\Reflection\Runtime\General\Dispensers.NativeFormat.cs" />
@@ -417,7 +460,9 @@
     <Compile Include="System\Reflection\Runtime\General\ReflectionCoreCallbacksImplementation.cs" />
     <Compile Include="System\Reflection\Runtime\General\Dispensers.cs" />
     <Compile Include="System\Reflection\Runtime\General\Helpers.cs" />
-    <Compile Include="System\Reflection\Runtime\General\IRuntimeMemberInfoWithNoMetadataDefinition.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\General\IRuntimeMemberInfoWithNoMetadataDefinition.cs"
+    />
     <Compile Include="System\Reflection\Runtime\General\LegacyCustomAttributeApis.cs" />
     <Compile Include="System\Reflection\Runtime\General\MetadataReaderExtensions.cs" />
     <Compile Include="System\Reflection\Runtime\General\MetadataReaderExtensions.NativeFormat.cs" />
@@ -434,7 +479,9 @@
     <Compile Include="System\Reflection\Runtime\General\QHandles.NativeFormat.cs" />
     <Compile Include="System\Reflection\Runtime\General\QSignatureTypeHandle.cs" />
     <Compile Include="System\Reflection\Runtime\General\QSignatureTypeHandle.NativeFormat.cs" />
-    <Compile Include="System\Reflection\Runtime\MethodInfos\NativeFormat\NativeFormatMethodCommon.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\MethodInfos\NativeFormat\NativeFormatMethodCommon.cs"
+    />
     <Compile Include="System\Reflection\Runtime\MethodInfos\CustomMethodInvoker.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\CustomMethodInvokerAction.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\CustomMethodMapper.cs" />
@@ -442,7 +489,9 @@
     <Compile Include="System\Reflection\Runtime\MethodInfos\CustomMethodMapper.String.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\InvokerOptions.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\OpenMethodInvoker.cs" />
-    <Compile Include="System\Reflection\Runtime\MethodInfos\RuntimeConstructedGenericMethodInfo.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\MethodInfos\RuntimeConstructedGenericMethodInfo.cs"
+    />
     <Compile Include="System\Reflection\Runtime\MethodInfos\RuntimeConstructorInfo.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\RuntimeDummyMethodInfo.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\RuntimeMethodHelpers.cs" />
@@ -455,31 +504,59 @@
     <Compile Include="System\Reflection\Runtime\MethodInfos\SyntheticMethodId.cs" />
     <Compile Include="System\Reflection\Runtime\MethodInfos\VirtualRuntimeParameterInfoArray.cs" />
     <Compile Include="System\Reflection\Runtime\Modules\RuntimeModule.cs" />
-    <Compile Include="System\Reflection\Runtime\Modules\NativeFormat\NativeFormatRuntimeModule.cs" />
-    <Compile Include="System\Reflection\Runtime\ParameterInfos\NativeFormat\NativeFormatMethodParameterInfo.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\Modules\NativeFormat\NativeFormatRuntimeModule.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\ParameterInfos\NativeFormat\NativeFormatMethodParameterInfo.cs"
+    />
     <Compile Include="System\Reflection\Runtime\ParameterInfos\RuntimeFatMethodParameterInfo.cs" />
     <Compile Include="System\Reflection\Runtime\ParameterInfos\RuntimeMethodParameterInfo.cs" />
     <Compile Include="System\Reflection\Runtime\ParameterInfos\RuntimeParameterInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\ParameterInfos\RuntimePropertyIndexParameterInfo.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\ParameterInfos\RuntimePropertyIndexParameterInfo.cs"
+    />
     <Compile Include="System\Reflection\Runtime\ParameterInfos\RuntimeThinMethodParameterInfo.cs" />
     <Compile Include="System\Reflection\Runtime\ParameterInfos\RuntimeSyntheticParameterInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\PropertyInfos\NativeFormat\NativeFormatRuntimePropertyInfo.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\PropertyInfos\NativeFormat\NativeFormatRuntimePropertyInfo.cs"
+    />
     <Compile Include="System\Reflection\Runtime\PropertyInfos\RuntimePropertyInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeNamedTypeInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeNamedTypeInfo.UnificationKey.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeTypeInfo.CoreGetDeclared.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeNamedTypeInfo.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfo.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeNamedTypeInfo.UnificationKey.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeTypeInfo.CoreGetDeclared.cs"
+    />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeArrayTypeInfo.cs" />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeByRefTypeInfo.cs" />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeConstructedGenericTypeInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeConstructedGenericTypeInfo.UnificationKey.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\RuntimeConstructedGenericTypeInfo.UnificationKey.cs"
+    />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeGenericParameterTypeInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForMethods.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForTypes.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForTypes.UnificationKey.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForMethods.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForMethods.UnificationKey.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForTypes.cs"
+    />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\NativeFormat\NativeFormatRuntimeGenericParameterTypeInfoForTypes.UnificationKey.cs"
+    />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeHasElementTypeInfo.cs" />
-    <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeHasElementTypeInfo.UnificationKey.cs" />
+    <Compile
+      Include="System\Reflection\Runtime\TypeInfos\RuntimeHasElementTypeInfo.UnificationKey.cs"
+    />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeNamedTypeInfo.cs" />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimePointerTypeInfo.cs" />
     <Compile Include="System\Reflection\Runtime\TypeInfos\RuntimeTypeDefinitionTypeInfo.cs" />
@@ -505,12 +582,21 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <DefineConstants>INPLACE_RUNTIME;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'arm'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'armel'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'wasm'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-
-    <IntermediatesDir>$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir>
-    <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))">$(IntermediatesDir)\ide</IntermediatesDir>
+    <DefineConstants Condition="'$(Platform)' == 'arm'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(Platform)' == 'armel'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(Platform)' == 'wasm'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <IntermediatesDir
+      >$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir
+    >
+    <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))"
+      >$(IntermediatesDir)\ide</IntermediatesDir
+    >
   </PropertyGroup>
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <Compile Include="$(RuntimeBasePath)System\Runtime\CachedInterfaceDispatch.cs">
@@ -553,13 +639,17 @@
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <Compile Include="$(IntermediatesDir)\nativeaot\Runtime\Full\AsmOffsets.cs" />
   </ItemGroup>
-
-  <Import Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems" Label="Shared" />
-
+  <Import
+    Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems"
+    Label="Shared"
+  />
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <!-- This is the T4 template service and is added by VS anytime you modify a T4 template. Required for .tt files. -->
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

@@ -3,10 +3,14 @@
     <Assembly Name="System.Data" Version="2.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.InteropServices.ComCompatibleVersion(1, 0, 3300, 0)</AttributeName>
+          <AttributeName
+            >System.Runtime.InteropServices.ComCompatibleVersion(1, 0, 3300, 0)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyFileVersion("2.0.50727.1433")</AttributeName>
@@ -24,16 +28,22 @@
           <AttributeName>System.CLSCompliant(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Resources.SatelliteContractVersion("2.0.0.0")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("MONO development team")</AttributeName>

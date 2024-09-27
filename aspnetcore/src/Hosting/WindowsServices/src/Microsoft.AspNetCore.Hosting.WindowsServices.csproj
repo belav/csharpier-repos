@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Description>ASP.NET Core hosting infrastructure and startup logic for web applications running within a Windows service.</Description>
+    <Description
+      >ASP.NET Core hosting infrastructure and startup logic for web applications running within a Windows service.</Description
+    >
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>aspnetcore;hosting</PackageTags>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
   </ItemGroup>
@@ -17,7 +17,6 @@
   <ItemGroup>
     <Compile Update="WebHostService.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Hosting.WindowsServices.Tests" />
   </ItemGroup>

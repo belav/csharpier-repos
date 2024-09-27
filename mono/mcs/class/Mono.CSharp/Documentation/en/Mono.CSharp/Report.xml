@@ -9,9 +9,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>
+    <summary
+      >
             This class is used to report errors and warnings to te user.
-            </summary>
+            </summary
+    >
     <remarks></remarks>
   </Docs>
   <Members>
@@ -57,7 +59,9 @@
       <Docs>
         <summary>The warning level for reporting errors.</summary>
         <value></value>
-        <remarks>See the compiler manual page for the possible values for the this variable.</remarks>
+        <remarks
+          >See the compiler manual page for the possible values for the this variable.</remarks
+        >
       </Docs>
     </Member>
     <Member MemberName="Warnings">

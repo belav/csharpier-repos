@@ -1,5 +1,11 @@
-<Type Name="DateTimeSerializationSection+DateTimeSerializationMode" FullName="System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode">
-  <TypeSignature Language="C#" Value="public enum DateTimeSerializationSection.DateTimeSerializationMode" />
+<Type
+  Name="DateTimeSerializationSection+DateTimeSerializationMode"
+  FullName="System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public enum DateTimeSerializationSection.DateTimeSerializationMode"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +25,9 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode</ReturnType>
+        <ReturnType
+          >System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode</ReturnType
+        >
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -32,7 +40,9 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode</ReturnType>
+        <ReturnType
+          >System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode</ReturnType
+        >
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -45,7 +55,9 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode</ReturnType>
+        <ReturnType
+          >System.Xml.Serialization.Configuration.DateTimeSerializationSection+DateTimeSerializationMode</ReturnType
+        >
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>

@@ -14,12 +14,23 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemChecked" /> event of the <see cref="T:System.Windows.Forms.ListView" /> control. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ListView.ItemChecked" />
+
+         event of the <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ItemCheckedEventArgs (System.Windows.Forms.ListViewItem item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ItemCheckedEventArgs (System.Windows.Forms.ListViewItem item);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="item" Type="System.Windows.Forms.ListViewItem" />
@@ -29,17 +40,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ItemCheckedEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ItemCheckedEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ListViewItem" /> that is being checked or unchecked.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ListViewItem" />
+
+           that is being checked or unchecked.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ListViewItem Item { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ListViewItem Item { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ListViewItem</ReturnType>
@@ -50,7 +75,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.ListViewItem" /> whose checked state is changing.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.ListViewItem" />
+
+             whose checked state is changing.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

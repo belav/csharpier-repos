@@ -14,20 +14,22 @@
     <OutputPath>$(RuntimeBinDir)/R2RDump</OutputPath>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
-  <Import Project="$(RepositoryEngineeringDir)coredistools.targets" Condition="'$(DotNetBuildFromSource)' != 'true'" />
+  <Import
+    Project="$(RepositoryEngineeringDir)coredistools.targets"
+    Condition="'$(DotNetBuildFromSource)' != 'true'"
+  />
   <Import Project="$(RepositoryEngineeringDir)DiaSymReaderNative.targets" />
-
   <ItemGroup>
     <Compile Include="..\Common\CommandLineHelpers.cs" Link="CommandLineHelpers.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="System.CommandLine">
       <Version>$(SystemCommandLineVersion)</Version>
     </PackageReference>
     <ProjectReference Include="..\aot\ILCompiler.Diagnostics\ILCompiler.Diagnostics.csproj" />
-    <ProjectReference Include="..\aot\ILCompiler.Reflection.ReadyToRun\ILCompiler.Reflection.ReadyToRun.csproj" />
+    <ProjectReference
+      Include="..\aot\ILCompiler.Reflection.ReadyToRun\ILCompiler.Reflection.ReadyToRun.csproj"
+    />
     <!-- Workaround until the SDK does this, see https://github.com/dotnet/sdk/issues/24799 -->
     <PackageReference Include="NETStandard.Library">
       <Version>$(NetStandardLibraryVersion)</Version>

@@ -1,4 +1,8 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<Project
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  ToolsVersion="3.5"
+>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_Java20|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug_Java20\</OutputPath>
@@ -11,8 +15,7 @@
     <KeepIntermediate>False</KeepIntermediate>
     <GHProjectType>3</GHProjectType>
     <PreCompile>True</PreCompile>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
     <ApplicationServerType>tomcat</ApplicationServerType>
     <Version>2.0</Version>
     <JDKName>1.5.0_05</JDKName>
@@ -26,7 +29,9 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C14E7AA4-23AD-417D-9A63-62DE9036C9BB}</ProjectGuid>
-    <ProjectTypeGuids>{F6B19D50-1E2E-4e87-ADFB-10393B439DE0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids
+      >{F6B19D50-1E2E-4e87-ADFB-10393B439DE0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids
+    >
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MainsoftWebApp20</RootNamespace>
@@ -35,10 +40,8 @@
     <GHProjectType>3</GHProjectType>
     <Version>2.0</Version>
     <ApplicationServerType>tomcat</ApplicationServerType>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
+    <FileUpgradeFlags></FileUpgradeFlags>
+    <UpgradeBackupLocation></UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
     <jarserver>ip2</jarserver>
   </PropertyGroup>
@@ -54,8 +57,7 @@
     <SkipValidation>True</SkipValidation>
     <KeepIntermediate>False</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
     <PreCompile>True</PreCompile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_Java|AnyCPU' ">
@@ -69,8 +71,7 @@
     <SkipValidation>True</SkipValidation>
     <KeepIntermediate>False</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
     <PreCompile>True</PreCompile>
   </PropertyGroup>
   <ItemGroup>
@@ -99,18 +100,32 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="JavaEE, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="myfaces, Version=1.6.65535.65535, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="nunit.framework, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference
+      Include="myfaces, Version=1.6.65535.65535, Culture=neutral, processorArchitecture=MSIL"
+    />
+    <Reference
+      Include="nunit.framework, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+    >
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\nunit20\framework\bin\Debug_Java20\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="rt, Version=1.6.0.65535, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
-    <Reference Include="System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86" />
-    <Reference Include="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
-    <Reference Include="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference
+      Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+    />
+    <Reference
+      Include="System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86"
+    />
+    <Reference
+      Include="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+    />
+    <Reference
+      Include="System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86"
+    />
+    <Reference
+      Include="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+    />
   </ItemGroup>
   <ItemGroup>
     <Content Include="My.master" />
@@ -226,13 +241,34 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3162</DevelopmentServerPort>
           <DevelopmentServerVPath>/MainsoftWebApp20</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl></IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties REFS-RefInfo-system-xml="repository:vmw:framework:2.0" REFS-RefInfo-system-drawing="repository:vmw:framework:2.0" REFS-RefInfo-system-data="repository:vmw:framework:2.0" REFS-RefInfo-system="repository:vmw:framework:2.0" REFS-RefInfo-system-web="repository:vmw:framework:2.0" REFS-JarPath-nunitweb="..\NunitWeb\NunitWeb\bin\Debug_Java20\NunitWeb.jar" REFS-JarPath-nunit-framework="..\NunitWeb\NunitWeb\bin\Debug_Java20\nunit.framework.jar" REFS-JarPath-htmlcompare="..\NunitWeb\NunitWeb\bin\Debug_Java20\HtmlCompare.jar" REFS-JarPath-system="" REFS-JarPath-system-drawing="" REFS-JarPath-system-data="" REFS-JarPath-system-web="" REFS-JarPath-system-xml="" REFS-JarPath-j2ee="..\..\..\..\..\..\..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\jakarta-tomcat\server\lib\catalina.jar;..\..\..\..\..\..\..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\jakarta-tomcat\common\lib\servlet-api.jar" REFS-JarPath-rt="" REFS-JarPath-mscorlib="..\..\..\..\..\..\..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\mscorlib.jar" REFS-JarPath-javaee="" REFS-RefInfo-javaee="repository:JavaEE:tomcat:1.3" REFS-RefInfo-rt="repository:jre:sun:1.6.0" REFS-JarPath-myfaces="" REFS-RefInfo-myfaces="repository:vmw:framework:2.0" />
+      <UserProperties
+        REFS-RefInfo-system-xml="repository:vmw:framework:2.0"
+        REFS-RefInfo-system-drawing="repository:vmw:framework:2.0"
+        REFS-RefInfo-system-data="repository:vmw:framework:2.0"
+        REFS-RefInfo-system="repository:vmw:framework:2.0"
+        REFS-RefInfo-system-web="repository:vmw:framework:2.0"
+        REFS-JarPath-nunitweb="..\NunitWeb\NunitWeb\bin\Debug_Java20\NunitWeb.jar"
+        REFS-JarPath-nunit-framework="..\NunitWeb\NunitWeb\bin\Debug_Java20\nunit.framework.jar"
+        REFS-JarPath-htmlcompare="..\NunitWeb\NunitWeb\bin\Debug_Java20\HtmlCompare.jar"
+        REFS-JarPath-system=""
+        REFS-JarPath-system-drawing=""
+        REFS-JarPath-system-data=""
+        REFS-JarPath-system-web=""
+        REFS-JarPath-system-xml=""
+        REFS-JarPath-j2ee="..\..\..\..\..\..\..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\jakarta-tomcat\server\lib\catalina.jar;..\..\..\..\..\..\..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\jakarta-tomcat\common\lib\servlet-api.jar"
+        REFS-JarPath-rt=""
+        REFS-JarPath-mscorlib="..\..\..\..\..\..\..\..\Program Files\Mainsoft\Visual MainWin for J2EE 2\java_refs\framework\mscorlib.jar"
+        REFS-JarPath-javaee=""
+        REFS-RefInfo-javaee="repository:JavaEE:tomcat:1.3"
+        REFS-RefInfo-rt="repository:jre:sun:1.6.0"
+        REFS-JarPath-myfaces=""
+        REFS-RefInfo-myfaces="repository:vmw:framework:2.0"
+      />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

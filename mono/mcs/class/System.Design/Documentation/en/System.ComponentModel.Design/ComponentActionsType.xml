@@ -11,7 +11,9 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The following table describes the two options for associating an object-bound smart tag to a component.</para>
+      <para
+        >The following table describes the two options for associating an object-bound smart tag to a component.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -28,7 +30,15 @@
             <para>Pull</para>
           </term>
           <description>
-            <para>The class derived from <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> that is associated with the component overrides the <see cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" /> property to return the collection of smart tags for that component.</para>
+            <para
+              >The class derived from <see
+               cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+               that is associated with the component overrides the <see
+               cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+               property to return the collection of smart tags for that component.</para
+            >
           </description>
         </item>
         <item>
@@ -36,15 +46,30 @@
             <para>Push</para>
           </term>
           <description>
-            <para>A call to the <see cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" /> method explicitly associates the specified smart tags with the specified component.</para>
+            <para
+              >A call to the <see
+               cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
+
+               method explicitly associates the specified smart tags with the specified component.</para
+            >
           </description>
         </item>
       </list>
-      <para>For more information about these smart-tag models, see the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> and <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" /> classes.</para>
+      <para
+        >For more information about these smart-tag models, see the <see
+         cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+         and <see
+         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+         classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of object-bound smart tag with respect to how it was associated with the component.</para>
+      <para
+        >Specifies the type of object-bound smart tag with respect to how it was associated with the component.</para
+      >
     </summary>
   </Docs>
   <Members>

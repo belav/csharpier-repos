@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TaskItem" FullName="Microsoft.Build.Utilities.TaskItem">
-  <TypeSignature Language="C#" Value="public sealed class TaskItem : MarshalByRefObject, Microsoft.Build.Framework.ITaskItem" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class TaskItem : MarshalByRefObject, Microsoft.Build.Framework.ITaskItem"
+  />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Utilities</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,8 +21,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:Microsoft.Build.Utilities.TaskItem" /> objects do not exactly correspond to item elements in project files. If they did, then tasks would have access to data that was not explicitly passed into the task through the project file. This is not a security issue, but rather an issue with project file clarity and transparency.</para>
-      <para>This class has to be sealed since the build engine instantiates its own copy of this type. If a third party were to extend this class, then the build engine will yield an undesired behavior.</para>
+        <see cref="T:Microsoft.Build.Utilities.TaskItem" />
+
+         objects do not exactly correspond to item elements in project files. If they did, then tasks would have access to data that was not explicitly passed into the task through the project file. This is not a security issue, but rather an issue with project file clarity and transparency.</para
+      >
+      <para
+        >This class has to be sealed since the build engine instantiates its own copy of this type. If a third party were to extend this class, then the build engine will yield an undesired behavior.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -39,7 +47,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Utilities.TaskItem" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,7 +60,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TaskItem (Microsoft.Build.Framework.ITaskItem sourceItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TaskItem (Microsoft.Build.Framework.ITaskItem sourceItem);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="sourceItem" Type="Microsoft.Build.Framework.ITaskItem" />
@@ -57,10 +73,21 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified source <see cref="T:Microsoft.Build.Framework.ITaskItem" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Utilities.TaskItem" />
+
+             class using the specified source <see
+             cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+            .</para
+          >
         </summary>
         <param name="sourceItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to copy.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item to copy.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -77,17 +104,28 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified item-specification string.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Utilities.TaskItem" />
+
+             class using the specified item-specification string.</para
+          >
         </summary>
         <param name="itemSpec">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item specification.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item specification.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TaskItem (string itemSpec, System.Collections.IDictionary itemMetadata);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TaskItem (string itemSpec, System.Collections.IDictionary itemMetadata);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="itemSpec" Type="System.String" />
@@ -98,19 +136,33 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified item-specification string and its metadata.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Utilities.TaskItem" />
+
+             class using the specified item-specification string and its metadata.</para
+          >
         </summary>
         <param name="itemSpec">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item specification.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item specification.</param
+        >
         <param name="itemMetadata">
-          <attribution license="cc4" from="Microsoft" modified="false" />The custom metadata for the item specification.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The custom metadata for the item specification.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CloneCustomMetadata">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary CloneCustomMetadata ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary CloneCustomMetadata ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionary</ReturnType>
@@ -128,7 +180,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IDictionary" /> that represents a clone of the custom metadata.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IDictionary" />
+
+             that represents a clone of the custom metadata.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -136,7 +193,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyMetadataTo">
-      <MemberSignature Language="C#" Value="public void CopyMetadataTo (Microsoft.Build.Framework.ITaskItem destinationItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyMetadataTo (Microsoft.Build.Framework.ITaskItem destinationItem);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -148,15 +208,24 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the metadata already exists on the destination item, then it is not overwritten. The original metadata value supersedes the copied metadata value.</para>
-          <para>This method does not copy the item specification to the destination task item.</para>
+          <para
+            >If the metadata already exists on the destination item, then it is not overwritten. The original metadata value supersedes the copied metadata value.</para
+          >
+          <para
+            >This method does not copy the item specification to the destination task item.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the item-specification metadata to the specified destination task item.</para>
+          <para
+            >Copies the item-specification metadata to the specified destination task item.</para
+          >
         </summary>
         <param name="destinationItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item that this method will copy metadata to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item that this method will copy metadata to.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -180,10 +249,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that represents the metadata value.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that represents the metadata value.</para
+          >
         </returns>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the metadata to retrieve.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the metadata to retrieve.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -202,7 +279,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Otherwise, a limited lease of 5 minutes will result; and task instances can expire if they take a long time to process.</para>
+          <para
+            >Otherwise, a limited lease of 5 minutes will result; and task instances can expire if they take a long time to process.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -225,10 +304,15 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> for the following item declaration in a project file is File.cs.</para>
-          <code>&lt;ItemGroup&gt;
-    &lt;Compile Include="File.cs"/&gt;
-&lt;/ItemGroup&gt;</code>
+          <para
+            >The <see
+             cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+
+             for the following item declaration in a project file is File.cs.</para
+          >
+          <code><ItemGroup>
+    <Compile Include="File.cs"/>
+</ItemGroup></code>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -259,7 +343,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MetadataNames">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection MetadataNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection MetadataNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ICollection</ReturnType>
@@ -278,7 +365,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static string op_Explicit (Microsoft.Build.Utilities.TaskItem taskItemToCast);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string op_Explicit (Microsoft.Build.Utilities.TaskItem taskItemToCast);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -314,14 +404,20 @@
           <para>Removes the specified metadata on the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of metadata to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of metadata to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetMetadata">
-      <MemberSignature Language="C#" Value="public void SetMetadata (string metadataName, string metadataValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetMetadata (string metadataName, string metadataValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -338,9 +434,15 @@
           <para>Sets or modifies the value of the specified metadata on the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of metadata to set or modify.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of metadata to set or modify.</param
+        >
         <param name="metadataValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value of metadata.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new value of metadata.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -364,7 +466,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that represents the item specification.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that represents the item specification.</para
+          >
         </returns>
       </Docs>
     </Member>

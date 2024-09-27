@@ -12,12 +12,14 @@
     <summary>
       Sentinel value used to indicate that no value was returned.
     </summary>
-    <remarks>
+    <remarks
+      >
       A sentinel value used to indicate that no value was
       was set by the compiled function.   This is used to
       differentiate between a function not returning a
       value and null.
-    </remarks>
+    </remarks
+    >
   </Docs>
   <Members>
     <Member MemberName=".ctor">

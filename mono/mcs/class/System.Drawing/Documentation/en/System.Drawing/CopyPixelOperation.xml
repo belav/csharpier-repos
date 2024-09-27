@@ -17,11 +17,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Drawing.CopyPixelOperation" /> enumeration is used by the <see cref="Overload:System.Drawing.Graphics.CopyFromScreen" /> method of the <see cref="T:System.Drawing.Graphics" /> class.</para>
+      <para
+        >The <see
+         cref="T:System.Drawing.CopyPixelOperation" />
+
+         enumeration is used by the <see
+         cref="Overload:System.Drawing.Graphics.CopyFromScreen" />
+
+         method of the <see
+         cref="T:System.Drawing.Graphics" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Determines how the source color in a copy pixel operation is combined with the destination color to result in a final color.</para>
+      <para
+        >Determines how the source color in a copy pixel operation is combined with the destination color to result in a final color.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,7 +48,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The destination area is filled by using the color associated with index 0 in the physical palette. (This color is black for the default physical palette.)</para>
+          <para
+            >The destination area is filled by using the color associated with index 0 in the physical palette. (This color is black for the default physical palette.)</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,7 +67,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Windows that are layered on top of your window are included in the resulting image. By default, the image contains only your window. Note that this generally cannot be used for printing device contexts.</para>
+          <para
+            >Windows that are layered on top of your window are included in the resulting image. By default, the image contains only your window. Note that this generally cannot be used for printing device contexts.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -86,7 +103,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the source area are merged with the colors of the selected brush of the destination device context using the Boolean AND operator.</para>
+          <para
+            >The colors of the source area are merged with the colors of the selected brush of the destination device context using the Boolean AND operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -103,7 +122,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the inverted source area are merged with the colors of the destination area by using the Boolean OR operator.</para>
+          <para
+            >The colors of the inverted source area are merged with the colors of the destination area by using the Boolean OR operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -154,7 +175,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The source and destination colors are combined using the Boolean OR operator, and then resultant color is then inverted.</para>
+          <para
+            >The source and destination colors are combined using the Boolean OR operator, and then resultant color is then inverted.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -171,7 +194,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The brush currently selected in the destination device context is copied to the destination bitmap.</para>
+          <para
+            >The brush currently selected in the destination device context is copied to the destination bitmap.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -188,7 +213,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the brush currently selected in the destination device context are combined with the colors of the destination are using the Boolean XOR operator.</para>
+          <para
+            >The colors of the brush currently selected in the destination device context are combined with the colors of the destination are using the Boolean XOR operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -205,7 +232,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the brush currently selected in the destination device context are combined with the colors of the inverted source area using the Boolean OR operator. The result of this operation is combined with the colors of the destination area using the Boolean OR operator.</para>
+          <para
+            >The colors of the brush currently selected in the destination device context are combined with the colors of the inverted source area using the Boolean OR operator. The result of this operation is combined with the colors of the destination area using the Boolean OR operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -222,7 +251,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the source and destination areas are combined using the Boolean AND operator.</para>
+          <para
+            >The colors of the source and destination areas are combined using the Boolean AND operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -256,7 +287,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The inverted colors of the destination area are combined with the colors of the source area using the Boolean AND operator.</para>
+          <para
+            >The inverted colors of the destination area are combined with the colors of the source area using the Boolean AND operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -273,7 +306,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the source and destination areas are combined using the Boolean XOR operator.</para>
+          <para
+            >The colors of the source and destination areas are combined using the Boolean XOR operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -290,7 +325,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The colors of the source and destination areas are combined using the Boolean OR operator.</para>
+          <para
+            >The colors of the source and destination areas are combined using the Boolean OR operator.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -307,7 +344,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The destination area is filled by using the color associated with index 1 in the physical palette. (This color is white for the default physical palette.)</para>
+          <para
+            >The destination area is filled by using the color associated with index 1 in the physical palette. (This color is white for the default physical palette.)</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

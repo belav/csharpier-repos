@@ -3,12 +3,16 @@
   <TypeSignature Language="C#" Value="public sealed class Encoder" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>System.Drawing</AssemblyName>
-    <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 07 D1 FA 57 C4 AE D9 F0 A3 2E 84 AA 0F AE FD 0D E9 E8 FD 6A EC 8F 87 FB 03 76 6C 83 4C 99 92 1E B2 3B E7 9A D9 D5 DC C1 DD 9A D2 36 13 21 02 90 0B 72 3C F9 80 95 7F C4 E1 77 10 8F C6 07 77 4F 29 E8 32 0E 92 EA 05 EC E4 E8 21 C0 A5 EF E8 F1 64 5C 4C 0C 93 C1 AB 99 28 5D 62 2C AA 65 2C 1D FA D6 3D 74 5D 6F 2D E5 F1 7E 5E AF 0F C4 96 3D 26 1C 8A 12 43 65 18 20 6D C0 93 34 4D 5A D2 93]</AssemblyPublicKey>
+    <AssemblyPublicKey
+      >[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 07 D1 FA 57 C4 AE D9 F0 A3 2E 84 AA 0F AE FD 0D E9 E8 FD 6A EC 8F 87 FB 03 76 6C 83 4C 99 92 1E B2 3B E7 9A D9 D5 DC C1 DD 9A D2 36 13 21 02 90 0B 72 3C F9 80 95 7F C4 E1 77 10 8F C6 07 77 4F 29 E8 32 0E 92 EA 05 EC E4 E8 21 C0 A5 EF E8 F1 64 5C 4C 0C 93 C1 AB 99 28 5D 62 2C AA 65 2C 1D FA D6 3D 74 5D 6F 2D E5 F1 7E 5E AF 0F C4 96 3D 26 1C 8A 12 43 65 18 20 6D C0 93 34 4D 5A D2 93]</AssemblyPublicKey
+    >
     <AssemblyVersion>1.0.3300.0</AssemblyVersion>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -16,8 +20,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-      <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+      <para
+        >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+         cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+         object. One of the fields of the <see
+         cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+         object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+         cref="T:System.Drawing.Imaging.Encoder" />
+
+         class to retrieve an <see
+         cref="T:System.Drawing.Imaging.Encoder" />
+
+         that contains parameters of the desired category.</para
+      >
+      <para
+        >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+      >
       <list type="table">
         <item>
           <term>
@@ -103,7 +123,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An <see cref="T:System.Drawing.Imaging.Encoder" /> object encapsulates a globally unique identifier (GUID) that identifies the category of an image encoder parameter.</para>
+      <para
+        >An <see
+         cref="T:System.Drawing.Imaging.Encoder" />
+
+         object encapsulates a globally unique identifier (GUID) that identifies the category of an image encoder parameter.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -117,7 +142,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -203,10 +230,18 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Encoder" /> class from the specified globally unique identifier (GUID). The GUID specifies an image encoder parameter category.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class from the specified globally unique identifier (GUID). The GUID specifies an image encoder parameter category.</para
+          >
         </summary>
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />A globally unique identifier that identifies an image encoder parameter category. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A globally unique identifier that identifies an image encoder parameter category. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -214,7 +249,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ChrominanceTable">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder ChrominanceTable;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder ChrominanceTable;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -223,8 +261,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -310,7 +364,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the chrominance table parameter category.</para>
+          <para
+            >An <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the chrominance table parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -319,7 +378,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ColorDepth">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder ColorDepth;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder ColorDepth;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -328,8 +390,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -415,7 +493,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the color depth parameter category.</para>
+          <para
+            >An <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the color depth parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -424,7 +507,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Compression">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder Compression;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder Compression;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -433,8 +519,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -520,7 +622,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the compression parameter category.</para>
+          <para
+            >An <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the compression parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -538,8 +645,24 @@
         <value>To be added: an object of type 'Guid'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -625,7 +748,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a globally unique identifier (GUID) that identifies an image encoder parameter category.</para>
+          <para
+            >Gets a globally unique identifier (GUID) that identifies an image encoder parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -634,7 +759,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LuminanceTable">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder LuminanceTable;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder LuminanceTable;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -643,8 +771,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -730,7 +874,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the luminance table parameter category.</para>
+          <para
+            >Represents an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the luminance table parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -739,7 +888,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Quality">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder Quality;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder Quality;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -748,9 +900,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="F:System.Drawing.Imaging.Encoder.Quality" /> category specifies the level of compression for an image. When used to construct an <see cref="T:System.Drawing.Imaging.EncoderParameter" />, the range of useful values for the quality category is from 0 to 100. The lower the number specified, the higher the compression and therefore the lower the quality of the image. Zero would give you the lowest quality image and 100 the highest.</para>
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >The <see
+             cref="F:System.Drawing.Imaging.Encoder.Quality" />
+
+             category specifies the level of compression for an image. When used to construct an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            , the range of useful values for the quality category is from 0 to 100. The lower the number specified, the higher the compression and therefore the lower the quality of the image. Zero would give you the lowest quality image and 100 the highest.</para
+          >
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -836,7 +1012,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the quality parameter category.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the quality parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -845,7 +1026,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RenderMethod">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder RenderMethod;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder RenderMethod;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -854,8 +1038,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -941,7 +1141,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the render method parameter category.</para>
+          <para
+            >Represents an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the render method parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -950,7 +1155,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SaveFlag">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder SaveFlag;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder SaveFlag;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -959,8 +1167,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -1046,7 +1270,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the save flag parameter category.</para>
+          <para
+            >Represents an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the save flag parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1055,7 +1284,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ScanMethod">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder ScanMethod;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder ScanMethod;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -1064,8 +1296,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -1151,7 +1399,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the scan method parameter category.</para>
+          <para
+            >Represents an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the scan method parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1160,7 +1413,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Transformation">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder Transformation;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder Transformation;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -1169,8 +1425,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -1256,7 +1528,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the transformation parameter category.</para>
+          <para
+            >Represents an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the transformation parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1265,7 +1542,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Version">
-      <MemberSignature Language="C#" Value="public static readonly System.Drawing.Imaging.Encoder Version;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Drawing.Imaging.Encoder Version;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.Encoder</ReturnType>
@@ -1274,9 +1554,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="F:System.Drawing.Imaging.Encoder.Quality" /> category specifies the level of compression for an image. When used to construct an <see cref="T:System.Drawing.Imaging.EncoderParameter" />, the range of useful values for the quality category is from 0 to 100. The lower the number specified, the higher the compression and therefore the lower the quality of the image. Zero would give you the lowest quality image and 100 the highest.</para>
-          <para>When you pass a parameter to an image encoder, the parameter is encapsulated in an <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object. One of the fields of the <see cref="T:System.Drawing.Imaging.EncoderParameter" /> object is a GUID that specifies the category of the parameter. Use the static fields of the <see cref="T:System.Drawing.Imaging.Encoder" /> class to retrieve an <see cref="T:System.Drawing.Imaging.Encoder" /> that contains parameters of the desired category.</para>
-          <para>The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para>
+          <para
+            >The <see
+             cref="F:System.Drawing.Imaging.Encoder.Quality" />
+
+             category specifies the level of compression for an image. When used to construct an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            , the range of useful values for the quality category is from 0 to 100. The lower the number specified, the higher the compression and therefore the lower the quality of the image. Zero would give you the lowest quality image and 100 the highest.</para
+          >
+          <para
+            >When you pass a parameter to an image encoder, the parameter is encapsulated in an <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object. One of the fields of the <see
+             cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+             object is a GUID that specifies the category of the parameter. Use the static fields of the <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             class to retrieve an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             that contains parameters of the desired category.</para
+          >
+          <para
+            >The image encoders that are built into ndptecgdiplus receive parameters that belong to several categories. The following table lists all the categories and the GUID associated with each category.</para
+          >
           <list type="table">
             <item>
               <term>
@@ -1362,7 +1666,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents an <see cref="T:System.Drawing.Imaging.Encoder" /> object that is initialized with the globally unique identifier for the version parameter category.</para>
+          <para
+            >Represents an <see
+             cref="T:System.Drawing.Imaging.Encoder" />
+
+             object that is initialized with the globally unique identifier for the version parameter category.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

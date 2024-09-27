@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\System.Private.CoreLib\src\System.Private.CoreLib.csproj" />
-    <ProjectReference Include="..\..\System.Private.TypeLoader\src\System.Private.TypeLoader.csproj" />
+    <ProjectReference
+      Include="..\..\System.Private.TypeLoader\src\System.Private.TypeLoader.csproj"
+    />
   </ItemGroup>
-
   <PropertyGroup>
     <NativeFormatCommonPath>$(CompilerCommonPath)\Internal\NativeFormat</NativeFormatCommonPath>
     <!-- we access a lot of internals of System.Private.CoreLib, disable compiling against the ref assembly for now so we don't need to update it -->
@@ -25,29 +26,55 @@
     <Compile Include="Internal\Reflection\Execution\TypeLoader\TypeCast.cs" />
     <Compile Include="Internal\Reflection\Execution\ReflectionExecution.cs" />
     <Compile Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.cs" />
-    <Compile Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.Runtime.cs" />
-    <Compile Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.MappingTables.cs" />
-    <Compile Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.MetadataTable.cs" />
-    <Compile Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.ManifestResources.cs" />
+    <Compile
+      Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.Runtime.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.MappingTables.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.MetadataTable.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\ExecutionEnvironmentImplementation.ManifestResources.cs"
+    />
     <Compile Include="Internal\Reflection\Execution\MetadataReaderExtensions.cs" />
     <Compile Include="Internal\Reflection\Execution\MethodInvokeInfo.cs" />
     <Compile Include="Internal\Reflection\Execution\RuntimeHandlesExtensions.cs" />
     <Compile Include="Internal\Reflection\Execution\FieldAccessors\InstanceFieldAccessor.cs" />
     <Compile Include="Internal\Reflection\Execution\FieldAccessors\LiteralFieldAccessor.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\PointerTypeFieldAccessorForInstanceFields.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\PointerTypeFieldAccessorForStaticFields.cs" />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\PointerTypeFieldAccessorForInstanceFields.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\PointerTypeFieldAccessorForStaticFields.cs"
+    />
     <Compile Include="Internal\Reflection\Execution\FieldAccessors\RegularStaticFieldAccessor.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\ReferenceTypeFieldAccessorForInstanceFields.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\ReferenceTypeFieldAccessorForStaticFields.cs" />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\ReferenceTypeFieldAccessorForInstanceFields.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\ReferenceTypeFieldAccessorForStaticFields.cs"
+    />
     <Compile Include="Internal\Reflection\Execution\FieldAccessors\StaticFieldAccessor.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\ValueTypeFieldAccessorForInstanceFields.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\ValueTypeFieldAccessorForStaticFields.cs" />
-    <Compile Include="Internal\Reflection\Execution\FieldAccessors\WritableStaticFieldAccessor.cs" />
-    <Compile Include="Internal\Reflection\Execution\MethodInvokers\MethodInvokerWithMethodInvokeInfo.cs" />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\ValueTypeFieldAccessorForInstanceFields.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\ValueTypeFieldAccessorForStaticFields.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\FieldAccessors\WritableStaticFieldAccessor.cs"
+    />
+    <Compile
+      Include="Internal\Reflection\Execution\MethodInvokers\MethodInvokerWithMethodInvokeInfo.cs"
+    />
     <Compile Include="Internal\Reflection\Execution\MethodInvokers\InstanceMethodInvoker.cs" />
     <Compile Include="Internal\Reflection\Execution\MethodInvokers\StaticMethodInvoker.cs" />
     <Compile Include="Internal\Reflection\Execution\MethodInvokers\VirtualMethodInvoker.cs" />
-    <Compile Include="Internal\Reflection\Execution\PayForPlayExperience\MissingMetadataExceptionCreator.cs" />
+    <Compile
+      Include="Internal\Reflection\Execution\PayForPlayExperience\MissingMetadataExceptionCreator.cs"
+    />
     <Compile Include="Internal\Reflection\Extensions\NonPortable\DelegateMethodInfoRetriever.cs" />
     <Compile Include="Internal\Runtime\CompilerHelpers\LibraryInitializer.cs" />
   </ItemGroup>
@@ -74,7 +101,9 @@
     <Compile Include="$(CompilerCommonPath)\Internal\LowLevelLinq\LowLevelEnumerable.ToArray.cs">
       <Link>Internal\LowLevelLinq\LowLevelEnumerable.ToArray.cs</Link>
     </Compile>
-    <Compile Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System\Collections\HashHelpers.cs">
+    <Compile
+      Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System\Collections\HashHelpers.cs"
+    >
       <Link>System\Collections\HashHelpers.cs</Link>
     </Compile>
     <Compile Include="$(AotCommonPath)\System\Collections\Generic\Empty.cs">

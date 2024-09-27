@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Suppressions
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
   <!-- net6.0 and net7.0 aren't supported by the current package and any errors should be suppressed. -->
   <Suppression>
     <Left>lib/net6.0/System.Security.Permissions.dll</Left>
@@ -20,7 +23,9 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.CopyTo(System.Array,System.Int32)</Target>
+    <Target
+      >M:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.CopyTo(System.Array,System.Int32)</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -32,7 +37,9 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.HostSecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.HostSecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -44,19 +51,25 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.SecurityAction.RequestMinimum:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.SecurityAction.RequestMinimum:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.SecurityAction.RequestOptional:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.SecurityAction.RequestOptional:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.SecurityAction.RequestRefuse:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.SecurityAction.RequestRefuse:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -68,39 +81,51 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.SecurityAction.RequestMinimum:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.SecurityAction.RequestMinimum:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.SecurityAction.RequestOptional:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.SecurityAction.RequestOptional:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.SecurityAction.RequestRefuse:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.SecurityAction.RequestRefuse:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -121,14 +146,18 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.HostSecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.HostSecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.PermissionSet.ConvertPermissionSet(System.String,System.Byte[],System.String):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.PermissionSet.ConvertPermissionSet(System.String,System.Byte[],System.String):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -142,56 +171,72 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongName):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongName):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Policy.PolicyLevel.CreateAppDomainLevel:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.PolicyLevel.CreateAppDomainLevel:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongName):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongName):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.IsGranted(System.Security.IPermission):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.IsGranted(System.Security.IPermission):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.LoadPolicyLevelFromFile(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.LoadPolicyLevelFromFile(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.LoadPolicyLevelFromString(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.LoadPolicyLevelFromString(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -205,35 +250,45 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet@):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet@):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence[]):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence[]):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicyGroups(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicyGroups(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolveSystemPolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolveSystemPolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -247,28 +302,36 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.SavePolicyLevel(System.Security.Policy.PolicyLevel):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.SavePolicyLevel(System.Security.Policy.PolicyLevel):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>P:System.Security.Permissions.RegistryPermissionAttribute.All:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.Permissions.RegistryPermissionAttribute.All:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>P:System.Security.Policy.PolicyLevel.FullTrustAssemblies:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.Policy.PolicyLevel.FullTrustAssemblies:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
-    <Target>P:System.Security.SecurityManager.CheckExecutionRights:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.SecurityManager.CheckExecutionRights:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/netstandard2.0/System.Security.Permissions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -303,25 +366,33 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.#ctor(System.Object[],System.Object[]):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.#ctor(System.Object[],System.Object[]):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net7.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.AddAssembly(System.Object):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.AddAssembly(System.Object):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net7.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.AddHost(System.Object):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.AddHost(System.Object):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net7.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.CopyTo(System.Array,System.Int32):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.CopyTo(System.Array,System.Int32):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net7.0/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -339,19 +410,25 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -369,7 +446,9 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.PermissionSet.ConvertPermissionSet(System.String,System.Byte[],System.String):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.PermissionSet.ConvertPermissionSet(System.String,System.Byte[],System.String):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -381,25 +460,33 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.PolicyLevel.CreateAppDomainLevel:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.PolicyLevel.CreateAppDomainLevel:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.IsGranted(System.Security.IPermission):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.IsGranted(System.Security.IPermission):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.LoadPolicyLevelFromFile(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.LoadPolicyLevelFromFile(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.LoadPolicyLevelFromString(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.LoadPolicyLevelFromString(System.String,System.Security.PolicyLevelType):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -411,31 +498,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet@):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet@):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence[]):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicy(System.Security.Policy.Evidence[]):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolvePolicyGroups(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolvePolicyGroups(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.ResolveSystemPolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.ResolveSystemPolicy(System.Security.Policy.Evidence):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -447,37 +544,49 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.SecurityManager.SavePolicyLevel(System.Security.Policy.PolicyLevel):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.SecurityManager.SavePolicyLevel(System.Security.Policy.PolicyLevel):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>P:System.Security.Permissions.FileIOPermissionAttribute.All:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.Permissions.FileIOPermissionAttribute.All:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>P:System.Security.Permissions.ReflectionPermissionAttribute.ReflectionEmit:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.Permissions.ReflectionPermissionAttribute.ReflectionEmit:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>P:System.Security.Permissions.ReflectionPermissionAttribute.TypeInformation:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.Permissions.ReflectionPermissionAttribute.TypeInformation:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>P:System.Security.Permissions.RegistryPermissionAttribute.All:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.Permissions.RegistryPermissionAttribute.All:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>P:System.Security.SecurityManager.CheckExecutionRights:[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >P:System.Security.SecurityManager.CheckExecutionRights:[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -507,25 +616,33 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.#ctor(System.Object[],System.Object[]):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.#ctor(System.Object[],System.Object[]):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.AddAssembly(System.Object):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.AddAssembly(System.Object):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.AddHost(System.Object):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.AddHost(System.Object):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.CopyTo(System.Array,System.Int32):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.CopyTo(System.Array,System.Int32):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net8.0/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -543,25 +660,33 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.#ctor(System.Object[],System.Object[]):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.#ctor(System.Object[],System.Object[]):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>ref/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.AddAssembly(System.Object):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.AddAssembly(System.Object):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>ref/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.AddHost(System.Object):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.AddHost(System.Object):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>ref/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
-    <Target>M:System.Security.Policy.Evidence.CopyTo(System.Array,System.Int32):[T:System.ObsoleteAttribute]</Target>
+    <Target
+      >M:System.Security.Policy.Evidence.CopyTo(System.Array,System.Int32):[T:System.ObsoleteAttribute]</Target
+    >
     <Left>ref/net6.0/System.Security.Permissions.dll</Left>
     <Right>lib/net6.0/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -579,7 +704,9 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0017</DiagnosticId>
-    <Target>M:System.Drawing.Printing.PrintingPermission.FromXml(System.Security.SecurityElement)$0</Target>
+    <Target
+      >M:System.Drawing.Printing.PrintingPermission.FromXml(System.Security.SecurityElement)$0</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -591,13 +718,17 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0017</DiagnosticId>
-    <Target>M:System.Security.Permissions.FileIOPermission.#ctor(System.Security.Permissions.FileIOPermissionAccess,System.Security.AccessControl.AccessControlActions,System.String)$1</Target>
+    <Target
+      >M:System.Security.Permissions.FileIOPermission.#ctor(System.Security.Permissions.FileIOPermissionAccess,System.Security.AccessControl.AccessControlActions,System.String)$1</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0017</DiagnosticId>
-    <Target>M:System.Security.Permissions.FileIOPermission.#ctor(System.Security.Permissions.FileIOPermissionAccess,System.Security.AccessControl.AccessControlActions,System.String[])$1</Target>
+    <Target
+      >M:System.Security.Permissions.FileIOPermission.#ctor(System.Security.Permissions.FileIOPermissionAccess,System.Security.AccessControl.AccessControlActions,System.String[])$1</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
@@ -609,13 +740,17 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0017</DiagnosticId>
-    <Target>M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.Security.AccessControl.AccessControlActions,System.String)$1</Target>
+    <Target
+      >M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.Security.AccessControl.AccessControlActions,System.String)$1</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0017</DiagnosticId>
-    <Target>M:System.Security.Permissions.RegistryPermission.FromXml(System.Security.SecurityElement)$0</Target>
+    <Target
+      >M:System.Security.Permissions.RegistryPermission.FromXml(System.Security.SecurityElement)$0</Target
+    >
     <Left>lib/netstandard2.0/System.Security.Permissions.dll</Left>
     <Right>lib/net462/System.Security.Permissions.dll</Right>
   </Suppression>

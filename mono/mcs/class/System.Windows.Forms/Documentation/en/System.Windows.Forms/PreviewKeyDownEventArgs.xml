@@ -13,16 +13,31 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+      <para
+        >For more information about handling events, see <format
+         type="text/html">
+          <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+        </format>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.Control.PreviewKeyDown" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.Control.PreviewKeyDown" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public PreviewKeyDownEventArgs (System.Windows.Forms.Keys keyData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public PreviewKeyDownEventArgs (System.Windows.Forms.Keys keyData);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="keyData" Type="System.Windows.Forms.Keys" />
@@ -32,10 +47,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.PreviewKeyDownEventArgs" /> class with the specified key. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.PreviewKeyDownEventArgs" />
+
+             class with the specified key. </para
+          >
         </summary>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.Keys" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.Keys" />
+
+           values.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,7 +136,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the keyboard code for a <see cref="E:System.Windows.Forms.Control.KeyDown" /> or <see cref="E:System.Windows.Forms.Control.KeyUp" /> event.</para>
+          <para
+            >Gets the keyboard code for a <see
+             cref="E:System.Windows.Forms.Control.KeyDown" />
+
+             or <see
+             cref="E:System.Windows.Forms.Control.KeyUp" />
+
+             event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -129,7 +163,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the key data for a <see cref="E:System.Windows.Forms.Control.KeyDown" /> or <see cref="E:System.Windows.Forms.Control.KeyUp" /> event.</para>
+          <para
+            >Gets the key data for a <see
+             cref="E:System.Windows.Forms.Control.KeyDown" />
+
+             or <see
+             cref="E:System.Windows.Forms.Control.KeyUp" />
+
+             event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -148,7 +190,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the keyboard value for a <see cref="E:System.Windows.Forms.Control.KeyDown" /> or <see cref="E:System.Windows.Forms.Control.KeyUp" /> event.</para>
+          <para
+            >Gets the keyboard value for a <see
+             cref="E:System.Windows.Forms.Control.KeyDown" />
+
+             or <see
+             cref="E:System.Windows.Forms.Control.KeyUp" />
+
+             event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -167,7 +217,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the modifier flags for a <see cref="E:System.Windows.Forms.Control.KeyDown" /> or <see cref="E:System.Windows.Forms.Control.KeyUp" /> event.</para>
+          <para
+            >Gets the modifier flags for a <see
+             cref="E:System.Windows.Forms.Control.KeyDown" />
+
+             or <see
+             cref="E:System.Windows.Forms.Control.KeyUp" />
+
+             event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -12,7 +12,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.Application.VisualStyleState" /> property to specify whether visual styles are applied to client or nonclient areas of application windows.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.Application.VisualStyleState" />
+
+         property to specify whether visual styles are applied to client or nonclient areas of application windows.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

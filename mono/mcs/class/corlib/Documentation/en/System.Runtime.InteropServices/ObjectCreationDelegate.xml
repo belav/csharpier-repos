@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ObjectCreationDelegate" FullName="System.Runtime.InteropServices.ObjectCreationDelegate">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public delegate IntPtr ObjectCreationDelegate(IntPtr aggregator);" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ObjectCreationDelegate extends System.MulticastDelegate" />
+<Type
+  Name="ObjectCreationDelegate"
+  FullName="System.Runtime.InteropServices.ObjectCreationDelegate"
+>
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public delegate IntPtr ObjectCreationDelegate(IntPtr aggregator);"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ObjectCreationDelegate extends System.MulticastDelegate"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -9,7 +19,9 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Delegate</BaseTypeName>
   </Base>
@@ -29,8 +41,21 @@
     <returns>To be added.</returns>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This delegate is called to create a COM object as an alternative to CoCreateInstance when a managed object needs to create a new instance of its unmanaged portion. The IUnknown interface of the managed object is passed as a parameter and the delegate should return the IUnknown interface of the unmanaged object. Both interfaces are passed as type <see cref="T:System.IntPtr" /> to avoid marshaling.</para>
-      <para>Every derived class of <see cref="T:System.Delegate" /> and <see cref="T:System.MulticastDelegate" /> has a constructor and an Invoke method.</para>
+      <para
+        >This delegate is called to create a COM object as an alternative to CoCreateInstance when a managed object needs to create a new instance of its unmanaged portion. The IUnknown interface of the managed object is passed as a parameter and the delegate should return the IUnknown interface of the unmanaged object. Both interfaces are passed as type <see
+         cref="T:System.IntPtr" />
+
+         to avoid marshaling.</para
+      >
+      <para
+        >Every derived class of <see
+         cref="T:System.Delegate" />
+
+         and <see
+         cref="T:System.MulticastDelegate" />
+
+         has a constructor and an Invoke method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

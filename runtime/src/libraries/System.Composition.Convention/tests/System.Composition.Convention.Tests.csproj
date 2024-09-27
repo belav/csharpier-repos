@@ -17,6 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../src/System.Composition.Convention.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.TypedParts\src\System.Composition.TypedParts.csproj" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Composition.TypedParts\src\System.Composition.TypedParts.csproj"
+    />
   </ItemGroup>
 </Project>

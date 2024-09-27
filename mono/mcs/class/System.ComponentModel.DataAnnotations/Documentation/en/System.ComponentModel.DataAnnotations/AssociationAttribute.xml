@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AssociationAttribute" FullName="System.ComponentModel.DataAnnotations.AssociationAttribute">
+<Type
+  Name="AssociationAttribute"
+  FullName="System.ComponentModel.DataAnnotations.AssociationAttribute"
+>
   <TypeSignature Language="C#" Value="public sealed class AssociationAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit AssociationAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit AssociationAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -12,20 +18,30 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=true)</AttributeName>
+      <AttributeName
+        >System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=true)</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies that an entity member represents a data relationship, such as a foreign key relationship.</para>
+      <para
+        >Specifies that an entity member represents a data relationship, such as a foreign key relationship.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AssociationAttribute (string name, string thisKey, string otherKey);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, string thisKey, string otherKey) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AssociationAttribute (string name, string thisKey, string otherKey);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, string thisKey, string otherKey) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,18 +54,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the association is bi-directional, the name must be the same on both sides of the association.</para>
+          <para
+            >If the association is bi-directional, the name must be the same on both sides of the association.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.AssociationAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.AssociationAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the association. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the association. </param
+        >
         <param name="thisKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated list of the property names of the key values on the <paramref name="thisKey" /> side of the association.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated list of the property names of the key values on the <paramref
+           name="thisKey" />
+
+           side of the association.</param
+        >
         <param name="otherKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated list of the property names of the key values on the <paramref name="otherKey" /> side of the association.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated list of the property names of the key values on the <paramref
+           name="otherKey" />
+
+           side of the association.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsForeignKey">
@@ -67,7 +105,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether the association member represents a foreign key.</para>
+          <para
+            >Gets or sets a value that indicates whether the association member represents a foreign key.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -85,7 +125,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the association is bi-directional, the name must be the same on both sides of the association.</para>
+          <para
+            >If the association is bi-directional, the name must be the same on both sides of the association.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -108,26 +150,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the property names of the key values on the OtherKey side of the association.</para>
+          <para
+            >Gets the property names of the key values on the OtherKey side of the association.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OtherKeyMembers">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;string&gt; OtherKeyMembers { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;string&gt; OtherKeyMembers" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<string> OtherKeyMembers { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IEnumerable`1<string> OtherKeyMembers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.String&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable<System.String></ReturnType>
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of individual key members that are specified in the <see cref="P:System.ComponentModel.DataAnnotations.AssociationAttribute.OtherKey" /> property.</para>
+          <para
+            >Gets a collection of individual key members that are specified in the <see
+             cref="P:System.ComponentModel.DataAnnotations.AssociationAttribute.OtherKey" />
+
+             property.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -146,26 +201,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the property names of the key values on the ThisKey side of the association.</para>
+          <para
+            >Gets the property names of the key values on the ThisKey side of the association.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ThisKeyMembers">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;string&gt; ThisKeyMembers { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;string&gt; ThisKeyMembers" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<string> ThisKeyMembers { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IEnumerable`1<string> ThisKeyMembers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.String&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable<System.String></ReturnType>
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of individual key members that are specified in the <see cref="P:System.ComponentModel.DataAnnotations.AssociationAttribute.ThisKey" /> property.</para>
+          <para
+            >Gets a collection of individual key members that are specified in the <see
+             cref="P:System.ComponentModel.DataAnnotations.AssociationAttribute.ThisKey" />
+
+             property.</para
+          >
         </summary>
       </Docs>
     </Member>

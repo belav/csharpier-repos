@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="EndToEndTracingElement" FullName="System.ServiceModel.Configuration.EndToEndTracingElement">
-  <TypeSignature Language="C#" Value="public sealed class EndToEndTracingElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed EndToEndTracingElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="EndToEndTracingElement"
+  FullName="System.ServiceModel.Configuration.EndToEndTracingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class EndToEndTracingElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed EndToEndTracingElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +23,18 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Handles configuration file element settings that enable and disable different aspects of end-to-end tracing during the running of a service application.</para>
+      <para
+        >Handles configuration file element settings that enable and disable different aspects of end-to-end tracing during the running of a service application.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public EndToEndTracingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +44,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.EndToEndTracingElement" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.EndToEndTracingElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -43,7 +62,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("activityTracing", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("activityTracing", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -67,7 +88,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("messageFlowTracing", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("messageFlowTracing", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -91,7 +114,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("propagateActivity", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("propagateActivity", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -107,8 +132,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

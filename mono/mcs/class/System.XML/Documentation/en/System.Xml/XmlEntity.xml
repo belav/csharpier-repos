@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlEntity" FullName="System.Xml.XmlEntity">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlEntity : System.Xml.XmlNode, System.Xml.IHasXmlChildNode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlEntity extends System.Xml.XmlNode implements class System.Xml.IHasXmlChildNode" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlEntity : System.Xml.XmlNode, System.Xml.IHasXmlChildNode"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlEntity extends System.Xml.XmlNode implements class System.Xml.IHasXmlChildNode"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -19,10 +26,15 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <remarks>This class represents an &lt;!ENTITY ... &gt; declaration node within a document type declaration node.  These nodes are children of <see cref="T:System.Xml.XmlDocumentType" /> nodes.</remarks>
+    <remarks
+      >This class represents an <!ENTITY ... > declaration node within a document type declaration node.  These nodes are children of <see
+       cref="T:System.Xml.XmlDocumentType" />
+
+       nodes.</remarks
+    >
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents an entity declaration, such as &lt;!ENTITY... &gt;.</para>
+      <para>Represents an entity declaration, such as <!ENTITY... >.</para>
     </summary>
   </Docs>
   <Members>
@@ -42,14 +54,22 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A networked XML document is comprised of chunks of data aggregated using various World Wide Web Consortium (W3C) standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from.</para>
-          <para>The value of this property varies depending on the node type. Nodes which are children of external EntityReference nodes return the location of the entity itself. For example, consider the following XML document: </para>
-          <code> &lt;!DOCTYPE item [
- &lt;!ENTITY xyz SYSTEM "a/b.xml"&gt;
- ]&gt;
- &lt;item num='123'&gt;&amp;xyz;&lt;/item&gt;</code>
-          <para>where the external entity a/b.xml contains the XML text &lt;test&gt;123&lt;/test&gt;.</para>
-          <para>If the document is loaded from http://server/mydata.xml, BaseURI returns the following: </para>
+          <para
+            >A networked XML document is comprised of chunks of data aggregated using various World Wide Web Consortium (W3C) standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from.</para
+          >
+          <para
+            >The value of this property varies depending on the node type. Nodes which are children of external EntityReference nodes return the location of the entity itself. For example, consider the following XML document: </para
+          >
+          <code
+            > <!DOCTYPE item [
+ <!ENTITY xyz SYSTEM "a/b.xml">
+ ]>
+ <item num='123'>&xyz;</item></code
+          >
+          <para>where the external entity a/b.xml contains the XML text <test>123</test>.</para>
+          <para
+            >If the document is loaded from http://server/mydata.xml, BaseURI returns the following: </para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -153,15 +173,21 @@
               </description>
             </item>
           </list>
-          <para>BaseURI looks for entity reference boundaries, so if entities are expanded, this information is not preserved and this property returns the location of the XmlDocument object in all cases.</para>
+          <para
+            >BaseURI looks for entity reference boundaries, so if entities are expanded, this information is not preserved and this property returns the location of the XmlDocument object in all cases.</para
+          >
           <para>As a second example, given the following XML document: </para>
-          <code> &lt;!DOCTYPE Mydata SYSTEM "http://localhost/doctype.dtd"&gt;
- &lt;baa&gt;&amp;xyz;&lt;/baa&gt;</code>
+          <code> <!DOCTYPE Mydata SYSTEM "http://localhost/doctype.dtd">
+ <baa>&xyz;</baa></code>
           <para>where the document type definition (DTD) file contains the following: </para>
-          <code> &lt;!ENTITY xyz "&lt;E1&gt;My Data&lt;/E1&gt;"&gt;
- &lt;!ELEMENT baa #PCDATA&gt;
- &lt;!ATTLIST baa attr1 "woof"&gt;</code>
-          <para>If the XML document is loaded from http://localhost/mydata.xml, BaseURI returns the following for each of the nodes: </para>
+          <code
+            > <!ENTITY xyz "<E1>My Data</E1>">
+ <!ELEMENT baa #PCDATA>
+ <!ATTLIST baa attr1 "woof"></code
+          >
+          <para
+            >If the XML document is loaded from http://localhost/mydata.xml, BaseURI returns the following for each of the nodes: </para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -244,7 +270,9 @@
             </item>
           </list>
           <block subset="none" type="note">
-            <para>The base URI of a default attribute is the same as the base URI of the element to which they belong.</para>
+            <para
+              >The base URI of a default attribute is the same as the base URI of the element to which they belong.</para
+            >
           </block>
           <para>This property is a Microsoft extension to the Document Object Model (DOM).</para>
         </remarks>
@@ -255,8 +283,14 @@
       </Docs>
     </Member>
     <Member MemberName="CloneNode">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNode CloneNode (bool deep);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Xml.XmlNode CloneNode(bool deep) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNode CloneNode (bool deep);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Xml.XmlNode CloneNode(bool deep) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -273,14 +307,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a duplicate of this node. Entity nodes cannot be cloned. Calling this method on an <see cref="T:System.Xml.XmlEntity" /> object throws an exception.</para>
+          <para
+            >Creates a duplicate of this node. Entity nodes cannot be cloned. Calling this method on an <see
+             cref="T:System.Xml.XmlEntity" />
+
+             object throws an exception.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a copy of the <see cref="T:System.Xml.XmlNode" /> from which the method is called.</para>
+          <para
+            >Returns a copy of the <see
+             cref="T:System.Xml.XmlNode" />
+
+             from which the method is called.</para
+          >
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to recursively clone the subtree under the specified node; false to clone only the node itself.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to recursively clone the subtree under the specified node; false to clone only the node itself.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="InnerText">
@@ -349,7 +396,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A read-only node is one whose properties, attributes, or children cannot be changed. You can remove a read-only node from the tree and insert it somewhere else.</para>
+          <para
+            >A read-only node is one whose properties, attributes, or children cannot be changed. You can remove a read-only node from the tree and insert it somewhere else.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -400,8 +449,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override System.Xml.XmlNodeType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.XmlNodeType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Xml.XmlNodeType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.XmlNodeType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -487,8 +542,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Xml.IHasXmlChildNode.LastLinkedChild">
-      <MemberSignature Language="C#" Value="System.Xml.XmlLinkedNode System.Xml.IHasXmlChildNode.LastLinkedChild { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlLinkedNode System.Xml.IHasXmlChildNode.LastLinkedChild" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Xml.XmlLinkedNode System.Xml.IHasXmlChildNode.LastLinkedChild { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlLinkedNode System.Xml.IHasXmlChildNode.LastLinkedChild"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -526,8 +587,14 @@
       </Docs>
     </Member>
     <Member MemberName="WriteContentTo">
-      <MemberSignature Language="C#" Value="public override void WriteContentTo (System.Xml.XmlWriter w);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void WriteContentTo(class System.Xml.XmlWriter w) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void WriteContentTo (System.Xml.XmlWriter w);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void WriteContentTo(class System.Xml.XmlWriter w) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -547,15 +614,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlEntity nodes, this method has no effect.</para>
+          <para
+            >Saves all the children of the node to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            . For XmlEntity nodes, this method has no effect.</para
+          >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XmlWriter to which you want to save. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XmlWriter to which you want to save. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
-      <MemberSignature Language="C#" Value="public override void WriteTo (System.Xml.XmlWriter w);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter w) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void WriteTo (System.Xml.XmlWriter w);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void WriteTo(class System.Xml.XmlWriter w) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -575,10 +656,18 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlEntity nodes, this method has no effect.</para>
+          <para
+            >Saves the node to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            . For XmlEntity nodes, this method has no effect.</para
+          >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XmlWriter to which you want to save. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XmlWriter to which you want to save. </param
+        >
       </Docs>
     </Member>
   </Members>

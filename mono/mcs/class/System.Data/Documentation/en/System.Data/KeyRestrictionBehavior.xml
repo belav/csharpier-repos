@@ -13,7 +13,9 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Identifies a list of connection string parameters identified by the KeyRestrictions property that are either allowed or not allowed.</para>
+      <para
+        >Identifies a list of connection string parameters identified by the KeyRestrictions property that are either allowed or not allowed.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -26,7 +28,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Default. Identifies the only additional connection string parameters that are allowed.</para>
+          <para
+            >Default. Identifies the only additional connection string parameters that are allowed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

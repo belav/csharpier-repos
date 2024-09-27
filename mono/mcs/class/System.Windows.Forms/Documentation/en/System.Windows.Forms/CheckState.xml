@@ -12,14 +12,29 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Multiple methods in <see cref="T:System.Windows.Forms.CheckBox" />, <see cref="T:System.Windows.Forms.CheckedListBox" />, and <see cref="T:System.Windows.Forms.ItemCheckEventArgs" /> use this enumeration.</para>
+      <para
+        >Multiple methods in <see
+         cref="T:System.Windows.Forms.CheckBox" />
+
+        , <see
+         cref="T:System.Windows.Forms.CheckedListBox" />
+
+        , and <see
+         cref="T:System.Windows.Forms.ItemCheckEventArgs" />
+
+         use this enumeration.</para
+      >
       <block subset="none" type="note">
-        <para>Use an indeterminately checked control when you do not want to set a default value.</para>
+        <para
+          >Use an indeterminately checked control when you do not want to set a default value.</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the state of a control, such as a check box, that can be checked, unchecked, or set to an indeterminate state.</para>
+      <para
+        >Specifies the state of a control, such as a check box, that can be checked, unchecked, or set to an indeterminate state.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -49,7 +64,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The control is indeterminate. An indeterminate control generally has a shaded appearance.</para>
+          <para
+            >The control is indeterminate. An indeterminate control generally has a shaded appearance.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

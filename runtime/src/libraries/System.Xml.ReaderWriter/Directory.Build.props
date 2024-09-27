@@ -2,6 +2,8 @@
   <Import Project="..\Directory.Build.props" />
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <ApiCompatExcludeAttributeList>$(ApiCompatExcludeAttributeList),$(MSBuildThisFileDirectory)ApiCompatExcludedAttributes.txt</ApiCompatExcludeAttributeList>
+    <ApiCompatExcludeAttributeList
+      >$(ApiCompatExcludeAttributeList),$(MSBuildThisFileDirectory)ApiCompatExcludedAttributes.txt</ApiCompatExcludeAttributeList
+    >
   </PropertyGroup>
 </Project>

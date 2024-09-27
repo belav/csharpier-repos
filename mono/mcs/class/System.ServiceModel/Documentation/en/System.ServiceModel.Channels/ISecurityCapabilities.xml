@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ISecurityCapabilities" FullName="System.ServiceModel.Channels.ISecurityCapabilities">
   <TypeSignature Language="C#" Value="public interface ISecurityCapabilities" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ISecurityCapabilities" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ISecurityCapabilities"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,8 +19,14 @@
   </Docs>
   <Members>
     <Member MemberName="SupportedRequestProtectionLevel">
-      <MemberSignature Language="C#" Value="public System.Net.Security.ProtectionLevel SupportedRequestProtectionLevel { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Security.ProtectionLevel SupportedRequestProtectionLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Security.ProtectionLevel SupportedRequestProtectionLevel { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Security.ProtectionLevel SupportedRequestProtectionLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,8 +44,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportedResponseProtectionLevel">
-      <MemberSignature Language="C#" Value="public System.Net.Security.ProtectionLevel SupportedResponseProtectionLevel { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.Security.ProtectionLevel SupportedResponseProtectionLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Security.ProtectionLevel SupportedResponseProtectionLevel { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.Security.ProtectionLevel SupportedResponseProtectionLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,7 +70,10 @@
     </Member>
     <Member MemberName="SupportsClientAuthentication">
       <MemberSignature Language="C#" Value="public bool SupportsClientAuthentication { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsClientAuthentication" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsClientAuthentication"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -68,13 +86,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the binding supports client authentication.</para>
+          <para
+            >Gets a value that indicates whether the binding supports client authentication.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SupportsClientWindowsIdentity">
       <MemberSignature Language="C#" Value="public bool SupportsClientWindowsIdentity { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsClientWindowsIdentity" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsClientWindowsIdentity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -87,13 +110,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the binding supports client Windows identity.</para>
+          <para
+            >Gets a value that indicates whether the binding supports client Windows identity.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SupportsServerAuthentication">
       <MemberSignature Language="C#" Value="public bool SupportsServerAuthentication { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsServerAuthentication" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsServerAuthentication"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -106,7 +134,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the binding supports server authentication.</para>
+          <para
+            >Gets a value that indicates whether the binding supports server authentication.</para
+          >
         </summary>
       </Docs>
     </Member>

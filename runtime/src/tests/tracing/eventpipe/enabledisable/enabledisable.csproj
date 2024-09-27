@@ -4,7 +4,9 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants Condition="'$(GitHubRepositoryName)' == 'runtime'">$(DefineConstants);DIAGNOSTICS_RUNTIME</DefineConstants>
+    <DefineConstants Condition="'$(GitHubRepositoryName)' == 'runtime'"
+      >$(DefineConstants);DIAGNOSTICS_RUNTIME</DefineConstants
+    >
     <UnloadabilityIncompatible>true</UnloadabilityIncompatible>
     <!-- Tracing tests routinely time out with jitstress and gcstress -->
     <GCStressIncompatible>true</GCStressIncompatible>
@@ -13,6 +15,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />
     <ProjectReference Include="../common/eventpipe_common.csproj" />
-    <ProjectReference Include="../common/Microsoft.Diagnostics.NETCore.Client/Microsoft.Diagnostics.NETCore.Client.csproj" />
+    <ProjectReference
+      Include="../common/Microsoft.Diagnostics.NETCore.Client/Microsoft.Diagnostics.NETCore.Client.csproj"
+    />
   </ItemGroup>
 </Project>

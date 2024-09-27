@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <EnableDefaultItems>false</EnableDefaultItems>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
@@ -7,35 +6,33 @@
     <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
     <EnsureRuntimePackageDependencies>false</EnsureRuntimePackageDependencies>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-
     <!-- Force System.Private.CoreLib.dll into a special IL output directory -->
     <OutputPath>$(RuntimeBinDir)IL\</OutputPath>
     <Configurations>Debug;Release;Checked</Configurations>
     <Platforms>x64;x86;arm;arm64</Platforms>
-
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-
     <ILLinkTrimAssembly>true</ILLinkTrimAssembly>
     <ILLinkDescriptorsXml>$(IntermediateOutputPath)ILLink.Descriptors.xml</ILLinkDescriptorsXml>
     <ILLinkDirectory>$(MSBuildThisFileDirectory)src\ILLink\</ILLinkDirectory>
-
     <FeaturePortableThreadPool>true</FeaturePortableThreadPool>
     <FeaturePortableTimer>true</FeaturePortableTimer>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkSubstitutionsXmls Include="$(ILLinkDirectory)ILLink.Substitutions.xml" />
-    <ILLinkSubstitutionsXmls Condition="'$(TargetsWindows)' == 'true'" Include="$(ILLinkDirectory)ILLink.Substitutions.Windows.xml" />
+    <ILLinkSubstitutionsXmls
+      Condition="'$(TargetsWindows)' == 'true'"
+      Include="$(ILLinkDirectory)ILLink.Substitutions.Windows.xml"
+    />
   </ItemGroup>
-
   <!-- Note that various places in SPCL depend on this resource name i.e. TplEventSource -->
   <ItemGroup Label="Embedded Resources">
-    <EmbeddedResource Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\Resources\Strings.resx">
+    <EmbeddedResource
+      Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\Resources\Strings.resx"
+    >
       <GenerateSource>true</GenerateSource>
       <ClassName>System.SR</ClassName>
     </EmbeddedResource>
   </ItemGroup>
-
   <PropertyGroup>
     <Platform Condition=" '$(Platform)' == '' ">$(TargetArchitecture)</Platform>
     <Platform Condition=" '$(Platform)' == 'armel' ">arm</Platform>
@@ -44,20 +41,21 @@
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <RuntimeMetadataVersion>v4.0.30319</RuntimeMetadataVersion>
     <!-- Override InformationalVersion during servicing as it's returned via public api. -->
-    <InformationalVersion Condition="'$(PreReleaseVersionLabel)' == 'servicing'">$(ProductVersion)</InformationalVersion>
-    <InformationalVersion Condition="'$(StabilizePackageVersion)' == 'true'">$(ProductVersion)</InformationalVersion>
+    <InformationalVersion Condition="'$(PreReleaseVersionLabel)' == 'servicing'"
+      >$(ProductVersion)</InformationalVersion
+    >
+    <InformationalVersion Condition="'$(StabilizePackageVersion)' == 'true'"
+      >$(ProductVersion)</InformationalVersion
+    >
     <!-- AD0001 : https://github.com/dotnet/runtime/issues/90356 -->
     <NoWarn>$(NoWarn),0419,0649,CA2249,CA1830;AD0001</NoWarn>
     <Nullable>enable</Nullable>
-
     <!-- Ignore all previous constants since SPCL is sensitive to what is defined and the Sdk adds some by default -->
     <DefineConstants>CORECLR;NETCOREAPP;SYSTEM_PRIVATE_CORELIB</DefineConstants>
     <DisableImplicitConfigurationDefines>true</DisableImplicitConfigurationDefines>
-
     <SkipCommonResourcesIncludes>true</SkipCommonResourcesIncludes>
     <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
   </PropertyGroup>
-
   <!-- Platform specific properties -->
   <PropertyGroup Condition="'$(Platform)' == 'x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -84,7 +82,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>$(DefineConstants);TARGET_RISCV64</DefineConstants>
   </PropertyGroup>
-
   <!-- Configuration specific properties -->
   <PropertyGroup Condition="'$(Configuration)' == 'Debug' or '$(Configuration)' == 'Checked'">
     <Optimize Condition="'$(Optimize)' == '' and '$(Configuration)' == 'Debug'">false</Optimize>
@@ -94,32 +91,33 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <Optimize Condition="'$(Optimize)' == ''">true</Optimize>
   </PropertyGroup>
-
   <!-- Assembly attributes -->
   <PropertyGroup>
     <Description>$(AssemblyName)</Description>
   </PropertyGroup>
-
   <!-- Signing -->
   <PropertyGroup>
     <StrongNameKeyId>SilverlightPlatform</StrongNameKeyId>
   </PropertyGroup>
-
   <!--
     Helper Paths
   -->
   <PropertyGroup>
-    <CommonPath>$([MSBuild]::NormalizeDirectory('$(LibrariesProjectRoot)', 'Common', 'src'))</CommonPath>
+    <CommonPath
+      >$([MSBuild]::NormalizeDirectory('$(LibrariesProjectRoot)', 'Common', 'src'))</CommonPath
+    >
     <BclSourcesRoot>$(MSBuildThisFileDirectory)src</BclSourcesRoot>
   </PropertyGroup>
-
   <!-- Compilation options -->
   <Import Project="../clr.featuredefines.props" />
-
   <!-- Sources -->
   <ItemGroup>
-    <Compile Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\ComActivationContextInternal.cs" />
-    <Compile Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\ComponentActivator.CoreCLR.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\ComActivationContextInternal.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\ComponentActivator.CoreCLR.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\__Canon.cs" />
     <Compile Include="$(BclSourcesRoot)\System\ArgIterator.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Array.CoreCLR.cs" />
@@ -138,7 +136,9 @@
     <Compile Include="$(BclSourcesRoot)\System\Diagnostics\Debugger.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Diagnostics\EditAndContinueHelper.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Diagnostics\Eventing\EventPipe.CoreCLR.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Diagnostics\Eventing\NativeRuntimeEventSource.Threading.NativeSinks.CoreCLR.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Diagnostics\Eventing\NativeRuntimeEventSource.Threading.NativeSinks.CoreCLR.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Diagnostics\ICustomDebuggerNotification.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Diagnostics\StackFrame.CoreCLR.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Diagnostics\StackFrameHelper.cs" />
@@ -166,7 +166,9 @@
     <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeEnumBuilder.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeEventBuilder.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeFieldBuilder.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeGenericTypeParameterBuilder.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeGenericTypeParameterBuilder.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeILGenerator.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeLocalBuilder.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\Emit\RuntimeMethodBuilder.cs" />
@@ -202,24 +204,50 @@
     <Compile Include="$(BclSourcesRoot)\System\Reflection\RuntimeParameterInfo.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\RuntimePropertyInfo.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Reflection\TypeNameParser.CoreCLR.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Reflection\Metadata\RuntimeTypeMetadataUpdateHandler.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Resources\ManifestBasedResourceGroveler.CoreCLR.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Reflection\Metadata\RuntimeTypeMetadataUpdateHandler.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Resources\ManifestBasedResourceGroveler.CoreCLR.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\CompilerServices\CastHelpers.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\CompilerServices\ICastableHelpers.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\CompilerServices\RuntimeHelpers.CoreCLR.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\CompilerServices\RuntimeHelpers.CoreCLR.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\ControlledExecution.CoreCLR.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\DependentHandle.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)..\nativeaot\Common\src\System\Runtime\RhFailFastReason.cs" Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"/>
-    <Compile Include="$(MSBuildThisFileDirectory)..\nativeaot\Runtime.Base\src\System\Runtime\ExceptionHandling.cs" Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"/>
-    <Compile Include="$(MSBuildThisFileDirectory)..\nativeaot\Runtime.Base\src\System\Runtime\ExceptionIDs.cs" Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"/>
-    <Compile Include="$(MSBuildThisFileDirectory)..\nativeaot\Runtime.Base\src\System\Runtime\StackFrameIterator.cs" Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"/>
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\ExceptionServices\AsmOffsets.cs" Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"/>
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\ExceptionServices\InternalCalls.cs" Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"/>
+    <Compile
+      Include="$(MSBuildThisFileDirectory)..\nativeaot\Common\src\System\Runtime\RhFailFastReason.cs"
+      Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"
+    />
+    <Compile
+      Include="$(MSBuildThisFileDirectory)..\nativeaot\Runtime.Base\src\System\Runtime\ExceptionHandling.cs"
+      Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"
+    />
+    <Compile
+      Include="$(MSBuildThisFileDirectory)..\nativeaot\Runtime.Base\src\System\Runtime\ExceptionIDs.cs"
+      Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"
+    />
+    <Compile
+      Include="$(MSBuildThisFileDirectory)..\nativeaot\Runtime.Base\src\System\Runtime\StackFrameIterator.cs"
+      Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\ExceptionServices\AsmOffsets.cs"
+      Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\ExceptionServices\InternalCalls.cs"
+      Condition="('$(Platform)' != 'x86' or '$(TargetsWindows)' != 'true')"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\GCSettings.CoreCLR.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\JitInfo.CoreCLR.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ComTypes\IEnumerable.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ComTypes\IEnumerator.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\DynamicInterfaceCastableHelpers.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\DynamicInterfaceCastableHelpers.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\GCHandle.CoreCLR.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\Marshal.CoreCLR.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\MemoryMarshal.CoreCLR.cs" />
@@ -248,7 +276,7 @@
     <Compile Include="$(BclSourcesRoot)\System\ValueType.cs" />
     <Compile Include="$(CommonPath)System\Collections\Generic\ArrayBuilder.cs">
       <Link>Common\System\Collections\Generic\ArrayBuilder.cs</Link>
-    </Compile>    
+    </Compile>
   </ItemGroup>
   <ItemGroup Condition="'$(FeatureComWrappers)' == 'true'">
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ComWrappers.cs" />
@@ -272,79 +300,119 @@
     <Compile Include="$(BclSourcesRoot)\System\OleAutBinder.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ComEventsHelper.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ComEventsInfo.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\ComDataHelpers.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumVariantViewOfEnumerator.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumerableToDispatchMarshaler.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumerableViewOfDispatch.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumeratorToEnumVariantMarshaler.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumeratorViewOfEnumVariant.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\ExpandoToDispatchExMarshaler.cs" />
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\TypeToTypeInfoMarshaler.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\ComDataHelpers.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumVariantViewOfEnumerator.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumerableToDispatchMarshaler.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumerableViewOfDispatch.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumeratorToEnumVariantMarshaler.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\EnumeratorViewOfEnumVariant.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\ExpandoToDispatchExMarshaler.cs"
+    />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\CustomMarshalers\TypeToTypeInfoMarshaler.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\System\Variant.cs" />
   </ItemGroup>
   <ItemGroup Condition="'$(FeatureCominterop)' != 'true'">
-    <Compile Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\ComActivator.PlatformNotSupported.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\ComActivator.PlatformNotSupported.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetsUnix)' == 'true'">
-    <Compile Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\InMemoryAssemblyLoader.PlatformNotSupported.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\InMemoryAssemblyLoader.PlatformNotSupported.cs"
+    />
     <Compile Include="$(BclSourcesRoot)\Interop\Unix\Interop.Libraries.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Threading\LowLevelLifoSemaphore.Unix.cs" />
     <Compile Include="$(BclSourcesRoot)\System\Threading\Mutex.CoreCLR.Unix.cs" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetsWindows)' == 'true'">
-    <Compile Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\InMemoryAssemblyLoader.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\Internal\Runtime\InteropServices\InMemoryAssemblyLoader.cs"
+    />
     <Compile Include="$(CommonPath)Interop\Windows\OleAut32\Interop.VariantClear.cs">
       <Link>Common\Interop\Windows\OleAut32\Interop.VariantClear.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup Condition="'$(FeatureObjCMarshal)' == 'true'">
-    <Compile Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ObjectiveCMarshal.CoreCLR.cs" />
+    <Compile
+      Include="$(BclSourcesRoot)\System\Runtime\InteropServices\ObjectiveCMarshal.CoreCLR.cs"
+    />
   </ItemGroup>
   <!-- Include additional sources shared files in the compilation -->
-  <Import Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems" Label="Shared" />
-
+  <Import
+    Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems"
+    Label="Shared"
+  />
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <!-- This is the T4 template service and is added by VS anytime you modify a T4 template. Required for .tt files. -->
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <Import Project="CreateRuntimeRootILLinkDescriptorFile.targets" />
-
-  <Target Name="CreateRuntimeRootIlLinkDescFile" BeforeTargets="CoreCompile" DependsOnTargets="_CreateILLinkRuntimeRootDescriptorFile" />
-
+  <Target
+    Name="CreateRuntimeRootIlLinkDescFile"
+    BeforeTargets="CoreCompile"
+    DependsOnTargets="_CreateILLinkRuntimeRootDescriptorFile"
+  />
   <Import Project="$(RepositoryEngineeringDir)codeOptimization.targets" />
-
   <!-- Setup eventing file generation -->
   <ItemGroup>
     <EventingGenerationScript Include="$(CoreClrProjectRoot)scripts/genRuntimeEventSources.py" />
     <EventManifestFile Include="$(CoreClrProjectRoot)vm/ClrEtwAll.man" />
-    <EventingSourceFile Include="$(IntermediateOutputPath)..\..\..\Eventing\$(TargetArchitecture)\$(Configuration)\NativeRuntimeEventSource.CoreCLR.cs" Condition="'$(FeaturePerfTracing)' == 'true' ">
+    <EventingSourceFile
+      Include="$(IntermediateOutputPath)..\..\..\Eventing\$(TargetArchitecture)\$(Configuration)\NativeRuntimeEventSource.CoreCLR.cs"
+      Condition="'$(FeaturePerfTracing)' == 'true' "
+    >
       <Link>src\System\Diagnostics\Eventing\Generated\NativeRuntimeEventSource.CoreCLR.cs</Link>
     </EventingSourceFile>
     <Compile Include="@(EventingSourceFile)" />
   </ItemGroup>
-
-  <Target Name="GenerateEventingFiles"
-          Inputs="@(EventingGenerationScript);@(EventManifestFile)"
-		  Outputs="@(EventingSourceFile)"
-		  DependsOnTargets="FindPython"
-		  BeforeTargets="BeforeCompile">
-
-    <Error Condition="'$(PYTHON)' == ''" Text="Unable to locate Python. NativeRuntimeEventSource.CoreCLR.cs cannot be generated without Python installed on the machine. Either install Python in your path or point to it with the PYTHON environment variable." />
+  <Target
+    Name="GenerateEventingFiles"
+    Inputs="@(EventingGenerationScript);@(EventManifestFile)"
+    Outputs="@(EventingSourceFile)"
+    DependsOnTargets="FindPython"
+    BeforeTargets="BeforeCompile"
+  >
+    <Error
+      Condition="'$(PYTHON)' == ''"
+      Text="Unable to locate Python. NativeRuntimeEventSource.CoreCLR.cs cannot be generated without Python installed on the machine. Either install Python in your path or point to it with the PYTHON environment variable."
+    />
     <PropertyGroup>
       <_PythonWarningParameter>-Wall</_PythonWarningParameter>
-      <_PythonWarningParameter Condition="'$(MSBuildTreatWarningsAsErrors)' == 'true'">$(_PythonWarningParameter) -Werror</_PythonWarningParameter>
-      <_EventingSourceFileDirectory>%(EventingSourceFile.RootDir)%(EventingSourceFile.Directory)</_EventingSourceFileDirectory>
-      <_EventingSourceFileDirectory Condition="HasTrailingSlash('$(_EventingSourceFileDirectory)')">$(_EventingSourceFileDirectory.TrimEnd('\'))</_EventingSourceFileDirectory>
-
+      <_PythonWarningParameter Condition="'$(MSBuildTreatWarningsAsErrors)' == 'true'"
+        >$(_PythonWarningParameter) -Werror</_PythonWarningParameter
+      >
+      <_EventingSourceFileDirectory
+        >%(EventingSourceFile.RootDir)%(EventingSourceFile.Directory)</_EventingSourceFileDirectory
+      >
+      <_EventingSourceFileDirectory Condition="HasTrailingSlash('$(_EventingSourceFileDirectory)')"
+        >$(_EventingSourceFileDirectory.TrimEnd('\'))</_EventingSourceFileDirectory
+      >
     </PropertyGroup>
-
-    <Exec Command="&quot;$(PYTHON)&quot; -B $(_PythonWarningParameter) &quot;@(EventingGenerationScript)&quot; --man &quot;@(EventManifestFile)&quot; --intermediate &quot;$(_EventingSourceFileDirectory)&quot;" />
-
+    <Exec
+      Command=""$(PYTHON)" -B $(_PythonWarningParameter) "@(EventingGenerationScript)" --man "@(EventManifestFile)" --intermediate "$(_EventingSourceFileDirectory)""
+    />
     <ItemGroup>
       <FileWrites Include="@(EventingSourceFile)" />
     </ItemGroup>

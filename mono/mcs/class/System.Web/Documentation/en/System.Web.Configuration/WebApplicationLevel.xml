@@ -12,7 +12,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.WebApplicationLevel" /> class provides three levels that are used to distinguish where a configuration file is in relation to the root level of an ASP.NET Web application. The three path-level types are <see cref="F:System.Web.Configuration.WebApplicationLevel.AboveApplication" />, <see cref="F:System.Web.Configuration.WebApplicationLevel.AtApplication" />, and <see cref="F:System.Web.Configuration.WebApplicationLevel.BelowApplication" />.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.WebApplicationLevel" />
+
+         class provides three levels that are used to distinguish where a configuration file is in relation to the root level of an ASP.NET Web application. The three path-level types are <see
+         cref="F:System.Web.Configuration.WebApplicationLevel.AboveApplication" />
+
+        , <see
+         cref="F:System.Web.Configuration.WebApplicationLevel.AtApplication" />
+
+        , and <see
+         cref="F:System.Web.Configuration.WebApplicationLevel.BelowApplication" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +44,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the configuration file is in a global directory in relation to the current ASP.NET Web application.</para>
+          <para
+            >Specifies that the configuration file is in a global directory in relation to the current ASP.NET Web application.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,7 +63,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the configuration file is in the root directory of the current ASP.NET Web application.</para>
+          <para
+            >Specifies that the configuration file is in the root directory of the current ASP.NET Web application.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -64,7 +82,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the configuration file is in a sub-directory of the current ASP.NET Web application.</para>
+          <para
+            >Specifies that the configuration file is in a sub-directory of the current ASP.NET Web application.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CodeTypeParameter" FullName="System.CodeDom.CodeTypeParameter">
   <TypeSignature Language="C#" Value="public class CodeTypeParameter : System.CodeDom.CodeObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit CodeTypeParameter extends System.CodeDom.CodeObject" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit CodeTypeParameter extends System.CodeDom.CodeObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,9 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.AutoDispatch)</AttributeName>
+      <AttributeName
+        >System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.AutoDispatch)</AttributeName
+      >
     </Attribute>
     <Attribute>
       <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
@@ -23,9 +28,31 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.CodeDom.CodeTypeParameter" /> class represents a type parameter in the declaration of a generic type or method. </para>
-      <para>A generic type or method declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see cref="T:System.Collections.Generic.List`1" /> class contains the type parameter <paramref name="T" />.</para>
-      <para>For more information on generics, see <format type="text/html"><a href="afdd5477-6770-4686-8297-f58a4d749daf">Generics in the .NET Framework Class Library</a></format>. </para>
+      <para
+        >The <see
+         cref="T:System.CodeDom.CodeTypeParameter" />
+
+         class represents a type parameter in the declaration of a generic type or method. </para
+      >
+      <para
+        >A generic type or method declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see
+         cref="T:System.Collections.Generic.List`1" />
+
+         class contains the type parameter <paramref
+         name="T" />
+
+        .</para
+      >
+      <para
+        >For more information on generics, see <format
+         type="text/html">
+          <a href="afdd5477-6770-4686-8297-f58a4d749daf"
+            >Generics in the .NET Framework Class Library</a
+          >
+        </format>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -35,7 +62,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeTypeParameter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,17 +76,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you use this constructor, you should set the <see cref="P:System.CodeDom.CodeTypeParameter.Name" /> property.</para>
+          <para
+            >If you use this constructor, you should set the <see
+             cref="P:System.CodeDom.CodeTypeParameter.Name" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeTypeParameter" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeTypeParameter (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -70,15 +113,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" /> class with the specified type parameter name. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeTypeParameter" />
+
+             class with the specified type parameter name. </para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type parameter.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the type parameter.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Constraints">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeTypeReferenceCollection Constraints { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.CodeDom.CodeTypeReferenceCollection Constraints" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeTypeReferenceCollection Constraints { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.CodeDom.CodeTypeReferenceCollection Constraints"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -92,7 +149,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constraint specifies the type that the type parameter must derive from or implement.</para>
+          <para
+            >A constraint specifies the type that the type parameter must derive from or implement.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -101,8 +160,14 @@
       </Docs>
     </Member>
     <Member MemberName="CustomAttributes">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeAttributeDeclarationCollection CustomAttributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.CodeDom.CodeAttributeDeclarationCollection CustomAttributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeAttributeDeclarationCollection CustomAttributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.CodeDom.CodeAttributeDeclarationCollection CustomAttributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -116,7 +181,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property can be used to add metadata attributes to the declaration of the type parameter.</para>
+          <para
+            >This property can be used to add metadata attributes to the declaration of the type parameter.</para
+          >
           <block subset="none" type="note">
             <para>This property is null by default and should be checked before referencing.</para>
           </block>
@@ -143,11 +210,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constructor constraint indicates to the compiler that the type parameter exposes a default public constructor (a public constructor with no parameters).</para>
+          <para
+            >A constructor constraint indicates to the compiler that the type parameter exposes a default public constructor (a public constructor with no parameters).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the type parameter has a constructor constraint.</para>
+          <para
+            >Gets or sets a value indicating whether the type parameter has a constructor constraint.</para
+          >
         </summary>
       </Docs>
     </Member>

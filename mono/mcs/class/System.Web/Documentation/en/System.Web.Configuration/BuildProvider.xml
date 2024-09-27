@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BuildProvider" FullName="System.Web.Configuration.BuildProvider">
-  <TypeSignature Language="C#" Value="public sealed class BuildProvider : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class BuildProvider : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,12 +17,17 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides functionality to parse a particular file type and generate code during compilation of a dynamic resource. This class cannot be inherited.</para>
+      <para
+        >Provides functionality to parse a particular file type and generate code during compilation of a dynamic resource. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BuildProvider (string extension, string type);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BuildProvider (string extension, string type);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="extension" Type="System.String" />
@@ -30,12 +38,26 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of a <see cref="T:System.Web.Configuration.BuildProvider" /> class, initialized to the provided values.</para>
+          <para
+            >Creates an instance of a <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             class, initialized to the provided values.</para
+          >
         </summary>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file extension of the dynamic resource used during compilation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file extension of the dynamic resource used during compilation.</param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that represents the <see cref="T:System.Web.Configuration.BuildProvider" /> instance to use when parsing and compiling the given extension.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that represents the <see
+           cref="T:System.Web.Configuration.BuildProvider" />
+
+           instance to use when parsing and compiling the given extension.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -54,18 +76,25 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The serializer uses this method to determine whether the same object already exists in the parent collection and whether it needs to be serialized at a lower level if it is not inherited.</para>
+          <para
+            >The serializer uses this method to determine whether the same object already exists in the parent collection and whether it needs to be serialized at a lower level if it is not inherited.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified build provider object is equal to the current object.</para>
+          <para
+            >Determines whether the specified build provider object is equal to the current object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the objects are equal; otherwise, false.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />The build provider object to compare with the current object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The build provider object to compare with the current object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -76,7 +105,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("extension", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("extension", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=1)</AttributeName>
@@ -91,7 +122,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the file extension to map to during compilation of a dynamic resource.</para>
+          <para
+            >Gets or sets the file extension to map to during compilation of a dynamic resource.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -122,7 +155,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -142,7 +178,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("type", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("type", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=1)</AttributeName>
@@ -157,7 +195,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or set the comma-separated class and assembly combination that indicates the <see cref="T:System.Web.Configuration.BuildProvider" /> instance to use.</para>
+          <para
+            >Gets or set the comma-separated class and assembly combination that indicates the <see
+             cref="T:System.Web.Configuration.BuildProvider" />
+
+             instance to use.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

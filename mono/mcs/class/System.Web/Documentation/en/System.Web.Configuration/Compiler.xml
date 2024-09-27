@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Compiler" FullName="System.Web.Configuration.Compiler">
-  <TypeSignature Language="C#" Value="public sealed class Compiler : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class Compiler : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,16 +16,26 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.Compiler" /> class provides a way to programmatically access a compiler configuration element. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.Compiler" />
+
+         class provides a way to programmatically access a compiler configuration element. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines a compiler that is used to support the compilation infrastructure of Web applications. This class cannot be inherited.</para>
+      <para
+        >Defines a compiler that is used to support the compilation infrastructure of Web applications. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Compiler (string compilerOptions, string extension, string language, string type, int warningLevel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Compiler (string compilerOptions, string extension, string language, string type, int warningLevel);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="compilerOptions" Type="System.String" />
@@ -36,18 +49,38 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of a <see cref="T:System.Web.Configuration.Compiler" /> initialized to the provided values.</para>
+          <para
+            >Creates an instance of a <see
+             cref="T:System.Web.Configuration.Compiler" />
+
+             initialized to the provided values.</para
+          >
         </summary>
         <param name="compilerOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />Lists additional compiler-specific options to pass during compilation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Lists additional compiler-specific options to pass during compilation.</param
+        >
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />Provides a semicolon-separated list of file-name extensions used for dynamic code-behind files. For example, ".cs".</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Provides a semicolon-separated list of file-name extensions used for dynamic code-behind files. For example, ".cs".</param
+        >
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />Provides a semicolon-separated list of languages used in dynamic compilation files. For example, "c#;cs;csharp".</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Provides a semicolon-separated list of languages used in dynamic compilation files. For example, "c#;cs;csharp".</param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies a comma-separated class/assembly combination that indicates the .NET Framework class.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies a comma-separated class/assembly combination that indicates the .NET Framework class.</param
+        >
         <param name="warningLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies compiler warning levels.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies compiler warning levels.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -58,7 +91,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("compilerOptions", DefaultValue="")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("compilerOptions", DefaultValue="")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -82,7 +117,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("extension", DefaultValue="")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("extension", DefaultValue="")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -93,7 +130,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the list of file-name extensions includes more than one extension, the list is semicolon-separated.</para>
+          <para
+            >When the list of file-name extensions includes more than one extension, the list is semicolon-separated.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,7 +148,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("language", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("language", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired | System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -120,7 +161,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the list of programming languages includes more than one language, the list is semicolon-separated.</para>
+          <para
+            >When the list of programming languages includes more than one language, the list is semicolon-separated.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -132,7 +175,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -152,7 +198,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("type", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("type", DefaultValue="", Options=System.Configuration.ConfigurationPropertyOptions.IsRequired)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -163,11 +211,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the type name of the language provider, including the name of the assembly containing the provider implementation.</para>
+          <para
+            >Specifies the type name of the language provider, including the name of the assembly containing the provider implementation.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the compiler type name of the language provider for dynamic compilation files. </para>
+          <para
+            >Gets the compiler type name of the language provider for dynamic compilation files. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -179,10 +231,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("warningLevel", DefaultValue="0")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("warningLevel", DefaultValue="0")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.IntegerValidator(MinValue=0, MaxValue=4)</AttributeName>
+          <AttributeName
+            >System.Configuration.IntegerValidator(MinValue=0, MaxValue=4)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -193,7 +249,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the default compiler warning level; determines the level at which the language provider treats compilation warnings as errors.</para>
+          <para
+            >Specifies the default compiler warning level; determines the level at which the language provider treats compilation warnings as errors.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

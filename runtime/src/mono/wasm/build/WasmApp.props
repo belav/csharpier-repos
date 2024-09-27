@@ -4,24 +4,27 @@
     <TargetOS>browser</TargetOS>
     <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
     <UseMonoRuntime>true</UseMonoRuntime>
-
-    <_WasmBuildCoreDependsOn>
+    <_WasmBuildCoreDependsOn
+      >
         _InitializeCommonProperties;
         _BeforeWasmBuildApp;
         _WasmResolveReferences;
         _WasmBuildNativeCore;
         _WasmGenerateAppBundle;
         _AfterWasmBuildApp
-    </_WasmBuildCoreDependsOn>
-
-    <WasmBuildAppDependsOn>
+    </_WasmBuildCoreDependsOn
+    >
+    <WasmBuildAppDependsOn
+      >
       _PrepareForAfterBuild;
       $(_WasmBuildCoreDependsOn)
-    </WasmBuildAppDependsOn>
-
-    <WasmNestedPublishAppDependsOn>
+    </WasmBuildAppDependsOn
+    >
+    <WasmNestedPublishAppDependsOn
+      >
       _PrepareForNestedPublish;
       $(_WasmBuildCoreDependsOn)
-    </WasmNestedPublishAppDependsOn>
+    </WasmNestedPublishAppDependsOn
+    >
   </PropertyGroup>
 </Project>

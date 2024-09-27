@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlSchemaComplexType" FullName="System.Xml.Schema.XmlSchemaComplexType">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlSchemaComplexType : System.Xml.Schema.XmlSchemaType" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlSchemaComplexType extends System.Xml.Schema.XmlSchemaType" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlSchemaComplexType : System.Xml.Schema.XmlSchemaType"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlSchemaComplexType extends System.Xml.Schema.XmlSchemaType"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -17,17 +24,29 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An element can be declared with a type attribute that refers to a complexType element that defines the structure, content, and attributes of that element.</para>
+      <para
+        >An element can be declared with a type attribute that refers to a complexType element that defines the structure, content, and attributes of that element.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the complexType element from XML Schema as specified by the <format type="text/html"><a href="">World Wide Web Consortium (W3C)</a></format>. This class defines a complex type that determines the set of attributes and content of an element.</para>
+      <para
+        >Represents the complexType element from XML Schema as specified by the <format
+         type="text/html">
+          <a href="">World Wide Web Consortium (W3C)</a>
+        </format>
+
+        . This class defines a complex type that determines the set of attributes and content of an element.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlSchemaComplexType ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -40,13 +59,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AnyAttribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -66,17 +96,33 @@
         <value>To be added: an object of type 'XmlSchemaAnyAttribute'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If this property is not null, the complex type can contain any attributes from the namespaces specified in the <see cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />.</para>
+          <para
+            >If this property is not null, the complex type can contain any attributes from the namespaces specified in the <see
+             cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the value for the <see cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" /> component of the complex type.</para>
+          <para
+            >Gets or sets the value for the <see
+             cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />
+
+             component of the complex type.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaObjectCollection Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaObjectCollection Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaObjectCollection Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaObjectCollection Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -85,10 +131,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("attribute", typeof(System.Xml.Schema.XmlSchemaAttribute))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("attribute", typeof(System.Xml.Schema.XmlSchemaAttribute))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("attributeGroup", typeof(System.Xml.Schema.XmlSchemaAttributeGroupRef))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("attributeGroup", typeof(System.Xml.Schema.XmlSchemaAttributeGroupRef))</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -104,8 +154,14 @@
       </Docs>
     </Member>
     <Member MemberName="AttributeUses">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaObjectTable AttributeUses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaObjectTable AttributeUses" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaObjectTable AttributeUses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaObjectTable AttributeUses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -124,18 +180,30 @@
         <value>To be added: an object of type 'XmlSchemaObjectTable'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For example, a combination of all the attributes from the Attributes property from each type in the hierarchy.</para>
-          <para>The value of this property is read-only. This property has the value after the schema has been successfully compiled to determine the complete attribute set that is allowed in an instance document.</para>
+          <para
+            >For example, a combination of all the attributes from the Attributes property from each type in the hierarchy.</para
+          >
+          <para
+            >The value of this property is read-only. This property has the value after the schema has been successfully compiled to determine the complete attribute set that is allowed in an instance document.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of all the complied attributes of this complex type and its base types.</para>
+          <para
+            >Gets the collection of all the complied attributes of this complex type and its base types.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AttributeWildcard">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaAnyAttribute AttributeWildcard { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaAnyAttribute AttributeWildcard" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaAnyAttribute AttributeWildcard { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaAnyAttribute AttributeWildcard"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -154,17 +222,27 @@
         <value>To be added: an object of type 'XmlSchemaAnyAttribute'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of this property is read-only. This property has values after the schema has been successfully compiled to determine the complete attribute set of the complex type. For example, it might be the anyAttribute element from one of the base types.</para>
+          <para
+            >The value of this property is read-only. This property has values after the schema has been successfully compiled to determine the complete attribute set of the complex type. For example, it might be the anyAttribute element from one of the base types.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the post-compilation value for anyAttribute for this complex type and its base type(s).</para>
+          <para
+            >Gets the post-compilation value for anyAttribute for this complex type and its base type(s).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Block">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaDerivationMethod Block { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.Schema.XmlSchemaDerivationMethod Block" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaDerivationMethod Block { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.Schema.XmlSchemaDerivationMethod Block"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -173,7 +251,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Xml.Serialization.XmlAttribute("block")</AttributeName>
@@ -205,7 +285,9 @@
                 <para>None </para>
               </term>
               <description>
-                <para>Use the derivation restriction defined by the BlockDefault property of the schema, if it exists. </para>
+                <para
+                  >Use the derivation restriction defined by the BlockDefault property of the schema, if it exists. </para
+                >
               </description>
             </item>
             <item>
@@ -229,11 +311,15 @@
                 <para>All </para>
               </term>
               <description>
-                <para>#all. This element cannot be replaced by any type regardless of derivation method. </para>
+                <para
+                  >#all. This element cannot be replaced by any type regardless of derivation method. </para
+                >
               </description>
             </item>
           </list>
-          <para>The Substitution, List, and Union derivation methods are not supported by this property.</para>
+          <para
+            >The Substitution, List, and Union derivation methods are not supported by this property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -242,8 +328,14 @@
       </Docs>
     </Member>
     <Member MemberName="BlockResolved">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaDerivationMethod BlockResolved { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.Schema.XmlSchemaDerivationMethod BlockResolved" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaDerivationMethod BlockResolved { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.Schema.XmlSchemaDerivationMethod BlockResolved"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -262,7 +354,9 @@
         <value>To be added: an object of type 'XmlSchemaDerivationMethod'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This value is taken either from the type itself or, if not defined at the type level, it is taken from the schema element. For example, if the value is restricted, only the specifically defined type can be used, not types derived from the specifically defined type.</para>
+          <para
+            >This value is taken either from the type itself or, if not defined at the type level, it is taken from the schema element. For example, if the value is restricted, only the specifically defined type can be used, not types derived from the specifically defined type.</para
+          >
           <para>This attribute can contain the following values: </para>
           <list type="table">
             <listheader>
@@ -280,7 +374,9 @@
                 <para>None </para>
               </term>
               <description>
-                <para>Use the derivation restriction defined by the BlockDefault property of the schema, if it exists. </para>
+                <para
+                  >Use the derivation restriction defined by the BlockDefault property of the schema, if it exists. </para
+                >
               </description>
             </item>
             <item>
@@ -304,21 +400,33 @@
                 <para>All </para>
               </term>
               <description>
-                <para>#all. This element cannot be replaced by any type regardless of derivation method. </para>
+                <para
+                  >#all. This element cannot be replaced by any type regardless of derivation method. </para
+                >
               </description>
             </item>
           </list>
-          <para>The Substitution, List, and Union derivation methods are not supported by this property.</para>
+          <para
+            >The Substitution, List, and Union derivation methods are not supported by this property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the value after the type has been compiled to the post-schema-validation information set (infoset). This value indicates how the type is enforced when xsi:type is used in the instance document.</para>
+          <para
+            >Gets the value after the type has been compiled to the post-schema-validation information set (infoset). This value indicates how the type is enforced when xsi:type is used in the instance document.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ContentModel">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaContentModel ContentModel { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaContentModel ContentModel" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaContentModel ContentModel { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaContentModel ContentModel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -327,10 +435,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("simpleContent", typeof(System.Xml.Schema.XmlSchemaSimpleContent))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("simpleContent", typeof(System.Xml.Schema.XmlSchemaSimpleContent))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("complexContent", typeof(System.Xml.Schema.XmlSchemaComplexContent))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("complexContent", typeof(System.Xml.Schema.XmlSchemaComplexContent))</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -341,17 +453,33 @@
         <value>To be added: an object of type 'XmlSchemaContentModel'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is mutually exclusive with the <see cref="P:System.Xml.Schema.XmlSchemaComplexType.Particle" /> property.</para>
+          <para
+            >This is mutually exclusive with the <see
+             cref="P:System.Xml.Schema.XmlSchemaComplexType.Particle" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the post-compilation <see cref="T:System.Xml.Schema.XmlSchemaContentModel" /> of this complex type.</para>
+          <para
+            >Gets or sets the post-compilation <see
+             cref="T:System.Xml.Schema.XmlSchemaContentModel" />
+
+             of this complex type.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ContentType">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaContentType ContentType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Xml.Schema.XmlSchemaContentType ContentType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaContentType ContentType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Xml.Schema.XmlSchemaContentType ContentType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -371,10 +499,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is the content in the post-schema-validation infoset.</para>
-          <para>If the IsMixed property is set to true on the ContentModel property that has the type XmlSchemaComplexContent, the value returned is Mixed.</para>
+          <para
+            >If the IsMixed property is set to true on the ContentModel property that has the type XmlSchemaComplexContent, the value returned is Mixed.</para
+          >
           <para>If the IsMixed property is false, the value is either Empty or ElementOnly.</para>
-          <para>If the type on the ContentModel property has the type XmlSchemaSimpleContent, then this value is always TextOnly.</para>
-          <para>The ContentType property must have one of the values shown in the following table.</para>
+          <para
+            >If the type on the ContentModel property has the type XmlSchemaSimpleContent, then this value is always TextOnly.</para
+          >
+          <para
+            >The ContentType property must have one of the values shown in the following table.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -422,13 +556,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the content model of the complex type which holds the post-compilation value.</para>
+          <para
+            >Gets the content model of the complex type which holds the post-compilation value.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ContentTypeParticle">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaParticle ContentTypeParticle { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaParticle ContentTypeParticle" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaParticle ContentTypeParticle { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaParticle ContentTypeParticle"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -447,11 +589,18 @@
         <value>To be added: an object of type 'XmlSchemaParticle'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This ContentTypeParticle is determined after the content models of the most derived types and the base complex type have been resolved according to the rules defined in the W3C XML Schema definition language (XSD) specification.</para>
+          <para
+            >This ContentTypeParticle is determined after the content models of the most derived types and the base complex type have been resolved according to the rules defined in the W3C XML Schema definition language (XSD) specification.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the particle that holds the post-compilation value of the <see cref="P:System.Xml.Schema.XmlSchemaComplexType.ContentType" /> particle.</para>
+          <para
+            >Gets the particle that holds the post-compilation value of the <see
+             cref="P:System.Xml.Schema.XmlSchemaComplexType.ContentType" />
+
+             particle.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -481,7 +630,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the information that determines if the complexType element can be used in the instance document.</para>
+          <para
+            >Gets or sets the information that determines if the complexType element can be used in the instance document.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -509,17 +660,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates if character data can appear between the child elements of this complexType. If the simpleContent element is a child element, the mixed attribute is not allowed (false). If the complexContent element is a child element, the mixed attribute can be overridden by the mixed attribute on the complexContent element.</para>
+          <para
+            >Indicates if character data can appear between the child elements of this complexType. If the simpleContent element is a child element, the mixed attribute is not allowed (false). If the complexContent element is a child element, the mixed attribute can be overridden by the mixed attribute on the complexContent element.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets information that determines if the complex type has a mixed content model (markup within the content).</para>
+          <para
+            >Gets or sets information that determines if the complex type has a mixed content model (markup within the content).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Particle">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaParticle Particle { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaParticle Particle" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaParticle Particle { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaParticle Particle"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -528,16 +689,24 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("group", typeof(System.Xml.Schema.XmlSchemaGroupRef))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("group", typeof(System.Xml.Schema.XmlSchemaGroupRef))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("all", typeof(System.Xml.Schema.XmlSchemaAll))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("all", typeof(System.Xml.Schema.XmlSchemaAll))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("choice", typeof(System.Xml.Schema.XmlSchemaChoice))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("choice", typeof(System.Xml.Schema.XmlSchemaChoice))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("sequence", typeof(System.Xml.Schema.XmlSchemaSequence))</AttributeName>
+          <AttributeName
+            >System.Xml.Serialization.XmlElement("sequence", typeof(System.Xml.Schema.XmlSchemaSequence))</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -565,7 +734,9 @@
                 <para>group </para>
               </term>
               <description>
-                <para>The complex type contains the elements defined in the referenced group. </para>
+                <para
+                  >The complex type contains the elements defined in the referenced group. </para
+                >
               </description>
             </item>
             <item>
@@ -573,7 +744,9 @@
                 <para>sequence </para>
               </term>
               <description>
-                <para>The complex type contains the elements defined in the specified sequence. </para>
+                <para
+                  >The complex type contains the elements defined in the specified sequence. </para
+                >
               </description>
             </item>
             <item>
@@ -581,7 +754,9 @@
                 <para>choice </para>
               </term>
               <description>
-                <para>The complex type allows one of the elements specified in the choice element. </para>
+                <para
+                  >The complex type allows one of the elements specified in the choice element. </para
+                >
               </description>
             </item>
             <item>
@@ -589,15 +764,36 @@
                 <para>all </para>
               </term>
               <description>
-                <para>The complex type allows all of the elements specified in the all element to appear once or not at all. </para>
+                <para
+                  >The complex type allows all of the elements specified in the all element to appear once or not at all. </para
+                >
               </description>
             </item>
           </list>
-          <para>This is mutually exclusive with the <see cref="P:System.Xml.Schema.XmlSchemaComplexType.ContentModel" /> property.</para>
+          <para
+            >This is mutually exclusive with the <see
+             cref="P:System.Xml.Schema.XmlSchemaComplexType.ContentModel" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the compositor type as one of the <see cref="T:System.Xml.Schema.XmlSchemaGroupRef" />, <see cref="T:System.Xml.Schema.XmlSchemaChoice" />, <see cref="T:System.Xml.Schema.XmlSchemaAll" />, or <see cref="T:System.Xml.Schema.XmlSchemaSequence" /> classes.</para>
+          <para
+            >Gets or sets the compositor type as one of the <see
+             cref="T:System.Xml.Schema.XmlSchemaGroupRef" />
+
+            , <see
+             cref="T:System.Xml.Schema.XmlSchemaChoice" />
+
+            , <see
+             cref="T:System.Xml.Schema.XmlSchemaAll" />
+
+            , or <see
+             cref="T:System.Xml.Schema.XmlSchemaSequence" />
+
+             classes.</para
+          >
         </summary>
       </Docs>
     </Member>

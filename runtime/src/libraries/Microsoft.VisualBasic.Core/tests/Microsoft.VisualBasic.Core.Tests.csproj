@@ -4,7 +4,10 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs" Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs"
+      Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs"
+    />
     <Compile Include="AssemblyAttributes.cs" />
     <Compile Include="ByteTypeTests.cs" />
     <Compile Include="CharTypeTests.cs" />
@@ -53,7 +56,9 @@
     <Compile Include="VBMathTests.cs" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Text.Encoding.CodePages\src\System.Text.Encoding.CodePages.csproj" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Text.Encoding.CodePages\src\System.Text.Encoding.CodePages.csproj"
+    />
     <Reference Include="Microsoft.VisualBasic" />
   </ItemGroup>
 </Project>

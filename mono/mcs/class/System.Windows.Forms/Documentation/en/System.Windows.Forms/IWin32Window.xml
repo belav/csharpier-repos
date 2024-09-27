@@ -9,10 +9,14 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.Runtime.InteropServices.InterfaceType(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)</AttributeName>
+      <AttributeName
+        >System.Runtime.InteropServices.InterfaceType(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)</AttributeName
+      >
     </Attribute>
     <Attribute>
-      <AttributeName>System.Runtime.InteropServices.Guid("458AB8A2-A1EA-4d7b-8EBE-DEE5D3D9442C")</AttributeName>
+      <AttributeName
+        >System.Runtime.InteropServices.Guid("458AB8A2-A1EA-4d7b-8EBE-DEE5D3D9442C")</AttributeName
+      >
     </Attribute>
     <Attribute>
       <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
@@ -21,7 +25,9 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This interface is implemented on objects that expose Win32 HWND handles. The resultant handle can be used with Win32 API calls.</para>
+      <para
+        >This interface is implemented on objects that expose Win32 HWND handles. The resultant handle can be used with Win32 API calls.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -39,7 +45,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Depending on the implementer, the value of the <see cref="P:System.Windows.Forms.IWin32Window.Handle" /> property could change during the life of the window.</para>
+          <para
+            >Depending on the implementer, the value of the <see
+             cref="P:System.Windows.Forms.IWin32Window.Handle" />
+
+             property could change during the life of the window.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

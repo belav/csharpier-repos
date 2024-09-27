@@ -17,7 +17,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.TreeNodeTypes" /> enumeration is used to represent the different node types that are available in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control. The following table describes the three different node types.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.TreeNodeTypes" />
+
+         enumeration is used to represent the different node types that are available in the <see
+         cref="T:System.Web.UI.WebControls.TreeView" />
+
+         control. The following table describes the three different node types.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -54,14 +62,47 @@
           </description>
         </item>
       </list>
-      <para>The <see cref="T:System.Web.UI.WebControls.TreeNodeTypes" /> enumeration is a flag enumeration, which allows you to combine values through bitwise operations. For example, to represent the parent and leaf nodes, you can perform a bitwise OR operation on the <see cref="F:System.Web.UI.WebControls.TreeNodeTypes.Parent" /> and <see cref="F:System.Web.UI.WebControls.TreeNodeTypes.Leaf" /> values.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.TreeNodeTypes" />
+
+         enumeration is a flag enumeration, which allows you to combine values through bitwise operations. For example, to represent the parent and leaf nodes, you can perform a bitwise OR operation on the <see
+         cref="F:System.Web.UI.WebControls.TreeNodeTypes.Parent" />
+
+         and <see
+         cref="F:System.Web.UI.WebControls.TreeNodeTypes.Leaf" />
+
+         values.</para
+      >
       <block subset="none" type="note">
-        <para>The <see cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" /> property uses the <see cref="T:System.Web.UI.WebControls.TreeNodeTypes" /> enumeration to represent the node types that display check boxes in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control. When it is set to a value other than the <see cref="F:System.Web.UI.WebControls.TreeNodeTypes.None" /> value, check boxes are displayed next to the specified node type, which allows users to select multiple items from the <see cref="T:System.Web.UI.WebControls.TreeView" /> control.</para>
+        <para
+          >The <see
+           cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" />
+
+           property uses the <see
+           cref="T:System.Web.UI.WebControls.TreeNodeTypes" />
+
+           enumeration to represent the node types that display check boxes in the <see
+           cref="T:System.Web.UI.WebControls.TreeView" />
+
+           control. When it is set to a value other than the <see
+           cref="F:System.Web.UI.WebControls.TreeNodeTypes.None" />
+
+           value, check boxes are displayed next to the specified node type, which allows users to select multiple items from the <see
+           cref="T:System.Web.UI.WebControls.TreeView" />
+
+           control.</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the different node types (leaf, parent, and root) in the <see cref="T:System.Web.UI.WebControls.TreeView" /> control.</para>
+      <para
+        >Represents the different node types (leaf, parent, and root) in the <see
+         cref="T:System.Web.UI.WebControls.TreeView" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>

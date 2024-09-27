@@ -15,8 +15,7 @@
   <div id="GHTSubTest3" testname="System.Web.UI.WebControls.HyperLink: RenderBeginTag">
     <span>
       <br />
-      <a id="ctrl_2">
-      </a>
+      <a id="ctrl_2"></a>
     </span>
   </div>
   <div id="GHTSubTest4" testname="System.Web.UI.WebControls.Image: RenderBeginTag">
@@ -34,15 +33,13 @@
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.Label: RenderBeginTag">
     <span>
       <br />
-      <span id="ctrl_5">
-      </span>
+      <span id="ctrl_5"></span>
     </span>
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.LinkButton: RenderBeginTag">
     <span>
       <br />
-      <a id="ctrl_6">
-      </a>
+      <a id="ctrl_6"></a>
     </span>
   </div>
 </testresults>

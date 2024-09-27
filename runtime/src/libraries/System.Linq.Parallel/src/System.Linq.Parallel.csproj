@@ -1,14 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
-    <FeatureWasmThreads Condition="'$(TargetPlatformIdentifier)' == 'browser' and '$(MonoWasmBuildVariant)' == 'multithread'">true</FeatureWasmThreads>
-    <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'" >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants>
+    <TargetPlatformIdentifier
+      >$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier
+    >
+    <FeatureWasmThreads
+      Condition="'$(TargetPlatformIdentifier)' == 'browser' and '$(MonoWasmBuildVariant)' == 'multithread'"
+      >true</FeatureWasmThreads
+    >
+    <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'"
+      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants
+    >
   </PropertyGroup>
   <!-- Compiled Source Files -->
   <ItemGroup>
@@ -50,45 +56,105 @@
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\ConcatQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\ExceptQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\GroupJoinQueryOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Binary\HashJoinQueryOperatorEnumerator.cs" />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Binary\HashJoinQueryOperatorEnumerator.cs"
+    />
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\IntersectQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\JoinQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\UnionQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Binary\ZipQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\CountAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\DecimalAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\DecimalMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\DecimalSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\DoubleAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\DoubleMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\DoubleSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\FloatAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\FloatMinMaxAggregationOperator.cs" />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\DecimalAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\DecimalMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\DecimalSumAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\DoubleAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\DoubleMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\DoubleSumAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\FloatAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\FloatMinMaxAggregationOperator.cs"
+    />
     <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\FloatSumAggregationOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\InlinedAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\InlinedAggregationOperatorEnumerator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\IntAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\IntMinMaxAggregationOperator.cs" />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\InlinedAggregationOperatorEnumerator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\IntAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\IntMinMaxAggregationOperator.cs"
+    />
     <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\IntSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\LongAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\LongCountAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\LongMinMaxAggregationOperator.cs" />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\LongAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\LongCountAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\LongMinMaxAggregationOperator.cs"
+    />
     <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\LongSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDecimalAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDecimalMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDecimalSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDoubleAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDoubleMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDoubleSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableFloatAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableFloatMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableFloatSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableIntAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableIntMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableIntSumAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableLongAverageAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableLongMinMaxAggregationOperator.cs" />
-    <Compile Include="System\Linq\Parallel\QueryOperators\Inlined\NullableLongSumAggregationOperator.cs" />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDecimalAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDecimalMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDecimalSumAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDoubleAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDoubleMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableDoubleSumAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableFloatAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableFloatMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableFloatSumAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableIntAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableIntMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableIntSumAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableLongAverageAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableLongMinMaxAggregationOperator.cs"
+    />
+    <Compile
+      Include="System\Linq\Parallel\QueryOperators\Inlined\NullableLongSumAggregationOperator.cs"
+    />
     <Compile Include="System\Linq\Parallel\QueryOperators\ListQueryResults.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Options\OrderingQueryOperator.cs" />
     <Compile Include="System\Linq\Parallel\QueryOperators\Options\QueryExecutionOption.cs" />
@@ -150,7 +216,6 @@
     <Compile Include="System\Linq\Parallel\Utils\Wrapper.cs" />
     <Compile Include="System\Linq\Parallel\Utils\WrapperEqualityComparer.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
@@ -159,5 +224,4 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

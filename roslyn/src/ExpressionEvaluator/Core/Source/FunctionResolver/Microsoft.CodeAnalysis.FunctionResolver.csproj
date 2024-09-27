@@ -13,7 +13,9 @@
     <Compile Include="..\..\..\..\Compilers\Core\Portable\InternalUtilities\ExceptionUtilities.cs">
       <Link>Compiler\ExceptionUtilities.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\Compilers\Core\Portable\MetadataReader\MetadataTypeCodeExtensions.cs">
+    <Compile
+      Include="..\..\..\..\Compilers\Core\Portable\MetadataReader\MetadataTypeCodeExtensions.cs"
+    >
       <Link>Compiler\MetadataTypeCodeExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\Compilers\Core\Portable\SpecialType.cs">
@@ -31,7 +33,9 @@
     <Compile Include="..\..\..\..\Compilers\Core\Portable\InternalUtilities\RoslynString.cs">
       <Link>Compiler\RoslynString.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\Compilers\Core\Portable\InternalUtilities\UnicodeCharacterUtilities.cs">
+    <Compile
+      Include="..\..\..\..\Compilers\Core\Portable\InternalUtilities\UnicodeCharacterUtilities.cs"
+    >
       <Link>Compiler\UnicodeCharacterUtilities.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\Compilers\CSharp\Portable\Syntax\SyntaxKind.cs">
@@ -40,13 +44,19 @@
     <Compile Include="..\..\..\..\Compilers\CSharp\Portable\Syntax\SyntaxKindFacts.cs">
       <Link>CSharp\Compiler\SyntaxKindFacts.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\Compilers\CSharp\Portable\Symbols\Synthesized\GeneratedNameKind.cs">
+    <Compile
+      Include="..\..\..\..\Compilers\CSharp\Portable\Symbols\Synthesized\GeneratedNameKind.cs"
+    >
       <Link>CSharp\Compiler\GeneratedNameKind.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\Compilers\CSharp\Portable\Symbols\Synthesized\GeneratedNameParser.cs">
+    <Compile
+      Include="..\..\..\..\Compilers\CSharp\Portable\Symbols\Synthesized\GeneratedNameParser.cs"
+    >
       <Link>CSharp\Compiler\GeneratedNameParser.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\Compilers\CSharp\Portable\Symbols\Synthesized\GeneratedNameConstants.cs">
+    <Compile
+      Include="..\..\..\..\Compilers\CSharp\Portable\Symbols\Synthesized\GeneratedNameConstants.cs"
+    >
       <Link>CSharp\Compiler\GeneratedNameConstants.cs</Link>
     </Compile>
     <Compile Include="..\ExpressionCompiler\DkmExceptionUtilities.cs">
@@ -56,18 +66,32 @@
     <VsdConfigXmlFiles Include="VisualBasic\FunctionResolver.vsdconfigxml" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExpressionEvaluator.FunctionResolver.UnitTests" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.ExpressionEvaluator.FunctionResolver.UnitTests"
+    />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Debugger.Engine-implementation" Version="$(MicrosoftVisualStudioDebuggerEngineimplementationVersion)" />
+    <PackageReference
+      Include="System.Collections.Immutable"
+      Version="$(SystemCollectionsImmutableVersion)"
+    />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Debugger.Engine-implementation"
+      Version="$(MicrosoftVisualStudioDebuggerEngineimplementationVersion)"
+    />
     <PackageReference Include="Microsoft.VisualStudio.Debugger.Metadata-implementation">
       <Version>$(MicrosoftVisualStudioDebuggerMetadataimplementationVersion)</Version>
       <ExcludeAssets>compile</ExcludeAssets>
     </PackageReference>
     <!-- Remove once https://github.com/dotnet/sdk/issues/19506 is resolved -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" />
+    <PackageReference
+      Include="Microsoft.NETFramework.ReferenceAssemblies"
+      Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)"
+    />
   </ItemGroup>
   <Import Project="$(RepositoryEngineeringDir)targets\Vsdconfig.targets" />
 </Project>

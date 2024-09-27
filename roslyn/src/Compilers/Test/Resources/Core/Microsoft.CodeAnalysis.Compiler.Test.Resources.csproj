@@ -9,14 +9,19 @@
     <IsShipping>false</IsShipping>
     <IsPackable>true</IsPackable>
     <PackageId>Microsoft.CodeAnalysis.Compiler.Test.Resources</PackageId>
-    <PackageDescription>This is an internal package for testing. Not meant for external or production uses. The API can and will break at our discretion.</PackageDescription>
+    <PackageDescription
+      >This is an internal package for testing. Not meant for external or production uses. The API can and will break at our discretion.</PackageDescription
+    >
     <NoWarn>NU5100,NU5106,CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\..\Core\Portable\Microsoft.CodeAnalysis.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ExpressionCompiler\*.*" LogicalName="ExpressionCompiler.%(FileName)%(Extension)" />
+    <EmbeddedResource
+      Include="ExpressionCompiler\*.*"
+      LogicalName="ExpressionCompiler.%(FileName)%(Extension)"
+    />
     <EmbeddedResource Include="DiagnosticTests\badresfile.res" />
     <Content Include="DiagnosticTests\ErrTestLib01.cs" />
     <EmbeddedResource Include="DiagnosticTests\ErrTestLib01.dll" />
@@ -49,7 +54,9 @@
     <Content Include="MetadataTests\Invalid\ClassLayout.il" />
     <EmbeddedResource Include="MetadataTests\Invalid\CustomAttributeTableUnsorted.dll" />
     <EmbeddedResource Include="MetadataTests\Invalid\EmptyModuleTable.netmodule" />
-    <EmbeddedResource Include="MetadataTests\Invalid\IncorrectCustomAssemblyTableSize_TooManyMethodSpecs.dll" />
+    <EmbeddedResource
+      Include="MetadataTests\Invalid\IncorrectCustomAssemblyTableSize_TooManyMethodSpecs.dll"
+    />
     <EmbeddedResource Include="MetadataTests\Invalid\InvalidDynamicAttributeArgs.dll" />
     <Content Include="MetadataTests\Invalid\InvalidDynamicAttributeArgs.il" />
     <EmbeddedResource Include="MetadataTests\Invalid\InvalidFuncDelegateName.dll" />
@@ -138,16 +145,36 @@
     <EmbeddedResource Include="SymbolsTests\DifferByCase\TypeAndNamespaceDifferByCase.dll" />
     <EmbeddedResource Include="SymbolsTests\Events.dll" />
     <Content Include="SymbolsTests\Events.il" />
-    <Content Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementation.cs" />
-    <EmbeddedResource Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementation.dll" />
-    <Content Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationEvents.cs" />
-    <EmbeddedResource Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationEvents.dll" />
-    <Content Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationProperties.cs" />
-    <EmbeddedResource Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationProperties.dll" />
-    <EmbeddedResource Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementation.dll" />
-    <Content Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementation.il" />
-    <EmbeddedResource Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementationProperties.dll" />
-    <Content Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementationProperties.il" />
+    <Content
+      Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementation.cs"
+    />
+    <EmbeddedResource
+      Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementation.dll"
+    />
+    <Content
+      Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationEvents.cs"
+    />
+    <EmbeddedResource
+      Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationEvents.dll"
+    />
+    <Content
+      Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationProperties.cs"
+    />
+    <EmbeddedResource
+      Include="SymbolsTests\ExplicitInterfaceImplementation\CSharpExplicitInterfaceImplementationProperties.dll"
+    />
+    <EmbeddedResource
+      Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementation.dll"
+    />
+    <Content
+      Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementation.il"
+    />
+    <EmbeddedResource
+      Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementationProperties.dll"
+    />
+    <Content
+      Include="SymbolsTests\ExplicitInterfaceImplementation\ILExplicitInterfaceImplementationProperties.il"
+    />
     <EmbeddedResource Include="SymbolsTests\Fields\ConstantFields.dll" />
     <Content Include="SymbolsTests\Fields\ConstantFields.il" />
     <Content Include="SymbolsTests\Fields\CSFields.cs" />

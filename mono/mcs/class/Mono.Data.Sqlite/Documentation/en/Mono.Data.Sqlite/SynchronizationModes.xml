@@ -1,6 +1,9 @@
 <Type Name="SynchronizationModes" FullName="Mono.Data.Sqlite.SynchronizationModes">
   <TypeSignature Language="C#" Value="public enum SynchronizationModes" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SynchronizationModes extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SynchronizationModes extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -9,15 +12,20 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>
+    <summary
+      >
             The I/O file cache flushing behavior for the connection
-            </summary>
+            </summary
+    >
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Full">
       <MemberSignature Language="C#" Value="Full" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Data.Sqlite.SynchronizationModes Full = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Data.Sqlite.SynchronizationModes Full = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +41,10 @@
     </Member>
     <Member MemberName="Normal">
       <MemberSignature Language="C#" Value="Normal" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Data.Sqlite.SynchronizationModes Normal = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Data.Sqlite.SynchronizationModes Normal = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,14 +53,19 @@
         <ReturnType>Mono.Data.Sqlite.SynchronizationModes</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Normal file flushing at critical sections of the code
-            </summary>
+            </summary
+        >
       </Docs>
     </Member>
     <Member MemberName="Off">
       <MemberSignature Language="C#" Value="Off" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Data.Sqlite.SynchronizationModes Off = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Data.Sqlite.SynchronizationModes Off = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,9 +74,11 @@
         <ReturnType>Mono.Data.Sqlite.SynchronizationModes</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Use the default operating system's file flushing, SQLite does not explicitly flush the file buffers after writing
-            </summary>
+            </summary
+        >
       </Docs>
     </Member>
   </Members>

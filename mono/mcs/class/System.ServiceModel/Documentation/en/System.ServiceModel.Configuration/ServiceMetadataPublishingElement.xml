@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceMetadataPublishingElement" FullName="System.ServiceModel.Configuration.ServiceMetadataPublishingElement">
-  <TypeSignature Language="C#" Value="public sealed class ServiceMetadataPublishingElement : System.ServiceModel.Configuration.BehaviorExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ServiceMetadataPublishingElement extends System.ServiceModel.Configuration.BehaviorExtensionElement" />
+<Type
+  Name="ServiceMetadataPublishingElement"
+  FullName="System.ServiceModel.Configuration.ServiceMetadataPublishingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ServiceMetadataPublishingElement : System.ServiceModel.Configuration.BehaviorExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ServiceMetadataPublishingElement extends System.ServiceModel.Configuration.BehaviorExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,17 +22,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This configuration element can be used to enable or disable the publication of service metadata using an HTTP/Get request or a WS-MetadataExchange (WS-MEX) request. You can also enable or prevent the display of an HTML page of information about the service when it is requested over HTTP.</para>
+      <para
+        >This configuration element can be used to enable or disable the publication of service metadata using an HTTP/Get request or a WS-MetadataExchange (WS-MEX) request. You can also enable or prevent the display of an HTML page of information about the service when it is requested over HTTP.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the configuration element that controls the publication of service metadata and associated information. This class cannot be inherited.</para>
+      <para
+        >Represents the configuration element that controls the publication of service metadata and associated information. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceMetadataPublishingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +49,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -58,7 +79,10 @@
     </Member>
     <Member MemberName="CreateBehavior">
       <MemberSignature Language="C#" Value="protected override object CreateBehavior ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance object CreateBehavior() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance object CreateBehavior() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,14 +99,19 @@
     </Member>
     <Member MemberName="ExternalMetadataLocation">
       <MemberSignature Language="C#" Value="public Uri ExternalMetadataLocation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri ExternalMetadataLocation" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri ExternalMetadataLocation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("externalMetadataLocation", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("externalMetadataLocation", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -109,7 +138,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpGetBinding", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpGetBinding", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=0)</AttributeName>
@@ -122,24 +153,36 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If this property is not set, the default binding (HttpsTransportBindingElement) is used for metadata retrieval as appropriate.</para>
+          <para
+            >If this property is not set, the default binding (HttpsTransportBindingElement) is used for metadata retrieval as appropriate.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string value that specifies the name of the binding to be used for metadata retrieval in HTTP GET scenarios.</para>
+          <para
+            >A string value that specifies the name of the binding to be used for metadata retrieval in HTTP GET scenarios.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="HttpGetBindingConfiguration">
-      <MemberSignature Language="C#" Value="public string HttpGetBindingConfiguration { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string HttpGetBindingConfiguration" />
+      <MemberSignature
+        Language="C#"
+        Value="public string HttpGetBindingConfiguration { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string HttpGetBindingConfiguration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpGetBindingConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpGetBindingConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=0)</AttributeName>
@@ -153,7 +196,14 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetBinding" />.</para>
+          <para
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
+
+              cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetBinding"
+            />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -166,7 +216,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpGetEnabled", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpGetEnabled", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -176,12 +228,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "http://localhost:8080/CalculatorService", the HTTP/Get metadata address is "http://localhost:8080/CalculatorService?wsdl". </para>
-          <para>If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para>
+          <para
+            >If the <see
+
+              cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl"
+            />
+
+             property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "http://localhost:8080/CalculatorService", the HTTP/Get metadata address is "http://localhost:8080/CalculatorService?wsdl". </para
+          >
+          <para
+            >If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies whether to publish service metadata for retrieval using an HTTP/Get request.</para>
+          <para
+            >Gets or sets a value that specifies whether to publish service metadata for retrieval using an HTTP/Get request.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -194,7 +257,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpGetUrl", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpGetUrl", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -205,7 +270,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a URI that specifies the address at which the metadata is published for retrieval using an HTTP/Get request.</para>
+          <para
+            >Gets or sets a URI that specifies the address at which the metadata is published for retrieval using an HTTP/Get request.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -218,7 +285,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpsGetBinding", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpsGetBinding", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=0)</AttributeName>
@@ -231,24 +300,36 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If this property is not set, the default binding (HttpsTransportBindingElement) is used for metadata retrieval as appropriate.</para>
+          <para
+            >If this property is not set, the default binding (HttpsTransportBindingElement) is used for metadata retrieval as appropriate.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string value that specifies the name of the binding to be used for metadata retrieval in HTTPS GET scenarios.</para>
+          <para
+            >A string value that specifies the name of the binding to be used for metadata retrieval in HTTPS GET scenarios.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="HttpsGetBindingConfiguration">
-      <MemberSignature Language="C#" Value="public string HttpsGetBindingConfiguration { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string HttpsGetBindingConfiguration" />
+      <MemberSignature
+        Language="C#"
+        Value="public string HttpsGetBindingConfiguration { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string HttpsGetBindingConfiguration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpsGetBindingConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpsGetBindingConfiguration", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.StringValidator(MinLength=0)</AttributeName>
@@ -262,7 +343,14 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement..HttpsGetBinding" />.</para>
+          <para
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
+
+              cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement..HttpsGetBinding"
+            />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -275,7 +363,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpsGetEnabled", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpsGetEnabled", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -285,12 +375,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" /> property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "https://localhost:8080/CalculatorService", the HTTP/Get metadata address is "https://localhost:8080/CalculatorService?wsdl". </para>
-          <para>If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para>
+          <para
+            >If the <see
+
+              cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl"
+            />
+
+             property is not specified, the address at which the metadata is published is the service address plus a "?wsdl". For example, if the service address is "https://localhost:8080/CalculatorService", the HTTP/Get metadata address is "https://localhost:8080/CalculatorService?wsdl". </para
+          >
+          <para
+            >If this property is false, or the address of the service is not based on HTTP or HTTPS, “?wsdl” is ignored. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether to publish service metadata for retrieval using an HTTPS/Get request.</para>
+          <para
+            >Gets or sets a value that indicates whether to publish service metadata for retrieval using an HTTPS/Get request.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -303,7 +404,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpsGetUrl", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpsGetUrl", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -314,23 +417,35 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a URI that specifies the address at which the metadata is published for retrieval using an HTTPS/Get request.</para>
+          <para
+            >Gets or sets a URI that specifies the address at which the metadata is published for retrieval using an HTTPS/Get request.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="PolicyVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.PolicyVersion PolicyVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Description.PolicyVersion PolicyVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.PolicyVersion PolicyVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Description.PolicyVersion PolicyVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.TypeConverter(typeof(System.ServiceModel.Configuration.PolicyVersionConverter))</AttributeName>
+          <AttributeName
+            >System.ComponentModel.TypeConverter(typeof(System.ServiceModel.Configuration.PolicyVersionConverter))</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("policyVersion", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("policyVersion", DefaultValue=Mono.Cecil.CustomAttributeArgument)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -341,13 +456,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies the version of the WS-Policy specification being used. </para>
+          <para
+            >Gets or sets a value that specifies the version of the WS-Policy specification being used. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

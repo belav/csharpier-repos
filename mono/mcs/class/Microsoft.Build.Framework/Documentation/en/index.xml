@@ -3,13 +3,19 @@
     <Assembly Name="Microsoft.Build.Framework" Version="2.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyFileVersion("2.0.50727.1433")</AttributeName>
@@ -18,7 +24,9 @@
           <AttributeName>System.CLSCompliant(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.InteropServices.Guid("D8A9BA71-4724-481d-9CA7-0DA23A1D615C")</AttributeName>
+          <AttributeName
+            >System.Runtime.InteropServices.Guid("D8A9BA71-4724-481d-9CA7-0DA23A1D615C")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.InteropServices.ComVisible(false)</AttributeName>
@@ -27,28 +35,40 @@
           <AttributeName>System.Resources.NeutralResourcesLanguage("en-US")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("2.0.50727.1433")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Resources.SatelliteContractVersion("2.0.0.0")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) various MONO Authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("MONO Common language infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("MONO development team")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDefaultAlias("Microsoft.Build.Framework.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDefaultAlias("Microsoft.Build.Framework.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDescription("Microsoft.Build.Framework.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDescription("Microsoft.Build.Framework.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyTitle("Microsoft.Build.Framework.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyTitle("Microsoft.Build.Framework.dll")</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>

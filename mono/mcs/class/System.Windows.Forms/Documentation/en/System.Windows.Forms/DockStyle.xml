@@ -11,14 +11,35 @@
   </Base>
   <Attributes>
     <Attribute>
-      <AttributeName>System.ComponentModel.Editor("System.Windows.Forms.Design.DockEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))</AttributeName>
+      <AttributeName
+        >System.ComponentModel.Editor("System.Windows.Forms.Design.DockEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When a control is docked to an edge of its container, it is always positioned flush against that edge when the container is resized. If more than one control is docked to an edge, the controls appear side by side according to their z-order; controls higher in the z-order are positioned farther from the container's edge.</para>
-      <para>If <see cref="F:System.Windows.Forms.DockStyle.Left" />, <see cref="F:System.Windows.Forms.DockStyle.Right" />, <see cref="F:System.Windows.Forms.DockStyle.Top" />, or <see cref="F:System.Windows.Forms.DockStyle.Bottom" /> is selected, the specified and opposite edges of the control are resized to the size of the containing control's corresponding edges. If <see cref="F:System.Windows.Forms.DockStyle.Fill" /> is selected, all four sides of the control are resized to match the containing control's edges.</para>
+      <para
+        >When a control is docked to an edge of its container, it is always positioned flush against that edge when the container is resized. If more than one control is docked to an edge, the controls appear side by side according to their z-order; controls higher in the z-order are positioned farther from the container's edge.</para
+      >
+      <para
+        >If <see
+         cref="F:System.Windows.Forms.DockStyle.Left" />
+
+        , <see
+         cref="F:System.Windows.Forms.DockStyle.Right" />
+
+        , <see
+         cref="F:System.Windows.Forms.DockStyle.Top" />
+
+        , or <see
+         cref="F:System.Windows.Forms.DockStyle.Bottom" />
+
+         is selected, the specified and opposite edges of the control are resized to the size of the containing control's corresponding edges. If <see
+         cref="F:System.Windows.Forms.DockStyle.Fill" />
+
+         is selected, all four sides of the control are resized to match the containing control's edges.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,7 +73,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>All the control's edges are docked to the all edges of its containing control and sized appropriately.</para>
+          <para
+            >All the control's edges are docked to the all edges of its containing control and sized appropriately.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -103,7 +126,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The control's right edge is docked to the right edge of its containing control.</para>
+          <para
+            >The control's right edge is docked to the right edge of its containing control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

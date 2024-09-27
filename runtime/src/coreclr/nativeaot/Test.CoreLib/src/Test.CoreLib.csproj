@@ -22,14 +22,23 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <DefineConstants>INPLACE_RUNTIME;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'arm'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'armel'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-
-    <IntermediatesDir>$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir>
-    <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))">$(IntermediatesDir)\ide</IntermediatesDir>
+    <DefineConstants Condition="'$(Platform)' == 'arm'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(Platform)' == 'armel'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <IntermediatesDir
+      >$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir
+    >
+    <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))"
+      >$(IntermediatesDir)\ide</IntermediatesDir
+    >
   </PropertyGroup>
   <PropertyGroup>
-    <CommonPath>$([MSBuild]::NormalizeDirectory('$(LibrariesProjectRoot)', 'Common', 'src'))</CommonPath>
+    <CommonPath
+      >$([MSBuild]::NormalizeDirectory('$(LibrariesProjectRoot)', 'Common', 'src'))</CommonPath
+    >
   </PropertyGroup>
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\CachedInterfaceDispatch.cs">
@@ -145,7 +154,9 @@
     <Compile Include="..\..\Runtime.Base\src\System\RuntimeHandles.cs">
       <Link>System\RuntimeHandles.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\EagerStaticClassConstructionAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\EagerStaticClassConstructionAttribute.cs"
+    >
       <Link>System\Runtime\CompilerServices\EagerStaticClassConstructionAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\IntrinsicAttribute.cs">
@@ -154,10 +165,14 @@
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\IsVolatile.cs">
       <Link>System\Runtime\CompilerServices\IsVolatile.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\MethodImplAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\MethodImplAttribute.cs"
+    >
       <Link>System\Runtime\CompilerServices\MethodImplAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\IsByRefLikeAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\CompilerServices\IsByRefLikeAttribute.cs"
+    >
       <Link>Runtime.Base\src\System\Runtime\CompilerServices\IsByRefLikeAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\EETypePtr.cs">
@@ -175,7 +190,9 @@
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\DllImportAttribute.cs">
       <Link>System\Runtime\InteropServices\DllImportAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\FieldOffsetAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\FieldOffsetAttribute.cs"
+    >
       <Link>System\Runtime\InteropServices\FieldOffsetAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\GCHandleType.cs">
@@ -184,10 +201,14 @@
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\LayoutKind.cs">
       <Link>System\Runtime\InteropServices\LayoutKind.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\UnmanagedCallConvAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\UnmanagedCallConvAttribute.cs"
+    >
       <Link>System\Runtime\InteropServices\UnmanagedCallConvAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\UnmanagedCallersOnlyAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\UnmanagedCallersOnlyAttribute.cs"
+    >
       <Link>System\Runtime\InteropServices\UnmanagedCallersOnlyAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\UnmanagedType.cs">
@@ -196,7 +217,9 @@
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\OutAttribute.cs">
       <Link>System\Runtime\InteropServices\OutAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\StructLayoutAttribute.cs">
+    <Compile
+      Include="..\..\Runtime.Base\src\System\Runtime\InteropServices\StructLayoutAttribute.cs"
+    >
       <Link>System\Runtime\InteropServices\StructLayoutAttribute.cs</Link>
     </Compile>
     <Compile Include="..\..\Runtime.Base\src\System\Runtime\RuntimeExportAttribute.cs">

@@ -9,7 +9,9 @@
     <Compile Include="HardwareEh.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(TestSourceDir)Common/CoreCLRTestLibrary/CoreCLRTestLibrary.csproj" />
+    <ProjectReference
+      Include="$(TestSourceDir)Common/CoreCLRTestLibrary/CoreCLRTestLibrary.csproj"
+    />
     <ProjectReference Include="ILHelper.ilproj" />
   </ItemGroup>
 </Project>

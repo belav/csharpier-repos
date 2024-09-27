@@ -14,8 +14,12 @@
     <UseVSTestRunner>true</UseVSTestRunner>
     <!-- Prohibit the usage of .NET Standard 1.x dependencies. -->
     <FlagNetStandard1XDependencies>true</FlagNetStandard1XDependencies>
-    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
-    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
+    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''"
+      >false</StabilizePackageVersion
+    >
+    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
+      >release</DotNetFinalVersionKind
+    >
   </PropertyGroup>
   <PropertyGroup>
     <!-- command-line-api -->
@@ -33,9 +37,13 @@
     <!-- roslyn -->
     <MicrosoftCodeAnalysisVersion>4.9.0-1.23520.1</MicrosoftCodeAnalysisVersion>
     <!-- roslyn-sdk -->
-    <MicrosoftCodeAnalysisAnalyzerTestingVersion>1.1.2-beta1.22216.1</MicrosoftCodeAnalysisAnalyzerTestingVersion>
+    <MicrosoftCodeAnalysisAnalyzerTestingVersion
+      >1.1.2-beta1.22216.1</MicrosoftCodeAnalysisAnalyzerTestingVersion
+    >
     <!-- runtime -->
-    <MicrosoftExtensionsFileSystemGlobbingVersion>9.0.0-alpha.1.23529.4</MicrosoftExtensionsFileSystemGlobbingVersion>
+    <MicrosoftExtensionsFileSystemGlobbingVersion
+      >9.0.0-alpha.1.23529.4</MicrosoftExtensionsFileSystemGlobbingVersion
+    >
     <MicrosoftExtensionsLoggingVersion>9.0.0-alpha.1.23529.4</MicrosoftExtensionsLoggingVersion>
     <!-- symreader -->
     <MicrosoftDiaSymReaderVersion>2.0.0</MicrosoftDiaSymReaderVersion>

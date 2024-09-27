@@ -43,7 +43,9 @@
       <Docs>
         <summary>Returns the current version string of CairoAPI</summary>
         <value>the current version string</value>
-        <remarks>Returns the version of the cairo library as a human-readable string of the form "X.Y.Z".</remarks>
+        <remarks
+          >Returns the version of the cairo library as a human-readable string of the form "X.Y.Z".</remarks
+        >
       </Docs>
     </Member>
   </Members>

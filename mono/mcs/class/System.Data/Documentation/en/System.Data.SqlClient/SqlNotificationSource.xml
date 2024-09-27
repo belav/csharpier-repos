@@ -12,53 +12,78 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The SqlNotificationSource enumeration is referenced by an instance of the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" /> class.</para>
-      <para>Query notifications are supported only for SELECT statements that meet a list of specific requirements. The following table provides links to the Service Broker and Query Notifications documentation in SQL Server Books Online. </para>
+      <para
+        >The SqlNotificationSource enumeration is referenced by an instance of the <see
+         cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+
+         class.</para
+      >
+      <para
+        >Query notifications are supported only for SELECT statements that meet a list of specific requirements. The following table provides links to the Service Broker and Query Notifications documentation in SQL Server Books Online. </para
+      >
       <para>SQL Server Books Online</para>
       <list type="bullet">
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms181122.aspx">Creating a Query for Notification</see>
+            <see cref="http://msdn.microsoft.com/library/ms181122.aspx"
+              >Creating a Query for Notification</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms166059.aspx">Security Considerations for Service Broker</see>
+            <see cref="http://msdn.microsoft.com/library/ms166059.aspx"
+              >Security Considerations for Service Broker</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/bb522911.aspx">Security and Protection (Service Broker)</see>
+            <see cref="http://msdn.microsoft.com/library/bb522911.aspx"
+              >Security and Protection (Service Broker)</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms172604.aspx">Security Considerations for Notifications Services</see>
+            <see cref="http://msdn.microsoft.com/library/ms172604.aspx"
+              >Security Considerations for Notifications Services</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms188311.aspx">Query Notification Permissions</see>
+            <see cref="http://msdn.microsoft.com/library/ms188311.aspx"
+              >Query Notification Permissions</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms166028.aspx">International Considerations for Service Broker</see>
+            <see cref="http://msdn.microsoft.com/library/ms166028.aspx"
+              >International Considerations for Service Broker</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/bb522899.aspx">Solution Design Considerations (Service Broker)</see>
+            <see cref="http://msdn.microsoft.com/library/bb522899.aspx"
+              >Solution Design Considerations (Service Broker)</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms166100.aspx">Service Broker Developer InfoCenter</see>
+            <see cref="http://msdn.microsoft.com/library/ms166100.aspx"
+              >Service Broker Developer InfoCenter</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/bb522908.aspx">Developer's Guide (Service Broker)</see>
+            <see cref="http://msdn.microsoft.com/library/bb522908.aspx"
+              >Developer's Guide (Service Broker)</see
+            >
           </para>
         </item>
       </list>
@@ -66,7 +91,9 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Indicates the source of the notification received by the dependency event handler.</para>
+      <para
+        >Indicates the source of the notification received by the dependency event handler.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -80,7 +107,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A client-initiated notification occurred, such as a client-side time-out or as a result of attempting to add a command to a dependency that has already fired.</para>
+          <para
+            >A client-initiated notification occurred, such as a client-side time-out or as a result of attempting to add a command to a dependency that has already fired.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,7 +126,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Data has changed; for example, an insert, update, delete, or truncate operation occurred.</para>
+          <para
+            >Data has changed; for example, an insert, update, delete, or truncate operation occurred.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -114,7 +145,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The database state changed; for example, the database related to the query was dropped or detached.</para>
+          <para
+            >The database state changed; for example, the database related to the query was dropped or detached.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -131,7 +164,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The run-time environment was not compatible with notifications; for example, the isolation level was set to snapshot, or one or more SET options are not compatible.</para>
+          <para
+            >The run-time environment was not compatible with notifications; for example, the isolation level was set to snapshot, or one or more SET options are not compatible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -165,7 +200,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A database object changed; for example, an underlying object related to the query was dropped or modified.</para>
+          <para
+            >A database object changed; for example, an underlying object related to the query was dropped or modified.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -198,7 +235,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The Transact-SQL statement is not valid for notifications; for example, a SELECT statement that could not be notified or a non-SELECT statement was executed.</para>
+          <para
+            >The Transact-SQL statement is not valid for notifications; for example, a SELECT statement that could not be notified or a non-SELECT statement was executed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -215,7 +254,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A system-related event occurred. For example, there was an internal error, the server was restarted, or resource pressure caused the invalidation.</para>
+          <para
+            >A system-related event occurred. For example, there was an internal error, the server was restarted, or resource pressure caused the invalidation.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,7 +292,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used when the source option sent by the server was not recognized by the client. </para>
+          <para
+            >Used when the source option sent by the server was not recognized by the client. </para
+          >
         </summary>
       </Docs>
     </Member>

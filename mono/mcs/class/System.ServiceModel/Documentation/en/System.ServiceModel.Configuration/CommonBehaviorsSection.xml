@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="CommonBehaviorsSection" FullName="System.ServiceModel.Configuration.CommonBehaviorsSection">
-  <TypeSignature Language="C#" Value="public class CommonBehaviorsSection : System.Configuration.ConfigurationSection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi CommonBehaviorsSection extends System.Configuration.ConfigurationSection" />
+<Type
+  Name="CommonBehaviorsSection"
+  FullName="System.ServiceModel.Configuration.CommonBehaviorsSection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class CommonBehaviorsSection : System.Configuration.ConfigurationSection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi CommonBehaviorsSection extends System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,17 +22,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This configuration section is defined in the Machine.config file. It contains a list of behaviors that is applied to all indigo2 services on the machine before the behaviors in the behaviors section are applied. If a behavior is defined in both sections, the behavior in the behaviors sections is given preference.</para>
+      <para
+        >This configuration section is defined in the Machine.config file. It contains a list of behaviors that is applied to all indigo2 services on the machine before the behaviors in the behaviors section are applied. If a behavior is defined in both sections, the behavior in the behaviors sections is given preference.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the configuration section that contains a list of behaviors that is applied to all indigo1 services on the machine before the behaviors in the behaviors section are applied.</para>
+      <para
+        >Represents the configuration section that contains a list of behaviors that is applied to all indigo1 services on the machine before the behaviors in the behaviors section are applied.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CommonBehaviorsSection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,20 +49,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CommonBehaviorsSection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.CommonBehaviorsSection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EndpointBehaviors">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.CommonEndpointBehaviorElement EndpointBehaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.CommonEndpointBehaviorElement EndpointBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.CommonEndpointBehaviorElement EndpointBehaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.CommonEndpointBehaviorElement EndpointBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("endpointBehaviors", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("endpointBehaviors", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -57,13 +86,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets all the child entries that are EndpointBehavior elements identified by their unique name.</para>
+          <para
+            >Gets all the child entries that are EndpointBehavior elements identified by their unique name.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,20 +113,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             instance that contains a collection of <see
+             cref="T:System.Configuration.ConfigurationProperty" />
+
+             objects that can be attributes or <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             objects of this configuration element.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ServiceBehaviors">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.CommonServiceBehaviorElement ServiceBehaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.CommonServiceBehaviorElement ServiceBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.CommonServiceBehaviorElement ServiceBehaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.CommonServiceBehaviorElement ServiceBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("serviceBehaviors", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("serviceBehaviors", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -100,7 +156,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets all the child entries that are serviceBehavior elements identified by their unique name.</para>
+          <para
+            >Gets all the child entries that are serviceBehavior elements identified by their unique name.</para
+          >
         </summary>
       </Docs>
     </Member>

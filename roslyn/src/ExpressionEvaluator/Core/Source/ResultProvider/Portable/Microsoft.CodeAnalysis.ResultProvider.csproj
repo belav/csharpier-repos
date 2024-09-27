@@ -28,25 +28,35 @@
     <Compile Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\EnumField.cs">
       <Link>Compiler\InternalUtilities\EnumField.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\ExceptionUtilities.cs">
+    <Compile
+      Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\ExceptionUtilities.cs"
+    >
       <Link>Compiler\InternalUtilities\ExceptionUtilities.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\NullableAttributes.cs">
+    <Compile
+      Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\NullableAttributes.cs"
+    >
       <Link>Compiler\InternalUtilities\NullableAttributes.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\ReflectionUtilities.cs">
+    <Compile
+      Include="..\..\..\..\..\Compilers\Core\Portable\InternalUtilities\ReflectionUtilities.cs"
+    >
       <Link>Compiler\InternalUtilities\ReflectionUtilities.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\..\Dependencies\PooledObjects\ObjectPool`1.cs">
       <Link>Compiler\InternalUtilities\ObjectPool`1.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Compilers\Core\Portable\SymbolDisplay\ObjectDisplayExtensions.cs">
+    <Compile
+      Include="..\..\..\..\..\Compilers\Core\Portable\SymbolDisplay\ObjectDisplayExtensions.cs"
+    >
       <Link>Compiler\SymbolDisplay\ObjectDisplayExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\..\Compilers\Core\Portable\SymbolDisplay\ObjectDisplayOptions.cs">
       <Link>Compiler\SymbolDisplay\ObjectDisplayOptions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Compilers\Core\Portable\SymbolDisplay\SymbolDisplayPartKind.cs">
+    <Compile
+      Include="..\..\..\..\..\Compilers\Core\Portable\SymbolDisplay\SymbolDisplayPartKind.cs"
+    >
       <Link>Compiler\SymbolDisplay\SymbolDisplayPartKind.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\..\Compilers\Core\Portable\Symbols\WellKnownMemberNames.cs">
@@ -75,12 +85,22 @@
     <EmbeddedResource Update="Resources.resx" GenerateSource="true" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ResultProvider" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ResultProvider" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ResultProvider"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ResultProvider"
+    />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Debugger.Engine-implementation" Version="$(MicrosoftVisualStudioDebuggerEngineimplementationVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Debugger.Metadata-implementation" Version="$(MicrosoftVisualStudioDebuggerMetadataimplementationVersion)" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Debugger.Engine-implementation"
+      Version="$(MicrosoftVisualStudioDebuggerEngineimplementationVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Debugger.Metadata-implementation"
+      Version="$(MicrosoftVisualStudioDebuggerMetadataimplementationVersion)"
+    />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
   </ItemGroup>
   <Import Project="..\ResultProvider.projitems" Label="Shared" />

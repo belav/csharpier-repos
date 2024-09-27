@@ -7,20 +7,16 @@
     <input type="button" name="_ctl1" />
   </div>
   <div id="GHTSubTest3" testname="HTMLButton_Disable_t">
-    <button disabled="disabled">
-    </button>
+    <button disabled="disabled"></button>
   </div>
   <div id="GHTSubTest4" testname="HTMLButton_Disable_f">
-    <button>
-    </button>
+    <button></button>
   </div>
   <div id="GHTSubTest5" testname="HTMLAnchor_Disable_t">
-    <a disabled="disabled">
-    </a>
+    <a disabled="disabled"></a>
   </div>
   <div id="GHTSubTest6" testname="HTMLAnchor_Disable_f">
-    <a>
-    </a>
+    <a></a>
   </div>
   <div id="GHTSubTest7" testname="HtmlInputHidden_Disable_t">
     <input disabled="disabled" type="hidden" name="_ctl6" />
@@ -35,19 +31,15 @@
     <input type="image" name="_ctl9" />
   </div>
   <div id="GHTSubTest11" testname="HtmlTextArea_Disable_t">
-    <textarea disabled="disabled" name="_ctl10">
-    </textarea>
+    <textarea disabled="disabled" name="_ctl10"></textarea>
   </div>
   <div id="GHTSubTest12" testname="HtmlTextArea_Disable_f">
-    <textarea name="_ctl11">
-    </textarea>
+    <textarea name="_ctl11"></textarea>
   </div>
   <div id="GHTSubTest13" testname="HtmlGenericControl_Disable_t">
-    <span disabled="disabled">
-    </span>
+    <span disabled="disabled"></span>
   </div>
   <div id="GHTSubTest14" testname="HtmlGenericControl_Disable_f">
-    <span>
-    </span>
+    <span></span>
   </div>
 </testresults>

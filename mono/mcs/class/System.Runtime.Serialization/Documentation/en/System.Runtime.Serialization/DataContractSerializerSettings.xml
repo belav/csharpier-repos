@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataContractSerializerSettings" FullName="System.Runtime.Serialization.DataContractSerializerSettings">
+<Type
+  Name="DataContractSerializerSettings"
+  FullName="System.Runtime.Serialization.DataContractSerializerSettings"
+>
   <TypeSignature Language="C#" Value="public class DataContractSerializerSettings" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DataContractSerializerSettings extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit DataContractSerializerSettings extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DataContractSerializerSettings ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +39,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractSerializerSettings" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.DataContractSerializerSettings" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DataContractResolver">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.DataContractResolver DataContractResolver { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Serialization.DataContractResolver DataContractResolver" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.DataContractResolver DataContractResolver { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Serialization.DataContractResolver DataContractResolver"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,13 +69,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the component used to dynamically map xsi:type declarations to known contract types.</para>
+          <para
+            >Gets or sets the component used to dynamically map xsi:type declarations to known contract types.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DataContractSurrogate">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Serialization.IDataContractSurrogate DataContractSurrogate"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -87,26 +115,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies whether to ignore data supplied by an extension of the class when the class is being serialized or deserialized.</para>
+          <para
+            >Gets or sets a value that specifies whether to ignore data supplied by an extension of the class when the class is being serialized or deserialized.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="KnownTypes">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;Type&gt; KnownTypes { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;class System.Type&gt; KnownTypes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerable<Type> KnownTypes { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IEnumerable`1<class System.Type> KnownTypes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Type&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable<System.Type></ReturnType>
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a collection of types that may be present in the object graph serialized using this instance of the DataContractSerializerSettings.</para>
+          <para
+            >Gets or sets a collection of types that may be present in the object graph serialized using this instance of the DataContractSerializerSettings.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -125,7 +163,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the maximum number of items in an object graph to serialize or deserialize.</para>
+          <para
+            >Gets or sets the maximum number of items in an object graph to serialize or deserialize.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -144,13 +184,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies whether to use non-standard XML constructs to preserve object reference data.</para>
+          <para
+            >Gets or sets a value that specifies whether to use non-standard XML constructs to preserve object reference data.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="RootName">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlDictionaryString RootName { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlDictionaryString RootName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlDictionaryString RootName { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlDictionaryString RootName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -168,8 +216,14 @@
       </Docs>
     </Member>
     <Member MemberName="RootNamespace">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlDictionaryString RootNamespace { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlDictionaryString RootNamespace" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlDictionaryString RootNamespace { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlDictionaryString RootNamespace"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

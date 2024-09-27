@@ -21,6 +21,8 @@
     <Compile Include="UmsSecurityTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj" />
+    <ProjectReference
+      Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj"
+    />
   </ItemGroup>
 </Project>

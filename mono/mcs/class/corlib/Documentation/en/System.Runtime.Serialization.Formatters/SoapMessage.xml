@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SoapMessage" FullName="System.Runtime.Serialization.Formatters.SoapMessage">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class SoapMessage : System.Runtime.Serialization.Formatters.ISoapMessage" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit SoapMessage extends System.Object implements class System.Runtime.Serialization.Formatters.ISoapMessage" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class SoapMessage : System.Runtime.Serialization.Formatters.ISoapMessage"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit SoapMessage extends System.Object implements class System.Runtime.Serialization.Formatters.ISoapMessage"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -9,7 +16,9 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -26,17 +35,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When <see cref="T:System.Runtime.Serialization.Formatters.SoapMessage" /> is the root of a serialization graph, SOAP is produced in RPC (Remote Procedure Call) format and a <see cref="T:System.Runtime.Serialization.Formatters.SoapMessage" /> object is used to specify the method call parameter types. The <see cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" /> property can be set to this object during deserialization.</para>
+      <para
+        >When <see
+         cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+
+         is the root of a serialization graph, SOAP is produced in RPC (Remote Procedure Call) format and a <see
+         cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+
+         object is used to specify the method call parameter types. The <see
+         cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
+
+         property can be set to this object during deserialization.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Holds the names and types of parameters required during serialization of a SOAP RPC (Remote Procedure Call).</para>
+      <para
+        >Holds the names and types of parameters required during serialization of a SOAP RPC (Remote Procedure Call).</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SoapMessage ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -49,13 +74,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Formatters.SoapMessage" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Headers">
-      <MemberSignature Language="C#" Value="public System.Runtime.Remoting.Messaging.Header[] Headers { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Remoting.Messaging.Header[] Headers" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Remoting.Messaging.Header[] Headers { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Remoting.Messaging.Header[] Headers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -133,7 +169,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is reserved. Use the <see cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamNames" /> and/or <see cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamValues" /> properties instead.</para>
+          <para
+            >This property is reserved. Use the <see
+             cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamNames" />
+
+             and/or <see
+             cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamValues" />
+
+             properties instead.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -175,7 +219,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the XML namespace name where the object that contains the called method is located.</para>
+          <para
+            >Gets or sets the XML namespace name where the object that contains the called method is located.</para
+          >
         </summary>
       </Docs>
     </Member>

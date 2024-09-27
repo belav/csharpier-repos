@@ -3,7 +3,9 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Microsoft.XmlSerializer.Generator\tests\SerializableAssembly.csproj" />
+    <ProjectReference
+      Include="..\..\Microsoft.XmlSerializer.Generator\tests\SerializableAssembly.csproj"
+    />
     <TrimmerRootAssembly Include="SerializableAssembly" />
   </ItemGroup>
   <ItemGroup>
@@ -20,7 +22,10 @@
     <Compile Include="$(TestSourceFolder)SerializationTestTypes\DCRTypeLibrary.cs" />
     <Compile Include="$(TestSourceFolder)SerializationTestTypes\Primitives.cs" />
     <Compile Include="$(CommonTestPath)System\IO\TempFile.cs" Link="Common\System\IO\TempFile.cs" />
-    <Compile Include="$(CommonTestPath)System\Runtime\Serialization\DataContractSerializerHelper.cs" Link="Common\System\Runtime\Serialization\DataContractSerializerHelper.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Runtime\Serialization\DataContractSerializerHelper.cs"
+      Link="Common\System\Runtime\Serialization\DataContractSerializerHelper.cs"
+    />
     <Compile Include="$(CommonTestPath)System\Runtime\Serialization\Utils.cs" />
     <Compile Include="$(TestSourceFolder)SerializationTestTypes\ObjRefSample.cs" />
     <Compile Include="SerializationTestTypes\Collections.cs" />
@@ -55,7 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.CodeDom\src\System.CodeDom.csproj" />
-    <ProjectReference Include=".\XsdDataContractExporterTests\SerializationTypes\SerializationTypes.csproj" />
+    <ProjectReference
+      Include=".\XsdDataContractExporterTests\SerializationTypes\SerializationTypes.csproj"
+    />
     <TrimmerRootDescriptor Include="$(ILLinkDescriptorsPath)ILLink.Descriptors.Serialization.xml" />
   </ItemGroup>
 </Project>

@@ -12,11 +12,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.SqlClient.SqlNotificationInfo" /> enumeration is referenced by an instance of the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" /> class.</para>
+      <para
+        >The <see
+         cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+
+         enumeration is referenced by an instance of the <see
+         cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration provides additional information about the different notifications that can be received by the dependency event handler. </para>
+      <para
+        >This enumeration provides additional information about the different notifications that can be received by the dependency event handler. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +40,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The SqlDependency object already fired, and new commands cannot be added to it.</para>
+          <para
+            >The SqlDependency object already fired, and new commands cannot be added to it.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -148,7 +160,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A statement was provided that cannot be notified (for example, an UPDATE statement).</para>
+          <para
+            >A statement was provided that cannot be notified (for example, an UPDATE statement).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -165,7 +179,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The statement was executed under an isolation mode that was not valid (for example, Snapshot).</para>
+          <para
+            >The statement was executed under an isolation mode that was not valid (for example, Snapshot).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -201,7 +217,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A previous statement has caused query notifications to fire under the current transaction.</para>
+          <para
+            >A previous statement has caused query notifications to fire under the current transaction.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -267,7 +285,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The subscribing query causes the number of templates on one of the target tables to exceed the maximum allowable limit.</para>
+          <para
+            >The subscribing query causes the number of templates on one of the target tables to exceed the maximum allowable limit.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -300,7 +320,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used when the info option sent by the server was not recognized by the client.</para>
+          <para
+            >Used when the info option sent by the server was not recognized by the client.</para
+          >
         </summary>
       </Docs>
     </Member>

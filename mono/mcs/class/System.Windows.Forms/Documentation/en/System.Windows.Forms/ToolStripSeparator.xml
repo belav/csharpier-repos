@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ToolStripSeparator" FullName="System.Windows.Forms.ToolStripSeparator">
-  <TypeSignature Language="C#" Value="public class ToolStripSeparator : System.Windows.Forms.ToolStripItem" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripSeparator : System.Windows.Forms.ToolStripItem"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -11,19 +14,57 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.Windows.Forms.Design.ToolStripItemDesignerAvailability(System.Windows.Forms.Design.ToolStripItemDesignerAvailability.ToolStrip | System.Windows.Forms.Design.ToolStripItemDesignerAvailability.ContextMenuStrip)</AttributeName>
+      <AttributeName
+        >System.Windows.Forms.Design.ToolStripItemDesignerAvailability(System.Windows.Forms.Design.ToolStripItemDesignerAvailability.ToolStrip | System.Windows.Forms.Design.ToolStripItemDesignerAvailability.ContextMenuStrip)</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use a <see cref="T:System.Windows.Forms.ToolStripSeparator" /> to group related items on a menu or <see cref="T:System.Windows.Forms.ToolStrip" />. The <see cref="T:System.Windows.Forms.ToolStripSeparator" /> is automatically spaced and oriented horizontally or vertically to accord with its container.</para>
-      <para>You can add a <see cref="T:System.Windows.Forms.ToolStripSeparator" /> at design time by choosing it from a drop-down list. However, you can also automatically create a <see cref="T:System.Windows.Forms.ToolStripSeparator" /> by typing a hyphen (-) in either the designer template node or in the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.String)" /> method.</para>
+      <para
+        >Use a <see
+         cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+         to group related items on a menu or <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+        . The <see
+         cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+         is automatically spaced and oriented horizontally or vertically to accord with its container.</para
+      >
+      <para
+        >You can add a <see
+         cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+         at design time by choosing it from a drop-down list. However, you can also automatically create a <see
+         cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+         by typing a hyphen (-) in either the designer template node or in the <see
+         cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.String)" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a line used to group items of a <see cref="T:System.Windows.Forms.ToolStrip" /> or the drop-down items of a <see cref="T:System.Windows.Forms.MenuStrip" /> or <see cref="T:System.Windows.Forms.ContextMenuStrip" /> or other <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control.</para>
+      <para
+        >Represents a line used to group items of a <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+         or the drop-down items of a <see
+         cref="T:System.Windows.Forms.MenuStrip" />
+
+         or <see
+         cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+         or other <see
+         cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -36,7 +77,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSeparator" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -48,10 +94,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -77,14 +127,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImage">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Image BackgroundImage { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Image BackgroundImage { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -110,14 +167,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImageLayout">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -154,7 +218,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripSeparator" /> can be selected. </para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+             can be selected. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -162,7 +231,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateAccessibilityInstance">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.AccessibleObject CreateAccessibilityInstance ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.AccessibleObject CreateAccessibilityInstance ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleObject</ReturnType>
@@ -173,11 +245,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripSeparator" />.</para>
+          <para
+            >Creates a new accessibility object for the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Windows.Forms.AccessibleObject" /> for the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Windows.Forms.AccessibleObject" />
+
+             for the <see
+             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -185,12 +270,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="DefaultMargin">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.Padding DefaultMargin { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.Padding DefaultMargin { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -203,12 +293,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the spacing between the <see cref="T:System.Windows.Forms.ToolStripSeparator" /> and an adjacent item.</para>
+          <para
+            >Gets the spacing between the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+             and an adjacent item.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DefaultSize">
-      <MemberSignature Language="C#" Value="protected override System.Drawing.Size DefaultSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Drawing.Size DefaultSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -219,7 +317,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the default size of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />.</para>
+          <para
+            >Gets the default size of the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -227,14 +330,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DisplayStyle">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripItemDisplayStyle DisplayStyle { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripItemDisplayStyle DisplayStyle { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -264,7 +374,9 @@
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -293,10 +405,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -326,10 +442,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -359,7 +479,9 @@
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -384,14 +506,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Font">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Font Font { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Font Font { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -417,7 +546,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPreferredSize">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Size GetPreferredSize (System.Drawing.Size constrainingSize);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Size GetPreferredSize (System.Drawing.Size constrainingSize);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -430,28 +562,57 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves the size of a rectangular area into which a <see cref="T:System.Windows.Forms.ToolStripSeparator" /> can be fitted.</para>
+          <para
+            >Retrieves the size of a rectangular area into which a <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+             can be fitted.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Size" /> representing the height and width of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />, in pixels.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Size" />
+
+             representing the height and width of the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            , in pixels.</para
+          >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Size" /> representing the height and width of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />, in pixels.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Size" />
+
+           representing the height and width of the <see
+           cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          , in pixels.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Image">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Image Image { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Image Image { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -477,14 +638,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImageAlign">
-      <MemberSignature Language="C#" Value="public System.Drawing.ContentAlignment ImageAlign { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.ContentAlignment ImageAlign { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -514,13 +682,19 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.Repaint)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.Repaint)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -553,10 +727,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -578,14 +756,21 @@
       </Docs>
     </Member>
     <Member MemberName="ImageScaling">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripItemImageScaling ImageScaling { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripItemImageScaling ImageScaling { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -611,14 +796,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImageTransparentColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color ImageTransparentColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color ImageTransparentColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -663,19 +855,30 @@
           <para>This method is not relevant to this class.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="OnPaint">
-      <MemberSignature Language="C#" Value="protected override void OnPaint (System.Windows.Forms.PaintEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnPaint (System.Windows.Forms.PaintEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -688,10 +891,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.Paint" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.Paint" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -705,10 +919,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -730,7 +948,10 @@
       </Docs>
     </Member>
     <Member MemberName="SetBounds">
-      <MemberSignature Language="C#" Value="protected override void SetBounds (System.Drawing.Rectangle rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetBounds (System.Drawing.Rectangle rect);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -745,10 +966,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the size and location of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />.</para>
+          <para
+            >Sets the size and location of the <see
+             cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            .</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Rectangle" /> specifying the size and location of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Rectangle" />
+
+           specifying the size and location of the <see
+           cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Text">
@@ -756,10 +991,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -785,14 +1024,21 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TextAlign">
-      <MemberSignature Language="C#" Value="public System.Drawing.ContentAlignment TextAlign { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.ContentAlignment TextAlign { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -822,7 +1068,9 @@
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -847,17 +1095,24 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TextDirection">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.ToolStripTextDirection TextDirection { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.ToolStripTextDirection TextDirection { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Windows.Forms.ToolStripTextDirection.Horizontal)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Windows.Forms.ToolStripTextDirection.Horizontal)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -879,14 +1134,21 @@
       </Docs>
     </Member>
     <Member MemberName="TextImageRelation">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.TextImageRelation TextImageRelation { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.TextImageRelation TextImageRelation { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -916,10 +1178,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>

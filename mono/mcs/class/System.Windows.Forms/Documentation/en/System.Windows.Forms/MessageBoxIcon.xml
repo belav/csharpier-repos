@@ -12,7 +12,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="T:System.Windows.Forms.MessageBox" /> class. The description of each member of this enumeration contains a typical representation of the symbol. The actual graphic displayed is a function of the operating system constants. In current implementations there are four unique symbols with multiple values assigned to them.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="T:System.Windows.Forms.MessageBox" />
+
+         class. The description of each member of this enumeration contains a typical representation of the symbol. The actual graphic displayed is a function of the operating system constants. In current implementations there are four unique symbols with multiple values assigned to them.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +34,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of a lowercase letter i in a circle.</para>
+          <para
+            >The message box contains a symbol consisting of a lowercase letter i in a circle.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -46,7 +53,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of white X in a circle with a red background.</para>
+          <para
+            >The message box contains a symbol consisting of white X in a circle with a red background.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,7 +72,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.</para>
+          <para
+            >The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +91,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of a white X in a circle with a red background.</para>
+          <para
+            >The message box contains a symbol consisting of a white X in a circle with a red background.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,7 +110,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of a lowercase letter i in a circle.</para>
+          <para
+            >The message box contains a symbol consisting of a lowercase letter i in a circle.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -131,7 +146,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of a question mark in a circle. The question-mark message icon is no longer recommended because it does not clearly represent a specific type of message and because the phrasing of a message as a question could apply to any message type. In addition, users can confuse the message symbol question mark with Help information. Therefore, do not use this question mark message symbol in your message boxes. The system continues to support its inclusion only for backward compatibility.</para>
+          <para
+            >The message box contains a symbol consisting of a question mark in a circle. The question-mark message icon is no longer recommended because it does not clearly represent a specific type of message and because the phrasing of a message as a question could apply to any message type. In addition, users can confuse the message symbol question mark with Help information. Therefore, do not use this question mark message symbol in your message boxes. The system continues to support its inclusion only for backward compatibility.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -148,7 +165,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of white X in a circle with a red background.</para>
+          <para
+            >The message box contains a symbol consisting of white X in a circle with a red background.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -165,7 +184,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.</para>
+          <para
+            >The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

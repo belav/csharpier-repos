@@ -8,6 +8,8 @@
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <!-- This is a source package which includes all .cs files by default. -->
     <IsSourcePackage>true</IsSourcePackage>
-    <PackageDescription>Internal package for sharing Microsoft.Extensions.Hosting.HostFactoryResolver type.</PackageDescription>
+    <PackageDescription
+      >Internal package for sharing Microsoft.Extensions.Hosting.HostFactoryResolver type.</PackageDescription
+    >
   </PropertyGroup>
 </Project>

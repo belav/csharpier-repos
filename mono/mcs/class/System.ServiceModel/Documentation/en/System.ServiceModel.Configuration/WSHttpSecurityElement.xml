@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WSHttpSecurityElement" FullName="System.ServiceModel.Configuration.WSHttpSecurityElement">
-  <TypeSignature Language="C#" Value="public sealed class WSHttpSecurityElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed WSHttpSecurityElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="WSHttpSecurityElement"
+  FullName="System.ServiceModel.Configuration.WSHttpSecurityElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WSHttpSecurityElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed WSHttpSecurityElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WSHttpSecurityElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,24 +42,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpSecurityElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.WSHttpSecurityElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Message">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement Message { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement Message" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement Message { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement Message"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("message", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("message", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement</ReturnType>
+        <ReturnType
+          >System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement</ReturnType
+        >
       </ReturnValue>
       <Docs>
         <value>To be added.</value>
@@ -59,15 +86,23 @@
       </Docs>
     </Member>
     <Member MemberName="Mode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.SecurityMode Mode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.SecurityMode Mode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.SecurityMode Mode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.SecurityMode Mode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("mode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("mode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -83,8 +118,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -99,15 +140,23 @@
       </Docs>
     </Member>
     <Member MemberName="Transport">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.WSHttpTransportSecurityElement Transport { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.WSHttpTransportSecurityElement Transport" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.WSHttpTransportSecurityElement Transport { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.WSHttpTransportSecurityElement Transport"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("transport", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("transport", Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>

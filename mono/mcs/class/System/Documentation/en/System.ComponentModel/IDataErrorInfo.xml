@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IDataErrorInfo" FullName="System.ComponentModel.IDataErrorInfo">
   <TypeSignature Language="C#" Maintainer="auto" Value="public interface IDataErrorInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDataErrorInfo" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IDataErrorInfo"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -10,13 +13,17 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Interfaces />
   <Docs>
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides the functionality to offer custom error information that a user interface can bind to.</para>
+      <para
+        >Provides the functionality to offer custom error information that a user interface can bind to.</para
+      >
     </summary>
   </Docs>
   <Members>

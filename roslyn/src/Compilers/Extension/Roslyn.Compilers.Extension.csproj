@@ -6,7 +6,6 @@
     <RootNamespace>Roslyn.Compilers.Extension</RootNamespace>
     <TargetFramework>net472</TargetFramework>
     <IsShipping>false</IsShipping>
-
     <!-- VSIX -->
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
@@ -16,10 +15,12 @@
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
   </PropertyGroup>
   <ItemGroup Label="PkgDef">
-    <PkgDefPackageRegistration Include="{31c0675e-87a4-4061-a0dd-a4e510fccf97}"
-                               Name="CompilerPackage"
-                               Class="Roslyn.Compilers.Extension.CompilerPackage"
-                               AllowsBackgroundLoad="true"/>
+    <PkgDefPackageRegistration
+      Include="{31c0675e-87a4-4061-a0dd-a4e510fccf97}"
+      Name="CompilerPackage"
+      Class="Roslyn.Compilers.Extension.CompilerPackage"
+      AllowsBackgroundLoad="true"
+    />
     <PkgDefBindingRedirect Include="$(TargetPath)" />
     <None Include="PackageRegistration.pkgdef" PkgDefEntry="FileContent" />
   </ItemGroup>
@@ -52,73 +53,134 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Scripting\Core\Microsoft.CodeAnalysis.Scripting.csproj">
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
     </ProjectReference>
-    <ProjectReference Include="..\..\Scripting\CSharp\Microsoft.CodeAnalysis.CSharp.Scripting.csproj">
+    <ProjectReference
+      Include="..\..\Scripting\CSharp\Microsoft.CodeAnalysis.CSharp.Scripting.csproj"
+    >
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
     </ProjectReference>
     <ProjectReference Include="..\Core\MSBuildTask\Microsoft.Build.Tasks.CodeAnalysis.csproj">
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <AdditionalProperties>TargetFramework=net472</AdditionalProperties>
       <PkgDefEntry>BindingRedirect</PkgDefEntry>
     </ProjectReference>
     <ProjectReference Include="..\Core\Portable\Microsoft.CodeAnalysis.csproj">
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
     </ProjectReference>
     <ProjectReference Include="..\Server\VBCSCompiler\AnyCpu\VBCSCompiler.csproj">
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <!-- Workaround for https://github.com/dotnet/sdk/issues/433#issuecomment-320024771 . Remove once resolved. -->
       <AdditionalProperties>TargetFramework=net472</AdditionalProperties>
     </ProjectReference>
     <ProjectReference Include="..\CSharp\csc\AnyCpu\csc.csproj">
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <AdditionalProperties>TargetFramework=net472</AdditionalProperties>
     </ProjectReference>
     <ProjectReference Include="..\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.csproj">
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
     </ProjectReference>
     <ProjectReference Include="..\VisualBasic\Portable\Microsoft.CodeAnalysis.VisualBasic.vbproj">
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
     </ProjectReference>
     <ProjectReference Include="..\VisualBasic\vbc\AnyCpu\vbc.csproj">
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <AdditionalProperties>TargetFramework=net472</AdditionalProperties>
     </ProjectReference>
     <ProjectReference Include="..\..\Interactive\csi\csi.csproj">
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <IncludeOutputGroupsInVSIX
+        >BuiltProjectOutputGroup%3bGetCopyToOutputDirectoryItems</IncludeOutputGroupsInVSIX
+      >
+      <IncludeOutputGroupsInVSIXLocalOnly
+        >DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly
+      >
       <ForceIncludeInVSIX>true</ForceIncludeInVSIX>
       <AdditionalProperties>TargetFramework=net472</AdditionalProperties>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceHub.Framework" Version="$(MicrosoftServiceHubFrameworkVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.ComponentModelHost" Version="$(MicrosoftVisualStudioComponentModelHostVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.CoreUtility" Version="$(MicrosoftVisualStudioCoreUtilityVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime" Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Interop" Version="$(MicrosoftVisualStudioInteropVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.ProjectSystem" Version="$(MicrosoftVisualStudioProjectSystemVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="$(MicrosoftVisualStudioShell150Version)" />
-    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers" Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="$(MicrosoftVisualStudioThreadingVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="$(MicrosoftVisualStudioValidationVersion)" />
+    <PackageReference
+      Include="Microsoft.ServiceHub.Framework"
+      Version="$(MicrosoftServiceHubFrameworkVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.ComponentModelHost"
+      Version="$(MicrosoftVisualStudioComponentModelHostVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.CoreUtility"
+      Version="$(MicrosoftVisualStudioCoreUtilityVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime"
+      Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Interop"
+      Version="$(MicrosoftVisualStudioInteropVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.ProjectSystem"
+      Version="$(MicrosoftVisualStudioProjectSystemVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.15.0"
+      Version="$(MicrosoftVisualStudioShell150Version)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.SDK.Analyzers"
+      Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading"
+      Version="$(MicrosoftVisualStudioThreadingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Validation"
+      Version="$(MicrosoftVisualStudioValidationVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 </Project>

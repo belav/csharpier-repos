@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MailPriority" FullName="System.Net.Mail.MailPriority">
   <TypeSignature Language="C#" Value="public enum MailPriority" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed MailPriority extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed MailPriority extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,13 +21,21 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the priority of a <see cref="T:System.Net.Mail.MailMessage" />.</para>
+      <para
+        >Specifies the priority of a <see
+         cref="T:System.Net.Mail.MailMessage" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="High">
       <MemberSignature Language="C#" Value="High" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.MailPriority High = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.MailPriority High = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +54,10 @@
     </Member>
     <Member MemberName="Low">
       <MemberSignature Language="C#" Value="Low" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.MailPriority Low = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.MailPriority Low = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +76,10 @@
     </Member>
     <Member MemberName="Normal">
       <MemberSignature Language="C#" Value="Normal" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Mail.MailPriority Normal = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Mail.MailPriority Normal = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

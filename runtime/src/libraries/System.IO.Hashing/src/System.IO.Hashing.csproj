@@ -1,17 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    <TargetFrameworks
+      >$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks
+    >
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
     <IsPackable>true</IsPackable>
-    <PackageDescription>Provides non-cryptographic hash algorithms, such as CRC-32.
+    <PackageDescription
+      >Provides non-cryptographic hash algorithms, such as CRC-32.
 
 Commonly Used Types:
 System.IO.Hashing.Crc32
-System.IO.Hashing.XxHash32</PackageDescription>
+System.IO.Hashing.XxHash32</PackageDescription
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\IO\Hashing\Crc32.cs" />
     <Compile Include="System\IO\Hashing\Crc32.Table.cs" />
@@ -26,7 +28,6 @@ System.IO.Hashing.XxHash32</PackageDescription>
     <Compile Include="System\IO\Hashing\XxHash64.State.cs" />
     <Compile Include="System\IO\Hashing\XxHashShared.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="System\IO\Hashing\Crc32.Arm.cs" />
     <Compile Include="System\IO\Hashing\Crc32.Vectorized.cs" />
@@ -34,14 +35,11 @@ System.IO.Hashing.XxHash32</PackageDescription>
     <Compile Include="System\IO\Hashing\VectorHelper.cs" />
     <Compile Include="System\ThrowHelper.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="System\IO\Hashing\BitOperations.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Buffers" Version="$(SystemBuffersVersion)" />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
   </ItemGroup>
-
 </Project>

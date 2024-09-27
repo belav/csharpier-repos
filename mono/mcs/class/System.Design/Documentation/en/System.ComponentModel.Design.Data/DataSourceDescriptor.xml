@@ -13,7 +13,9 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implements the basic functionality required by a single data source at the EnvDTE.Project level.</para>
+      <para
+        >Implements the basic functionality required by a single data source at the EnvDTE.Project level.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -28,7 +30,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -45,11 +52,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Bitmap" /> image that represents the data source is typically used in design-time pickers. The image may be null.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Bitmap" />
+
+             image that represents the data source is typically used in design-time pickers. The image may be null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, closes this stream and the underlying stream gets the <see cref="T:System.Drawing.Bitmap" /> image that represents the data source.</para>
+          <para
+            >When overridden in a derived class, closes this stream and the underlying stream gets the <see
+             cref="T:System.Drawing.Bitmap" />
+
+             image that represents the data source.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -66,11 +83,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the data source is designable, meaning that an instance of this type will be added to the design surface when binding. Designable data sources are bound by instance rather than by type. Data sources of type <see cref="T:System.ComponentModel.IComponent" /> are designable.</para>
+          <para
+            >Indicates whether the data source is designable, meaning that an instance of this type will be added to the design surface when binding. Designable data sources are bound by instance rather than by type. Data sources of type <see
+             cref="T:System.ComponentModel.IComponent" />
+
+             are designable.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the value indicating whether the data source is designable.</para>
+          <para
+            >When overridden in a derived class, gets the value indicating whether the data source is designable.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -87,7 +111,9 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The name of the data source must be unique across all data sources at the EnvDTE.Project level.</para>
+          <para
+            >The name of the data source must be unique across all data sources at the EnvDTE.Project level.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,7 +135,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the fully qualified type name of the data source.</para>
+          <para
+            >When overridden in a derived class, gets the fully qualified type name of the data source.</para
+          >
         </summary>
       </Docs>
     </Member>

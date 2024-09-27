@@ -289,13 +289,17 @@
           <AttributeName>System.CLSCompliant(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("Mono development team")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) Various Mono authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) Various Mono authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyDefaultAlias("System.Xml.dll")</AttributeName>
@@ -307,10 +311,14 @@
           <AttributeName>System.Reflection.AssemblyFileVersion("4.0.30319.17020")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("4.0.30319.17020")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("4.0.30319.17020")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("Mono Common Language Infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("Mono Common Language Infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyTitle("System.Xml.dll")</AttributeName>
@@ -322,13 +330,19 @@
           <AttributeName>System.Resources.SatelliteContractVersion("4.0.0.0")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.CompilationRelaxations(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.InternalsVisibleTo("System.Xml.Linq, PublicKey=00000000000000000400000000000000")</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.InternalsVisibleTo("System.Xml.Linq, PublicKey=00000000000000000400000000000000")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.InteropServices.ComVisible(false)</AttributeName>

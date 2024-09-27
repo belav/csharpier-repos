@@ -3,52 +3,68 @@
     <Assembly Name="DocTest-DropNS-classic" Version="0.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(8)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>
     <Assembly Name="DocTest-DropNS-classic-multitest" Version="0.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(8)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>
     <Assembly Name="DocTest-DropNS-unified" Version="0.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(8)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>
     <Assembly Name="DocTest-DropNS-unified-multitest" Version="0.0.0.0">
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.CompilationRelaxations(8)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>
@@ -69,8 +85,14 @@
         <Target Type="T:MyFramework.MyNamespace.MyClass" />
       </Targets>
       <Member MemberName="AnExtension">
-        <MemberSignature Language="C#" Value="public static bool AnExtension (this MyFramework.MyNamespace.MyClass value);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool AnExtension(class MyFramework.MyNamespace.MyClass value) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static bool AnExtension (this MyFramework.MyNamespace.MyClass value);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig bool AnExtension(class MyFramework.MyNamespace.MyClass value) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Boolean</ReturnType>
@@ -82,7 +104,10 @@
           <param name="value">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="MyFramework.MyNamespace.MyClassExtensions" Member="M:MyFramework.MyNamespace.MyClassExtensions.AnExtension(MyFramework.MyNamespace.MyClass)" />
+        <Link
+          Type="MyFramework.MyNamespace.MyClassExtensions"
+          Member="M:MyFramework.MyNamespace.MyClassExtensions.AnExtension(MyFramework.MyNamespace.MyClass)"
+        />
       </Member>
     </ExtensionMethod>
   </ExtensionMethods>

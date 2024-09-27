@@ -1,6 +1,12 @@
 <Type Name="SqliteParameter" FullName="Mono.Data.Sqlite.SqliteParameter">
-  <TypeSignature Language="C#" Value="public sealed class SqliteParameter : System.Data.Common.DbParameter, ICloneable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteParameter extends System.Data.Common.DbParameter implements class System.ICloneable" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteParameter : System.Data.Common.DbParameter, ICloneable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteParameter extends System.Data.Common.DbParameter implements class System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,7 +28,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteParameter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,7 +46,10 @@
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -47,15 +59,20 @@
       </Parameters>
       <Docs>
         <param name="dbType">The datatype of the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified data type
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -65,15 +82,23 @@
       </Parameters>
       <Docs>
         <param name="parameterName">The parameter name</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter given the specified parameter name
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -85,15 +110,23 @@
       <Docs>
         <param name="parameterType">The data type</param>
         <param name="parameterSize">The size of the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified type and size
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType dbType, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,15 +138,23 @@
       <Docs>
         <param name="dbType">The datatype of the parameter</param>
         <param name="value">The initial value of the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified data type and sets the initial value
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -125,15 +166,23 @@
       <Docs>
         <param name="dbType">The datatype of the parameter</param>
         <param name="sourceColumn">The source column</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified data type and source column
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType dbType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType dbType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -145,15 +194,23 @@
       <Docs>
         <param name="parameterName">The parameter name</param>
         <param name="dbType">The datatype of the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -165,15 +222,23 @@
       <Docs>
         <param name="parameterName">The parameter name</param>
         <param name="value">The initial value of the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter given the specified parameter name and initial value
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -187,15 +252,23 @@
         <param name="parameterType">The data type</param>
         <param name="parameterSize">The size of the parameter</param>
         <param name="sourceColumn">The source column</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified type, size, and source column
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -209,15 +282,23 @@
         <param name="dbType">The data type</param>
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified data type, source column and row version
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -231,15 +312,23 @@
         <param name="parameterName">The parameter name</param>
         <param name="parameterType">The data type</param>
         <param name="parameterSize">The size of the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type and size
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -253,15 +342,23 @@
         <param name="parameterName">The parameter name</param>
         <param name="dbType">The data type</param>
         <param name="sourceColumn">The source column</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type and source column reference
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -277,15 +374,23 @@
         <param name="parameterSize">The size of the parameter</param>
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
-        <summary>
+        <summary
+          >
             Constructs an unnamed parameter of the specified type, size, source column and row version
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -301,15 +406,23 @@
         <param name="parameterType">The data type</param>
         <param name="parameterSize">The size of the parameter</param>
         <param name="sourceColumn">The source column</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type, size and source column
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -325,15 +438,23 @@
         <param name="dbType">The data type</param>
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type, source column and row version
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -351,22 +472,32 @@
         <param name="parameterSize">The size of the parameter</param>
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type, size, source column and row version
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, bool isNullable, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, bool isNullable, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, bool isNullable, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, bool isNullable, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <Parameters>
@@ -392,22 +523,32 @@
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
         <param name="value">The initial value to assign the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter of the specified type, size, source column and row version
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <Parameters>
@@ -431,17 +572,24 @@
         <param name="scale">Ignored</param>
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
-        <param name="sourceColumnNullMapping">Whether or not this parameter is for comparing NULL's</param>
+        <param name="sourceColumnNullMapping"
+          >Whether or not this parameter is for comparing NULL's</param
+        >
         <param name="value">The intial value to assign the parameter</param>
-        <summary>
+        <summary
+          >
             Constructs a named parameter, yet another flavor
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Clone">
       <MemberSignature Language="C#" Value="public object Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -459,15 +607,23 @@
       </Docs>
     </Member>
     <Member MemberName="DbType">
-      <MemberSignature Language="C#" Value="public override System.Data.DbType DbType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.DbType DbType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.DbType DbType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.DbType DbType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.All)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.All)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Data.Common.DbProviderSpecificTypeProperty(true)</AttributeName>
@@ -485,8 +641,14 @@
       </Docs>
     </Member>
     <Member MemberName="Direction">
-      <MemberSignature Language="C#" Value="public override System.Data.ParameterDirection Direction { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.ParameterDirection Direction" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.ParameterDirection Direction { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.ParameterDirection Direction"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -513,9 +675,11 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Whether or not the parameter can contain a null value
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -540,7 +704,10 @@
     </Member>
     <Member MemberName="ResetDbType">
       <MemberSignature Language="C#" Value="public override void ResetDbType ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ResetDbType() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ResetDbType() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -550,9 +717,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>
+        <summary
+          >
             Resets the DbType of the parameter so it can be inferred from the value
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -598,7 +767,10 @@
       </Docs>
     </Member>
     <Member MemberName="SourceColumnNullMapping">
-      <MemberSignature Language="C#" Value="public override bool SourceColumnNullMapping { get; set; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool SourceColumnNullMapping { get; set; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool SourceColumnNullMapping" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -608,16 +780,24 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Used by DbCommandBuilder to determine the mapping for nullable fields
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SourceVersion">
-      <MemberSignature Language="C#" Value="public override System.Data.DataRowVersion SourceVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.DataRowVersion SourceVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.DataRowVersion SourceVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.DataRowVersion SourceVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -642,19 +822,25 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.All)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.RefreshProperties(System.ComponentModel.RefreshProperties.All)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.TypeConverter(typeof(System.ComponentModel.StringConverter))</AttributeName>
+          <AttributeName
+            >System.ComponentModel.TypeConverter(typeof(System.ComponentModel.StringConverter))</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets and sets the parameter value.  If no datatype was specified, the datatype will assume the type from the value given.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

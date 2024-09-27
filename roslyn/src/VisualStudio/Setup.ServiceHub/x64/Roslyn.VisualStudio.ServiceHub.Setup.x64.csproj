@@ -7,7 +7,9 @@
     <SetupProductArch>x64</SetupProductArch>
   </PropertyGroup>
   <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\..\Workspaces\Remote\ServiceHub.CoreComponents\x64\Microsoft.CodeAnalysis.Remote.ServiceHub.CoreComponents.x64.csproj">
+    <ProjectReference
+      Include="..\..\..\Workspaces\Remote\ServiceHub.CoreComponents\x64\Microsoft.CodeAnalysis.Remote.ServiceHub.CoreComponents.x64.csproj"
+    >
       <Name>ServiceHubX64</Name>
       <!-- This project targets netcoreapp -->
       <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>

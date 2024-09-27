@@ -1,5 +1,8 @@
 <Type Name="NvdlAction" FullName="Commons.Xml.Nvdl.NvdlAction">
-  <TypeSignature Language="C#" Value="public abstract class NvdlAction : Commons.Xml.Nvdl.NvdlAttributable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class NvdlAction : Commons.Xml.Nvdl.NvdlAttributable"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -21,6 +24,8 @@
   </Members>
   <Docs>
     <summary>Represents "action" element of NVDL grammar object model.</summary>
-    <remarks>This class represents NVDL "action" element. For the entire NVDL grammar, see http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/fcd/nvdl-fcd.pdf .</remarks>
+    <remarks
+      >This class represents NVDL "action" element. For the entire NVDL grammar, see http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/fcd/nvdl-fcd.pdf .</remarks
+    >
   </Docs>
 </Type>

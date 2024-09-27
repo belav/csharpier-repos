@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Soap12Binding" FullName="System.Web.Services.Description.Soap12Binding">
-  <TypeSignature Language="C#" Value="public sealed class Soap12Binding : System.Web.Services.Description.SoapBinding" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class Soap12Binding : System.Web.Services.Description.SoapBinding"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -11,22 +14,30 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.Web.Services.Configuration.XmlFormatExtension("binding", "http://schemas.xmlsoap.org/wsdl/soap12/", typeof(System.Web.Services.Description.Binding))</AttributeName>
+      <AttributeName
+        >System.Web.Services.Configuration.XmlFormatExtension("binding", "http://schemas.xmlsoap.org/wsdl/soap12/", typeof(System.Web.Services.Description.Binding))</AttributeName
+      >
     </Attribute>
     <Attribute>
-      <AttributeName>System.Web.Services.Configuration.XmlFormatExtensionPrefix("soap12", "http://schemas.xmlsoap.org/wsdl/soap12/")</AttributeName>
+      <AttributeName
+        >System.Web.Services.Configuration.XmlFormatExtensionPrefix("soap12", "http://schemas.xmlsoap.org/wsdl/soap12/")</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class represents the XML added to a WSDL document stating that an XML Web service supports communication using the SOAP protocol version 1.2.</para>
+      <para
+        >This class represents the XML added to a WSDL document stating that an XML Web service supports communication using the SOAP protocol version 1.2.</para
+      >
       <para>This class is not supported in the .NET Framework version 1.0.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a binding in a Web Services Description Language (WSDL) document to the SOAP version 1.2 protocol. This class cannot be inherited.</para>
+      <para
+        >Represents a binding in a Web Services Description Language (WSDL) document to the SOAP version 1.2 protocol. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -39,7 +50,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.Soap12Binding" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.Soap12Binding" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -60,7 +76,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents the transport protocol for the SOAP message is HTTP. This field is constant.</para>
+          <para
+            >Represents the transport protocol for the SOAP message is HTTP. This field is constant.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -81,7 +99,9 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents the XML namespace of a binding to the SOAP protocol version 1.2. This field is constant.</para>
+          <para
+            >Represents the XML namespace of a binding to the SOAP protocol version 1.2. This field is constant.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

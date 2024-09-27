@@ -1,6 +1,12 @@
 <Type Name="SqliteDataAdapter" FullName="Mono.Data.Sqlite.SqliteDataAdapter">
-  <TypeSignature Language="C#" Value="public sealed class SqliteDataAdapter : System.Data.Common.DbDataAdapter" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteDataAdapter extends System.Data.Common.DbDataAdapter" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteDataAdapter : System.Data.Common.DbDataAdapter"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteDataAdapter extends System.Data.Common.DbDataAdapter"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,10 +20,14 @@
       <AttributeName>System.ComponentModel.DefaultEvent("RowUpdated")</AttributeName>
     </Attribute>
     <Attribute>
-      <AttributeName>System.ComponentModel.Designer("Microsoft.VSDesigner.Data.VS.SqlDataAdapterDesigner, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
+      <AttributeName
+        >System.ComponentModel.Designer("Microsoft.VSDesigner.Data.VS.SqlDataAdapterDesigner, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName
+      >
     </Attribute>
     <Attribute>
-      <AttributeName>System.ComponentModel.ToolboxItem("SQLite.Designer.SqliteDataAdapterToolboxItem, SQLite.Designer, Version=1.0.36.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139")</AttributeName>
+      <AttributeName
+        >System.ComponentModel.ToolboxItem("SQLite.Designer.SqliteDataAdapterToolboxItem, SQLite.Designer, Version=1.0.36.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139")</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
@@ -29,7 +39,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteDataAdapter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -40,14 +53,22 @@
             Default constructor.
             </summary>
         <remarks>To be added.</remarks>
-        <overloads>
+        <overloads
+          >
             This class is just a shell around the DbDataAdapter.  Nothing from DbDataAdapter is overridden here, just a few constructors are defined.
-            </overloads>
+            </overloads
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteDataAdapter (Mono.Data.Sqlite.SqliteCommand cmd);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Data.Sqlite.SqliteCommand cmd) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteDataAdapter (Mono.Data.Sqlite.SqliteCommand cmd);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Data.Sqlite.SqliteCommand cmd) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,15 +78,23 @@
       </Parameters>
       <Docs>
         <param name="cmd">The select command to associate with the adapter.</param>
-        <summary>
+        <summary
+          >
             Constructs a data adapter using the specified select command.
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteDataAdapter (string commandText, Mono.Data.Sqlite.SqliteConnection connection);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, class Mono.Data.Sqlite.SqliteConnection connection) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteDataAdapter (string commandText, Mono.Data.Sqlite.SqliteConnection connection);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, class Mono.Data.Sqlite.SqliteConnection connection) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,17 +104,27 @@
         <Parameter Name="connection" Type="Mono.Data.Sqlite.SqliteConnection" />
       </Parameters>
       <Docs>
-        <param name="commandText">The select command text to associate with the data adapter.</param>
+        <param name="commandText"
+          >The select command text to associate with the data adapter.</param
+        >
         <param name="connection">The connection to associate with the select command.</param>
-        <summary>
+        <summary
+          >
             Constructs a data adapter with the supplied select command text and associated with the specified connection.
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteDataAdapter (string commandText, string connectionString);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, string connectionString) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteDataAdapter (string commandText, string connectionString);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, string connectionString) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,17 +134,29 @@
         <Parameter Name="connectionString" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="commandText">The select command text to use to construct a select command.</param>
-        <param name="connectionString">A connection string suitable for passing to a new SqliteConnection, which is associated with the select command.</param>
-        <summary>
+        <param name="commandText"
+          >The select command text to use to construct a select command.</param
+        >
+        <param name="connectionString"
+          >A connection string suitable for passing to a new SqliteConnection, which is associated with the select command.</param
+        >
+        <summary
+          >
             Constructs a data adapter with the specified select command text, and using the specified database connection string.
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DeleteCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand DeleteCommand { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteCommand DeleteCommand" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand DeleteCommand { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteCommand DeleteCommand"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,23 +166,33 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>Mono.Data.Sqlite.SqliteCommand</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/sets the delete command for this DataAdapter
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="InsertCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand InsertCommand { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteCommand InsertCommand" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand InsertCommand { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteCommand InsertCommand"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -141,23 +202,33 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>Mono.Data.Sqlite.SqliteCommand</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/sets the insert command for this DataAdapter
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnRowUpdated">
-      <MemberSignature Language="C#" Value="protected override void OnRowUpdated (System.Data.Common.RowUpdatedEventArgs value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnRowUpdated(class System.Data.Common.RowUpdatedEventArgs value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRowUpdated (System.Data.Common.RowUpdatedEventArgs value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void OnRowUpdated(class System.Data.Common.RowUpdatedEventArgs value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -177,8 +248,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnRowUpdating">
-      <MemberSignature Language="C#" Value="protected override void OnRowUpdating (System.Data.Common.RowUpdatingEventArgs value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnRowUpdating(class System.Data.Common.RowUpdatingEventArgs value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRowUpdating (System.Data.Common.RowUpdatingEventArgs value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void OnRowUpdating(class System.Data.Common.RowUpdatingEventArgs value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -191,21 +268,29 @@
       </Parameters>
       <Docs>
         <param name="value">The event's specifics</param>
-        <summary>
+        <summary
+          >
             Raised by the underlying DbDataAdapter when a row is being updated
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RowUpdated">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;System.Data.Common.RowUpdatedEventArgs&gt; RowUpdated;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class System.Data.Common.RowUpdatedEventArgs&gt; RowUpdated" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler<System.Data.Common.RowUpdatedEventArgs> RowUpdated;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.EventHandler`1<class System.Data.Common.RowUpdatedEventArgs> RowUpdated"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.EventHandler&lt;System.Data.Common.RowUpdatedEventArgs&gt;</ReturnType>
+        <ReturnType>System.EventHandler<System.Data.Common.RowUpdatedEventArgs></ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
@@ -215,14 +300,20 @@
       </Docs>
     </Member>
     <Member MemberName="RowUpdating">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;System.Data.Common.RowUpdatingEventArgs&gt; RowUpdating;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class System.Data.Common.RowUpdatingEventArgs&gt; RowUpdating" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler<System.Data.Common.RowUpdatingEventArgs> RowUpdating;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.EventHandler`1<class System.Data.Common.RowUpdatingEventArgs> RowUpdating"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.EventHandler&lt;System.Data.Common.RowUpdatingEventArgs&gt;</ReturnType>
+        <ReturnType>System.EventHandler<System.Data.Common.RowUpdatingEventArgs></ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
@@ -232,8 +323,14 @@
       </Docs>
     </Member>
     <Member MemberName="SelectCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand SelectCommand { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteCommand SelectCommand" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand SelectCommand { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteCommand SelectCommand"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -243,23 +340,33 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>Mono.Data.Sqlite.SqliteCommand</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/sets the select command for this DataAdapter
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UpdateCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand UpdateCommand { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteCommand UpdateCommand" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand UpdateCommand { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteCommand UpdateCommand"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,16 +376,20 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.Editor("Microsoft.VSDesigner.Data.Design.DBCommandEditor, Microsoft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
         <ReturnType>Mono.Data.Sqlite.SqliteCommand</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets/sets the update command for this DataAdapter
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

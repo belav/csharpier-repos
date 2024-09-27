@@ -1,13 +1,18 @@
 <Type Name="Calendar" FullName="System.Web.UI.WebControls.Calendar">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class Calendar : System.Web.UI.WebControls.WebControl, System.Web.UI.IPostBackEventHandler" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class Calendar : System.Web.UI.WebControls.WebControl, System.Web.UI.IPostBackEventHandler"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Web.UI.WebControls.WebControl</BaseTypeName>
   </Base>
@@ -21,10 +26,14 @@
       <AttributeName>System.Web.UI.SupportsEventValidation</AttributeName>
     </Attribute>
     <Attribute>
-      <AttributeName>System.Web.UI.ControlValueProperty("SelectedDate", "1/1/0001 12:00:00 AM")</AttributeName>
+      <AttributeName
+        >System.Web.UI.ControlValueProperty("SelectedDate", "1/1/0001 12:00:00 AM")</AttributeName
+      >
     </Attribute>
     <Attribute>
-      <AttributeName>System.ComponentModel.Designer("System.Web.UI.Design.WebControls.CalendarDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.ComponentModel.Design.IDesigner")</AttributeName>
+      <AttributeName
+        >System.ComponentModel.Designer("System.Web.UI.Design.WebControls.CalendarDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.ComponentModel.Design.IDesigner")</AttributeName
+      >
     </Attribute>
     <Attribute>
       <AttributeName>System.ComponentModel.DefaultProperty("SelectedDate")</AttributeName>
@@ -33,28 +42,37 @@
       <AttributeName>System.ComponentModel.DefaultEvent("SelectionChanged")</AttributeName>
     </Attribute>
     <Attribute>
-      <AttributeName>System.Web.UI.DataBindingHandler("System.Web.UI.Design.WebControls.CalendarDataBindingHandler, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
+      <AttributeName
+        >System.Web.UI.DataBindingHandler("System.Web.UI.Design.WebControls.CalendarDataBindingHandler, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <summary>Creates a calendar object that can be used in a web page.</summary>
-    <remarks>This is how the calendar can be created and how to setup all styles as css class so yu can finetune the feel and look of the calendar.
+    <remarks
+      >This is how the calendar can be created and how to setup all styles as css class so yu can finetune the feel and look of the calendar.
 
-<example><code lang="C#">
-	&lt;asp:Calendar runat="server" BorderStyle="double"
+<example
+      >
+        <code lang="C#"
+          >
+	<asp:Calendar runat="server" BorderStyle="double"
 	 BorderColor="#E7E5DB" BorderWidth="2" BackColor="#F8F7F4"
-	 Font--Size=".9em" Font--Names="Verdana" class="TableThin"&gt;
-	   &lt;TodayDayStyle cssclass="calendar_today" /&gt;
-	   &lt;OtherMonthDayStyle cssclass="calendar_other"/&gt;
-	   &lt;SelectedDayStyle cssclass="calendar_selected" /&gt;
-	   &lt;TitleStyle cssclass="calendar_title" /&gt;
-	   &lt;NextPrevStyle cssclass="calendar_pager" /&gt;
-	   &lt;DayStyle cssclass="calendar_day" /&gt;
-	   &lt;SelectorStyle cssclass="calendar_selector"/&gt;
-	   &lt;WeekendDayStyle cssclass="calendar_weekend"/&gt;
-	   &lt;DayHeaderStyle cssclass="calendar_dayheader"/&gt;
-	&lt;/asp:Calendar&gt;
-  </code></example></remarks>
+	 Font--Size=".9em" Font--Names="Verdana" class="TableThin">
+	   <TodayDayStyle cssclass="calendar_today" />
+	   <OtherMonthDayStyle cssclass="calendar_other"/>
+	   <SelectedDayStyle cssclass="calendar_selected" />
+	   <TitleStyle cssclass="calendar_title" />
+	   <NextPrevStyle cssclass="calendar_pager" />
+	   <DayStyle cssclass="calendar_day" />
+	   <SelectorStyle cssclass="calendar_selector"/>
+	   <WeekendDayStyle cssclass="calendar_weekend"/>
+	   <DayHeaderStyle cssclass="calendar_dayheader"/>
+	</asp:Calendar>
+  </code
+        >
+      </example>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -95,14 +113,19 @@
       </Docs>
     </Member>
     <Member MemberName="CaptionAlign">
-      <MemberSignature Language="C#" Value="public virtual System.Web.UI.WebControls.TableCaptionAlign CaptionAlign { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Web.UI.WebControls.TableCaptionAlign CaptionAlign { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Web.UI.WebControls.TableCaptionAlign.NotSet)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Web.UI.WebControls.TableCaptionAlign.NotSet)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -159,7 +182,10 @@
       </Attributes>
     </Member>
     <Member MemberName="CreateControlCollection">
-      <MemberSignature Language="C#" Value="protected override System.Web.UI.ControlCollection CreateControlCollection ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Web.UI.ControlCollection CreateControlCollection ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.ControlCollection</ReturnType>
@@ -167,7 +193,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.Web.UI.ControlCollection" /></returns>
+        <returns
+          >a <see
+           cref="T:System.Web.UI.ControlCollection" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -176,7 +205,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DayHeaderStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle DayHeaderStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle DayHeaderStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -192,18 +224,25 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="DayNameFormat">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.DayNameFormat DayNameFormat { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.DayNameFormat DayNameFormat { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.DayNameFormat</ReturnType>
@@ -220,12 +259,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Web.UI.WebControls.DayNameFormat.Short)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Web.UI.WebControls.DayNameFormat.Short)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="DayRender">
-      <MemberSignature Language="C#" Value="public event System.Web.UI.WebControls.DayRenderEventHandler DayRender;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Web.UI.WebControls.DayRenderEventHandler DayRender;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.DayRenderEventHandler</ReturnType>
@@ -241,7 +285,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DayStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle DayStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle DayStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -257,13 +304,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
@@ -271,7 +322,10 @@
       </Attributes>
     </Member>
     <Member MemberName="FirstDayOfWeek">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.FirstDayOfWeek FirstDayOfWeek { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.FirstDayOfWeek FirstDayOfWeek { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.FirstDayOfWeek</ReturnType>
@@ -288,12 +342,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Web.UI.WebControls.FirstDayOfWeek.Default)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Web.UI.WebControls.FirstDayOfWeek.Default)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="HasWeekSelectors">
-      <MemberSignature Language="C#" Value="protected bool HasWeekSelectors (System.Web.UI.WebControls.CalendarSelectionMode selectionMode);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected bool HasWeekSelectors (System.Web.UI.WebControls.CalendarSelectionMode selectionMode);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -313,7 +372,10 @@
       </Docs>
     </Member>
     <Member MemberName="LoadViewState">
-      <MemberSignature Language="C#" Value="protected override void LoadViewState (object savedState);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void LoadViewState (object savedState);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -322,7 +384,10 @@
         <Parameter Name="savedState" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="savedState">a <see cref="T:System.Object" /></param>
+        <param name="savedState"
+          >a <see
+           cref="T:System.Object" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -352,12 +417,15 @@
           <AttributeName>System.ComponentModel.Localizable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue("&amp;gt;")</AttributeName>
+          <AttributeName>System.ComponentModel.DefaultValue("&gt;")</AttributeName>
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="NextPrevFormat">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.NextPrevFormat NextPrevFormat { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.NextPrevFormat NextPrevFormat { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.NextPrevFormat</ReturnType>
@@ -374,12 +442,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Web.UI.WebControls.NextPrevFormat.CustomText)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Web.UI.WebControls.NextPrevFormat.CustomText)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="NextPrevStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle NextPrevStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle NextPrevStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -395,18 +468,25 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="OnDayRender">
-      <MemberSignature Language="C#" Value="protected virtual void OnDayRender (System.Web.UI.WebControls.TableCell cell, System.Web.UI.WebControls.CalendarDay day);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnDayRender (System.Web.UI.WebControls.TableCell cell, System.Web.UI.WebControls.CalendarDay day);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -462,7 +542,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnVisibleMonthChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnVisibleMonthChanged (DateTime newDate, DateTime previousDate);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnVisibleMonthChanged (DateTime newDate, DateTime previousDate);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -472,7 +555,10 @@
         <Parameter Name="previousDate" Type="System.DateTime" />
       </Parameters>
       <Docs>
-        <param name="newDate">a <see cref="T:System.DateTime" /></param>
+        <param name="newDate"
+          >a <see
+           cref="T:System.DateTime" />
+        </param>
         <param name="previousDate">To be added.</param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -483,7 +569,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OtherMonthDayStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle OtherMonthDayStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle OtherMonthDayStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -499,10 +588,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
@@ -533,12 +626,15 @@
           <AttributeName>System.ComponentModel.Localizable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue("&amp;lt;")</AttributeName>
+          <AttributeName>System.ComponentModel.DefaultValue("&lt;")</AttributeName>
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="RaisePostBackEvent">
-      <MemberSignature Language="C#" Value="protected virtual void RaisePostBackEvent (string arg);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void RaisePostBackEvent (string arg);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -556,7 +652,10 @@
       </Docs>
     </Member>
     <Member MemberName="Render">
-      <MemberSignature Language="C#" Value="protected override void Render (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Render (System.Web.UI.HtmlTextWriter writer);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -565,7 +664,10 @@
         <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="writer">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
+        <param name="writer"
+          >a <see
+           cref="T:System.Web.UI.HtmlTextWriter" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -583,7 +685,10 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns>a <see cref="T:System.Object" /></returns>
+        <returns
+          >a <see
+           cref="T:System.Object" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -612,12 +717,17 @@
           <AttributeName>System.ComponentModel.DefaultValue("1/1/0001 12:00:00 AM")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.Bindable(true, System.ComponentModel.BindingDirection.TwoWay)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.Bindable(true, System.ComponentModel.BindingDirection.TwoWay)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="SelectedDates">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.SelectedDatesCollection SelectedDates { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.SelectedDatesCollection SelectedDates { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.SelectedDatesCollection</ReturnType>
@@ -633,7 +743,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -641,7 +753,10 @@
       </Attributes>
     </Member>
     <Member MemberName="SelectedDayStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle SelectedDayStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle SelectedDayStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -657,13 +772,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
@@ -687,7 +806,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SelectionMode">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.CalendarSelectionMode SelectionMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.CalendarSelectionMode SelectionMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.CalendarSelectionMode</ReturnType>
@@ -704,7 +826,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Web.UI.WebControls.CalendarSelectionMode.Day)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Web.UI.WebControls.CalendarSelectionMode.Day)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
@@ -729,12 +853,15 @@
           <AttributeName>System.ComponentModel.Localizable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue("&amp;gt;&amp;gt;")</AttributeName>
+          <AttributeName>System.ComponentModel.DefaultValue("&gt;&gt;")</AttributeName>
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="SelectorStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle SelectorStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle SelectorStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -750,13 +877,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
@@ -781,7 +912,7 @@
           <AttributeName>System.ComponentModel.Localizable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue("&amp;gt;")</AttributeName>
+          <AttributeName>System.ComponentModel.DefaultValue("&gt;")</AttributeName>
         </Attribute>
       </Attributes>
     </Member>
@@ -874,7 +1005,10 @@
       </Attributes>
     </Member>
     <Member MemberName="System.Web.UI.IPostBackEventHandler.RaisePostBackEvent">
-      <MemberSignature Language="C#" Value="void IPostBackEventHandler.RaisePostBackEvent (string eventArgument);" />
+      <MemberSignature
+        Language="C#"
+        Value="void IPostBackEventHandler.RaisePostBackEvent (string eventArgument);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -893,7 +1027,10 @@
       </Docs>
     </Member>
     <Member MemberName="TitleFormat">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TitleFormat TitleFormat { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TitleFormat TitleFormat { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TitleFormat</ReturnType>
@@ -910,12 +1047,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(System.Web.UI.WebControls.TitleFormat.MonthYear)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(System.Web.UI.WebControls.TitleFormat.MonthYear)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="TitleStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle TitleStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle TitleStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -931,18 +1073,25 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>
     <Member MemberName="TodayDayStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle TodayDayStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle TodayDayStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -958,13 +1107,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
@@ -989,7 +1142,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
@@ -1013,7 +1168,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UseAccessibleHeader">
-      <MemberSignature Language="C#" Value="public virtual bool UseAccessibleHeader { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool UseAccessibleHeader { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1058,7 +1216,10 @@
       </Attributes>
     </Member>
     <Member MemberName="VisibleMonthChanged">
-      <MemberSignature Language="C#" Value="public event System.Web.UI.WebControls.MonthChangedEventHandler VisibleMonthChanged;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Web.UI.WebControls.MonthChangedEventHandler VisibleMonthChanged;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.MonthChangedEventHandler</ReturnType>
@@ -1074,7 +1235,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WeekendDayStyle">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.TableItemStyle WeekendDayStyle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.TableItemStyle WeekendDayStyle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.TableItemStyle</ReturnType>
@@ -1090,13 +1254,17 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName
+            >System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Content)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Member>

@@ -12,6 +12,8 @@
     <EmbeddedResource Include="regexdna-input25000.txt" />
   </ItemGroup>
   <PropertyGroup>
-    <ProjectAssetsFile>$(JitPackagesConfigFileDirectory)benchmark\obj\project.assets.json</ProjectAssetsFile>
+    <ProjectAssetsFile
+      >$(JitPackagesConfigFileDirectory)benchmark\obj\project.assets.json</ProjectAssetsFile
+    >
   </PropertyGroup>
 </Project>

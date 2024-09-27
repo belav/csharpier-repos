@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OnChangeEventHandler" FullName="System.Data.SqlClient.OnChangeEventHandler">
-  <TypeSignature Language="C#" Value="public delegate void OnChangeEventHandler(object sender, SqlNotificationEventArgs e);" />
+  <TypeSignature
+    Language="C#"
+    Value="public delegate void OnChangeEventHandler(object sender, SqlNotificationEventArgs e);"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -21,11 +24,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Data.SqlClient.SqlDependency.OnChange" /> event does not necessarily imply a change in the data. Other circumstances, such as time-out expired and failure to set the notification request, also generate <see cref="E:System.Data.SqlClient.SqlDependency.OnChange" />.</para>
+      <para
+        >The <see
+         cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
+
+         event does not necessarily imply a change in the data. Other circumstances, such as time-out expired and failure to set the notification request, also generate <see
+         cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Handles the <see cref="E:System.Data.SqlClient.SqlDependency.OnChange" /> event that is fired when a notification is received for any of the commands associated with a <see cref="T:System.Data.SqlClient.SqlDependency" /> object.</para>
+      <para
+        >Handles the <see
+         cref="E:System.Data.SqlClient.SqlDependency.OnChange" />
+
+         event that is fired when a notification is received for any of the commands associated with a <see
+         cref="T:System.Data.SqlClient.SqlDependency" />
+
+         object.</para
+      >
     </summary>
   </Docs>
 </Type>

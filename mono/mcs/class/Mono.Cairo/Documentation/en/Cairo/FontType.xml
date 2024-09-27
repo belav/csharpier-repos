@@ -10,8 +10,7 @@
   </Base>
   <Docs>
     <summary>Describes the type of a given font face or scaled font.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
     <since version="cairo 1.2" />
   </Docs>
   <Members>

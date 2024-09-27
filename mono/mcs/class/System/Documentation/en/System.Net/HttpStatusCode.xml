@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HttpStatusCode" FullName="System.Net.HttpStatusCode" FullNameSP="System_Net_HttpStatusCode" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable HttpStatusCode extends System.Enum" />
+<Type
+  Name="HttpStatusCode"
+  FullName="System.Net.HttpStatusCode"
+  FullNameSP="System_Net_HttpStatusCode"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable HttpStatusCode extends System.Enum"
+  />
   <TypeSignature Language="C#" Value="public enum HttpStatusCode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed HttpStatusCode extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed HttpStatusCode extends System.Enum"
+  />
   <MemberOfLibrary>Networking</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
@@ -17,10 +28,19 @@
   </Base>
   <Docs>
     <example>
-      <para> The following example compares the status returned by a
-   <see cref="T:System.Net.HttpWebResponse" /> with a <see cref="T:System.Net.HttpStatusCode" />
-   value to determine the status of the response.</para>
-      <code lang="C#">using System;
+      <para
+        > The following example compares the status returned by a
+   <see
+         cref="T:System.Net.HttpWebResponse" />
+
+         with a <see
+         cref="T:System.Net.HttpStatusCode" />
+
+        
+   value to determine the status of the response.</para
+      >
+      <code lang="C#"
+        >using System;
 using System.Net;
 
 public class HttpStatusCodeExample {
@@ -35,7 +55,8 @@ public class HttpStatusCodeExample {
       }
    }
 }
-</code>
+</code
+      >
       <para>The output is</para>
       <c>
         <para>Request for http://www.contoso.com was
@@ -44,8 +65,18 @@ public class HttpStatusCodeExample {
     </example>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Net.HttpStatusCode" /> enumeration contains the values of the status codes defined in RFC 2616 for HTTP 1.1.</para>
-      <para>The status of an HTTP request is contained in the <see cref="P:System.Net.HttpWebResponse.StatusCode" /> property.</para>
+      <para
+        >The <see
+         cref="T:System.Net.HttpStatusCode" />
+
+         enumeration contains the values of the status codes defined in RFC 2616 for HTTP 1.1.</para
+      >
+      <para
+        >The status of an HTTP request is contained in the <see
+         cref="P:System.Net.HttpWebResponse.StatusCode" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,9 +85,15 @@ public class HttpStatusCodeExample {
   </Docs>
   <Members>
     <Member MemberName="Accepted">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Accepted = 202" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Accepted = 202"
+      />
       <MemberSignature Language="C#" Value="Accepted" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Accepted = int32(202)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Accepted = int32(202)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -71,15 +108,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 202. <see cref="F:System.Net.HttpStatusCode.Accepted" /> indicates that the request has been accepted for further processing.</para>
+          <para
+            >Equivalent to HTTP status 202. <see
+             cref="F:System.Net.HttpStatusCode.Accepted" />
+
+             indicates that the request has been accepted for further processing.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Ambiguous">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Ambiguous = 300" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Ambiguous = 300"
+      />
       <MemberSignature Language="C#" Value="Ambiguous" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Ambiguous = int32(300)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Ambiguous = int32(300)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -94,21 +142,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.Ambiguous" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.Ambiguous" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.Ambiguous" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.MultipleChoices" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.Ambiguous" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 300. <see cref="F:System.Net.HttpStatusCode.Ambiguous" /> indicates that the requested information has multiple representations. The default action is to treat this status as a redirect and follow the contents of the Location header associated with this response.</para>
+          <para
+            >Equivalent to HTTP status 300. <see
+             cref="F:System.Net.HttpStatusCode.Ambiguous" />
+
+             indicates that the requested information has multiple representations. The default action is to treat this status as a redirect and follow the contents of the Location header associated with this response.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="BadGateway">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode BadGateway = 502" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode BadGateway = 502"
+      />
       <MemberSignature Language="C#" Value="BadGateway" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode BadGateway = int32(502)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode BadGateway = int32(502)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -123,15 +196,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 502. <see cref="F:System.Net.HttpStatusCode.BadGateway" /> indicates that an intermediate proxy server received a bad response from another proxy or the origin server.</para>
+          <para
+            >Equivalent to HTTP status 502. <see
+             cref="F:System.Net.HttpStatusCode.BadGateway" />
+
+             indicates that an intermediate proxy server received a bad response from another proxy or the origin server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="BadRequest">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode BadRequest = 400" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode BadRequest = 400"
+      />
       <MemberSignature Language="C#" Value="BadRequest" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode BadRequest = int32(400)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode BadRequest = int32(400)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -146,15 +230,29 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 400. <see cref="F:System.Net.HttpStatusCode.BadRequest" /> indicates that the request could not be understood by the server. <see cref="F:System.Net.HttpStatusCode.BadRequest" /> is sent when no other error is applicable, or if the exact error is unknown or does not have its own error code.</para>
+          <para
+            >Equivalent to HTTP status 400. <see
+             cref="F:System.Net.HttpStatusCode.BadRequest" />
+
+             indicates that the request could not be understood by the server. <see
+             cref="F:System.Net.HttpStatusCode.BadRequest" />
+
+             is sent when no other error is applicable, or if the exact error is unknown or does not have its own error code.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Conflict">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Conflict = 409" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Conflict = 409"
+      />
       <MemberSignature Language="C#" Value="Conflict" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Conflict = int32(409)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Conflict = int32(409)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -169,15 +267,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 409. <see cref="F:System.Net.HttpStatusCode.Conflict" /> indicates that the request could not be carried out because of a conflict on the server.</para>
+          <para
+            >Equivalent to HTTP status 409. <see
+             cref="F:System.Net.HttpStatusCode.Conflict" />
+
+             indicates that the request could not be carried out because of a conflict on the server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Continue">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Continue = 100" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Continue = 100"
+      />
       <MemberSignature Language="C#" Value="Continue" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Continue = int32(100)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Continue = int32(100)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,15 +301,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 100. <see cref="F:System.Net.HttpStatusCode.Continue" /> indicates that the client can continue with its request.</para>
+          <para
+            >Equivalent to HTTP status 100. <see
+             cref="F:System.Net.HttpStatusCode.Continue" />
+
+             indicates that the client can continue with its request.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Created">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Created = 201" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Created = 201"
+      />
       <MemberSignature Language="C#" Value="Created" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Created = int32(201)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Created = int32(201)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -215,15 +335,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 201. <see cref="F:System.Net.HttpStatusCode.Created" /> indicates that the request resulted in a new resource created before the response was sent.</para>
+          <para
+            >Equivalent to HTTP status 201. <see
+             cref="F:System.Net.HttpStatusCode.Created" />
+
+             indicates that the request resulted in a new resource created before the response was sent.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ExpectationFailed">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode ExpectationFailed = 417" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ExpectationFailed = 417"
+      />
       <MemberSignature Language="C#" Value="ExpectationFailed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode ExpectationFailed = int32(417)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ExpectationFailed = int32(417)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -238,15 +369,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 417. <see cref="F:System.Net.HttpStatusCode.ExpectationFailed" /> indicates that an expectation given in an Expect header could not be met by the server.</para>
+          <para
+            >Equivalent to HTTP status 417. <see
+             cref="F:System.Net.HttpStatusCode.ExpectationFailed" />
+
+             indicates that an expectation given in an Expect header could not be met by the server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Forbidden">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Forbidden = 403" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Forbidden = 403"
+      />
       <MemberSignature Language="C#" Value="Forbidden" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Forbidden = int32(403)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Forbidden = int32(403)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -261,15 +403,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 403. <see cref="F:System.Net.HttpStatusCode.Forbidden" /> indicates that the server refuses to fulfill the request.</para>
+          <para
+            >Equivalent to HTTP status 403. <see
+             cref="F:System.Net.HttpStatusCode.Forbidden" />
+
+             indicates that the server refuses to fulfill the request.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Found">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Found = 302" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Found = 302"
+      />
       <MemberSignature Language="C#" Value="Found" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Found = int32(302)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Found = int32(302)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -284,21 +437,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.Found" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.Found" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.Found" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.Redirect" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.Found" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.Redirect" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 302. <see cref="F:System.Net.HttpStatusCode.Found" /> indicates that the requested information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will use the GET method.</para>
+          <para
+            >Equivalent to HTTP status 302. <see
+             cref="F:System.Net.HttpStatusCode.Found" />
+
+             indicates that the requested information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will use the GET method.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="GatewayTimeout">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode GatewayTimeout = 504" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode GatewayTimeout = 504"
+      />
       <MemberSignature Language="C#" Value="GatewayTimeout" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode GatewayTimeout = int32(504)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode GatewayTimeout = int32(504)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -313,15 +491,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 504. <see cref="F:System.Net.HttpStatusCode.GatewayTimeout" /> indicates that an intermediate proxy server timed out while waiting for a response from another proxy or the origin server.</para>
+          <para
+            >Equivalent to HTTP status 504. <see
+             cref="F:System.Net.HttpStatusCode.GatewayTimeout" />
+
+             indicates that an intermediate proxy server timed out while waiting for a response from another proxy or the origin server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Gone">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Gone = 410" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Gone = 410"
+      />
       <MemberSignature Language="C#" Value="Gone" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Gone = int32(410)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Gone = int32(410)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -336,15 +525,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 410. <see cref="F:System.Net.HttpStatusCode.Gone" /> indicates that the requested resource is no longer available.</para>
+          <para
+            >Equivalent to HTTP status 410. <see
+             cref="F:System.Net.HttpStatusCode.Gone" />
+
+             indicates that the requested resource is no longer available.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="HttpVersionNotSupported">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode HttpVersionNotSupported = 505" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode HttpVersionNotSupported = 505"
+      />
       <MemberSignature Language="C#" Value="HttpVersionNotSupported" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode HttpVersionNotSupported = int32(505)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode HttpVersionNotSupported = int32(505)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -359,15 +559,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 505. <see cref="F:System.Net.HttpStatusCode.HttpVersionNotSupported" /> indicates that the requested HTTP version is not supported by the server.</para>
+          <para
+            >Equivalent to HTTP status 505. <see
+             cref="F:System.Net.HttpStatusCode.HttpVersionNotSupported" />
+
+             indicates that the requested HTTP version is not supported by the server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="InternalServerError">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode InternalServerError = 500" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode InternalServerError = 500"
+      />
       <MemberSignature Language="C#" Value="InternalServerError" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode InternalServerError = int32(500)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode InternalServerError = int32(500)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -382,15 +593,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 500. <see cref="F:System.Net.HttpStatusCode.InternalServerError" /> indicates that a generic error has occurred on the server.</para>
+          <para
+            >Equivalent to HTTP status 500. <see
+             cref="F:System.Net.HttpStatusCode.InternalServerError" />
+
+             indicates that a generic error has occurred on the server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="LengthRequired">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode LengthRequired = 411" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode LengthRequired = 411"
+      />
       <MemberSignature Language="C#" Value="LengthRequired" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode LengthRequired = int32(411)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode LengthRequired = int32(411)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -405,15 +627,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 411. <see cref="F:System.Net.HttpStatusCode.LengthRequired" /> indicates that the required Content-length header is missing.</para>
+          <para
+            >Equivalent to HTTP status 411. <see
+             cref="F:System.Net.HttpStatusCode.LengthRequired" />
+
+             indicates that the required Content-length header is missing.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="MethodNotAllowed">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode MethodNotAllowed = 405" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode MethodNotAllowed = 405"
+      />
       <MemberSignature Language="C#" Value="MethodNotAllowed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode MethodNotAllowed = int32(405)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode MethodNotAllowed = int32(405)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -428,15 +661,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 405. <see cref="F:System.Net.HttpStatusCode.MethodNotAllowed" /> indicates that the request method (POST or GET) is not allowed on the requested resource.</para>
+          <para
+            >Equivalent to HTTP status 405. <see
+             cref="F:System.Net.HttpStatusCode.MethodNotAllowed" />
+
+             indicates that the request method (POST or GET) is not allowed on the requested resource.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Moved">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Moved = 301" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Moved = 301"
+      />
       <MemberSignature Language="C#" Value="Moved" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Moved = int32(301)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Moved = int32(301)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -452,19 +696,36 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Net.HttpStatusCode.Moved" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.MovedPermanently" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.Moved" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.MovedPermanently" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 301. <see cref="F:System.Net.HttpStatusCode.Moved" /> indicates that the requested information has been moved to the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will use the GET method.</para>
+          <para
+            >Equivalent to HTTP status 301. <see
+             cref="F:System.Net.HttpStatusCode.Moved" />
+
+             indicates that the requested information has been moved to the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will use the GET method.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="MovedPermanently">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode MovedPermanently = 301" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode MovedPermanently = 301"
+      />
       <MemberSignature Language="C#" Value="MovedPermanently" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode MovedPermanently = int32(301)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode MovedPermanently = int32(301)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -480,19 +741,36 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Net.HttpStatusCode.MovedPermanently" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.Moved" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.MovedPermanently" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.Moved" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 301. <see cref="F:System.Net.HttpStatusCode.MovedPermanently" /> indicates that the requested information has been moved to the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response.</para>
+          <para
+            >Equivalent to HTTP status 301. <see
+             cref="F:System.Net.HttpStatusCode.MovedPermanently" />
+
+             indicates that the requested information has been moved to the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="MultipleChoices">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode MultipleChoices = 300" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode MultipleChoices = 300"
+      />
       <MemberSignature Language="C#" Value="MultipleChoices" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode MultipleChoices = int32(300)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode MultipleChoices = int32(300)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -507,21 +785,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.MultipleChoices" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.MultipleChoices" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.Ambiguous" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.Ambiguous" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 300. <see cref="F:System.Net.HttpStatusCode.MultipleChoices" /> indicates that the requested information has multiple representations. The default action is to treat this status as a redirect and follow the contents of the Location header associated with this response.</para>
+          <para
+            >Equivalent to HTTP status 300. <see
+             cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+
+             indicates that the requested information has multiple representations. The default action is to treat this status as a redirect and follow the contents of the Location header associated with this response.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="NoContent">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode NoContent = 204" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NoContent = 204"
+      />
       <MemberSignature Language="C#" Value="NoContent" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode NoContent = int32(204)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NoContent = int32(204)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -536,15 +839,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 204. <see cref="F:System.Net.HttpStatusCode.NoContent" /> indicates that the request has been successfully processed and that the response is intentionally blank.</para>
+          <para
+            >Equivalent to HTTP status 204. <see
+             cref="F:System.Net.HttpStatusCode.NoContent" />
+
+             indicates that the request has been successfully processed and that the response is intentionally blank.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="NonAuthoritativeInformation">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode NonAuthoritativeInformation = 203" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NonAuthoritativeInformation = 203"
+      />
       <MemberSignature Language="C#" Value="NonAuthoritativeInformation" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode NonAuthoritativeInformation = int32(203)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NonAuthoritativeInformation = int32(203)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -559,15 +873,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 203. <see cref="F:System.Net.HttpStatusCode.NonAuthoritativeInformation" /> indicates that the returned metainformation is from a cached copy instead of the origin server and therefore may be incorrect.</para>
+          <para
+            >Equivalent to HTTP status 203. <see
+             cref="F:System.Net.HttpStatusCode.NonAuthoritativeInformation" />
+
+             indicates that the returned metainformation is from a cached copy instead of the origin server and therefore may be incorrect.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="NotAcceptable">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode NotAcceptable = 406" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotAcceptable = 406"
+      />
       <MemberSignature Language="C#" Value="NotAcceptable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode NotAcceptable = int32(406)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotAcceptable = int32(406)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -582,15 +907,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 406. <see cref="F:System.Net.HttpStatusCode.NotAcceptable" /> indicates that the client has indicated with Accept headers that it will not accept any of the available representations of the resource.</para>
+          <para
+            >Equivalent to HTTP status 406. <see
+             cref="F:System.Net.HttpStatusCode.NotAcceptable" />
+
+             indicates that the client has indicated with Accept headers that it will not accept any of the available representations of the resource.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="NotFound">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode NotFound = 404" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotFound = 404"
+      />
       <MemberSignature Language="C#" Value="NotFound" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode NotFound = int32(404)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotFound = int32(404)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -605,15 +941,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 404. <see cref="F:System.Net.HttpStatusCode.NotFound" /> indicates that the requested resource does not exist on the server.</para>
+          <para
+            >Equivalent to HTTP status 404. <see
+             cref="F:System.Net.HttpStatusCode.NotFound" />
+
+             indicates that the requested resource does not exist on the server.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="NotImplemented">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode NotImplemented = 501" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotImplemented = 501"
+      />
       <MemberSignature Language="C#" Value="NotImplemented" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode NotImplemented = int32(501)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotImplemented = int32(501)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -628,15 +975,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 501. <see cref="F:System.Net.HttpStatusCode.NotImplemented" /> indicates that the server does not support the requested function.</para>
+          <para
+            >Equivalent to HTTP status 501. <see
+             cref="F:System.Net.HttpStatusCode.NotImplemented" />
+
+             indicates that the server does not support the requested function.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="NotModified">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode NotModified = 304" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotModified = 304"
+      />
       <MemberSignature Language="C#" Value="NotModified" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode NotModified = int32(304)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode NotModified = int32(304)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -651,15 +1009,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 304. <see cref="F:System.Net.HttpStatusCode.NotModified" /> indicates that the client's cached copy is up to date. The contents of the resource are not transferred.</para>
+          <para
+            >Equivalent to HTTP status 304. <see
+             cref="F:System.Net.HttpStatusCode.NotModified" />
+
+             indicates that the client's cached copy is up to date. The contents of the resource are not transferred.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="OK">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode OK = 200" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode OK = 200"
+      />
       <MemberSignature Language="C#" Value="OK" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode OK = int32(200)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode OK = int32(200)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -674,15 +1043,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 200. <see cref="F:System.Net.HttpStatusCode.OK" /> indicates that the request succeeded and that the requested information is in the response. This is the most common status code to receive.</para>
+          <para
+            >Equivalent to HTTP status 200. <see
+             cref="F:System.Net.HttpStatusCode.OK" />
+
+             indicates that the request succeeded and that the requested information is in the response. This is the most common status code to receive.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="PartialContent">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode PartialContent = 206" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode PartialContent = 206"
+      />
       <MemberSignature Language="C#" Value="PartialContent" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode PartialContent = int32(206)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode PartialContent = int32(206)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -697,15 +1077,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 206. <see cref="F:System.Net.HttpStatusCode.PartialContent" /> indicates that the response is a partial response as requested by a GET request that includes a byte range.</para>
+          <para
+            >Equivalent to HTTP status 206. <see
+             cref="F:System.Net.HttpStatusCode.PartialContent" />
+
+             indicates that the response is a partial response as requested by a GET request that includes a byte range.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="PaymentRequired">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode PaymentRequired = 402" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode PaymentRequired = 402"
+      />
       <MemberSignature Language="C#" Value="PaymentRequired" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode PaymentRequired = int32(402)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode PaymentRequired = int32(402)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -720,15 +1111,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 402. <see cref="F:System.Net.HttpStatusCode.PaymentRequired" /> is reserved for future use.</para>
+          <para
+            >Equivalent to HTTP status 402. <see
+             cref="F:System.Net.HttpStatusCode.PaymentRequired" />
+
+             is reserved for future use.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="PreconditionFailed">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode PreconditionFailed = 412" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode PreconditionFailed = 412"
+      />
       <MemberSignature Language="C#" Value="PreconditionFailed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode PreconditionFailed = int32(412)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode PreconditionFailed = int32(412)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -743,15 +1145,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 412. <see cref="F:System.Net.HttpStatusCode.PreconditionFailed" /> indicates that a condition set for this request failed, and the request cannot be carried out. Conditions are set with conditional request headers like If-Match, If-None-Match, or If-Unmodified-Since.</para>
+          <para
+            >Equivalent to HTTP status 412. <see
+             cref="F:System.Net.HttpStatusCode.PreconditionFailed" />
+
+             indicates that a condition set for this request failed, and the request cannot be carried out. Conditions are set with conditional request headers like If-Match, If-None-Match, or If-Unmodified-Since.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ProxyAuthenticationRequired">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode ProxyAuthenticationRequired = 407" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ProxyAuthenticationRequired = 407"
+      />
       <MemberSignature Language="C#" Value="ProxyAuthenticationRequired" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode ProxyAuthenticationRequired = int32(407)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ProxyAuthenticationRequired = int32(407)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -766,15 +1179,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 407. <see cref="F:System.Net.HttpStatusCode.ProxyAuthenticationRequired" /> indicates that the requested proxy requires authentication. The Proxy-authenticate header contains the details of how to perform the authentication.</para>
+          <para
+            >Equivalent to HTTP status 407. <see
+             cref="F:System.Net.HttpStatusCode.ProxyAuthenticationRequired" />
+
+             indicates that the requested proxy requires authentication. The Proxy-authenticate header contains the details of how to perform the authentication.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Redirect">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Redirect = 302" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Redirect = 302"
+      />
       <MemberSignature Language="C#" Value="Redirect" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Redirect = int32(302)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Redirect = int32(302)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -789,21 +1213,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.Redirect" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.Redirect" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.Redirect" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.Found" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.Redirect" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.Found" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 302. <see cref="F:System.Net.HttpStatusCode.Redirect" /> indicates that the requested information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will use the GET method.</para>
+          <para
+            >Equivalent to HTTP status 302. <see
+             cref="F:System.Net.HttpStatusCode.Redirect" />
+
+             indicates that the requested information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will use the GET method.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="RedirectKeepVerb">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectKeepVerb = 307" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectKeepVerb = 307"
+      />
       <MemberSignature Language="C#" Value="RedirectKeepVerb" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectKeepVerb = int32(307)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectKeepVerb = int32(307)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -818,21 +1267,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 307. <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" /> indicates that the request information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will also use the POST method.</para>
+          <para
+            >Equivalent to HTTP status 307. <see
+             cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+
+             indicates that the request information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will also use the POST method.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="RedirectMethod">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectMethod = 303" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectMethod = 303"
+      />
       <MemberSignature Language="C#" Value="RedirectMethod" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectMethod = int32(303)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RedirectMethod = int32(303)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -847,21 +1321,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.RedirectMethod" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.RedirectMethod" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.SeeOther" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.SeeOther" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 303. <see cref="F:System.Net.HttpStatusCode.RedirectMethod" /> automatically redirects the client to the URI specified in the Location header as the result of a POST. The request to the resource specified by the Location header will be made with a GET.</para>
+          <para
+            >Equivalent to HTTP status 303. <see
+             cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+
+             automatically redirects the client to the URI specified in the Location header as the result of a POST. The request to the resource specified by the Location header will be made with a GET.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="RequestedRangeNotSatisfiable">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestedRangeNotSatisfiable = 416" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestedRangeNotSatisfiable = 416"
+      />
       <MemberSignature Language="C#" Value="RequestedRangeNotSatisfiable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestedRangeNotSatisfiable = int32(416)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestedRangeNotSatisfiable = int32(416)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -876,15 +1375,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 416. <see cref="F:System.Net.HttpStatusCode.RequestedRangeNotSatisfiable" /> indicates that the range of data requested from the resource cannot be returned, either because the beginning of the range is before the beginning of the resource, or the end of the range is after the end of the resource.</para>
+          <para
+            >Equivalent to HTTP status 416. <see
+             cref="F:System.Net.HttpStatusCode.RequestedRangeNotSatisfiable" />
+
+             indicates that the range of data requested from the resource cannot be returned, either because the beginning of the range is before the beginning of the resource, or the end of the range is after the end of the resource.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="RequestEntityTooLarge">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestEntityTooLarge = 413" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestEntityTooLarge = 413"
+      />
       <MemberSignature Language="C#" Value="RequestEntityTooLarge" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestEntityTooLarge = int32(413)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestEntityTooLarge = int32(413)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -899,15 +1409,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 413. <see cref="F:System.Net.HttpStatusCode.RequestEntityTooLarge" /> indicates that the request is too large for the server to process.</para>
+          <para
+            >Equivalent to HTTP status 413. <see
+             cref="F:System.Net.HttpStatusCode.RequestEntityTooLarge" />
+
+             indicates that the request is too large for the server to process.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="RequestTimeout">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestTimeout = 408" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestTimeout = 408"
+      />
       <MemberSignature Language="C#" Value="RequestTimeout" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestTimeout = int32(408)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestTimeout = int32(408)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -922,15 +1443,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 408. <see cref="F:System.Net.HttpStatusCode.RequestTimeout" /> indicates that the client did not send a request within the time the server was expecting the request.</para>
+          <para
+            >Equivalent to HTTP status 408. <see
+             cref="F:System.Net.HttpStatusCode.RequestTimeout" />
+
+             indicates that the client did not send a request within the time the server was expecting the request.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="RequestUriTooLong">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestUriTooLong = 414" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestUriTooLong = 414"
+      />
       <MemberSignature Language="C#" Value="RequestUriTooLong" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode RequestUriTooLong = int32(414)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode RequestUriTooLong = int32(414)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -945,15 +1477,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 414. <see cref="F:System.Net.HttpStatusCode.RequestUriTooLong" /> indicates that the URI is too long.</para>
+          <para
+            >Equivalent to HTTP status 414. <see
+             cref="F:System.Net.HttpStatusCode.RequestUriTooLong" />
+
+             indicates that the URI is too long.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ResetContent">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode ResetContent = 205" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ResetContent = 205"
+      />
       <MemberSignature Language="C#" Value="ResetContent" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode ResetContent = int32(205)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ResetContent = int32(205)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -968,15 +1511,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 205. <see cref="F:System.Net.HttpStatusCode.ResetContent" /> indicates that the client should reset (not reload) the current resource.</para>
+          <para
+            >Equivalent to HTTP status 205. <see
+             cref="F:System.Net.HttpStatusCode.ResetContent" />
+
+             indicates that the client should reset (not reload) the current resource.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="SeeOther">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode SeeOther = 303" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode SeeOther = 303"
+      />
       <MemberSignature Language="C#" Value="SeeOther" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode SeeOther = int32(303)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode SeeOther = int32(303)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -991,21 +1545,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.SeeOther" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.SeeOther" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.SeeOther" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.RedirectMethod" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.SeeOther" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 303. <see cref="F:System.Net.HttpStatusCode.SeeOther" /> automatically redirects the client to the URI specified in the Location header as the result of a POST. The request to the resource specified by the Location header will be made with a GET.</para>
+          <para
+            >Equivalent to HTTP status 303. <see
+             cref="F:System.Net.HttpStatusCode.SeeOther" />
+
+             automatically redirects the client to the URI specified in the Location header as the result of a POST. The request to the resource specified by the Location header will be made with a GET.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ServiceUnavailable">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode ServiceUnavailable = 503" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ServiceUnavailable = 503"
+      />
       <MemberSignature Language="C#" Value="ServiceUnavailable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode ServiceUnavailable = int32(503)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode ServiceUnavailable = int32(503)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1020,15 +1599,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 503. <see cref="F:System.Net.HttpStatusCode.ServiceUnavailable" /> indicates that the server is temporarily unavailable, usually due to high load or maintenance.</para>
+          <para
+            >Equivalent to HTTP status 503. <see
+             cref="F:System.Net.HttpStatusCode.ServiceUnavailable" />
+
+             indicates that the server is temporarily unavailable, usually due to high load or maintenance.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="SwitchingProtocols">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode SwitchingProtocols = 101" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode SwitchingProtocols = 101"
+      />
       <MemberSignature Language="C#" Value="SwitchingProtocols" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode SwitchingProtocols = int32(101)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode SwitchingProtocols = int32(101)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1043,15 +1633,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 101. <see cref="F:System.Net.HttpStatusCode.SwitchingProtocols" /> indicates that the protocol version or protocol is being changed.</para>
+          <para
+            >Equivalent to HTTP status 101. <see
+             cref="F:System.Net.HttpStatusCode.SwitchingProtocols" />
+
+             indicates that the protocol version or protocol is being changed.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="TemporaryRedirect">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode TemporaryRedirect = 307" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode TemporaryRedirect = 307"
+      />
       <MemberSignature Language="C#" Value="TemporaryRedirect" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode TemporaryRedirect = int32(307)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode TemporaryRedirect = int32(307)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1066,21 +1667,46 @@ public class HttpStatusCodeExample {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" /> property is false, <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" /> will cause an exception to be thrown.</para>
+          <para
+            >If the <see
+             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+             property is false, <see
+             cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+
+             will cause an exception to be thrown.</para
+          >
           <para>
-            <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" /> is a synonym for <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />.</para>
+            <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+
+             is a synonym for <see
+             cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 307. <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" /> indicates that the request information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will also use the POST method.</para>
+          <para
+            >Equivalent to HTTP status 307. <see
+             cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+
+             indicates that the request information is located at the URI specified in the Location header. The default action when this status is received is to follow the Location header associated with the response. When the original request method was POST, the redirected request will also use the POST method.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Unauthorized">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Unauthorized = 401" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Unauthorized = 401"
+      />
       <MemberSignature Language="C#" Value="Unauthorized" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Unauthorized = int32(401)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Unauthorized = int32(401)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1095,15 +1721,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 401. <see cref="F:System.Net.HttpStatusCode.Unauthorized" /> indicates that the requested resource requires authentication. The WWW-Authenticate header contains the details of how to perform the authentication.</para>
+          <para
+            >Equivalent to HTTP status 401. <see
+             cref="F:System.Net.HttpStatusCode.Unauthorized" />
+
+             indicates that the requested resource requires authentication. The WWW-Authenticate header contains the details of how to perform the authentication.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="UnsupportedMediaType">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode UnsupportedMediaType = 415" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode UnsupportedMediaType = 415"
+      />
       <MemberSignature Language="C#" Value="UnsupportedMediaType" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode UnsupportedMediaType = int32(415)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode UnsupportedMediaType = int32(415)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1118,15 +1755,26 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 415. <see cref="F:System.Net.HttpStatusCode.UnsupportedMediaType" /> indicates that the request is an unsupported type.</para>
+          <para
+            >Equivalent to HTTP status 415. <see
+             cref="F:System.Net.HttpStatusCode.UnsupportedMediaType" />
+
+             indicates that the request is an unsupported type.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Unused">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode Unused = 306" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Unused = 306"
+      />
       <MemberSignature Language="C#" Value="Unused" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode Unused = int32(306)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode Unused = int32(306)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1141,14 +1789,22 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 306. <see cref="F:System.Net.HttpStatusCode.Unused" /> is a proposed extension to the HTTP/1.1 specification that is not fully specified.</para>
+          <para
+            >Equivalent to HTTP status 306. <see
+             cref="F:System.Net.HttpStatusCode.Unused" />
+
+             is a proposed extension to the HTTP/1.1 specification that is not fully specified.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="UpgradeRequired">
       <MemberSignature Language="C#" Value="UpgradeRequired" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode UpgradeRequired = int32(426)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode UpgradeRequired = int32(426)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1159,14 +1815,25 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 426. <see cref="F:System.Net.HttpStatusCode.UpgradeRequired" /> indicates that the client should switch to a different protocol such as TLS/1.0.</para>
+          <para
+            >Equivalent to HTTP status 426. <see
+             cref="F:System.Net.HttpStatusCode.UpgradeRequired" />
+
+             indicates that the client should switch to a different protocol such as TLS/1.0.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="UseProxy">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.Net.HttpStatusCode UseProxy = 305" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode UseProxy = 305"
+      />
       <MemberSignature Language="C#" Value="UseProxy" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.HttpStatusCode UseProxy = int32(305)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.HttpStatusCode UseProxy = int32(305)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1181,7 +1848,12 @@ public class HttpStatusCodeExample {
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Equivalent to HTTP status 305. <see cref="F:System.Net.HttpStatusCode.UseProxy" /> indicates that the request should use the proxy server at the URI specified in the Location header.</para>
+          <para
+            >Equivalent to HTTP status 305. <see
+             cref="F:System.Net.HttpStatusCode.UseProxy" />
+
+             indicates that the request should use the proxy server at the URI specified in the Location header.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>

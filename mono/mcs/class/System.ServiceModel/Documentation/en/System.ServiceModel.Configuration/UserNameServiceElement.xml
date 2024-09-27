@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="UserNameServiceElement" FullName="System.ServiceModel.Configuration.UserNameServiceElement">
-  <TypeSignature Language="C#" Value="public sealed class UserNameServiceElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit UserNameServiceElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="UserNameServiceElement"
+  FullName="System.ServiceModel.Configuration.UserNameServiceElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class UserNameServiceElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit UserNameServiceElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +23,18 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a configuration element that specifies a service's credentials based on username and password. This class cannot be inherited.</para>
+      <para
+        >Represents a configuration element that specifies a service's credentials based on username and password. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public UserNameServiceElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,20 +44,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.UserNameServiceElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.UserNameServiceElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CachedLogonTokenLifetime">
-      <MemberSignature Language="C#" Value="public TimeSpan CachedLogonTokenLifetime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan CachedLogonTokenLifetime" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan CachedLogonTokenLifetime { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan CachedLogonTokenLifetime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("cachedLogonTokenLifetime", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("cachedLogonTokenLifetime", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -67,7 +94,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("cacheLogonTokens", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("cacheLogonTokens", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -83,18 +112,28 @@
       </Docs>
     </Member>
     <Member MemberName="CustomUserNamePasswordValidatorType">
-      <MemberSignature Language="C#" Value="public string CustomUserNamePasswordValidatorType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string CustomUserNamePasswordValidatorType" />
+      <MemberSignature
+        Language="C#"
+        Value="public string CustomUserNamePasswordValidatorType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string CustomUserNamePasswordValidatorType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("customUserNamePasswordValidatorType", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("customUserNamePasswordValidatorType", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -118,7 +157,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("includeWindowsGroups", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("includeWindowsGroups", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -128,11 +169,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting this property to true has a performance impact as it results in a full group expansion. Set this property to false if you do not need to establish the list of groups a user belongs to.</para>
+          <para
+            >Setting this property to true has a performance impact as it results in a full group expansion. Set this property to false if you do not need to establish the list of groups a user belongs to.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether Windows groups are included in the security context. </para>
+          <para
+            >Gets or sets a value that indicates whether Windows groups are included in the security context. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -145,10 +190,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("maxCachedLogonTokens", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("maxCachedLogonTokens", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName>
+          <AttributeName
+            >System.Configuration.IntegerValidator(ExcludeRange=false, MaxValue=2147483647, MinValue=1)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -172,10 +221,14 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("membershipProviderName", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("membershipProviderName", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName>
+          <AttributeName
+            >System.Configuration.StringValidator(InvalidCharacters=null, MaxLength=2147483647, MinLength=0)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -185,17 +238,30 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see cref="T:System.Web.Security.MembershipProvider" /> that specifies the relevant password validation logic.</para>
+          <para
+            >When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see
+             cref="T:System.Web.Security.MembershipProvider" />
+
+             that specifies the relevant password validation logic.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a string that specifies the name of a member provider that provides password validation logic.</para>
+          <para
+            >Gets or sets a string that specifies the name of a member provider that provides password validation logic.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -210,15 +276,23 @@
       </Docs>
     </Member>
     <Member MemberName="UserNamePasswordValidationMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.UserNamePasswordValidationMode UserNamePasswordValidationMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("userNamePasswordValidationMode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("userNamePasswordValidationMode", DefaultValue=Mono.Cecil.CustomAttributeArgument, Options=System.Configuration.ConfigurationPropertyOptions.None)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>

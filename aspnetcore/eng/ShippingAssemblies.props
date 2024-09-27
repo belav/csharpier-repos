@@ -37,7 +37,9 @@
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Server.IIS" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Server.Kestrel.Core" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Server.Kestrel" />
-    <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes" />
+    <AspNetCoreShippingAssembly
+      Include="Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes"
+    />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Quic" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Authentication.BearerToken" />
@@ -101,7 +103,9 @@
     <AspNetCoreShippingAssembly Include="Microsoft.Extensions.ObjectPool" />
     <AspNetCoreShippingAssembly Include="Microsoft.JSInterop" />
     <AspNetCoreShippingAssembly Include="Microsoft.Extensions.WebEncoders" />
-    <AspNetCoreShippingAssembly Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" />
+    <AspNetCoreShippingAssembly
+      Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions"
+    />
     <AspNetCoreShippingAssembly Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
     <AspNetCoreShippingAssembly Include="Microsoft.Extensions.Features" />
     <AspNetCoreShippingAssembly Include="Microsoft.Extensions.Caching.SqlServer" />
@@ -131,7 +135,9 @@
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.ConcurrencyLimiter" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.HeaderPropagation" />
-    <AspNetCoreShippingAssembly Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
+    <AspNetCoreShippingAssembly
+      Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore"
+    />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.OutputCaching.StackExchangeRedis" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.MiddlewareAnalysis" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.SpaProxy" />
@@ -149,12 +155,16 @@
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.SignalR.Specification.Tests" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.CustomElements" />
-    <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" />
+    <AspNetCoreShippingAssembly
+      Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter"
+    />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.QuickGrid" />
     <AspNetCoreShippingAssembly Include="Microsoft.Authentication.WebAssembly.Msal" />
     <AspNetCoreShippingAssembly Include="Microsoft.JSInterop.WebAssembly" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
-    <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" />
+    <AspNetCoreShippingAssembly
+      Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication"
+    />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.WebAssembly" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Components.WebView" />
     <AspNetCoreShippingAssembly Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" />

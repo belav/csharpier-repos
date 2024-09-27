@@ -6,7 +6,9 @@
     <Compile Include="System.Diagnostics.TextWriterTraceListener.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\System.Diagnostics.TraceSource\ref\System.Diagnostics.TraceSource.csproj" />
+    <ProjectReference
+      Include="..\..\System.Diagnostics.TraceSource\ref\System.Diagnostics.TraceSource.csproj"
+    />
     <ProjectReference Include="..\..\System.Runtime\ref\System.Runtime.csproj" />
   </ItemGroup>
 </Project>

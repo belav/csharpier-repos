@@ -13,7 +13,9 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a list of constants for use with the GetSchema method to retrieve metadata collections.</para>
+      <para
+        >Provides a list of constants for use with the GetSchema method to retrieve metadata collections.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +32,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Catalogs collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Catalogs collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -47,7 +51,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Collations collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Collations collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -64,7 +70,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Columns collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Columns collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -81,7 +89,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Indexes collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Indexes collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -98,7 +108,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the ProcedureColumns collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the ProcedureColumns collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -115,7 +127,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the ProcedureParameters collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the ProcedureParameters collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -132,7 +146,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Procedures collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Procedures collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -149,7 +165,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Tables collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Tables collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -166,7 +184,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Views collection. </para>
+          <para
+            >A constant for use with the GetSchema method that represents the Views collection. </para
+          >
         </summary>
       </Docs>
     </Member>

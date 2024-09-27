@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="CryptographicAttributeObjectEnumerator" FullName="System.Security.Cryptography.CryptographicAttributeObjectEnumerator">
-  <TypeSignature Language="C#" Value="public sealed class CryptographicAttributeObjectEnumerator : System.Collections.IEnumerator" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CryptographicAttributeObjectEnumerator extends System.Object implements class System.Collections.IEnumerator" />
+<Type
+  Name="CryptographicAttributeObjectEnumerator"
+  FullName="System.Security.Cryptography.CryptographicAttributeObjectEnumerator"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class CryptographicAttributeObjectEnumerator : System.Collections.IEnumerator"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit CryptographicAttributeObjectEnumerator extends System.Object implements class System.Collections.IEnumerator"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Security</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,13 +29,24 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides enumeration functionality for the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" /> collection. This class cannot be inherited. </para>
+      <para
+        >Provides enumeration functionality for the <see
+         cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+         collection. This class cannot be inherited. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Current">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.CryptographicAttributeObject Current { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.CryptographicAttributeObject Current" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.CryptographicAttributeObject Current { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.CryptographicAttributeObject Current"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -41,13 +61,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the current <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" /> object from the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" /> collection.</para>
+          <para
+            >Gets the current <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+             object from the <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MoveNext">
       <MemberSignature Language="C#" Value="public bool MoveNext ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool MoveNext() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool MoveNext() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,17 +93,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Advances the enumeration to the next <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" /> object in the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" /> collection.</para>
+          <para
+            >Advances the enumeration to the next <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+             object in the <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+             collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the enumeration successfully moved to the next <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" /> object; false if the enumerator is at the end of the enumeration.</para>
+          <para
+            >true if the enumeration successfully moved to the next <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+             object; false if the enumerator is at the end of the enumeration.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="public void Reset ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Reset() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Reset() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,13 +134,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Resets the enumeration to the first <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" /> object in the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" /> collection.</para>
+          <para
+            >Resets the enumeration to the first <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+             object in the <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerator.Current">
-      <MemberSignature Language="C#" Value="object System.Collections.IEnumerator.Current { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance object System.Collections.IEnumerator.Current" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IEnumerator.Current { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance object System.Collections.IEnumerator.Current"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -107,7 +168,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the current <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" /> object from the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" /> collection.</para>
+          <para
+            >Gets the current <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+             object from the <see
+             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>

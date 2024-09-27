@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core MVC Razor Pages.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -8,11 +7,9 @@
     <PackageTags>aspnetcore;aspnetcoremvc;cshtml;razor</PackageTags>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc.Razor" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc.Test" />

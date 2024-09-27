@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Description>
+    <Description
+      >
       ASP.NET Core middleware for routing requests to application logic and for generating links.
       Commonly used types:
       Microsoft.AspNetCore.Routing.Route
       Microsoft.AspNetCore.Routing.RouteCollection
-    </Description>
+    </Description
+    >
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -15,19 +16,22 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <PropertyGroup>
     <!--
       The ability to save compiled assemblies is for testing and debugging, not shipped in the product.
     -->
     <ILEmitSaveAssemblies Condition="'$(ILEmitSaveAssemblies)'==''">false</ILEmitSaveAssemblies>
-    <DefineConstants Condition="'$(ILEmitSaveAssemblies)'=='true'">IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(ILEmitSaveAssemblies)'=='true'"
+      >IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)PropertyHelper\*.cs" />
     <Compile Include="$(SharedSourceRoot)RoslynUtils\TypeHelper.cs" />
-    <Compile Include="$(SharedSourceRoot)MediaType\ReadOnlyMediaTypeHeaderValue.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)MediaType\ReadOnlyMediaTypeHeaderValue.cs"
+      LinkBase="Shared"
+    />
     <Compile Include="$(SharedSourceRoot)ApiExplorerTypes\*.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)Json\JsonSerializerExtensions.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)RouteHandlers\ExecuteHandlerHelper.cs" LinkBase="Shared" />
@@ -38,7 +42,6 @@
     <Compile Include="$(SharedSourceRoot)AntiforgeryMetadata.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)HttpExtensions.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authorization" />
     <Reference Include="Microsoft.AspNetCore.Http" />
@@ -51,7 +54,6 @@
     <Reference Include="Microsoft.Extensions.ObjectPool" />
     <Reference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.OpenApi.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Routing.Microbenchmarks" />

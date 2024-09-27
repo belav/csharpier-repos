@@ -14,7 +14,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides static values that are used for the column names in the MetaDataCollection objects contained in the <see cref="T:System.Data.DataTable" />. The <see cref="T:System.Data.DataTable" /> is created by the GetSchema method.</para>
+      <para
+        >Provides static values that are used for the column names in the MetaDataCollection objects contained in the <see
+         cref="T:System.Data.DataTable" />
+
+        . The <see
+         cref="T:System.Data.DataTable" />
+
+         is created by the GetSchema method.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -29,7 +37,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the CollectionName column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the CollectionName column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,7 +57,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ColumnSize column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the ColumnSize column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -55,7 +67,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CompositeIdentifierSeparatorPattern">
-      <MemberSignature Language="C#" Value="public static readonly string CompositeIdentifierSeparatorPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string CompositeIdentifierSeparatorPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -65,7 +80,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the CompositeIdentifierSeparatorPattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the CompositeIdentifierSeparatorPattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -83,7 +100,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the CreateFormat column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the CreateFormat column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -101,7 +120,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the CreateParameters column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the CreateParameters column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,7 +140,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the DataSourceProductName column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the DataSourceProductName column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -127,7 +150,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataSourceProductVersion">
-      <MemberSignature Language="C#" Value="public static readonly string DataSourceProductVersion;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string DataSourceProductVersion;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -137,7 +163,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the DataSourceProductVersion column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the DataSourceProductVersion column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -145,7 +173,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataSourceProductVersionNormalized">
-      <MemberSignature Language="C#" Value="public static readonly string DataSourceProductVersionNormalized;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string DataSourceProductVersionNormalized;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -155,7 +186,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the DataSourceProductVersionNormalized column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the DataSourceProductVersionNormalized column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -173,7 +206,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the DataType column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the DataType column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -191,7 +226,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the GroupByBehavior column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the GroupByBehavior column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -209,7 +246,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IdentifierCase column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the IdentifierCase column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -227,7 +266,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IdentifierPattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the IdentifierPattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -245,7 +286,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsAutoIncrementable column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsAutoIncrementable column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -263,7 +306,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsBestMatch column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsBestMatch column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -281,7 +326,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsCaseSensitive column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsCaseSensitive column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -299,7 +346,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsConcurrencyType column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsConcurrencyType column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -317,7 +366,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsFixedLength column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsFixedLength column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -335,7 +386,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsFixedPrecisionScale column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsFixedPrecisionScale column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -353,7 +406,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsLiteralSupported column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsLiteralSupported column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -371,7 +426,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsLong column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsLong column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -389,7 +446,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsNullable column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsNullable column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -407,7 +466,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsSearchable column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsSearchable column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -425,7 +486,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsSearchableWithLike column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsSearchableWithLike column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -443,7 +506,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the IsUnsigned column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the IsUnsigned column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -461,7 +526,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the LiteralPrefix column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the LiteralPrefix column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -479,7 +546,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the LiteralSuffix column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the LiteralSuffix column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -497,7 +566,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the MaximumScale column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the MaximumScale column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -514,11 +585,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For numeric data types, this indicates the minimum number of digits to the right of the decimal point.</para>
+          <para
+            >For numeric data types, this indicates the minimum number of digits to the right of the decimal point.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the MinimumScale column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the MinimumScale column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -526,7 +601,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NumberOfIdentifierParts">
-      <MemberSignature Language="C#" Value="public static readonly string NumberOfIdentifierParts;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string NumberOfIdentifierParts;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -536,7 +614,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the NumberOfIdentifierParts column in the MetaDataCollections collection.</para>
+          <para
+            >Used by the GetSchema method to create the NumberOfIdentifierParts column in the MetaDataCollections collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -554,7 +634,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the NumberOfRestrictions column in the MetaDataCollections collection.</para>
+          <para
+            >Used by the GetSchema method to create the NumberOfRestrictions column in the MetaDataCollections collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -562,7 +644,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OrderByColumnsInSelect">
-      <MemberSignature Language="C#" Value="public static readonly string OrderByColumnsInSelect;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string OrderByColumnsInSelect;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -572,7 +657,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the OrderByColumnsInSelect column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the OrderByColumnsInSelect column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -590,7 +677,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ParameterMarkerFormat column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the ParameterMarkerFormat column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -598,7 +687,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParameterMarkerPattern">
-      <MemberSignature Language="C#" Value="public static readonly string ParameterMarkerPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string ParameterMarkerPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -608,7 +700,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ParameterMarkerPattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the ParameterMarkerPattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -616,7 +710,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParameterNameMaxLength">
-      <MemberSignature Language="C#" Value="public static readonly string ParameterNameMaxLength;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string ParameterNameMaxLength;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -626,7 +723,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ParameterNameMaxLength column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the ParameterNameMaxLength column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -644,7 +743,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ParameterNamePattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the ParameterNamePattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -662,7 +763,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ProviderDbType column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the ProviderDbType column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -680,7 +783,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the QuotedIdentifierCase column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the QuotedIdentifierCase column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -688,7 +793,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="QuotedIdentifierPattern">
-      <MemberSignature Language="C#" Value="public static readonly string QuotedIdentifierPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string QuotedIdentifierPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -698,7 +806,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the QuotedIdentifierPattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the QuotedIdentifierPattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -716,7 +826,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the ReservedWord column in the ReservedWords collection.</para>
+          <para
+            >Used by the GetSchema method to create the ReservedWord column in the ReservedWords collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -724,7 +836,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="StatementSeparatorPattern">
-      <MemberSignature Language="C#" Value="public static readonly string StatementSeparatorPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string StatementSeparatorPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -734,7 +849,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the StatementSeparatorPattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the StatementSeparatorPattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -752,7 +869,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the StringLiteralPattern column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the StringLiteralPattern column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -760,7 +879,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SupportedJoinOperators">
-      <MemberSignature Language="C#" Value="public static readonly string SupportedJoinOperators;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string SupportedJoinOperators;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -770,7 +892,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the SupportedJoinOperators column in the DataSourceInformation collection.</para>
+          <para
+            >Used by the GetSchema method to create the SupportedJoinOperators column in the DataSourceInformation collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -788,7 +912,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the GetSchema method to create the TypeName column in the DataTypes collection.</para>
+          <para
+            >Used by the GetSchema method to create the TypeName column in the DataTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

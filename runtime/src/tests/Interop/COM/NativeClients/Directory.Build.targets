@@ -2,6 +2,7 @@
   <PropertyGroup>
     <CLRTestRunFile>COMClient$(MSBuildProjectName)</CLRTestRunFile>
   </PropertyGroup>
-
-  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))" />
+  <Import
+    Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))"
+  />
 </Project>

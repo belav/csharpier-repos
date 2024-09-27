@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the mode for the automatic completion feature used in the <see cref="T:System.Windows.Forms.ComboBox" /> and <see cref="T:System.Windows.Forms.TextBox" /> controls.</para>
+      <para
+        >Specifies the mode for the automatic completion feature used in the <see
+         cref="T:System.Windows.Forms.ComboBox" />
+
+         and <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         controls.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +35,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the remainder of the most likely candidate string to the existing characters, highlighting the appended characters.</para>
+          <para
+            >Appends the remainder of the most likely candidate string to the existing characters, highlighting the appended characters.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -44,7 +54,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Disables the automatic completion feature for the <see cref="T:System.Windows.Forms.ComboBox" /> and <see cref="T:System.Windows.Forms.TextBox" /> controls.</para>
+          <para
+            >Disables the automatic completion feature for the <see
+             cref="T:System.Windows.Forms.ComboBox" />
+
+             and <see
+             cref="T:System.Windows.Forms.TextBox" />
+
+             controls.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -61,7 +79,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Displays the auxiliary drop-down list associated with the edit control. This drop-down is populated with one or more suggested completion strings.</para>
+          <para
+            >Displays the auxiliary drop-down list associated with the edit control. This drop-down is populated with one or more suggested completion strings.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

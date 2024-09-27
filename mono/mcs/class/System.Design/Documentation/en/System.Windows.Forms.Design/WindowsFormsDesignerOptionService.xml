@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WindowsFormsDesignerOptionService" FullName="System.Windows.Forms.Design.WindowsFormsDesignerOptionService">
-  <TypeSignature Language="C#" Value="public class WindowsFormsDesignerOptionService : System.ComponentModel.Design.DesignerOptionService" />
+<Type
+  Name="WindowsFormsDesignerOptionService"
+  FullName="System.Windows.Forms.Design.WindowsFormsDesignerOptionService"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class WindowsFormsDesignerOptionService : System.ComponentModel.Design.DesignerOptionService"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,12 +34,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CompatibilityOptions">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.Design.DesignerOptions CompatibilityOptions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.Design.DesignerOptions CompatibilityOptions { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,12 +60,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.Design.DesignerOptions" /> exposed by the <see cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.Design.DesignerOptions" />
+
+             exposed by the <see
+             cref="T:System.Windows.Forms.Design.WindowsFormsDesignerOptionService" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="PopulateOptionCollection">
-      <MemberSignature Language="C#" Value="protected override void PopulateOptionCollection (System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection options);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void PopulateOptionCollection (System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection options);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -60,7 +85,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="options" Type="System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection" />
+        <Parameter
+          Name="options"
+          Type="System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection"
+        />
       </Parameters>
       <Docs>
         <param name="options">To be added.</param>

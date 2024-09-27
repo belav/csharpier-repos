@@ -2,7 +2,6 @@
   <PropertyGroup>
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- ActiveIssue https://github.com/dotnet/runtime/issues/84402 -->
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>
@@ -13,7 +12,9 @@
     <Compile Include="RuntimeMarshallingDisabledAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Native_DisabledMarshalling/DisabledRuntimeMarshallingNative_DisabledMarshalling.csproj" />
+    <ProjectReference
+      Include="Native_DisabledMarshalling/DisabledRuntimeMarshallingNative_DisabledMarshalling.csproj"
+    />
     <CMakeProjectReference Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

@@ -17,11 +17,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by <see cref="P:System.Windows.Forms.ScrollEventArgs.Type" />.</para>
+      <para
+        >This enumeration is used by <see
+         cref="P:System.Windows.Forms.ScrollEventArgs.Type" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of action used to raise the <see cref="E:System.Windows.Forms.ScrollBar.Scroll" /> event.</para>
+      <para
+        >Specifies the type of action used to raise the <see
+         cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -51,7 +61,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box was moved to the <see cref="P:System.Windows.Forms.ScrollBar.Minimum" /> position.</para>
+          <para
+            >The scroll box was moved to the <see
+             cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+
+             position.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +83,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box moved a large distance. The user clicked the scroll bar to the left(horizontal) or above(vertical) the scroll box, or pressed the PAGE UP key.</para>
+          <para
+            >The scroll box moved a large distance. The user clicked the scroll bar to the left(horizontal) or above(vertical) the scroll box, or pressed the PAGE UP key.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +102,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box moved a large distance. The user clicked the scroll bar to the right(horizontal) or below(vertical) the scroll box, or pressed the PAGE DOWN key.</para>
+          <para
+            >The scroll box moved a large distance. The user clicked the scroll bar to the right(horizontal) or below(vertical) the scroll box, or pressed the PAGE DOWN key.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +121,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box was moved to the <see cref="P:System.Windows.Forms.ScrollBar.Maximum" /> position.</para>
+          <para
+            >The scroll box was moved to the <see
+             cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+             position.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,7 +143,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box was moved a small distance. The user clicked the left(horizontal) or top(vertical) scroll arrow, or pressed the UP ARROW key.</para>
+          <para
+            >The scroll box was moved a small distance. The user clicked the left(horizontal) or top(vertical) scroll arrow, or pressed the UP ARROW key.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,7 +162,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The scroll box was moved a small distance. The user clicked the right(horizontal) or bottom(vertical) scroll arrow, or pressed the DOWN ARROW key.</para>
+          <para
+            >The scroll box was moved a small distance. The user clicked the right(horizontal) or bottom(vertical) scroll arrow, or pressed the DOWN ARROW key.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

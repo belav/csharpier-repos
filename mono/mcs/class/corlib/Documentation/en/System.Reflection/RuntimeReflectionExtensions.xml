@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RuntimeReflectionExtensions" FullName="System.Reflection.RuntimeReflectionExtensions">
   <TypeSignature Language="C#" Value="public static class RuntimeReflectionExtensions" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit RuntimeReflectionExtensions extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract sealed beforefieldinit RuntimeReflectionExtensions extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,8 +22,14 @@
   </Docs>
   <Members>
     <Member MemberName="GetMethodInfo">
-      <MemberSignature Language="C#" Value="public static System.Reflection.MethodInfo GetMethodInfo (this Delegate del);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.MethodInfo GetMethodInfo(class System.Delegate del) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.MethodInfo GetMethodInfo (this Delegate del);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.MethodInfo GetMethodInfo(class System.Delegate del) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,19 +44,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an object that represents the method represented by the specified delegate.</para>
+          <para
+            >Gets an object that represents the method represented by the specified delegate.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An object that represents the method.</para>
         </returns>
         <param name="del">
-          <attribution license="cc4" from="Microsoft" modified="false" />The delegate to examine.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The delegate to examine.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeBaseDefinition">
-      <MemberSignature Language="C#" Value="public static System.Reflection.MethodInfo GetRuntimeBaseDefinition (this System.Reflection.MethodInfo method);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.MethodInfo GetRuntimeBaseDefinition(class System.Reflection.MethodInfo method) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.MethodInfo GetRuntimeBaseDefinition (this System.Reflection.MethodInfo method);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.MethodInfo GetRuntimeBaseDefinition(class System.Reflection.MethodInfo method) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -62,19 +82,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves an object that represents the specified method on the direct or indirect base class where the method was first declared.</para>
+          <para
+            >Retrieves an object that represents the specified method on the direct or indirect base class where the method was first declared.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that represents the specified method's initial declaration on a base class.</para>
+          <para
+            >An object that represents the specified method's initial declaration on a base class.</para
+          >
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method to retrieve information about.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The method to retrieve information about.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeEvent">
-      <MemberSignature Language="C#" Value="public static System.Reflection.EventInfo GetRuntimeEvent (this Type type, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.EventInfo GetRuntimeEvent(class System.Type type, string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.EventInfo GetRuntimeEvent (this Type type, string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.EventInfo GetRuntimeEvent(class System.Type type, string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -94,23 +127,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that represents the specified event, or null if the event is not found.</para>
+          <para
+            >An object that represents the specified event, or null if the event is not found.</para
+          >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the event.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the event.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeEvents">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Reflection.EventInfo&gt; GetRuntimeEvents (this Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Reflection.EventInfo&gt; GetRuntimeEvents(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEnumerable<System.Reflection.EventInfo> GetRuntimeEvents (this Type type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Reflection.EventInfo> GetRuntimeEvents(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Reflection.EventInfo&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable<System.Reflection.EventInfo></ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="type" Type="System.Type" RefType="this" />
@@ -118,23 +165,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method returns all events defined on the specified type, including inherited, non-public, instance, and static events.</para>
+          <para
+            >This method returns all events defined on the specified type, including inherited, non-public, instance, and static events.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a collection that represents all the events defined on a specified type.</para>
+          <para
+            >Retrieves a collection that represents all the events defined on a specified type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A collection of events for the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the events.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the events.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeField">
-      <MemberSignature Language="C#" Value="public static System.Reflection.FieldInfo GetRuntimeField (this Type type, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.FieldInfo GetRuntimeField(class System.Type type, string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.FieldInfo GetRuntimeField (this Type type, string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.FieldInfo GetRuntimeField(class System.Type type, string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -154,23 +214,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that represents the specified field, or null if the field is not found.</para>
+          <para
+            >An object that represents the specified field, or null if the field is not found.</para
+          >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the field.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the field.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the field.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the field.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeFields">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Reflection.FieldInfo&gt; GetRuntimeFields (this Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Reflection.FieldInfo&gt; GetRuntimeFields(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEnumerable<System.Reflection.FieldInfo> GetRuntimeFields (this Type type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Reflection.FieldInfo> GetRuntimeFields(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Reflection.FieldInfo&gt;</ReturnType>
+        <ReturnType>System.Collections.Generic.IEnumerable<System.Reflection.FieldInfo></ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="type" Type="System.Type" RefType="this" />
@@ -178,23 +252,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method returns all fields that are defined on the specified type, including inherited, non-public, instance, and static fields.</para>
+          <para
+            >This method returns all fields that are defined on the specified type, including inherited, non-public, instance, and static fields.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a collection that represents all the fields defined on a specified type.</para>
+          <para
+            >Retrieves a collection that represents all the fields defined on a specified type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A collection of fields for the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the fields.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the fields.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeInterfaceMap">
-      <MemberSignature Language="C#" Value="public static System.Reflection.InterfaceMapping GetRuntimeInterfaceMap (this System.Reflection.TypeInfo typeInfo, Type interfaceType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Reflection.InterfaceMapping GetRuntimeInterfaceMap(class System.Reflection.TypeInfo typeInfo, class System.Type interfaceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.InterfaceMapping GetRuntimeInterfaceMap (this System.Reflection.TypeInfo typeInfo, Type interfaceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig valuetype System.Reflection.InterfaceMapping GetRuntimeInterfaceMap(class System.Reflection.TypeInfo typeInfo, class System.Type interfaceType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -210,21 +297,37 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an interface mapping for the specified type and the specified interface.</para>
+          <para
+            >Returns an interface mapping for the specified type and the specified interface.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that represents the interface mapping for the specified interface and type.</para>
+          <para
+            >An object that represents the interface mapping for the specified interface and type.</para
+          >
         </returns>
         <param name="typeInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to retrieve a mapping for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to retrieve a mapping for.</param
+        >
         <param name="interfaceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The interface to retrieve a mapping for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The interface to retrieve a mapping for.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeMethod">
-      <MemberSignature Language="C#" Value="public static System.Reflection.MethodInfo GetRuntimeMethod (this Type type, string name, Type[] parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.MethodInfo GetRuntimeMethod(class System.Type type, string name, class System.Type[] parameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.MethodInfo GetRuntimeMethod (this Type type, string name, Type[] parameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.MethodInfo GetRuntimeMethod(class System.Type type, string name, class System.Type[] parameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -245,25 +348,44 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that represents the specified method, or null if the method is not found.</para>
+          <para
+            >An object that represents the specified method, or null if the method is not found.</para
+          >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the method.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the method.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array that contains the method's parameters.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array that contains the method's parameters.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeMethods">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Reflection.MethodInfo&gt; GetRuntimeMethods (this Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Reflection.MethodInfo&gt; GetRuntimeMethods(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEnumerable<System.Reflection.MethodInfo> GetRuntimeMethods (this Type type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Reflection.MethodInfo> GetRuntimeMethods(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Reflection.MethodInfo&gt;</ReturnType>
+        <ReturnType
+          >System.Collections.Generic.IEnumerable<System.Reflection.MethodInfo></ReturnType
+        >
       </ReturnValue>
       <Parameters>
         <Parameter Name="type" Type="System.Type" RefType="this" />
@@ -271,29 +393,44 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method returns all methods defined on the specified type, including inherited, non-public, instance, and static methods.</para>
+          <para
+            >This method returns all methods defined on the specified type, including inherited, non-public, instance, and static methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a collection that represents all methods defined on a specified type.</para>
+          <para
+            >Retrieves a collection that represents all methods defined on a specified type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A collection of methods for the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the methods.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the methods.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeProperties">
-      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IEnumerable&lt;System.Reflection.PropertyInfo&gt; GetRuntimeProperties (this Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1&lt;class System.Reflection.PropertyInfo&gt; GetRuntimeProperties(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> GetRuntimeProperties (this Type type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Collections.Generic.IEnumerable`1<class System.Reflection.PropertyInfo> GetRuntimeProperties(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Reflection.PropertyInfo&gt;</ReturnType>
+        <ReturnType
+          >System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo></ReturnType
+        >
       </ReturnValue>
       <Parameters>
         <Parameter Name="type" Type="System.Type" RefType="this" />
@@ -301,23 +438,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method returns all properties defined on the specified type, including inherited, non-public, instance, and static properties.</para>
+          <para
+            >This method returns all properties defined on the specified type, including inherited, non-public, instance, and static properties.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a collection that represents all the properties defined on a specified type.</para>
+          <para
+            >Retrieves a collection that represents all the properties defined on a specified type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A collection of properties for the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the properties.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the properties.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeProperty">
-      <MemberSignature Language="C#" Value="public static System.Reflection.PropertyInfo GetRuntimeProperty (this Type type, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.PropertyInfo GetRuntimeProperty(class System.Type type, string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.PropertyInfo GetRuntimeProperty (this Type type, string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.PropertyInfo GetRuntimeProperty(class System.Type type, string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -337,12 +487,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that represents the specified property, or null if the property is not found.</para>
+          <para
+            >An object that represents the specified property, or null if the property is not found.</para
+          >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that contains the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that contains the property.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property.</param
+        >
       </Docs>
     </Member>
   </Members>

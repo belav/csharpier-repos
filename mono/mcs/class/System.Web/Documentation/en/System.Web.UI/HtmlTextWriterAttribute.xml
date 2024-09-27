@@ -3,23 +3,51 @@
   <TypeSignature Language="C#" Maintainer="auto" Value="public enum HtmlTextWriterAttribute" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is commonly used with the following methods of the <see cref="T:System.Web.UI.HtmlTextWriter" /> class: <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />, <see cref="M:System.Web.UI.HtmlTextWriter.GetAttributeName(System.Web.UI.HtmlTextWriterAttribute)" />, <see cref="Overload:System.Web.UI.HtmlTextWriter.IsAttributeDefined" />, <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />.</para>
+      <para
+        >This enumeration is commonly used with the following methods of the <see
+         cref="T:System.Web.UI.HtmlTextWriter" />
+
+         class: <see
+         cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+
+        , <see
+
+          cref="M:System.Web.UI.HtmlTextWriter.GetAttributeName(System.Web.UI.HtmlTextWriterAttribute)"
+        />
+
+        , <see
+         cref="Overload:System.Web.UI.HtmlTextWriter.IsAttributeDefined" />
+
+        , <see
+         cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the HTML attributes that an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object writes to the opening tag of an HTML element when a Web request is processed.</para>
+      <para
+        >Specifies the HTML attributes that an <see
+         cref="T:System.Web.UI.HtmlTextWriter" />
+
+         or <see
+         cref="T:System.Web.UI.Html32TextWriter" />
+
+         object writes to the opening tag of an HTML element when a Web request is processed.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -45,8 +73,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -65,8 +92,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -85,8 +111,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -137,8 +162,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -157,8 +181,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -177,8 +200,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -197,8 +219,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -217,8 +238,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -237,8 +257,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -257,8 +276,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -277,8 +295,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -297,8 +314,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -317,8 +333,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -401,8 +416,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -421,8 +435,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -457,8 +470,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -477,8 +489,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -497,8 +508,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -533,8 +543,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -553,8 +562,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -573,8 +581,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -593,8 +600,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -613,8 +619,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -633,8 +638,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -653,8 +657,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -689,8 +692,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -709,8 +711,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -729,8 +730,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -765,8 +765,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -801,8 +800,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -821,8 +819,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -841,8 +838,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -861,8 +857,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -881,8 +876,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -901,8 +895,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -921,8 +914,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -957,8 +949,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -977,8 +968,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -1013,8 +1003,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -1033,8 +1022,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterAttribute</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <testresults name="">
-  <div id="GHTSubTest1" style="height:72px;width:553px">
-  </div>
-  <div id="GHTSubTest2" style="height:72px;width:553px">
+  <div id="GHTSubTest1" style="height:72px;width:553px"></div>
+  <div id="GHTSubTest2" style="height:72px;width:553px"
+    >
 	
 				
 						plain text
@@ -26,7 +26,8 @@
 						plain text
 					
 			
-</div>
+</div
+  >
   <div id="GHTSubTest3" style="height:72px;width:553px">
     <b>html</b>
     <b>html</b>
@@ -40,18 +41,79 @@
     <b>html</b>
   </div>
   <div id="GHTSubTest4" style="height:72px;width:553px">
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl0:Button1" id="Repeater4__ctl0_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl1:Button1" id="Repeater4__ctl1_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl2:Button1" id="Repeater4__ctl2_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl3:Button1" id="Repeater4__ctl3_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl4:Button1" id="Repeater4__ctl4_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl5:Button1" id="Repeater4__ctl5_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl6:Button1" id="Repeater4__ctl6_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl7:Button1" id="Repeater4__ctl7_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl8:Button1" id="Repeater4__ctl8_Button1" />
-    <input value="Server control template" style="width:100px" type="submit" name="Repeater4:_ctl9:Button1" id="Repeater4__ctl9_Button1" />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl0:Button1"
+      id="Repeater4__ctl0_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl1:Button1"
+      id="Repeater4__ctl1_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl2:Button1"
+      id="Repeater4__ctl2_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl3:Button1"
+      id="Repeater4__ctl3_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl4:Button1"
+      id="Repeater4__ctl4_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl5:Button1"
+      id="Repeater4__ctl5_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl6:Button1"
+      id="Repeater4__ctl6_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl7:Button1"
+      id="Repeater4__ctl7_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl8:Button1"
+      id="Repeater4__ctl8_Button1"
+    />
+    <input
+      value="Server control template"
+      style="width:100px"
+      type="submit"
+      name="Repeater4:_ctl9:Button1"
+      id="Repeater4__ctl9_Button1"
+    />
   </div>
-  <div id="GHTSubTest5" style="height:72px;width:553px">
+  <div id="GHTSubTest5" style="height:72px;width:553px"
+    >
 	
 				
 						one
@@ -75,7 +137,8 @@
 						ten
 					
 			
-</div>
+</div
+  >
   <div id="GHTSubTest6" style="height:72px;width:553px">
     <input id="Repeater6__ctl0__ctl0" type="checkbox" name="Repeater6:_ctl0:_ctl0" />
     <label for="Repeater6__ctl0__ctl0">one</label>
@@ -98,7 +161,8 @@
     <input id="Repeater6__ctl9__ctl0" type="checkbox" name="Repeater6:_ctl9:_ctl0" />
     <label for="Repeater6__ctl9__ctl0">ten</label>
   </div>
-  <div id="GHTSubTest7" style="height:72px;width:553px">
+  <div id="GHTSubTest7" style="height:72px;width:553px"
+    >
 	
 				
 						one
@@ -182,12 +246,14 @@
 						ten
 					
 			
-</div>
-  <div id="GHTSubTest8" testname="Code base template 1">
-  </div>
-  <div id="GHTSubTest9" testname="Code base template 2">
+</div
+  >
+  <div id="GHTSubTest8" testname="Code base template 1"></div>
+  <div id="GHTSubTest9" testname="Code base template 2"
+    >
 	Plain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run timePlain text template create at run time
-</div>
+</div
+  >
   <div id="GHTSubTest10" testname="Code base template 3">
     <div>
       <b>

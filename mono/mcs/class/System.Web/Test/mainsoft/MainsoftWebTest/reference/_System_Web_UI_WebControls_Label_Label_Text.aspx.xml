@@ -10,14 +10,12 @@
     <span id="Label2" disabled="disabled">    abcdefghijklm nopqrstuvw xyz    </span>
   </div>
   <div id="GHTSubTest3" style="height:48px;width:208px">
-    <span id="Label3">`1234567890-=[]\;',./~!@#$%^&amp;*()_+{}|:"?</span>
+    <span id="Label3">`1234567890-=[]\;',./~!@#$%^&*()_+{}|:"?</span>
   </div>
   <div id="GHTSubTest4" style="height:48px;width:208px">
-    <span id="Label4">
-    </span>
+    <span id="Label4"></span>
   </div>
   <div id="GHTSubTest5" style="height:48px;width:208px">
-    <span id="Label5">
-    </span>
+    <span id="Label5"></span>
   </div>
 </testresults>

@@ -13,12 +13,20 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.ComponentModel.Design.DesignSurfaceManager.DesignSurfaceCreated" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.ComponentModel.Design.DesignSurfaceManager.DesignSurfaceCreated" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DesignSurfaceEventArgs (System.ComponentModel.Design.DesignSurface surface);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DesignSurfaceEventArgs (System.ComponentModel.Design.DesignSurface surface);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,14 +38,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignSurfaceEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.DesignSurfaceEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="surface">
-          <attribution license="cc4" from="Microsoft" modified="false" />The design surface that is being created.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The design surface that is being created.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Surface">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.DesignSurface Surface { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.DesignSurface Surface { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

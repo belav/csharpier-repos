@@ -17,7 +17,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="P:System.Windows.Forms.Button.DialogResult" /> property and the <see cref="M:System.Windows.Forms.Form.ShowDialog" /> method use this enumeration.</para>
+      <para
+        >The <see
+         cref="P:System.Windows.Forms.Button.DialogResult" />
+
+         property and the <see
+         cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+         method use this enumeration.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,7 +42,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The dialog box return value is Abort (usually sent from a button labeled Abort).</para>
+          <para
+            >The dialog box return value is Abort (usually sent from a button labeled Abort).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,7 +61,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The dialog box return value is Cancel (usually sent from a button labeled Cancel).</para>
+          <para
+            >The dialog box return value is Cancel (usually sent from a button labeled Cancel).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +80,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The dialog box return value is Ignore (usually sent from a button labeled Ignore).</para>
+          <para
+            >The dialog box return value is Ignore (usually sent from a button labeled Ignore).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +116,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Nothing is returned from the dialog box. This means that the modal dialog continues running.</para>
+          <para
+            >Nothing is returned from the dialog box. This means that the modal dialog continues running.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,7 +152,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The dialog box return value is Retry (usually sent from a button labeled Retry).</para>
+          <para
+            >The dialog box return value is Retry (usually sent from a button labeled Retry).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

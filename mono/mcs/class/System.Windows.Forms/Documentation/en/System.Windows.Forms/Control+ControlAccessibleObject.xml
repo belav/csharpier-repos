@@ -1,5 +1,11 @@
-<Type Name="Control+ControlAccessibleObject" FullName="System.Windows.Forms.Control+ControlAccessibleObject">
-  <TypeSignature Language="C#" Value="public class Control.ControlAccessibleObject : System.Windows.Forms.AccessibleObject" />
+<Type
+  Name="Control+ControlAccessibleObject"
+  FullName="System.Windows.Forms.Control+ControlAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class Control.ControlAccessibleObject : System.Windows.Forms.AccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ControlAccessibleObject (System.Windows.Forms.Control ownerControl);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ControlAccessibleObject (System.Windows.Forms.Control ownerControl);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="ownerControl" Type="System.Windows.Forms.Control" />
@@ -68,13 +77,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetHelpTopic">
-      <MemberSignature Language="C#" Value="public override int GetHelpTopic (out string fileName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override int GetHelpTopic (out string fileName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="fileName" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="fileName" Type="System.String&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="fileName">To be added.</param>
@@ -152,7 +164,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NotifyClients">
-      <MemberSignature Language="C#" Value="public void NotifyClients (System.Windows.Forms.AccessibleEvents accEvent);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void NotifyClients (System.Windows.Forms.AccessibleEvents accEvent);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -171,7 +186,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NotifyClients">
-      <MemberSignature Language="C#" Value="public void NotifyClients (System.Windows.Forms.AccessibleEvents accEvent, int childID);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void NotifyClients (System.Windows.Forms.AccessibleEvents accEvent, int childID);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -192,7 +210,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NotifyClients">
-      <MemberSignature Language="C#" Value="public void NotifyClients (System.Windows.Forms.AccessibleEvents accEvent, int objectID, int childID);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void NotifyClients (System.Windows.Forms.AccessibleEvents accEvent, int objectID, int childID);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -230,7 +251,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleObject Parent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleObject Parent { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleObject</ReturnType>
@@ -246,7 +270,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Role">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleRole Role { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleRole Role { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleRole</ReturnType>

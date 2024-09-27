@@ -1,5 +1,11 @@
-<Type Name="NvdlBuiltInValidationProvider" FullName="Commons.Xml.Nvdl.NvdlBuiltInValidationProvider">
-  <TypeSignature Language="C#" Value="public class NvdlBuiltInValidationProvider : Commons.Xml.Nvdl.NvdlValidationProvider" />
+<Type
+  Name="NvdlBuiltInValidationProvider"
+  FullName="Commons.Xml.Nvdl.NvdlBuiltInValidationProvider"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlBuiltInValidationProvider : Commons.Xml.Nvdl.NvdlValidationProvider"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -21,6 +27,8 @@
   </Members>
   <Docs>
     <summary>Validator implementation for built-in NVDL namespace.</summary>
-    <remarks>This validation provider implements a validation feature for built-in NVDL namespace. In this namespace, the rule is simple; any of input XML instances are either allowed or rejected.</remarks>
+    <remarks
+      >This validation provider implements a validation feature for built-in NVDL namespace. In this namespace, the rule is simple; any of input XML instances are either allowed or rejected.</remarks
+    >
   </Docs>
 </Type>

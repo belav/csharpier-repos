@@ -3,34 +3,27 @@
     <BeforePack>GenerateNupkgProps;$(BeforePack)</BeforePack>
     <PropsFilePath>$(BaseIntermediateOutputPath)$(PackageId).props</PropsFilePath>
   </PropertyGroup>
-
   <ItemGroup>
-    <None Include="$(PropsFilePath)"
-          PackagePath="build"
-          Pack="true" />
+    <None Include="$(PropsFilePath)" PackagePath="build" Pack="true" />
   </ItemGroup>
-
-  <Target Name="GenerateNupkgProps"
-          Inputs="$(MSBuildThisFileFullPath)"
-          Outputs="$(PropsFilePath)">
+  <Target Name="GenerateNupkgProps" Inputs="$(MSBuildThisFileFullPath)" Outputs="$(PropsFilePath)">
     <PropertyGroup>
-      <PropsFileContents>
-&lt;Project&gt;
-  &lt;ItemGroup&gt;
-    &lt;DotNetCliToolReference Include="$(PackageId)" Version="$(PackageVersion)" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;PropertyGroup&gt;
-    &lt;SgenPackSerializer Condition="'%24(SgenPackSerializer)'==''"&gt;True&lt;/SgenPackSerializer&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;ItemGroup Condition="'%24(SgenPackSerializer)'=='True'"&gt;
-    &lt;BuildOutputInPackage Include="%24(OutputPath)%24(AssemblyName).XmlSerializers.dll" /&gt;
-  &lt;/ItemGroup&gt;
-&lt;/Project&gt;
-      </PropsFileContents>
+      <PropsFileContents
+        >
+<Project>
+  <ItemGroup>
+    <DotNetCliToolReference Include="$(PackageId)" Version="$(PackageVersion)" />
+  </ItemGroup>
+  <PropertyGroup>
+    <SgenPackSerializer Condition="'%24(SgenPackSerializer)'==''">True</SgenPackSerializer>
+  </PropertyGroup>
+  <ItemGroup Condition="'%24(SgenPackSerializer)'=='True'">
+    <BuildOutputInPackage Include="%24(OutputPath)%24(AssemblyName).XmlSerializers.dll" />
+  </ItemGroup>
+</Project>
+      </PropsFileContents
+      >
     </PropertyGroup>
-
-    <WriteLinesToFile File="$(PropsFilePath)"
-                      Lines="$(PropsFileContents)"
-                      Overwrite="true" />
+    <WriteLinesToFile File="$(PropsFilePath)" Lines="$(PropsFileContents)" Overwrite="true" />
   </Target>
 </Project>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SoapExtensionTypeElement" FullName="System.Web.Services.Configuration.SoapExtensionTypeElement">
-  <TypeSignature Language="C#" Value="public sealed class SoapExtensionTypeElement : System.Configuration.ConfigurationElement" />
+<Type
+  Name="SoapExtensionTypeElement"
+  FullName="System.Web.Services.Configuration.SoapExtensionTypeElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SoapExtensionTypeElement : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +20,9 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the SoapExtensionElement in the Web Services configuration file. This element adds a SOAP extension to run with all XML Web services within the scope of the configuration file. The class cannot be inherited.</para>
+      <para
+        >Represents the SoapExtensionElement in the Web Services configuration file. This element adds a SOAP extension to run with all XML Web services within the scope of the configuration file. The class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +35,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +48,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SoapExtensionTypeElement (string type, int priority, System.Web.Services.Configuration.PriorityGroup group);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SoapExtensionTypeElement (string type, int priority, System.Web.Services.Configuration.PriorityGroup group);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="type" Type="System.String" />
@@ -47,21 +63,38 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+             class.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the SOAP extension class to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the SOAP extension class to add.</param
+        >
         <param name="priority">
-          <attribution license="cc4" from="Microsoft" modified="false" />Indicates the relative order in which a SOAP extension runs when multiple SOAP extensions are specified. Within each group, the priority attribute distinguishes the overall relative priority of the SOAP extension. A lower priority number indicates a higher priority for the SOAP extension. The lowest possible value for the priority attribute is 1.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Indicates the relative order in which a SOAP extension runs when multiple SOAP extensions are specified. Within each group, the priority attribute distinguishes the overall relative priority of the SOAP extension. A lower priority number indicates a higher priority for the SOAP extension. The lowest possible value for the priority attribute is 1.</param
+        >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />Along with priority, specifies the relative order in which a SOAP extension runs when multiple SOAP extensions are configured to run.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Along with priority, specifies the relative order in which a SOAP extension runs when multiple SOAP extensions are configured to run.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SoapExtensionTypeElement (Type type, int priority, System.Web.Services.Configuration.PriorityGroup group);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SoapExtensionTypeElement (Type type, int priority, System.Web.Services.Configuration.PriorityGroup group);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="type" Type="System.Type" />
@@ -73,25 +106,44 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Configuration.SoapExtensionTypeElement" />
+
+             class.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the SOAP extension class to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the SOAP extension class to add.</param
+        >
         <param name="priority">
-          <attribution license="cc4" from="Microsoft" modified="false" />Indicates the relative order in which a SOAP extension runs when multiple SOAP extensions are specified.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Indicates the relative order in which a SOAP extension runs when multiple SOAP extensions are specified.</param
+        >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />Along with priority, specifies the relative order in which a SOAP extension runs when multiple SOAP extensions are configured to run.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Along with priority, specifies the relative order in which a SOAP extension runs when multiple SOAP extensions are configured to run.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Group">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.PriorityGroup Group { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.PriorityGroup Group { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("group", DefaultValue=System.Web.Services.Configuration.PriorityGroup.Low, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("group", DefaultValue=System.Web.Services.Configuration.PriorityGroup.Low, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -102,11 +154,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Within each group, the priority attribute distinguishes the overall relative priority of the SOAP extension. A lower priority number indicates a higher priority for the SOAP extension. The lowest possible value for the priority attribute is 1.</para>
+          <para
+            >Within each group, the priority attribute distinguishes the overall relative priority of the SOAP extension. A lower priority number indicates a higher priority for the SOAP extension. The lowest possible value for the priority attribute is 1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the relative order in which a SOAP extension runs when multiple SOAP extensions are configured to run.</para>
+          <para
+            >Gets or sets the relative order in which a SOAP extension runs when multiple SOAP extensions are configured to run.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -118,7 +174,9 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("priority", DefaultValue=0, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("priority", DefaultValue=0, Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Configuration.IntegerValidator(MaxValue=2147483647)</AttributeName>
@@ -132,11 +190,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Within each group the priority attribute distinguishes the overall relative priority of the SOAP extension. A lower priority number indicates a higher priority for the SOAP extension. The lowest possible value for the priority attribute is 1.</para>
+          <para
+            >Within each group the priority attribute distinguishes the overall relative priority of the SOAP extension. A lower priority number indicates a higher priority for the SOAP extension. The lowest possible value for the priority attribute is 1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the value that indicates the relative order in which a SOAP extension runs when multiple SOAP extensions are specified.</para>
+          <para
+            >Gets or sets the value that indicates the relative order in which a SOAP extension runs when multiple SOAP extensions are specified.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -144,7 +206,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -164,10 +229,14 @@
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("type", Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("type", Options=System.Configuration.ConfigurationPropertyOptions.IsKey)</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.TypeConverter(typeof(System.Web.Services.Configuration.TypeTypeConverter))</AttributeName>
+          <AttributeName
+            >System.ComponentModel.TypeConverter(typeof(System.Web.Services.Configuration.TypeTypeConverter))</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -179,7 +248,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the SOAP extension class to add to the SoapExtensionType element of the Web Services configuration file.</para>
+          <para
+            >Gets or sets the SOAP extension class to add to the SoapExtensionType element of the Web Services configuration file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

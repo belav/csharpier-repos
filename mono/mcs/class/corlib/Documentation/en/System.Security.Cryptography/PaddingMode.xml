@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PaddingMode" FullName="System.Security.Cryptography.PaddingMode">
   <TypeSignature Maintainer="auto" Language="C#" Value="public enum PaddingMode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed PaddingMode extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed PaddingMode extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -9,7 +12,9 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
@@ -21,8 +26,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Most plain text messages do not consist of a number of bytes that completely fill blocks. Often, there are not enough bytes to fill the last block. When this happens, a padding string is added to the text. For example, if the block length is 64 bits and the last block contains only 40 bits, 24 bits of padding are added.</para>
-      <para>Some encryption standards specify a particular padding scheme. The following example shows how these modes work. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para>
+      <para
+        >Most plain text messages do not consist of a number of bytes that completely fill blocks. Often, there are not enough bytes to fill the last block. When this happens, a padding string is added to the text. For example, if the block length is 64 bits and the last block contains only 40 bits, 24 bits of padding are added.</para
+      >
+      <para
+        >Some encryption standards specify a particular padding scheme. The following example shows how these modes work. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para
+      >
       <para>Data:                    FF FF FF FF FF FF FF FF FF</para>
       <para>X923 padding:          FF FF FF FF FF FF FF FF FF 00 00 00 00 00 00 07</para>
       <para>PKCS7 padding:        FF FF FF FF FF FF FF FF FF 07 07 07 07 07 07 07</para>
@@ -30,13 +39,18 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of padding to apply when the message data block is shorter than the full number of bytes needed for a cryptographic operation.</para>
+      <para
+        >Specifies the type of padding to apply when the message data block is shorter than the full number of bytes needed for a cryptographic operation.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="ANSIX923">
       <MemberSignature Language="C#" Value="ANSIX923" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode ANSIX923 = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode ANSIX923 = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,19 +63,26 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following example shows how this mode works. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para>
+          <para
+            >The following example shows how this mode works. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para
+          >
           <para>Data:        FF FF FF FF FF FF FF FF FF</para>
           <para>X923 padding:          FF FF FF FF FF FF FF FF FF 00 00 00 00 00 00 07</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The ANSIX923 padding string consists of a sequence of bytes filled with zeros before the length.</para>
+          <para
+            >The ANSIX923 padding string consists of a sequence of bytes filled with zeros before the length.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ISO10126">
       <MemberSignature Language="C#" Value="ISO10126" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode ISO10126 = int32(5)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode ISO10126 = int32(5)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -74,7 +95,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following example shows how this mode works. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para>
+          <para
+            >The following example shows how this mode works. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para
+          >
           <para>Data:        FF FF FF FF FF FF FF FF FF</para>
           <para>ISO10126 padding:     FF FF FF FF FF FF FF FF FF 7D 2A 75 EF F8 EF 07</para>
         </remarks>
@@ -86,7 +109,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode None = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode None = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -107,7 +133,10 @@
     </Member>
     <Member MemberName="PKCS7">
       <MemberSignature Language="C#" Value="PKCS7" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode PKCS7 = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode PKCS7 = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -121,19 +150,26 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following example shows how these modes work. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para>
+          <para
+            >The following example shows how these modes work. Given a blocklength of 8, a data length of 9, the number of padding octets equal to 7, and the data equal to FF FF FF FF FF FF FF FF FF:</para
+          >
           <para>Data:         FF FF FF FF FF FF FF FF FF</para>
           <para>PKCS7 padding:        FF FF FF FF FF FF FF FF FF 07 07 07 07 07 07 07</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The PKCS #7 padding string consists of a sequence of bytes, each of which is equal to the total number of padding bytes added. </para>
+          <para
+            >The PKCS #7 padding string consists of a sequence of bytes, each of which is equal to the total number of padding bytes added. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Zeros">
       <MemberSignature Language="C#" Value="Zeros" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode Zeros = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.PaddingMode Zeros = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

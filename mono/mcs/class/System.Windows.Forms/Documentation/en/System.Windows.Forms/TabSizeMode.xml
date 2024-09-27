@@ -12,7 +12,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by members such as <see cref="P:System.Windows.Forms.TabControl.SizeMode" />.</para>
+      <para
+        >This enumeration is used by members such as <see
+         cref="P:System.Windows.Forms.TabControl.SizeMode" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +34,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The width of each tab is sized so that each row of tabs fills the entire width of the container control. This is only applicable to tab controls with more than one row.</para>
+          <para
+            >The width of each tab is sized so that each row of tabs fills the entire width of the container control. This is only applicable to tab controls with more than one row.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,7 +70,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The width of each tab is sized to accommodate what is displayed on the tab, and the size of tabs in a row are not adjusted to fill the entire width of the container control.</para>
+          <para
+            >The width of each tab is sized to accommodate what is displayed on the tab, and the size of tabs in a row are not adjusted to fill the entire width of the container control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

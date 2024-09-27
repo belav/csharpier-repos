@@ -1,7 +1,10 @@
 <Project>
-  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
+  <Import
+    Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))"
+  />
   <PropertyGroup>
-    <JitPackagesConfigFileDirectory>$(MSBuildThisFileDirectory)config\</JitPackagesConfigFileDirectory>
+    <JitPackagesConfigFileDirectory
+      >$(MSBuildThisFileDirectory)config\</JitPackagesConfigFileDirectory
+    >
   </PropertyGroup>
 </Project>

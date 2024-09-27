@@ -13,11 +13,23 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.TextMetrics" /> structure specifies the return values of the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetTextMetrics(System.Drawing.IDeviceContext)" /> method.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.TextMetrics" />
+
+         structure specifies the return values of the <see
+
+          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetTextMetrics(System.Drawing.IDeviceContext)"
+        />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides basic information about the font specified by a visual style for a particular element.</para>
+      <para
+        >Provides basic information about the font specified by a visual style for a particular element.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -54,7 +66,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The average character width is generally defined as the width of the letter "x". This value does not include the overhang required for bold or italic characters.</para>
+          <para
+            >The average character width is generally defined as the width of the letter "x". This value does not include the overhang required for bold or italic characters.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,7 +99,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CharSet">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.VisualStyles.TextMetricsCharacterSet CharSet { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.VisualStyles.TextMetricsCharacterSet CharSet { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.TextMetricsCharacterSet</ReturnType>
@@ -156,7 +173,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the horizontal aspect of the device for which the font was designed.</para>
+          <para
+            >Gets or sets the horizontal aspect of the device for which the font was designed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -175,7 +194,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the vertical aspect of the device for which the font was designed.</para>
+          <para
+            >Gets or sets the vertical aspect of the device for which the font was designed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -193,11 +214,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Because the leading area is outside the font, it contains no marks and is not altered by text output calls in either opaque or transparent mode.</para>
+          <para
+            >Because the leading area is outside the font, it contains no marks and is not altered by text output calls in either opaque or transparent mode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the amount of extra leading that the application adds between rows.</para>
+          <para
+            >Gets or sets the amount of extra leading that the application adds between rows.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,7 +259,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The height of a character is equal to the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Ascent" /> plus the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Descent" />.</para>
+          <para
+            >The height of a character is equal to the <see
+             cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Ascent" />
+
+             plus the <see
+             cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Descent" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -260,7 +293,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the amount of leading inside the bounds set by the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Height" /> property. </para>
+          <para
+            >Gets or sets the amount of leading inside the bounds set by the <see
+             cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Height" />
+
+             property. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -336,7 +374,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the extra width per string that may be added to some synthesized fonts.</para>
+          <para
+            >Gets or sets the extra width per string that may be added to some synthesized fonts.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -344,7 +384,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PitchAndFamily">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues PitchAndFamily { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues PitchAndFamily { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues</ReturnType>
@@ -355,7 +398,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets information about the pitch, technology, and family of a physical font.</para>
+          <para
+            >Gets or sets information about the pitch, technology, and family of a physical font.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -374,7 +419,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the font specifies a horizontal line through the characters.</para>
+          <para
+            >Gets or sets a value indicating whether the font specifies a horizontal line through the characters.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

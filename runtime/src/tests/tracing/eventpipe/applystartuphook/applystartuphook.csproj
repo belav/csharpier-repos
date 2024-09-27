@@ -18,7 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../common/eventpipe_common.csproj" />
-    <ProjectReference Include="../common/Microsoft.Diagnostics.NETCore.Client/Microsoft.Diagnostics.NETCore.Client.csproj" />
+    <ProjectReference
+      Include="../common/Microsoft.Diagnostics.NETCore.Client/Microsoft.Diagnostics.NETCore.Client.csproj"
+    />
     <ProjectReference Include="hooks/Basic.csproj" Link="hooks\Basic.dll">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <OutputItemType>Content</OutputItemType>

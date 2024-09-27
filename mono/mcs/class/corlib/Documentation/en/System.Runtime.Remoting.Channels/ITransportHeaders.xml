@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ITransportHeaders" FullName="System.Runtime.Remoting.Channels.ITransportHeaders">
   <TypeSignature Maintainer="auto" Language="C#" Value="public interface ITransportHeaders" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ITransportHeaders" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ITransportHeaders"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -9,7 +12,9 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Interfaces />
   <Attributes>
     <Attribute>
@@ -25,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -41,11 +52,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Collections.IEnumerator" /> that iterates over all entries in the <see cref="T:System.Runtime.Remoting.Channels.ITransportHeaders" /> object.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Collections.IEnumerator" />
+
+             that iterates over all entries in the <see
+             cref="T:System.Runtime.Remoting.Channels.ITransportHeaders" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Collections.IEnumerator" /> that iterates over all entries in the <see cref="T:System.Runtime.Remoting.Channels.ITransportHeaders" /> object.</para>
+          <para
+            >A <see
+             cref="T:System.Collections.IEnumerator" />
+
+             that iterates over all entries in the <see
+             cref="T:System.Runtime.Remoting.Channels.ITransportHeaders" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>

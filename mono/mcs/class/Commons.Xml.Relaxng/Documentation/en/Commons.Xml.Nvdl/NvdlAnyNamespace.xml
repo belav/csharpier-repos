@@ -21,6 +21,8 @@
   </Members>
   <Docs>
     <summary>Represents an NVDL "anyNamespace" element.</summary>
-    <remarks>This class represents NVDL "allow" element. For the entire NVDL grammar, see http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/fcd/nvdl-fcd.pdf .</remarks>
+    <remarks
+      >This class represents NVDL "allow" element. For the entire NVDL grammar, see http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/fcd/nvdl-fcd.pdf .</remarks
+    >
   </Docs>
 </Type>

@@ -10,7 +10,9 @@
   </Base>
   <Docs>
     <summary>Specifies whether to hint font metrics.</summary>
-    <remarks>Hinting font metrics means quantizing them so that they are integer values in device space. Doing this improves the consistency of letter and line spacing, however it also means that text will be laid out differently at different zoom factors.</remarks>
+    <remarks
+      >Hinting font metrics means quantizing them so that they are integer values in device space. Doing this improves the consistency of letter and line spacing, however it also means that text will be laid out differently at different zoom factors.</remarks
+    >
   </Docs>
   <Members>
     <Member MemberName="Default">

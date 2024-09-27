@@ -1,5 +1,8 @@
 <Type Name="NvdlAllow" FullName="Commons.Xml.Nvdl.NvdlAllow">
-  <TypeSignature Language="C#" Value="public class NvdlAllow : Commons.Xml.Nvdl.NvdlNoResultAction" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlAllow : Commons.Xml.Nvdl.NvdlNoResultAction"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -21,6 +24,8 @@
   </Members>
   <Docs>
     <summary>Represents an NVDL "allow" element.</summary>
-    <remarks>This class represents NVDL "allow" element. For the entire NVDL grammar, see http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/fcd/nvdl-fcd.pdf .</remarks>
+    <remarks
+      >This class represents NVDL "allow" element. For the entire NVDL grammar, see http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/fcd/nvdl-fcd.pdf .</remarks
+    >
   </Docs>
 </Type>

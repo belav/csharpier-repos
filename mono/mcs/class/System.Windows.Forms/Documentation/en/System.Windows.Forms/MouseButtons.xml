@@ -20,7 +20,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by many classes, including <see cref="T:System.Windows.Forms.AxHost" />, <see cref="T:System.Windows.Forms.Control" />, <see cref="T:System.Windows.Forms.DataGrid" />, <see cref="T:System.Windows.Forms.Form" />, <see cref="T:System.Windows.Forms.RadioButton" />, <see cref="T:System.Windows.Forms.Splitter" />, <see cref="T:System.Windows.Forms.StatusBar" />, and <see cref="T:System.Windows.Forms.UpDownBase" />.</para>
+      <para
+        >This enumeration is used by many classes, including <see
+         cref="T:System.Windows.Forms.AxHost" />
+
+        , <see
+         cref="T:System.Windows.Forms.Control" />
+
+        , <see
+         cref="T:System.Windows.Forms.DataGrid" />
+
+        , <see
+         cref="T:System.Windows.Forms.Form" />
+
+        , <see
+         cref="T:System.Windows.Forms.RadioButton" />
+
+        , <see
+         cref="T:System.Windows.Forms.Splitter" />
+
+        , <see
+         cref="T:System.Windows.Forms.StatusBar" />
+
+        , and <see
+         cref="T:System.Windows.Forms.UpDownBase" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,7 +131,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>With Windows 2000, Microsoft is introducing support for the Microsoft IntelliMouse Explorer, which is a mouse with five buttons. The two new mouse buttons (XBUTTON1 and XBUTTON2) provide backward/forward navigation.</para>
+          <para
+            >With Windows 2000, Microsoft is introducing support for the Microsoft IntelliMouse Explorer, which is a mouse with five buttons. The two new mouse buttons (XBUTTON1 and XBUTTON2) provide backward/forward navigation.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -126,7 +154,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>With Windows 2000, Microsoft is introducing support for the Microsoft IntelliMouse Explorer, which is a mouse with five buttons. The two new mouse buttons (XBUTTON1 and XBUTTON2) provide backward/forward navigation.</para>
+          <para
+            >With Windows 2000, Microsoft is introducing support for the Microsoft IntelliMouse Explorer, which is a mouse with five buttons. The two new mouse buttons (XBUTTON1 and XBUTTON2) provide backward/forward navigation.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

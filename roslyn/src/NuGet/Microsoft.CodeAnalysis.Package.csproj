@@ -2,12 +2,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageId>Microsoft.CodeAnalysis</PackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageDescription>
+    <PackageDescription
+      >
       .NET Compiler Platform ("Roslyn").
 
       This is the all-in-one package (a superset of all assemblies). You can install any of these sub-packages if you only want part of the functionality:
@@ -16,13 +16,17 @@
       - "Microsoft.CodeAnalysis.Compilers" (both compilers)
       - "Microsoft.CodeAnalysis.CSharp" (only the C# compiler)
       - "Microsoft.CodeAnalysis.VisualBasic (only the VB compiler)
-    </PackageDescription>
+    </PackageDescription
+    >
     <!-- Remove once https://github.com/NuGet/Home/issues/8583 is fixed -->
     <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Workspaces\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.Workspaces.csproj" />
-    <ProjectReference Include="..\Workspaces\VisualBasic\Portable\Microsoft.CodeAnalysis.VisualBasic.Workspaces.vbproj" />
+    <ProjectReference
+      Include="..\Workspaces\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.Workspaces.csproj"
+    />
+    <ProjectReference
+      Include="..\Workspaces\VisualBasic\Portable\Microsoft.CodeAnalysis.VisualBasic.Workspaces.vbproj"
+    />
   </ItemGroup>
 </Project>

@@ -8,16 +8,19 @@
     <TargetFrameworks>$(SourceBuildTargetFrameworks);netstandard2.0</TargetFrameworks>
     <DefineConstants>$(DefineConstants);COMPILERCORE</DefineConstants>
     <NoStdLib>true</NoStdLib>
-    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'">full</ApplyNgenOptimization>
+    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
+      >full</ApplyNgenOptimization
+    >
     <GeneratePerformanceSensitiveAttribute>true</GeneratePerformanceSensitiveAttribute>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageId>Microsoft.CodeAnalysis.Common</PackageId>
-    <PackageDescription>
+    <PackageDescription
+      >
       A shared package used by the Microsoft .NET Compiler Platform ("Roslyn").
       Do not install this package manually, it will be added as a prerequisite by other packages that require it.
-    </PackageDescription>
+    </PackageDescription
+    >
   </PropertyGroup>
   <ItemGroup>
     <None Include="Operations\OperationInterfaces.xml" />
@@ -30,24 +33,57 @@
       Note: PrivateAssets="ContentFiles" ensures that projects referencing Microsoft.CodeAnalysis.Common package
       will import everything but content files from Microsoft.CodeAnalysis.Analyzers, specifically, analyzers.
     -->
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" Condition="'$(DotNetBuildFromSource)' != 'true'" PrivateAssets="ContentFiles" />
-    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
-    <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="$(SystemRuntimeCompilerServicesUnsafeVersion)" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="$(SystemThreadingTasksExtensionsVersion)" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.Analyzers"
+      Version="$(MicrosoftCodeAnalysisAnalyzersVersion)"
+      Condition="'$(DotNetBuildFromSource)' != 'true'"
+      PrivateAssets="ContentFiles"
+    />
+    <PackageReference
+      Include="System.Collections.Immutable"
+      Version="$(SystemCollectionsImmutableVersion)"
+    />
+    <PackageReference
+      Include="System.Memory"
+      Version="$(SystemMemoryVersion)"
+      Condition="'$(TargetFramework)' == 'netstandard2.0'"
+    />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
+    <PackageReference
+      Include="System.Runtime.CompilerServices.Unsafe"
+      Version="$(SystemRuntimeCompilerServicesUnsafeVersion)"
+    />
+    <PackageReference
+      Include="System.Threading.Tasks.Extensions"
+      Version="$(SystemThreadingTasksExtensionsVersion)"
+      Condition="'$(TargetFramework)' == 'netstandard2.0'"
+    />
+    <PackageReference
+      Include="System.Text.Encoding.CodePages"
+      Version="$(SystemTextEncodingCodePagesVersion)"
+      Condition="'$(TargetFramework)' == 'netstandard2.0'"
+    />
   </ItemGroup>
   <ItemGroup>
     <!-- Need to include the PerformanceSensitiveAttribute definition in source build, since we can't get it from the analyzer package. -->
-    <Compile Remove="InternalUtilities\PerformanceSensitiveAttribute.cs" Condition="'$(DotNetBuildFromSource)' != 'true'" />
+    <Compile
+      Remove="InternalUtilities\PerformanceSensitiveAttribute.cs"
+      Condition="'$(DotNetBuildFromSource)' != 'true'"
+    />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExpressionEvaluator.ExpressionCompiler" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ExpressionCompiler" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ExpressionCompiler"
+    />
     <InternalsVisibleTo Include="csc" />
     <InternalsVisibleTo Include="csi" />
     <InternalsVisibleTo Include="BuildValidator" />
@@ -77,9 +113,15 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.Symbol.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.Syntax.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.Test.Utilities" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler.UnitTests" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ExpressionCompiler.UnitTests" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExpressionEvaluator.ExpressionCompiler.Utilities" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler.UnitTests"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ExpressionCompiler.UnitTests"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.ExpressionEvaluator.ExpressionCompiler.Utilities"
+    />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler" />
     <InternalsVisibleTo Include="InteractiveHost.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Scripting.UnitTests" />
@@ -93,12 +135,14 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Rebuild.UnitTests" />
     <InternalsVisibleTo Include="Roslyn.Test.PdbUtilities" />
     <InternalsVisibleTo Include="VBCSCompiler.UnitTests" />
-    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" Key="$(MoqPublicKey)" LoadsWithinVisualStudio="false" />
+    <InternalsVisibleTo
+      Include="DynamicProxyGenAssembly2"
+      Key="$(MoqPublicKey)"
+      LoadsWithinVisualStudio="false"
+    />
     <InternalsVisibleTo Include="CompilerBenchmarks" />
-
     <EmbeddedResource Update="CodeAnalysisResources.resx" GenerateSource="true" />
     <EmbeddedResource Include="Resources\default.win32manifest" />
-
     <None Include="RuleSet\RuleSetSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -107,7 +151,16 @@
     <PublicAPI Include="PublicAPI.Unshipped.txt" />
   </ItemGroup>
   <Import Project="..\AnalyzerDriver\AnalyzerDriver.projitems" Label="Shared" />
-  <Import Project="..\..\..\Dependencies\CodeAnalysis.Debugging\Microsoft.CodeAnalysis.Debugging.projitems" Label="Shared" />
-  <Import Project="..\..\..\Dependencies\PooledObjects\Microsoft.CodeAnalysis.PooledObjects.projitems" Label="Shared" />
-  <Import Project="..\..\..\Dependencies\Collections\Microsoft.CodeAnalysis.Collections.projitems" Label="Shared" />
+  <Import
+    Project="..\..\..\Dependencies\CodeAnalysis.Debugging\Microsoft.CodeAnalysis.Debugging.projitems"
+    Label="Shared"
+  />
+  <Import
+    Project="..\..\..\Dependencies\PooledObjects\Microsoft.CodeAnalysis.PooledObjects.projitems"
+    Label="Shared"
+  />
+  <Import
+    Project="..\..\..\Dependencies\Collections\Microsoft.CodeAnalysis.Collections.projitems"
+    Label="Shared"
+  />
 </Project>

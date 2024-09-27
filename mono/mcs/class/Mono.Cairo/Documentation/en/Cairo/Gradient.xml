@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary>Base class for gradients.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -21,8 +20,7 @@
       <Parameters />
       <Docs>
         <summary>Default constructor</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -36,7 +34,10 @@
         <Parameter Name="handle" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="handle">The handle as a <see cref="t:System.IntPtr" /></param>
+        <param name="handle"
+          >The handle as a <see
+           cref="t:System.IntPtr" />
+        </param>
         <summary>Costructor with the option to pass an handle</summary>
         <remarks />
       </Docs>
@@ -46,7 +47,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddColorStop">
-      <MemberSignature Language="C#" Value="public Cairo.Status AddColorStop (double offset, Cairo.Color c);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Cairo.Status AddColorStop (double offset, Cairo.Color c);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Cairo.Status</ReturnType>
@@ -60,7 +64,9 @@
         <param name="c">the color</param>
         <summary>Adds a translucent color stop to a gradient pattern.</summary>
         <returns>the status</returns>
-        <remarks>The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.</remarks>
+        <remarks
+          >The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -68,7 +74,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddColorStopRgb">
-      <MemberSignature Language="C#" Value="public Cairo.Status AddColorStopRgb (double offset, Cairo.Color c);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Cairo.Status AddColorStopRgb (double offset, Cairo.Color c);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Cairo.Status</ReturnType>
@@ -82,7 +91,9 @@
         <param name="c">the color</param>
         <summary>Adds an opaque color stop to a gradient pattern.</summary>
         <returns>the status</returns>
-        <remarks>The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.</remarks>
+        <remarks
+          >The offset specifies the location along the gradient's control vector. For example, a linear gradient's control vector is from (x0,y0) to (x1,y1) while a radial gradient's control vector is from any point on the start circle to the corresponding point on the end circle.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -101,7 +112,10 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the count of Color Stops</summary>
-        <value>The ColorStopCount as <see cref="t:System.Int32" /></value>
+        <value
+          >The ColorStopCount as <see
+           cref="t:System.Int32" />
+        </value>
         <remarks />
       </Docs>
     </Member>

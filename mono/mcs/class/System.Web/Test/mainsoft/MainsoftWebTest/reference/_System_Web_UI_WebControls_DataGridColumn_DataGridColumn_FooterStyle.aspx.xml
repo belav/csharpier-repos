@@ -3,7 +3,7 @@
   <div id="GHTSubTest1" testname="GhtSubTest1">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl0">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
         <td>ID</td>
         <td>Name</td>
         <td>Company</td>
@@ -70,16 +70,16 @@
       </tr>
       <tr>
         <td align="Right" nowrap="nowrap" valign="Top">Footer</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
     </table>
   </div>
   <div id="GHTSubTest2" testname="GhtSubTest2">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl1">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
         <td>ID</td>
         <td>Name</td>
         <td>Company</td>
@@ -166,16 +166,16 @@
       </tr>
       <tr>
         <td align="Right" nowrap="nowrap" valign="Top">Footer</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
     </table>
   </div>
   <div id="GHTSubTest3" testname="GhtSubTest3">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl2">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
         <td>ID</td>
         <td>Name</td>
         <td>Company</td>
@@ -262,16 +262,16 @@
       </tr>
       <tr>
         <td align="Right" nowrap="nowrap" valign="Top">Footer</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
     </table>
   </div>
   <div id="GHTSubTest4" testname="GhtSubTest4">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl3">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
         <td>ID</td>
         <td>Name</td>
         <td>Company</td>
@@ -358,16 +358,16 @@
       </tr>
       <tr>
         <td align="Right" nowrap="nowrap" valign="Top">Footer</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
     </table>
   </div>
   <div id="GHTSubTest5" testname="GhtSubTest5">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="_ctl4">
       <tr>
-        <td>&amp;nbsp;</td>
+        <td>&nbsp;</td>
         <td>ID</td>
         <td>Name</td>
         <td>Company</td>

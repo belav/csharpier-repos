@@ -7,10 +7,11 @@
     <AlwaysUseCrossGen2>true</AlwaysUseCrossGen2>
     <IlasmRoundTripIncompatible>true</IlasmRoundTripIncompatible>
   </PropertyGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <ItemGroup>
     <Compile Include="fieldlayouttests.cs" />
-    <Compile Include="../../../coreclr/tools/aot/ILCompiler.TypeSystem.Tests/CoreTestAssembly/InstanceFieldLayout.cs" />
+    <Compile
+      Include="../../../coreclr/tools/aot/ILCompiler.TypeSystem.Tests/CoreTestAssembly/InstanceFieldLayout.cs"
+    />
   </ItemGroup>
 </Project>

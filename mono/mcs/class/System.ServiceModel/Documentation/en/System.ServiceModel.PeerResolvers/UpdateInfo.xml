@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UpdateInfo" FullName="System.ServiceModel.PeerResolvers.UpdateInfo">
   <TypeSignature Language="C#" Value="public class UpdateInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UpdateInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit UpdateInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,17 +21,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Instances of this class are primarily used to pass registration update request information to the resolver service from a network client of that service.</para>
+      <para
+        >Instances of this class are primarily used to pass registration update request information to the resolver service from a network client of that service.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains the information used to update the endpoint address of a specific registration entry in the lookup table of a peer resolver service.</para>
+      <para
+        >Contains the information used to update the endpoint address of a specific registration entry in the lookup table of a peer resolver service.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public UpdateInfo ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,13 +48,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public UpdateInfo (Guid registrationId, Guid client, string meshId, System.ServiceModel.PeerNodeAddress address);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Guid registrationId, valuetype System.Guid client, string meshId, class System.ServiceModel.PeerNodeAddress address) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public UpdateInfo (Guid registrationId, Guid client, string meshId, System.ServiceModel.PeerNodeAddress address);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Guid registrationId, valuetype System.Guid client, string meshId, class System.ServiceModel.PeerNodeAddress address) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,24 +79,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A peer can have multiple entries for any mesh ID, each for a specific peer endpoint. Each endpoint entry is updated separately.</para>
+          <para
+            >A peer can have multiple entries for any mesh ID, each for a specific peer endpoint. Each endpoint entry is updated separately.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" /> class with the supplied peer client ID, registration ID, peer mesh ID, and peer endpoint address.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" />
+
+             class with the supplied peer client ID, registration ID, peer mesh ID, and peer endpoint address.</para
+          >
         </summary>
         <param name="registrationId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Guid" /> that specifies the unique ID of the registration entry to update.</param>
+          <see cref="T:System.Guid" />
+
+           that specifies the unique ID of the registration entry to update.</param
+        >
         <param name="client">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Guid" /> that specifies the unique ID of the peer client that submitted the updated registration entry information.</param>
+          <see cref="T:System.Guid" />
+
+           that specifies the unique ID of the peer client that submitted the updated registration entry information.</param
+        >
         <param name="meshId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.String" /> that contains the mesh ID of the entry.</param>
+          <see cref="T:System.String" />
+
+           that contains the mesh ID of the entry.</param
+        >
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.PeerNodeAddress" /> that contains the endpoint address to update for the registration entry.</param>
+          <see cref="T:System.ServiceModel.PeerNodeAddress" />
+
+           that contains the endpoint address to update for the registration entry.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ClientId">
@@ -93,13 +133,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the unique ID of the peer client that submitted the updated registration entry information.</para>
+          <para
+            >Gets the unique ID of the peer client that submitted the updated registration entry information.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="HasBody">
       <MemberSignature Language="C#" Value="public bool HasBody ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool HasBody() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool HasBody() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -112,11 +157,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the body of the message containing a serialized instance of this type is correctly formed.</para>
+          <para
+            >Indicates whether the body of the message containing a serialized instance of this type is correctly formed.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>True if the registration update information body is correctly-formed by the sender; false if it is not.</para>
+          <para
+            >True if the registration update information body is correctly-formed by the sender; false if it is not.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -140,8 +189,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.PeerNodeAddress NodeAddress { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.PeerNodeAddress NodeAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.PeerNodeAddress NodeAddress { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.PeerNodeAddress NodeAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -160,7 +215,10 @@
     </Member>
     <Member MemberName="RegistrationId">
       <MemberSignature Language="C#" Value="public Guid RegistrationId { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid RegistrationId" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Guid RegistrationId"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

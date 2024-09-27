@@ -6,11 +6,12 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TestRuntime>true</TestRuntime>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-    <MainLibraryFileName>Android.Device_Emulator.InvariantCultureOnlyMode.Test.dll</MainLibraryFileName>
+    <MainLibraryFileName
+      >Android.Device_Emulator.InvariantCultureOnlyMode.Test.dll</MainLibraryFileName
+    >
     <IncludesTestRunner>false</IncludesTestRunner>
     <ExpectedExitCode>42</ExpectedExitCode>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

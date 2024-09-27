@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IServiceChannel" FullName="System.ServiceModel.IServiceChannel">
-  <TypeSignature Language="C#" Value="public interface IServiceChannel : System.ServiceModel.IContextChannel, System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IServiceChannel implements class System.ServiceModel.Channels.IChannel, class System.ServiceModel.ICommunicationObject, class System.ServiceModel.IContextChannel, class System.ServiceModel.IExtensibleObject`1&lt;class System.ServiceModel.IContextChannel&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface IServiceChannel : System.ServiceModel.IContextChannel, System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IServiceChannel implements class System.ServiceModel.Channels.IChannel, class System.ServiceModel.ICommunicationObject, class System.ServiceModel.IContextChannel, class System.ServiceModel.IExtensibleObject`1<class System.ServiceModel.IContextChannel>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -11,13 +17,17 @@
       <InterfaceName>System.ServiceModel.IContextChannel</InterfaceName>
     </Interface>
     <Interface>
-      <InterfaceName>System.ServiceModel.IExtensibleObject&lt;System.ServiceModel.IContextChannel&gt;</InterfaceName>
+      <InterfaceName
+        >System.ServiceModel.IExtensibleObject<System.ServiceModel.IContextChannel></InterfaceName
+      >
     </Interface>
   </Interfaces>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This interface defines access to the URI at which the service listens for incoming requests on the channel.</para>
+      <para
+        >This interface defines access to the URI at which the service listens for incoming requests on the channel.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

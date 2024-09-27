@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WebSocketTransportSettings" FullName="System.ServiceModel.Channels.WebSocketTransportSettings">
-  <TypeSignature Language="C#" Value="public sealed class WebSocketTransportSettings : IEquatable&lt;System.ServiceModel.Channels.WebSocketTransportSettings&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit WebSocketTransportSettings extends System.Object implements class System.IEquatable`1&lt;class System.ServiceModel.Channels.WebSocketTransportSettings&gt;" />
+<Type
+  Name="WebSocketTransportSettings"
+  FullName="System.ServiceModel.Channels.WebSocketTransportSettings"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WebSocketTransportSettings : IEquatable<System.ServiceModel.Channels.WebSocketTransportSettings>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit WebSocketTransportSettings extends System.Object implements class System.IEquatable`1<class System.ServiceModel.Channels.WebSocketTransportSettings>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -11,7 +20,9 @@
   </Base>
   <Interfaces>
     <Interface>
-      <InterfaceName>System.IEquatable&lt;System.ServiceModel.Channels.WebSocketTransportSettings&gt;</InterfaceName>
+      <InterfaceName
+        >System.IEquatable<System.ServiceModel.Channels.WebSocketTransportSettings></InterfaceName
+      >
     </Interface>
   </Interfaces>
   <Docs>
@@ -24,7 +35,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WebSocketTransportSettings ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,13 +48,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.WebSocketTransportSettings" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.WebSocketTransportSettings" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BinaryEncoderTransferModeHeader">
-      <MemberSignature Language="C#" Value="public const string BinaryEncoderTransferModeHeader = null;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string BinaryEncoderTransferModeHeader = null" />
+      <MemberSignature
+        Language="C#"
+        Value="public const string BinaryEncoderTransferModeHeader = null;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string BinaryEncoderTransferModeHeader = null"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,7 +84,10 @@
     </Member>
     <Member MemberName="BinaryMessageReceivedAction">
       <MemberSignature Language="C#" Value="public const string BinaryMessageReceivedAction;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string BinaryMessageReceivedAction" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string BinaryMessageReceivedAction"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,7 +105,10 @@
     </Member>
     <Member MemberName="ConnectionOpenedAction">
       <MemberSignature Language="C#" Value="public const string ConnectionOpenedAction = null;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string ConnectionOpenedAction = null" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string ConnectionOpenedAction = null"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,8 +126,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateNotificationOnConnection">
-      <MemberSignature Language="C#" Value="public bool CreateNotificationOnConnection { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool CreateNotificationOnConnection" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool CreateNotificationOnConnection { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool CreateNotificationOnConnection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -128,13 +165,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that indicates whether the web socket masking is disabled.</para>
+          <para
+            >Gets or sets a value that indicates whether the web socket masking is disabled.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (System.ServiceModel.Channels.WebSocketTransportSettings other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(class System.ServiceModel.Channels.WebSocketTransportSettings other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (System.ServiceModel.Channels.WebSocketTransportSettings other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(class System.ServiceModel.Channels.WebSocketTransportSettings other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -149,19 +194,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified web socket transport settings object is equal with the current object.</para>
+          <para
+            >Determines whether the specified web socket transport settings object is equal with the current object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the specified object is equal with the current object; otherwise, false.</para>
+          <para
+            >true if the specified object is equal with the current object; otherwise, false.</para
+          >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />The web socket transport settings object to compare with the current object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The web socket transport settings object to compare with the current object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="KeepAliveInterval">
       <MemberSignature Language="C#" Value="public TimeSpan KeepAliveInterval { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan KeepAliveInterval" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan KeepAliveInterval"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -237,7 +292,10 @@
     </Member>
     <Member MemberName="SoapContentTypeHeader">
       <MemberSignature Language="C#" Value="public const string SoapContentTypeHeader = null;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string SoapContentTypeHeader = null" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string SoapContentTypeHeader = null"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -275,7 +333,10 @@
     </Member>
     <Member MemberName="TextMessageReceivedAction">
       <MemberSignature Language="C#" Value="public const string TextMessageReceivedAction;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string TextMessageReceivedAction" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string TextMessageReceivedAction"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -292,8 +353,14 @@
       </Docs>
     </Member>
     <Member MemberName="TransportUsage">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.WebSocketTransportUsage TransportUsage { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Channels.WebSocketTransportUsage TransportUsage" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.WebSocketTransportUsage TransportUsage { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Channels.WebSocketTransportUsage TransportUsage"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

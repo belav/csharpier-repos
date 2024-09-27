@@ -14,8 +14,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Web.UI.PropertyEntry" /> is the base class for all property entry classes; you cannot create an instance of this class. It defines fields that are used in the derived classes <see cref="T:System.Web.UI.BoundPropertyEntry" />, <see cref="T:System.Web.UI.BuilderPropertyEntry" />, <see cref="T:System.Web.UI.ComplexPropertyEntry" />, <see cref="T:System.Web.UI.TemplatePropertyEntry" />, and <see cref="T:System.Web.UI.SimplePropertyEntry" />. </para>
-      <para>The page parser uses property entry classes during parsing to represent expressions found within server control tags.</para>
+        <see cref="T:System.Web.UI.PropertyEntry" />
+
+         is the base class for all property entry classes; you cannot create an instance of this class. It defines fields that are used in the derived classes <see
+         cref="T:System.Web.UI.BoundPropertyEntry" />
+
+        , <see
+         cref="T:System.Web.UI.BuilderPropertyEntry" />
+
+        , <see
+         cref="T:System.Web.UI.ComplexPropertyEntry" />
+
+        , <see
+         cref="T:System.Web.UI.TemplatePropertyEntry" />
+
+        , and <see
+         cref="T:System.Web.UI.SimplePropertyEntry" />
+
+        . </para
+      >
+      <para
+        >The page parser uses property entry classes during parsing to represent expressions found within server control tags.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -81,7 +101,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PropertyInfo">
-      <MemberSignature Language="C#" Value="public System.Reflection.PropertyInfo PropertyInfo { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.PropertyInfo PropertyInfo { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Reflection.PropertyInfo</ReturnType>
@@ -92,7 +115,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an object containing attributes of the property the expression applies to.</para>
+          <para
+            >Gets or sets an object containing attributes of the property the expression applies to.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

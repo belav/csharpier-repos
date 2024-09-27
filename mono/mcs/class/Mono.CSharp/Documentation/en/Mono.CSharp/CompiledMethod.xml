@@ -8,23 +8,27 @@
     <BaseTypeName>System.Delegate</BaseTypeName>
   </Base>
   <Parameters>
-    <Parameter Name="retvalue" Type="System.Object&amp;" RefType="ref" />
+    <Parameter Name="retvalue" Type="System.Object&" RefType="ref" />
   </Parameters>
   <ReturnValue>
     <ReturnType>System.Void</ReturnType>
   </ReturnValue>
   <Docs>
     <param name="retvalue">The return value.</param>
-    <summary>
+    <summary
+      >
             A delegate that can be used to invoke the
             compiled expression or statement.
-            </summary>
-    <remarks>
+            </summary
+    >
+    <remarks
+      >
             Since the Compile methods will compile
             statements and expressions into the same
             delegate, you can tell if a value was returned
             by checking whether the returned value is of type
             NoValueSet.
-            </remarks>
+            </remarks
+    >
   </Docs>
 </Type>

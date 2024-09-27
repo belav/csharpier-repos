@@ -15,6 +15,9 @@
   <div id="GHTSubTest5" style="height:56px;width:553px">
     <textarea cols="7" id="Textarea5" rows="2" name="Textarea5">Sample Text</textarea>
     <span>
-      <br />7</span>
+      <br />
+
+      7</span
+    >
   </div>
 </testresults>

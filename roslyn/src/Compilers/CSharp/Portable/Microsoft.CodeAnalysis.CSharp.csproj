@@ -6,22 +6,28 @@
     <RootNamespace>Microsoft.CodeAnalysis.CSharp</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TargetFrameworks>$(SourceBuildTargetFrameworks);netstandard2.0</TargetFrameworks>
-    <GenerateMicrosoftCodeAnalysisCommitHashAttribute>true</GenerateMicrosoftCodeAnalysisCommitHashAttribute>
-    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'">full</ApplyNgenOptimization>
-
+    <GenerateMicrosoftCodeAnalysisCommitHashAttribute
+      >true</GenerateMicrosoftCodeAnalysisCommitHashAttribute
+    >
+    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
+      >full</ApplyNgenOptimization
+    >
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-    <PackageDescription>
+    <PackageDescription
+      >
       .NET Compiler Platform ("Roslyn") support for C#, Microsoft.CodeAnalysis.CSharp.dll.
-    </PackageDescription>
-
+    </PackageDescription
+    >
     <!-- Enable output of generated files back into our Generated directory -->
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Portable\Microsoft.CodeAnalysis.csproj" />
-    <ProjectReference Include="..\..\..\Tools\Source\CompilerGeneratorTools\Source\CSharpSyntaxGenerator\CSharpSyntaxGenerator.csproj">
+    <ProjectReference
+      Include="..\..\..\Tools\Source\CompilerGeneratorTools\Source\CSharpSyntaxGenerator\CSharpSyntaxGenerator.csproj"
+    >
       <OutputItemType>Analyzer</OutputItemType>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <!-- The generator project currently builds as both a console app and a source generator,
@@ -41,7 +47,6 @@
     <None Include="FlowAnalysis\Flow Analysis Design.docx" />
     <PublicAPI Include="PublicAPI.Shipped.txt" />
     <PublicAPI Include="PublicAPI.Unshipped.txt" />
-
     <!-- Don't include the output from a previous source generator execution into future runs; the */** trick here ensures that there's
          at least one subdirectory, which is our key that it's coming from a source generator as opposed to something that is coming from
          some other tool. -->
@@ -51,7 +56,9 @@
     <EmbeddedResource Update="CSharpResources.resx" GenerateSource="true" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler"
+    />
     <InternalsVisibleTo Include="csc" />
     <InternalsVisibleTo Include="csi" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.Scripting" />
@@ -69,7 +76,9 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.Symbol.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.Syntax.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.Test.Utilities" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler.UnitTests" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ExpressionCompiler.UnitTests"
+    />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Test.Utilities" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Scripting.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests" />

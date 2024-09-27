@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ToolStripSystemRenderer" FullName="System.Windows.Forms.ToolStripSystemRenderer">
-  <TypeSignature Language="C#" Value="public class ToolStripSystemRenderer : System.Windows.Forms.ToolStripRenderer" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripSystemRenderer : System.Windows.Forms.ToolStripRenderer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,12 +16,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> applies system colors and a flat visual style to <see cref="T:System.Windows.Forms.ToolStrip" /> applications.</para>
-      <para>By default, the <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> applies a palette of <see cref="T:System.Drawing.SystemColors" /> and visual styles, if visual styles are enabled for the application. </para>
+        <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+         applies system colors and a flat visual style to <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+         applications.</para
+      >
+      <para
+        >By default, the <see
+         cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+         applies a palette of <see
+         cref="T:System.Drawing.SystemColors" />
+
+         and visual styles, if visual styles are enabled for the application. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Handles the painting functionality for <see cref="T:System.Windows.Forms.ToolStrip" /> objects, using system colors and a flat visual style.</para>
+      <para
+        >Handles the painting functionality for <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+         objects, using system colors and a flat visual style.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -33,12 +55,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnRenderButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -56,7 +86,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderDropDownButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderDropDownButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderDropDownButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -74,7 +107,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderGrip">
-      <MemberSignature Language="C#" Value="protected override void OnRenderGrip (System.Windows.Forms.ToolStripGripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderGrip (System.Windows.Forms.ToolStripGripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -92,7 +128,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderImageMargin">
-      <MemberSignature Language="C#" Value="protected override void OnRenderImageMargin (System.Windows.Forms.ToolStripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderImageMargin (System.Windows.Forms.ToolStripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,7 +149,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderItemBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderItemBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderItemBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -128,7 +170,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderLabelBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -146,7 +191,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderMenuItemBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderMenuItemBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderMenuItemBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -164,7 +212,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderOverflowButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderOverflowButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderOverflowButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -182,7 +233,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderSeparator">
-      <MemberSignature Language="C#" Value="protected override void OnRenderSeparator (System.Windows.Forms.ToolStripSeparatorRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderSeparator (System.Windows.Forms.ToolStripSeparatorRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -200,7 +254,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderSplitButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderSplitButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderSplitButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -218,7 +275,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderToolStripBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripBackground (System.Windows.Forms.ToolStripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripBackground (System.Windows.Forms.ToolStripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -236,7 +296,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderToolStripBorder">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripBorder (System.Windows.Forms.ToolStripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripBorder (System.Windows.Forms.ToolStripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -254,7 +317,10 @@
       </Docs>
     </Member>
     <Member MemberName="OnRenderToolStripStatusLabelBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripStatusLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripStatusLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

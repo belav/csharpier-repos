@@ -1,8 +1,8 @@
 <Project>
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.props))\Directory.Build.props" />
-
-  <Import Project="Wix.props"  Condition="'$(MSBuildProjectExtension)' == '.wixproj'" />
-
+  <Import
+    Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.props))\Directory.Build.props"
+  />
+  <Import Project="Wix.props" Condition="'$(MSBuildProjectExtension)' == '.wixproj'" />
   <PropertyGroup>
     <!--
       For installers project, build acceleration may not work correctly.
@@ -10,5 +10,4 @@
     -->
     <AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
   </PropertyGroup>
-
 </Project>

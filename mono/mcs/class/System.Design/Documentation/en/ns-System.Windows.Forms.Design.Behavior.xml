@@ -3,23 +3,51 @@
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Windows.Forms.Design.Behavior" /> namespace contains classes for creating custom user interface behavior for components at design time.</para>
+      <para
+        >The <see
+         cref="N:System.Windows.Forms.Design.Behavior" />
+
+         namespace contains classes for creating custom user interface behavior for components at design time.</para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The following list shows the classes included in this namespace: </para>
       <list type="bullet">
         <item>
-          <para>A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> class for handling painting and hit-testing.</para>
+          <para
+            >A <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             class for handling painting and hit-testing.</para
+          >
         </item>
         <item>
-          <para>An <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" /> class for managing a collection of <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects. </para>
+          <para
+            >An <see
+             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+             class for managing a collection of <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             objects. </para
+          >
         </item>
         <item>
-          <para>A <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> class for managing the custom user interface in a designer.</para>
+          <para
+            >A <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             class for managing the custom user interface in a designer.</para
+          >
         </item>
         <item>
-          <para>A <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class that represents horizontal and vertical line segments that assist users in aligning components at design time.</para>
+          <para
+            >A <see
+             cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+             class that represents horizontal and vertical line segments that assist users in aligning components at design time.</para
+          >
         </item>
       </list>
     </remarks>

@@ -11,19 +11,32 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.AttributeUsage(System.AttributeTargets.Property, AllowMultiple=false, Inherited=false)</AttributeName>
+      <AttributeName
+        >System.AttributeUsage(System.AttributeTargets.Property, AllowMultiple=false, Inherited=false)</AttributeName
+      >
     </Attribute>
   </Attributes>
   <Docs>
     <since version="2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>If a property marked with this attribute is not assigned a value when the task is invoked, the build will fail.</para>
-      <para>For more information about using attributes, see <format type="text/html"><a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a></format>.</para>
+      <para
+        >If a property marked with this attribute is not assigned a value when the task is invoked, the build will fail.</para
+      >
+      <para
+        >For more information about using attributes, see <format
+         type="text/html">
+          <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines the metadata attribute that task authors use to identify required task properties. Task properties with this attribute must have a set value when the task is run. </para>
+      <para
+        >Defines the metadata attribute that task authors use to identify required task properties. Task properties with this attribute must have a set value when the task is run. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -36,7 +49,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.RequiredAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.RequiredAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

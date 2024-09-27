@@ -59,9 +59,14 @@
     <ProjectReference Include="..\src\System.IO.Pipelines.csproj" SkipUseReferenceAssembly="true" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
-    <ProjectReference Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj" />
+    <ProjectReference
+      Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="$(SystemRuntimeCompilerServicesUnsafeVersion)" />
+    <PackageReference
+      Include="System.Runtime.CompilerServices.Unsafe"
+      Version="$(SystemRuntimeCompilerServicesUnsafeVersion)"
+    />
   </ItemGroup>
 </Project>

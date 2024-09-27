@@ -34,7 +34,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>This operator leaves the first object mostly intact, but mixes both objects in the overlapping area. The second object object is not drawn except there.</summary>
+        <summary
+          >This operator leaves the first object mostly intact, but mixes both objects in the overlapping area. The second object object is not drawn except there.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -48,7 +50,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Where the second object is drawn, the first is completely removed. Anywhere else it is left intact. The second object itself is not drawn.</summary>
+        <summary
+          >Where the second object is drawn, the first is completely removed. Anywhere else it is left intact. The second object itself is not drawn.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -76,7 +80,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Same as the ATOP operator, but as if the order of the drawing operations had been reversed.</summary>
+        <summary
+          >Same as the ATOP operator, but as if the order of the drawing operations had been reversed.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,7 +96,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>This works like the IN operator, but with the second object "below" the first.</summary>
+        <summary
+          >This works like the IN operator, but with the second object "below" the first.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -104,7 +112,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The second object is used to reduce the visibility of the first in the overlapping area. The second object is not drawn itself.</summary>
+        <summary
+          >The second object is used to reduce the visibility of the first in the overlapping area. The second object is not drawn itself.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -118,7 +128,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The result is similar to the OVER operator. Except that the "order" of the objects is reversed, so the second is drawn below the first.</summary>
+        <summary
+          >The result is similar to the OVER operator. Except that the "order" of the objects is reversed, so the second is drawn below the first.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -132,7 +144,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The first object is removed completely, the second is only drawn where the first was.</summary>
+        <summary
+          >The first object is removed completely, the second is only drawn where the first was.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -146,7 +160,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The first object is removed completely, the second is only drawn where the first not was.</summary>
+        <summary
+          >The first object is removed completely, the second is only drawn where the first not was.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -160,7 +176,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The result is the same as if you held two semi-transparent slides on top of each other.</summary>
+        <summary
+          >The result is the same as if you held two semi-transparent slides on top of each other.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -188,7 +206,9 @@
         <ReturnType>Cairo.Operator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The second object is drawn as if nothing else were below. The first object is only left intact outside the second.</summary>
+        <summary
+          >The second object is drawn as if nothing else were below. The first object is only left intact outside the second.</summary
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

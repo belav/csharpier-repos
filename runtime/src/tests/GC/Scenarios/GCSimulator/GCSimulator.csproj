@@ -4,7 +4,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GCStressIncompatible>true</GCStressIncompatible>
     <IsGCSimulatorTest>true</IsGCSimulatorTest>
-    <CLRTestExecutionArguments>-t 1 -tp 0 -dz 17 -sdz 17 -dc 20000 -sdc 8000 -lt 2 -dp 0.0 -dw 0.4</CLRTestExecutionArguments>
+    <CLRTestExecutionArguments
+      >-t 1 -tp 0 -dz 17 -sdz 17 -dc 20000 -sdc 8000 -lt 2 -dp 0.0 -dw 0.4</CLRTestExecutionArguments
+    >
     <CLRTestPriority>1</CLRTestPriority>
   </PropertyGroup>
   <ItemGroup>

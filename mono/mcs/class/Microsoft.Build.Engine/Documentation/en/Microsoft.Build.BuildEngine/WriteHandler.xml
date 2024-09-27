@@ -20,7 +20,9 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the method that writes strings to a certain location, such as the console window or a window in an integrated development environment. </para>
+      <para
+        >Represents the method that writes strings to a certain location, such as the console window or a window in an integrated development environment. </para
+      >
     </summary>
   </Docs>
 </Type>

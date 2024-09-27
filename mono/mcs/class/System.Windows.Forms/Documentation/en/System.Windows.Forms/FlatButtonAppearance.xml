@@ -14,12 +14,26 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides properties that specify the appearance of <see cref="T:System.Windows.Forms.Button" /> controls whose <see cref="T:System.Windows.Forms.FlatStyle" /> is <see cref="F:System.Windows.Forms.FlatStyle.Flat" />.</para>
+      <para
+        >Provides properties that specify the appearance of <see
+         cref="T:System.Windows.Forms.Button" />
+
+         controls whose <see
+         cref="T:System.Windows.Forms.FlatStyle" />
+
+         is <see
+         cref="F:System.Windows.Forms.FlatStyle.Flat" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="BorderColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color BorderColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color BorderColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -29,10 +43,14 @@
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -65,7 +83,9 @@
           <AttributeName>System.ComponentModel.DefaultValue(1)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -77,7 +97,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that specifies the size, in pixels, of the border around the button.</para>
+          <para
+            >Gets or sets a value that specifies the size, in pixels, of the border around the button.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +107,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CheckedBackColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color CheckedBackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color CheckedBackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -95,10 +120,14 @@
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -110,7 +139,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the color of the client area of the button when the button is checked and the mouse pointer is outside the bounds of the control.</para>
+          <para
+            >Gets or sets the color of the client area of the button when the button is checked and the mouse pointer is outside the bounds of the control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -118,7 +149,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MouseDownBackColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color MouseDownBackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color MouseDownBackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -128,10 +162,14 @@
           <AttributeName>System.ComponentModel.Browsable(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -143,7 +181,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the color of the client area of the button when the mouse is pressed within the bounds of the control.</para>
+          <para
+            >Gets or sets the color of the client area of the button when the mouse is pressed within the bounds of the control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -151,7 +191,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MouseOverBackColor">
-      <MemberSignature Language="C#" Value="public System.Drawing.Color MouseOverBackColor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Color MouseOverBackColor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -161,10 +204,14 @@
           <AttributeName>System.ComponentModel.NotifyParentProperty(true)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName>
+          <AttributeName
+            >System.ComponentModel.DefaultValue(typeof(System.Drawing.Color), "")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName>
+          <AttributeName
+            >System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -176,7 +223,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the color of the client area of the button when the mouse pointer is within the bounds of the control.</para>
+          <para
+            >Gets or sets the color of the client area of the button when the mouse pointer is within the bounds of the control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -186,7 +235,9 @@
   </Members>
   <Attributes>
     <Attribute>
-      <AttributeName>System.ComponentModel.TypeConverter(typeof(System.Windows.Forms.FlatButtonAppearanceConverter))</AttributeName>
+      <AttributeName
+        >System.ComponentModel.TypeConverter(typeof(System.Windows.Forms.FlatButtonAppearanceConverter))</AttributeName
+      >
     </Attribute>
   </Attributes>
 </Type>

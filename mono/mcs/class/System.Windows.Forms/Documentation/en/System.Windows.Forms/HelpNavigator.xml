@@ -12,7 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="T:System.Windows.Forms.Help" /> and <see cref="T:System.Windows.Forms.HelpProvider" /> classes to provide access to specific elements of a Help file. For example, when used with the <see cref="T:System.Windows.Forms.HelpProvider" /> component that provides F1 Help, the <see cref="F:System.Windows.Forms.HelpNavigator.TopicId" /> or <see cref="F:System.Windows.Forms.HelpNavigator.Topic" /> value could be specified to open Help to a context-specific topic.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="T:System.Windows.Forms.Help" />
+
+         and <see
+         cref="T:System.Windows.Forms.HelpProvider" />
+
+         classes to provide access to specific elements of a Help file. For example, when used with the <see
+         cref="T:System.Windows.Forms.HelpProvider" />
+
+         component that provides F1 Help, the <see
+         cref="F:System.Windows.Forms.HelpNavigator.TopicId" />
+
+         or <see
+         cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+         value could be specified to open Help to a context-specific topic.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +46,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The Help file opens to the index entry for the first letter of a specified topic.</para>
+          <para
+            >The Help file opens to the index entry for the first letter of a specified topic.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +99,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The Help file opens to the topic with the specified index entry, if one exists; otherwise, the index entry closest to the specified keyword is displayed.</para>
+          <para
+            >The Help file opens to the topic with the specified index entry, if one exists; otherwise, the index entry closest to the specified keyword is displayed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

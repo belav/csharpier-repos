@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="STATSTG" FullName="System.Runtime.InteropServices.ComTypes.STATSTG">
   <TypeSignature Language="C#" Value="public struct STATSTG" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential sealed beforefieldinit STATSTG extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential sealed beforefieldinit STATSTG extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,18 +18,35 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+      >
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains statistical information about an open storage, stream, or byte-array object.</para>
+      <para
+        >Contains statistical information about an open storage, stream, or byte-array object.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="atime">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.FILETIME atime;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FILETIME atime" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.FILETIME atime;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FILETIME atime"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,7 +59,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,7 +84,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,7 +110,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is initialized to CLSID_NULL for new storage objects.</para>
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -95,8 +121,14 @@
       </Docs>
     </Member>
     <Member MemberName="ctime">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.FILETIME ctime;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FILETIME ctime" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.FILETIME ctime;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FILETIME ctime"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,7 +141,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -132,7 +166,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -155,7 +191,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -178,17 +216,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the current state bits of the storage object (the value most recently set by the IStorage::SetStateBits method).</para>
+          <para
+            >Indicates the current state bits of the storage object (the value most recently set by the IStorage::SetStateBits method).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="mtime">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.FILETIME mtime;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FILETIME mtime" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.FILETIME mtime;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FILETIME mtime"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -201,7 +249,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -224,11 +274,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a pointer to a null-terminated string containing the name of the object described by this structure.</para>
+          <para
+            >Represents a pointer to a null-terminated string containing the name of the object described by this structure.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -247,7 +301,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -270,11 +326,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
+          <para
+            >For more information, see the existing documentation for STATSTG in the MSDN library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the type of storage object, which is one of the values from the STGTY enumeration.</para>
+          <para
+            >Indicates the type of storage object, which is one of the values from the STGTY enumeration.</para
+          >
         </summary>
       </Docs>
     </Member>

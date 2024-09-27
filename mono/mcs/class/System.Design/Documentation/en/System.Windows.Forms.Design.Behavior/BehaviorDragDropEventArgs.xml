@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="BehaviorDragDropEventArgs" FullName="System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs">
+<Type
+  Name="BehaviorDragDropEventArgs"
+  FullName="System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs"
+>
   <TypeSignature Language="C#" Value="public class BehaviorDragDropEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -13,12 +16,23 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" /> and <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" /> events.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" />
+
+         and <see
+         cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
+
+         events.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BehaviorDragDropEventArgs (System.Collections.ICollection dragComponents);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BehaviorDragDropEventArgs (System.Collections.ICollection dragComponents);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,14 +44,31 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="dragComponents">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.ICollection" /> of <see cref="T:System.ComponentModel.IComponent" /> objects currently being dragged.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Collections.ICollection" />
+
+           of <see
+           cref="T:System.ComponentModel.IComponent" />
+
+           objects currently being dragged.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DragComponents">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection DragComponents { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection DragComponents { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,7 +81,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the list of <see cref="T:System.ComponentModel.IComponent" /> objects currently being dragged.</para>
+          <para
+            >Gets the list of <see
+             cref="T:System.ComponentModel.IComponent" />
+
+             objects currently being dragged.</para
+          >
         </summary>
       </Docs>
     </Member>

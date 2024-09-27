@@ -190,11 +190,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the string "true" if the column is automatically incremented; otherwise "false."</para>
+          <para
+            >Returns the string "true" if the column is automatically incremented; otherwise "false."</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies whether the column values in the column are automatically incremented.</para>
+          <para
+            >Specifies whether the column values in the column are automatically incremented.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -253,7 +257,9 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the string "true" if the column contains row version information, otherwise "false."</para>
+          <para
+            >Returns the string "true" if the column contains row version information, otherwise "false."</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -265,7 +271,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProviderSpecificDataType">
-      <MemberSignature Language="C#" Value="public static readonly string ProviderSpecificDataType;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string ProviderSpecificDataType;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

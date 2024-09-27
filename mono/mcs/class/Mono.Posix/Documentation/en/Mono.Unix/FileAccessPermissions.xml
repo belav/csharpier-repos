@@ -1,6 +1,9 @@
 <Type Name="FileAccessPermissions" FullName="Mono.Unix.FileAccessPermissions">
   <TypeSignature Language="C#" Value="public enum FileAccessPermissions" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed FileAccessPermissions extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed FileAccessPermissions extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -17,10 +20,12 @@
   </Attributes>
   <Docs>
     <summary>Unix file access permissions.</summary>
-    <remarks>Every Unix file system entry has a 9-bit bitmask associated with 
+    <remarks
+      >Every Unix file system entry has a 9-bit bitmask associated with 
     it controlling file access from the file's owner, group, and for everybody
     else.  These bits control whether the owner/group/other can Read, Write,
-    or Execute the file.</remarks>
+    or Execute the file.</remarks
+    >
     <altmember cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
     <altmember cref="P:Mono.Unix.UnixStream.FileAccessPermissions" />
     <altmember cref="F:Mono.Unix.Native.FilePermissions" />
@@ -31,7 +36,10 @@
   <Members>
     <Member MemberName="AllPermissions">
       <MemberSignature Language="C#" Value="AllPermissions" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions AllPermissions = int32(511)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions AllPermissions = int32(511)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -42,16 +50,29 @@
         <ReturnType>Mono.Unix.FileAccessPermissions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Equivalent to 
-        <c>FileAccessPermissions.UserReadWriteExecute |
+        <summary
+          >Equivalent to 
+        <c
+
+            >FileAccessPermissions.UserReadWriteExecute |
         FileAccessPermissions.GroupReadWriteExecute |
-        FileAccessPermissions.OtherReadWriteExecute</c>
-        (the <c>777</c> permission).</summary>
+        FileAccessPermissions.OtherReadWriteExecute</c
+          >
+
+          
+        (the <c
+          >777</c>
+
+           permission).</summary
+        >
       </Docs>
     </Member>
     <Member MemberName="DefaultPermissions">
       <MemberSignature Language="C#" Value="DefaultPermissions" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions DefaultPermissions = int32(438)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions DefaultPermissions = int32(438)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -62,16 +83,29 @@
         <ReturnType>Mono.Unix.FileAccessPermissions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Equivalent to 
-        <c>FileAccessPermissions.UserRead | FileAccessPermissions.UserWrite | 
+        <summary
+          >Equivalent to 
+        <c
+
+            >FileAccessPermissions.UserRead | FileAccessPermissions.UserWrite | 
         FileAccessPermissions.GroupRead | FileAccessPermissions.GroupWrite | 
-        FileAccessPermissions.OtherRead | FileAccessPermissions.OtherWrite</c> 
-        (the <c>666</c> permission).</summary>
+        FileAccessPermissions.OtherRead | FileAccessPermissions.OtherWrite</c
+          >
+
+           
+        (the <c
+          >666</c>
+
+           permission).</summary
+        >
       </Docs>
     </Member>
     <Member MemberName="GroupExecute">
       <MemberSignature Language="C#" Value="GroupExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupExecute = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupExecute = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -84,14 +118,19 @@
       <Docs>
         <summary>
           <para>Is executable by group.</para>
-          <para>The executable bit on directories controls searching within
-					the directory.</para>
+          <para
+            >The executable bit on directories controls searching within
+					the directory.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GroupRead">
       <MemberSignature Language="C#" Value="GroupRead" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupRead = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupRead = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -107,7 +146,10 @@
     </Member>
     <Member MemberName="GroupReadWriteExecute">
       <MemberSignature Language="C#" Value="GroupReadWriteExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupReadWriteExecute = int32(56)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupReadWriteExecute = int32(56)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -120,14 +162,19 @@
       <Docs>
         <summary>
           <para>Is readable, writable, and executable by group.</para>
-          <para>The executable bit on directories controls searching within
-					the directory.</para>
+          <para
+            >The executable bit on directories controls searching within
+					the directory.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GroupWrite">
       <MemberSignature Language="C#" Value="GroupWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupWrite = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions GroupWrite = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -143,7 +190,10 @@
     </Member>
     <Member MemberName="OtherExecute">
       <MemberSignature Language="C#" Value="OtherExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherExecute = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherExecute = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -156,14 +206,19 @@
       <Docs>
         <summary>
           <para>Is executable by others.</para>
-          <para>The executable bit on directories controls searching within
-					the directory.</para>
+          <para
+            >The executable bit on directories controls searching within
+					the directory.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OtherRead">
       <MemberSignature Language="C#" Value="OtherRead" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherRead = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherRead = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -179,7 +234,10 @@
     </Member>
     <Member MemberName="OtherReadWriteExecute">
       <MemberSignature Language="C#" Value="OtherReadWriteExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherReadWriteExecute = int32(7)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherReadWriteExecute = int32(7)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,14 +250,19 @@
       <Docs>
         <summary>
           <para>Is readable, writable, and executable by others.</para>
-          <para>The executable bit on directories controls searching within
-					the directory.</para>
+          <para
+            >The executable bit on directories controls searching within
+					the directory.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OtherWrite">
       <MemberSignature Language="C#" Value="OtherWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherWrite = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions OtherWrite = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -215,7 +278,10 @@
     </Member>
     <Member MemberName="UserExecute">
       <MemberSignature Language="C#" Value="UserExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserExecute = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserExecute = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -228,14 +294,19 @@
       <Docs>
         <summary>
           <para>Is executable by user (owner).</para>
-          <para>The executable bit on directories controls searching within
-					the directory.</para>
+          <para
+            >The executable bit on directories controls searching within
+					the directory.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="UserRead">
       <MemberSignature Language="C#" Value="UserRead" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserRead = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserRead = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -251,7 +322,10 @@
     </Member>
     <Member MemberName="UserReadWriteExecute">
       <MemberSignature Language="C#" Value="UserReadWriteExecute" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserReadWriteExecute = int32(448)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserReadWriteExecute = int32(448)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -264,14 +338,19 @@
       <Docs>
         <summary>
           <para>Is readable, writable, and executable by user (owner).</para>
-          <para>The executable bit on directories controls searching within
-					the directory.</para>
+          <para
+            >The executable bit on directories controls searching within
+					the directory.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="UserWrite">
       <MemberSignature Language="C#" Value="UserWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserWrite = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Unix.FileAccessPermissions UserWrite = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

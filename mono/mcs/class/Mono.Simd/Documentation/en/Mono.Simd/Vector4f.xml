@@ -10,7 +10,9 @@
   <Interfaces />
   <Docs>
     <summary>A vector with four floating point values.</summary>
-    <remarks>This represents a vector that contains 4 single precision floating point values.</remarks>
+    <remarks
+      >This represents a vector that contains 4 single precision floating point values.</remarks
+    >
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -29,7 +31,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Vector4f (float x, float y, float z, float w);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Vector4f (float x, float y, float z, float w);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,8 +51,7 @@
         <param name="z">Z component.</param>
         <param name="w">W component.</param>
         <summary>Creates a vector with four float values.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Component">
@@ -85,7 +89,10 @@
       </Docs>
     </Member>
     <Member MemberName="LoadAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f LoadAligned (ref Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f LoadAligned (ref Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -94,7 +101,7 @@
         <ReturnType>Mono.Simd.Vector4f</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="v" Type="Mono.Simd.Vector4f&amp;" RefType="ref" />
+        <Parameter Name="v" Type="Mono.Simd.Vector4f&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="v">Vector to operate on.</param>
@@ -109,7 +116,10 @@
       </Attributes>
     </Member>
     <Member MemberName="LoadAligned">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f LoadAligned (Mono.Simd.Vector4f* v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f LoadAligned (Mono.Simd.Vector4f* v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -166,7 +176,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Addition">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_Addition (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_Addition (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -184,7 +197,9 @@
         <param name="v1">First vector.</param>
         <summary>Computes the sum of two vectors.</summary>
         <returns>A new vector.</returns>
-        <remarks>The vector returned is the sum of the individual components in the two vectors.</remarks>
+        <remarks
+          >The vector returned is the sum of the individual components in the two vectors.</remarks
+        >
       </Docs>
       <Attributes>
         <Attribute>
@@ -193,7 +208,10 @@
       </Attributes>
     </Member>
     <Member MemberName="op_BitwiseAnd">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_BitwiseAnd (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_BitwiseAnd (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -211,9 +229,11 @@
         <param name="v1">First vector.</param>
         <summary>Computes the bitwise and of two vectors.</summary>
         <returns>A new vector.</returns>
-        <remarks>The vector returned contains the result of doing a
+        <remarks
+          >The vector returned contains the result of doing a
         bitwise and operation on the individual components of the two
-        vectors.</remarks>
+        vectors.</remarks
+        >
       </Docs>
       <Attributes>
         <Attribute>
@@ -222,7 +242,10 @@
       </Attributes>
     </Member>
     <Member MemberName="op_BitwiseOr">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_BitwiseOr (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_BitwiseOr (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -240,9 +263,11 @@
         <param name="v1">First vector.</param>
         <summary>Computes the bitwise and of two vectors.</summary>
         <returns>A new vector.</returns>
-        <remarks>The vector returned contains the result of doing a
+        <remarks
+          >The vector returned contains the result of doing a
         bitwise and operation on the individual components of the two
-        vectors.</remarks>
+        vectors.</remarks
+        >
       </Docs>
       <Attributes>
         <Attribute>
@@ -251,7 +276,10 @@
       </Attributes>
     </Member>
     <Member MemberName="op_Division">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_Division (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_Division (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -278,7 +306,10 @@
       </Attributes>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -304,7 +335,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_ExclusiveOr">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_ExclusiveOr (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_ExclusiveOr (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -322,9 +356,11 @@
         <param name="v1">First vector.</param>
         <summary>Computes the bitwise xor of two vectors.</summary>
         <returns>A new vector.</returns>
-        <remarks>The vector returned contains the result of doing a
+        <remarks
+          >The vector returned contains the result of doing a
         bitwise xor operation on the individual components of the two
-        vectors.</remarks>
+        vectors.</remarks
+        >
       </Docs>
       <Attributes>
         <Attribute>
@@ -333,7 +369,10 @@
       </Attributes>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16b op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -357,7 +396,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector16sb op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -384,7 +426,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2d op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -408,7 +453,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2l op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -432,7 +480,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector2ul op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -459,7 +510,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4i op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -483,7 +537,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4ui op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -510,7 +567,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8s op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -534,7 +594,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us op_Explicit (Mono.Simd.Vector4f v);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector8us op_Explicit (Mono.Simd.Vector4f v);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -561,7 +624,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -587,7 +653,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Multiply">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_Multiply (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_Multiply (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -614,7 +683,10 @@
       </Attributes>
     </Member>
     <Member MemberName="op_Subtraction">
-      <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f op_Subtraction (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Simd.Vector4f op_Subtraction (Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -632,7 +704,9 @@
         <param name="v1">First vector.</param>
         <summary>Substracts the values from the second vector from the first.</summary>
         <returns>A new vector.</returns>
-        <remarks>The vector elements contain the substraction of the elements in the second vector from the elements in the first vector.</remarks>
+        <remarks
+          >The vector elements contain the substraction of the elements in the second vector from the elements in the first vector.</remarks
+        >
       </Docs>
       <Attributes>
         <Attribute>
@@ -656,7 +730,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchNonTemporal">
-      <MemberSignature Language="C#" Value="public static void PrefetchNonTemporal (ref Mono.Simd.Vector4f res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchNonTemporal (ref Mono.Simd.Vector4f res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -673,7 +750,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="res" Type="Mono.Simd.Vector4f&amp;" RefType="ref" />
+        <Parameter Name="res" Type="Mono.Simd.Vector4f&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="res">To be added.</param>
@@ -682,7 +759,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchNonTemporal">
-      <MemberSignature Language="C#" Value="public static void PrefetchNonTemporal (Mono.Simd.Vector4f* res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchNonTemporal (Mono.Simd.Vector4f* res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -708,7 +788,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchTemporal1stLevelCache">
-      <MemberSignature Language="C#" Value="public static void PrefetchTemporal1stLevelCache (ref Mono.Simd.Vector4f res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchTemporal1stLevelCache (ref Mono.Simd.Vector4f res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -725,7 +808,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="res" Type="Mono.Simd.Vector4f&amp;" RefType="ref" />
+        <Parameter Name="res" Type="Mono.Simd.Vector4f&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="res">To be added.</param>
@@ -734,7 +817,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchTemporal1stLevelCache">
-      <MemberSignature Language="C#" Value="public static void PrefetchTemporal1stLevelCache (Mono.Simd.Vector4f* res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchTemporal1stLevelCache (Mono.Simd.Vector4f* res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -760,7 +846,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchTemporal2ndLevelCache">
-      <MemberSignature Language="C#" Value="public static void PrefetchTemporal2ndLevelCache (ref Mono.Simd.Vector4f res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchTemporal2ndLevelCache (ref Mono.Simd.Vector4f res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -777,7 +866,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="res" Type="Mono.Simd.Vector4f&amp;" RefType="ref" />
+        <Parameter Name="res" Type="Mono.Simd.Vector4f&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="res">To be added.</param>
@@ -786,7 +875,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchTemporal2ndLevelCache">
-      <MemberSignature Language="C#" Value="public static void PrefetchTemporal2ndLevelCache (Mono.Simd.Vector4f* res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchTemporal2ndLevelCache (Mono.Simd.Vector4f* res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -812,7 +904,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchTemporalAllCacheLevels">
-      <MemberSignature Language="C#" Value="public static void PrefetchTemporalAllCacheLevels (ref Mono.Simd.Vector4f res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchTemporalAllCacheLevels (ref Mono.Simd.Vector4f res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -829,7 +924,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="res" Type="Mono.Simd.Vector4f&amp;" RefType="ref" />
+        <Parameter Name="res" Type="Mono.Simd.Vector4f&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="res">To be added.</param>
@@ -838,7 +933,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrefetchTemporalAllCacheLevels">
-      <MemberSignature Language="C#" Value="public static void PrefetchTemporalAllCacheLevels (Mono.Simd.Vector4f* res);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void PrefetchTemporalAllCacheLevels (Mono.Simd.Vector4f* res);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -864,7 +962,10 @@
       </Docs>
     </Member>
     <Member MemberName="StoreAligned">
-      <MemberSignature Language="C#" Value="public static void StoreAligned (ref Mono.Simd.Vector4f res, Mono.Simd.Vector4f val);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void StoreAligned (ref Mono.Simd.Vector4f res, Mono.Simd.Vector4f val);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -873,7 +974,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="res" Type="Mono.Simd.Vector4f&amp;" RefType="ref" />
+        <Parameter Name="res" Type="Mono.Simd.Vector4f&" RefType="ref" />
         <Parameter Name="val" Type="Mono.Simd.Vector4f" />
       </Parameters>
       <Docs>
@@ -889,7 +990,10 @@
       </Attributes>
     </Member>
     <Member MemberName="StoreAligned">
-      <MemberSignature Language="C#" Value="public static void StoreAligned (Mono.Simd.Vector4f* res, Mono.Simd.Vector4f val);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void StoreAligned (Mono.Simd.Vector4f* res, Mono.Simd.Vector4f val);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -943,10 +1047,8 @@
       </ReturnValue>
       <Docs>
         <summary>The W component.</summary>
-        <value>
-        </value>
-        <remarks>
-        </remarks>
+        <value></value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="X">
@@ -960,10 +1062,8 @@
       </ReturnValue>
       <Docs>
         <summary>The X component.</summary>
-        <value>
-        </value>
-        <remarks>
-        </remarks>
+        <value></value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Y">
@@ -977,10 +1077,8 @@
       </ReturnValue>
       <Docs>
         <summary>The Y component.</summary>
-        <value>
-        </value>
-        <remarks>
-        </remarks>
+        <value></value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Z">
@@ -994,10 +1092,8 @@
       </ReturnValue>
       <Docs>
         <summary>The Z component.</summary>
-        <value>
-        </value>
-        <remarks>
-        </remarks>
+        <value></value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Zero">

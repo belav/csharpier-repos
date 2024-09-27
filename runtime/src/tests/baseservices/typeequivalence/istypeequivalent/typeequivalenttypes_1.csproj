@@ -4,7 +4,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../../coreclr/tools/aot/ILCompiler.TypeSystem.Tests/TypeEquivalenceAssembly/TypesWhichDoNotMatch.cs" />
-    <Compile Include="../../../../coreclr/tools/aot/ILCompiler.TypeSystem.Tests/TypeEquivalenceAssembly/TypesWhichMatch.cs" />
+    <Compile
+      Include="../../../../coreclr/tools/aot/ILCompiler.TypeSystem.Tests/TypeEquivalenceAssembly/TypesWhichDoNotMatch.cs"
+    />
+    <Compile
+      Include="../../../../coreclr/tools/aot/ILCompiler.TypeSystem.Tests/TypeEquivalenceAssembly/TypesWhichMatch.cs"
+    />
   </ItemGroup>
 </Project>

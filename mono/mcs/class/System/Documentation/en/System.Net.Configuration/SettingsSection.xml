@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SettingsSection" FullName="System.Net.Configuration.SettingsSection">
-  <TypeSignature Language="C#" Value="public sealed class SettingsSection : System.Configuration.ConfigurationSection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SettingsSection extends System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SettingsSection : System.Configuration.ConfigurationSection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SettingsSection extends System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,18 +21,32 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class corresponds to the <format type="text/html"><a href="189ce989-c39b-427d-b004-6b82a668b931">Settings Element (Network Settings)</a></format> configuration element.</para>
-      <para>This class provides programmatic access to information that can be stored in configuration files.</para>
+      <para
+        >This class corresponds to the <format
+         type="text/html">
+          <a href="189ce989-c39b-427d-b004-6b82a668b931">Settings Element (Network Settings)</a>
+        </format>
+
+         configuration element.</para
+      >
+      <para
+        >This class provides programmatic access to information that can be stored in configuration files.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the configuration section for sockets, IPv6, response headers, and service points. This class cannot be inherited.</para>
+      <para
+        >Represents the configuration section for sockets, IPv6, response headers, and service points. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SettingsSection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -38,13 +58,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementSection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Configuration.ConnectionManagementSection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="HttpWebRequest">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.HttpWebRequestElement HttpWebRequest { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.HttpWebRequestElement HttpWebRequest" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.HttpWebRequestElement HttpWebRequest { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.HttpWebRequestElement HttpWebRequest"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -52,7 +83,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("httpWebRequest")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("httpWebRequest")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -64,13 +97,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration element that controls the settings used by an <see cref="T:System.Net.HttpWebRequest" /> object.</para>
+          <para
+            >Gets the configuration element that controls the settings used by an <see
+             cref="T:System.Net.HttpWebRequest" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Ipv6">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.Ipv6Element Ipv6 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.Ipv6Element Ipv6" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.Ipv6Element Ipv6 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.Ipv6Element Ipv6"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,13 +134,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration element that enables Internet Protocol version 6 (IPv6).</para>
+          <para
+            >Gets the configuration element that enables Internet Protocol version 6 (IPv6).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="PerformanceCounters">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.PerformanceCountersElement PerformanceCounters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.PerformanceCountersElement PerformanceCounters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.PerformanceCountersElement PerformanceCounters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.PerformanceCountersElement PerformanceCounters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -104,7 +156,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("performanceCounters")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("performanceCounters")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -116,13 +170,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration element that controls whether network performance counters are enabled.</para>
+          <para
+            >Gets the configuration element that controls whether network performance counters are enabled.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -139,8 +201,14 @@
       </Docs>
     </Member>
     <Member MemberName="ServicePointManager">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.ServicePointManagerElement ServicePointManager { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.ServicePointManagerElement ServicePointManager" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.ServicePointManagerElement ServicePointManager { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.ServicePointManagerElement ServicePointManager"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -148,7 +216,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("servicePointManager")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("servicePointManager")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -159,17 +229,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The settings correspond to properties in the <see cref="T:System.Net.ServicePointManager" /> class.</para>
+          <para
+            >The settings correspond to properties in the <see
+             cref="T:System.Net.ServicePointManager" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration element that controls settings for connections to remote host computers.</para>
+          <para
+            >Gets the configuration element that controls settings for connections to remote host computers.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Socket">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.SocketElement Socket { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.SocketElement Socket" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.SocketElement Socket { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.SocketElement Socket"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -194,8 +277,14 @@
       </Docs>
     </Member>
     <Member MemberName="WebProxyScript">
-      <MemberSignature Language="C#" Value="public System.Net.Configuration.WebProxyScriptElement WebProxyScript { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Configuration.WebProxyScriptElement WebProxyScript" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Configuration.WebProxyScriptElement WebProxyScript { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Configuration.WebProxyScriptElement WebProxyScript"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -203,7 +292,9 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Configuration.ConfigurationProperty("webProxyScript")</AttributeName>
+          <AttributeName
+            >System.Configuration.ConfigurationProperty("webProxyScript")</AttributeName
+          >
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -215,7 +306,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the configuration element that controls the execution timeout and download timeout of Web proxy scripts.</para>
+          <para
+            >Gets the configuration element that controls the execution timeout and download timeout of Web proxy scripts.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -17,11 +17,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.PropertyGrid.PropertySort" /> property of the <see cref="T:System.Windows.Forms.PropertyGrid" />.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.PropertyGrid" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how properties are sorted in the <see cref="T:System.Windows.Forms.PropertyGrid" />.</para>
+      <para
+        >Specifies how properties are sorted in the <see
+         cref="T:System.Windows.Forms.PropertyGrid" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -51,7 +64,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Properties are displayed according to their category in a group. The categories are defined by the properties themselves.</para>
+          <para
+            >Properties are displayed according to their category in a group. The categories are defined by the properties themselves.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +83,9 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Properties are displayed according to their category in a group. The properties are further sorted alphabetically within the group. The categories are defined by the properties themselves.</para>
+          <para
+            >Properties are displayed according to their category in a group. The properties are further sorted alphabetically within the group. The categories are defined by the properties themselves.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +102,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Properties are displayed in the order in which they are retrieved from the <see cref="T:System.ComponentModel.TypeDescriptor" />.</para>
+          <para
+            >Properties are displayed in the order in which they are retrieved from the <see
+             cref="T:System.ComponentModel.TypeDescriptor" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

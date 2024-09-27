@@ -12,8 +12,32 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.VirtualReferenceType" /> enumeration describes the type of resource referenced by a virtual path. The <see cref="T:System.Web.UI.VirtualReferenceType" /> is determined from the parsed extension of the resource.</para>
-      <para>Page and control developers do not use the <see cref="T:System.Web.UI.VirtualReferenceType" /> enumeration directly. Extensibility developers might use the <see cref="T:System.Web.UI.VirtualReferenceType" /> enumeration when extending the <see cref="T:System.Web.UI.PageParserFilter" /> class and overriding its <see cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)" /> method.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.VirtualReferenceType" />
+
+         enumeration describes the type of resource referenced by a virtual path. The <see
+         cref="T:System.Web.UI.VirtualReferenceType" />
+
+         is determined from the parsed extension of the resource.</para
+      >
+      <para
+        >Page and control developers do not use the <see
+         cref="T:System.Web.UI.VirtualReferenceType" />
+
+         enumeration directly. Extensibility developers might use the <see
+         cref="T:System.Web.UI.VirtualReferenceType" />
+
+         enumeration when extending the <see
+         cref="T:System.Web.UI.PageParserFilter" />
+
+         class and overriding its <see
+
+          cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)"
+        />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,7 +72,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parsed virtual path references a resource that is not an ASP.NET page, master page, user control, or language-specific code file.</para>
+          <para
+            >The parsed virtual path references a resource that is not an ASP.NET page, master page, user control, or language-specific code file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -82,7 +108,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The parsed virtual path references a code file that is compiled using a specific language compiler.</para>
+          <para
+            >The parsed virtual path references a code file that is compiled using a specific language compiler.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

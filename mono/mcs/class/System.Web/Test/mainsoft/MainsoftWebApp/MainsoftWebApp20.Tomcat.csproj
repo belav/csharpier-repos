@@ -5,7 +5,9 @@
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BC58B7F8-695B-46A3-BB5C-C9E8B441A389}</ProjectGuid>
-    <ProjectTypeGuids>{F6B19D50-1E2E-4e87-ADFB-10393B439DE0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids
+      >{F6B19D50-1E2E-4e87-ADFB-10393B439DE0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids
+    >
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>MainsoftWebApp</AssemblyName>
@@ -28,8 +30,7 @@
     <SkipValidation>True</SkipValidation>
     <KeepIntermediate>False</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
     <PreCompile>true</PreCompile>
     <CompressionLevel>1</CompressionLevel>
     <DeploymentMethod>0</DeploymentMethod>
@@ -46,8 +47,7 @@
     <SkipValidation>false</SkipValidation>
     <KeepIntermediate>false</KeepIntermediate>
     <TargetPlatform>0</TargetPlatform>
-    <AdditionalClassPath>
-    </AdditionalClassPath>
+    <AdditionalClassPath></AdditionalClassPath>
     <PreCompile>true</PreCompile>
   </PropertyGroup>
   <ItemGroup>
@@ -90,10 +90,18 @@
     <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_Contents.aspx" />
     <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_CopyTo_AI.aspx" />
     <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_Count.aspx" />
-    <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_GetEnumerator_.aspx" />
-    <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsCookieless.aspx" />
-    <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession.aspx" />
-    <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession2.aspx" />
+    <Content
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_GetEnumerator_.aspx"
+    />
+    <Content
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsCookieless.aspx"
+    />
+    <Content
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession.aspx"
+    />
+    <Content
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession2.aspx"
+    />
     <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsReadOnly.aspx" />
     <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsReadOnly2.aspx" />
     <Content Include="System_Web_SessionState\HttpSessionState\HttpSessionState_Item.aspx" />
@@ -126,7 +134,9 @@
     <Content Include="System_Web_UI\HtmlTextWriterStyle\HtmlTextWriterStyle_Enum.aspx" />
     <Content Include="System_Web_UI\HtmlTextWriterTag\HtmlTextWriterTag_Enum.aspx" />
     <Content Include="System_Web_UI\Page\Page_ctor_.aspx" />
-    <Content Include="System_Web_UI\ValidationPropertyAttribute\ValidationPropertyAttribute_ctor_S.aspx" />
+    <Content
+      Include="System_Web_UI\ValidationPropertyAttribute\ValidationPropertyAttribute_ctor_S.aspx"
+    />
     <Content Include="System_Web_UI_HtmlControls\HtmlAnchor\HtmlAnchor_ctor_.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlAnchor\HtmlAnchor_HRef.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlAnchor\HtmlAnchor_Name.aspx" />
@@ -134,8 +144,12 @@
     <Content Include="System_Web_UI_HtmlControls\HtmlAnchor\HtmlAnchor_Title.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlButton\HtmlButton_CausesValidation.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlButton\HtmlButton_ctor_.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerHtml.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerText.aspx" />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerHtml.aspx"
+    />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerText.aspx"
+    />
     <Content Include="System_Web_UI_HtmlControls\HtmlControl\HtmlControl_Attributes.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlControl\HtmlControl_Disabled.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlControl\HtmlControl_Style.aspx" />
@@ -152,15 +166,25 @@
     <Content Include="System_Web_UI_HtmlControls\HtmlForm\HtmlForm_Target.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlForm\HtmlForm_Target1.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlForm\HtmlForm_Target2.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_S.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_TagName.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlInputButton\HtmlInputButton_CausesValidation.aspx" />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_S.aspx"
+    />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_TagName.aspx"
+    />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlInputButton\HtmlInputButton_CausesValidation.aspx"
+    />
     <Content Include="System_Web_UI_HtmlControls\HtmlInputHidden\HtmlInputHidden_ctor_.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_Align.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_Alt.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_Border.aspx" />
-    <Content Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_CausesValidation.aspx" />
+    <Content
+      Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_CausesValidation.aspx"
+    />
     <Content Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_ctor_.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_Src.aspx" />
     <Content Include="System_Web_UI_HtmlControls\HtmlTextArea\HtmlTextArea_Cols.aspx" />
@@ -193,13 +217,21 @@
     <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_CommandName.aspx" />
     <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_ctor_.aspx" />
     <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_DataTextField.aspx" />
-    <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_DataTextFormatString.aspx" />
-    <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_FormatDataTextValue_O.aspx" />
-    <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_InitializeCell_TIL.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_DataTextFormatString.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_FormatDataTextValue_O.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_InitializeCell_TIL.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_Text.aspx" />
     <Content Include="System_Web_UI_WebControls\Button\Button_CausesValidation.aspx" />
     <Content Include="System_Web_UI_WebControls\Button\Button_Text.aspx" />
-    <Content Include="System_Web_UI_WebControls\CalendarSelectionMode\CalendarSelectionMode_Enum.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\CalendarSelectionMode\CalendarSelectionMode_Enum.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\CheckBoxList\CheckBoxList_CellPadding.aspx" />
     <Content Include="System_Web_UI_WebControls\CheckBoxList\CheckBoxList_CellSpacing.aspx" />
     <Content Include="System_Web_UI_WebControls\CheckBoxList\CheckBoxList_RepeatColumns.aspx" />
@@ -213,26 +245,46 @@
     <Content Include="System_Web_UI_WebControls\CheckBox\CheckBox_TextAlign.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_FooterStyle.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_FooterText.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_HeaderImageUrl.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_HeaderImageUrl.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_HeaderStyle.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_HeaderText.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_ItemStyle.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_SortExpression.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_SortExpression.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_ToString_.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_Visible.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridItem\DataGridItem_DataItem.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridItem\DataGridItem_DataSetIndex.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridItem\DataGridItem_ItemIndex.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGridItem\DataGridItem_ItemType.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_CopyFrom_S.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_MergeWith_S.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_CopyFrom_S.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_MergeWith_S.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Mode.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_NextPageText.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PageButtonCount.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Position.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PrevPageText.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Reset_.aspx" />
-    <Content Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Visible.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_NextPageText.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PageButtonCount.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Position.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PrevPageText.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Reset_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Visible.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\DataGrid\DataGrid_AllowCustomPaging.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGrid\DataGrid_AllowPaging.aspx" />
     <Content Include="System_Web_UI_WebControls\DataGrid\DataGrid_AllowSorting.aspx" />
@@ -312,21 +364,41 @@
     <Content Include="System_Web_UI_WebControls\DropDownList\DropDownList_BorderWidth.aspx" />
     <Content Include="System_Web_UI_WebControls\DropDownList\DropDownList_SelectedIndex.aspx" />
     <Content Include="System_Web_UI_WebControls\DropDownList\DropDownList_ToolTip.aspx" />
-    <Content Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_ButtonType.aspx" />
-    <Content Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_CancelText.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_ButtonType.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_CancelText.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_ctor_.aspx" />
-    <Content Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_EditText.aspx" />
-    <Content Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_InitializeCell_TIL.aspx" />
-    <Content Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_UpdateText.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_EditText.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_InitializeCell_TIL.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_UpdateText.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\FirstDayOfWeek\FirstDayOfWeek_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\FontSize\FontSize_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\GridLines\GridLines_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\HorizontalAlign\HorizontalAlign_Enum.aspx" />
-    <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlField.aspx" />
-    <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlFormatString.aspx" />
-    <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextField.aspx" />
-    <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextFormatString.aspx" />
-    <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_InitializeCell_TIL.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlField.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlFormatString.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextField.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextFormatString.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_InitializeCell_TIL.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_NavigateUrl.aspx" />
     <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_Target.aspx" />
     <Content Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_Text.aspx" />
@@ -345,8 +417,12 @@
     <Content Include="System_Web_UI_WebControls\Image\Image_ImageUrl.aspx" />
     <Content Include="System_Web_UI_WebControls\Label\Label_ctor_.aspx" />
     <Content Include="System_Web_UI_WebControls\Label\Label_Text.aspx" />
-    <Content Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_AllowWhitespaceLiterals_.aspx" />
-    <Content Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_ctor_.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_AllowWhitespaceLiterals_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_ctor_.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\LinkButton\LinkButton_CausesValidation.aspx" />
     <Content Include="System_Web_UI_WebControls\LinkButton\LinkButton_Text.aspx" />
     <Content Include="System_Web_UI_WebControls\ListBox\ListBox_BorderColor.aspx" />
@@ -360,7 +436,9 @@
     <Content Include="System_Web_UI_WebControls\ListControl\ListControl_DataMember.aspx" />
     <Content Include="System_Web_UI_WebControls\ListControl\ListControl_DataSource.aspx" />
     <Content Include="System_Web_UI_WebControls\ListControl\ListControl_DataTextField.aspx" />
-    <Content Include="System_Web_UI_WebControls\ListControl\ListControl_DataTextFormatString.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\ListControl\ListControl_DataTextFormatString.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\ListControl\ListControl_DataValueField.aspx" />
     <Content Include="System_Web_UI_WebControls\ListControl\ListControl_Items.aspx" />
     <Content Include="System_Web_UI_WebControls\ListControl\ListControl_SelectedIndex.aspx" />
@@ -388,9 +466,15 @@
     <Content Include="System_Web_UI_WebControls\PlaceHolder\PlaceHolder_ctor_.aspx" />
     <Content Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_CellPadding.aspx" />
     <Content Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_CellSpacing.aspx" />
-    <Content Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatColumns.aspx" />
-    <Content Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatDirection.aspx" />
-    <Content Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatLayout.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatColumns.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatDirection.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatLayout.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_TextAlign.aspx" />
     <Content Include="System_Web_UI_WebControls\RadioButton\RadioButton_ctor.aspx" />
     <Content Include="System_Web_UI_WebControls\RadioButton\RadioButton_GroupName.aspx" />
@@ -411,20 +495,48 @@
     <Content Include="System_Web_UI_WebControls\Repeater\Repeater_ItemTemplate.aspx" />
     <Content Include="System_Web_UI_WebControls\Repeater\Repeater_SeparatorTemplate.aspx" />
     <Content Include="System_Web_UI_WebControls\RepeatLayout\RepeatLayout_Enum.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddAt_IT.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddRange_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Add_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Clear_.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_CopyTo_AI.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Count.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetCellIndex_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetEnumerator_.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsReadOnly.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsSynchronized.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Item.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_RemoveAt_I.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Remove_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_SyncRoot.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddAt_IT.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddRange_T.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Add_T.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Clear_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_CopyTo_AI.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Count.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetCellIndex_T.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetEnumerator_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsReadOnly.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsSynchronized.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Item.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_RemoveAt_I.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Remove_T.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_SyncRoot.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TableCell\TableCell_ColumnSpan.aspx" />
     <Content Include="System_Web_UI_WebControls\TableCell\TableCell_ctor_.aspx" />
     <Content Include="System_Web_UI_WebControls\TableCell\TableCell_HorizontalAlign.aspx" />
@@ -436,25 +548,49 @@
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_CopyFrom_S.aspx" />
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_ctor_.aspx" />
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_ctor_S.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_HorizontalAlign.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_HorizontalAlign.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_MergeWith_S.aspx" />
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_Reset_.aspx" />
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_VerticalAlign.aspx" />
     <Content Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_Wrap.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddAt_IT.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddRange_T.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddAt_IT.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddRange_T.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Add_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Clear_.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_CopyTo_AI.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Clear_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_CopyTo_AI.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Count.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetEnumerator_.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetRowIndex_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsReadOnly.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsSynchronized.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetEnumerator_.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetRowIndex_T.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsReadOnly.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsSynchronized.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Item.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_RemoveAt_I.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Remove_T.aspx" />
-    <Content Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_SyncRoot.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_RemoveAt_I.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Remove_T.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_SyncRoot.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TableRow\TableRow_Cells.aspx" />
     <Content Include="System_Web_UI_WebControls\TableRow\TableRow_CreateControlCollection_.aspx" />
     <Content Include="System_Web_UI_WebControls\TableRow\TableRow_CreateControlStyle_.aspx" />
@@ -479,10 +615,18 @@
     <Content Include="System_Web_UI_WebControls\Table\Table_HorizontalAlign.aspx" />
     <Content Include="System_Web_UI_WebControls\Table\Table_Rows.aspx" />
     <Content Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_ctor_.aspx" />
-    <Content Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_EditItemTemplate.aspx" />
-    <Content Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_FooterTemplate.aspx" />
-    <Content Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_HeaderTemplate.aspx" />
-    <Content Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_InitializeCell_TIL.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_EditItemTemplate.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_FooterTemplate.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_HeaderTemplate.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_InitializeCell_TIL.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_ItemTemplate.aspx" />
     <Content Include="System_Web_UI_WebControls\TextAlign\TextAlign_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\TextBoxMode\TextBoxMode_Enum.aspx" />
@@ -496,9 +640,13 @@
     <Content Include="System_Web_UI_WebControls\TextBox\TextBox_Wrap.aspx" />
     <Content Include="System_Web_UI_WebControls\TitleFormat\TitleFormat_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\UnitType\UnitType_Enum.aspx" />
-    <Content Include="System_Web_UI_WebControls\ValidationCompareOperator\ValidationCompareOperator_Enum.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\ValidationCompareOperator\ValidationCompareOperator_Enum.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\ValidationDataType\ValidationDataType_Enum.aspx" />
-    <Content Include="System_Web_UI_WebControls\ValidationSummaryDisplayMode\ValidationSummaryDisplayMode_Enum.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\ValidationSummaryDisplayMode\ValidationSummaryDisplayMode_Enum.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\ValidatorDisplay\ValidatorDisplay_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\VerticalAlign\VerticalAlign_Enum.aspx" />
     <Content Include="System_Web_UI_WebControls\WebControl\cat.jpg" />
@@ -538,14 +686,26 @@
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_Style_Hight.aspx" />
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_Style_Width.aspx" />
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TabIndex.aspx" />
-    <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_HorizontalAlign.aspx" />
-    <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_VerticalAlign.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_HorizontalAlign.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_VerticalAlign.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_Wrap.aspx" />
-    <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_BackImageUrl.aspx" />
-    <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellPadding.aspx" />
-    <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellSpacing.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_BackImageUrl.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellPadding.aspx"
+    />
+    <Content
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellSpacing.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_GridLines.aspx" />
-    <Content Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_HorizontalAlign.aspx" />
+    <Content
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_HorizontalAlign.aspx"
+    />
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_ToolTip.aspx" />
     <Content Include="System_Web_UI_WebControls\WebControl\WebControl_Width.aspx" />
     <Content Include="WEB-INF\web.xml" />
@@ -771,7 +931,9 @@
       <DependentUpon>TraceMode_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_SessionState\HttpSessionState\HttpSessionState_Add_Nothing.aspx.cs">
+    <Compile
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_Add_Nothing.aspx.cs"
+    >
       <DependentUpon>HttpSessionState_Add_Nothing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -799,19 +961,27 @@
       <DependentUpon>HttpSessionState_Count.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_SessionState\HttpSessionState\HttpSessionState_GetEnumerator_.aspx.cs">
+    <Compile
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_GetEnumerator_.aspx.cs"
+    >
       <DependentUpon>HttpSessionState_GetEnumerator_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsCookieless.aspx.cs">
+    <Compile
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsCookieless.aspx.cs"
+    >
       <DependentUpon>HttpSessionState_IsCookieless.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession.aspx.cs">
+    <Compile
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession.aspx.cs"
+    >
       <DependentUpon>HttpSessionState_IsNewSession.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession2.aspx.cs">
+    <Compile
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsNewSession2.aspx.cs"
+    >
       <DependentUpon>HttpSessionState_IsNewSession2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -819,7 +989,9 @@
       <DependentUpon>HttpSessionState_IsReadOnly.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsReadOnly2.aspx.cs">
+    <Compile
+      Include="System_Web_SessionState\HttpSessionState\HttpSessionState_IsReadOnly2.aspx.cs"
+    >
       <DependentUpon>HttpSessionState_IsReadOnly2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -943,7 +1115,9 @@
       <DependentUpon>Page_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI\ValidationPropertyAttribute\ValidationPropertyAttribute_ctor_S.aspx.cs">
+    <Compile
+      Include="System_Web_UI\ValidationPropertyAttribute\ValidationPropertyAttribute_ctor_S.aspx.cs"
+    >
       <DependentUpon>ValidationPropertyAttribute_ctor_S.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -975,11 +1149,15 @@
       <DependentUpon>HtmlButton_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerHtml.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerHtml.aspx.cs"
+    >
       <DependentUpon>HtmlContainerControl_InnerHtml.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerText.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlContainerControl\HtmlContainerControl_InnerText.aspx.cs"
+    >
       <DependentUpon>HtmlContainerControl_InnerText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1047,19 +1225,27 @@
       <DependentUpon>HtmlForm_Target2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_.aspx.cs"
+    >
       <DependentUpon>HtmlGenericControl_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_S.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_ctor_S.aspx.cs"
+    >
       <DependentUpon>HtmlGenericControl_ctor_S.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_TagName.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlGenericControl\HtmlGenericControl_TagName.aspx.cs"
+    >
       <DependentUpon>HtmlGenericControl_TagName.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlInputButton\HtmlInputButton_CausesValidation.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlInputButton\HtmlInputButton_CausesValidation.aspx.cs"
+    >
       <DependentUpon>HtmlInputButton_CausesValidation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1079,7 +1265,9 @@
       <DependentUpon>HtmlInputImage_Border.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_CausesValidation.aspx.cs">
+    <Compile
+      Include="System_Web_UI_HtmlControls\HtmlInputImage\HtmlInputImage_CausesValidation.aspx.cs"
+    >
       <DependentUpon>HtmlInputImage_CausesValidation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1211,15 +1399,21 @@
       <DependentUpon>ButtonColumn_DataTextField.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_DataTextFormatString.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_DataTextFormatString.aspx.cs"
+    >
       <DependentUpon>ButtonColumn_DataTextFormatString.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_FormatDataTextValue_O.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_FormatDataTextValue_O.aspx.cs"
+    >
       <DependentUpon>ButtonColumn_FormatDataTextValue_O.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_InitializeCell_TIL.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\ButtonColumn\ButtonColumn_InitializeCell_TIL.aspx.cs"
+    >
       <DependentUpon>ButtonColumn_InitializeCell_TIL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1235,7 +1429,9 @@
       <DependentUpon>Button_Text.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\CalendarSelectionMode\CalendarSelectionMode_Enum.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\CalendarSelectionMode\CalendarSelectionMode_Enum.aspx.cs"
+    >
       <DependentUpon>CalendarSelectionMode_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1291,7 +1487,9 @@
       <DependentUpon>DataGridColumn_FooterText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_HeaderImageUrl.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_HeaderImageUrl.aspx.cs"
+    >
       <DependentUpon>DataGridColumn_HeaderImageUrl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1307,7 +1505,9 @@
       <DependentUpon>DataGridColumn_ItemStyle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_SortExpression.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridColumn\DataGridColumn_SortExpression.aspx.cs"
+    >
       <DependentUpon>DataGridColumn_SortExpression.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1335,11 +1535,15 @@
       <DependentUpon>DataGridItem_ItemType.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_CopyFrom_S.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_CopyFrom_S.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_CopyFrom_S.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_MergeWith_S.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_MergeWith_S.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_MergeWith_S.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1347,27 +1551,39 @@
       <DependentUpon>DataGridPagerStyle_Mode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_NextPageText.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_NextPageText.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_NextPageText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PageButtonCount.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PageButtonCount.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_PageButtonCount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Position.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Position.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_Position.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PrevPageText.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_PrevPageText.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_PrevPageText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Reset_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Reset_.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_Reset_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Visible.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\DataGridPagerStyle\DataGridPagerStyle_Visible.aspx.cs"
+    >
       <DependentUpon>DataGridPagerStyle_Visible.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1687,11 +1903,15 @@
       <DependentUpon>DropDownList_ToolTip.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_ButtonType.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_ButtonType.aspx.cs"
+    >
       <DependentUpon>EditCommandColumn_ButtonType.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_CancelText.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_CancelText.aspx.cs"
+    >
       <DependentUpon>EditCommandColumn_CancelText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1699,15 +1919,21 @@
       <DependentUpon>EditCommandColumn_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_EditText.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_EditText.aspx.cs"
+    >
       <DependentUpon>EditCommandColumn_EditText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_InitializeCell_TIL.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_InitializeCell_TIL.aspx.cs"
+    >
       <DependentUpon>EditCommandColumn_InitializeCell_TIL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_UpdateText.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\EditCommandColumn\EditCommandColumn_UpdateText.aspx.cs"
+    >
       <DependentUpon>EditCommandColumn_UpdateText.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1727,27 +1953,39 @@
       <DependentUpon>HorizontalAlign_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlField.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlField.aspx.cs"
+    >
       <DependentUpon>HyperLinkColumn_DataNavigateUrlField.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlFormatString.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataNavigateUrlFormatString.aspx.cs"
+    >
       <DependentUpon>HyperLinkColumn_DataNavigateUrlFormatString.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextField.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextField.aspx.cs"
+    >
       <DependentUpon>HyperLinkColumn_DataTextField.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextFormatString.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_DataTextFormatString.aspx.cs"
+    >
       <DependentUpon>HyperLinkColumn_DataTextFormatString.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_InitializeCell_TIL.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_InitializeCell_TIL.aspx.cs"
+    >
       <DependentUpon>HyperLinkColumn_InitializeCell_TIL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_NavigateUrl.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\HyperLinkColumn\HyperLinkColumn_NavigateUrl.aspx.cs"
+    >
       <DependentUpon>HyperLinkColumn_NavigateUrl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1811,11 +2049,15 @@
       <DependentUpon>Label_Text.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_AllowWhitespaceLiterals_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_AllowWhitespaceLiterals_.aspx.cs"
+    >
       <DependentUpon>LinkButtonControlBuilder_AllowWhitespaceLiterals_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_ctor_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\LinkButtonControlBuilder\LinkButtonControlBuilder_ctor_.aspx.cs"
+    >
       <DependentUpon>LinkButtonControlBuilder_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1871,7 +2113,9 @@
       <DependentUpon>ListControl_DataTextField.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\ListControl\ListControl_DataTextFormatString.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\ListControl\ListControl_DataTextFormatString.aspx.cs"
+    >
       <DependentUpon>ListControl_DataTextFormatString.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1971,23 +2215,33 @@
       <DependentUpon>PlaceHolder_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_CellPadding.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_CellPadding.aspx.cs"
+    >
       <DependentUpon>RadioButtonList_CellPadding.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_CellSpacing.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_CellSpacing.aspx.cs"
+    >
       <DependentUpon>RadioButtonList_CellSpacing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatColumns.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatColumns.aspx.cs"
+    >
       <DependentUpon>RadioButtonList_RepeatColumns.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatDirection.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatDirection.aspx.cs"
+    >
       <DependentUpon>RadioButtonList_RepeatDirection.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatLayout.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\RadioButtonList\RadioButtonList_RepeatLayout.aspx.cs"
+    >
       <DependentUpon>RadioButtonList_RepeatLayout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2071,59 +2325,87 @@
       <DependentUpon>RepeatLayout_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddAt_IT.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddAt_IT.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_AddAt_IT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddRange_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_AddRange_T.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_AddRange_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Add_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Add_T.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_Add_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Clear_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Clear_.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_Clear_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_CopyTo_AI.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_CopyTo_AI.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_CopyTo_AI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Count.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Count.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_Count.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetCellIndex_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetCellIndex_T.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_GetCellIndex_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetEnumerator_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_GetEnumerator_.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_GetEnumerator_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsReadOnly.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsReadOnly.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_IsReadOnly.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsSynchronized.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_IsSynchronized.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_IsSynchronized.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Item.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Item.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_Item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_RemoveAt_I.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_RemoveAt_I.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_RemoveAt_I.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Remove_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_Remove_T.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_Remove_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_SyncRoot.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableCellCollection\TableCellCollection_SyncRoot.aspx.cs"
+    >
       <DependentUpon>TableCellCollection_SyncRoot.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2171,7 +2453,9 @@
       <DependentUpon>TableItemStyle_ctor_S.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_HorizontalAlign.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_HorizontalAlign.aspx.cs"
+    >
       <DependentUpon>TableItemStyle_HorizontalAlign.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2183,7 +2467,9 @@
       <DependentUpon>TableItemStyle_Reset_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_VerticalAlign.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableItemStyle\TableItemStyle_VerticalAlign.aspx.cs"
+    >
       <DependentUpon>TableItemStyle_VerticalAlign.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2191,43 +2477,63 @@
       <DependentUpon>TableItemStyle_Wrap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddAt_IT.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddAt_IT.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_AddAt_IT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddRange_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_AddRange_T.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_AddRange_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Add_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Add_T.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_Add_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Clear_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Clear_.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_Clear_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_CopyTo_AI.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_CopyTo_AI.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_CopyTo_AI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Count.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Count.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_Count.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetEnumerator_.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetEnumerator_.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_GetEnumerator_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetRowIndex_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_GetRowIndex_T.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_GetRowIndex_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsReadOnly.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsReadOnly.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_IsReadOnly.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsSynchronized.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_IsSynchronized.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_IsSynchronized.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2235,15 +2541,21 @@
       <DependentUpon>TableRowCollection_Item.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_RemoveAt_I.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_RemoveAt_I.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_RemoveAt_I.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Remove_T.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_Remove_T.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_Remove_T.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_SyncRoot.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TableRowCollection\TableRowCollection_SyncRoot.aspx.cs"
+    >
       <DependentUpon>TableRowCollection_SyncRoot.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2343,19 +2655,27 @@
       <DependentUpon>TemplateColumn_ctor_.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_EditItemTemplate.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_EditItemTemplate.aspx.cs"
+    >
       <DependentUpon>TemplateColumn_EditItemTemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_FooterTemplate.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_FooterTemplate.aspx.cs"
+    >
       <DependentUpon>TemplateColumn_FooterTemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_HeaderTemplate.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_HeaderTemplate.aspx.cs"
+    >
       <DependentUpon>TemplateColumn_HeaderTemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_InitializeCell_TIL.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\TemplateColumn\TemplateColumn_InitializeCell_TIL.aspx.cs"
+    >
       <DependentUpon>TemplateColumn_InitializeCell_TIL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2411,7 +2731,9 @@
       <DependentUpon>UnitType_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\ValidationCompareOperator\ValidationCompareOperator_Enum.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\ValidationCompareOperator\ValidationCompareOperator_Enum.aspx.cs"
+    >
       <DependentUpon>ValidationCompareOperator_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2419,7 +2741,9 @@
       <DependentUpon>ValidationDataType_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\ValidationSummaryDisplayMode\ValidationSummaryDisplayMode_Enum.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\ValidationSummaryDisplayMode\ValidationSummaryDisplayMode_Enum.aspx.cs"
+    >
       <DependentUpon>ValidationSummaryDisplayMode_Enum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2571,11 +2895,15 @@
       <DependentUpon>WebControl_TabIndex.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_HorizontalAlign.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_HorizontalAlign.aspx.cs"
+    >
       <DependentUpon>WebControl_TableItemStyle_HorizontalAlign.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_VerticalAlign.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableItemStyle_VerticalAlign.aspx.cs"
+    >
       <DependentUpon>WebControl_TableItemStyle_VerticalAlign.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2583,15 +2911,21 @@
       <DependentUpon>WebControl_TableItemStyle_Wrap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_BackImageUrl.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_BackImageUrl.aspx.cs"
+    >
       <DependentUpon>WebControl_TableStyle_BackImageUrl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellPadding.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellPadding.aspx.cs"
+    >
       <DependentUpon>WebControl_TableStyle_CellPadding.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellSpacing.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_CellSpacing.aspx.cs"
+    >
       <DependentUpon>WebControl_TableStyle_CellSpacing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2599,7 +2933,9 @@
       <DependentUpon>WebControl_TableStyle_GridLines.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_HorizontalAlign.aspx.cs">
+    <Compile
+      Include="System_Web_UI_WebControls\WebControl\WebControl_TableStyle_HorizontalAlign.aspx.cs"
+    >
       <DependentUpon>WebControl_TableStyle_HorizontalAlign.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2681,12 +3017,22 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl></IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties REFS-JarPath-mscorlib="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\mscorlib.jar" REFS-JarPath-rt="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\jre5\lib\rt.jar" REFS-JarPath-j2ee="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\jakarta-tomcat\server\lib\catalina.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\jakarta-tomcat\common\lib\servlet-api.jar" REFS-JarPath-system-xml="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Xml.jar" REFS-JarPath-system-web-services="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Web.Services.jar" REFS-JarPath-system-web="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Web.jar" REFS-JarPath-system-drawing="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Drawing.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\jai_imageio.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\jai_core.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\jai_codec.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\clibwrapper_jiio.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\mlibwrapper_jai.jar" REFS-JarPath-system-data="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Data.jar" REFS-JarPath-system-configuration="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Configuration.jar" REFS-JarPath-system="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.jar" />
+      <UserProperties
+        REFS-JarPath-mscorlib="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\mscorlib.jar"
+        REFS-JarPath-rt="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\jre5\lib\rt.jar"
+        REFS-JarPath-j2ee="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\jakarta-tomcat\server\lib\catalina.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\jakarta-tomcat\common\lib\servlet-api.jar"
+        REFS-JarPath-system-xml="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Xml.jar"
+        REFS-JarPath-system-web-services="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Web.Services.jar"
+        REFS-JarPath-system-web="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Web.jar"
+        REFS-JarPath-system-drawing="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Drawing.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\jai_imageio.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\jai_core.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\jai_codec.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\clibwrapper_jiio.jar;..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\mlibwrapper_jai.jar"
+        REFS-JarPath-system-data="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Data.jar"
+        REFS-JarPath-system-configuration="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.Configuration.jar"
+        REFS-JarPath-system="..\..\Program Files\Mainsoft\Visual MainWin for J2EE V2\java_refs\framework\System.jar"
+      />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

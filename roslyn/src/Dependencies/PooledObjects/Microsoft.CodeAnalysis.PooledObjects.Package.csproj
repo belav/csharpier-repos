@@ -6,24 +6,31 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <DebugType>none</DebugType>
     <GenerateDependencyFile>false</GenerateDependencyFile>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <IsSourcePackage>true</IsSourcePackage>
     <PackageId>Microsoft.CodeAnalysis.PooledObjects</PackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageDescription>
+    <PackageDescription
+      >
       Package containing sources of Microsoft .NET Compiler Platform ("Roslyn") pooled objects.
-    </PackageDescription>
+    </PackageDescription
+    >
     <!-- Remove once https://github.com/NuGet/Home/issues/8583 is fixed -->
     <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
+    <PackageReference
+      Include="System.Collections.Immutable"
+      Version="$(SystemCollectionsImmutableVersion)"
+    />
     <!-- Remove once https://github.com/dotnet/sdk/issues/19506 is resolved -->
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" />
+    <PackageReference
+      Include="Microsoft.NETFramework.ReferenceAssemblies"
+      Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)"
+    />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Debugging.Package"/>
+    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Debugging.Package" />
   </ItemGroup>
 </Project>

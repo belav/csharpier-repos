@@ -4,34 +4,50 @@
       <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 ]</AssemblyPublicKey>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName>
+          <AttributeName
+            >System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute+DebuggingModes.IgnoreSymbolStoreSequencePoints)</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany("Mono development team")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyCopyright("(c) Various Mono authors")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyCopyright("(c) Various Mono authors")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDefaultAlias("System.IO.Compression.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDefaultAlias("System.IO.Compression.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyDescription("System.IO.Compression.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyDescription("System.IO.Compression.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyFileVersion("4.0.30319.17020")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyInformationalVersion("4.0.30319.17020")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyInformationalVersion("4.0.30319.17020")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyProduct("Mono Common Language Infrastructure")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyProduct("Mono Common Language Infrastructure")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Reflection.AssemblyTitle("System.IO.Compression.dll")</AttributeName>
+          <AttributeName
+            >System.Reflection.AssemblyTitle("System.IO.Compression.dll")</AttributeName
+          >
         </Attribute>
         <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+          <AttributeName
+            >System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName
+          >
         </Attribute>
       </Attributes>
     </Assembly>

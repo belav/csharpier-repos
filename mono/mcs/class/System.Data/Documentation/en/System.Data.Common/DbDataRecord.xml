@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DbDataRecord" FullName="System.Data.Common.DbDataRecord">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class DbDataRecord : System.ComponentModel.ICustomTypeDescriptor, System.Data.IDataRecord" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class DbDataRecord : System.ComponentModel.ICustomTypeDescriptor, System.Data.IDataRecord"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -8,7 +12,9 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -24,7 +30,18 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implements <see cref="T:System.Data.IDataRecord" /> and <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, and provides data binding support for <see cref="T:System.Data.Common.DbEnumerator" />.</para>
+      <para
+        >Implements <see
+         cref="T:System.Data.IDataRecord" />
+
+         and <see
+         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+        , and provides data binding support for <see
+         cref="T:System.Data.Common.DbEnumerator" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -39,7 +56,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the number of fields within the current record. This property is read-only.</para>
+          <para
+            >Indicates the number of fields within the current record. This property is read-only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,7 +78,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a Boolean.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a Boolean.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,7 +91,10 @@
           <para>true if the Boolean is true; otherwise false.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -89,7 +113,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a byte.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a byte.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,7 +126,10 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -108,7 +137,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetBytes">
-      <MemberSignature Language="C#" Value="public long GetBytes (int i, long dataIndex, byte[] buffer, int bufferIndex, int length);" />
+      <MemberSignature
+        Language="C#"
+        Value="public long GetBytes (int i, long dataIndex, byte[] buffer, int bufferIndex, int length);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
@@ -123,7 +155,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a byte array.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a byte array.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -134,15 +168,33 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based column ordinal.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based column ordinal.</param
+        >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index within the field from which to start the read operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index within the field from which to start the read operation.</param
+        >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer into which to read the stream of bytes.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The buffer into which to read the stream of bytes.</param
+        >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index for <paramref name="buffer" /> to start the read operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index for <paramref
+           name="buffer" />
+
+           to start the read operation.</param
+        >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to read.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to read.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -161,7 +213,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a character.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a character.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -172,7 +226,10 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -180,7 +237,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetChars">
-      <MemberSignature Language="C#" Value="public long GetChars (int i, long dataIndex, char[] buffer, int bufferIndex, int length);" />
+      <MemberSignature
+        Language="C#"
+        Value="public long GetChars (int i, long dataIndex, char[] buffer, int bufferIndex, int length);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
@@ -195,7 +255,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a character array.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a character array.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -206,15 +268,30 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />Column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Column ordinal. </param
+        >
         <param name="dataIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />Buffer to copy data into. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Buffer to copy data into. </param
+        >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />Maximum length to copy into the buffer. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Maximum length to copy into the buffer. </param
+        >
         <param name="bufferIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />Point to start from within the buffer. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Point to start from within the buffer. </param
+        >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />Point to start from within the source data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Point to start from within the source data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -241,7 +318,10 @@
           <para>Not currently supported.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not currently supported.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Not currently supported.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -268,7 +348,10 @@
           <para>The name of the back-end data type.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -287,18 +370,31 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a <see cref="T:System.DateTime" /> object.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a <see
+             cref="T:System.DateTime" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the value of the specified column as a <see cref="T:System.DateTime" /> object.</para>
+          <para
+            >Returns the value of the specified column as a <see
+             cref="T:System.DateTime" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -317,18 +413,31 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a <see cref="T:System.Decimal" /> object.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a <see
+             cref="T:System.Decimal" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the value of the specified column as a <see cref="T:System.Decimal" /> object.</para>
+          <para
+            >Returns the value of the specified column as a <see
+             cref="T:System.Decimal" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -347,18 +456,25 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a double-precision floating-point number.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a double-precision floating-point number.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the value of the specified column as a double-precision floating-point number.</para>
+          <para
+            >Returns the value of the specified column as a double-precision floating-point number.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -378,14 +494,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.Type" /> that is the data type of the object.</para>
+          <para
+            >Returns the <see
+             cref="T:System.Type" />
+
+             that is the data type of the object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Type" /> that is the data type of the object.</para>
+          <para
+            >The <see
+             cref="T:System.Type" />
+
+             that is the data type of the object.</para
+          >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -404,18 +533,25 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a single-precision floating-point number.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a single-precision floating-point number.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the value of the specified column as a single-precision floating-point number.</para>
+          <para
+            >Returns the value of the specified column as a single-precision floating-point number.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -442,7 +578,10 @@
           <para>The GUID value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the field to return. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the field to return. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -461,7 +600,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a 16-bit signed integer.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a 16-bit signed integer.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -472,7 +613,10 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -491,7 +635,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a 32-bit signed integer.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a 32-bit signed integer.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -502,7 +648,10 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -521,7 +670,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a 64-bit signed integer.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a 64-bit signed integer.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -532,7 +683,10 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -559,7 +713,10 @@
           <para>The name of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -586,7 +743,10 @@
           <para>The column ordinal.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the column. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -605,7 +765,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No conversions are performed; therefore the data retrieved must already be a string.</para>
+          <para
+            >No conversions are performed; therefore the data retrieved must already be a string.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -616,7 +778,10 @@
           <para>The value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -643,7 +808,10 @@
           <para>The value to return.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -662,7 +830,9 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Using this method may be more efficient for most applications then retrieving each field individually.</para>
+          <para
+            >Using this method may be more efficient for most applications then retrieving each field individually.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -670,10 +840,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The number of instances of <see cref="T:System.Object" /> in the array.</para>
+          <para
+            >The number of instances of <see
+             cref="T:System.Object" />
+
+             in the array.</para
+          >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of <see cref="T:System.Object" /> to copy the attribute fields into. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of <see
+           cref="T:System.Object" />
+
+           to copy the attribute fields into. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -692,7 +873,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Call this method to check for null column values before calling the typed get methods (for example, <see cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />, <see cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />, and so on) to avoid raising an error.</para>
+          <para
+            >Call this method to check for null column values before calling the typed get methods (for example, <see
+             cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
+
+            , <see
+             cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+
+            , and so on) to avoid raising an error.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -700,10 +889,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the specified column is equivalent to <see cref="T:System.DBNull" />; otherwise false.</para>
+          <para
+            >true if the specified column is equivalent to <see
+             cref="T:System.DBNull" />
+
+            ; otherwise false.</para
+          >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />The column ordinal. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The column ordinal. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -751,7 +948,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetAttributes">
-      <MemberSignature Language="C#" Value="System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -764,7 +964,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetAttributes" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -772,7 +977,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.AttributeCollection" /> that contains the attributes for this object. </para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.AttributeCollection" />
+
+             that contains the attributes for this object. </para
+          >
         </returns>
       </Docs>
     </Member>
@@ -790,7 +1000,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -816,7 +1031,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -829,7 +1049,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetConverter">
-      <MemberSignature Language="C#" Value="System.ComponentModel.TypeConverter ICustomTypeDescriptor.GetConverter ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.TypeConverter ICustomTypeDescriptor.GetConverter ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -842,7 +1065,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetConverter" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -850,12 +1078,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.TypeConverter" /> that is the converter for this object, or null if there is no <see cref="T:System.ComponentModel.TypeConverter" /> for this object.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+             that is the converter for this object, or null if there is no <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+             for this object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent">
-      <MemberSignature Language="C#" Value="System.ComponentModel.EventDescriptor ICustomTypeDescriptor.GetDefaultEvent ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.EventDescriptor ICustomTypeDescriptor.GetDefaultEvent ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -868,7 +1107,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultEvent" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -876,12 +1120,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.EventDescriptor" /> that represents the default event for this object, or null if this object does not have events.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.EventDescriptor" />
+
+             that represents the default event for this object, or null if this object does not have events.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty">
-      <MemberSignature Language="C#" Value="System.ComponentModel.PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -894,7 +1146,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetDefaultProperty" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -902,12 +1159,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the default property for this object, or null if this object does not have properties.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             that represents the default property for this object, or null if this object does not have properties.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetEditor">
-      <MemberSignature Language="C#" Value="object ICustomTypeDescriptor.GetEditor (Type editorBaseType);" />
+      <MemberSignature
+        Language="C#"
+        Value="object ICustomTypeDescriptor.GetEditor (Type editorBaseType);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -922,7 +1187,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -930,14 +1200,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> of the specified type that is the editor for this object, or null if the editor cannot be found.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             of the specified type that is the editor for this object, or null if the editor cannot be found.</para
+          >
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Type" /> that represents the editor for this object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Type" />
+
+           that represents the editor for this object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetEvents">
-      <MemberSignature Language="C#" Value="System.ComponentModel.EventDescriptorCollection ICustomTypeDescriptor.GetEvents ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.EventDescriptorCollection ICustomTypeDescriptor.GetEvents ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -950,7 +1234,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -958,12 +1247,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for this component instance.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+             that represents the events for this component instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetEvents">
-      <MemberSignature Language="C#" Value="System.ComponentModel.EventDescriptorCollection ICustomTypeDescriptor.GetEvents (Attribute[] attributes);" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.EventDescriptorCollection ICustomTypeDescriptor.GetEvents (Attribute[] attributes);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -978,22 +1275,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents.(System.Attribute[])" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetEvents.(System.Attribute[])" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the events for this instance of a component using the specified attribute array as a filter.</para>
+          <para
+            >Returns the events for this instance of a component using the specified attribute array as a filter.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the filtered events for this component instance.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+             that represents the filtered events for this component instance.</para
+          >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Attribute" />
+
+           that is used as a filter.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetProperties">
-      <MemberSignature Language="C#" Value="System.ComponentModel.PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1006,7 +1324,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1014,12 +1337,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the properties for this component instance.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             that represents the properties for this component instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetProperties">
-      <MemberSignature Language="C#" Value="System.ComponentModel.PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties (Attribute[] attributes);" />
+      <MemberSignature
+        Language="C#"
+        Value="System.ComponentModel.PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties (Attribute[] attributes);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1034,22 +1365,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties.(System.Attribute[])" />.</para>
+          <para
+            >For more information, see <see
+
+              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetProperties.(System.Attribute[])"
+            />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the properties for this instance of a component using the attribute array as a filter.</para>
+          <para
+            >Returns the properties for this instance of a component using the attribute array as a filter.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the filtered properties for this component instance.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             that represents the filtered properties for this component instance.</para
+          >
         </returns>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Attribute" />
+
+           that is used as a filter.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner">
-      <MemberSignature Language="C#" Value="object ICustomTypeDescriptor.GetPropertyOwner (System.ComponentModel.PropertyDescriptor pd);" />
+      <MemberSignature
+        Language="C#"
+        Value="object ICustomTypeDescriptor.GetPropertyOwner (System.ComponentModel.PropertyDescriptor pd);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1064,18 +1418,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.ComponentModel.ICustomTypeDescriptor.PropertyDescriptor" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.PropertyDescriptor" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an object that contains the property described by the specified property descriptor.</para>
+          <para
+            >Returns an object that contains the property described by the specified property descriptor.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> that represents the owner of the specified property.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             that represents the owner of the specified property.</para
+          >
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the property whose owner is to be found.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ComponentModel.PropertyDescriptor" />
+
+           that represents the property whose owner is to be found.</param
+        >
       </Docs>
     </Member>
   </Members>

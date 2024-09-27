@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="RegistrationClassContext" FullName="System.Runtime.InteropServices.RegistrationClassContext">
+<Type
+  Name="RegistrationClassContext"
+  FullName="System.Runtime.InteropServices.RegistrationClassContext"
+>
   <TypeSignature Language="C#" Value="public enum RegistrationClassContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed RegistrationClassContext extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed RegistrationClassContext extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,18 +25,41 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The values in the <see cref="T:System.Runtime.InteropServices.RegistrationClassContext" /> enumeration are used in the <paramref name="classContext" /> parameter of the <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" /> method. These values are the same as those defined in the COM CLSCTX enumeration, which is used as the <paramref name="dwClsContext" /> parameter in calls to the COM API CoRegisterClassObject.</para>
-      <para>For more information about CoRegisterClassObject and the CLSCTX enumeration, see the MSDN library.</para>
+      <para
+        >The values in the <see
+         cref="T:System.Runtime.InteropServices.RegistrationClassContext" />
+
+         enumeration are used in the <paramref
+         name="classContext" />
+
+         parameter of the <see
+
+          cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)"
+        />
+
+         method. These values are the same as those defined in the COM CLSCTX enumeration, which is used as the <paramref
+         name="dwClsContext" />
+
+         parameter in calls to the COM API CoRegisterClassObject.</para
+      >
+      <para
+        >For more information about CoRegisterClassObject and the CLSCTX enumeration, see the MSDN library.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the set of execution contexts in which a class object will be made available for requests to construct instances.</para>
+      <para
+        >Specifies the set of execution contexts in which a class object will be made available for requests to construct instances.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="DisableActivateAsActivator">
       <MemberSignature Language="C#" Value="DisableActivateAsActivator" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext DisableActivateAsActivator = int32(32768)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext DisableActivateAsActivator = int32(32768)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +78,10 @@
     </Member>
     <Member MemberName="EnableActivateAsActivator">
       <MemberSignature Language="C#" Value="EnableActivateAsActivator" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext EnableActivateAsActivator = int32(65536)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext EnableActivateAsActivator = int32(65536)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -68,7 +100,10 @@
     </Member>
     <Member MemberName="EnableCodeDownload">
       <MemberSignature Language="C#" Value="EnableCodeDownload" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext EnableCodeDownload = int32(8192)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext EnableCodeDownload = int32(8192)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,7 +122,10 @@
     </Member>
     <Member MemberName="FromDefaultContext">
       <MemberSignature Language="C#" Value="FromDefaultContext" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext FromDefaultContext = int32(131072)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext FromDefaultContext = int32(131072)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,7 +144,10 @@
     </Member>
     <Member MemberName="InProcessHandler">
       <MemberSignature Language="C#" Value="InProcessHandler" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessHandler = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessHandler = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,7 +166,10 @@
     </Member>
     <Member MemberName="InProcessHandler16">
       <MemberSignature Language="C#" Value="InProcessHandler16" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessHandler16 = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessHandler16 = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -144,7 +188,10 @@
     </Member>
     <Member MemberName="InProcessServer">
       <MemberSignature Language="C#" Value="InProcessServer" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessServer = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessServer = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -157,13 +204,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The code that creates and manages objects of this class is a DLL that runs in the same process as the caller of the function specifying the class context.</para>
+          <para
+            >The code that creates and manages objects of this class is a DLL that runs in the same process as the caller of the function specifying the class context.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="InProcessServer16">
       <MemberSignature Language="C#" Value="InProcessServer16" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessServer16 = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext InProcessServer16 = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -182,7 +234,10 @@
     </Member>
     <Member MemberName="LocalServer">
       <MemberSignature Language="C#" Value="LocalServer" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext LocalServer = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext LocalServer = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -195,13 +250,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The EXE code that creates and manages objects of this class runs on same machine but is loaded in a separate process space.</para>
+          <para
+            >The EXE code that creates and manages objects of this class runs on same machine but is loaded in a separate process space.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="NoCodeDownload">
       <MemberSignature Language="C#" Value="NoCodeDownload" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext NoCodeDownload = int32(1024)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext NoCodeDownload = int32(1024)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -220,7 +280,10 @@
     </Member>
     <Member MemberName="NoCustomMarshal">
       <MemberSignature Language="C#" Value="NoCustomMarshal" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext NoCustomMarshal = int32(4096)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext NoCustomMarshal = int32(4096)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -239,7 +302,10 @@
     </Member>
     <Member MemberName="NoFailureLog">
       <MemberSignature Language="C#" Value="NoFailureLog" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext NoFailureLog = int32(16384)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext NoFailureLog = int32(16384)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -258,7 +324,10 @@
     </Member>
     <Member MemberName="RemoteServer">
       <MemberSignature Language="C#" Value="RemoteServer" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext RemoteServer = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext RemoteServer = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -277,7 +346,10 @@
     </Member>
     <Member MemberName="Reserved1">
       <MemberSignature Language="C#" Value="Reserved1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved1 = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved1 = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -296,7 +368,10 @@
     </Member>
     <Member MemberName="Reserved2">
       <MemberSignature Language="C#" Value="Reserved2" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved2 = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved2 = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -315,7 +390,10 @@
     </Member>
     <Member MemberName="Reserved3">
       <MemberSignature Language="C#" Value="Reserved3" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved3 = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved3 = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -334,7 +412,10 @@
     </Member>
     <Member MemberName="Reserved4">
       <MemberSignature Language="C#" Value="Reserved4" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved4 = int32(512)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved4 = int32(512)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -353,7 +434,10 @@
     </Member>
     <Member MemberName="Reserved5">
       <MemberSignature Language="C#" Value="Reserved5" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved5 = int32(2048)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.RegistrationClassContext Reserved5 = int32(2048)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

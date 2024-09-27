@@ -1,6 +1,12 @@
 <Type Name="SqliteTransaction" FullName="Mono.Data.Sqlite.SqliteTransaction">
-  <TypeSignature Language="C#" Value="public sealed class SqliteTransaction : System.Data.Common.DbTransaction" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteTransaction extends System.Data.Common.DbTransaction" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteTransaction : System.Data.Common.DbTransaction"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteTransaction extends System.Data.Common.DbTransaction"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,7 +24,10 @@
   <Members>
     <Member MemberName="Commit">
       <MemberSignature Language="C#" Value="public override void Commit ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Commit() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Commit() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,8 +44,14 @@
       </Docs>
     </Member>
     <Member MemberName="Connection">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteConnection Connection { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteConnection Connection" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteConnection Connection { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteConnection Connection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -45,16 +60,24 @@
         <ReturnType>Mono.Data.Sqlite.SqliteConnection</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Returns the underlying connection to which this transaction applies.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DbConnection">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbConnection DbConnection { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Common.DbConnection DbConnection" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbConnection DbConnection { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Data.Common.DbConnection DbConnection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,7 +95,10 @@
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -85,15 +111,23 @@
       </Parameters>
       <Docs>
         <param name="disposing">To be added.</param>
-        <summary>
+        <summary
+          >
             Disposes the transaction.  If it is currently active, any changes are rolled back.
-            </summary>
+            </summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsolationLevel">
-      <MemberSignature Language="C#" Value="public override System.Data.IsolationLevel IsolationLevel { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.IsolationLevel IsolationLevel" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.IsolationLevel IsolationLevel { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.IsolationLevel IsolationLevel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -102,16 +136,21 @@
         <ReturnType>System.Data.IsolationLevel</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
+        <summary
+          >
             Gets the isolation level of the transaction.  SQLite only supports Serializable transactions.
-            </summary>
+            </summary
+        >
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Rollback">
       <MemberSignature Language="C#" Value="public override void Rollback ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Rollback() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Rollback() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

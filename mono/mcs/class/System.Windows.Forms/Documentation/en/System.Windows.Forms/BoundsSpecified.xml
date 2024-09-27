@@ -17,11 +17,28 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration when calling the <see cref="M:System.Windows.Forms.Control.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" /> and <see cref="M:System.Windows.Forms.Control.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)" /> methods of the <see cref="T:System.Windows.Forms.Control" /> class.</para>
+      <para
+        >Use the members of this enumeration when calling the <see
+
+          cref="M:System.Windows.Forms.Control.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)"
+        />
+
+         and <see
+
+          cref="M:System.Windows.Forms.Control.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)"
+        />
+
+         methods of the <see
+         cref="T:System.Windows.Forms.Control" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the bounds of the control to use when defining a control's size and position.</para>
+      <para
+        >Specifies the bounds of the control to use when defining a control's size and position.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,7 +51,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Both <see cref="P:System.Windows.Forms.Control.Location" /> and <see cref="P:System.Windows.Forms.Control.Size" /> property values are defined.</para>
+          <para
+            >Both <see
+             cref="P:System.Windows.Forms.Control.Location" />
+
+             and <see
+             cref="P:System.Windows.Forms.Control.Size" />
+
+             property values are defined.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,7 +127,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Both <see cref="P:System.Windows.Forms.Control.Width" /> and <see cref="P:System.Windows.Forms.Control.Height" /> property values of the control are defined.</para>
+          <para
+            >Both <see
+             cref="P:System.Windows.Forms.Control.Width" />
+
+             and <see
+             cref="P:System.Windows.Forms.Control.Height" />
+
+             property values of the control are defined.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

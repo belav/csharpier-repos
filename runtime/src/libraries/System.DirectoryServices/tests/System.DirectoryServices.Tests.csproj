@@ -15,13 +15,17 @@
     <Compile Include="System\DirectoryServices\DirectoryVirtualListViewTests.cs" />
     <Compile Include="System\DirectoryServices\PropertyCollectionTests.cs" />
     <Compile Include="System\DirectoryServices\SortOptionTests.cs" />
-    <Compile Include="System\DirectoryServices\ActiveDirectory\ActiveDirectoryInterSiteTransportTests.cs" />
+    <Compile
+      Include="System\DirectoryServices\ActiveDirectory\ActiveDirectoryInterSiteTransportTests.cs"
+    />
     <Compile Include="System\DirectoryServices\ActiveDirectory\DirectoryContextTests.cs" />
     <Compile Include="System\DirectoryServices\ActiveDirectory\ForestTests.cs" />
     <Compile Include="System\DirectoryServices\ActiveDirectory\ActiveDirectoryTests.cs" />
     <Compile Include="System\DirectoryServices\ActiveDirectory\TrustHelperTests.cs" />
-    <Compile Include="$(CommonTestPath)System\DirectoryServices\LdapConfiguration.cs"
-             Link="Common\DirectoryServices\LdapConfiguration.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\DirectoryServices\LdapConfiguration.cs"
+      Link="Common\DirectoryServices\LdapConfiguration.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(CommonTestPath)System\DirectoryServices\LDAP.Configuration.xml">
@@ -32,7 +36,9 @@
     <Compile Include="System\DirectoryServices\DirectoryServicesTests.Windows.cs" />
     <Compile Include="System\DirectoryServices\ActiveDirectoryComInterop.cs" />
     <ProjectReference Include="..\src\System.DirectoryServices.csproj" />
-    <ProjectReference Include="..\..\System.Security.Permissions\src\System.Security.Permissions.csproj" />
+    <ProjectReference
+      Include="..\..\System.Security.Permissions\src\System.Security.Permissions.csproj"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.DirectoryServices" />

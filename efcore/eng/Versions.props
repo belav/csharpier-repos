@@ -8,27 +8,49 @@
     <!--
         When StabilizePackageVersion is set to 'true', this branch will produce stable outputs for 'Shipping' packages
     -->
-    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
-    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
+    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''"
+      >false</StabilizePackageVersion
+    >
+    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
+      >release</DotNetFinalVersionKind
+    >
     <DefaultNetCoreTargetFramework>net8.0</DefaultNetCoreTargetFramework>
   </PropertyGroup>
   <PropertyGroup Label="Arcade settings">
     <UsingToolXliff>False</UsingToolXliff>
   </PropertyGroup>
   <PropertyGroup Label="Dependencies from dotnet/runtime">
-    <MicrosoftExtensionsCachingMemoryVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsCachingMemoryVersion>
-    <MicrosoftExtensionsConfigurationVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationVersion>
-    <MicrosoftExtensionsConfigurationAbstractionsVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationAbstractionsVersion>
-    <MicrosoftExtensionsConfigurationEnvironmentVariablesVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationEnvironmentVariablesVersion>
-    <MicrosoftExtensionsConfigurationJsonVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationJsonVersion>
-    <MicrosoftExtensionsDependencyInjectionVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsDependencyInjectionVersion>
-    <MicrosoftExtensionsDependencyModelVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsDependencyModelVersion>
-    <MicrosoftExtensionsHostFactoryResolverSourcesVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsHostFactoryResolverSourcesVersion>
+    <MicrosoftExtensionsCachingMemoryVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsCachingMemoryVersion
+    >
+    <MicrosoftExtensionsConfigurationVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationVersion
+    >
+    <MicrosoftExtensionsConfigurationAbstractionsVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationAbstractionsVersion
+    >
+    <MicrosoftExtensionsConfigurationEnvironmentVariablesVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationEnvironmentVariablesVersion
+    >
+    <MicrosoftExtensionsConfigurationJsonVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsConfigurationJsonVersion
+    >
+    <MicrosoftExtensionsDependencyInjectionVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsDependencyInjectionVersion
+    >
+    <MicrosoftExtensionsDependencyModelVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsDependencyModelVersion
+    >
+    <MicrosoftExtensionsHostFactoryResolverSourcesVersion
+      >9.0.0-alpha.1.23576.6</MicrosoftExtensionsHostFactoryResolverSourcesVersion
+    >
     <MicrosoftExtensionsLoggingVersion>9.0.0-alpha.1.23576.6</MicrosoftExtensionsLoggingVersion>
     <SystemTextJsonVersion>9.0.0-alpha.1.23576.6</SystemTextJsonVersion>
   </PropertyGroup>
   <PropertyGroup Label="Dependencies from dotnet/arcade">
-    <MicrosoftDotNetBuildTasksTemplatingVersion>9.0.0-beta.23572.2</MicrosoftDotNetBuildTasksTemplatingVersion>
+    <MicrosoftDotNetBuildTasksTemplatingVersion
+      >9.0.0-beta.23572.2</MicrosoftDotNetBuildTasksTemplatingVersion
+    >
   </PropertyGroup>
   <PropertyGroup Label="Other dependencies">
     <!-- NB: This version affects Visual Studio compatibility. See https://learn.microsoft.com/visualstudio/extensibility/roslyn-version-support -->

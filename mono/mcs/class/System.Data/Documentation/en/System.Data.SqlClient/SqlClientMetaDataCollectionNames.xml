@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SqlClientMetaDataCollectionNames" FullName="System.Data.SqlClient.SqlClientMetaDataCollectionNames">
+<Type
+  Name="SqlClientMetaDataCollectionNames"
+  FullName="System.Data.SqlClient.SqlClientMetaDataCollectionNames"
+>
   <TypeSignature Language="C#" Value="public static class SqlClientMetaDataCollectionNames" />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
@@ -14,7 +17,9 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a list of constants for use with the GetSchema method to retrieve metadata collections.</para>
+      <para
+        >Provides a list of constants for use with the GetSchema method to retrieve metadata collections.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +35,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Columns collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Columns collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,7 +56,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Databases collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Databases collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +77,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the ForeignKeys collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the ForeignKeys collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,7 +98,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the IndexColumns collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the IndexColumns collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,7 +119,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Indexes collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Indexes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -125,7 +140,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Parameters collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Parameters collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -144,7 +161,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the ProcedureColumns collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the ProcedureColumns collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -163,7 +182,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Procedures collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Procedures collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -182,7 +203,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Tables collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Tables collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -201,7 +224,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the UserDefinedTypes collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the UserDefinedTypes collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -220,7 +245,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Users collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the Users collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -239,7 +266,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the ViewColumns collection.</para>
+          <para
+            >A constant for use with the GetSchema method that represents the ViewColumns collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -258,7 +287,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant for use with the GetSchema method that represents the Views collection. </para>
+          <para
+            >A constant for use with the GetSchema method that represents the Views collection. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

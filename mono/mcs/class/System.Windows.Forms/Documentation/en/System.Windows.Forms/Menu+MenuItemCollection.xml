@@ -1,5 +1,8 @@
 <Type Name="Menu+MenuItemCollection" FullName="System.Windows.Forms.Menu+MenuItemCollection">
-  <TypeSignature Language="C#" Value="public class Menu.MenuItemCollection : System.Collections.IList" />
+  <TypeSignature
+    Language="C#"
+    Value="public class Menu.MenuItemCollection : System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -24,7 +27,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MenuItemCollection (System.Windows.Forms.Menu owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public MenuItemCollection (System.Windows.Forms.Menu owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.Menu" />
@@ -40,7 +46,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.MenuItem Add (string caption);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.MenuItem Add (string caption);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.MenuItem</ReturnType>
@@ -60,7 +69,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual int Add (System.Windows.Forms.MenuItem item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int Add (System.Windows.Forms.MenuItem item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -80,7 +92,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual int Add (int index, System.Windows.Forms.MenuItem item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int Add (int index, System.Windows.Forms.MenuItem item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -102,7 +117,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.MenuItem Add (string caption, EventHandler onClick);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.MenuItem Add (string caption, EventHandler onClick);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.MenuItem</ReturnType>
@@ -124,7 +142,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.MenuItem Add (string caption, System.Windows.Forms.MenuItem[] items);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.MenuItem Add (string caption, System.Windows.Forms.MenuItem[] items);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.MenuItem</ReturnType>
@@ -146,7 +167,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public virtual void AddRange (System.Windows.Forms.MenuItem[] items);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void AddRange (System.Windows.Forms.MenuItem[] items);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -181,7 +205,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (System.Windows.Forms.MenuItem value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (System.Windows.Forms.MenuItem value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -257,7 +284,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Find">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.MenuItem[] Find (string key, bool searchAllChildren);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.MenuItem[] Find (string key, bool searchAllChildren);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -278,7 +308,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -295,7 +328,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Windows.Forms.MenuItem value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Windows.Forms.MenuItem value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -350,7 +386,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.MenuItem this[int index] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.MenuItem this[int index] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.MenuItem</ReturnType>
@@ -370,7 +409,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.MenuItem this[string key] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.MenuItem this[string key] { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -389,7 +431,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public virtual void Remove (System.Windows.Forms.MenuItem item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Remove (System.Windows.Forms.MenuItem item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -445,7 +490,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -461,7 +509,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -574,7 +625,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

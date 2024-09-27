@@ -1,22 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    <TargetFrameworks
+      >$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks
+    >
     <IsTrimmable>false</IsTrimmable>
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
     <IsPackable>true</IsPackable>
-    <PackageDescription>Provides Managed Extensibility Framework types that are useful to developers of extensible applications, or hosts.
+    <PackageDescription
+      >Provides Managed Extensibility Framework types that are useful to developers of extensible applications, or hosts.
 
 Commonly Used Types:
-System.Composition.Hosting.CompositionHost</PackageDescription>
-
+System.Composition.Hosting.CompositionHost</PackageDescription
+    >
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Composition\Hosting\CompositionHost.cs" />
     <Compile Include="System\Composition\Hosting\Core\CompositeActivator.cs" />
@@ -34,24 +35,33 @@ System.Composition.Hosting.CompositionHost</PackageDescription>
     <Compile Include="System\Composition\Hosting\Core\LifetimeContext.cs" />
     <Compile Include="System\Composition\Hosting\Core\UpdateResult.cs" />
     <Compile Include="System\Composition\Hosting\Providers\Constants.cs" />
-    <Compile Include="System\Composition\Hosting\Providers\CurrentScope\CurrentScopeExportDescriptorProvider.cs" />
-    <Compile Include="System\Composition\Hosting\Providers\ExportFactory\ExportFactoryExportDescriptorProvider.cs" />
-    <Compile Include="System\Composition\Hosting\Providers\ExportFactory\ExportFactoryWithMetadataExportDescriptorProvider.cs" />
-    <Compile Include="System\Composition\Hosting\Providers\ImportMany\ImportManyExportDescriptorProvider.cs" />
+    <Compile
+      Include="System\Composition\Hosting\Providers\CurrentScope\CurrentScopeExportDescriptorProvider.cs"
+    />
+    <Compile
+      Include="System\Composition\Hosting\Providers\ExportFactory\ExportFactoryExportDescriptorProvider.cs"
+    />
+    <Compile
+      Include="System\Composition\Hosting\Providers\ExportFactory\ExportFactoryWithMetadataExportDescriptorProvider.cs"
+    />
+    <Compile
+      Include="System\Composition\Hosting\Providers\ImportMany\ImportManyExportDescriptorProvider.cs"
+    />
     <Compile Include="System\Composition\Hosting\Providers\Lazy\LazyExportDescriptorProvider.cs" />
-    <Compile Include="System\Composition\Hosting\Providers\Lazy\LazyWithMetadataExportDescriptorProvider.cs" />
+    <Compile
+      Include="System\Composition\Hosting\Providers\Lazy\LazyWithMetadataExportDescriptorProvider.cs"
+    />
     <Compile Include="System\Composition\Hosting\Providers\Metadata\MetadataViewProvider.cs" />
     <Compile Include="System\Composition\Hosting\Util\Formatters.cs" />
     <Compile Include="System\Composition\Hosting\Util\MethodInfoExtensions.cs" />
     <Compile Include="System\Composition\Hosting\Util\SmallSparseInitonlyArray.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Runtime\src\System.Composition.Runtime.csproj" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Composition.Runtime\src\System.Composition.Runtime.csproj"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
-
 </Project>

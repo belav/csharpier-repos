@@ -1,4 +1,7 @@
-<Type Name="Protocol" FullName="System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol">
+<Type
+  Name="Protocol"
+  FullName="System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol"
+>
   <TypeSignature Language="C#" Value="public sealed struct Protocol;" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Remoting</AssemblyName>
@@ -14,7 +17,9 @@
       </Attribute>
     </Attributes>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Docs>
     <summary>To be added</summary>
     <remarks>To be added</remarks>
@@ -36,7 +41,10 @@
   <Attributes />
   <Members>
     <Member MemberName="Http">
-      <MemberSignature Language="C#" Value="public static BinaryServerFormatterSink+Protocol Http;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static BinaryServerFormatterSink+Protocol Http;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol</ReturnType>
@@ -48,7 +56,10 @@
       </Docs>
     </Member>
     <Member MemberName="Other">
-      <MemberSignature Language="C#" Value="public static BinaryServerFormatterSink+Protocol Other;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static BinaryServerFormatterSink+Protocol Other;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol</ReturnType>

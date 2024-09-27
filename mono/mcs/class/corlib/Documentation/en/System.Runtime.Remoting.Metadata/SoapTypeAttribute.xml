@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SoapTypeAttribute" FullName="System.Runtime.Remoting.Metadata.SoapTypeAttribute">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class SoapTypeAttribute : System.Runtime.Remoting.Metadata.SoapAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SoapTypeAttribute extends System.Runtime.Remoting.Metadata.SoapAttribute" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class SoapTypeAttribute : System.Runtime.Remoting.Metadata.SoapAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SoapTypeAttribute extends System.Runtime.Remoting.Metadata.SoapAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -9,14 +16,18 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the &lt;link location="node:gtk-sharp/programming/threads"&gt;Gtk# Thread Programming&lt;/link&gt; for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Runtime.Remoting.Metadata.SoapAttribute</BaseTypeName>
   </Base>
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct | System.AttributeTargets.Enum | System.AttributeTargets.Interface | System.AttributeTargets.All)</AttributeName>
+      <AttributeName
+        >System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct | System.AttributeTargets.Enum | System.AttributeTargets.Interface | System.AttributeTargets.All)</AttributeName
+      >
     </Attribute>
     <Attribute>
       <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
@@ -25,17 +36,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute is a custom attribute that can be applied to objects, value types, and interface objects. This attribute is used to specify information on an object type that controls how SOAP will generate the SOAP XML wire format.</para>
+      <para
+        >The <see
+         cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+         attribute is a custom attribute that can be applied to objects, value types, and interface objects. This attribute is used to specify information on an object type that controls how SOAP will generate the SOAP XML wire format.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Customizes SOAP generation and processing for target types. This class cannot be inherited.</para>
+      <para
+        >Customizes SOAP generation and processing for target types. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SoapTypeAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -48,13 +69,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />.</para>
+          <para
+            >Creates an instance of <see
+             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SoapOptions">
-      <MemberSignature Language="C#" Value="public System.Runtime.Remoting.Metadata.SoapOption SoapOptions { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Runtime.Remoting.Metadata.SoapOption SoapOptions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Remoting.Metadata.SoapOption SoapOptions { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Runtime.Remoting.Metadata.SoapOption SoapOptions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -68,14 +100,35 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" /> value indicates the SOAP configuration options that will be used with a <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute.</para>
+          <para
+            >A <see
+             cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
+
+             value indicates the SOAP configuration options that will be used with a <see
+             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+             attribute.</para
+          >
           <block subset="none" type="note">
-            <para>The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.SoapOptions" /> enumeration has no effect on serialization of objects with the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para>
+            <para
+              >The <see
+               cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.SoapOptions" />
+
+               enumeration has no effect on serialization of objects with the <see
+               cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+              .</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" /> configuration value.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
+
+             configuration value.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -95,11 +148,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" /> property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute.</para>
+          <para
+            >The <see
+             cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" />
+
+             property cannot be set on the <see
+             cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+             attribute.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the target of the current attribute will be serialized as an XML attribute instead of an XML field.</para>
+          <para
+            >Gets or sets a value indicating whether the target of the current attribute will be serialized as an XML attribute instead of an XML field.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -125,8 +188,14 @@
       </Docs>
     </Member>
     <Member MemberName="XmlFieldOrder">
-      <MemberSignature Language="C#" Value="public System.Runtime.Remoting.Metadata.XmlFieldOrderOption XmlFieldOrder { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Runtime.Remoting.Metadata.XmlFieldOrderOption XmlFieldOrder" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Remoting.Metadata.XmlFieldOrderOption XmlFieldOrder { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Runtime.Remoting.Metadata.XmlFieldOrderOption XmlFieldOrder"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -162,7 +231,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the XML namespace that is used during serialization of the target object type.</para>
+          <para
+            >Gets or sets the XML namespace that is used during serialization of the target object type.</para
+          >
         </summary>
       </Docs>
     </Member>

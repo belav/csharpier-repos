@@ -12,11 +12,36 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.ControlUpdateMode" /> is used by the <see cref="P:System.Windows.Forms.Binding.ControlUpdateMode" /> property of the <see cref="T:System.Windows.Forms.Binding" /> class. <see cref="F:System.Windows.Forms.ControlUpdateMode.OnPropertyChanged" /> is the default value. To force a control update when the update mode is <see cref="F:System.Windows.Forms.ControlUpdateMode.Never" />, use the <see cref="M:System.Windows.Forms.Binding.ReadValue" /> method on the related <see cref="T:System.Windows.Forms.Binding" />.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.ControlUpdateMode" />
+
+         is used by the <see
+         cref="P:System.Windows.Forms.Binding.ControlUpdateMode" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         class. <see
+         cref="F:System.Windows.Forms.ControlUpdateMode.OnPropertyChanged" />
+
+         is the default value. To force a control update when the update mode is <see
+         cref="F:System.Windows.Forms.ControlUpdateMode.Never" />
+
+        , use the <see
+         cref="M:System.Windows.Forms.Binding.ReadValue" />
+
+         method on the related <see
+         cref="T:System.Windows.Forms.Binding" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Determines when changes to a data source value get propagated to the corresponding data-bound control property.</para>
+      <para
+        >Determines when changes to a data source value get propagated to the corresponding data-bound control property.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +55,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The bound control is never updated when a data source value changes. The data source is write-only.</para>
+          <para
+            >The bound control is never updated when a data source value changes. The data source is write-only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,7 +74,9 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The bound control is updated when the data source value changes, or the data source position changes.</para>
+          <para
+            >The bound control is updated when the data source value changes, or the data source position changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

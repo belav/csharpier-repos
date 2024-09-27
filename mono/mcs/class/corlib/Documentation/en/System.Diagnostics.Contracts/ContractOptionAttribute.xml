@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ContractOptionAttribute" FullName="System.Diagnostics.Contracts.ContractOptionAttribute">
+<Type
+  Name="ContractOptionAttribute"
+  FullName="System.Diagnostics.Contracts.ContractOptionAttribute"
+>
   <TypeSignature Language="C#" Value="public sealed class ContractOptionAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContractOptionAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ContractOptionAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -12,7 +18,9 @@
   <Interfaces />
   <Attributes>
     <Attribute>
-      <AttributeName>System.AttributeUsage(System.AttributeTargets.All, AllowMultiple=true, Inherited=false)</AttributeName>
+      <AttributeName
+        >System.AttributeUsage(System.AttributeTargets.All, AllowMultiple=true, Inherited=false)</AttributeName
+      >
     </Attribute>
     <Attribute>
       <AttributeName>System.Diagnostics.Conditional("CONTRACTS_FULL")</AttributeName>
@@ -44,7 +52,9 @@
             <para>inheritance</para>
           </description>
           <description>
-            <para>true to turn contract inheritance on; false to turn it off.  The default is true.</para>
+            <para
+              >true to turn contract inheritance on; false to turn it off.  The default is true.</para
+            >
           </description>
         </item>
         <item>
@@ -55,7 +65,9 @@
             <para>checking</para>
           </description>
           <description>
-            <para>true to turn run-time checking on; false to turn it off. The default is true.</para>
+            <para
+              >true to turn run-time checking on; false to turn it off. The default is true.</para
+            >
           </description>
         </item>
       </list>
@@ -63,15 +75,18 @@
       <para>To turn off run-time checking for the entire assembly:</para>
       <code>[assembly:ContractOption("runtime", "checking", false)]</code>
       <para>To turn run-time contract checking on for a specific type:</para>
-      <code>   [ContractOption("runtime", "checking", true)]
+      <code
+        >   [ContractOption("runtime", "checking", true)]
    class TypeWithRuntimeChecking {
  
        ...
-</code>
+</code
+      >
       <para>To turn run-time checking off for a specific method:</para>
-      <code>// Turn off all contract inheritance from interface IList&lt;T&gt;
+      <code
+        >// Turn off all contract inheritance from interface IList<T>
 [ContractOption("contract", "inheritance", false)]
-class MyConcurrentList&lt;T&gt; : IList&lt;T&gt; {
+class MyConcurrentList<T> : IList<T> {
    ...
 }
  
@@ -87,17 +102,26 @@ public override MyMethod(int x) {
           ...
        }
    }
-</code>
+</code
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Enables you to set contract and tool options at assembly, type, or method granularity.</para>
+      <para
+        >Enables you to set contract and tool options at assembly, type, or method granularity.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ContractOptionAttribute (string category, string setting, bool enabled);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, bool enabled) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ContractOptionAttribute (string category, string setting, bool enabled);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, bool enabled) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,19 +135,39 @@ public override MyMethod(int x) {
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" /> class by using the provided category, setting, and enable/disable value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" />
+
+             class by using the provided category, setting, and enable/disable value.</para
+          >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />The category for the option to be set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The category for the option to be set.</param
+        >
         <param name="setting">
-          <attribution license="cc4" from="Microsoft" modified="false" />The option setting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The option setting.</param
+        >
         <param name="enabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to enable the option; false to disable the option.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to enable the option; false to disable the option.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ContractOptionAttribute (string category, string setting, string value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, string value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ContractOptionAttribute (string category, string setting, string value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, string value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,23 +180,46 @@ public override MyMethod(int x) {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>There are only two category/setting options, and they can be set by either of the constructor overloads. You can use this overload with the same settings as the <see cref="M:System.Diagnostics.Contracts.ContractOptionAttribute.#ctor(System.String,System.String,System.Boolean)" /> overload by specifying "true" or "false" in string format; for example:</para>
-          <code>[ContractOption("contract", "inheritance", “false”)]
-class MyConcurrentList&lt;T&gt; : IList&lt;T&gt; {
+          <para
+            >There are only two category/setting options, and they can be set by either of the constructor overloads. You can use this overload with the same settings as the <see
+
+              cref="M:System.Diagnostics.Contracts.ContractOptionAttribute.#ctor(System.String,System.String,System.Boolean)"
+            />
+
+             overload by specifying "true" or "false" in string format; for example:</para
+          >
+          <code
+            >[ContractOption("contract", "inheritance", “false”)]
+class MyConcurrentList<T> : IList<T> {
    ...
 }
-</code>
+</code
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" /> class by using the provided category, setting, and value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" />
+
+             class by using the provided category, setting, and value.</para
+          >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />The category of the option to be set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The category of the option to be set.</param
+        >
         <param name="setting">
-          <attribution license="cc4" from="Microsoft" modified="false" />The option setting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The option setting.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value for the setting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value for the setting.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Category">
