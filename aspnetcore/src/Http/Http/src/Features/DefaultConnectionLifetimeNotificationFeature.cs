@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Http.Features;
 /// <summary>
 /// Default implementation of <see cref="IConnectionLifetimeNotificationFeature"/>.
 /// </summary>
-internal sealed class DefaultConnectionLifetimeNotificationFeature : IConnectionLifetimeNotificationFeature
+internal sealed class DefaultConnectionLifetimeNotificationFeature
+    : IConnectionLifetimeNotificationFeature
 {
     private readonly IHttpResponseFeature? _httpResponseFeature;
 

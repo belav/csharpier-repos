@@ -7,10 +7,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
     {
         public override string AreaName
         {
-            get
-            {
-                return "HelpPage";
-            }
+            get { return "HelpPage"; }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
@@ -18,7 +15,13 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             context.MapRoute(
                 "HelpPage_Default",
                 "Help/{action}/{apiId}",
-                new { controller = "Help", action = "Index", apiId = UrlParameter.Optional });
+                new
+                {
+                    controller = "Help",
+                    action = "Index",
+                    apiId = UrlParameter.Optional,
+                }
+            );
 
             HelpPageConfig.Register(GlobalConfiguration.Configuration);
         }

@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	using System;
+    using System;
 
-	public interface IFooWithUIntPtr
-	{
-		UIntPtr Buffer(UInt32 index);
-	}
+    public interface IFooWithUIntPtr
+    {
+        UIntPtr Buffer(UInt32 index);
+    }
 }

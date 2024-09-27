@@ -5,20 +5,22 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Security.Cryptography.X509Certificates;
 
     public sealed partial class X509ScopedServiceCertificateElement : ConfigurationElement
     {
-        public X509ScopedServiceCertificateElement()
-        {
-        }
+        public X509ScopedServiceCertificateElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.TargetUri, DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TargetUri,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         public Uri TargetUri
         {
             get { return (Uri)base[ConfigurationStrings.TargetUri]; }
@@ -40,7 +42,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreLocation, DefaultValue = X509CertificateRecipientClientCredential.DefaultStoreLocation)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreLocation,
+            DefaultValue = X509CertificateRecipientClientCredential.DefaultStoreLocation
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreLocation))]
         public StoreLocation StoreLocation
         {
@@ -48,7 +53,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreLocation] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.StoreName, DefaultValue = X509CertificateRecipientClientCredential.DefaultStoreName)]
+        [ConfigurationProperty(
+            ConfigurationStrings.StoreName,
+            DefaultValue = X509CertificateRecipientClientCredential.DefaultStoreName
+        )]
         [StandardRuntimeEnumValidator(typeof(StoreName))]
         public StoreName StoreName
         {
@@ -56,7 +64,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.StoreName] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.X509FindType, DefaultValue = X509CertificateRecipientClientCredential.DefaultFindType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.X509FindType,
+            DefaultValue = X509CertificateRecipientClientCredential.DefaultFindType
+        )]
         [StandardRuntimeEnumValidator(typeof(X509FindType))]
         public X509FindType X509FindType
         {
@@ -68,7 +79,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -89,17 +102,27 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("creds");
             }
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.TargetUri].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.StoreLocation].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.StoreName].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.X509FindType].ValueOrigin != PropertyValueOrigin.Default
-                || propertyInfo[ConfigurationStrings.FindValue].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.TargetUri].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.StoreLocation].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.StoreName].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.X509FindType].ValueOrigin
+                    != PropertyValueOrigin.Default
+                || propertyInfo[ConfigurationStrings.FindValue].ValueOrigin
+                    != PropertyValueOrigin.Default
+            )
             {
-                creds.SetScopedCertificate(this.StoreLocation, this.StoreName, this.X509FindType, this.FindValue, this.TargetUri);
+                creds.SetScopedCertificate(
+                    this.StoreLocation,
+                    this.StoreName,
+                    this.X509FindType,
+                    this.FindValue,
+                    this.TargetUri
+                );
             }
         }
     }
 }
-
-
-

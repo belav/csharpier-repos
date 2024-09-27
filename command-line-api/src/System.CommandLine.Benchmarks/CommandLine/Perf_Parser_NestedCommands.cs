@@ -21,7 +21,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
         ///
         /// 2 - cmd-root/
         ///     |-cmd-nested0
-        /// 
+        ///
         /// 5 - cmd-root/
         ///     |-cmd-nested0/
         ///       |-cmd-nested00/
@@ -66,6 +66,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
         }
 
         [Benchmark]
-        public ParseResult Parser_Parse() => CliParser.Parse(_rootCommand, _testSymbolsAsString, _configuration);
+        public ParseResult Parser_Parse() =>
+            CliParser.Parse(_rootCommand, _testSymbolsAsString, _configuration);
     }
 }

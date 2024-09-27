@@ -21,14 +21,10 @@ namespace System.ServiceModel.Channels
         bool includePortInComparison;
 
         public UriPrefixTable()
-            : this(false)
-        {
-        }
+            : this(false) { }
 
         public UriPrefixTable(bool includePortInComparison)
-            : this(includePortInComparison, false)
-        {
-        }
+            : this(includePortInComparison, false) { }
 
         public UriPrefixTable(bool includePortInComparison, bool useWeakReferences)
         {
@@ -45,7 +41,11 @@ namespace System.ServiceModel.Channels
             {
                 foreach (KeyValuePair<BaseUriWithWildcard, TItem> current in objectToClone.GetAll())
                 {
-                    this.RegisterUri(current.Key.BaseAddress, current.Key.HostNameComparisonMode, current.Value);
+                    this.RegisterUri(
+                        current.Key.BaseAddress,
+                        current.Key.HostNameComparisonMode,
+                        current.Value
+                    );
                 }
             }
         }
@@ -54,28 +54,29 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                // The UriPrefixTable instance itself is used as a 
-                // synchronization primitive in the TransportManagers and the 
-                // TransportManagerContainers so we return 'this' to keep them in sync.                 
+                // The UriPrefixTable instance itself is used as a
+                // synchronization primitive in the TransportManagers and the
+                // TransportManagerContainers so we return 'this' to keep them in sync.
                 return this;
             }
         }
 
         public int Count
         {
-            get
-            {
-                return this.count;
-            }
+            get { return this.count; }
         }
 
         public bool IsRegistered(BaseUriWithWildcard key)
         {
             Uri uri = key.BaseAddress;
 
-            // don't need to normalize path since SegmentHierarchyNode is 
+            // don't need to normalize path since SegmentHierarchyNode is
             // already OrdinalIgnoreCase
-            string[] paths = UriSegmenter.ToPath(uri, key.HostNameComparisonMode, this.includePortInComparison);
+            string[] paths = UriSegmenter.ToPath(
+                uri,
+                key.HostNameComparisonMode,
+                this.includePortInComparison
+            );
             bool exactMatch;
             SegmentHierarchyNode<TItem> node;
             lock (ThisLock)
@@ -89,7 +90,8 @@ namespace System.ServiceModel.Channels
         {
             lock (ThisLock)
             {
-                List<KeyValuePair<BaseUriWithWildcard, TItem>> result = new List<KeyValuePair<BaseUriWithWildcard, TItem>>();
+                List<KeyValuePair<BaseUriWithWildcard, TItem>> result =
+                    new List<KeyValuePair<BaseUriWithWildcard, TItem>>();
                 this.root.Collect(result);
                 return result;
             }
@@ -119,7 +121,11 @@ namespace System.ServiceModel.Channels
             this.lookupCache = new HopperCache(HopperSize, this.useWeakReferences);
         }
 
-        public bool TryLookupUri(Uri uri, HostNameComparisonMode hostNameComparisonMode, out TItem item)
+        public bool TryLookupUri(
+            Uri uri,
+            HostNameComparisonMode hostNameComparisonMode,
+            out TItem item
+        )
         {
             BaseUriWithWildcard key = new BaseUriWithWildcard(uri, hostNameComparisonMode);
             if (TryCacheLookup(key, out item))
@@ -133,7 +139,13 @@ namespace System.ServiceModel.Channels
                 // catch case-insensitive variations that aren't yet in our cache)
                 bool dummy;
                 SegmentHierarchyNode<TItem> node = FindDataNode(
-                    UriSegmenter.ToPath(key.BaseAddress, hostNameComparisonMode, this.includePortInComparison), out dummy);
+                    UriSegmenter.ToPath(
+                        key.BaseAddress,
+                        hostNameComparisonMode,
+                        this.includePortInComparison
+                    ),
+                    out dummy
+                );
                 if (node != null)
                 {
                     item = node.Data;
@@ -146,7 +158,10 @@ namespace System.ServiceModel.Channels
 
         public void RegisterUri(Uri uri, HostNameComparisonMode hostNameComparisonMode, TItem item)
         {
-            Fx.Assert(HostNameComparisonModeHelper.IsDefined(hostNameComparisonMode), "RegisterUri: Invalid HostNameComparisonMode value passed in.");
+            Fx.Assert(
+                HostNameComparisonModeHelper.IsDefined(hostNameComparisonMode),
+                "RegisterUri: Invalid HostNameComparisonMode value passed in."
+            );
 
             lock (ThisLock)
             {
@@ -157,8 +172,9 @@ namespace System.ServiceModel.Channels
                 SegmentHierarchyNode<TItem> node = FindOrCreateNode(key);
                 if (node.Data != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                        SR.DuplicateRegistration, uri)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.DuplicateRegistration, uri))
+                    );
                 }
                 node.SetData(item, key);
                 count++;
@@ -172,7 +188,11 @@ namespace System.ServiceModel.Channels
                 // Since every removed Uri could alter what Prefixes should have matched, we
                 // should clear the cache of any existing results and start over
                 ClearCache();
-                string[] path = UriSegmenter.ToPath(uri, hostNameComparisonMode, this.includePortInComparison);
+                string[] path = UriSegmenter.ToPath(
+                    uri,
+                    hostNameComparisonMode,
+                    this.includePortInComparison
+                );
                 // Never remove the root
                 if (path.Length == 0)
                 {
@@ -214,7 +234,11 @@ namespace System.ServiceModel.Channels
         {
             Fx.Assert(baseUri != null, "FindOrCreateNode: baseUri is null");
 
-            string[] path = UriSegmenter.ToPath(baseUri.BaseAddress, baseUri.HostNameComparisonMode, this.includePortInComparison);
+            string[] path = UriSegmenter.ToPath(
+                baseUri.BaseAddress,
+                baseUri.HostNameComparisonMode,
+                this.includePortInComparison
+            );
             SegmentHierarchyNode<TItem> current = this.root;
             for (int i = 0; i < path.Length; ++i)
             {
@@ -231,8 +255,11 @@ namespace System.ServiceModel.Channels
 
         static class UriSegmenter
         {
-            internal static string[] ToPath(Uri uriPath, HostNameComparisonMode hostNameComparisonMode,
-                bool includePortInComparison)
+            internal static string[] ToPath(
+                Uri uriPath,
+                HostNameComparisonMode hostNameComparisonMode,
+                bool includePortInComparison
+            )
             {
                 if (null == uriPath)
                 {
@@ -268,8 +295,10 @@ namespace System.ServiceModel.Channels
                     this.segmentLength = 0;
                 }
 
-                public string[] GetSegments(HostNameComparisonMode hostNameComparisonMode,
-                    bool includePortInComparison)
+                public string[] GetSegments(
+                    HostNameComparisonMode hostNameComparisonMode,
+                    bool includePortInComparison
+                )
                 {
                     List<string> segments = new List<string>();
                     while (this.Next())
@@ -277,7 +306,9 @@ namespace System.ServiceModel.Channels
                         switch (this.type)
                         {
                             case UriSegmentType.Path:
-                                segments.Add(this.segment.Substring(this.segmentStartAt, this.segmentLength));
+                                segments.Add(
+                                    this.segment.Substring(this.segmentStartAt, this.segmentLength)
+                                );
                                 break;
 
                             case UriSegmentType.Host:
@@ -296,7 +327,10 @@ namespace System.ServiceModel.Channels
                                 break;
 
                             case UriSegmentType.Port:
-                                if (includePortInComparison || hostNameComparisonMode == HostNameComparisonMode.Exact)
+                                if (
+                                    includePortInComparison
+                                    || hostNameComparisonMode == HostNameComparisonMode.Exact
+                                )
                                 {
                                     segments.Add(this.segment);
                                 }
@@ -369,7 +403,10 @@ namespace System.ServiceModel.Channels
                 public bool NextPathSegment()
                 {
                     this.segmentStartAt += this.segmentLength;
-                    while (this.segmentStartAt < this.segment.Length && this.segment[this.segmentStartAt] == '/')
+                    while (
+                        this.segmentStartAt < this.segment.Length
+                        && this.segment[this.segmentStartAt] == '/'
+                    )
                     {
                         this.segmentStartAt++;
                     }
@@ -405,7 +442,7 @@ namespace System.ServiceModel.Channels
                     Host,
                     Port,
                     Path,
-                    None
+                    None,
                 }
             }
         }
@@ -425,7 +462,9 @@ namespace System.ServiceModel.Channels
         {
             this.name = name;
             this.useWeakReferences = useWeakReferences;
-            this.children = new Dictionary<string, SegmentHierarchyNode<TData>>(StringComparer.OrdinalIgnoreCase);
+            this.children = new Dictionary<string, SegmentHierarchyNode<TData>>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public TData Data

@@ -13,7 +13,6 @@ namespace System
     // This represents a Query value, which can either be Empty, a Literal or a Variable
     abstract class UriTemplateQueryValue
     {
-
         readonly UriTemplatePartType nature;
         static UriTemplateQueryValue empty = new EmptyUriTemplateQueryValue();
 
@@ -24,20 +23,18 @@ namespace System
 
         public static UriTemplateQueryValue Empty
         {
-            get
-            {
-                return UriTemplateQueryValue.empty;
-            }
+            get { return UriTemplateQueryValue.empty; }
         }
 
         public UriTemplatePartType Nature
         {
-            get
-            {
-                return this.nature;
-            }
+            get { return this.nature; }
         }
-        public static UriTemplateQueryValue CreateFromUriTemplate(string value, UriTemplate template)
+
+        public static UriTemplateQueryValue CreateFromUriTemplate(
+            string value,
+            UriTemplate template
+        )
         {
             // Checking for empty value
             if (value == null)
@@ -51,11 +48,19 @@ namespace System
                     return UriTemplateLiteralQueryValue.CreateFromUriTemplate(value);
 
                 case UriTemplatePartType.Compound:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                        SR.UTQueryCannotHaveCompoundValue, template.originalTemplate)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.UTQueryCannotHaveCompoundValue,
+                                template.originalTemplate
+                            )
+                        )
+                    );
 
                 case UriTemplatePartType.Variable:
-                    return new UriTemplateVariableQueryValue(template.AddQueryVariable(value.Substring(1, value.Length - 2)));
+                    return new UriTemplateVariableQueryValue(
+                        template.AddQueryVariable(value.Substring(1, value.Length - 2))
+                    );
 
                 default:
                     Fx.Assert("Invalid value from IdentifyStringNature");
@@ -75,7 +80,13 @@ namespace System
             }
             return false;
         }
-        public abstract void Bind(string keyName, string[] values, ref int valueIndex, StringBuilder query);
+
+        public abstract void Bind(
+            string keyName,
+            string[] values,
+            ref int valueIndex,
+            StringBuilder query
+        );
 
         public abstract bool IsEquivalentTo(UriTemplateQueryValue other);
         public abstract void Lookup(string value, NameValueCollection boundParameters);
@@ -83,10 +94,14 @@ namespace System
         class EmptyUriTemplateQueryValue : UriTemplateQueryValue
         {
             public EmptyUriTemplateQueryValue()
-                : base(UriTemplatePartType.Literal)
-            {
-            }
-            public override void Bind(string keyName, string[] values, ref int valueIndex, StringBuilder query)
+                : base(UriTemplatePartType.Literal) { }
+
+            public override void Bind(
+                string keyName,
+                string[] values,
+                ref int valueIndex,
+                StringBuilder query
+            )
             {
                 query.AppendFormat("&{0}", UrlUtility.UrlEncode(keyName, Encoding.UTF8));
             }
@@ -95,11 +110,11 @@ namespace System
             {
                 return (other == UriTemplateQueryValue.Empty);
             }
+
             public override void Lookup(string value, NameValueCollection boundParameters)
             {
                 Fx.Assert(string.IsNullOrEmpty(value), "shouldn't have a value");
             }
         }
     }
-
 }

@@ -13,8 +13,10 @@ internal static unsafe partial class UnsafeNclNativeMethods
     private const string api_ms_win_core_io_LIB = "api-ms-win-core-io-l1-1-0.dll";
     private const string api_ms_win_core_handle_LIB = "api-ms-win-core-handle-l1-1-0.dll";
     private const string api_ms_win_core_heap_LIB = "api-ms-win-core-heap-L1-2-0.dll";
-    private const string api_ms_win_core_heap_obsolete_LIB = "api-ms-win-core-heap-obsolete-L1-1-0.dll";
-    private const string api_ms_win_core_kernel32_legacy_LIB = "api-ms-win-core-kernel32-legacy-l1-1-0.dll";
+    private const string api_ms_win_core_heap_obsolete_LIB =
+        "api-ms-win-core-heap-obsolete-L1-1-0.dll";
+    private const string api_ms_win_core_kernel32_legacy_LIB =
+        "api-ms-win-core-kernel32-legacy-l1-1-0.dll";
 
     private const string TOKENBINDING = "tokenbinding.dll";
 
@@ -38,18 +40,24 @@ internal static unsafe partial class UnsafeNclNativeMethods
     }
 
     [LibraryImport(api_ms_win_core_io_LIB, SetLastError = true)]
-    internal static unsafe partial uint CancelIoEx(SafeHandle handle, SafeNativeOverlapped overlapped);
+    internal static unsafe partial uint CancelIoEx(
+        SafeHandle handle,
+        SafeNativeOverlapped overlapped
+    );
 
     [LibraryImport(api_ms_win_core_kernel32_legacy_LIB, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static unsafe partial bool SetFileCompletionNotificationModes(SafeHandle handle, FileCompletionNotificationModes modes);
+    internal static unsafe partial bool SetFileCompletionNotificationModes(
+        SafeHandle handle,
+        FileCompletionNotificationModes modes
+    );
 
     [Flags]
     internal enum FileCompletionNotificationModes : byte
     {
         None = 0,
         SkipCompletionPortOnSuccess = 1,
-        SkipSetEventOnHandle = 2
+        SkipSetEventOnHandle = 2,
     }
 
     [LibraryImport(TOKENBINDING)]
@@ -59,7 +67,8 @@ internal static unsafe partial class UnsafeNclNativeMethods
         char* keyType,
         byte* tlsUnique,
         uint tlsUniqueSize,
-        out HeapAllocHandle resultList);
+        out HeapAllocHandle resultList
+    );
 
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa366569(v=vs.85).aspx
     [LibraryImport(api_ms_win_core_heap_LIB, SetLastError = true)]
@@ -68,23 +77,26 @@ internal static unsafe partial class UnsafeNclNativeMethods
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa366701(v=vs.85).aspx
     [LibraryImport(api_ms_win_core_heap_LIB, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool HeapFree(
-        IntPtr hHeap,
-        uint dwFlags,
-        IntPtr lpMem);
+    internal static partial bool HeapFree(IntPtr hHeap, uint dwFlags, IntPtr lpMem);
 
     internal static partial class SafeNetHandles
     {
         [LibraryImport(sspicli_LIB, SetLastError = true)]
-        internal static partial int FreeContextBuffer(
-            IntPtr contextBuffer);
+        internal static partial int FreeContextBuffer(IntPtr contextBuffer);
 
         [LibraryImport(api_ms_win_core_handle_LIB, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool CloseHandle(IntPtr handle);
 
-        [LibraryImport(api_ms_win_core_heap_obsolete_LIB, EntryPoint = "LocalAlloc", SetLastError = true)]
-        internal static partial SafeLocalFreeChannelBinding LocalAllocChannelBinding(int uFlags, UIntPtr sizetdwBytes);
+        [LibraryImport(
+            api_ms_win_core_heap_obsolete_LIB,
+            EntryPoint = "LocalAlloc",
+            SetLastError = true
+        )]
+        internal static partial SafeLocalFreeChannelBinding LocalAllocChannelBinding(
+            int uFlags,
+            UIntPtr sizetdwBytes
+        );
 
         [LibraryImport(api_ms_win_core_heap_obsolete_LIB, SetLastError = true)]
         internal static partial IntPtr LocalFree(IntPtr handle);

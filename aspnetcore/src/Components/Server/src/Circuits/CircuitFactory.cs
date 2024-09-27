@@ -24,7 +24,8 @@ internal sealed partial class CircuitFactory : ICircuitFactory
         IServiceScopeFactory scopeFactory,
         ILoggerFactory loggerFactory,
         CircuitIdFactory circuitIdFactory,
-        IOptions<CircuitOptions> options)
+        IOptions<CircuitOptions> options
+    )
     {
         _scopeFactory = scopeFactory;
         _loggerFactory = loggerFactory;
@@ -39,15 +40,19 @@ internal sealed partial class CircuitFactory : ICircuitFactory
         string baseUri,
         string uri,
         ClaimsPrincipal user,
-        IPersistentComponentStateStore store)
+        IPersistentComponentStateStore store
+    )
     {
         var scope = _scopeFactory.CreateAsyncScope();
         var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
         jsRuntime.Initialize(client);
 
-        var navigationManager = (RemoteNavigationManager)scope.ServiceProvider.GetRequiredService<NavigationManager>();
-        var navigationInterception = (RemoteNavigationInterception)scope.ServiceProvider.GetRequiredService<INavigationInterception>();
-        var scrollToLocationHash = (RemoteScrollToLocationHash)scope.ServiceProvider.GetRequiredService<IScrollToLocationHash>();
+        var navigationManager = (RemoteNavigationManager)
+            scope.ServiceProvider.GetRequiredService<NavigationManager>();
+        var navigationInterception = (RemoteNavigationInterception)
+            scope.ServiceProvider.GetRequiredService<INavigationInterception>();
+        var scrollToLocationHash = (RemoteScrollToLocationHash)
+            scope.ServiceProvider.GetRequiredService<IScrollToLocationHash>();
         if (client.Connected)
         {
             navigationManager.AttachJsRuntime(jsRuntime);
@@ -66,11 +71,13 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             // Skip initializing the state if there are no components.
             // This is the case on Blazor Web scenarios, which will initialize the state
             // when the first set of components is provided via an UpdateRootComponents call.
-            var appLifetime = scope.ServiceProvider.GetRequiredService<ComponentStatePersistenceManager>();
+            var appLifetime =
+                scope.ServiceProvider.GetRequiredService<ComponentStatePersistenceManager>();
             await appLifetime.RestoreStateAsync(store);
         }
 
-        var serverComponentDeserializer = scope.ServiceProvider.GetRequiredService<IServerComponentDeserializer>();
+        var serverComponentDeserializer =
+            scope.ServiceProvider.GetRequiredService<IServerComponentDeserializer>();
         var jsComponentInterop = new CircuitJSComponentInterop(_options);
         var renderer = new RemoteRenderer(
             scope.ServiceProvider,
@@ -80,15 +87,20 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             serverComponentDeserializer,
             _loggerFactory.CreateLogger<RemoteRenderer>(),
             jsRuntime,
-            jsComponentInterop);
+            jsComponentInterop
+        );
 
         // In Blazor Server we have already restored the app state, so we can get the handlers from DI.
         // In Blazor Web the state is provided in the first call to UpdateRootComponents, so we need to
         // delay creating the handlers until then. Otherwise, a handler would be able to access the state
         // in the constructor for Blazor Server, but not in Blazor Web.
-        var circuitHandlers = components.Count == 0 ? [] : scope.ServiceProvider.GetServices<CircuitHandler>()
-            .OrderBy(h => h.Order)
-            .ToArray();
+        var circuitHandlers =
+            components.Count == 0
+                ? []
+                : scope
+                    .ServiceProvider.GetServices<CircuitHandler>()
+                    .OrderBy(h => h.Order)
+                    .ToArray();
 
         var circuitHost = new CircuitHost(
             _circuitIdFactory.CreateCircuitId(),
@@ -100,11 +112,14 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             jsRuntime,
             navigationManager,
             circuitHandlers,
-            _loggerFactory.CreateLogger<CircuitHost>());
+            _loggerFactory.CreateLogger<CircuitHost>()
+        );
         Log.CreatedCircuit(_logger, circuitHost);
 
         // Initialize per - circuit data that services need
-        (circuitHost.Services.GetRequiredService<ICircuitAccessor>() as DefaultCircuitAccessor).Circuit = circuitHost.Circuit;
+        (
+            circuitHost.Services.GetRequiredService<ICircuitAccessor>() as DefaultCircuitAccessor
+        ).Circuit = circuitHost.Circuit;
         circuitHost.SetCircuitUser(user);
 
         return circuitHost;
@@ -112,8 +127,17 @@ internal sealed partial class CircuitFactory : ICircuitFactory
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Created circuit {CircuitId} for connection {ConnectionId}", EventName = "CreatedCircuit")]
-        private static partial void CreatedCircuit(ILogger logger, string circuitId, string connectionId);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Created circuit {CircuitId} for connection {ConnectionId}",
+            EventName = "CreatedCircuit"
+        )]
+        private static partial void CreatedCircuit(
+            ILogger logger,
+            string circuitId,
+            string connectionId
+        );
 
         internal static void CreatedCircuit(ILogger logger, CircuitHost circuitHost) =>
             CreatedCircuit(logger, circuitHost.CircuitId.Id, circuitHost.Client.ConnectionId);

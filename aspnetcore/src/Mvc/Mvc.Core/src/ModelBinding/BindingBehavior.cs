@@ -23,5 +23,5 @@ public enum BindingBehavior
     /// <summary>
     /// The property is required for model binding.
     /// </summary>
-    Required
+    Required,
 }

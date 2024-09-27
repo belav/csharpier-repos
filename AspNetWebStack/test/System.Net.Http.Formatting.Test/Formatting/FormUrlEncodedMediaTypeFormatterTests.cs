@@ -21,13 +21,11 @@ namespace System.Net.Http.Formatting
         [Fact]
         void CopyConstructor()
         {
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter()
-            {
-                MaxDepth = 42,
-                ReadBufferSize = 512
-            };
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter() { MaxDepth = 42, ReadBufferSize = 512 };
 
-            TestFormUrlEncodedMediaTypeFormatter derivedFormatter = new TestFormUrlEncodedMediaTypeFormatter(formatter);
+            TestFormUrlEncodedMediaTypeFormatter derivedFormatter =
+                new TestFormUrlEncodedMediaTypeFormatter(formatter);
 
             Assert.Equal(formatter.MaxDepth, derivedFormatter.MaxDepth);
             Assert.Equal(formatter.ReadBufferSize, derivedFormatter.ReadBufferSize);
@@ -36,7 +34,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(FormUrlEncodedMediaTypeFormatter), TypeAssert.TypeProperties.IsPublicVisibleClass);
+            Assert.Type.HasProperties(
+                typeof(FormUrlEncodedMediaTypeFormatter),
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+            );
         }
 
         [Fact]
@@ -47,7 +48,9 @@ namespace System.Net.Http.Formatting
 
             foreach (MediaTypeHeaderValue mediaType1 in formatter1.SupportedMediaTypes)
             {
-                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(m => m.Equals(mediaType1));
+                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(m =>
+                    m.Equals(mediaType1)
+                );
                 Assert.NotSame(mediaType1, mediaType2);
             }
         }
@@ -70,7 +73,10 @@ namespace System.Net.Http.Formatting
         public void Constructor(MediaTypeHeaderValue mediaType)
         {
             FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter();
-            Assert.True(formatter.SupportedMediaTypes.Contains(mediaType), String.Format("SupportedMediaTypes should have included {0}.", mediaType.ToString()));
+            Assert.True(
+                formatter.SupportedMediaTypes.Contains(mediaType),
+                String.Format("SupportedMediaTypes should have included {0}.", mediaType.ToString())
+            );
         }
 
         [Fact]
@@ -92,47 +98,62 @@ namespace System.Net.Http.Formatting
                 illegalLowerValue: 255,
                 maxLegalValue: null,
                 illegalUpperValue: null,
-                roundTripTestValue: 1024);
+                roundTripTestValue: 1024
+            );
         }
 
         [Fact]
         public void MaxDepthReturnsCorrectValue()
         {
             Assert.Reflection.IntegerProperty(
-                 new FormUrlEncodedMediaTypeFormatter(),
-                 f => f.MaxDepth,
-                 expectedDefaultValue: 256,
-                 minLegalValue: 1,
-                 illegalLowerValue: 0,
-                 maxLegalValue: null,
-                 illegalUpperValue: null,
-                 roundTripTestValue: 10);
+                new FormUrlEncodedMediaTypeFormatter(),
+                f => f.MaxDepth,
+                expectedDefaultValue: 256,
+                minLegalValue: 1,
+                illegalLowerValue: 0,
+                maxLegalValue: null,
+                illegalUpperValue: null,
+                roundTripTestValue: 10
+            );
         }
 
         [Fact]
         public async Task ReadDeeplyNestedObjectThrows()
         {
-            FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter() { MaxDepth = 100 };
+            FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter()
+            {
+                MaxDepth = 100,
+            };
 
             StringContent content = new StringContent(GetDeeplyNestedObject(125));
 
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            content.Headers.ContentType = new MediaTypeHeaderValue(
+                "application/x-www-form-urlencoded"
+            );
             var contentStream = await content.ReadAsStreamAsync();
             await Assert.ThrowsAsync<ArgumentException>(
-                () => formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null));
+                () => formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null)
+            );
         }
 
         [Fact]
         public async Task ReadDeeplyNestedObjectWithBigDepthQuotaWorks()
         {
-            FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter() { MaxDepth = 150 };
+            FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter()
+            {
+                MaxDepth = 150,
+            };
 
             StringContent content = new StringContent(GetDeeplyNestedObject(125));
 
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            content.Headers.ContentType = new MediaTypeHeaderValue(
+                "application/x-www-form-urlencoded"
+            );
 
             var contentStream = await content.ReadAsStreamAsync();
-            JToken result = (JToken)(await formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null));
+            JToken result = (JToken)(
+                await formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null)
+            );
             Assert.NotNull(result);
         }
 
@@ -150,8 +171,15 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void CanReadTypeThrowsOnNull()
         {
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter();
-            Assert.ThrowsArgumentNull(() => { formatter.CanReadType(null); }, "type");
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter();
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    formatter.CanReadType(null);
+                },
+                "type"
+            );
         }
 
         [Theory]
@@ -159,52 +187,85 @@ namespace System.Net.Http.Formatting
         [InlineData(typeof(JToken))]
         public void CanReadTypeTrue(Type type)
         {
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter();
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter();
 
             Assert.True(formatter.CanReadType(type));
         }
 
-
         [Theory]
-        [TestDataSet(typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection")]
+        [TestDataSet(
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection"
+        )]
         public void CanReadTypeReturnsFalse(Type variationType, object testData)
         {
             GC.KeepAlive(testData); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter();
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter();
 
             Assert.False(formatter.CanReadType(variationType));
 
             // Ask a 2nd time to probe whether the cached result is treated the same
             Assert.False(formatter.CanReadType(variationType));
         }
-
 
         [Fact]
         public void CanWriteTypeThrowsOnNull()
         {
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter();
-            Assert.ThrowsArgumentNull(() => { formatter.CanWriteType(null); }, "type");
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter();
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    formatter.CanWriteType(null);
+                },
+                "type"
+            );
         }
 
         [Theory]
-        [TestDataSet(typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection")]
+        [TestDataSet(
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection"
+        )]
         public void CanWriteTypeReturnsFalse(Type variationType, object testData)
         {
             GC.KeepAlive(testData); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter();
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter();
 
-            Assert.False(formatter.CanWriteType(variationType), "formatter should have returned false.");
+            Assert.False(
+                formatter.CanWriteType(variationType),
+                "formatter should have returned false."
+            );
 
             // Ask a 2nd time to probe whether the cached result is treated the same
-            Assert.False(formatter.CanWriteType(variationType), "formatter should have returned false on 2nd try as well.");
+            Assert.False(
+                formatter.CanWriteType(variationType),
+                "formatter should have returned false on 2nd try as well."
+            );
         }
 
         [Fact]
         public void ReadFromStreamThrowsOnNull()
         {
-            TestFormUrlEncodedMediaTypeFormatter formatter = new TestFormUrlEncodedMediaTypeFormatter();
-            Assert.ThrowsArgumentNull(() => { formatter.ReadFromStreamAsync(null, Stream.Null, null, null); }, "type");
-            Assert.ThrowsArgumentNull(() => { formatter.ReadFromStreamAsync(typeof(object), null, null, null); }, "readStream");
+            TestFormUrlEncodedMediaTypeFormatter formatter =
+                new TestFormUrlEncodedMediaTypeFormatter();
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    formatter.ReadFromStreamAsync(null, Stream.Null, null, null);
+                },
+                "type"
+            );
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    formatter.ReadFromStreamAsync(typeof(object), null, null, null);
+                },
+                "readStream"
+            );
         }
 
         [Fact]
@@ -212,20 +273,26 @@ namespace System.Net.Http.Formatting
         {
             FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter();
             Assert.Throws<NotSupportedException>(
-                () => formatter.WriteToStreamAsync(typeof(object), new object(), Stream.Null, null, null),
-                "The media type formatter of type 'FormUrlEncodedMediaTypeFormatter' does not support writing because it does not implement the WriteToStreamAsync method.");
+                () =>
+                    formatter.WriteToStreamAsync(
+                        typeof(object),
+                        new object(),
+                        Stream.Null,
+                        null,
+                        null
+                    ),
+                "The media type formatter of type 'FormUrlEncodedMediaTypeFormatter' does not support writing because it does not implement the WriteToStreamAsync method."
+            );
         }
 
         public class TestFormUrlEncodedMediaTypeFormatter : FormUrlEncodedMediaTypeFormatter
         {
-            public TestFormUrlEncodedMediaTypeFormatter()
-            {
-            }
+            public TestFormUrlEncodedMediaTypeFormatter() { }
 
-            public TestFormUrlEncodedMediaTypeFormatter(TestFormUrlEncodedMediaTypeFormatter formatter)
-                : base(formatter)
-            {
-            }
+            public TestFormUrlEncodedMediaTypeFormatter(
+                TestFormUrlEncodedMediaTypeFormatter formatter
+            )
+                : base(formatter) { }
 
             public new bool CanReadType(Type type)
             {

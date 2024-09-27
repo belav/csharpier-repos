@@ -43,7 +43,11 @@ namespace System.CodeDom.Tests
         [MemberData(nameof(TypeString_TestData))]
         public void Ctor_String_NonEmptyParamsCodeExpression(string type, string expectedBaseType)
         {
-            CodeExpression[] initializers = new CodeExpression[] { new CodePrimitiveExpression("Value1"), new CodePrimitiveExpression("Value2") };
+            CodeExpression[] initializers = new CodeExpression[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodePrimitiveExpression("Value2"),
+            };
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
             Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
             Assert.Equal(initializers, arrayCreate.Initializers.Cast<CodeExpression>());
@@ -74,7 +78,11 @@ namespace System.CodeDom.Tests
         [MemberData(nameof(Type_TestData))]
         public void Ctor_Type_NonEmptyParamsCodeExpression(Type type, string expectedBaseType)
         {
-            CodeExpression[] initializers = new CodeExpression[] { new CodePrimitiveExpression("Value1"), new CodePrimitiveExpression("Value2") };
+            CodeExpression[] initializers = new CodeExpression[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodePrimitiveExpression("Value2"),
+            };
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
             Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
             Assert.Equal(initializers, arrayCreate.Initializers.Cast<CodeExpression>());
@@ -88,7 +96,10 @@ namespace System.CodeDom.Tests
         {
             CodeExpression[] initializers = new CodeExpression[0];
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
-            Assert.Equal((type ?? new CodeTypeReference("")).BaseType, arrayCreate.CreateType.BaseType);
+            Assert.Equal(
+                (type ?? new CodeTypeReference("")).BaseType,
+                arrayCreate.CreateType.BaseType
+            );
             Assert.Equal(initializers, arrayCreate.Initializers.Cast<CodeExpression>());
             Assert.Equal(0, arrayCreate.Size);
             Assert.Null(arrayCreate.SizeExpression);
@@ -98,9 +109,16 @@ namespace System.CodeDom.Tests
         [MemberData(nameof(CodeTypeReference_TestData))]
         public void Ctor_CodeTypeReference_NonEmptyParamsCodeExpression(CodeTypeReference type)
         {
-            CodeExpression[] initializers = new CodeExpression[] { new CodePrimitiveExpression("Value1"), new CodePrimitiveExpression("Value2") };
+            CodeExpression[] initializers = new CodeExpression[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodePrimitiveExpression("Value2"),
+            };
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
-            Assert.Equal((type ?? new CodeTypeReference("")).BaseType, arrayCreate.CreateType.BaseType);
+            Assert.Equal(
+                (type ?? new CodeTypeReference("")).BaseType,
+                arrayCreate.CreateType.BaseType
+            );
             Assert.Equal(initializers, arrayCreate.Initializers.Cast<CodeExpression>());
             Assert.Equal(0, arrayCreate.Size);
             Assert.Null(arrayCreate.SizeExpression);
@@ -141,7 +159,10 @@ namespace System.CodeDom.Tests
             foreach (int size in new int[] { -1, 0, 1 })
             {
                 var arrayCreate = new CodeArrayCreateExpression(type, size);
-                Assert.Equal((type ?? new CodeTypeReference("")).BaseType, arrayCreate.CreateType.BaseType);
+                Assert.Equal(
+                    (type ?? new CodeTypeReference("")).BaseType,
+                    arrayCreate.CreateType.BaseType
+                );
                 Assert.Empty(arrayCreate.Initializers);
                 Assert.Equal(size, arrayCreate.Size);
                 Assert.Null(arrayCreate.SizeExpression);
@@ -152,7 +173,13 @@ namespace System.CodeDom.Tests
         [MemberData(nameof(TypeString_TestData))]
         public void Ctor_String_CodeExpression(string type, string expectedBaseType)
         {
-            foreach (CodeExpression sizeExpression in new CodeExpression[] { null, new CodePrimitiveExpression("Value") })
+            foreach (
+                CodeExpression sizeExpression in new CodeExpression[]
+                {
+                    null,
+                    new CodePrimitiveExpression("Value"),
+                }
+            )
             {
                 var arrayCreate = new CodeArrayCreateExpression(type, sizeExpression);
                 Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
@@ -166,7 +193,13 @@ namespace System.CodeDom.Tests
         [MemberData(nameof(Type_TestData))]
         public void Ctor_Type_CodeExpression(Type type, string expectedBaseType)
         {
-            foreach (CodeExpression sizeExpression in new CodeExpression[] { null, new CodePrimitiveExpression("Value") })
+            foreach (
+                CodeExpression sizeExpression in new CodeExpression[]
+                {
+                    null,
+                    new CodePrimitiveExpression("Value"),
+                }
+            )
             {
                 var arrayCreate = new CodeArrayCreateExpression(type, sizeExpression);
                 Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
@@ -180,10 +213,19 @@ namespace System.CodeDom.Tests
         [MemberData(nameof(CodeTypeReference_TestData))]
         public void Ctor_CodeTypeReference_CodeExpression(CodeTypeReference type)
         {
-            foreach (CodeExpression sizeExpression in new CodeExpression[] { null, new CodePrimitiveExpression("Value") })
+            foreach (
+                CodeExpression sizeExpression in new CodeExpression[]
+                {
+                    null,
+                    new CodePrimitiveExpression("Value"),
+                }
+            )
             {
                 var arrayCreate = new CodeArrayCreateExpression(type, sizeExpression);
-                Assert.Equal((type ?? new CodeTypeReference("")).BaseType, arrayCreate.CreateType.BaseType);
+                Assert.Equal(
+                    (type ?? new CodeTypeReference("")).BaseType,
+                    arrayCreate.CreateType.BaseType
+                );
                 Assert.Empty(arrayCreate.Initializers);
                 Assert.Equal(0, arrayCreate.Size);
                 Assert.Equal(sizeExpression, arrayCreate.SizeExpression);
@@ -193,26 +235,57 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression()));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression[0]));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeArrayCreateExpression((Type)null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression())
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression[0])
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new CodeArrayCreateExpression((Type)null, 0)
+            );
         }
 
         [Fact]
         public void Ctor_NullTypeInitializers_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayCreateExpression("", (CodePrimitiveExpression[])null));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayCreateExpression(typeof(void), (CodePrimitiveExpression[])null));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayCreateExpression(new CodeTypeReference(), (CodePrimitiveExpression[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeArrayCreateExpression("", (CodePrimitiveExpression[])null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeArrayCreateExpression(typeof(void), (CodePrimitiveExpression[])null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    new CodeArrayCreateExpression(
+                        new CodeTypeReference(),
+                        (CodePrimitiveExpression[])null
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullTypeInInitializers_ThrowsArgumentNullException()
         {
             CodePrimitiveExpression[] initializers = new CodePrimitiveExpression[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayCreateExpression("", initializers));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayCreateExpression(typeof(void), initializers));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeArrayCreateExpression(new CodeTypeReference(), initializers));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeArrayCreateExpression("", initializers)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeArrayCreateExpression(typeof(void), initializers)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeArrayCreateExpression(new CodeTypeReference(), initializers)
+            );
         }
 
         [Theory]
@@ -221,7 +294,10 @@ namespace System.CodeDom.Tests
         {
             var arrayCreate = new CodeArrayCreateExpression();
             arrayCreate.CreateType = value;
-            Assert.Equal((value ?? new CodeTypeReference("")).BaseType, arrayCreate.CreateType.BaseType);
+            Assert.Equal(
+                (value ?? new CodeTypeReference("")).BaseType,
+                arrayCreate.CreateType.BaseType
+            );
         }
 
         [Fact]
@@ -231,11 +307,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             arrayCreate.Initializers.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, arrayCreate.Initializers.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                arrayCreate.Initializers.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             arrayCreate.Initializers.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, arrayCreate.Initializers.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                arrayCreate.Initializers.Cast<CodeExpression>()
+            );
         }
 
         [Theory]

@@ -26,7 +26,10 @@ namespace System.Linq.Parallel.Tests
         public static void Average_Int(int count, double average)
         {
             Assert.Equal(average, UnorderedSources.Default(count).Average());
-            Assert.Equal((double?)average, UnorderedSources.Default(count).Select(x => (int?)x).Average());
+            Assert.Equal(
+                (double?)average,
+                UnorderedSources.Default(count).Select(x => (int?)x).Average()
+            );
             Assert.Equal(-average, UnorderedSources.Default(count).Average(x => -x));
             Assert.Equal(-(double?)average, UnorderedSources.Default(count).Average(x => -(int?)x));
         }
@@ -42,8 +45,14 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(AverageData), new[] { 1, 2, 16 })]
         public static void Average_Int_SomeNull(int count, double average)
         {
-            Assert.Equal(Math.Truncate(average), UnorderedSources.Default(count).Select(x => (x % 2 == 0) ? (int?)x : null).Average());
-            Assert.Equal(Math.Truncate(-average), UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(int?)x : null));
+            Assert.Equal(
+                Math.Truncate(average),
+                UnorderedSources.Default(count).Select(x => (x % 2 == 0) ? (int?)x : null).Average()
+            );
+            Assert.Equal(
+                Math.Truncate(-average),
+                UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(int?)x : null)
+            );
         }
 
         [Theory]
@@ -61,9 +70,15 @@ namespace System.Linq.Parallel.Tests
         public static void Average_Long(int count, double average)
         {
             Assert.Equal(average, UnorderedSources.Default(count).Select(x => (long)x).Average());
-            Assert.Equal((double?)average, UnorderedSources.Default(count).Select(x => (long?)x).Average());
+            Assert.Equal(
+                (double?)average,
+                UnorderedSources.Default(count).Select(x => (long?)x).Average()
+            );
             Assert.Equal(-average, UnorderedSources.Default(count).Average(x => -(long)x));
-            Assert.Equal(-(double?)average, UnorderedSources.Default(count).Average(x => -(long?)x));
+            Assert.Equal(
+                -(double?)average,
+                UnorderedSources.Default(count).Average(x => -(long?)x)
+            );
         }
 
         [Fact]
@@ -76,18 +91,39 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_Long_Overflow()
         {
-            AssertThrows.Wrapped<OverflowException>(() => UnorderedSources.Default(2).Select(x => x == 0 ? 1 : long.MaxValue).Average());
-            AssertThrows.Wrapped<OverflowException>(() => UnorderedSources.Default(2).Select(x => x == 0 ? (long?)1 : long.MaxValue).Average());
-            AssertThrows.Wrapped<OverflowException>(() => UnorderedSources.Default(2).Average(x => x == 0 ? -1 : long.MinValue));
-            AssertThrows.Wrapped<OverflowException>(() => UnorderedSources.Default(2).Average(x => x == 0 ? (long?)-1 : long.MinValue));
+            AssertThrows.Wrapped<OverflowException>(
+                () => UnorderedSources.Default(2).Select(x => x == 0 ? 1 : long.MaxValue).Average()
+            );
+            AssertThrows.Wrapped<OverflowException>(
+                () =>
+                    UnorderedSources
+                        .Default(2)
+                        .Select(x => x == 0 ? (long?)1 : long.MaxValue)
+                        .Average()
+            );
+            AssertThrows.Wrapped<OverflowException>(
+                () => UnorderedSources.Default(2).Average(x => x == 0 ? -1 : long.MinValue)
+            );
+            AssertThrows.Wrapped<OverflowException>(
+                () => UnorderedSources.Default(2).Average(x => x == 0 ? (long?)-1 : long.MinValue)
+            );
         }
 
         [Theory]
         [MemberData(nameof(AverageData), new[] { 1, 2, 16 })]
         public static void Average_Long_SomeNull(int count, double average)
         {
-            Assert.Equal(Math.Truncate(average), UnorderedSources.Default(count).Select(x => (x % 2 == 0) ? (long?)x : null).Average());
-            Assert.Equal(Math.Truncate(-average), UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(long?)x : null));
+            Assert.Equal(
+                Math.Truncate(average),
+                UnorderedSources
+                    .Default(count)
+                    .Select(x => (x % 2 == 0) ? (long?)x : null)
+                    .Average()
+            );
+            Assert.Equal(
+                Math.Truncate(-average),
+                UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(long?)x : null)
+            );
         }
 
         [Theory]
@@ -105,9 +141,15 @@ namespace System.Linq.Parallel.Tests
         public static void Average_Float(int count, float average)
         {
             Assert.Equal(average, UnorderedSources.Default(count).Select(x => (float)x).Average());
-            Assert.Equal((float?)average, UnorderedSources.Default(count).Select(x => (float?)x).Average());
+            Assert.Equal(
+                (float?)average,
+                UnorderedSources.Default(count).Select(x => (float?)x).Average()
+            );
             Assert.Equal(-average, UnorderedSources.Default(count).Average(x => -(float)x));
-            Assert.Equal(-(float?)average, UnorderedSources.Default(count).Average(x => -(float?)x));
+            Assert.Equal(
+                -(float?)average,
+                UnorderedSources.Default(count).Average(x => -(float?)x)
+            );
         }
 
         [Fact]
@@ -121,8 +163,17 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(AverageData), new[] { 1, 2, 16 })]
         public static void Average_Float_SomeNull(int count, float average)
         {
-            Assert.Equal((float?)Math.Truncate(average), UnorderedSources.Default(count).Select(x => (x % 2 == 0) ? (float?)x : null).Average());
-            Assert.Equal((float?)Math.Truncate(-average), UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(float?)x : null));
+            Assert.Equal(
+                (float?)Math.Truncate(average),
+                UnorderedSources
+                    .Default(count)
+                    .Select(x => (x % 2 == 0) ? (float?)x : null)
+                    .Average()
+            );
+            Assert.Equal(
+                (float?)Math.Truncate(-average),
+                UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(float?)x : null)
+            );
         }
 
         [Theory]
@@ -140,9 +191,15 @@ namespace System.Linq.Parallel.Tests
         public static void Average_Double(int count, double average)
         {
             Assert.Equal(average, UnorderedSources.Default(count).Select(x => (double)x).Average());
-            Assert.Equal((double?)average, UnorderedSources.Default(count).Select(x => (double?)x).Average());
+            Assert.Equal(
+                (double?)average,
+                UnorderedSources.Default(count).Select(x => (double?)x).Average()
+            );
             Assert.Equal(-average, UnorderedSources.Default(count).Average(x => -(double)x));
-            Assert.Equal(-(double?)average, UnorderedSources.Default(count).Average(x => -(double?)x));
+            Assert.Equal(
+                -(double?)average,
+                UnorderedSources.Default(count).Average(x => -(double?)x)
+            );
         }
 
         [Fact]
@@ -156,8 +213,17 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(AverageData), new[] { 1, 2, 16 })]
         public static void Average_Double_SomeNull(int count, double average)
         {
-            Assert.Equal(Math.Truncate(average), UnorderedSources.Default(count).Select(x => (x % 2 == 0) ? (double?)x : null).Average());
-            Assert.Equal(Math.Truncate(-average), UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(double?)x : null));
+            Assert.Equal(
+                Math.Truncate(average),
+                UnorderedSources
+                    .Default(count)
+                    .Select(x => (x % 2 == 0) ? (double?)x : null)
+                    .Average()
+            );
+            Assert.Equal(
+                Math.Truncate(-average),
+                UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(double?)x : null)
+            );
         }
 
         [Theory]
@@ -174,10 +240,19 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(AverageData), new[] { 1, 2, 16 })]
         public static void Average_Decimal(int count, decimal average)
         {
-            Assert.Equal(average, UnorderedSources.Default(count).Select(x => (decimal)x).Average());
-            Assert.Equal((decimal?)average, UnorderedSources.Default(count).Select(x => (decimal?)x).Average());
+            Assert.Equal(
+                average,
+                UnorderedSources.Default(count).Select(x => (decimal)x).Average()
+            );
+            Assert.Equal(
+                (decimal?)average,
+                UnorderedSources.Default(count).Select(x => (decimal?)x).Average()
+            );
             Assert.Equal(-average, UnorderedSources.Default(count).Average(x => -(decimal)x));
-            Assert.Equal(-(decimal?)average, UnorderedSources.Default(count).Average(x => -(decimal?)x));
+            Assert.Equal(
+                -(decimal?)average,
+                UnorderedSources.Default(count).Average(x => -(decimal?)x)
+            );
         }
 
         [Fact]
@@ -191,8 +266,17 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(AverageData), new[] { 1, 2, 16 })]
         public static void Average_Decimal_SomeNull(int count, decimal average)
         {
-            Assert.Equal(Math.Truncate(average), UnorderedSources.Default(count).Select(x => (x % 2 == 0) ? (decimal?)x : null).Average());
-            Assert.Equal(Math.Truncate(-average), UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(decimal?)x : null));
+            Assert.Equal(
+                Math.Truncate(average),
+                UnorderedSources
+                    .Default(count)
+                    .Select(x => (x % 2 == 0) ? (decimal?)x : null)
+                    .Average()
+            );
+            Assert.Equal(
+                Math.Truncate(-average),
+                UnorderedSources.Default(count).Average(x => (x % 2 == 0) ? -(decimal?)x : null)
+            );
         }
 
         [Theory]
@@ -208,16 +292,36 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_InvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Average());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Average(x => x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Average());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Average(x => x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Average());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Average(x => x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Average());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Average(x => x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Average());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Average(x => x));
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Average()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Average(x => x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<long>().Average()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<long>().Average(x => x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<float>().Average()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<float>().Average(x => x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<double>().Average()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<double>().Average(x => x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<decimal>().Average()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<decimal>().Average(x => x)
+            );
             // Nullables return null when empty
             Assert.Null(ParallelEnumerable.Empty<int?>().Average());
             Assert.Null(ParallelEnumerable.Empty<int?>().Average(x => x));
@@ -234,54 +338,264 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (int?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (int?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (long)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (long?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (long)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (long?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (float)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (float?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (float)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (float?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (double)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (double?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (double)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (double?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (decimal)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Average(x => { canceler(); return (decimal?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (decimal)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (decimal?)x;
+                    })
+            );
         }
 
         [Fact]
         public static void Average_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (int?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (int?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (long)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (long?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (long)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (long?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (float)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (float?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (float)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (float?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (double)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (double?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (double)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (double?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (decimal)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Average(x => { canceler(); return (decimal?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (decimal)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (decimal?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (int?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (int?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (long)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (long?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (long)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (long?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (float)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (float?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (float)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (float?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (double)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (double?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (double)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (double?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (decimal)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Average(x => { canceler(); return (decimal?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (decimal)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Average(x =>
+                    {
+                        canceler();
+                        return (decimal?)x;
+                    })
+            );
         }
 
         [Fact]
@@ -306,49 +620,232 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, int>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, int?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, int>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, int?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, long>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, long?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, long>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, long?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, float>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, float?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, float>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, float?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, double>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, double?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, double>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, double?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, decimal>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Average((Func<int, decimal?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, decimal>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Average(
+                            (Func<int, decimal?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
         }
 
         [Fact]
         public static void Average_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat(0, 1).Average((Func<int, int>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int?>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((int?)0, 1).Average((Func<int?, int?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat(0, 1).Average((Func<int, int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int?>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((int?)0, 1).Average((Func<int?, int?>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<long>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((long)0, 1).Average((Func<long, long>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<long?>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((long?)0, 1).Average((Func<long?, long?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<long>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((long)0, 1).Average((Func<long, long>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<long?>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((long?)0, 1).Average((Func<long?, long?>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<float>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((float)0, 1).Average((Func<float, float>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<float?>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((float?)0, 1).Average((Func<float?, float?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<float>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((float)0, 1).Average((Func<float, float>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<float?>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((float?)0, 1).Average((Func<float?, float?>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<double>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((double)0, 1).Average((Func<double, double>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<double?>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((double?)0, 1).Average((Func<double?, double?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<double>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((double)0, 1).Average((Func<double, double>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<double?>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((double?)0, 1).Average((Func<double?, double?>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<decimal>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((decimal)0, 1).Average((Func<decimal, decimal>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<decimal?>)null).Average());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((decimal?)0, 1).Average((Func<decimal?, decimal?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<decimal>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((decimal)0, 1).Average((Func<decimal, decimal>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<decimal?>)null).Average()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () =>
+                    ParallelEnumerable
+                        .Repeat((decimal?)0, 1)
+                        .Average((Func<decimal?, decimal?>)null)
+            );
         }
     }
 }

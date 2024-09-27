@@ -5,7 +5,5 @@ namespace System.ServiceModel.Channels
 {
     using System;
 
-    public interface IDuplexChannel : IInputChannel, IOutputChannel
-    {
-    }
+    public interface IDuplexChannel : IInputChannel, IOutputChannel { }
 }

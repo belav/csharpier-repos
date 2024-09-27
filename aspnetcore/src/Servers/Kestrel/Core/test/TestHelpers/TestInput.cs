@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 
@@ -25,7 +25,12 @@ class TestInput : IDisposable
     public TestInput(KestrelTrace log = null, ITimeoutControl timeoutControl = null)
     {
         _memoryPool = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(pool: _memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            pool: _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
         Transport = pair.Transport;
         Application = pair.Application;
@@ -36,13 +41,14 @@ class TestInput : IDisposable
         Http1ConnectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: new TestServiceContext
             {
-                Log = log ?? new KestrelTrace(NullLoggerFactory.Instance)
+                Log = log ?? new KestrelTrace(NullLoggerFactory.Instance),
             },
             connectionContext: Mock.Of<ConnectionContext>(),
             transport: Transport,
             timeoutControl: timeoutControl ?? Mock.Of<ITimeoutControl>(),
             memoryPool: _memoryPool,
-            connectionFeatures: connectionFeatures);
+            connectionFeatures: connectionFeatures
+        );
 
         Http1Connection = new Http1Connection(Http1ConnectionContext);
         Http1Connection.HttpResponseControl = Mock.Of<IHttpResponseControl>();
@@ -83,4 +89,3 @@ class TestInput : IDisposable
         _memoryPool.Dispose();
     }
 }
-

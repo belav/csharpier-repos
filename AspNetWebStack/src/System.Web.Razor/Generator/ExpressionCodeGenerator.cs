@@ -10,16 +10,23 @@ namespace System.Web.Razor.Generator
     {
         public override void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
         {
-            if (context.Host.EnableInstrumentation && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.Host.EnableInstrumentation
+                && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
-                Span contentSpan = target.Children
-                    .OfType<Span>()
+                Span contentSpan = target
+                    .Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
 
                 if (contentSpan != null)
                 {
-                    context.AddContextCall(contentSpan, context.Host.GeneratedClassContext.BeginContextMethodName, false);
+                    context.AddContextCall(
+                        contentSpan,
+                        context.Host.GeneratedClassContext.BeginContextMethodName,
+                        false
+                    );
                 }
             }
 
@@ -34,13 +41,17 @@ namespace System.Web.Razor.Generator
                 {
                     if (!String.IsNullOrEmpty(context.TargetWriterName))
                     {
-                        cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteToMethodName);
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteToMethodName
+                        );
                         cw.WriteSnippet(context.TargetWriterName);
                         cw.WriteParameterSeparator();
                     }
                     else
                     {
-                        cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteMethodName);
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteMethodName
+                        );
                     }
                 }
             });
@@ -71,16 +82,23 @@ namespace System.Web.Razor.Generator
             context.BufferStatementFragment(endBlock);
             context.FlushBufferedStatement();
 
-            if (context.Host.EnableInstrumentation && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.Host.EnableInstrumentation
+                && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
-                Span contentSpan = target.Children
-                    .OfType<Span>()
+                Span contentSpan = target
+                    .Children.OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
 
                 if (contentSpan != null)
                 {
-                    context.AddContextCall(contentSpan, context.Host.GeneratedClassContext.EndContextMethodName, false);
+                    context.AddContextCall(
+                        contentSpan,
+                        context.Host.GeneratedClassContext.EndContextMethodName,
+                        false
+                    );
                 }
             }
         }
@@ -88,7 +106,10 @@ namespace System.Web.Razor.Generator
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
             Span sourceSpan = null;
-            if (context.CreateCodeWriter().SupportsMidStatementLinePragmas || context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.CreateCodeWriter().SupportsMidStatementLinePragmas
+                || context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
                 sourceSpan = target;
             }

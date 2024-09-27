@@ -20,7 +20,9 @@ namespace Microsoft.Interop.Analyzers
     [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
     public class CustomMarshallerAttributeFixer : CodeFixProvider
     {
-        private const string AddMissingCustomTypeMarshallerMembersKey = nameof(AddMissingCustomTypeMarshallerMembersKey);
+        private const string AddMissingCustomTypeMarshallerMembersKey = nameof(
+            AddMissingCustomTypeMarshallerMembersKey
+        );
 
         private sealed class CustomFixAllProvider : FixAllProvider
         {
@@ -28,72 +30,144 @@ namespace Microsoft.Interop.Analyzers
 
             public override async Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext)
             {
-                ImmutableArray<Diagnostic> diagnostics = await GetAllDiagnosticsInScope(fixAllContext).ConfigureAwait(false);
-                Dictionary<(INamedTypeSymbol marshallerType, ITypeSymbol managedType, bool isLinearCollectionMarshaller), HashSet<string>> uniqueMarshallersToFix = new();
+                ImmutableArray<Diagnostic> diagnostics = await GetAllDiagnosticsInScope(
+                        fixAllContext
+                    )
+                    .ConfigureAwait(false);
+                Dictionary<
+                    (
+                        INamedTypeSymbol marshallerType,
+                        ITypeSymbol managedType,
+                        bool isLinearCollectionMarshaller
+                    ),
+                    HashSet<string>
+                > uniqueMarshallersToFix = new();
                 // Organize all the diagnostics by marshaller, managed type, and whether or not it's a collection marshaller
                 foreach (Diagnostic diagnostic in diagnostics)
                 {
-                    Document doc = fixAllContext.Solution.GetDocument(diagnostic.Location.SourceTree);
-                    SemanticModel model = await doc.GetSemanticModelAsync(fixAllContext.CancellationToken).ConfigureAwait(false);
+                    Document doc = fixAllContext.Solution.GetDocument(
+                        diagnostic.Location.SourceTree
+                    );
+                    SemanticModel model = await doc.GetSemanticModelAsync(
+                            fixAllContext.CancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                    var entryPointTypeSymbol = (INamedTypeSymbol)model.GetEnclosingSymbol(diagnostic.Location.SourceSpan.Start, fixAllContext.CancellationToken);
-                    ITypeSymbol? managedType = GetManagedTypeInAttributeSyntax(diagnostic.Location, entryPointTypeSymbol);
+                    var entryPointTypeSymbol = (INamedTypeSymbol)
+                        model.GetEnclosingSymbol(
+                            diagnostic.Location.SourceSpan.Start,
+                            fixAllContext.CancellationToken
+                        );
+                    ITypeSymbol? managedType = GetManagedTypeInAttributeSyntax(
+                        diagnostic.Location,
+                        entryPointTypeSymbol
+                    );
 
-                    SyntaxNode root = await diagnostic.Location.SourceTree.GetRootAsync(fixAllContext.CancellationToken).ConfigureAwait(false);
+                    SyntaxNode root = await diagnostic
+                        .Location.SourceTree.GetRootAsync(fixAllContext.CancellationToken)
+                        .ConfigureAwait(false);
 
                     SyntaxNode node = root.FindNode(diagnostic.Location.SourceSpan);
-                    var marshallerType = (INamedTypeSymbol)model.GetSymbolInfo(node, fixAllContext.CancellationToken).Symbol;
-                    var uniqueMarshallerFixKey = (marshallerType, managedType, ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(entryPointTypeSymbol));
-                    if (!uniqueMarshallersToFix.TryGetValue(uniqueMarshallerFixKey, out HashSet<string> membersToAdd))
+                    var marshallerType = (INamedTypeSymbol)
+                        model.GetSymbolInfo(node, fixAllContext.CancellationToken).Symbol;
+                    var uniqueMarshallerFixKey = (
+                        marshallerType,
+                        managedType,
+                        ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(
+                            entryPointTypeSymbol
+                        )
+                    );
+                    if (
+                        !uniqueMarshallersToFix.TryGetValue(
+                            uniqueMarshallerFixKey,
+                            out HashSet<string> membersToAdd
+                        )
+                    )
                     {
-                        uniqueMarshallersToFix[uniqueMarshallerFixKey] = membersToAdd = new HashSet<string>();
+                        uniqueMarshallersToFix[uniqueMarshallerFixKey] = membersToAdd =
+                            new HashSet<string>();
                     }
 
-                    membersToAdd.UnionWith(diagnostic.Properties[MissingMemberNames.Key].Split(MissingMemberNames.Delimiter));
+                    membersToAdd.UnionWith(
+                        diagnostic
+                            .Properties[MissingMemberNames.Key]
+                            .Split(MissingMemberNames.Delimiter)
+                    );
                 }
 
-                Dictionary<INamedTypeSymbol, INamedTypeSymbol> partiallyUpdatedSymbols = new(SymbolEqualityComparer.Default);
+                Dictionary<INamedTypeSymbol, INamedTypeSymbol> partiallyUpdatedSymbols =
+                    new(SymbolEqualityComparer.Default);
 
                 SymbolEditor symbolEditor = SymbolEditor.Create(fixAllContext.Solution);
 
                 // Apply each fix
                 foreach (var marshallerInfo in uniqueMarshallersToFix)
                 {
-                    var (marshallerType, managedType, isLinearCollectionMarshaller) = marshallerInfo.Key;
+                    var (marshallerType, managedType, isLinearCollectionMarshaller) =
+                        marshallerInfo.Key;
                     HashSet<string> missingMembers = marshallerInfo.Value;
 
-                    if (!partiallyUpdatedSymbols.TryGetValue(marshallerType, out INamedTypeSymbol newMarshallerType))
+                    if (
+                        !partiallyUpdatedSymbols.TryGetValue(
+                            marshallerType,
+                            out INamedTypeSymbol newMarshallerType
+                        )
+                    )
                     {
                         newMarshallerType = marshallerType;
                     }
 
-                    newMarshallerType = (INamedTypeSymbol)await symbolEditor.EditOneDeclarationAsync(
-                        marshallerType,
-                        (editor, decl) => AddMissingMembers(
-                            editor,
-                            decl,
-                            marshallerType,
-                            managedType,
-                            missingMembers,
-                            isLinearCollectionMarshaller),
-                        fixAllContext.CancellationToken).ConfigureAwait(false);
+                    newMarshallerType = (INamedTypeSymbol)
+                        await symbolEditor
+                            .EditOneDeclarationAsync(
+                                marshallerType,
+                                (editor, decl) =>
+                                    AddMissingMembers(
+                                        editor,
+                                        decl,
+                                        marshallerType,
+                                        managedType,
+                                        missingMembers,
+                                        isLinearCollectionMarshaller
+                                    ),
+                                fixAllContext.CancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                     partiallyUpdatedSymbols[marshallerType] = newMarshallerType;
                 }
 
-                return CodeAction.Create(SR.AddMissingCustomTypeMarshallerMembers, ct => Task.FromResult(symbolEditor.ChangedSolution));
+                return CodeAction.Create(
+                    SR.AddMissingCustomTypeMarshallerMembers,
+                    ct => Task.FromResult(symbolEditor.ChangedSolution)
+                );
             }
 
-            private static async Task<ImmutableArray<Diagnostic>> GetAllDiagnosticsInScope(FixAllContext context)
+            private static async Task<ImmutableArray<Diagnostic>> GetAllDiagnosticsInScope(
+                FixAllContext context
+            )
             {
                 switch (context.Scope)
                 {
                     case FixAllScope.Document:
-                        return await context.GetDocumentDiagnosticsAsync(context.Document).ConfigureAwait(false);
+                        return await context
+                            .GetDocumentDiagnosticsAsync(context.Document)
+                            .ConfigureAwait(false);
                     case FixAllScope.Project:
-                        return await context.GetAllDiagnosticsAsync(context.Project).ConfigureAwait(false);
+                        return await context
+                            .GetAllDiagnosticsAsync(context.Project)
+                            .ConfigureAwait(false);
                     case FixAllScope.Solution:
-                        return ImmutableArray.CreateRange((await Task.WhenAll(context.Solution.Projects.Select(context.GetAllDiagnosticsAsync)).ConfigureAwait(false)).SelectMany(arr => arr));
+                        return ImmutableArray.CreateRange(
+                            (
+                                await Task.WhenAll(
+                                        context.Solution.Projects.Select(
+                                            context.GetAllDiagnosticsAsync
+                                        )
+                                    )
+                                    .ConfigureAwait(false)
+                            ).SelectMany(arr => arr)
+                        );
                     default:
                         throw new UnreachableException();
                 }
@@ -104,17 +178,20 @@ namespace Microsoft.Interop.Analyzers
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(
-                AnalyzerDiagnostics.Ids.CustomMarshallerTypeMustHaveRequiredShape);
+                AnalyzerDiagnostics.Ids.CustomMarshallerTypeMustHaveRequiredShape
+            );
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             Document doc = context.Document;
-            SyntaxNode? root = await doc.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            SyntaxNode? root = await doc.GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             if (root == null)
                 return;
 
             SyntaxNode node = root.FindNode(context.Span);
-            var (missingMemberNames, missingMembersDiagnostics) = GetRequiredShapeMissingMemberNames(context.Diagnostics);
+            var (missingMemberNames, missingMembersDiagnostics) =
+                GetRequiredShapeMissingMemberNames(context.Diagnostics);
 
             if (missingMembersDiagnostics.Count > 0)
             {
@@ -122,23 +199,38 @@ namespace Microsoft.Interop.Analyzers
                     CodeAction.Create(
                         SR.AddMissingCustomTypeMarshallerMembers,
                         ct => AddMissingMembers(doc, node, missingMemberNames, ct),
-                        AddMissingCustomTypeMarshallerMembersKey),
-                    missingMembersDiagnostics);
+                        AddMissingCustomTypeMarshallerMembersKey
+                    ),
+                    missingMembersDiagnostics
+                );
             }
         }
 
-        private static (HashSet<string> missingMembers, List<Diagnostic> fixedDiagnostics) GetRequiredShapeMissingMemberNames(IEnumerable<Diagnostic> diagnostics)
+        private static (
+            HashSet<string> missingMembers,
+            List<Diagnostic> fixedDiagnostics
+        ) GetRequiredShapeMissingMemberNames(IEnumerable<Diagnostic> diagnostics)
         {
             HashSet<string> missingMemberNames = new();
             List<Diagnostic> requiredShapeDiagnostics = new();
             foreach (var diagnostic in diagnostics)
             {
-                if (diagnostic.Id == AnalyzerDiagnostics.Ids.CustomMarshallerTypeMustHaveRequiredShape)
+                if (
+                    diagnostic.Id
+                    == AnalyzerDiagnostics.Ids.CustomMarshallerTypeMustHaveRequiredShape
+                )
                 {
                     requiredShapeDiagnostics.Add(diagnostic);
-                    if (diagnostic.Properties.TryGetValue(MissingMemberNames.Key, out string missingMembers))
+                    if (
+                        diagnostic.Properties.TryGetValue(
+                            MissingMemberNames.Key,
+                            out string missingMembers
+                        )
+                    )
                     {
-                        missingMemberNames.UnionWith(missingMembers.Split(MissingMemberNames.Delimiter));
+                        missingMemberNames.UnionWith(
+                            missingMembers.Split(MissingMemberNames.Delimiter)
+                        );
                     }
                 }
             }
@@ -146,31 +238,67 @@ namespace Microsoft.Interop.Analyzers
             return (missingMemberNames, requiredShapeDiagnostics);
         }
 
-        private static void IgnoreArityMismatch(INamedTypeSymbol marshallerType, INamedTypeSymbol managedType)
-        {
-        }
+        private static void IgnoreArityMismatch(
+            INamedTypeSymbol marshallerType,
+            INamedTypeSymbol managedType
+        ) { }
 
 #pragma warning disable IDE0060
-        private static async Task<Solution> AddMissingMembers(Document doc, SyntaxNode node, HashSet<string> missingMemberNames, CancellationToken ct)
+        private static async Task<Solution> AddMissingMembers(
+            Document doc,
+            SyntaxNode node,
+            HashSet<string> missingMemberNames,
+            CancellationToken ct
+        )
         {
             var model = await doc.GetSemanticModelAsync(ct).ConfigureAwait(false);
 
-            var entryPointTypeSymbol = (INamedTypeSymbol)model.GetEnclosingSymbol(node.SpanStart, ct);
+            var entryPointTypeSymbol = (INamedTypeSymbol)
+                model.GetEnclosingSymbol(node.SpanStart, ct);
 
             // TODO: Convert to use the IOperation tree once IAttributeOperation is available
-            var managedTypeSymbolInAttribute = GetManagedTypeInAttributeSyntax(node.GetLocation(), entryPointTypeSymbol);
+            var managedTypeSymbolInAttribute = GetManagedTypeInAttributeSyntax(
+                node.GetLocation(),
+                entryPointTypeSymbol
+            );
 
-            bool isLinearCollectionMarshaller = ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(entryPointTypeSymbol);
+            bool isLinearCollectionMarshaller =
+                ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(entryPointTypeSymbol);
 
             // Explicitly ignore the generic arity mismatch diagnostics as we will only reach here if there are no mismatches.
             // The analyzer will not for missing members if the managed type cannot be resolved.
-            ManualTypeMarshallingHelper.TryResolveManagedType(entryPointTypeSymbol, ManualTypeMarshallingHelper.ReplaceGenericPlaceholderInType(managedTypeSymbolInAttribute, entryPointTypeSymbol, model.Compilation), isLinearCollectionMarshaller, IgnoreArityMismatch, out ITypeSymbol managedType);
+            ManualTypeMarshallingHelper.TryResolveManagedType(
+                entryPointTypeSymbol,
+                ManualTypeMarshallingHelper.ReplaceGenericPlaceholderInType(
+                    managedTypeSymbolInAttribute,
+                    entryPointTypeSymbol,
+                    model.Compilation
+                ),
+                isLinearCollectionMarshaller,
+                IgnoreArityMismatch,
+                out ITypeSymbol managedType
+            );
 
             SymbolEditor editor = SymbolEditor.Create(doc.Project.Solution);
 
-            INamedTypeSymbol marshallerType = (INamedTypeSymbol)model.GetSymbolInfo(node, ct).Symbol;
+            INamedTypeSymbol marshallerType = (INamedTypeSymbol)
+                model.GetSymbolInfo(node, ct).Symbol;
 
-            await editor.EditOneDeclarationAsync(marshallerType, (editor, decl) => AddMissingMembers(editor, decl, marshallerType, managedType, missingMemberNames, isLinearCollectionMarshaller), ct).ConfigureAwait(false);
+            await editor
+                .EditOneDeclarationAsync(
+                    marshallerType,
+                    (editor, decl) =>
+                        AddMissingMembers(
+                            editor,
+                            decl,
+                            marshallerType,
+                            managedType,
+                            missingMemberNames,
+                            isLinearCollectionMarshaller
+                        ),
+                    ct
+                )
+                .ConfigureAwait(false);
 
             return editor.ChangedSolution;
         }
@@ -178,10 +306,21 @@ namespace Microsoft.Interop.Analyzers
         // Get the managed type from the CustomMarshallerAttribute located at the provided location in source on the provided type.
         // As we only get fixable diagnostics for types that have valid non-null managed types in the CustomMarshallerAttribute applications,
         // we do not need to worry about the returned symbol being null.
-        private static ITypeSymbol GetManagedTypeInAttributeSyntax(Location locationInAttribute, INamedTypeSymbol attributedTypeSymbol)
-            => (ITypeSymbol)attributedTypeSymbol.GetAttributes().First(attr =>
-                    attr.ApplicationSyntaxReference.SyntaxTree == locationInAttribute.SourceTree
-                    && attr.ApplicationSyntaxReference.Span.Contains(locationInAttribute.SourceSpan)).ConstructorArguments[0].Value!;
+        private static ITypeSymbol GetManagedTypeInAttributeSyntax(
+            Location locationInAttribute,
+            INamedTypeSymbol attributedTypeSymbol
+        ) =>
+            (ITypeSymbol)
+                attributedTypeSymbol
+                    .GetAttributes()
+                    .First(attr =>
+                        attr.ApplicationSyntaxReference.SyntaxTree == locationInAttribute.SourceTree
+                        && attr.ApplicationSyntaxReference.Span.Contains(
+                            locationInAttribute.SourceSpan
+                        )
+                    )
+                    .ConstructorArguments[0]
+                    .Value!;
 
         private static void AddMissingMembers(
             DocumentEditor editor,
@@ -189,30 +328,65 @@ namespace Microsoft.Interop.Analyzers
             INamedTypeSymbol marshallerType,
             ITypeSymbol managedType,
             HashSet<string> missingMemberNames,
-            bool isLinearCollectionMarshaller)
+            bool isLinearCollectionMarshaller
+        )
         {
             if (marshallerType.IsStatic && marshallerType.IsReferenceType)
             {
-                AddMissingMembersToStatelessMarshaller(editor, declaringSyntax, marshallerType, managedType, missingMemberNames, isLinearCollectionMarshaller);
+                AddMissingMembersToStatelessMarshaller(
+                    editor,
+                    declaringSyntax,
+                    marshallerType,
+                    managedType,
+                    missingMemberNames,
+                    isLinearCollectionMarshaller
+                );
             }
             if (marshallerType.IsValueType)
             {
-                AddMissingMembersToStatefulMarshaller(editor, declaringSyntax, marshallerType, managedType, missingMemberNames, isLinearCollectionMarshaller);
+                AddMissingMembersToStatefulMarshaller(
+                    editor,
+                    declaringSyntax,
+                    marshallerType,
+                    managedType,
+                    missingMemberNames,
+                    isLinearCollectionMarshaller
+                );
             }
         }
 
-        private static void AddMissingMembersToStatelessMarshaller(DocumentEditor editor, SyntaxNode declaringSyntax, INamedTypeSymbol marshallerType, ITypeSymbol managedType, HashSet<string> missingMemberNames, bool isLinearCollectionMarshaller)
+        private static void AddMissingMembersToStatelessMarshaller(
+            DocumentEditor editor,
+            SyntaxNode declaringSyntax,
+            INamedTypeSymbol marshallerType,
+            ITypeSymbol managedType,
+            HashSet<string> missingMemberNames,
+            bool isLinearCollectionMarshaller
+        )
         {
             SyntaxGenerator gen = editor.Generator;
             // Get the methods of the shape so we can use them to determine what types to use in signatures that are not obvious.
-            var (_, methods) = StatelessMarshallerShapeHelper.GetShapeForType(marshallerType, managedType, isLinearCollectionMarshaller, editor.SemanticModel.Compilation);
-            INamedTypeSymbol spanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(TypeNames.System_Span_Metadata)!;
-            INamedTypeSymbol readOnlySpanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata)!;
-            var (typeParameters, _) = marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
+            var (_, methods) = StatelessMarshallerShapeHelper.GetShapeForType(
+                marshallerType,
+                managedType,
+                isLinearCollectionMarshaller,
+                editor.SemanticModel.Compilation
+            );
+            INamedTypeSymbol spanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                TypeNames.System_Span_Metadata
+            )!;
+            INamedTypeSymbol readOnlySpanOfT =
+                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                    TypeNames.System_ReadOnlySpan_Metadata
+                )!;
+            var (typeParameters, _) =
+                marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
             // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and reconstructing the syntax.
-            Lazy<SyntaxNode> unmanagedTypeSyntax = new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
-            Lazy<ITypeSymbol> managedElementTypeSymbol = new(CreateManagedElementTypeSymbol, isThreadSafe: false);
+            Lazy<SyntaxNode> unmanagedTypeSyntax =
+                new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
+            Lazy<ITypeSymbol> managedElementTypeSymbol =
+                new(CreateManagedElementTypeSymbol, isThreadSafe: false);
 
             List<SyntaxNode> newMembers = new();
 
@@ -221,11 +395,19 @@ namespace Microsoft.Interop.Analyzers
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.Value.Stateless.ConvertToUnmanaged,
-                        parameters: new[] { gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)) },
+                        parameters: new[]
+                        {
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
+                        },
                         returnType: unmanagedTypeSyntax.Value,
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.Value.Stateless.ConvertToManaged))
@@ -233,72 +415,142 @@ namespace Microsoft.Interop.Analyzers
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.Value.Stateless.ConvertToManaged,
-                        parameters: new[] { gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value) },
+                        parameters: new[]
+                        {
+                            gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
+                        },
                         returnType: gen.TypeExpression(managedType),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.BufferSize))
             {
                 newMembers.Add(
                     gen.WithAccessorDeclarations(
-                        gen.PropertyDeclaration(ShapeMemberNames.BufferSize,
-                            gen.TypeExpression(editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_Int32)),
+                        gen.PropertyDeclaration(
+                            ShapeMemberNames.BufferSize,
+                            gen.TypeExpression(
+                                editor.SemanticModel.Compilation.GetSpecialType(
+                                    SpecialType.System_Int32
+                                )
+                            ),
                             Accessibility.Public,
-                            DeclarationModifiers.Static),
-                        gen.GetAccessorDeclaration(statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) })));
+                            DeclarationModifiers.Static
+                        ),
+                        gen.GetAccessorDeclaration(
+                            statements: new[]
+                            {
+                                DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                            }
+                        )
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateless.AllocateContainerForUnmanagedElements))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames
+                        .LinearCollection
+                        .Stateless
+                        .AllocateContainerForUnmanagedElements
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
-                        ShapeMemberNames.LinearCollection.Stateless.AllocateContainerForUnmanagedElements,
+                        ShapeMemberNames
+                            .LinearCollection
+                            .Stateless
+                            .AllocateContainerForUnmanagedElements,
                         parameters: new[]
                         {
                             gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
-                            gen.ParameterDeclaration("numElements", type: gen.TypeExpression(SpecialType.System_Int32), refKind: RefKind.Out),
+                            gen.ParameterDeclaration(
+                                "numElements",
+                                type: gen.TypeExpression(SpecialType.System_Int32),
+                                refKind: RefKind.Out
+                            ),
                         },
                         returnType: unmanagedTypeSyntax.Value,
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateless.AllocateContainerForManagedElements))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateless.AllocateContainerForManagedElements
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
-                        ShapeMemberNames.LinearCollection.Stateless.AllocateContainerForManagedElements,
+                        ShapeMemberNames
+                            .LinearCollection
+                            .Stateless
+                            .AllocateContainerForManagedElements,
                         parameters: new[]
                         {
                             gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
-                            gen.ParameterDeclaration("numElements", type: gen.TypeExpression(SpecialType.System_Int32)),
+                            gen.ParameterDeclaration(
+                                "numElements",
+                                type: gen.TypeExpression(SpecialType.System_Int32)
+                            ),
                         },
                         returnType: gen.TypeExpression(managedType),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesSource))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesSource
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesSource,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType))
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
                         },
-                        returnType: gen.TypeExpression(readOnlySpanOfT.Construct(managedElementTypeSymbol.Value)),
+                        returnType: gen.TypeExpression(
+                            readOnlySpanOfT.Construct(managedElementTypeSymbol.Value)
+                        ),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateless.GetUnmanagedValuesDestination))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateless.GetUnmanagedValuesDestination
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
@@ -306,15 +558,29 @@ namespace Microsoft.Interop.Analyzers
                         parameters: new[]
                         {
                             gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
-                            gen.ParameterDeclaration("numElements", gen.TypeExpression(SpecialType.System_Int32))
+                            gen.ParameterDeclaration(
+                                "numElements",
+                                gen.TypeExpression(SpecialType.System_Int32)
+                            ),
                         },
-                        returnType: gen.TypeExpression(spanOfT.Construct(typeParameters[typeParameters.Length - 1])),
+                        returnType: gen.TypeExpression(
+                            spanOfT.Construct(typeParameters[typeParameters.Length - 1])
+                        ),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateless.GetUnmanagedValuesSource))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateless.GetUnmanagedValuesSource
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
@@ -322,30 +588,54 @@ namespace Microsoft.Interop.Analyzers
                         parameters: new[]
                         {
                             gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
-                            gen.ParameterDeclaration("numElements", gen.TypeExpression(SpecialType.System_Int32))
+                            gen.ParameterDeclaration(
+                                "numElements",
+                                gen.TypeExpression(SpecialType.System_Int32)
+                            ),
                         },
-                        returnType: gen.TypeExpression(readOnlySpanOfT.Construct(typeParameters[typeParameters.Length - 1])),
+                        returnType: gen.TypeExpression(
+                            readOnlySpanOfT.Construct(typeParameters[typeParameters.Length - 1])
+                        ),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesDestination))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesDestination
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesDestination,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType))
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
                         },
-                        returnType: gen.TypeExpression(spanOfT.Construct(managedElementTypeSymbol.Value)),
+                        returnType: gen.TypeExpression(
+                            spanOfT.Construct(managedElementTypeSymbol.Value)
+                        ),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            editor.ReplaceNode(declaringSyntax, (declaringSyntax, gen) => gen.AddMembers(declaringSyntax, newMembers));
+            editor.ReplaceNode(
+                declaringSyntax,
+                (declaringSyntax, gen) => gen.AddMembers(declaringSyntax, newMembers)
+            );
 
             SyntaxNode CreateUnmanagedTypeSyntax()
             {
@@ -379,36 +669,62 @@ namespace Microsoft.Interop.Analyzers
                 {
                     return gen.TypeExpression(unmanagedType);
                 }
-                return gen.TypeExpression(editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_IntPtr));
+                return gen.TypeExpression(
+                    editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_IntPtr)
+                );
             }
 
             ITypeSymbol CreateManagedElementTypeSymbol()
             {
                 if (methods.ManagedValuesSource is not null)
                 {
-                    return ((INamedTypeSymbol)methods.ManagedValuesSource.ReturnType).TypeArguments[0];
+                    return ((INamedTypeSymbol)methods.ManagedValuesSource.ReturnType).TypeArguments[
+                        0
+                    ];
                 }
                 if (methods.ManagedValuesDestination is not null)
                 {
-                    return ((INamedTypeSymbol)methods.ManagedValuesDestination.ReturnType).TypeArguments[0];
+                    return (
+                        (INamedTypeSymbol)methods.ManagedValuesDestination.ReturnType
+                    ).TypeArguments[0];
                 }
 
                 return editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_IntPtr);
             }
         }
 
-        private static void AddMissingMembersToStatefulMarshaller(DocumentEditor editor, SyntaxNode declaringSyntax, INamedTypeSymbol marshallerType, ITypeSymbol managedType, HashSet<string> missingMemberNames, bool isLinearCollectionMarshaller)
+        private static void AddMissingMembersToStatefulMarshaller(
+            DocumentEditor editor,
+            SyntaxNode declaringSyntax,
+            INamedTypeSymbol marshallerType,
+            ITypeSymbol managedType,
+            HashSet<string> missingMemberNames,
+            bool isLinearCollectionMarshaller
+        )
         {
             SyntaxGenerator gen = editor.Generator;
             // Get the methods of the shape so we can use them to determine what types to use in signatures that are not obvious.
-            var (_, methods) = StatefulMarshallerShapeHelper.GetShapeForType(marshallerType, managedType, isLinearCollectionMarshaller, editor.SemanticModel.Compilation);
-            INamedTypeSymbol spanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(TypeNames.System_Span_Metadata)!;
-            INamedTypeSymbol readOnlySpanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata)!;
-            var (typeParameters, _) = marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
+            var (_, methods) = StatefulMarshallerShapeHelper.GetShapeForType(
+                marshallerType,
+                managedType,
+                isLinearCollectionMarshaller,
+                editor.SemanticModel.Compilation
+            );
+            INamedTypeSymbol spanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                TypeNames.System_Span_Metadata
+            )!;
+            INamedTypeSymbol readOnlySpanOfT =
+                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                    TypeNames.System_ReadOnlySpan_Metadata
+                )!;
+            var (typeParameters, _) =
+                marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
             // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and reconstructing the syntax.
-            Lazy<SyntaxNode> unmanagedTypeSyntax = new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
-            Lazy<ITypeSymbol> managedElementTypeSymbol = new(CreateManagedElementTypeSymbol, isThreadSafe: false);
+            Lazy<SyntaxNode> unmanagedTypeSyntax =
+                new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
+            Lazy<ITypeSymbol> managedElementTypeSymbol =
+                new(CreateManagedElementTypeSymbol, isThreadSafe: false);
 
             List<SyntaxNode> newMembers = new();
 
@@ -417,9 +733,17 @@ namespace Microsoft.Interop.Analyzers
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.Value.Stateful.FromManaged,
-                        parameters: new[] { gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)) },
+                        parameters: new[]
+                        {
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
+                        },
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.Value.Stateful.ToUnmanaged))
@@ -429,7 +753,12 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.Value.Stateful.ToUnmanaged,
                         returnType: unmanagedTypeSyntax.Value,
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.Value.Stateful.FromUnmanaged))
@@ -437,9 +766,17 @@ namespace Microsoft.Interop.Analyzers
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.Value.Stateful.FromUnmanaged,
-                        parameters: new[] { gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value) },
+                        parameters: new[]
+                        {
+                            gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
+                        },
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.Value.Stateful.ToManaged))
@@ -449,66 +786,134 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.Value.Stateful.ToManaged,
                         returnType: gen.TypeExpression(managedType),
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.BufferSize))
             {
                 newMembers.Add(
                     gen.WithAccessorDeclarations(
-                        gen.PropertyDeclaration(ShapeMemberNames.BufferSize,
-                            gen.TypeExpression(editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_Int32)),
+                        gen.PropertyDeclaration(
+                            ShapeMemberNames.BufferSize,
+                            gen.TypeExpression(
+                                editor.SemanticModel.Compilation.GetSpecialType(
+                                    SpecialType.System_Int32
+                                )
+                            ),
                             Accessibility.Public,
-                            DeclarationModifiers.Static),
-                        gen.GetAccessorDeclaration(statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) })));
+                            DeclarationModifiers.Static
+                        ),
+                        gen.GetAccessorDeclaration(
+                            statements: new[]
+                            {
+                                DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                            }
+                        )
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesSource))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesSource
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesSource,
-                        returnType: gen.TypeExpression(readOnlySpanOfT.Construct(managedElementTypeSymbol.Value)),
+                        returnType: gen.TypeExpression(
+                            readOnlySpanOfT.Construct(managedElementTypeSymbol.Value)
+                        ),
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesDestination))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesDestination
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesDestination,
-                        returnType: gen.TypeExpression(spanOfT.Construct(typeParameters[typeParameters.Length - 1])),
+                        returnType: gen.TypeExpression(
+                            spanOfT.Construct(typeParameters[typeParameters.Length - 1])
+                        ),
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesSource))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesSource
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.LinearCollection.Stateful.GetUnmanagedValuesSource,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("numElements", gen.TypeExpression(SpecialType.System_Int32))
+                            gen.ParameterDeclaration(
+                                "numElements",
+                                gen.TypeExpression(SpecialType.System_Int32)
+                            ),
                         },
-                        returnType: gen.TypeExpression(readOnlySpanOfT.Construct(typeParameters[typeParameters.Length - 1])),
+                        returnType: gen.TypeExpression(
+                            readOnlySpanOfT.Construct(typeParameters[typeParameters.Length - 1])
+                        ),
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            if (missingMemberNames.Contains(ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesDestination))
+            if (
+                missingMemberNames.Contains(
+                    ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesDestination
+                )
+            )
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
                         ShapeMemberNames.LinearCollection.Stateful.GetManagedValuesDestination,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("numElements", gen.TypeExpression(SpecialType.System_Int32))
+                            gen.ParameterDeclaration(
+                                "numElements",
+                                gen.TypeExpression(SpecialType.System_Int32)
+                            ),
                         },
-                        returnType: gen.TypeExpression(spanOfT.Construct(managedElementTypeSymbol.Value)),
+                        returnType: gen.TypeExpression(
+                            spanOfT.Construct(managedElementTypeSymbol.Value)
+                        ),
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
             if (missingMemberNames.Contains(ShapeMemberNames.Free))
@@ -517,10 +922,18 @@ namespace Microsoft.Interop.Analyzers
                     gen.MethodDeclaration(
                         ShapeMemberNames.Value.Stateful.Free,
                         accessibility: Accessibility.Public,
-                        statements: new[] { DefaultMethodStatement(gen, editor.SemanticModel.Compilation) }));
+                        statements: new[]
+                        {
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
+                        }
+                    )
+                );
             }
 
-            editor.ReplaceNode(declaringSyntax, (declaringSyntax, gen) => gen.AddMembers(declaringSyntax, newMembers));
+            editor.ReplaceNode(
+                declaringSyntax,
+                (declaringSyntax, gen) => gen.AddMembers(declaringSyntax, newMembers)
+            );
 
             SyntaxNode CreateUnmanagedTypeSyntax()
             {
@@ -546,29 +959,42 @@ namespace Microsoft.Interop.Analyzers
                 {
                     return gen.TypeExpression(unmanagedType);
                 }
-                return gen.TypeExpression(editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_IntPtr));
+                return gen.TypeExpression(
+                    editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_IntPtr)
+                );
             }
 
             ITypeSymbol CreateManagedElementTypeSymbol()
             {
                 if (methods.ManagedValuesSource is not null)
                 {
-                    return ((INamedTypeSymbol)methods.ManagedValuesSource.ReturnType).TypeArguments[0];
+                    return ((INamedTypeSymbol)methods.ManagedValuesSource.ReturnType).TypeArguments[
+                        0
+                    ];
                 }
                 if (methods.ManagedValuesDestination is not null)
                 {
-                    return ((INamedTypeSymbol)methods.ManagedValuesDestination.ReturnType).TypeArguments[0];
+                    return (
+                        (INamedTypeSymbol)methods.ManagedValuesDestination.ReturnType
+                    ).TypeArguments[0];
                 }
 
                 return editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_IntPtr);
             }
         }
 
-        private static SyntaxNode DefaultMethodStatement(SyntaxGenerator generator, Compilation compilation)
+        private static SyntaxNode DefaultMethodStatement(
+            SyntaxGenerator generator,
+            Compilation compilation
+        )
         {
-            return generator.ThrowStatement(generator.ObjectCreationExpression(
-                generator.TypeExpression(
-                    compilation.GetTypeByMetadataName("System.NotImplementedException"))));
+            return generator.ThrowStatement(
+                generator.ObjectCreationExpression(
+                    generator.TypeExpression(
+                        compilation.GetTypeByMetadataName("System.NotImplementedException")
+                    )
+                )
+            );
         }
 #pragma warning disable IDE0060
     }

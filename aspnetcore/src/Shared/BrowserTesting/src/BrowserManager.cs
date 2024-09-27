@@ -20,9 +20,9 @@ public class BrowserManager
 
     private static bool IsPlaywrightDisabled =>
 #if DISABLE_PLAYWRIGHT
-                                        true;
+        true;
 #else
-                                        false;
+        false;
 #endif
 
     private object _lock = new();
@@ -40,7 +40,10 @@ public class BrowserManager
 
     public bool HasFailedTests { get; set; }
 
-    public static async Task<BrowserManager> CreateAsync(BrowserManagerConfiguration configuration, ILoggerFactory loggerFactory)
+    public static async Task<BrowserManager> CreateAsync(
+        BrowserManagerConfiguration configuration,
+        ILoggerFactory loggerFactory
+    )
     {
         var manager = new BrowserManager(configuration, loggerFactory);
         await manager.InitializeAsync();
@@ -64,14 +67,23 @@ public class BrowserManager
             {
                 if (!_launchBrowsers.ContainsKey(browserName))
                 {
-                    var effectiveLaunchOptions = _browserManagerConfiguration.GetBrowserTypeLaunchOptions(options.BrowserLaunchOptions);
+                    var effectiveLaunchOptions =
+                        _browserManagerConfiguration.GetBrowserTypeLaunchOptions(
+                            options.BrowserLaunchOptions
+                        );
 
                     var browser = options.BrowserKind switch
                     {
-                        BrowserKind.Chromium => await Playwright.Chromium.LaunchAsync(effectiveLaunchOptions),
-                        BrowserKind.Firefox => await Playwright.Firefox.LaunchAsync(effectiveLaunchOptions),
-                        BrowserKind.Webkit => await Playwright.Webkit.LaunchAsync(effectiveLaunchOptions),
-                        _ => throw new InvalidOperationException("Unsupported browser type.")
+                        BrowserKind.Chromium => await Playwright.Chromium.LaunchAsync(
+                            effectiveLaunchOptions
+                        ),
+                        BrowserKind.Firefox => await Playwright.Firefox.LaunchAsync(
+                            effectiveLaunchOptions
+                        ),
+                        BrowserKind.Webkit => await Playwright.Webkit.LaunchAsync(
+                            effectiveLaunchOptions
+                        ),
+                        _ => throw new InvalidOperationException("Unsupported browser type."),
                     };
 
                     _launchBrowsers.Add(browserName, browser);
@@ -82,40 +94,80 @@ public class BrowserManager
 
     public IEnumerable<string> GetAvailableBrowsers() => _launchBrowsers.Keys;
 
-    public Task<IBrowserContext> GetBrowserInstance(BrowserKind browserInstance, ContextInformation contextInfo) =>
-        GetBrowserInstance(browserInstance.ToString(), contextInfo);
+    public Task<IBrowserContext> GetBrowserInstance(
+        BrowserKind browserInstance,
+        ContextInformation contextInfo
+    ) => GetBrowserInstance(browserInstance.ToString(), contextInfo);
 
-    public Task<IBrowserContext> GetBrowserInstance(string browserInstance, ContextInformation contextInfo)
+    public Task<IBrowserContext> GetBrowserInstance(
+        string browserInstance,
+        ContextInformation contextInfo
+    )
     {
         var browser = GetBrowser(browserInstance);
 
         return AttachContextInfo(
-            browser.NewContextAsync(contextInfo.ConfigureUniqueHarPath(_browserManagerConfiguration.GetContextOptions(browserInstance))),
-            contextInfo);
+            browser.NewContextAsync(
+                contextInfo.ConfigureUniqueHarPath(
+                    _browserManagerConfiguration.GetContextOptions(browserInstance)
+                )
+            ),
+            contextInfo
+        );
     }
 
-    public Task<IBrowserContext> GetBrowserInstance(BrowserKind browserInstance, string contextName, ContextInformation contextInfo) =>
-        GetBrowserInstance(browserInstance.ToString(), contextName, contextInfo);
+    public Task<IBrowserContext> GetBrowserInstance(
+        BrowserKind browserInstance,
+        string contextName,
+        ContextInformation contextInfo
+    ) => GetBrowserInstance(browserInstance.ToString(), contextName, contextInfo);
 
-    public Task<IBrowserContext> GetBrowserInstance(string browserInstance, string contextName, ContextInformation contextInfo)
+    public Task<IBrowserContext> GetBrowserInstance(
+        string browserInstance,
+        string contextName,
+        ContextInformation contextInfo
+    )
     {
         var browser = GetBrowser(browserInstance);
 
         return AttachContextInfo(
-            browser.NewContextAsync(contextInfo.ConfigureUniqueHarPath(_browserManagerConfiguration.GetContextOptions(browserInstance, contextName))),
-            contextInfo);
+            browser.NewContextAsync(
+                contextInfo.ConfigureUniqueHarPath(
+                    _browserManagerConfiguration.GetContextOptions(browserInstance, contextName)
+                )
+            ),
+            contextInfo
+        );
     }
 
-    public Task<IBrowserContext> GetBrowserInstance(BrowserKind browserInstance, string contextName, BrowserNewContextOptions options, ContextInformation contextInfo) =>
-        GetBrowserInstance(browserInstance.ToString(), contextName, options, contextInfo);
+    public Task<IBrowserContext> GetBrowserInstance(
+        BrowserKind browserInstance,
+        string contextName,
+        BrowserNewContextOptions options,
+        ContextInformation contextInfo
+    ) => GetBrowserInstance(browserInstance.ToString(), contextName, options, contextInfo);
 
-    public Task<IBrowserContext> GetBrowserInstance(string browserInstance, string contextName, BrowserNewContextOptions options, ContextInformation contextInfo)
+    public Task<IBrowserContext> GetBrowserInstance(
+        string browserInstance,
+        string contextName,
+        BrowserNewContextOptions options,
+        ContextInformation contextInfo
+    )
     {
         var browser = GetBrowser(browserInstance);
 
         return AttachContextInfo(
-            browser.NewContextAsync(contextInfo.ConfigureUniqueHarPath(_browserManagerConfiguration.GetContextOptions(browserInstance, contextName, options))),
-            contextInfo);
+            browser.NewContextAsync(
+                contextInfo.ConfigureUniqueHarPath(
+                    _browserManagerConfiguration.GetContextOptions(
+                        browserInstance,
+                        contextName,
+                        options
+                    )
+                )
+            ),
+            contextInfo
+        );
     }
 
     private IBrowser GetBrowser(string browserInstance)
@@ -132,12 +184,15 @@ public class BrowserManager
         return browser;
     }
 
-    private async Task<IBrowserContext> AttachContextInfo(Task<IBrowserContext> browserContextTask, ContextInformation contextInfo)
+    private async Task<IBrowserContext> AttachContextInfo(
+        Task<IBrowserContext> browserContextTask,
+        ContextInformation contextInfo
+    )
     {
         var context = await browserContextTask;
-        var defaultTimeout = HasFailedTests ?
-            _browserManagerConfiguration.TimeoutAfterFirstFailureInMilliseconds :
-            _browserManagerConfiguration.TimeoutInMilliseconds;
+        var defaultTimeout = HasFailedTests
+            ? _browserManagerConfiguration.TimeoutAfterFirstFailureInMilliseconds
+            : _browserManagerConfiguration.TimeoutInMilliseconds;
         context.SetDefaultTimeout(defaultTimeout);
 
         contextInfo.Attach(context);
@@ -163,11 +218,14 @@ public class BrowserManager
         _launchBrowsers.ContainsKey(browserKind.ToString());
 
     public bool IsExplicitlyDisabled(BrowserKind browserKind) =>
-        _browserManagerConfiguration.IsDisabled ||
-        _browserManagerConfiguration.DisabledBrowsers.Contains(browserKind.ToString()) ||
-        IsPlaywrightDisabled;
+        _browserManagerConfiguration.IsDisabled
+        || _browserManagerConfiguration.DisabledBrowsers.Contains(browserKind.ToString())
+        || IsPlaywrightDisabled;
 
-    public static IEnumerable<object[]> WithBrowsers<T>(IEnumerable<BrowserKind> browsers, IEnumerable<T[]> data)
+    public static IEnumerable<object[]> WithBrowsers<T>(
+        IEnumerable<BrowserKind> browsers,
+        IEnumerable<T[]> data
+    )
     {
         var result = new List<object[]>();
         foreach (var browser in browsers)
@@ -181,7 +239,10 @@ public class BrowserManager
         return result;
     }
 
-    public static IEnumerable<object[]> WithBrowsers(IEnumerable<BrowserKind> browsers, params object[] data)
+    public static IEnumerable<object[]> WithBrowsers(
+        IEnumerable<BrowserKind> browsers,
+        params object[] data
+    )
     {
         var result = new List<object[]>();
         foreach (var browser in browsers)

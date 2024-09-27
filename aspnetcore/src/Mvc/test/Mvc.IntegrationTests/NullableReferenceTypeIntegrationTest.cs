@@ -15,6 +15,7 @@ public class NullableReferenceTypeIntegrationTest
     {
         public string FirstName { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -26,7 +27,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person1)
+            ParameterType = typeof(Person1),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -55,7 +56,8 @@ public class NullableReferenceTypeIntegrationTest
 
                 // Not validating framework error message.
                 Assert.Single(kvp.Value.Errors);
-            });
+            }
+        );
     }
 
 #nullable enable
@@ -63,6 +65,7 @@ public class NullableReferenceTypeIntegrationTest
     {
         public string? FirstName { get; set; }
     }
+
 #nullable restore
 
     [Fact]
@@ -74,7 +77,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person2)
+            ParameterType = typeof(Person2),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -102,6 +105,7 @@ public class NullableReferenceTypeIntegrationTest
         [Required(ErrorMessage = "Test")]
         public string FirstName { get; set; } = default!;
     }
+
 #nullable restore
 
     [Fact]
@@ -113,7 +117,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person3)
+            ParameterType = typeof(Person3),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -142,13 +146,13 @@ public class NullableReferenceTypeIntegrationTest
 
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("Test", error.ErrorMessage);
-            });
+            }
+        );
     }
 
 #nullable enable
-    private void NonNullableParameter(string param1)
-    {
-    }
+    private void NonNullableParameter(string param1) { }
+
 #nullable restore
 
     [Fact]
@@ -160,10 +164,14 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "param1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
-        var method = GetType().GetMethod(nameof(NonNullableParameter), BindingFlags.NonPublic | BindingFlags.Instance);
+        var method = GetType()
+            .GetMethod(
+                nameof(NonNullableParameter),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
         var parameterInfo = method.GetParameters().Single();
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo);
@@ -176,7 +184,8 @@ public class NullableReferenceTypeIntegrationTest
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
 
@@ -197,6 +206,7 @@ public class NullableReferenceTypeIntegrationTest
 
                 // Not validating framework error message.
                 Assert.Single(kvp.Value.Errors);
-            });
+            }
+        );
     }
 }

@@ -10,9 +10,9 @@
 
 namespace System.Transactions
 {
-	public enum DependentCloneOption {
-		BlockCommitUntilComplete,
-		RollbackIfNotComplete
-	}
+    public enum DependentCloneOption
+    {
+        BlockCommitUntilComplete,
+        RollbackIfNotComplete,
+    }
 }
-

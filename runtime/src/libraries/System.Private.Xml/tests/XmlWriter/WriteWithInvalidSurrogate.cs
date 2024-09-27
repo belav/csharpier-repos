@@ -26,12 +26,19 @@ namespace System.Xml.XmlWriterTests
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("test");
-                char[] invalidSurrogatePair = new char[] { (char)(SurHighStart + 5), (char)(SurLowStart - 1) };
-
-                AssertExtensions.Throws<ArgumentException>(null, () =>
+                char[] invalidSurrogatePair = new char[]
                 {
-                    writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
-                });
+                    (char)(SurHighStart + 5),
+                    (char)(SurLowStart - 1),
+                };
+
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                    {
+                        writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
+                    }
+                );
             }
         }
 
@@ -45,12 +52,19 @@ namespace System.Xml.XmlWriterTests
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("test");
-                char[] invalidSurrogatePair = new char[] { (char)(SurHighStart + 5), (char)(SurLowEnd + 1) };
-
-                AssertExtensions.Throws<ArgumentException>(null, () =>
+                char[] invalidSurrogatePair = new char[]
                 {
-                    writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
-                });
+                    (char)(SurHighStart + 5),
+                    (char)(SurLowEnd + 1),
+                };
+
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                    {
+                        writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
+                    }
+                );
             }
         }
 
@@ -64,12 +78,17 @@ namespace System.Xml.XmlWriterTests
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("test");
-                char[] validSurrogatePairs = new char[] {
-                    (char)(SurHighStart + 5), (char)(SurLowEnd),
-                    (char)(SurHighStart + 5), (char)(SurLowEnd - 1),
-                    (char)(SurHighStart + 5), (char)(SurLowStart),
-                    (char)(SurHighStart + 5), (char)(SurLowStart + 1),
-                    };
+                char[] validSurrogatePairs = new char[]
+                {
+                    (char)(SurHighStart + 5),
+                    (char)(SurLowEnd),
+                    (char)(SurHighStart + 5),
+                    (char)(SurLowEnd - 1),
+                    (char)(SurHighStart + 5),
+                    (char)(SurLowStart),
+                    (char)(SurHighStart + 5),
+                    (char)(SurLowStart + 1),
+                };
 
                 // Everything should be fine, no exceptions
                 writer.WriteRaw(validSurrogatePairs, 0, validSurrogatePairs.Length);

@@ -15,7 +15,10 @@ namespace System.Web.Mvc.Routing.Test
         public void SelectBestCandidate_ReturnsNullOnEmptyList()
         {
             // Arrange & Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(new List<DirectRouteCandidate>(), new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                new List<DirectRouteCandidate>(),
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Null(actual);
@@ -26,7 +29,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             RouteData routeData = new RouteData();
             routeData.Values["action"] = "Action1";
@@ -47,12 +52,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -63,7 +71,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             RouteData routeData = new RouteData();
             routeData.Values["action"] = "Action1";
@@ -71,7 +81,10 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionNameSelectors = new ActionNameSelector[] { (context, name) => name == "Action1" },
+                ActionNameSelectors = new ActionNameSelector[]
+                {
+                    (context, name) => name == "Action1",
+                },
                 ControllerDescriptor = controllerDescriptor,
                 RouteData = routeData,
             };
@@ -79,19 +92,25 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate worse = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action2()),
-                ActionNameSelectors = new ActionNameSelector[] { (context, name) => name == "Action2" },
+                ActionNameSelectors = new ActionNameSelector[]
+                {
+                    (context, name) => name == "Action2",
+                },
                 ControllerDescriptor = controllerDescriptor,
                 RouteData = routeData,
             };
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -102,7 +121,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             RouteData routeData = new RouteData();
             routeData.Values["action"] = "Action1";
@@ -110,7 +131,10 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action2()),
-                ActionNameSelectors = new ActionNameSelector[] { (context, name) => name == "Action1" },
+                ActionNameSelectors = new ActionNameSelector[]
+                {
+                    (context, name) => name == "Action1",
+                },
                 ControllerDescriptor = controllerDescriptor,
                 RouteData = routeData,
             };
@@ -124,12 +148,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -140,7 +167,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -153,7 +182,7 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate worse = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionSelectors = new ActionSelector[] { (context) => false, },
+                ActionSelectors = new ActionSelector[] { (context) => false },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 0,
                 RouteData = new RouteData(),
@@ -161,12 +190,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -177,12 +209,14 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionSelectors = new ActionSelector[] { (context) => false, },
+                ActionSelectors = new ActionSelector[] { (context) => false },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 0,
                 RouteData = new RouteData(),
@@ -191,7 +225,7 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate worse = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionSelectors = new ActionSelector[] { (context) => false, },
+                ActionSelectors = new ActionSelector[] { (context) => false },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 1,
                 RouteData = new RouteData(),
@@ -199,12 +233,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Null(actual);
@@ -215,7 +252,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -234,12 +273,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -250,7 +292,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -270,12 +314,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -286,7 +333,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -308,12 +357,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -324,7 +376,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -346,12 +400,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -362,7 +419,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -384,12 +443,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -400,7 +462,9 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -424,12 +488,15 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                better, 
+                better,
                 worse,
             };
 
             // Act
-            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext());
+            DirectRouteCandidate actual = DirectRouteCandidate.SelectBestCandidate(
+                candidates,
+                new ControllerContext()
+            );
 
             // Assert
             Assert.Same(better, actual);
@@ -440,11 +507,17 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             DirectRouteCandidate candidate1 = new DirectRouteCandidate()
             {
-                ActionDescriptor = new ReflectedActionDescriptor(controllerType.GetMethod("Action1"), "Action1", controllerDescriptor),
+                ActionDescriptor = new ReflectedActionDescriptor(
+                    controllerType.GetMethod("Action1"),
+                    "Action1",
+                    controllerDescriptor
+                ),
                 ActionSelectors = new ActionSelector[] { (context) => true },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 0,
@@ -454,7 +527,11 @@ namespace System.Web.Mvc.Routing.Test
 
             DirectRouteCandidate candidate2 = new DirectRouteCandidate()
             {
-                ActionDescriptor = new ReflectedActionDescriptor(controllerType.GetMethod("Action2"), "Action2", controllerDescriptor),
+                ActionDescriptor = new ReflectedActionDescriptor(
+                    controllerType.GetMethod("Action2"),
+                    "Action2",
+                    controllerDescriptor
+                ),
                 ActionSelectors = new ActionSelector[] { (context) => true },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 0,
@@ -464,17 +541,22 @@ namespace System.Web.Mvc.Routing.Test
 
             List<DirectRouteCandidate> candidates = new List<DirectRouteCandidate>()
             {
-                candidate1, 
+                candidate1,
                 candidate2,
             };
 
-            string message = 
-                "The current request is ambiguous between the following action methods:" + Environment.NewLine +
-                "Void Action1() on type System.Web.Mvc.Routing.Test.DirectRouteCandidateTest+TestController" + Environment.NewLine +
-                "Void Action2() on type System.Web.Mvc.Routing.Test.DirectRouteCandidateTest+TestController";
+            string message =
+                "The current request is ambiguous between the following action methods:"
+                + Environment.NewLine
+                + "Void Action1() on type System.Web.Mvc.Routing.Test.DirectRouteCandidateTest+TestController"
+                + Environment.NewLine
+                + "Void Action2() on type System.Web.Mvc.Routing.Test.DirectRouteCandidateTest+TestController";
 
             // Act & Assert
-            Assert.Throws<AmbiguousMatchException>(() => DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext()), message);
+            Assert.Throws<AmbiguousMatchException>(
+                () => DirectRouteCandidate.SelectBestCandidate(candidates, new ControllerContext()),
+                message
+            );
         }
 
         private static ActionDescriptor ActionDescriptorFrom<T>(Expression<Action<T>> methodCall)
@@ -490,26 +572,18 @@ namespace System.Web.Mvc.Routing.Test
         private class TestController : Controller
         {
             [Route("cool")]
-            public void Action1()
-            {
-            }
+            public void Action1() { }
 
             [Route("cool")]
-            public void Action2()
-            {
-            }
+            public void Action2() { }
         }
 
         [Route("controller/{action")]
         private class ClassLevelTestController : Controller
         {
-            public void Action1()
-            {
-            }
+            public void Action1() { }
 
-            public void Action2()
-            {
-            }
+            public void Action2() { }
         }
     }
 }

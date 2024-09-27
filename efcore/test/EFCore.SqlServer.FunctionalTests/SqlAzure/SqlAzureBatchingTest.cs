@@ -23,26 +23,31 @@ public class SqlAzureBatchingTest : IClassFixture<BatchingSqlAzureFixture>
     public void AddWithBatchSize(int batchSize)
     {
         using var context = Fixture.CreateContext(batchSize);
-        context.Database.CreateExecutionStrategy().Execute(
-            context, contextScoped =>
-            {
-                using (contextScoped.Database.BeginTransaction())
+        context
+            .Database.CreateExecutionStrategy()
+            .Execute(
+                context,
+                contextScoped =>
                 {
-                    for (var i = 0; i < batchSize; i++)
+                    using (contextScoped.Database.BeginTransaction())
                     {
-                        var uuid = Guid.NewGuid().ToString();
-                        contextScoped.Products.Add(
-                            new Product
-                            {
-                                Name = uuid,
-                                ProductNumber = uuid.Substring(0, 25),
-                                Weight = 1000,
-                                SellStartDate = DateTime.Now
-                            });
-                    }
+                        for (var i = 0; i < batchSize; i++)
+                        {
+                            var uuid = Guid.NewGuid().ToString();
+                            contextScoped.Products.Add(
+                                new Product
+                                {
+                                    Name = uuid,
+                                    ProductNumber = uuid.Substring(0, 25),
+                                    Weight = 1000,
+                                    SellStartDate = DateTime.Now,
+                                }
+                            );
+                        }
 
-                    Assert.Equal(batchSize, contextScoped.SaveChanges());
+                        Assert.Equal(batchSize, contextScoped.SaveChanges());
+                    }
                 }
-            });
+            );
     }
 }

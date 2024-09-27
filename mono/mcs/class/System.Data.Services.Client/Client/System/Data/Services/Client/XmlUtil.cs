@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -21,7 +21,6 @@ namespace System.Data.Services.Client
 
     internal static partial class UriUtil
     {
-
         internal static string GetNameFromAtomLinkRelationAttribute(string value)
         {
             string name = null;
@@ -32,13 +31,20 @@ namespace System.Data.Services.Client
                 {
                     uri = new Uri(value, UriKind.RelativeOrAbsolute);
                 }
-                catch (UriFormatException)
-                {                }
+                catch (UriFormatException) { }
 
                 if ((null != uri) && uri.IsAbsoluteUri)
                 {
-                    string unescaped = uri.GetComponents(UriComponents.AbsoluteUri, UriFormat.SafeUnescaped);
-                    if (unescaped.StartsWith(XmlConstants.DataWebRelatedNamespace, StringComparison.Ordinal))
+                    string unescaped = uri.GetComponents(
+                        UriComponents.AbsoluteUri,
+                        UriFormat.SafeUnescaped
+                    );
+                    if (
+                        unescaped.StartsWith(
+                            XmlConstants.DataWebRelatedNamespace,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         name = unescaped.Substring(XmlConstants.DataWebRelatedNamespace.Length);
                     }
@@ -47,7 +53,6 @@ namespace System.Data.Services.Client
 
             return name;
         }
-
     }
 
     internal static partial class XmlUtil
@@ -94,7 +99,8 @@ namespace System.Data.Services.Client
             settings.NameTable = XmlUtil.CreateAtomNameTable();
 
             if (null == encoding)
-            {                return XmlReader.Create(stream, settings);
+            {
+                return XmlReader.Create(stream, settings);
             }
 
             return XmlReader.Create(new StreamReader(stream, encoding), settings);
@@ -111,25 +117,39 @@ namespace System.Data.Services.Client
             settings.Indent = true;
             settings.NewLineHandling = NewLineHandling.Entitize;
 
-            Debug.Assert(!settings.CloseOutput, "!settings.CloseOutput -- otherwise default changed?");
+            Debug.Assert(
+                !settings.CloseOutput,
+                "!settings.CloseOutput -- otherwise default changed?"
+            );
 
             return settings;
         }
 
-        internal static XmlWriter CreateXmlWriterAndWriteProcessingInstruction(Stream stream, Encoding encoding)
+        internal static XmlWriter CreateXmlWriterAndWriteProcessingInstruction(
+            Stream stream,
+            Encoding encoding
+        )
         {
             Debug.Assert(null != stream, "null != stream");
             Debug.Assert(null != encoding, "null != encoding");
 
             XmlWriterSettings settings = CreateXmlWriterSettings(encoding);
             XmlWriter writer = XmlWriter.Create(stream, settings);
-            writer.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"" + encoding.WebName + "\" standalone=\"yes\"");
+            writer.WriteProcessingInstruction(
+                "xml",
+                "version=\"1.0\" encoding=\"" + encoding.WebName + "\" standalone=\"yes\""
+            );
             return writer;
         }
 
-        internal static string GetAttributeEx(this XmlReader reader, string attributeName, string namespaceUri)
+        internal static string GetAttributeEx(
+            this XmlReader reader,
+            string attributeName,
+            string namespaceUri
+        )
         {
-            return reader.GetAttribute(attributeName, namespaceUri) ?? reader.GetAttribute(attributeName);
+            return reader.GetAttribute(attributeName, namespaceUri)
+                ?? reader.GetAttribute(attributeName);
         }
 
         internal static void RemoveDuplicateNamespaceAttributes(System.Xml.Linq.XElement element)

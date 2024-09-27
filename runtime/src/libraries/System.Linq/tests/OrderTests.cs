@@ -29,8 +29,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x1 in new int[] { 1, 6, 0, -1, 3 }
-                    select x1;
+            var q = from x1 in new int[] { 1, 6, 0, -1, 3 } select x1;
 
             Assert.Equal(q.Order().ThenBy(f => f * 2), q.Order().ThenBy(f => f * 2));
         }
@@ -116,14 +115,8 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderedToArray()
         {
-            var source = new[]
-            {
-                5, 9, 6, 7, 8, 5, 20
-            };
-            var expected = new[]
-            {
-                5, 5, 6, 7, 8, 9, 20
-            };
+            var source = new[] { 5, 9, 6, 7, 8, 5, 20 };
+            var expected = new[] { 5, 5, 6, 7, 8, 9, 20 };
 
             Assert.Equal(expected, source.Order().ToArray());
         }
@@ -137,14 +130,8 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderedToList()
         {
-            var source = new[]
-            {
-                5, 9, 6, 7, 8, 5, 20
-            };
-            var expected = new[]
-            {
-                5, 5, 6, 7, 8, 9, 20
-            };
+            var source = new[] { 5, 9, 6, 7, 8, 5, 20 };
+            var expected = new[] { 5, 5, 6, 7, 8, 9, 20 };
 
             Assert.Equal(expected, source.Order().ToList());
         }
@@ -208,31 +195,76 @@ namespace System.Linq.Tests
         public void FirstWithPredicateOnOrdered()
         {
             IEnumerable<int> ordered = Enumerable.Range(0, 10).Shuffle().Order();
-            IEnumerable<int> orderedDescending = Enumerable.Range(0, 10).Shuffle().OrderDescending();
+            IEnumerable<int> orderedDescending = Enumerable
+                .Range(0, 10)
+                .Shuffle()
+                .OrderDescending();
             int counter;
 
             counter = 0;
-            Assert.Equal(0, ordered.First(i => { counter++; return true; }));
+            Assert.Equal(
+                0,
+                ordered.First(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(9, ordered.First(i => { counter++; return i == 9; }));
+            Assert.Equal(
+                9,
+                ordered.First(i =>
+                {
+                    counter++;
+                    return i == 9;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(() => ordered.First(i => { counter++; return false; }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ordered.First(i =>
+                    {
+                        counter++;
+                        return false;
+                    })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(9, orderedDescending.First(i => { counter++; return true; }));
+            Assert.Equal(
+                9,
+                orderedDescending.First(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(0, orderedDescending.First(i => { counter++; return i == 0; }));
+            Assert.Equal(
+                0,
+                orderedDescending.First(i =>
+                {
+                    counter++;
+                    return i == 0;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(() => orderedDescending.First(i => { counter++; return false; }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    orderedDescending.First(i =>
+                    {
+                        counter++;
+                        return false;
+                    })
+            );
             Assert.Equal(10, counter);
         }
 
@@ -252,27 +284,69 @@ namespace System.Linq.Tests
             int counter;
 
             counter = 0;
-            Assert.Equal(0, Order.FirstOrDefault(i => { counter++; return true; }));
+            Assert.Equal(
+                0,
+                Order.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(9, Order.FirstOrDefault(i => { counter++; return i == 9; }));
+            Assert.Equal(
+                9,
+                Order.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return i == 9;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(0, Order.FirstOrDefault(i => { counter++; return false; }));
+            Assert.Equal(
+                0,
+                Order.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return false;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(9, OrderDescending.FirstOrDefault(i => { counter++; return true; }));
+            Assert.Equal(
+                9,
+                OrderDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(0, OrderDescending.FirstOrDefault(i => { counter++; return i == 0; }));
+            Assert.Equal(
+                0,
+                OrderDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return i == 0;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(0, OrderDescending.FirstOrDefault(i => { counter++; return false; }));
+            Assert.Equal(
+                0,
+                OrderDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return false;
+                })
+            );
             Assert.Equal(10, counter);
         }
 
@@ -310,7 +384,10 @@ namespace System.Linq.Tests
         [Fact]
         public void EnumeratorDoesntContinue()
         {
-            var enumerator = NumberRangeGuaranteedNotCollectionType(0, 3).Shuffle().Order().GetEnumerator();
+            var enumerator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .Shuffle()
+                .Order()
+                .GetEnumerator();
             while (enumerator.MoveNext()) { }
             Assert.False(enumerator.MoveNext());
         }
@@ -382,7 +459,15 @@ namespace System.Linq.Tests
         [Fact]
         public void CultureOrder()
         {
-            string[] source = new[] { "Apple0", "\u00C6ble0", "Apple1", "\u00C6ble1", "Apple2", "\u00C6ble2" };
+            string[] source = new[]
+            {
+                "Apple0",
+                "\u00C6ble0",
+                "Apple1",
+                "\u00C6ble1",
+                "Apple2",
+                "\u00C6ble2",
+            };
 
             CultureInfo dk = new CultureInfo("da-DK");
             CultureInfo au = new CultureInfo("en-AU");
@@ -454,7 +539,15 @@ namespace System.Linq.Tests
         [Fact]
         public void CultureOrderElementAt()
         {
-            string[] source = new[] { "Apple0", "\u00C6ble0", "Apple1", "\u00C6ble1", "Apple2", "\u00C6ble2" };
+            string[] source = new[]
+            {
+                "Apple0",
+                "\u00C6ble0",
+                "Apple1",
+                "\u00C6ble1",
+                "Apple2",
+                "\u00C6ble2",
+            };
 
             CultureInfo dk = new CultureInfo("da-DK");
             CultureInfo au = new CultureInfo("en-AU");
@@ -476,12 +569,20 @@ namespace System.Linq.Tests
             {
                 using (new ThreadCultureChange(dk))
                 {
-                    Assert.Equal(resultDK[i], delaySortedSource.ElementAt(i), StringComparer.Ordinal);
+                    Assert.Equal(
+                        resultDK[i],
+                        delaySortedSource.ElementAt(i),
+                        StringComparer.Ordinal
+                    );
                 }
 
                 using (new ThreadCultureChange(au))
                 {
-                    Assert.Equal(resultAU[i], delaySortedSource.ElementAt(i), StringComparer.Ordinal);
+                    Assert.Equal(
+                        resultAU[i],
+                        delaySortedSource.ElementAt(i),
+                        StringComparer.Ordinal
+                    );
                 }
             }
         }

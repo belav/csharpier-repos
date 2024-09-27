@@ -4,122 +4,157 @@
 // I assume that it's under the MS sample license. - BL
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
-public class ObjectDumper {
-    public static void Write(object o) {
+public class ObjectDumper
+{
+    public static void Write(object o)
+    {
         Write(o, 0);
     }
 
-    public static void Write(object o, int depth) {
-		Write(o, depth, Console.Out);
+    public static void Write(object o, int depth)
+    {
+        Write(o, depth, Console.Out);
     }
 
-	public static void Write(object o, int depth, TextWriter log) {
-		ObjectDumper dumper = new ObjectDumper(depth);
-		dumper.writer = log;
-		dumper.WriteObject(null, o);
-	}
+    public static void Write(object o, int depth, TextWriter log)
+    {
+        ObjectDumper dumper = new ObjectDumper(depth);
+        dumper.writer = log;
+        dumper.WriteObject(null, o);
+    }
 
     TextWriter writer;
     int pos;
     int level;
     int depth;
 
-    private ObjectDumper(int depth) {
+    private ObjectDumper(int depth)
+    {
         this.depth = depth;
     }
 
-    private void Write(string s) {
-        if (s != null) {
+    private void Write(string s)
+    {
+        if (s != null)
+        {
             writer.Write(s);
             pos += s.Length;
         }
     }
 
-    private void WriteIndent() {
-        for (int i = 0; i < level; i++) writer.Write("  ");
+    private void WriteIndent()
+    {
+        for (int i = 0; i < level; i++)
+            writer.Write("  ");
     }
 
-    private void WriteLine() {
+    private void WriteLine()
+    {
         writer.WriteLine();
         pos = 0;
     }
 
-    private void WriteTab() {
+    private void WriteTab()
+    {
         Write("  ");
-        while (pos % 8 != 0) Write(" ");
+        while (pos % 8 != 0)
+            Write(" ");
     }
 
-    private void WriteObject(string prefix, object o) {
-        if (o == null || o is ValueType || o is string) {
+    private void WriteObject(string prefix, object o)
+    {
+        if (o == null || o is ValueType || o is string)
+        {
             WriteIndent();
             Write(prefix);
             WriteValue(o);
             WriteLine();
         }
-        else if (o is IEnumerable) {
-            foreach (object element in (IEnumerable)o) {
-                if (element is IEnumerable && !(element is string)) {
+        else if (o is IEnumerable)
+        {
+            foreach (object element in (IEnumerable)o)
+            {
+                if (element is IEnumerable && !(element is string))
+                {
                     WriteIndent();
                     Write(prefix);
                     Write("...");
                     WriteLine();
-                    if (level < depth) {
+                    if (level < depth)
+                    {
                         level++;
                         WriteObject(prefix, element);
                         level--;
                     }
                 }
-                else {
+                else
+                {
                     WriteObject(prefix, element);
                 }
             }
         }
-        else {
-            MemberInfo[] members = o.GetType().GetMembers(BindingFlags.Public | BindingFlags.Instance);
+        else
+        {
+            MemberInfo[] members = o.GetType()
+                .GetMembers(BindingFlags.Public | BindingFlags.Instance);
             WriteIndent();
             Write(prefix);
             bool propWritten = false;
-            foreach (MemberInfo m in members) {
+            foreach (MemberInfo m in members)
+            {
                 FieldInfo f = m as FieldInfo;
                 PropertyInfo p = m as PropertyInfo;
-                if (f != null || p != null) {
-                    if (propWritten) {
+                if (f != null || p != null)
+                {
+                    if (propWritten)
+                    {
                         WriteTab();
                     }
-                    else {
+                    else
+                    {
                         propWritten = true;
                     }
                     Write(m.Name);
                     Write("=");
                     Type t = f != null ? f.FieldType : p.PropertyType;
-                    if (t.IsValueType || t == typeof(string)) {
+                    if (t.IsValueType || t == typeof(string))
+                    {
                         WriteValue(f != null ? f.GetValue(o) : p.GetValue(o, null));
                     }
-                    else {
-                        if (typeof(IEnumerable).IsAssignableFrom(t)) {
+                    else
+                    {
+                        if (typeof(IEnumerable).IsAssignableFrom(t))
+                        {
                             Write("...");
                         }
-                        else {
+                        else
+                        {
                             Write("{ }");
                         }
                     }
                 }
             }
-            if (propWritten) WriteLine();
-            if (level < depth) {
-                foreach (MemberInfo m in members) {
+            if (propWritten)
+                WriteLine();
+            if (level < depth)
+            {
+                foreach (MemberInfo m in members)
+                {
                     FieldInfo f = m as FieldInfo;
                     PropertyInfo p = m as PropertyInfo;
-                    if (f != null || p != null) {
+                    if (f != null || p != null)
+                    {
                         Type t = f != null ? f.FieldType : p.PropertyType;
-                        if (!(t.IsValueType || t == typeof(string))) {
+                        if (!(t.IsValueType || t == typeof(string)))
+                        {
                             object value = f != null ? f.GetValue(o) : p.GetValue(o, null);
-                            if (value != null) {
+                            if (value != null)
+                            {
                                 level++;
                                 WriteObject(m.Name + ": ", value);
                                 level--;
@@ -131,20 +166,26 @@ public class ObjectDumper {
         }
     }
 
-    private void WriteValue(object o) {
-        if (o == null) {
+    private void WriteValue(object o)
+    {
+        if (o == null)
+        {
             Write("null");
         }
-        else if (o is DateTime) {
+        else if (o is DateTime)
+        {
             Write(((DateTime)o).ToShortDateString());
         }
-        else if (o is ValueType || o is string) {
+        else if (o is ValueType || o is string)
+        {
             Write(o.ToString());
         }
-        else if (o is IEnumerable) {
+        else if (o is IEnumerable)
+        {
             Write("...");
         }
-        else {
+        else
+        {
             Write("{ }");
         }
     }

@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to be a string of a given length or within a given range of lengths.
 /// </summary>
-public class LengthRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class LengthRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class LengthRouteConstraint : IRouteConstraint
 #endif
@@ -57,8 +60,10 @@ internal class LengthRouteConstraint : IRouteConstraint
 
         if (minLength > maxLength)
         {
-            var errorMessage =
-                Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax("minLength", "maxLength");
+            var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax(
+                "minLength",
+                "maxLength"
+            );
             throw new ArgumentOutOfRangeException(nameof(minLength), minLength, errorMessage);
         }
 
@@ -83,10 +88,10 @@ internal class LengthRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);

@@ -6,16 +6,23 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace Microsoft.AspNetCore.Components;
 
-internal sealed class ProtectedPrerenderComponentApplicationStore : PrerenderComponentApplicationStore
+internal sealed class ProtectedPrerenderComponentApplicationStore
+    : PrerenderComponentApplicationStore
 {
     private IDataProtector _protector = default!; // Assigned in all constructor paths
 
-    public ProtectedPrerenderComponentApplicationStore(IDataProtectionProvider dataProtectionProvider) : base()
+    public ProtectedPrerenderComponentApplicationStore(
+        IDataProtectionProvider dataProtectionProvider
+    )
+        : base()
     {
         CreateProtector(dataProtectionProvider);
     }
 
-    public ProtectedPrerenderComponentApplicationStore(string existingState, IDataProtectionProvider dataProtectionProvider)
+    public ProtectedPrerenderComponentApplicationStore(
+        string existingState,
+        IDataProtectionProvider dataProtectionProvider
+    )
     {
         CreateProtector(dataProtectionProvider);
         DeserializeState(_protector.Unprotect(Convert.FromBase64String(existingState)));
@@ -28,9 +35,12 @@ internal sealed class ProtectedPrerenderComponentApplicationStore : PrerenderCom
     }
 
     private void CreateProtector(IDataProtectionProvider dataProtectionProvider) =>
-        _protector = dataProtectionProvider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+        _protector = dataProtectionProvider.CreateProtector(
+            "Microsoft.AspNetCore.Components.Server.State"
+        );
 
     public override bool SupportsRenderMode(IComponentRenderMode renderMode) =>
-        renderMode is null ||
-        renderMode is InteractiveServerRenderMode || renderMode is InteractiveAutoRenderMode;
+        renderMode is null
+        || renderMode is InteractiveServerRenderMode
+        || renderMode is InteractiveAutoRenderMode;
 }

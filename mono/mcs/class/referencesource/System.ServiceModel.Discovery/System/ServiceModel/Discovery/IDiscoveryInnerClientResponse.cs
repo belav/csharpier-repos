@@ -9,9 +9,22 @@ namespace System.ServiceModel.Discovery
 
     interface IDiscoveryInnerClientResponse
     {
-        void HelloOperation(UniqueId relatesTo, DiscoveryMessageSequence proxyMessageSequence, EndpointDiscoveryMetadata proxyEndpointMetadata);
-        void ProbeMatchOperation(UniqueId relatesTo, DiscoveryMessageSequence discoveryMessageSequence, Collection<EndpointDiscoveryMetadata> endpointDiscoveryMetadataCollection, bool findCompleted);
-        void ResolveMatchOperation(UniqueId relatesTo, DiscoveryMessageSequence discoveryMessageSequence, EndpointDiscoveryMetadata endpointDiscoveryMetadata);
+        void HelloOperation(
+            UniqueId relatesTo,
+            DiscoveryMessageSequence proxyMessageSequence,
+            EndpointDiscoveryMetadata proxyEndpointMetadata
+        );
+        void ProbeMatchOperation(
+            UniqueId relatesTo,
+            DiscoveryMessageSequence discoveryMessageSequence,
+            Collection<EndpointDiscoveryMetadata> endpointDiscoveryMetadataCollection,
+            bool findCompleted
+        );
+        void ResolveMatchOperation(
+            UniqueId relatesTo,
+            DiscoveryMessageSequence discoveryMessageSequence,
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        );
         void PostFindCompletedAndRemove(UniqueId operationId, bool cancelled, Exception error);
         void PostResolveCompletedAndRemove(UniqueId operationId, bool cancelled, Exception error);
     }

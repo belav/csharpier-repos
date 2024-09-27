@@ -9,8 +9,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
     [ServiceContract(
         Name = ProtocolStrings.ContractNames.DiscoveryManagedContractName,
         Namespace = ProtocolStrings.VersionApril2005.Namespace,
-        CallbackContract = typeof(IDiscoveryResponseContractApril2005))]
-    interface IDiscoveryContractManagedApril2005 : IDiscoveryContractApril2005
-    {
-    }
+        CallbackContract = typeof(IDiscoveryResponseContractApril2005)
+    )]
+    interface IDiscoveryContractManagedApril2005 : IDiscoveryContractApril2005 { }
 }

@@ -12,19 +12,26 @@ namespace System.Web.Http.Tracing.Tracers
 {
     public class HttpControllerDescriptorTracerTest
     {
-        private static readonly HttpControllerContext _controllerContext = ContextUtil.CreateControllerContext(instance: _controller);
+        private static readonly HttpControllerContext _controllerContext =
+            ContextUtil.CreateControllerContext(instance: _controller);
         private static readonly HttpRequestMessage _request = _controllerContext.Request;
         private static readonly IHttpController _controller = new Mock<IHttpController>().Object;
-        private static readonly InvalidOperationException _exception = new InvalidOperationException("test");
+        private static readonly InvalidOperationException _exception =
+            new InvalidOperationException("test");
 
         [Fact]
         public void Properties_Calls_Inner()
         {
             // Arrange
-            ConcurrentDictionary<object, object> properties = new ConcurrentDictionary<object, object>();
-            Mock<HttpControllerDescriptor> mockControllerDescriptor = new Mock<HttpControllerDescriptor>();
+            ConcurrentDictionary<object, object> properties =
+                new ConcurrentDictionary<object, object>();
+            Mock<HttpControllerDescriptor> mockControllerDescriptor =
+                new Mock<HttpControllerDescriptor>();
             mockControllerDescriptor.Setup(d => d.Properties).Returns(properties).Verifiable();
-            HttpControllerDescriptorTracer tracer = GetHttpControllerDescriptorTracer(mockControllerDescriptor.Object, new TestTraceWriter());
+            HttpControllerDescriptorTracer tracer = GetHttpControllerDescriptorTracer(
+                mockControllerDescriptor.Object,
+                new TestTraceWriter()
+            );
 
             // Act and Assert
             Assert.Same(properties, tracer.Properties);
@@ -35,22 +42,40 @@ namespace System.Web.Http.Tracing.Tracers
         public void CreateController_Invokes_Inner_And_Traces()
         {
             // Arrange
-            Mock<HttpControllerDescriptor> mockControllerDescriptor = CreateMockControllerDescriptor();
-            mockControllerDescriptor.Setup(b => b.CreateController(It.IsAny<HttpRequestMessage>())).Returns(_controller);
+            Mock<HttpControllerDescriptor> mockControllerDescriptor =
+                CreateMockControllerDescriptor();
+            mockControllerDescriptor
+                .Setup(b => b.CreateController(It.IsAny<HttpRequestMessage>()))
+                .Returns(_controller);
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpControllerDescriptorTracer tracer = GetHttpControllerDescriptorTracer(mockControllerDescriptor.Object, traceWriter);
+            HttpControllerDescriptorTracer tracer = GetHttpControllerDescriptorTracer(
+                mockControllerDescriptor.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "CreateController" },
-                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.End, Operation = "CreateController" }
+                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "CreateController",
+                },
+                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "CreateController",
+                },
             };
 
             // Act
             IHttpController controller = tracer.CreateController(_request);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.IsAssignableFrom<HttpControllerTracer>(controller);
         }
 
@@ -58,22 +83,42 @@ namespace System.Web.Http.Tracing.Tracers
         public void CreateController_Throws_And_Traces_When_Inner_Throws()
         {
             // Arrange
-            Mock<HttpControllerDescriptor> mockControllerDescriptor = CreateMockControllerDescriptor();
-            mockControllerDescriptor.Setup(b => b.CreateController(It.IsAny<HttpRequestMessage>())).Throws(_exception);
+            Mock<HttpControllerDescriptor> mockControllerDescriptor =
+                CreateMockControllerDescriptor();
+            mockControllerDescriptor
+                .Setup(b => b.CreateController(It.IsAny<HttpRequestMessage>()))
+                .Throws(_exception);
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpControllerDescriptorTracer tracer = GetHttpControllerDescriptorTracer(mockControllerDescriptor.Object, traceWriter);
+            HttpControllerDescriptorTracer tracer = GetHttpControllerDescriptorTracer(
+                mockControllerDescriptor.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "CreateController" },
-                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Error) { Kind = TraceKind.End, Operation = "CreateController" }
+                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "CreateController",
+                },
+                new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Error)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "CreateController",
+                },
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() => tracer.CreateController(_request));
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () => tracer.CreateController(_request)
+            );
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Same(_exception, thrown);
             Assert.Same(_exception, traceWriter.Traces[1].Exception);
         }
@@ -84,7 +129,10 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             HttpControllerDescriptor expectedInner = BuildHttpControllerDescriptor(_controller);
 
-            HttpControllerDescriptorTracer productUnderTest = new HttpControllerDescriptorTracer(expectedInner, new TestTraceWriter());
+            HttpControllerDescriptorTracer productUnderTest = new HttpControllerDescriptorTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             HttpControllerDescriptor actualInner = productUnderTest.Inner;
@@ -99,10 +147,15 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             HttpControllerDescriptor expectedInner = BuildHttpControllerDescriptor(_controller);
 
-            HttpControllerDescriptorTracer productUnderTest = new HttpControllerDescriptorTracer(expectedInner, new TestTraceWriter());
+            HttpControllerDescriptorTracer productUnderTest = new HttpControllerDescriptorTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
-            HttpControllerDescriptor actualInner = Decorator.GetInner(productUnderTest as HttpControllerDescriptor);
+            HttpControllerDescriptor actualInner = Decorator.GetInner(
+                productUnderTest as HttpControllerDescriptor
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);
@@ -113,9 +166,16 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             int raisedCount = 0;
-            RaiseWhenInitializedAttribute.Initialized += delegate { ++raisedCount; };
+            RaiseWhenInitializedAttribute.Initialized += delegate
+            {
+                ++raisedCount;
+            };
 
-            var descriptor = new HttpControllerDescriptor(new HttpConfiguration(), "my", typeof(MyController));
+            var descriptor = new HttpControllerDescriptor(
+                new HttpConfiguration(),
+                "my",
+                typeof(MyController)
+            );
             Assert.Equal(1, raisedCount);
 
             // Act
@@ -127,7 +187,11 @@ namespace System.Web.Http.Tracing.Tracers
             Assert.Equal(1, raisedCount);
         }
 
-        private static HttpControllerDescriptor BuildHttpControllerDescriptor(IHttpController controller, string controllerName = "AnyController", HttpConfiguration httpConfiguration = null)
+        private static HttpControllerDescriptor BuildHttpControllerDescriptor(
+            IHttpController controller,
+            string controllerName = "AnyController",
+            HttpConfiguration httpConfiguration = null
+        )
         {
             HttpControllerDescriptor expectedInner = new Mock<HttpControllerDescriptor>().Object;
             expectedInner.ControllerName = controllerName;
@@ -136,7 +200,10 @@ namespace System.Web.Http.Tracing.Tracers
             return expectedInner;
         }
 
-        private static HttpControllerDescriptorTracer GetHttpControllerDescriptorTracer(HttpControllerDescriptor controllerDescriptor, ITraceWriter traceWriter)
+        private static HttpControllerDescriptorTracer GetHttpControllerDescriptorTracer(
+            HttpControllerDescriptor controllerDescriptor,
+            ITraceWriter traceWriter
+        )
         {
             if (controllerDescriptor.Configuration == null)
             {
@@ -155,19 +222,29 @@ namespace System.Web.Http.Tracing.Tracers
 
             return new HttpControllerDescriptorTracer(
                 innerDescriptor: controllerDescriptor,
-                traceWriter: traceWriter);
+                traceWriter: traceWriter
+            );
         }
 
         private static Mock<HttpControllerDescriptor> CreateMockControllerDescriptor()
         {
-            Mock<HttpControllerDescriptor> mockControllerDescriptor = new Mock<HttpControllerDescriptor>(_controllerContext.Configuration, "AnyController", _controller.GetType());
+            Mock<HttpControllerDescriptor> mockControllerDescriptor =
+                new Mock<HttpControllerDescriptor>(
+                    _controllerContext.Configuration,
+                    "AnyController",
+                    _controller.GetType()
+                );
             return mockControllerDescriptor;
         }
 
         private class RaiseWhenInitializedAttribute : Attribute, IControllerConfiguration
         {
             public static event EventHandler Initialized;
-            public void Initialize(HttpControllerSettings controllerSettings, HttpControllerDescriptor controllerDescriptor)
+
+            public void Initialize(
+                HttpControllerSettings controllerSettings,
+                HttpControllerDescriptor controllerDescriptor
+            )
             {
                 Initialized(this, EventArgs.Empty);
             }

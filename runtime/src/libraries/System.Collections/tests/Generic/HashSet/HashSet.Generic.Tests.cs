@@ -20,9 +20,17 @@ namespace System.Collections.Tests
 
         protected override bool ResetImplemented => true;
 
-        protected override ModifyOperation ModifyEnumeratorThrows => PlatformDetection.IsNetFramework ? base.ModifyEnumeratorThrows : (base.ModifyEnumeratorAllowed & ~(ModifyOperation.Remove | ModifyOperation.Clear));
+        protected override ModifyOperation ModifyEnumeratorThrows =>
+            PlatformDetection.IsNetFramework
+                ? base.ModifyEnumeratorThrows
+                : (
+                    base.ModifyEnumeratorAllowed & ~(ModifyOperation.Remove | ModifyOperation.Clear)
+                );
 
-        protected override ModifyOperation ModifyEnumeratorAllowed => PlatformDetection.IsNetFramework ? base.ModifyEnumeratorAllowed : ModifyOperation.Overwrite | ModifyOperation.Remove | ModifyOperation.Clear;
+        protected override ModifyOperation ModifyEnumeratorAllowed =>
+            PlatformDetection.IsNetFramework
+                ? base.ModifyEnumeratorAllowed
+                : ModifyOperation.Overwrite | ModifyOperation.Remove | ModifyOperation.Clear;
 
         protected override ISet<T> GenericISetFactory()
         {
@@ -74,11 +82,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void HashSet_Generic_Constructor_IEnumerable(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void HashSet_Generic_Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             HashSet<T> set = new HashSet<T>(enumerable);
             Assert.True(set.SetEquals(enumerable));
         }
@@ -88,7 +108,9 @@ namespace System.Collections.Tests
         public void HashSet_Generic_Constructor_IEnumerable_WithManyDuplicates(int count)
         {
             IEnumerable<T> items = CreateEnumerable(EnumerableType.List, null, count, 0, 0);
-            HashSet<T> hashSetFromDuplicates = new HashSet<T>(Enumerable.Range(0, 40).SelectMany(i => items).ToArray());
+            HashSet<T> hashSetFromDuplicates = new HashSet<T>(
+                Enumerable.Range(0, 40).SelectMany(i => items).ToArray()
+            );
             HashSet<T> hashSetFromNoDuplicates = new HashSet<T>(items);
             Assert.True(hashSetFromNoDuplicates.SetEquals(hashSetFromDuplicates));
         }
@@ -97,11 +119,11 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void HashSet_Generic_Constructor_HashSet_SparselyFilled(int count)
         {
-            HashSet<T> source = (HashSet<T>)CreateEnumerable(EnumerableType.HashSet, null, count, 0, 0);
+            HashSet<T> source =
+                (HashSet<T>)CreateEnumerable(EnumerableType.HashSet, null, count, 0, 0);
             List<T> sourceElements = source.ToList();
             foreach (int i in NonSquares(count))
-                source.Remove(sourceElements[i]);// Unevenly spaced survivors increases chance of catching any spacing-related bugs.
-
+                source.Remove(sourceElements[i]); // Unevenly spaced survivors increases chance of catching any spacing-related bugs.
 
             HashSet<T> set = new HashSet<T>(source, GetIEqualityComparer());
             Assert.True(set.SetEquals(source));
@@ -111,17 +133,31 @@ namespace System.Collections.Tests
         public void HashSet_Generic_Constructor_IEnumerable_Null()
         {
             Assert.Throws<ArgumentNullException>(() => new HashSet<T>((IEnumerable<T>)null));
-            Assert.Throws<ArgumentNullException>(() => new HashSet<T>((IEnumerable<T>)null, EqualityComparer<T>.Default));
+            Assert.Throws<ArgumentNullException>(
+                () => new HashSet<T>((IEnumerable<T>)null, EqualityComparer<T>.Default)
+            );
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void HashSet_Generic_Constructor_IEnumerable_IEqualityComparer(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void HashSet_Generic_Constructor_IEnumerable_IEqualityComparer(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, 0);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                0
+            );
             HashSet<T> set = new HashSet<T>(enumerable, GetIEqualityComparer());
             Assert.True(set.SetEquals(enumerable));
         }
@@ -162,7 +198,12 @@ namespace System.Collections.Tests
         public void HashSet_Generic_RemoveWhere_AllElements(int setLength)
         {
             HashSet<T> set = (HashSet<T>)GenericISetFactory(setLength);
-            int removedCount = set.RemoveWhere((value) => { return true; });
+            int removedCount = set.RemoveWhere(
+                (value) =>
+                {
+                    return true;
+                }
+            );
             Assert.Equal(setLength, removedCount);
         }
 
@@ -171,7 +212,12 @@ namespace System.Collections.Tests
         public void HashSet_Generic_RemoveWhere_NoElements(int setLength)
         {
             HashSet<T> set = (HashSet<T>)GenericISetFactory(setLength);
-            int removedCount = set.RemoveWhere((value) => { return false; });
+            int removedCount = set.RemoveWhere(
+                (value) =>
+                {
+                    return false;
+                }
+            );
             Assert.Equal(0, removedCount);
             Assert.Equal(setLength, set.Count);
         }
@@ -187,7 +233,12 @@ namespace System.Collections.Tests
             set.Remove(obj);
             foreach (object o in set) { }
             set.CopyTo(array, 0, 2);
-            set.RemoveWhere((element) => { return false; });
+            set.RemoveWhere(
+                (element) =>
+                {
+                    return false;
+                }
+            );
         }
 
         [Theory]
@@ -209,7 +260,9 @@ namespace System.Collections.Tests
         {
             HashSet<T> hashSet = (HashSet<T>)GenericISetFactory(size);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => hashSet.TrimExcess(newCapacity));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                () => hashSet.TrimExcess(newCapacity)
+            );
         }
 
         [Fact]
@@ -301,7 +354,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void HashSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(int count)
+        public void HashSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(
+            int count
+        )
         {
             HashSet<T> set = (HashSet<T>)GenericISetFactory(count);
             T[] arr = new T[count];
@@ -328,30 +383,38 @@ namespace System.Collections.Tests
         [Fact]
         public void SetComparer_SetEqualsTests()
         {
-            List<T> objects = new List<T>() { CreateT(1), CreateT(2), CreateT(3), CreateT(4), CreateT(5), CreateT(6) };
+            List<T> objects = new List<T>()
+            {
+                CreateT(1),
+                CreateT(2),
+                CreateT(3),
+                CreateT(4),
+                CreateT(5),
+                CreateT(6),
+            };
 
             var set = new HashSet<HashSet<T>>()
             {
                 new HashSet<T> { objects[0], objects[1], objects[2] },
-                new HashSet<T> { objects[3], objects[4], objects[5] }
+                new HashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var noComparerSet = new HashSet<HashSet<T>>()
             {
                 new HashSet<T> { objects[0], objects[1], objects[2] },
-                new HashSet<T> { objects[3], objects[4], objects[5] }
+                new HashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var comparerSet1 = new HashSet<HashSet<T>>(HashSet<T>.CreateSetComparer())
             {
                 new HashSet<T> { objects[0], objects[1], objects[2] },
-                new HashSet<T> { objects[3], objects[4], objects[5] }
+                new HashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var comparerSet2 = new HashSet<HashSet<T>>(HashSet<T>.CreateSetComparer())
             {
                 new HashSet<T> { objects[3], objects[4], objects[5] },
-                new HashSet<T> { objects[0], objects[1], objects[2] }
+                new HashSet<T> { objects[0], objects[1], objects[2] },
             };
 
             Assert.False(noComparerSet.SetEquals(set));
@@ -362,24 +425,32 @@ namespace System.Collections.Tests
         [Fact]
         public void SetComparer_SequenceEqualTests()
         {
-            List<T> objects = new List<T>() { CreateT(1), CreateT(2), CreateT(3), CreateT(4), CreateT(5), CreateT(6) };
+            List<T> objects = new List<T>()
+            {
+                CreateT(1),
+                CreateT(2),
+                CreateT(3),
+                CreateT(4),
+                CreateT(5),
+                CreateT(6),
+            };
 
             var set = new HashSet<HashSet<T>>()
             {
                 new HashSet<T> { objects[0], objects[1], objects[2] },
-                new HashSet<T> { objects[3], objects[4], objects[5] }
+                new HashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var noComparerSet = new HashSet<HashSet<T>>()
             {
                 new HashSet<T> { objects[0], objects[1], objects[2] },
-                new HashSet<T> { objects[3], objects[4], objects[5] }
+                new HashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var comparerSet = new HashSet<HashSet<T>>(HashSet<T>.CreateSetComparer())
             {
                 new HashSet<T> { objects[0], objects[1], objects[2] },
-                new HashSet<T> { objects[3], objects[4], objects[5] }
+                new HashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             Assert.False(noComparerSet.SequenceEqual(set));
@@ -433,8 +504,14 @@ namespace System.Collections.Tests
         [Fact]
         public void HashSet_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new HashSet<T>(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new HashSet<T>(int.MinValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new HashSet<T>(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new HashSet<T>(int.MinValue)
+            );
         }
 
         [Theory]
@@ -452,7 +529,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void HashSet_Generic_Constructor_int_IEqualityComparer_AddUpToAndBeyondCapacity(int capacity)
+        public void HashSet_Generic_Constructor_int_IEqualityComparer_AddUpToAndBeyondCapacity(
+            int capacity
+        )
         {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
             HashSet<T> set = new HashSet<T>(capacity, comparer);
@@ -468,8 +547,14 @@ namespace System.Collections.Tests
         public void HashSet_Generic_Constructor_int_IEqualityComparer_Negative_ThrowsArgumentOutOfRangeException()
         {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new HashSet<T>(-1, comparer));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new HashSet<T>(int.MinValue, comparer));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new HashSet<T>(-1, comparer)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new HashSet<T>(int.MinValue, comparer)
+            );
         }
 
         #region TryGetValue
@@ -536,7 +621,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesNotInvalidateEnumeration(int setLength)
+        public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesNotInvalidateEnumeration(
+            int setLength
+        )
         {
             HashSet<T> set = (HashSet<T>)(GenericISetFactory(setLength));
             var capacity = set.EnsureCapacity(0);
@@ -556,7 +643,10 @@ namespace System.Collections.Tests
         public void EnsureCapacity_Generic_NegativeCapacityRequested_Throws()
         {
             var set = new HashSet<T>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => set.EnsureCapacity(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => set.EnsureCapacity(-1)
+            );
         }
 
         [Fact]
@@ -571,7 +661,9 @@ namespace System.Collections.Tests
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
-        public void EnsureCapacity_Generic_HashsetNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(int requestedCapacity)
+        public void EnsureCapacity_Generic_HashsetNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(
+            int requestedCapacity
+        )
         {
             var set = new HashSet<T>();
             Assert.InRange(set.EnsureCapacity(requestedCapacity), requestedCapacity, int.MaxValue);
@@ -580,7 +672,9 @@ namespace System.Collections.Tests
         [Theory]
         [InlineData(3)]
         [InlineData(7)]
-        public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(int currentCapacity)
+        public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(
+            int currentCapacity
+        )
         {
             HashSet<T> set;
 
@@ -630,7 +724,9 @@ namespace System.Collections.Tests
         [InlineData(5)]
         [InlineData(7)]
         [InlineData(8)]
-        public void EnsureCapacity_Generic_HashsetNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(int setLength)
+        public void EnsureCapacity_Generic_HashsetNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(
+            int setLength
+        )
         {
             HashSet<T> set = (HashSet<T>)GenericISetFactory(setLength);
             Assert.InRange(set.EnsureCapacity(setLength - 1), setLength, int.MaxValue);
@@ -709,7 +805,10 @@ namespace System.Collections.Tests
 
         #region Serialization
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void ComparerSerialization()
         {
             // Strings switch between randomized and non-randomized comparers,
@@ -731,7 +830,10 @@ namespace System.Collections.Tests
             TestComparerSerialization(EqualityComparer<int?>.Default);
             TestComparerSerialization(EqualityComparer<object>.Default);
 
-            static void TestComparerSerialization<TCompared>(IEqualityComparer<TCompared> equalityComparer, string internalTypeName = null)
+            static void TestComparerSerialization<TCompared>(
+                IEqualityComparer<TCompared> equalityComparer,
+                string internalTypeName = null
+            )
             {
                 var bf = new BinaryFormatter();
                 var s = new MemoryStream();

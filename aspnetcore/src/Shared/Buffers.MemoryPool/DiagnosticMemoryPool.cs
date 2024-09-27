@@ -31,14 +31,20 @@ internal sealed class DiagnosticMemoryPool : MemoryPool<byte>
     /// </summary>
     private const int AnySize = -1;
 
-    public DiagnosticMemoryPool(MemoryPool<byte> pool, bool allowLateReturn = false, bool rentTracking = false)
+    public DiagnosticMemoryPool(
+        MemoryPool<byte> pool,
+        bool allowLateReturn = false,
+        bool rentTracking = false
+    )
     {
         _pool = pool;
         _allowLateReturn = allowLateReturn;
         _rentTracking = rentTracking;
         _blocks = new HashSet<DiagnosticPoolBlock>();
         _syncObj = new object();
-        _allBlocksReturned = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _allBlocksReturned = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         _blockAccessExceptions = new List<Exception>();
     }
 
@@ -50,7 +56,9 @@ internal sealed class DiagnosticMemoryPool : MemoryPool<byte>
         {
             if (IsDisposed)
             {
-                MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPool);
+                MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                    MemoryPoolThrowHelper.ExceptionArgument.MemoryPool
+                );
             }
 
             var diagnosticPoolBlock = new DiagnosticPoolBlock(this, _pool.Rent(size));
@@ -79,7 +87,9 @@ internal sealed class DiagnosticMemoryPool : MemoryPool<byte>
         {
             if (!_allowLateReturn)
             {
-                MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockReturnedToDisposedPool(block);
+                MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockReturnedToDisposedPool(
+                    block
+                );
             }
 
             if (returnedAllBlocks)
@@ -113,7 +123,11 @@ internal sealed class DiagnosticMemoryPool : MemoryPool<byte>
                 allBlocksReturned = _blocks.Count == 0;
                 if (!allBlocksReturned && !_allowLateReturn)
                 {
-                    MemoryPoolThrowHelper.ThrowInvalidOperationException_DisposingPoolWithActiveBlocks(_totalBlocks - _blocks.Count, _totalBlocks, _blocks.ToArray());
+                    MemoryPoolThrowHelper.ThrowInvalidOperationException_DisposingPoolWithActiveBlocks(
+                        _totalBlocks - _blocks.Count,
+                        _totalBlocks,
+                        _blocks.ToArray()
+                    );
                 }
 
                 if (_blockAccessExceptions.Count > 0)
@@ -147,7 +161,10 @@ internal sealed class DiagnosticMemoryPool : MemoryPool<byte>
 
     private AggregateException CreateAccessExceptions()
     {
-        return new AggregateException("Exceptions occurred while accessing blocks", _blockAccessExceptions.ToArray());
+        return new AggregateException(
+            "Exceptions occurred while accessing blocks",
+            _blockAccessExceptions.ToArray()
+        );
     }
 
     public async Task WhenAllBlocksReturnedAsync(TimeSpan timeout)
@@ -155,7 +172,11 @@ internal sealed class DiagnosticMemoryPool : MemoryPool<byte>
         var task = await Task.WhenAny(_allBlocksReturned.Task, Task.Delay(timeout));
         if (task != _allBlocksReturned.Task)
         {
-            MemoryPoolThrowHelper.ThrowInvalidOperationException_BlocksWereNotReturnedInTime(_totalBlocks - _blocks.Count, _totalBlocks, _blocks.ToArray());
+            MemoryPoolThrowHelper.ThrowInvalidOperationException_BlocksWereNotReturnedInTime(
+                _totalBlocks - _blocks.Count,
+                _totalBlocks,
+                _blocks.ToArray()
+            );
         }
 
         await task;

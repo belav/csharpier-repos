@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Tests;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Tests;
 using System.Text;
-using Microsoft.VisualBasic.CompilerServices.Tests;
 using Microsoft.DotNet.RemoteExecutor;
+using Microsoft.VisualBasic.CompilerServices.Tests;
 using Xunit;
 
 namespace Microsoft.VisualBasic.Tests
@@ -92,7 +92,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(65536)]
         public void Chr_CharCodeOutOfRange_ThrowsArgumentException(int charCode)
         {
-            AssertExtensions.Throws<ArgumentException>("CharCode", null, () => Strings.Chr(charCode));
+            AssertExtensions.Throws<ArgumentException>(
+                "CharCode",
+                null,
+                () => Strings.Chr(charCode)
+            );
         }
 
         [Theory]
@@ -110,7 +114,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(65536)]
         public void ChrW_CharCodeOutOfRange_ThrowsArgumentException(int charCode)
         {
-            AssertExtensions.Throws<ArgumentException>("CharCode", null, () => Strings.ChrW(charCode));
+            AssertExtensions.Throws<ArgumentException>(
+                "CharCode",
+                null,
+                () => Strings.ChrW(charCode)
+            );
         }
 
         [Theory]
@@ -128,8 +136,14 @@ namespace Microsoft.VisualBasic.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/30419", TargetFrameworkMonikers.NetFramework)]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/30419",
+            TargetFrameworkMonikers.NetFramework
+        )]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         [InlineData(0, 0)]
         [InlineData(33, 33)]
         [InlineData(172, 0)]
@@ -151,14 +165,23 @@ namespace Microsoft.VisualBasic.Tests
         [Theory]
         [InlineData(new string[] { }, null, null)]
         [InlineData(new string[] { }, "", null)]
-        public void Filter_WhenNoMatchArgument_ReturnsNull(string[] source, string match, string[] expected)
+        public void Filter_WhenNoMatchArgument_ReturnsNull(
+            string[] source,
+            string match,
+            string[] expected
+        )
         {
             Assert.Equal(expected, Strings.Filter(source, match));
         }
 
         [Theory]
         [InlineData(new string[] { }, "a", new string[] { }, new string[] { })]
-        public void Filter_NoElements(string[] source, string match, string[] includeExpected, string[] excludeExpected)
+        public void Filter_NoElements(
+            string[] source,
+            string match,
+            string[] includeExpected,
+            string[] excludeExpected
+        )
         {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
@@ -173,7 +196,12 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(new string[] { "b" }, "a", new string[] { }, new string[] { "b" })]
         [InlineData(new string[] { "a" }, "ab", new string[] { }, new string[] { "a" })]
         [InlineData(new string[] { "ab" }, "ab", new string[] { "ab" }, new string[] { })]
-        public void Filter_SingleElement(string[] source, string match, string[] includeExpected, string[] excludeExpected)
+        public void Filter_SingleElement(
+            string[] source,
+            string match,
+            string[] includeExpected,
+            string[] excludeExpected
+        )
         {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
@@ -181,18 +209,40 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [InlineData(new string[] { "A" }, "a", new string[] { }, new string[] { "A" })]
-        public void Filter_SingleElement_BinaryCompare(string[] source, string match, string[] includeExpected, string[] excludeExpected)
+        public void Filter_SingleElement_BinaryCompare(
+            string[] source,
+            string match,
+            string[] includeExpected,
+            string[] excludeExpected
+        )
         {
-            Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true, Compare: CompareMethod.Binary));
-            Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false, Compare: CompareMethod.Binary));
+            Assert.Equal(
+                includeExpected,
+                Strings.Filter(source, match, Include: true, Compare: CompareMethod.Binary)
+            );
+            Assert.Equal(
+                excludeExpected,
+                Strings.Filter(source, match, Include: false, Compare: CompareMethod.Binary)
+            );
         }
 
         [Theory]
         [InlineData(new string[] { "A" }, "a", new string[] { "A" }, new string[] { })]
-        public void Filter_SingleElement_TextCompare(string[] source, string match, string[] includeExpected, string[] excludeExpected)
+        public void Filter_SingleElement_TextCompare(
+            string[] source,
+            string match,
+            string[] includeExpected,
+            string[] excludeExpected
+        )
         {
-            Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true, Compare: CompareMethod.Text));
-            Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false, Compare: CompareMethod.Text));
+            Assert.Equal(
+                includeExpected,
+                Strings.Filter(source, match, Include: true, Compare: CompareMethod.Text)
+            );
+            Assert.Equal(
+                excludeExpected,
+                Strings.Filter(source, match, Include: false, Compare: CompareMethod.Text)
+            );
         }
 
         [Theory]
@@ -200,7 +250,12 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(new string[] { "a", "b" }, "a", new string[] { "a" }, new string[] { "b" })]
         [InlineData(new string[] { "b", "a" }, "a", new string[] { "a" }, new string[] { "b" })]
         [InlineData(new string[] { "b", "b" }, "a", new string[] { }, new string[] { "b", "b" })]
-        public void Filter_MultipleElements(string[] source, string match, string[] includeExpected, string[] excludeExpected)
+        public void Filter_MultipleElements(
+            string[] source,
+            string match,
+            string[] includeExpected,
+            string[] excludeExpected
+        )
         {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
@@ -212,13 +267,22 @@ namespace Microsoft.VisualBasic.Tests
             object[] source = new object[] { typeof(object) };
             string match = "a";
 
-            AssertExtensions.Throws<ArgumentException>("Source", null, () => Strings.Filter(source, match));
+            AssertExtensions.Throws<ArgumentException>(
+                "Source",
+                null,
+                () => Strings.Filter(source, match)
+            );
         }
 
         [Theory]
         [InlineData(new object[] { 42 }, "42", new string[] { "42" }, new string[] { })]
         [InlineData(new object[] { true }, "True", new string[] { "True" }, new string[] { })]
-        public void Filter_Objects(object[] source, string match, string[] includeExpected, string[] excludeExpected)
+        public void Filter_Objects(
+            object[] source,
+            string match,
+            string[] includeExpected,
+            string[] excludeExpected
+        )
         {
             Assert.Equal(includeExpected, Strings.Filter(source, match, Include: true));
             Assert.Equal(excludeExpected, Strings.Filter(source, match, Include: false));
@@ -264,7 +328,7 @@ namespace Microsoft.VisualBasic.Tests
                 yield return new object[] { false, "on/off", "Off" };
                 yield return new object[] { true, "on/off", "On" };
                 yield return new object[] { false, "true/false", "False" };
-                yield return new object[] { true, "true/false",  "True" };
+                yield return new object[] { true, "true/false", "True" };
                 yield return new object[] { 0, "yes/no", "No" };
                 yield return new object[] { "ABC", "yes/no", "ABC" };
                 yield return new object[] { 123.4, "scientific", "1.23E+02" };
@@ -288,27 +352,139 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(FormatCurrency_TestData))]
-        public void FormatCurrency(object expression, int numDigitsAfterDecimal, TriState includeLeadingDigit, TriState useParensForNegativeNumbers, TriState groupDigits, string expected)
+        public void FormatCurrency(
+            object expression,
+            int numDigitsAfterDecimal,
+            TriState includeLeadingDigit,
+            TriState useParensForNegativeNumbers,
+            TriState groupDigits,
+            string expected
+        )
         {
-            Assert.Equal(expected, Strings.FormatCurrency(expression, numDigitsAfterDecimal, includeLeadingDigit, useParensForNegativeNumbers, groupDigits));
+            Assert.Equal(
+                expected,
+                Strings.FormatCurrency(
+                    expression,
+                    numDigitsAfterDecimal,
+                    includeLeadingDigit,
+                    useParensForNegativeNumbers,
+                    groupDigits
+                )
+            );
         }
 
         public static IEnumerable<object[]> FormatCurrency_TestData()
         {
-            yield return new object[] { null, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "" };
+            yield return new object[]
+            {
+                null,
+                2,
+                TriState.UseDefault,
+                TriState.UseDefault,
+                TriState.UseDefault,
+                "",
+            };
             if (IsEnUS())
             {
-                yield return new object[] { 0.123, 0, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "$0" };
-                yield return new object[] { 0.123, 1, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "$0.1" };
-                yield return new object[] { 0.123, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "$0.12" };
-                yield return new object[] { 0.123, 4, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "$0.1230" };
-                yield return new object[] { 0.123, 2, TriState.False, TriState.UseDefault, TriState.UseDefault, "$.12" };
-                yield return new object[] { 0.123, 2, TriState.True, TriState.UseDefault, TriState.UseDefault, "$0.12" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.False, TriState.UseDefault, "-$0.12" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.True, TriState.UseDefault, "($0.12)" };
-                yield return new object[] { 1234.5, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "$1,234.50" };
-                yield return new object[] { 1234.5, 2, TriState.UseDefault, TriState.UseDefault, TriState.False, "$1234.50" };
-                yield return new object[] { 1234.5, 2, TriState.UseDefault, TriState.UseDefault, TriState.True, "$1,234.50" };
+                yield return new object[]
+                {
+                    0.123,
+                    0,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$0",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    1,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$0.1",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$0.12",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    4,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$0.1230",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.False,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$.12",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.True,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$0.12",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.False,
+                    TriState.UseDefault,
+                    "-$0.12",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.True,
+                    TriState.UseDefault,
+                    "($0.12)",
+                };
+                yield return new object[]
+                {
+                    1234.5,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "$1,234.50",
+                };
+                yield return new object[]
+                {
+                    1234.5,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.False,
+                    "$1234.50",
+                };
+                yield return new object[]
+                {
+                    1234.5,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.True,
+                    "$1,234.50",
+                };
             }
         }
 
@@ -331,56 +507,304 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(FormatNumber_TestData))]
-        public void FormatNumber(object expression, int numDigitsAfterDecimal, TriState includeLeadingDigit, TriState useParensForNegativeNumbers, TriState groupDigits, string expected)
+        public void FormatNumber(
+            object expression,
+            int numDigitsAfterDecimal,
+            TriState includeLeadingDigit,
+            TriState useParensForNegativeNumbers,
+            TriState groupDigits,
+            string expected
+        )
         {
-            Assert.Equal(expected, Strings.FormatNumber(expression, numDigitsAfterDecimal, includeLeadingDigit, useParensForNegativeNumbers, groupDigits));
+            Assert.Equal(
+                expected,
+                Strings.FormatNumber(
+                    expression,
+                    numDigitsAfterDecimal,
+                    includeLeadingDigit,
+                    useParensForNegativeNumbers,
+                    groupDigits
+                )
+            );
         }
 
         public static IEnumerable<object[]> FormatNumber_TestData()
         {
-            yield return new object[] { null, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "" };
+            yield return new object[]
+            {
+                null,
+                2,
+                TriState.UseDefault,
+                TriState.UseDefault,
+                TriState.UseDefault,
+                "",
+            };
             if (IsEnUS())
             {
-                yield return new object[] { 0.123, 0, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "0" };
-                yield return new object[] { 0.123, 1, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "0.1" };
-                yield return new object[] { 0.123, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "0.12" };
-                yield return new object[] { 0.123, 4, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "0.1230" };
-                yield return new object[] { 0.123, 2, TriState.False, TriState.UseDefault, TriState.UseDefault, ".12" };
-                yield return new object[] { 0.123, 2, TriState.True, TriState.UseDefault, TriState.UseDefault, "0.12" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "-0.12" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.False, TriState.UseDefault, "-0.12" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.True, TriState.UseDefault, "(0.12)" };
-                yield return new object[] { 1234.5, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "1,234.50" };
-                yield return new object[] { 1234.5, 2, TriState.UseDefault, TriState.UseDefault, TriState.False, "1234.50" };
-                yield return new object[] { 1234.5, 2, TriState.UseDefault, TriState.UseDefault, TriState.True, "1,234.50" };
+                yield return new object[]
+                {
+                    0.123,
+                    0,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    1,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0.1",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0.12",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    4,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0.1230",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.False,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    ".12",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.True,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0.12",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "-0.12",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.False,
+                    TriState.UseDefault,
+                    "-0.12",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.True,
+                    TriState.UseDefault,
+                    "(0.12)",
+                };
+                yield return new object[]
+                {
+                    1234.5,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "1,234.50",
+                };
+                yield return new object[]
+                {
+                    1234.5,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.False,
+                    "1234.50",
+                };
+                yield return new object[]
+                {
+                    1234.5,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.True,
+                    "1,234.50",
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(FormatPercent_TestData))]
-        public void FormatPercent(object expression, int numDigitsAfterDecimal, TriState includeLeadingDigit, TriState useParensForNegativeNumbers, TriState groupDigits, string expected)
+        public void FormatPercent(
+            object expression,
+            int numDigitsAfterDecimal,
+            TriState includeLeadingDigit,
+            TriState useParensForNegativeNumbers,
+            TriState groupDigits,
+            string expected
+        )
         {
-            Assert.Equal(expected, Strings.FormatPercent(expression, numDigitsAfterDecimal, includeLeadingDigit, useParensForNegativeNumbers, groupDigits));
+            Assert.Equal(
+                expected,
+                Strings.FormatPercent(
+                    expression,
+                    numDigitsAfterDecimal,
+                    includeLeadingDigit,
+                    useParensForNegativeNumbers,
+                    groupDigits
+                )
+            );
         }
 
         public static IEnumerable<object[]> FormatPercent_TestData()
         {
-            yield return new object[] { null, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "" };
+            yield return new object[]
+            {
+                null,
+                2,
+                TriState.UseDefault,
+                TriState.UseDefault,
+                TriState.UseDefault,
+                "",
+            };
             if (IsEnUS())
             {
-                yield return new object[] { 0.123, 0, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "12%" };
-                yield return new object[] { 0.123, 1, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "12.3%" };
-                yield return new object[] { 0.123, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "12.30%" };
-                yield return new object[] { 0.123, 4, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "12.3000%" };
-                yield return new object[] { 0.00123, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "0.12%" };
-                yield return new object[] { 0.00123, 2, TriState.False, TriState.UseDefault, TriState.UseDefault, ".12%" };
-                yield return new object[] { 0.00123, 2, TriState.True, TriState.UseDefault, TriState.UseDefault, "0.12%" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "-12.30%" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.False, TriState.UseDefault, "-12.30%" };
-                yield return new object[] { -0.123, 2, TriState.UseDefault, TriState.True, TriState.UseDefault, "(12.30%)" };
-                yield return new object[] { 12.345, 2, TriState.UseDefault, TriState.UseDefault, TriState.UseDefault, "1,234.50%" };
-                yield return new object[] { 12.345, 2, TriState.UseDefault, TriState.UseDefault, TriState.False, "1234.50%" };
-                yield return new object[] { 12.345, 2, TriState.UseDefault, TriState.UseDefault, TriState.True, "1,234.50%" };
+                yield return new object[]
+                {
+                    0.123,
+                    0,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "12%",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    1,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "12.3%",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "12.30%",
+                };
+                yield return new object[]
+                {
+                    0.123,
+                    4,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "12.3000%",
+                };
+                yield return new object[]
+                {
+                    0.00123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0.12%",
+                };
+                yield return new object[]
+                {
+                    0.00123,
+                    2,
+                    TriState.False,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    ".12%",
+                };
+                yield return new object[]
+                {
+                    0.00123,
+                    2,
+                    TriState.True,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "0.12%",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "-12.30%",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.False,
+                    TriState.UseDefault,
+                    "-12.30%",
+                };
+                yield return new object[]
+                {
+                    -0.123,
+                    2,
+                    TriState.UseDefault,
+                    TriState.True,
+                    TriState.UseDefault,
+                    "(12.30%)",
+                };
+                yield return new object[]
+                {
+                    12.345,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    "1,234.50%",
+                };
+                yield return new object[]
+                {
+                    12.345,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.False,
+                    "1234.50%",
+                };
+                yield return new object[]
+                {
+                    12.345,
+                    2,
+                    TriState.UseDefault,
+                    TriState.UseDefault,
+                    TriState.True,
+                    "1,234.50%",
+                };
             }
         }
 
@@ -402,7 +826,7 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("ABC", 4)]
         public void GetChar_ArgumentException(string str, int index)
         {
-            Assert.Throws< ArgumentException>(() => Strings.GetChar(str, index));
+            Assert.Throws<ArgumentException>(() => Strings.GetChar(str, index));
         }
 
         [Theory]
@@ -453,7 +877,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(-1)]
         public void InStr_WhenStartZeroOrLess_ThrowsArgumentException(int start)
         {
-            AssertExtensions.Throws<ArgumentException>("Start", null, () => Strings.InStr(start, "a", "a"));
+            AssertExtensions.Throws<ArgumentException>(
+                "Start",
+                null,
+                () => Strings.InStr(start, "a", "a")
+            );
         }
 
         [Theory]
@@ -466,7 +894,12 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(InStrRev_FromWithin_TestData))]
-        public void InStrRev_FromWithin(string stringCheck, string stringMatch, int start, int expected)
+        public void InStrRev_FromWithin(
+            string stringCheck,
+            string stringMatch,
+            int start,
+            int expected
+        )
         {
             Assert.Equal(expected, Strings.InStrRev(stringCheck, stringMatch, start));
         }
@@ -474,17 +907,33 @@ namespace Microsoft.VisualBasic.Tests
         [Theory]
         [InlineData("A", "a", 1, 0)]
         [InlineData("aA", "a", 2, 1)]
-        public void InStrRev_BinaryCompare(string stringCheck, string stringMatch, int start, int expected)
+        public void InStrRev_BinaryCompare(
+            string stringCheck,
+            string stringMatch,
+            int start,
+            int expected
+        )
         {
-            Assert.Equal(expected, Strings.InStrRev(stringCheck, stringMatch, start, CompareMethod.Binary));
+            Assert.Equal(
+                expected,
+                Strings.InStrRev(stringCheck, stringMatch, start, CompareMethod.Binary)
+            );
         }
 
         [Theory]
         [InlineData("A", "a", 1, 1)]
         [InlineData("aA", "a", 2, 2)]
-        public void InStrRev_TextCompare(string stringCheck, string stringMatch, int start, int expected)
+        public void InStrRev_TextCompare(
+            string stringCheck,
+            string stringMatch,
+            int start,
+            int expected
+        )
         {
-            Assert.Equal(expected, Strings.InStrRev(stringCheck, stringMatch, start, CompareMethod.Text));
+            Assert.Equal(
+                expected,
+                Strings.InStrRev(stringCheck, stringMatch, start, CompareMethod.Text)
+            );
         }
 
         [Fact]
@@ -507,7 +956,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(-3)]
         public void InStrRev_WhenStartZeroOrMinusTwoOrLess_ThrowsArgumentException(int start)
         {
-            AssertExtensions.Throws<ArgumentException>("Start", null, () => Strings.InStrRev("a", "a", start));
+            AssertExtensions.Throws<ArgumentException>(
+                "Start",
+                null,
+                () => Strings.InStrRev("a", "a", start)
+            );
         }
 
         [Theory]
@@ -597,7 +1050,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1)]
         public void Left_Invalid(string str, int length)
         {
-            AssertExtensions.Throws<ArgumentException>("Length", null, () => Strings.Left(str, length));
+            AssertExtensions.Throws<ArgumentException>(
+                "Length",
+                null,
+                () => Strings.Left(str, length)
+            );
         }
 
         [Theory]
@@ -613,39 +1070,47 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(Len_Object_Data))]
-        [MemberData(nameof(StructUtilsTestData.RecordsAndLength), MemberType = typeof(StructUtilsTestData))]
+        [MemberData(
+            nameof(StructUtilsTestData.RecordsAndLength),
+            MemberType = typeof(StructUtilsTestData)
+        )]
         public void Len_Object(object o, int length)
         {
             Assert.Equal(length, Strings.Len(o));
         }
 
-        public static TheoryData<object, int> Len_Object_Data() => new TheoryData<object, int>
-        {
-            { null, 0 },
-            { new bool(), 2 },
-            { new sbyte(), 1 },
-            { new byte(), 1 },
-            { new short(), 2 },
-            { new ushort(), 2 },
-            { new uint(), 4 },
-            { new int(), 4 },
-            { new ulong(), 8 },
-            { new decimal(), 16 },
-            { new float(), 4 },
-            { new double(), 8 },
-            { new DateTime(), 8 },
-            { new char(), 2 },
-            { "", 0 },
-            { "a", 1 },
-            { "ab", 2 },
-            { "ab\0", 3 },
-        };
+        public static TheoryData<object, int> Len_Object_Data() =>
+            new TheoryData<object, int>
+            {
+                { null, 0 },
+                { new bool(), 2 },
+                { new sbyte(), 1 },
+                { new byte(), 1 },
+                { new short(), 2 },
+                { new ushort(), 2 },
+                { new uint(), 4 },
+                { new int(), 4 },
+                { new ulong(), 8 },
+                { new decimal(), 16 },
+                { new float(), 4 },
+                { new double(), 8 },
+                { new DateTime(), 8 },
+                { new char(), 2 },
+                { "", 0 },
+                { "a", 1 },
+                { "ab", 2 },
+                { "ab\0", 3 },
+            };
 
         [Theory]
         [InlineData("a", -1)]
         public void Right_Invalid(string str, int length)
         {
-            AssertExtensions.Throws<ArgumentException>("Length", null, () => Strings.Right(str, length));
+            AssertExtensions.Throws<ArgumentException>(
+                "Length",
+                null,
+                () => Strings.Right(str, length)
+            );
         }
 
         [Theory]
@@ -663,7 +1128,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1)]
         public void Mid2_Invalid(string str, int start)
         {
-            AssertExtensions.Throws<ArgumentException>("Start", null, () => Strings.Mid(str, start));
+            AssertExtensions.Throws<ArgumentException>(
+                "Start",
+                null,
+                () => Strings.Mid(str, start)
+            );
         }
 
         [Theory]
@@ -671,7 +1140,7 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(null, 1, null)]
         [InlineData("abc", 1000, "")]
         [InlineData("abcde", 2, "bcde")]
-        [InlineData("abc", 1, "abc")]   // 1-based strings in VB
+        [InlineData("abc", 1, "abc")] // 1-based strings in VB
         [InlineData("abcd", 2, "bcd")]
         [InlineData("abcd", 3, "cd")]
         public void Mid2_Valid(string str, int start, string expected)
@@ -684,7 +1153,11 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1, 1)]
         public void Mid3_Invalid(string str, int start, int length)
         {
-            AssertExtensions.Throws<ArgumentException>(start < 1 ? "Start" : "Length", null, () => Strings.Mid(str, start, length));
+            AssertExtensions.Throws<ArgumentException>(
+                start < 1 ? "Start" : "Length",
+                null,
+                () => Strings.Mid(str, start, length)
+            );
         }
 
         [Theory]
@@ -692,7 +1165,7 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(null, 1, 1, "")]
         [InlineData("abc", 1000, 1, "")]
         [InlineData("abcde", 2, 1000, "bcde")]
-        [InlineData("abc", 1, 2, "ab")]   // 1-based strings in VB
+        [InlineData("abc", 1, 2, "ab")] // 1-based strings in VB
         [InlineData("abcd", 2, 2, "bc")]
         [InlineData("abcd", 2, 3, "bcd")]
         public void Mid3_Valid(string str, int start, int length, string expected)
@@ -793,17 +1266,37 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("abc", "bc", "23", 2, -1, CompareMethod.Text, "23")]
         [InlineData("abc", "bc", "23", 3, -1, CompareMethod.Text, "c")]
         [InlineData("abc", "bc", "23", 4, -1, CompareMethod.Text, null)]
-        public void Replace(string expression, string find, string replacement, int start, int n, CompareMethod compare, string expected)
+        public void Replace(
+            string expression,
+            string find,
+            string replacement,
+            int start,
+            int n,
+            CompareMethod compare,
+            string expected
+        )
         {
-            Assert.Equal(expected, Strings.Replace(expression, find, replacement, start, n, compare));
+            Assert.Equal(
+                expected,
+                Strings.Replace(expression, find, replacement, start, n, compare)
+            );
         }
 
         [Theory]
         [InlineData(null, null, null, 0, 0, CompareMethod.Text)]
         [InlineData(null, "", "", 0, 0, CompareMethod.Text)]
-        public void Replace_ArgumentException(string expression, string find, string replacement, int start, int length, CompareMethod compare)
+        public void Replace_ArgumentException(
+            string expression,
+            string find,
+            string replacement,
+            int start,
+            int length,
+            CompareMethod compare
+        )
         {
-            Assert.Throws< ArgumentException>(() => Strings.Replace(expression, find, replacement, start, length, compare));
+            Assert.Throws<ArgumentException>(
+                () => Strings.Replace(expression, find, replacement, start, length, compare)
+            );
         }
 
         [Theory]
@@ -827,17 +1320,36 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("A, B, C", ", ", -1, CompareMethod.Text, new string[] { "A", "B", "C" })]
         [InlineData("A, B, C", ", ", 1, CompareMethod.Text, new string[] { "A, B, C" })]
         [InlineData("A, B, C", ", ", 2, CompareMethod.Text, new string[] { "A", "B, C" })]
-        [InlineData("A, B, C", ", ", int.MaxValue, CompareMethod.Text, new string[] { "A", "B", "C" })]
-        public void Split(string expression, string delimiter, int limit, CompareMethod compare, string[] expected)
+        [InlineData(
+            "A, B, C",
+            ", ",
+            int.MaxValue,
+            CompareMethod.Text,
+            new string[] { "A", "B", "C" }
+        )]
+        public void Split(
+            string expression,
+            string delimiter,
+            int limit,
+            CompareMethod compare,
+            string[] expected
+        )
         {
             Assert.Equal(expected, Strings.Split(expression, delimiter, limit, compare));
         }
 
         [Theory]
         [InlineData("A, B, C", ", ", 0, CompareMethod.Text)]
-        public void Split_IndexOutOfRangeException(string expression, string delimiter, int limit, CompareMethod compare)
+        public void Split_IndexOutOfRangeException(
+            string expression,
+            string delimiter,
+            int limit,
+            CompareMethod compare
+        )
         {
-            Assert.Throws< IndexOutOfRangeException>(() => Strings.Split(expression, delimiter, limit, compare));
+            Assert.Throws<IndexOutOfRangeException>(
+                () => Strings.Split(expression, delimiter, limit, compare)
+            );
         }
 
         [Theory]
@@ -847,7 +1359,12 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", "ABC", 1, -1)]
         [InlineData("ABC", "a", -1, 1)]
         [InlineData("abc", "ABC", 1, 0)]
-        public void StrComp(string left, string right, int expectedBinaryCompare, int expectedTextCompare)
+        public void StrComp(
+            string left,
+            string right,
+            int expectedBinaryCompare,
+            int expectedTextCompare
+        )
         {
             Assert.Equal(expectedBinaryCompare, Strings.StrComp(left, right, CompareMethod.Binary));
             Assert.Equal(expectedTextCompare, Strings.StrComp(left, right, CompareMethod.Text));
@@ -860,7 +1377,12 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("", VbStrConv.Lowercase, 0, "")]
         [InlineData("Abc123", VbStrConv.Lowercase, 0, "abc123")]
         [InlineData("Abc123", VbStrConv.Uppercase, 0, "ABC123")]
-        public void StrConv(string str, Microsoft.VisualBasic.VbStrConv conversion, int localeID, string expected)
+        public void StrConv(
+            string str,
+            Microsoft.VisualBasic.VbStrConv conversion,
+            int localeID,
+            string expected
+        )
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -868,7 +1390,9 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Strings.StrConv(str, conversion, localeID));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => Strings.StrConv(str, conversion, localeID)
+                );
             }
         }
 
@@ -885,7 +1409,7 @@ namespace Microsoft.VisualBasic.Tests
         [MemberData(nameof(StrDup_Object_ArgumentException_TestData))]
         public void StrDup_ArgumentException_Int_Object(int number, object character)
         {
-            Assert.Throws< ArgumentException>(() => Strings.StrDup(number, character));
+            Assert.Throws<ArgumentException>(() => Strings.StrDup(number, character));
         }
 
         [Theory]
@@ -973,68 +1497,74 @@ namespace Microsoft.VisualBasic.Tests
             Assert.Equal(expected, Strings.StrReverse(str));
         }
 
-        public static TheoryData<string, string, int> InStr_TestData_NullsAndEmpties() => new TheoryData<string, string, int>
-        {
-            {null, null, 0 },
-            {null, "", 0 },
-            {"", null, 0 },
-            {"", "", 0 },
-        };
+        public static TheoryData<string, string, int> InStr_TestData_NullsAndEmpties() =>
+            new TheoryData<string, string, int>
+            {
+                { null, null, 0 },
+                { null, "", 0 },
+                { "", null, 0 },
+                { "", "", 0 },
+            };
 
-        public static TheoryData<string, string, int> InStr_FromBegin_TestData() => new TheoryData<string, string, int>
-        {
-            { null, "a", 0 },
-            { "a", null, 1 },
-            { "a", "a", 1 },
-            { "aa", "a", 1 },
-            { "ab", "a", 1 },
-            { "ba", "a", 2 },
-            { "b", "a", 0 },
-            { "a", "ab", 0 },
-            { "ab", "ab", 1 },
-        };
+        public static TheoryData<string, string, int> InStr_FromBegin_TestData() =>
+            new TheoryData<string, string, int>
+            {
+                { null, "a", 0 },
+                { "a", null, 1 },
+                { "a", "a", 1 },
+                { "aa", "a", 1 },
+                { "ab", "a", 1 },
+                { "ba", "a", 2 },
+                { "b", "a", 0 },
+                { "a", "ab", 0 },
+                { "ab", "ab", 1 },
+            };
 
-        public static TheoryData<string, string, int> InStr_FromWithin_TestData() => new TheoryData<string, string, int>
-        {
-            { null, "a", 0 },
-            { "aa", null, 2 },
-            { "aa", "a", 2 },
-            { "aab", "a", 2 },
-            { "aba", "a", 3 },
-            { "ab", "a", 0 },
-            { "aa", "ab", 0 },
-            { "abab", "ab", 3 },
-        };
+        public static TheoryData<string, string, int> InStr_FromWithin_TestData() =>
+            new TheoryData<string, string, int>
+            {
+                { null, "a", 0 },
+                { "aa", null, 2 },
+                { "aa", "a", 2 },
+                { "aab", "a", 2 },
+                { "aba", "a", 3 },
+                { "ab", "a", 0 },
+                { "aa", "ab", 0 },
+                { "abab", "ab", 3 },
+            };
 
-        public static TheoryData<string, string, int> InStrRev_FromEnd_TestData() => new TheoryData<string, string, int>
-        {
-            { null, "a", 0 },
-            { "a", null, 1 },
-            { "a", "a", 1 },
-            { "aa", "a", 2 },
-            { "ba", "a", 2 },
-            { "ab", "a", 1 },
-            { "b", "a", 0 },
-            { "a", "ab", 0 },
-            { "ab", "ab", 1 },
-        };
+        public static TheoryData<string, string, int> InStrRev_FromEnd_TestData() =>
+            new TheoryData<string, string, int>
+            {
+                { null, "a", 0 },
+                { "a", null, 1 },
+                { "a", "a", 1 },
+                { "aa", "a", 2 },
+                { "ba", "a", 2 },
+                { "ab", "a", 1 },
+                { "b", "a", 0 },
+                { "a", "ab", 0 },
+                { "ab", "ab", 1 },
+            };
 
-        public static TheoryData<string, string, int,int> InStrRev_FromWithin_TestData() => new TheoryData<string, string, int, int>
-        {
-            { null, null, 1, 0 },
-            { null, "", 1, 0 },
-            { "", null, 1, 0 },
-            { "", "", 1, 0 },
-            { null, "a", 1, 0 },
-            { "aa", null, 1, 1 },
-            { "aa", "a", 1, 1 },
-            { "baa", "a", 2, 2 },
-            { "aba", "a", 2, 1 },
-            { "ba", "a", 1, 0 },
-            { "aa", "ab", 1, 0 },
-            { "abab", "ab", 3, 1 },
-        };
+        public static TheoryData<string, string, int, int> InStrRev_FromWithin_TestData() =>
+            new TheoryData<string, string, int, int>
+            {
+                { null, null, 1, 0 },
+                { null, "", 1, 0 },
+                { "", null, 1, 0 },
+                { "", "", 1, 0 },
+                { null, "a", 1, 0 },
+                { "aa", null, 1, 1 },
+                { "aa", "a", 1, 1 },
+                { "baa", "a", 2, 2 },
+                { "aba", "a", 2, 1 },
+                { "ba", "a", 1, 0 },
+                { "aa", "ab", 1, 0 },
+                { "abab", "ab", 3, 1 },
+            };
 
-        private static bool IsEnUS() => System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en-US";
+        private static bool IsEnUS() =>
+            System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en-US";
     }
 }

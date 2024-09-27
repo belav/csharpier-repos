@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>ericeil</OWNER>
@@ -15,13 +15,13 @@
 **
 =============================================================================*/
 
-namespace System.Threading {
-
-[Serializable]
-[Flags]
-[System.Runtime.InteropServices.ComVisible(true)]
+namespace System.Threading
+{
+    [Serializable]
+    [Flags]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum ThreadState
-    {   
+    {
         /*=========================================================================
         ** Constants for thread states.
         =========================================================================*/
@@ -34,6 +34,6 @@ namespace System.Threading {
         WaitSleepJoin = 32,
         Suspended = 64,
         AbortRequested = 128,
-        Aborted = 256
+        Aborted = 256,
     }
 }

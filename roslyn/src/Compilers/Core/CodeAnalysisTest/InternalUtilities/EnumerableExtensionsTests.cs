@@ -24,9 +24,12 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
             Assert.True(EnumerableExtensions.SequenceEqual(new[] { 1 }, new[] { 1 }, comparer));
             Assert.False(EnumerableExtensions.SequenceEqual(new int[0], new[] { 1 }, comparer));
             Assert.False(EnumerableExtensions.SequenceEqual(new[] { 1 }, new int[0], comparer));
-            Assert.False(EnumerableExtensions.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 3, 2 }, comparer));
-            Assert.True(EnumerableExtensions.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }, comparer));
+            Assert.False(
+                EnumerableExtensions.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 3, 2 }, comparer)
+            );
+            Assert.True(
+                EnumerableExtensions.SequenceEqual(new[] { 1, 2, 3 }, new[] { 1, 2, 3 }, comparer)
+            );
         }
     }
 }
-

@@ -23,9 +23,15 @@ public static class SqliteTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder UseSqlReturningClause(
         this TableBuilder tableBuilder,
-        bool useSqlReturningClause = true)
+        bool useSqlReturningClause = true
+    )
     {
-        UseSqlReturningClause(tableBuilder.Metadata, tableBuilder.Name, tableBuilder.Schema, useSqlReturningClause);
+        UseSqlReturningClause(
+            tableBuilder.Metadata,
+            tableBuilder.Name,
+            tableBuilder.Schema,
+            useSqlReturningClause
+        );
 
         return tableBuilder;
     }
@@ -44,9 +50,11 @@ public static class SqliteTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder<TEntity> UseSqlReturningClause<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
-        bool useSqlReturningClause = true)
-        where TEntity : class
-        => (TableBuilder<TEntity>)((TableBuilder)tableBuilder).UseSqlReturningClause(useSqlReturningClause);
+        bool useSqlReturningClause = true
+    )
+        where TEntity : class =>
+        (TableBuilder<TEntity>)
+            ((TableBuilder)tableBuilder).UseSqlReturningClause(useSqlReturningClause);
 
     /// <summary>
     ///     Configures whether to use the SQL RETURNING clause when saving changes to the table.
@@ -61,9 +69,15 @@ public static class SqliteTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static SplitTableBuilder UseSqlReturningClause(
         this SplitTableBuilder tableBuilder,
-        bool useSqlReturningClause = true)
+        bool useSqlReturningClause = true
+    )
     {
-        UseSqlReturningClause(tableBuilder.Metadata, tableBuilder.Name, tableBuilder.Schema, useSqlReturningClause);
+        UseSqlReturningClause(
+            tableBuilder.Metadata,
+            tableBuilder.Name,
+            tableBuilder.Schema,
+            useSqlReturningClause
+        );
 
         return tableBuilder;
     }
@@ -82,9 +96,11 @@ public static class SqliteTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static SplitTableBuilder<TEntity> UseSqlReturningClause<TEntity>(
         this SplitTableBuilder<TEntity> tableBuilder,
-        bool useSqlReturningClause = true)
-        where TEntity : class
-        => (SplitTableBuilder<TEntity>)((SplitTableBuilder)tableBuilder).UseSqlReturningClause(useSqlReturningClause);
+        bool useSqlReturningClause = true
+    )
+        where TEntity : class =>
+        (SplitTableBuilder<TEntity>)
+            ((SplitTableBuilder)tableBuilder).UseSqlReturningClause(useSqlReturningClause);
 
     /// <summary>
     ///     Configures whether to use the SQL RETURNING clause when saving changes to the table.
@@ -99,9 +115,15 @@ public static class SqliteTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationTableBuilder UseSqlReturningClause(
         this OwnedNavigationTableBuilder tableBuilder,
-        bool useSqlReturningClause = true)
+        bool useSqlReturningClause = true
+    )
     {
-        UseSqlReturningClause(tableBuilder.Metadata, tableBuilder.Name, tableBuilder.Schema, useSqlReturningClause);
+        UseSqlReturningClause(
+            tableBuilder.Metadata,
+            tableBuilder.Name,
+            tableBuilder.Schema,
+            useSqlReturningClause
+        );
 
         return tableBuilder;
     }
@@ -119,19 +141,26 @@ public static class SqliteTableBuilderExtensions
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="useSqlReturningClause">A value indicating whether to use the RETURNING clause when saving changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> UseSqlReturningClause<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> UseSqlReturningClause<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
-        bool useSqlReturningClause = true)
+        bool useSqlReturningClause = true
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>)
-            ((OwnedNavigationTableBuilder)tableBuilder).UseSqlReturningClause(useSqlReturningClause);
+        where TDependentEntity : class =>
+        (OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>)
+            ((OwnedNavigationTableBuilder)tableBuilder).UseSqlReturningClause(
+                useSqlReturningClause
+            );
 
     private static void UseSqlReturningClause(
         IMutableEntityType entityType,
         string? tableName,
         string? tableSchema,
-        bool useSqlReturningClause)
+        bool useSqlReturningClause
+    )
     {
         if (tableName is null)
         {
@@ -141,7 +170,8 @@ public static class SqliteTableBuilderExtensions
         {
             entityType.UseSqlReturningClause(
                 useSqlReturningClause,
-                StoreObjectIdentifier.Table(tableName, tableSchema));
+                StoreObjectIdentifier.Table(tableName, tableSchema)
+            );
         }
     }
 }

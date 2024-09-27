@@ -17,7 +17,7 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Create_ReturnsDefaultInstance() // implementation detail being verified
         {
-            Assert.Equal(default, PoolingAsyncValueTaskMethodBuilder.Create()); 
+            Assert.Equal(default, PoolingAsyncValueTaskMethodBuilder.Create());
             Assert.Equal(default, PoolingAsyncValueTaskMethodBuilder<int>.Create());
         }
 
@@ -27,15 +27,16 @@ namespace System.Threading.Tasks.Tests
             PoolingAsyncValueTaskMethodBuilder b = PoolingAsyncValueTaskMethodBuilder.Create();
 
             b.SetResult();
-            
+
             Assert.Equal(default, b.Task);
         }
 
         [Fact]
         public void Generic_SetResult_BeforeAccessTask_ValueTaskContainsValue()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
-            
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+
             b.SetResult(42);
 
             ValueTask<int> vt = b.Task;
@@ -53,7 +54,7 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(vt, b.Task);
 
             b.SetResult();
-            
+
             Assert.Equal(vt, b.Task);
             Assert.True(vt.IsCompletedSuccessfully);
         }
@@ -61,14 +62,15 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetResult_AfterAccessTask_ValueTaskContainsValue()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
 
             ValueTask<int> vt = b.Task;
             Assert.NotEqual(default, vt);
             Assert.Equal(vt, b.Task);
-            
+
             b.SetResult(42);
-            
+
             Assert.Equal(vt, b.Task);
             Assert.True(vt.IsCompletedSuccessfully);
             Assert.Equal(42, vt.Result);
@@ -78,7 +80,7 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_SetException_BeforeAccessTask_FaultsTask()
         {
             PoolingAsyncValueTaskMethodBuilder b = PoolingAsyncValueTaskMethodBuilder.Create();
-            
+
             var e = new FormatException();
             b.SetException(e);
 
@@ -91,7 +93,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetException_BeforeAccessTask_FaultsTask()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
 
             var e = new FormatException();
             b.SetException(e);
@@ -121,7 +124,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetException_AfterAccessTask_FaultsTask()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
 
             ValueTask<int> vt = b.Task;
             Assert.Equal(vt, b.Task);
@@ -144,26 +148,33 @@ namespace System.Threading.Tasks.Tests
 
             var e = new OperationCanceledException();
             b.SetException(e);
-            
+
             Assert.Equal(vt, b.Task);
             Assert.True(vt.IsCanceled);
-            Assert.Same(e, Assert.Throws<OperationCanceledException>(() => vt.GetAwaiter().GetResult()));
+            Assert.Same(
+                e,
+                Assert.Throws<OperationCanceledException>(() => vt.GetAwaiter().GetResult())
+            );
         }
 
         [Fact]
         public void Generic_SetException_OperationCanceledException_CancelsTask()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
 
             ValueTask<int> vt = b.Task;
             Assert.Equal(vt, b.Task);
 
             var e = new OperationCanceledException();
             b.SetException(e);
-            
+
             Assert.Equal(vt, b.Task);
             Assert.True(vt.IsCanceled);
-            Assert.Same(e, Assert.Throws<OperationCanceledException>(() => vt.GetAwaiter().GetResult()));
+            Assert.Same(
+                e,
+                Assert.Throws<OperationCanceledException>(() => vt.GetAwaiter().GetResult())
+            );
         }
 
         [Fact]
@@ -176,7 +187,8 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void Generic_SetExceptionWithNullException_Throws()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
             AssertExtensions.Throws<ArgumentNullException>("exception", () => b.SetException(null));
         }
 
@@ -188,19 +200,20 @@ namespace System.Threading.Tasks.Tests
             int invokes = 0;
             var dsm = new DelegateStateMachine { MoveNextDelegate = () => invokes++ };
             b.Start(ref dsm);
-            
+
             Assert.Equal(1, invokes);
         }
 
         [Fact]
         public void Generic_Start_InvokesMoveNext()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
 
             int invokes = 0;
             var dsm = new DelegateStateMachine { MoveNextDelegate = () => invokes++ };
             b.Start(ref dsm);
-            
+
             Assert.Equal(1, invokes);
         }
 
@@ -243,7 +256,8 @@ namespace System.Threading.Tasks.Tests
         [InlineData(2, true)]
         public void Generic_AwaitOnCompleted_ForcesTaskCreation(int numAwaits, bool awaitUnsafe)
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
 
             var dsm = new DelegateStateMachine();
             TaskAwaiter<int> t = new TaskCompletionSource<int>().Task.GetAwaiter();
@@ -273,14 +287,21 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_SetStateMachine_InvalidArgument_ThrowsException()
         {
             PoolingAsyncValueTaskMethodBuilder b = PoolingAsyncValueTaskMethodBuilder.Create();
-            AssertExtensions.Throws<ArgumentNullException>("stateMachine", () => b.SetStateMachine(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "stateMachine",
+                () => b.SetStateMachine(null)
+            );
         }
 
         [Fact]
         public void Generic_SetStateMachine_InvalidArgument_ThrowsException()
         {
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
-            AssertExtensions.Throws<ArgumentNullException>("stateMachine", () => b.SetStateMachine(null));
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            AssertExtensions.Throws<ArgumentNullException>(
+                "stateMachine",
+                () => b.SetStateMachine(null)
+            );
         }
 
         [Fact]
@@ -295,7 +316,7 @@ namespace System.Threading.Tasks.Tests
                 {
                     al.Value++;
                     calls++;
-                }
+                },
             };
 
             dsm.MoveNext();
@@ -328,7 +349,7 @@ namespace System.Threading.Tasks.Tests
                 {
                     al.Value++;
                     calls++;
-                }
+                },
             };
 
             dsm.MoveNext();
@@ -339,7 +360,8 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(2, al.Value);
             Assert.Equal(2, calls);
 
-            PoolingAsyncValueTaskMethodBuilder<int> b = PoolingAsyncValueTaskMethodBuilder<int>.Create();
+            PoolingAsyncValueTaskMethodBuilder<int> b =
+                PoolingAsyncValueTaskMethodBuilder<int>.Create();
             b.Start(ref dsm);
             Assert.Equal(2, al.Value); // change should not be visible
             Assert.Equal(3, calls);
@@ -421,21 +443,87 @@ namespace System.Threading.Tasks.Tests
                     await Task.CompletedTask;
                     await Task.FromResult(42);
                     await new ValueTask();
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(Task.FromException<int>(new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(ManualResetValueTaskSourceFactory.Completed(0, new FormatException()), 0));
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(Task.FromException<int>(new FormatException()))
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
                     Assert.Equal(42, await new ValueTask<int>(42));
                     Assert.Equal(42, await new ValueTask<int>(Task.FromResult(42)));
-                    Assert.Equal(42, await new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(Task.FromException<int>(new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(0, new FormatException()), 0));
+                    Assert.Equal(
+                        42,
+                        await new ValueTask<int>(
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(Task.FromException<int>(new FormatException()))
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
 
                     // Incomplete
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(Task.Delay(1).ContinueWith(_ => throw new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()), 0));
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                Task.Delay(1).ContinueWith(_ => throw new FormatException())
+                            )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
                     Assert.Equal(42, await new ValueTask<int>(Task.Delay(1).ContinueWith(_ => 42)));
-                    Assert.Equal(42, await new ValueTask<int>(ManualResetValueTaskSourceFactory.Delay(1, 42, null), 0));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()), 0));
+                    Assert.Equal(
+                        42,
+                        await new ValueTask<int>(
+                            ManualResetValueTaskSourceFactory.Delay(1, 42, null),
+                            0
+                        )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
+                            )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
                     await Task.Yield();
                 }
             }
@@ -449,21 +537,87 @@ namespace System.Threading.Tasks.Tests
                     await Task.CompletedTask;
                     await Task.FromResult(42);
                     await new ValueTask();
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(Task.FromException<int>(new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(ManualResetValueTaskSourceFactory.Completed(0, new FormatException()), 0));
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(Task.FromException<int>(new FormatException()))
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
                     Assert.Equal(42, await new ValueTask<int>(42));
                     Assert.Equal(42, await new ValueTask<int>(Task.FromResult(42)));
-                    Assert.Equal(42, await new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(42, null), 0));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(Task.FromException<int>(new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(ManualResetValueTaskSourceFactory.Completed(0, new FormatException()), 0));
+                    Assert.Equal(
+                        42,
+                        await new ValueTask<int>(
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(Task.FromException<int>(new FormatException()))
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Completed(
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
 
                     // Incomplete
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(Task.Delay(1).ContinueWith(_ => throw new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask(ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()), 0));
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                Task.Delay(1).ContinueWith(_ => throw new FormatException())
+                            )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
                     Assert.Equal(42, await new ValueTask<int>(Task.Delay(1).ContinueWith(_ => 42)));
-                    Assert.Equal(42, await new ValueTask<int>(ManualResetValueTaskSourceFactory.Delay(1, 42, null), 0));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())));
-                    await Assert.ThrowsAsync<FormatException>(async () => await new ValueTask<int>(ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()), 0));
+                    Assert.Equal(
+                        42,
+                        await new ValueTask<int>(
+                            ManualResetValueTaskSourceFactory.Delay(1, 42, null),
+                            0
+                        )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                Task.Delay(1).ContinueWith<int>(_ => throw new FormatException())
+                            )
+                    );
+                    await Assert.ThrowsAsync<FormatException>(
+                        async () =>
+                            await new ValueTask<int>(
+                                ManualResetValueTaskSourceFactory.Delay(
+                                    1,
+                                    0,
+                                    new FormatException()
+                                ),
+                                0
+                            )
+                    );
                     await Task.Yield();
                 }
                 return 18;
@@ -474,39 +628,47 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public async Task NonGeneric_ConcurrentBuilders_WorkCorrectly()
         {
-            await Task.WhenAll(Enumerable.Range(0, Environment.ProcessorCount).Select(async _ =>
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    await ValueTaskAsync();
-
-                    [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder))]
-                    static async ValueTask ValueTaskAsync()
+            await Task.WhenAll(
+                Enumerable
+                    .Range(0, Environment.ProcessorCount)
+                    .Select(async _ =>
                     {
-                        await Task.Delay(1);
-                    }
-                }
-            }));
+                        for (int i = 0; i < 10; i++)
+                        {
+                            await ValueTaskAsync();
+
+                            [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder))]
+                            static async ValueTask ValueTaskAsync()
+                            {
+                                await Task.Delay(1);
+                            }
+                        }
+                    })
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/roslyn/issues/51999")]
         [Fact]
         public async Task Generic_ConcurrentBuilders_WorkCorrectly()
         {
-            await Task.WhenAll(Enumerable.Range(0, Environment.ProcessorCount).Select(async _ =>
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    Assert.Equal(42 + i, await ValueTaskAsync(i));
-
-                    [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-                    static async ValueTask<int> ValueTaskAsync(int i)
+            await Task.WhenAll(
+                Enumerable
+                    .Range(0, Environment.ProcessorCount)
+                    .Select(async _ =>
                     {
-                        await Task.Delay(1);
-                        return 42 + i;
-                    }
-                }
-            }));
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Assert.Equal(42 + i, await ValueTaskAsync(i));
+
+                            [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
+                            static async ValueTask<int> ValueTaskAsync(int i)
+                            {
+                                await Task.Delay(1);
+                                return 42 + i;
+                            }
+                        }
+                    })
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/roslyn/issues/51999")]
@@ -520,34 +682,42 @@ namespace System.Threading.Tasks.Tests
             var psi = new ProcessStartInfo();
             if (limitEnvVar != null)
             {
-                psi.Environment.Add("DOTNET_SYSTEM_THREADING_POOLINGASYNCVALUETASKSCACHESIZE", limitEnvVar);
+                psi.Environment.Add(
+                    "DOTNET_SYSTEM_THREADING_POOLINGASYNCVALUETASKSCACHESIZE",
+                    limitEnvVar
+                );
             }
 
-            RemoteExecutor.Invoke(async () =>
-            {
-                var boxes = new ConcurrentQueue<object>();
-                var valueTasks = new ValueTask<int>[10];
-                int total = 0;
-
-                // Invoke a bunch of ValueTask methods, some in parallel,
-                // and track a) their results and b) what boxing object is used.
-                for (int rep = 0; rep < 3; rep++)
-                {
-                    for (int i = 0; i < valueTasks.Length; i++)
+            RemoteExecutor
+                .Invoke(
+                    async () =>
                     {
-                        valueTasks[i] = ComputeAsync(i + 1, boxes);
-                    }
-                    foreach (ValueTask<int> vt in valueTasks)
-                    {
-                        total += await vt;
-                    }
-                }
+                        var boxes = new ConcurrentQueue<object>();
+                        var valueTasks = new ValueTask<int>[10];
+                        int total = 0;
 
-                // Make sure we got the right total, and that if we expected pooling,
-                // we at least pooled one object.
-                Assert.Equal(330, total);
-                Assert.InRange(boxes.Distinct().Count(), 1, boxes.Count - 1);
-            }, new RemoteInvokeOptions() { StartInfo = psi }).Dispose();
+                        // Invoke a bunch of ValueTask methods, some in parallel,
+                        // and track a) their results and b) what boxing object is used.
+                        for (int rep = 0; rep < 3; rep++)
+                        {
+                            for (int i = 0; i < valueTasks.Length; i++)
+                            {
+                                valueTasks[i] = ComputeAsync(i + 1, boxes);
+                            }
+                            foreach (ValueTask<int> vt in valueTasks)
+                            {
+                                total += await vt;
+                            }
+                        }
+
+                        // Make sure we got the right total, and that if we expected pooling,
+                        // we at least pooled one object.
+                        Assert.Equal(330, total);
+                        Assert.InRange(boxes.Distinct().Count(), 1, boxes.Count - 1);
+                    },
+                    new RemoteInvokeOptions() { StartInfo = psi }
+                )
+                .Dispose();
 
             [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
             static async ValueTask<int> ComputeAsync(int input, ConcurrentQueue<object> boxes)
@@ -571,6 +741,7 @@ namespace System.Threading.Tasks.Tests
         private struct DelegateStateMachine : IAsyncStateMachine
         {
             internal Action MoveNextDelegate;
+
             public void MoveNext() => MoveNextDelegate?.Invoke();
 
             public void SetStateMachine(IAsyncStateMachine stateMachine) { }

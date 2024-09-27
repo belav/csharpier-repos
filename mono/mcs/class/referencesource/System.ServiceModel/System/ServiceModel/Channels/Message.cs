@@ -103,16 +103,24 @@ namespace System.ServiceModel.Channels
                 OnClose();
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.MessageClosed,
-                        SR.GetString(SR.TraceCodeMessageClosed), this);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.MessageClosed,
+                        SR.GetString(SR.TraceCodeMessageClosed),
+                        this
+                    );
                 }
             }
             else
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.MessageClosedAgain,
-                        SR.GetString(SR.TraceCodeMessageClosedAgain), this);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.MessageClosedAgain,
+                        SR.GetString(SR.TraceCodeMessageClosedAgain),
+                        this
+                    );
                 }
             }
         }
@@ -120,29 +128,52 @@ namespace System.ServiceModel.Channels
         public MessageBuffer CreateBufferedCopy(int maxBufferSize)
         {
             if (maxBufferSize < 0)
-                throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxBufferSize", maxBufferSize,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)), this);
+                throw TraceUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxBufferSize",
+                        maxBufferSize,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    ),
+                    this
+                );
             switch (state)
             {
                 case MessageState.Created:
                     state = MessageState.Copied;
                     if (DiagnosticUtility.ShouldTraceVerbose)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.MessageCopied,
-                            SR.GetString(SR.TraceCodeMessageCopied), this, this);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Verbose,
+                            TraceCode.MessageCopied,
+                            SR.GetString(SR.TraceCodeMessageCopied),
+                            this,
+                            this
+                        );
                     }
                     break;
                 case MessageState.Closed:
                     throw TraceUtility.ThrowHelperError(CreateMessageDisposedException(), this);
                 case MessageState.Copied:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)),
+                        this
+                    );
                 case MessageState.Read:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)),
+                        this
+                    );
                 case MessageState.Written:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)),
+                        this
+                    );
                 default:
                     Fx.Assert(SR.GetString(SR.InvalidMessageState));
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InvalidMessageState)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InvalidMessageState)),
+                        this
+                    );
             }
             return OnCreateBufferedCopy(maxBufferSize);
         }
@@ -152,26 +183,51 @@ namespace System.ServiceModel.Channels
             return (value == null) ? typeof(object) : value.GetType();
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, object body)
+        public static Message CreateMessage(MessageVersion version, string action, object body)
         {
-            return CreateMessage(version, action, body, DataContractSerializerDefaults.CreateSerializer(GetObjectType(body), int.MaxValue/*maxItems*/));
+            return CreateMessage(
+                version,
+                action,
+                body,
+                DataContractSerializerDefaults.CreateSerializer(
+                    GetObjectType(body),
+                    int.MaxValue /*maxItems*/
+                )
+            );
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, object body, XmlObjectSerializer serializer)
+        public static Message CreateMessage(
+            MessageVersion version,
+            string action,
+            object body,
+            XmlObjectSerializer serializer
+        )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serializer"));
-            return new BodyWriterMessage(version, action, new XmlObjectSerializerBodyWriter(body, serializer));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serializer")
+                );
+            return new BodyWriterMessage(
+                version,
+                action,
+                new XmlObjectSerializerBodyWriter(body, serializer)
+            );
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, XmlReader body)
+        public static Message CreateMessage(MessageVersion version, string action, XmlReader body)
         {
             return CreateMessage(version, action, XmlDictionaryReader.CreateDictionaryReader(body));
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, XmlDictionaryReader body)
+        public static Message CreateMessage(
+            MessageVersion version,
+            string action,
+            XmlDictionaryReader body
+        )
         {
             if (body == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("body");
@@ -181,84 +237,155 @@ namespace System.ServiceModel.Channels
             return CreateMessage(version, action, new XmlReaderBodyWriter(body, version.Envelope));
         }
 
-        static public Message CreateMessage(MessageVersion version, string action, BodyWriter body)
+        public static Message CreateMessage(MessageVersion version, string action, BodyWriter body)
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             if (body == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("body"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("body")
+                );
             return new BodyWriterMessage(version, action, body);
         }
 
-        static internal Message CreateMessage(MessageVersion version, ActionHeader actionHeader, BodyWriter body)
+        internal static Message CreateMessage(
+            MessageVersion version,
+            ActionHeader actionHeader,
+            BodyWriter body
+        )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             if (body == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("body"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("body")
+                );
             return new BodyWriterMessage(version, actionHeader, body);
         }
 
-        static public Message CreateMessage(MessageVersion version, string action)
+        public static Message CreateMessage(MessageVersion version, string action)
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             return new BodyWriterMessage(version, action, EmptyBodyWriter.Value);
         }
 
-        static internal Message CreateMessage(MessageVersion version, ActionHeader actionHeader)
+        internal static Message CreateMessage(MessageVersion version, ActionHeader actionHeader)
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             return new BodyWriterMessage(version, actionHeader, EmptyBodyWriter.Value);
         }
 
-        static public Message CreateMessage(XmlReader envelopeReader, int maxSizeOfHeaders, MessageVersion version)
+        public static Message CreateMessage(
+            XmlReader envelopeReader,
+            int maxSizeOfHeaders,
+            MessageVersion version
+        )
         {
-            return CreateMessage(XmlDictionaryReader.CreateDictionaryReader(envelopeReader), maxSizeOfHeaders, version);
+            return CreateMessage(
+                XmlDictionaryReader.CreateDictionaryReader(envelopeReader),
+                maxSizeOfHeaders,
+                version
+            );
         }
 
-        static public Message CreateMessage(XmlDictionaryReader envelopeReader, int maxSizeOfHeaders, MessageVersion version)
+        public static Message CreateMessage(
+            XmlDictionaryReader envelopeReader,
+            int maxSizeOfHeaders,
+            MessageVersion version
+        )
         {
             if (envelopeReader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("envelopeReader"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("envelopeReader")
+                );
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             Message message = new StreamedMessage(envelopeReader, maxSizeOfHeaders, version);
             return message;
         }
 
-        static public Message CreateMessage(MessageVersion version, FaultCode faultCode, string reason, string action)
+        public static Message CreateMessage(
+            MessageVersion version,
+            FaultCode faultCode,
+            string reason,
+            string action
+        )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             if (faultCode == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("faultCode"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("faultCode")
+                );
             if (reason == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("reason"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("reason")
+                );
 
             return CreateMessage(version, MessageFault.CreateFault(faultCode, reason), action);
         }
 
-        static public Message CreateMessage(MessageVersion version, FaultCode faultCode, string reason, object detail, string action)
+        public static Message CreateMessage(
+            MessageVersion version,
+            FaultCode faultCode,
+            string reason,
+            object detail,
+            string action
+        )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
             if (faultCode == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("faultCode"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("faultCode")
+                );
             if (reason == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("reason"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("reason")
+                );
 
-            return CreateMessage(version, MessageFault.CreateFault(faultCode, new FaultReason(reason), detail), action);
+            return CreateMessage(
+                version,
+                MessageFault.CreateFault(faultCode, new FaultReason(reason), detail),
+                action
+            );
         }
 
-        static public Message CreateMessage(MessageVersion version, MessageFault fault, string action)
+        public static Message CreateMessage(
+            MessageVersion version,
+            MessageFault fault,
+            string action
+        )
         {
             if (fault == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("fault"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("fault")
+                );
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("version"));
-            return new BodyWriterMessage(version, action, new FaultBodyWriter(fault, version.Envelope));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("version")
+                );
+            return new BodyWriterMessage(
+                version,
+                action,
+                new FaultBodyWriter(fault, version.Envelope)
+            );
         }
 
         internal Exception CreateMessageDisposedException()
@@ -273,19 +400,27 @@ namespace System.ServiceModel.Channels
 
         public T GetBody<T>()
         {
-            XmlDictionaryReader reader = GetReaderAtBodyContents();   // This call will change the message state to Read.
+            XmlDictionaryReader reader = GetReaderAtBodyContents(); // This call will change the message state to Read.
             return OnGetBody<T>(reader);
         }
 
         protected virtual T OnGetBody<T>(XmlDictionaryReader reader)
         {
-            return this.GetBodyCore<T>(reader, DataContractSerializerDefaults.CreateSerializer(typeof(T), int.MaxValue/*maxItems*/));
+            return this.GetBodyCore<T>(
+                reader,
+                DataContractSerializerDefaults.CreateSerializer(
+                    typeof(T),
+                    int.MaxValue /*maxItems*/
+                )
+            );
         }
 
         public T GetBody<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serializer")
+                );
             return this.GetBodyCore<T>(GetReaderAtBodyContents(), serializer);
         }
 
@@ -322,7 +457,10 @@ namespace System.ServiceModel.Channels
         {
             EnsureReadMessageState();
             if (IsEmpty)
-                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageIsEmpty)), this);
+                throw TraceUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MessageIsEmpty)),
+                    this
+                );
             return OnGetReaderAtBodyContents();
         }
 
@@ -334,20 +472,37 @@ namespace System.ServiceModel.Channels
                     state = MessageState.Read;
                     if (DiagnosticUtility.ShouldTraceVerbose)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.MessageRead, SR.GetString(SR.TraceCodeMessageRead), this);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Verbose,
+                            TraceCode.MessageRead,
+                            SR.GetString(SR.TraceCodeMessageRead),
+                            this
+                        );
                     }
                     break;
                 case MessageState.Copied:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)),
+                        this
+                    );
                 case MessageState.Read:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)),
+                        this
+                    );
                 case MessageState.Written:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)),
+                        this
+                    );
                 case MessageState.Closed:
                     throw TraceUtility.ThrowHelperError(CreateMessageDisposedException(), this);
                 default:
                     Fx.Assert(SR.GetString(SR.InvalidMessageState));
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InvalidMessageState)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InvalidMessageState)),
+                        this
+                    );
             }
         }
 
@@ -357,7 +512,13 @@ namespace System.ServiceModel.Channels
                 throw TraceUtility.ThrowHelperError(CreateMessageDisposedException(), this);
             if (null == this.messageNavigator)
             {
-                this.messageNavigator = new SeekableMessageNavigator(this, maxNodes, XmlSpace.Default, navigateBody, false);
+                this.messageNavigator = new SeekableMessageNavigator(
+                    this,
+                    maxNodes,
+                    XmlSpace.Default,
+                    navigateBody,
+                    false
+                );
             }
             else
             {
@@ -371,11 +532,19 @@ namespace System.ServiceModel.Channels
         {
             UniqueId requestMessageID = request.Headers.MessageId;
             if (requestMessageID == null)
-                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.RequestMessageDoesNotHaveAMessageID)), request);
+                throw TraceUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.RequestMessageDoesNotHaveAMessageID)
+                    ),
+                    request
+                );
             Headers.RelatesTo = requestMessageID;
         }
 
-        static internal bool IsFaultStartElement(XmlDictionaryReader reader, EnvelopeVersion version)
+        internal static bool IsFaultStartElement(
+            XmlDictionaryReader reader,
+            EnvelopeVersion version
+        )
         {
             return reader.IsStartElement(XD.MessageDictionary.Fault, version.DictionaryNamespace);
         }
@@ -390,7 +559,10 @@ namespace System.ServiceModel.Channels
             return OnCreateBufferedCopy(maxBufferSize, XmlDictionaryReaderQuotas.Max);
         }
 
-        internal MessageBuffer OnCreateBufferedCopy(int maxBufferSize, XmlDictionaryReaderQuotas quotas)
+        internal MessageBuffer OnCreateBufferedCopy(
+            int maxBufferSize,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             XmlBuffer msgBuffer = new XmlBuffer(maxBufferSize);
             XmlDictionaryWriter writer = msgBuffer.OpenSection(quotas);
@@ -400,9 +572,7 @@ namespace System.ServiceModel.Channels
             return new DefaultMessageBuffer(this, msgBuffer);
         }
 
-        protected virtual void OnClose()
-        {
-        }
+        protected virtual void OnClose() { }
 
         protected virtual XmlDictionaryReader OnGetReaderAtBodyContents()
         {
@@ -434,7 +604,11 @@ namespace System.ServiceModel.Channels
         protected virtual void OnWriteStartBody(XmlDictionaryWriter writer)
         {
             MessageDictionary messageDictionary = XD.MessageDictionary;
-            writer.WriteStartElement(messageDictionary.Prefix.Value, messageDictionary.Body, Version.Envelope.DictionaryNamespace);
+            writer.WriteStartElement(
+                messageDictionary.Prefix.Value,
+                messageDictionary.Body,
+                Version.Envelope.DictionaryNamespace
+            );
         }
 
         public void WriteBodyContents(XmlDictionaryWriter writer)
@@ -443,7 +617,11 @@ namespace System.ServiceModel.Channels
             OnWriteBodyContents(writer);
         }
 
-        public IAsyncResult BeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        public IAsyncResult BeginWriteBodyContents(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureWriteMessageState(writer);
             return this.OnBeginWriteBodyContents(writer, callback, state);
@@ -456,7 +634,11 @@ namespace System.ServiceModel.Channels
 
         protected abstract void OnWriteBodyContents(XmlDictionaryWriter writer);
 
-        protected virtual IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        protected virtual IAsyncResult OnBeginWriteBodyContents(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OnWriteBodyContentsAsyncResult(writer, this, callback, state);
         }
@@ -480,7 +662,11 @@ namespace System.ServiceModel.Channels
             if (envelopeVersion != EnvelopeVersion.None)
             {
                 MessageDictionary messageDictionary = XD.MessageDictionary;
-                writer.WriteStartElement(messageDictionary.Prefix.Value, messageDictionary.Envelope, envelopeVersion.DictionaryNamespace);
+                writer.WriteStartElement(
+                    messageDictionary.Prefix.Value,
+                    messageDictionary.Envelope,
+                    envelopeVersion.DictionaryNamespace
+                );
                 WriteSharedHeaderPrefixes(writer);
             }
         }
@@ -491,7 +677,11 @@ namespace System.ServiceModel.Channels
             if (envelopeVersion != EnvelopeVersion.None)
             {
                 MessageDictionary messageDictionary = XD.MessageDictionary;
-                writer.WriteStartElement(messageDictionary.Prefix.Value, messageDictionary.Header, envelopeVersion.DictionaryNamespace);
+                writer.WriteStartElement(
+                    messageDictionary.Prefix.Value,
+                    messageDictionary.Header,
+                    envelopeVersion.DictionaryNamespace
+                );
             }
         }
 
@@ -503,7 +693,9 @@ namespace System.ServiceModel.Channels
             }
 
             StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture);
-            EncodingFallbackAwareXmlTextWriter textWriter = new EncodingFallbackAwareXmlTextWriter(stringWriter);
+            EncodingFallbackAwareXmlTextWriter textWriter = new EncodingFallbackAwareXmlTextWriter(
+                stringWriter
+            );
             textWriter.Formatting = Formatting.Indented;
             XmlDictionaryWriter writer = XmlDictionaryWriter.CreateDictionaryWriter(textWriter);
             try
@@ -560,16 +752,28 @@ namespace System.ServiceModel.Channels
                 case MessageState.Created:
                     break;
                 case MessageState.Copied:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)),
+                        this
+                    );
                 case MessageState.Read:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)),
+                        this
+                    );
                 case MessageState.Written:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)),
+                        this
+                    );
                 case MessageState.Closed:
                     throw TraceUtility.ThrowHelperError(CreateMessageDisposedException(), this);
                 default:
                     Fx.Assert(SR.GetString(SR.InvalidMessageState));
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InvalidMessageState)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InvalidMessageState)),
+                        this
+                    );
             }
             return OnGetBodyAttribute(localName, ns);
         }
@@ -584,7 +788,10 @@ namespace System.ServiceModel.Channels
             Message.ReadFromBodyContentsToEnd(reader, this.Version.Envelope);
         }
 
-        static void ReadFromBodyContentsToEnd(XmlDictionaryReader reader, EnvelopeVersion envelopeVersion)
+        static void ReadFromBodyContentsToEnd(
+            XmlDictionaryReader reader,
+            EnvelopeVersion envelopeVersion
+        )
         {
             if (envelopeVersion != EnvelopeVersion.None)
             {
@@ -594,7 +801,12 @@ namespace System.ServiceModel.Channels
             reader.MoveToContent();
         }
 
-        internal static bool ReadStartBody(XmlDictionaryReader reader, EnvelopeVersion envelopeVersion, out bool isFault, out bool isEmpty)
+        internal static bool ReadStartBody(
+            XmlDictionaryReader reader,
+            EnvelopeVersion envelopeVersion,
+            out bool isFault,
+            out bool isEmpty
+        )
         {
             if (reader.IsEmptyElement)
             {
@@ -681,24 +893,45 @@ namespace System.ServiceModel.Channels
                     state = MessageState.Written;
                     if (DiagnosticUtility.ShouldTraceVerbose)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.MessageWritten, SR.GetString(SR.TraceCodeMessageWritten), this);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Verbose,
+                            TraceCode.MessageWritten,
+                            SR.GetString(SR.TraceCodeMessageWritten),
+                            this
+                        );
                     }
                     break;
                 case MessageState.Copied:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenCopied)),
+                        this
+                    );
                 case MessageState.Read:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenRead)),
+                        this
+                    );
                 case MessageState.Written:
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MessageHasBeenWritten)),
+                        this
+                    );
                 case MessageState.Closed:
                     throw TraceUtility.ThrowHelperError(CreateMessageDisposedException(), this);
                 default:
                     Fx.Assert(SR.GetString(SR.InvalidMessageState));
-                    throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InvalidMessageState)), this);
+                    throw TraceUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InvalidMessageState)),
+                        this
+                    );
             }
         }
 
-        public IAsyncResult BeginWriteMessage(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        public IAsyncResult BeginWriteMessage(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureWriteMessageState(writer);
             return OnBeginWriteMessage(writer, callback, state);
@@ -747,7 +980,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual IAsyncResult OnBeginWriteMessage(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        protected virtual IAsyncResult OnBeginWriteMessage(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OnWriteMessageAsyncResult(writer, this, callback, state);
         }
@@ -764,32 +1001,59 @@ namespace System.ServiceModel.Channels
             int prefixesWritten = 0;
             for (int i = 0; i < count; i++)
             {
-                if (this.Version.Addressing == AddressingVersion.None && headers[i].Namespace == AddressingVersion.None.Namespace)
+                if (
+                    this.Version.Addressing == AddressingVersion.None
+                    && headers[i].Namespace == AddressingVersion.None.Namespace
+                )
                 {
                     continue;
                 }
 
-                IMessageHeaderWithSharedNamespace headerWithSharedNamespace = headers[i] as IMessageHeaderWithSharedNamespace;
+                IMessageHeaderWithSharedNamespace headerWithSharedNamespace =
+                    headers[i] as IMessageHeaderWithSharedNamespace;
                 if (headerWithSharedNamespace != null)
                 {
                     XmlDictionaryString prefix = headerWithSharedNamespace.SharedPrefix;
                     string prefixString = prefix.Value;
                     if (!((prefixString.Length == 1)))
                     {
-                        Fx.Assert("Message.WriteSharedHeaderPrefixes: (prefixString.Length == 1) -- IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix.");
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, "IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix.")), this);
+                        Fx.Assert(
+                            "Message.WriteSharedHeaderPrefixes: (prefixString.Length == 1) -- IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix."
+                        );
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix."
+                                )
+                            ),
+                            this
+                        );
                     }
 
                     int prefixIndex = prefixString[0] - 'a';
                     if (!((prefixIndex >= 0 && prefixIndex < 26)))
                     {
-                        Fx.Assert("Message.WriteSharedHeaderPrefixes: (prefixIndex >= 0 && prefixIndex < 26) -- IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix.");
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, "IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix.")), this);
+                        Fx.Assert(
+                            "Message.WriteSharedHeaderPrefixes: (prefixIndex >= 0 && prefixIndex < 26) -- IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix."
+                        );
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "IMessageHeaderWithSharedNamespace must use a single lowercase letter prefix."
+                                )
+                            ),
+                            this
+                        );
                     }
                     int prefixBit = 1 << prefixIndex;
                     if ((prefixesWritten & prefixBit) == 0)
                     {
-                        writer.WriteXmlnsAttribute(prefixString, headerWithSharedNamespace.SharedNamespace);
+                        writer.WriteXmlnsAttribute(
+                            prefixString,
+                            headerWithSharedNamespace.SharedNamespace
+                        );
                         prefixesWritten |= prefixBit;
                     }
                 }
@@ -801,7 +1065,12 @@ namespace System.ServiceModel.Channels
             Message message;
             XmlDictionaryWriter writer;
 
-            public OnWriteBodyContentsAsyncResult(XmlDictionaryWriter writer, Message message, AsyncCallback callback, object state)
+            public OnWriteBodyContentsAsyncResult(
+                XmlDictionaryWriter writer,
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 Fx.Assert(message != null, "message should never be null");
@@ -823,7 +1092,12 @@ namespace System.ServiceModel.Channels
             Message message;
             XmlDictionaryWriter writer;
 
-            public OnWriteMessageAsyncResult(XmlDictionaryWriter writer, Message message, AsyncCallback callback, object state)
+            public OnWriteMessageAsyncResult(
+                XmlDictionaryWriter writer,
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 Fx.Assert(message != null, "message should never be null");
@@ -846,9 +1120,7 @@ namespace System.ServiceModel.Channels
         static EmptyBodyWriter value;
 
         EmptyBodyWriter()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         public static EmptyBodyWriter Value
         {
@@ -865,9 +1137,7 @@ namespace System.ServiceModel.Channels
             get { return true; }
         }
 
-        protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
-        {
-        }
+        protected override void OnWriteBodyContents(XmlDictionaryWriter writer) { }
     }
 
     class FaultBodyWriter : BodyWriter
@@ -929,17 +1199,19 @@ namespace System.ServiceModel.Channels
         {
             this.reader = reader;
             if (reader.MoveToContent() != XmlNodeType.Element)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidReaderPositionOnCreateMessage), "reader"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
+                        "reader"
+                    )
+                );
 
             this.isFault = Message.IsFaultStartElement(reader, version);
         }
 
         internal override bool IsFault
         {
-            get
-            {
-                return this.isFault;
-            }
+            get { return this.isFault; }
         }
 
         protected override BodyWriter OnCreateBufferedCopy(int maxBufferSize)
@@ -955,7 +1227,12 @@ namespace System.ServiceModel.Channels
                 while (!reader.EOF && type != XmlNodeType.EndElement)
                 {
                     if (type != XmlNodeType.Element)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidReaderPositionOnCreateMessage), "reader"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
+                                "reader"
+                            )
+                        );
                     writer.WriteNode(reader, false);
 
                     type = reader.MoveToContent();
@@ -982,14 +1259,22 @@ namespace System.ServiceModel.Channels
             this.headers.Action = action;
         }
 
-        public BodyWriterMessage(MessageVersion version, ActionHeader actionHeader, BodyWriter bodyWriter)
+        public BodyWriterMessage(
+            MessageVersion version,
+            ActionHeader actionHeader,
+            BodyWriter bodyWriter
+        )
             : this(bodyWriter)
         {
             this.headers = new MessageHeaders(version);
             this.headers.SetActionHeader(actionHeader);
         }
 
-        public BodyWriterMessage(MessageHeaders headers, KeyValuePair<string, object>[] properties, BodyWriter bodyWriter)
+        public BodyWriterMessage(
+            MessageHeaders headers,
+            KeyValuePair<string, object>[] properties,
+            BodyWriter bodyWriter
+        )
             : this(bodyWriter)
         {
             this.headers = new MessageHeaders(headers);
@@ -1065,7 +1350,6 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-
         public override MessageVersion Version
         {
             get
@@ -1088,7 +1372,9 @@ namespace System.ServiceModel.Channels
             {
                 bufferedBodyWriter = bodyWriter.CreateBufferedCopy(maxBufferSize);
             }
-            KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[Properties.Count];
+            KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[
+                Properties.Count
+            ];
             ((ICollection<KeyValuePair<string, object>>)Properties).CopyTo(properties, 0);
             return new BodyWriterMessageBuffer(headers, properties, bufferedBodyWriter);
         }
@@ -1131,7 +1417,11 @@ namespace System.ServiceModel.Channels
             bodyWriter.WriteBodyContents(writer);
         }
 
-        protected override IAsyncResult OnBeginWriteMessage(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWriteMessage(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             WriteMessagePreamble(writer);
             return new OnWriteMessageAsyncResult(writer, this, callback, state);
@@ -1142,7 +1432,11 @@ namespace System.ServiceModel.Channels
             OnWriteMessageAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWriteBodyContents(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             return bodyWriter.BeginWriteBodyContents(writer, callback, state);
         }
@@ -1166,10 +1460,7 @@ namespace System.ServiceModel.Channels
 
         protected internal BodyWriter BodyWriter
         {
-            get
-            {
-                return bodyWriter;
-            }
+            get { return bodyWriter; }
         }
 
         class OnWriteMessageAsyncResult : AsyncResult
@@ -1177,7 +1468,12 @@ namespace System.ServiceModel.Channels
             BodyWriterMessage message;
             XmlDictionaryWriter writer;
 
-            public OnWriteMessageAsyncResult(XmlDictionaryWriter writer, BodyWriterMessage message, AsyncCallback callback, object state)
+            public OnWriteMessageAsyncResult(
+                XmlDictionaryWriter writer,
+                BodyWriterMessage message,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.message = message;
@@ -1193,7 +1489,11 @@ namespace System.ServiceModel.Channels
             {
                 if (result == null)
                 {
-                    result = this.message.OnBeginWriteBodyContents(this.writer, PrepareAsyncCompletion(HandleWriteBodyContents), this);
+                    result = this.message.OnBeginWriteBodyContents(
+                        this.writer,
+                        PrepareAsyncCompletion(HandleWriteBodyContents),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -1210,7 +1510,6 @@ namespace System.ServiceModel.Channels
                 AsyncResult.End<OnWriteMessageAsyncResult>(result);
             }
         }
-
     }
 
     abstract class ReceivedMessage : Message
@@ -1228,9 +1527,15 @@ namespace System.ServiceModel.Channels
             get { return isFault; }
         }
 
-        protected static bool HasHeaderElement(XmlDictionaryReader reader, EnvelopeVersion envelopeVersion)
+        protected static bool HasHeaderElement(
+            XmlDictionaryReader reader,
+            EnvelopeVersion envelopeVersion
+        )
         {
-            return reader.IsStartElement(XD.MessageDictionary.Header, envelopeVersion.DictionaryNamespace);
+            return reader.IsStartElement(
+                XD.MessageDictionary.Header,
+                envelopeVersion.DictionaryNamespace
+            );
         }
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
@@ -1239,8 +1544,18 @@ namespace System.ServiceModel.Channels
             {
                 using (XmlDictionaryReader bodyReader = OnGetReaderAtBodyContents())
                 {
-                    if (bodyReader.ReadState == ReadState.Error || bodyReader.ReadState == ReadState.Closed)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MessageBodyReaderInvalidReadState, bodyReader.ReadState.ToString())));
+                    if (
+                        bodyReader.ReadState == ReadState.Error
+                        || bodyReader.ReadState == ReadState.Closed
+                    )
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.MessageBodyReaderInvalidReadState,
+                                    bodyReader.ReadState.ToString()
+                                )
+                            )
+                        );
 
                     while (bodyReader.NodeType != XmlNodeType.EndElement && !bodyReader.EOF)
                     {
@@ -1254,21 +1569,40 @@ namespace System.ServiceModel.Channels
 
         protected bool ReadStartBody(XmlDictionaryReader reader)
         {
-            return Message.ReadStartBody(reader, this.Version.Envelope, out this.isFault, out this.isEmpty);
+            return Message.ReadStartBody(
+                reader,
+                this.Version.Envelope,
+                out this.isFault,
+                out this.isEmpty
+            );
         }
 
         protected static EnvelopeVersion ReadStartEnvelope(XmlDictionaryReader reader)
         {
             EnvelopeVersion envelopeVersion;
 
-            if (reader.IsStartElement(XD.MessageDictionary.Envelope, XD.Message12Dictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    XD.MessageDictionary.Envelope,
+                    XD.Message12Dictionary.Namespace
+                )
+            )
                 envelopeVersion = EnvelopeVersion.Soap12;
-            else if (reader.IsStartElement(XD.MessageDictionary.Envelope, XD.Message11Dictionary.Namespace))
+            else if (
+                reader.IsStartElement(
+                    XD.MessageDictionary.Envelope,
+                    XD.Message11Dictionary.Namespace
+                )
+            )
                 envelopeVersion = EnvelopeVersion.Soap11;
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MessageVersionUnknown)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(SR.GetString(SR.MessageVersionUnknown))
+                );
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MessageBodyMissing)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(SR.GetString(SR.MessageBodyMissing))
+                );
             reader.Read();
             return envelopeVersion;
         }
@@ -1276,7 +1610,9 @@ namespace System.ServiceModel.Channels
         protected static void VerifyStartBody(XmlDictionaryReader reader, EnvelopeVersion version)
         {
             if (!reader.IsStartElement(XD.MessageDictionary.Body, version.DictionaryNamespace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MessageBodyMissing)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(SR.GetString(SR.MessageBodyMissing))
+                );
         }
     }
 
@@ -1293,7 +1629,11 @@ namespace System.ServiceModel.Channels
         XmlDictionaryReader reader;
         XmlDictionaryReaderQuotas quotas;
 
-        public StreamedMessage(XmlDictionaryReader reader, int maxSizeOfHeaders, MessageVersion desiredVersion)
+        public StreamedMessage(
+            XmlDictionaryReader reader,
+            int maxSizeOfHeaders,
+            MessageVersion desiredVersion
+        )
         {
             properties = new MessageProperties();
             if (reader.NodeType != XmlNodeType.Element)
@@ -1307,22 +1647,45 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                envelopeAttributes = XmlAttributeHolder.ReadAttributes(reader, ref maxSizeOfHeaders);
+                envelopeAttributes = XmlAttributeHolder.ReadAttributes(
+                    reader,
+                    ref maxSizeOfHeaders
+                );
                 envelopePrefix = reader.Prefix;
                 EnvelopeVersion envelopeVersion = ReadStartEnvelope(reader);
                 if (desiredVersion.Envelope != envelopeVersion)
                 {
-                    Exception versionMismatchException = new ArgumentException(SR.GetString(SR.EncoderEnvelopeVersionMismatch, envelopeVersion, desiredVersion.Envelope), "reader");
+                    Exception versionMismatchException = new ArgumentException(
+                        SR.GetString(
+                            SR.EncoderEnvelopeVersionMismatch,
+                            envelopeVersion,
+                            desiredVersion.Envelope
+                        ),
+                        "reader"
+                    );
                     throw TraceUtility.ThrowHelperError(
-                        new CommunicationException(versionMismatchException.Message, versionMismatchException),
-                        this);
+                        new CommunicationException(
+                            versionMismatchException.Message,
+                            versionMismatchException
+                        ),
+                        this
+                    );
                 }
 
                 if (HasHeaderElement(reader, envelopeVersion))
                 {
                     headerPrefix = reader.Prefix;
-                    headerAttributes = XmlAttributeHolder.ReadAttributes(reader, ref maxSizeOfHeaders);
-                    headers = new MessageHeaders(desiredVersion, reader, envelopeAttributes, headerAttributes, ref maxSizeOfHeaders);
+                    headerAttributes = XmlAttributeHolder.ReadAttributes(
+                        reader,
+                        ref maxSizeOfHeaders
+                    );
+                    headers = new MessageHeaders(
+                        desiredVersion,
+                        reader,
+                        envelopeAttributes,
+                        headerAttributes,
+                        ref maxSizeOfHeaders
+                    );
                 }
                 else
                 {
@@ -1361,18 +1724,12 @@ namespace System.ServiceModel.Channels
 
         public override MessageVersion Version
         {
-            get
-            {
-                return headers.MessageVersion;
-            }
+            get { return headers.MessageVersion; }
         }
 
         public override MessageProperties Properties
         {
-            get
-            {
-                return properties;
-            }
+            get { return properties; }
         }
 
         protected override void OnBodyToString(XmlDictionaryWriter writer)
@@ -1448,14 +1805,22 @@ namespace System.ServiceModel.Channels
         protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
         {
             EnvelopeVersion envelopeVersion = Version.Envelope;
-            writer.WriteStartElement(envelopePrefix, MessageStrings.Envelope, envelopeVersion.Namespace);
+            writer.WriteStartElement(
+                envelopePrefix,
+                MessageStrings.Envelope,
+                envelopeVersion.Namespace
+            );
             XmlAttributeHolder.WriteAttributes(envelopeAttributes, writer);
         }
 
         protected override void OnWriteStartHeaders(XmlDictionaryWriter writer)
         {
             EnvelopeVersion envelopeVersion = Version.Envelope;
-            writer.WriteStartElement(headerPrefix, MessageStrings.Header, envelopeVersion.Namespace);
+            writer.WriteStartElement(
+                headerPrefix,
+                MessageStrings.Header,
+                envelopeVersion.Namespace
+            );
             XmlAttributeHolder.WriteAttributes(headerAttributes, writer);
         }
 
@@ -1487,12 +1852,18 @@ namespace System.ServiceModel.Channels
         XmlDictionaryReader reader;
         XmlAttributeHolder[] bodyAttributes;
 
-        public BufferedMessage(IBufferedMessageData messageData, RecycledMessageState recycledMessageState)
-            : this(messageData, recycledMessageState, null, false)
-        {
-        }
+        public BufferedMessage(
+            IBufferedMessageData messageData,
+            RecycledMessageState recycledMessageState
+        )
+            : this(messageData, recycledMessageState, null, false) { }
 
-        public BufferedMessage(IBufferedMessageData messageData, RecycledMessageState recycledMessageState, bool[] understoodHeaders, bool understoodHeadersModified)
+        public BufferedMessage(
+            IBufferedMessageData messageData,
+            RecycledMessageState recycledMessageState,
+            bool[] understoodHeaders,
+            bool understoodHeadersModified
+        )
         {
             bool throwing = true;
             try
@@ -1515,10 +1886,21 @@ namespace System.ServiceModel.Channels
                     EnvelopeVersion envelopeVersion = ReadStartEnvelope(reader);
                     if (desiredVersion.Envelope != envelopeVersion)
                     {
-                        Exception versionMismatchException = new ArgumentException(SR.GetString(SR.EncoderEnvelopeVersionMismatch, envelopeVersion, desiredVersion.Envelope), "reader");
+                        Exception versionMismatchException = new ArgumentException(
+                            SR.GetString(
+                                SR.EncoderEnvelopeVersionMismatch,
+                                envelopeVersion,
+                                desiredVersion.Envelope
+                            ),
+                            "reader"
+                        );
                         throw TraceUtility.ThrowHelperError(
-                            new CommunicationException(versionMismatchException.Message, versionMismatchException),
-                            this);
+                            new CommunicationException(
+                                versionMismatchException.Message,
+                                versionMismatchException
+                            ),
+                            this
+                        );
                     }
 
                     if (HasHeaderElement(reader, envelopeVersion))
@@ -1526,11 +1908,25 @@ namespace System.ServiceModel.Channels
                         headers = recycledMessageState.TakeHeaders();
                         if (headers == null)
                         {
-                            headers = new MessageHeaders(desiredVersion, reader, messageData, recycledMessageState, understoodHeaders, understoodHeadersModified);
+                            headers = new MessageHeaders(
+                                desiredVersion,
+                                reader,
+                                messageData,
+                                recycledMessageState,
+                                understoodHeaders,
+                                understoodHeadersModified
+                            );
                         }
                         else
                         {
-                            headers.Init(desiredVersion, reader, messageData, recycledMessageState, understoodHeaders, understoodHeadersModified);
+                            headers.Init(
+                                desiredVersion,
+                                reader,
+                                messageData,
+                                recycledMessageState,
+                                understoodHeaders,
+                                understoodHeadersModified
+                            );
                         }
                     }
                     else
@@ -1541,7 +1937,10 @@ namespace System.ServiceModel.Channels
                     VerifyStartBody(reader, envelopeVersion);
 
                     int maxSizeOfAttributes = int.MaxValue;
-                    bodyAttributes = XmlAttributeHolder.ReadAttributes(reader, ref maxSizeOfAttributes);
+                    bodyAttributes = XmlAttributeHolder.ReadAttributes(
+                        reader,
+                        ref maxSizeOfAttributes
+                    );
                     if (maxSizeOfAttributes < int.MaxValue - 4096)
                         bodyAttributes = null;
                     if (ReadStartBody(reader))
@@ -1577,10 +1976,7 @@ namespace System.ServiceModel.Channels
 
         internal IBufferedMessageData MessageData
         {
-            get
-            {
-                return messageData;
-            }
+            get { return messageData; }
         }
 
         public override MessageProperties Properties
@@ -1601,10 +1997,7 @@ namespace System.ServiceModel.Channels
 
         public override MessageVersion Version
         {
-            get
-            {
-                return headers.MessageVersion;
-            }
+            get { return headers.MessageVersion; }
         }
 
         protected override XmlDictionaryReader OnGetReaderAtBodyContents()
@@ -1736,7 +2129,11 @@ namespace System.ServiceModel.Channels
             {
                 reader.MoveToContent();
                 EnvelopeVersion envelopeVersion = Version.Envelope;
-                writer.WriteStartElement(reader.Prefix, MessageStrings.Envelope, envelopeVersion.Namespace);
+                writer.WriteStartElement(
+                    reader.Prefix,
+                    MessageStrings.Envelope,
+                    envelopeVersion.Namespace
+                );
                 writer.WriteAttributes(reader, false);
             }
         }
@@ -1750,12 +2147,20 @@ namespace System.ServiceModel.Channels
                 reader.Read();
                 if (HasHeaderElement(reader, envelopeVersion))
                 {
-                    writer.WriteStartElement(reader.Prefix, MessageStrings.Header, envelopeVersion.Namespace);
+                    writer.WriteStartElement(
+                        reader.Prefix,
+                        MessageStrings.Header,
+                        envelopeVersion.Namespace
+                    );
                     writer.WriteAttributes(reader, false);
                 }
                 else
                 {
-                    writer.WriteStartElement(MessageStrings.Prefix, MessageStrings.Header, envelopeVersion.Namespace);
+                    writer.WriteStartElement(
+                        MessageStrings.Prefix,
+                        MessageStrings.Header,
+                        envelopeVersion.Namespace
+                    );
                 }
             }
         }
@@ -1764,7 +2169,11 @@ namespace System.ServiceModel.Channels
         {
             using (XmlDictionaryReader reader = GetBufferedReaderAtBody())
             {
-                writer.WriteStartElement(reader.Prefix, MessageStrings.Body, Version.Envelope.Namespace);
+                writer.WriteStartElement(
+                    reader.Prefix,
+                    MessageStrings.Body,
+                    Version.Envelope.Namespace
+                );
                 writer.WriteAttributes(reader, false);
             }
         }
@@ -1773,7 +2182,9 @@ namespace System.ServiceModel.Channels
         {
             if (headers.ContainsOnlyBufferedMessageHeaders)
             {
-                KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[Properties.Count];
+                KeyValuePair<string, object>[] properties = new KeyValuePair<string, object>[
+                    Properties.Count
+                ];
                 ((ICollection<KeyValuePair<string, object>>)Properties).CopyTo(properties, 0);
                 messageData.EnableMultipleUsers();
                 bool[] understoodHeaders = null;
@@ -1785,7 +2196,12 @@ namespace System.ServiceModel.Channels
                         understoodHeaders[i] = headers.IsUnderstood(i);
                     }
                 }
-                return new BufferedMessageBuffer(messageData, properties, understoodHeaders, headers.HasMustUnderstandBeenModified);
+                return new BufferedMessageBuffer(
+                    messageData,
+                    properties,
+                    understoodHeaders,
+                    headers.HasMustUnderstandBeenModified
+                );
             }
             else
             {
@@ -1862,7 +2278,10 @@ namespace System.ServiceModel.Channels
             return ReadAttributes(reader, ref maxSizeOfHeaders);
         }
 
-        public static XmlAttributeHolder[] ReadAttributes(XmlDictionaryReader reader, ref int maxSizeOfHeaders)
+        public static XmlAttributeHolder[] ReadAttributes(
+            XmlDictionaryReader reader,
+            ref int maxSizeOfHeaders
+        )
         {
             if (reader.AttributeCount == 0)
                 return emptyArray;
@@ -1899,12 +2318,18 @@ namespace System.ServiceModel.Channels
             {
                 string message = SR.GetString(SR.XmlBufferQuotaExceeded);
                 Exception inner = new QuotaExceededException(message);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(message, inner));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(message, inner)
+                );
             }
             maxSizeOfHeaders -= byteCount;
         }
 
-        public static string GetAttribute(XmlAttributeHolder[] attributes, string localName, string ns)
+        public static string GetAttribute(
+            XmlAttributeHolder[] attributes,
+            string localName,
+            string ns
+        )
         {
             for (int i = 0; i < attributes.Length; i++)
                 if (attributes[i].LocalName == localName && attributes[i].NamespaceUri == ns)
@@ -1981,12 +2406,18 @@ namespace System.ServiceModel.Channels
         HeaderInfo[] headerInfos;
         int index;
 
-        public MessageHeaderInfo TakeHeaderInfo(XmlDictionaryReader reader, string actor, bool mustUnderstand, bool relay, bool isRefParam)
+        public MessageHeaderInfo TakeHeaderInfo(
+            XmlDictionaryReader reader,
+            string actor,
+            bool mustUnderstand,
+            bool relay,
+            bool isRefParam
+        )
         {
             if (this.headerInfos != null)
             {
                 int i = this.index;
-                for (;;)
+                for (; ; )
                 {
                     HeaderInfo headerInfo = this.headerInfos[i];
                     if (headerInfo != null)
@@ -2019,7 +2450,7 @@ namespace System.ServiceModel.Channels
                     this.headerInfos = new HeaderInfo[maxHeaderInfos];
                 }
                 int i = this.index;
-                for (;;)
+                for (; ; )
                 {
                     if (this.headerInfos[i] == null)
                     {
@@ -2045,7 +2476,13 @@ namespace System.ServiceModel.Channels
             bool mustUnderstand;
             bool relay;
 
-            public HeaderInfo(XmlDictionaryReader reader, string actor, bool mustUnderstand, bool relay, bool isReferenceParameter)
+            public HeaderInfo(
+                XmlDictionaryReader reader,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                bool isReferenceParameter
+            )
             {
                 this.actor = actor;
                 this.mustUnderstand = mustUnderstand;
@@ -2084,10 +2521,19 @@ namespace System.ServiceModel.Channels
                 get { return relay; }
             }
 
-            public bool Matches(XmlDictionaryReader reader, string actor, bool mustUnderstand, bool relay, bool isRefParam)
+            public bool Matches(
+                XmlDictionaryReader reader,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
+                bool isRefParam
+            )
             {
-                return reader.IsStartElement(this.name, this.ns) &&
-                    this.actor == actor && this.mustUnderstand == mustUnderstand && this.relay == relay && this.isReferenceParameter == isRefParam;
+                return reader.IsStartElement(this.name, this.ns)
+                    && this.actor == actor
+                    && this.mustUnderstand == mustUnderstand
+                    && this.relay == relay
+                    && this.isReferenceParameter == isRefParam;
             }
         }
     }

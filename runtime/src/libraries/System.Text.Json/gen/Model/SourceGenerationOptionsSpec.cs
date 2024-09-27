@@ -52,7 +52,8 @@ namespace System.Text.Json.SourceGeneration
 
         public required bool? WriteIndented { get; init; }
 
-        public JsonKnownNamingPolicy? GetEffectivePropertyNamingPolicy()
-            => PropertyNamingPolicy ?? (Defaults is JsonSerializerDefaults.Web ? JsonKnownNamingPolicy.CamelCase : null);
+        public JsonKnownNamingPolicy? GetEffectivePropertyNamingPolicy() =>
+            PropertyNamingPolicy
+            ?? (Defaults is JsonSerializerDefaults.Web ? JsonKnownNamingPolicy.CamelCase : null);
     }
 }

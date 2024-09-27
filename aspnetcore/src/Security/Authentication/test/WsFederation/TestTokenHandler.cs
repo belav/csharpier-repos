@@ -13,16 +13,21 @@ internal class TestSecurityTokenHandler : TokenHandler
         return new TestSecurityToken();
     }
 
-    public override Task<TokenValidationResult> ValidateTokenAsync(string token, TokenValidationParameters validationParameters)
+    public override Task<TokenValidationResult> ValidateTokenAsync(
+        string token,
+        TokenValidationParameters validationParameters
+    )
     {
         if (!string.IsNullOrEmpty(token) && token.Contains("ThisIsAValidToken"))
         {
-            return Task.FromResult(new TokenValidationResult
-            {
-                ClaimsIdentity = new ClaimsIdentity("Test"),
-                IsValid = true,
-                SecurityToken = new TestSecurityToken()
-            });
+            return Task.FromResult(
+                new TokenValidationResult
+                {
+                    ClaimsIdentity = new ClaimsIdentity("Test"),
+                    IsValid = true,
+                    SecurityToken = new TestSecurityToken(),
+                }
+            );
         }
 
         throw new SecurityTokenException("The security token did not contain ThisIsAValidToken");

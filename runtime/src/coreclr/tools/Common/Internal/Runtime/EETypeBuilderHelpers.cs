@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 namespace Internal.Runtime
@@ -37,7 +36,6 @@ namespace Internal.Runtime
                 Debug.Assert(elementType <= EETypeElementType.FunctionPointer);
 
                 return elementType;
-
             }
         }
 
@@ -78,16 +76,21 @@ namespace Internal.Runtime
                 flags |= (uint)EETypeFlags.HasFinalizerFlag;
             }
 
-            if (type.IsDefType
+            if (
+                type.IsDefType
                 && !type.IsCanonicalSubtype(CanonicalFormKind.Universal)
-                && ((DefType)type).ContainsGCPointers)
+                && ((DefType)type).ContainsGCPointers
+            )
             {
                 flags |= (uint)EETypeFlags.HasPointersFlag;
             }
             else if (type.IsArray && !type.IsCanonicalSubtype(CanonicalFormKind.Universal))
             {
                 var arrayElementType = ((ArrayType)type).ElementType;
-                if ((arrayElementType.IsValueType && ((DefType)arrayElementType).ContainsGCPointers) || arrayElementType.IsGCPointer)
+                if (
+                    (arrayElementType.IsValueType && ((DefType)arrayElementType).ContainsGCPointers)
+                    || arrayElementType.IsGCPointer
+                )
                 {
                     flags |= (uint)EETypeFlags.HasPointersFlag;
                 }
@@ -105,10 +108,12 @@ namespace Internal.Runtime
         {
             ushort flagsEx = 0;
 
-            if (type is MetadataType mdType &&
-                            mdType.Module == mdType.Context.SystemModule &&
-                            mdType.Name is "WeakReference" or "WeakReference`1" &&
-                            mdType.Namespace == "System")
+            if (
+                type is MetadataType mdType
+                && mdType.Module == mdType.Context.SystemModule
+                && mdType.Name is "WeakReference" or "WeakReference`1"
+                && mdType.Namespace == "System"
+            )
             {
                 flagsEx |= (ushort)EETypeFlagsEx.HasEagerFinalizerFlag;
             }
@@ -138,15 +143,16 @@ namespace Internal.Runtime
                 if (!type.HasFinalizer)
                     return false;
 
-                if (type is MetadataType mdType &&
-                            mdType.Module == mdType.Context.SystemModule &&
-                            mdType.Name == "CriticalFinalizerObject" &&
-                            mdType.Namespace == "System.Runtime.ConstrainedExecution")
+                if (
+                    type is MetadataType mdType
+                    && mdType.Module == mdType.Context.SystemModule
+                    && mdType.Name == "CriticalFinalizerObject"
+                    && mdType.Namespace == "System.Runtime.ConstrainedExecution"
+                )
                     return true;
 
                 type = type.BaseType;
-            }
-            while (type != null);
+            } while (type != null);
 
             return false;
         }
@@ -158,12 +164,16 @@ namespace Internal.Runtime
                 if (!type.HasFinalizer)
                     return false;
 
-                if (((MetadataType)type).HasCustomAttribute("System.Runtime.InteropServices.ObjectiveC", "ObjectiveCTrackedTypeAttribute"))
+                if (
+                    ((MetadataType)type).HasCustomAttribute(
+                        "System.Runtime.InteropServices.ObjectiveC",
+                        "ObjectiveCTrackedTypeAttribute"
+                    )
+                )
                     return true;
 
                 type = type.BaseType;
-            }
-            while (type != null);
+            } while (type != null);
 
             return false;
         }
@@ -187,7 +197,11 @@ namespace Internal.Runtime
         /// of objects on the GCHeap. The amount of padding is recorded to allow unboxing to locals /
         /// arrays of value types which don't need it.
         /// </summary>
-        internal static uint ComputeValueTypeFieldPaddingFieldValue(uint padding, uint alignment, int targetPointerSize)
+        internal static uint ComputeValueTypeFieldPaddingFieldValue(
+            uint padding,
+            uint alignment,
+            int targetPointerSize
+        )
         {
             // For the default case, return 0
             if ((padding == 0) && (alignment == targetPointerSize))
@@ -209,7 +223,9 @@ namespace Internal.Runtime
             alignmentLog2++;
 
             uint paddingLowBits = padding & ValueTypePaddingLowMask;
-            uint paddingHighBits = ((padding & ~ValueTypePaddingLowMask) >> ValueTypePaddingAlignmentShift) << ValueTypePaddingHighShift;
+            uint paddingHighBits =
+                ((padding & ~ValueTypePaddingLowMask) >> ValueTypePaddingAlignmentShift)
+                << ValueTypePaddingHighShift;
             uint alignmentLog2Bits = alignmentLog2 << ValueTypePaddingAlignmentShift;
             Debug.Assert((alignmentLog2Bits & ~ValueTypePaddingAlignmentMask) == 0);
             return paddingLowBits | paddingHighBits | alignmentLog2Bits;

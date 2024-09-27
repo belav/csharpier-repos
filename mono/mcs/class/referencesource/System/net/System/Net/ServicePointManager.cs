@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 #if MONO_FEATURE_WEB_STACK
-namespace System.Net {
-    using Diagnostics;
+namespace System.Net
+{
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -14,6 +14,7 @@ namespace System.Net {
     using System.Runtime.CompilerServices;
     using System.Security.Authentication;
     using System.Threading;
+    using Diagnostics;
 
     //
     // The ServicePointManager class hands out ServicePoints (may exist or be created
@@ -25,14 +26,15 @@ namespace System.Net {
     /// <para>Manages the collection of <see cref='System.Net.ServicePoint'/> instances.</para>
     /// </devdoc>
     ///
-    public partial class ServicePointManager {
-
+    public partial class ServicePointManager
+    {
         /// <devdoc>
         ///    <para>
         ///       The number of non-persistent connections allowed on a <see cref='System.Net.ServicePoint'/>.
         ///    </para>
         /// </devdoc>
         public const int DefaultNonPersistentConnectionLimit = 4;
+
         /// <devdoc>
         ///    <para>
         ///       The default number of persistent connections allowed on a <see cref='System.Net.ServicePoint'/>.
@@ -47,9 +49,10 @@ namespace System.Net {
         /// </devdoc>
         private const int DefaultAspPersistentConnectionLimit = 10;
 
-
-        internal static readonly string SpecialConnectGroupName = "/.NET/NetClasses/HttpWebRequest/CONNECT__Group$$/";
-        internal static readonly TimerThread.Callback s_IdleServicePointTimeoutDelegate = new TimerThread.Callback(IdleServicePointTimeoutCallback);
+        internal static readonly string SpecialConnectGroupName =
+            "/.NET/NetClasses/HttpWebRequest/CONNECT__Group$$/";
+        internal static readonly TimerThread.Callback s_IdleServicePointTimeoutDelegate =
+            new TimerThread.Callback(IdleServicePointTimeoutCallback);
 
         //
         // data  - only statics used
@@ -64,10 +67,12 @@ namespace System.Net {
         private static Hashtable s_ServicePointTable = new Hashtable(10);
 
         // IIS6 has 120 sec for an idle connection timeout, we should have a little bit less.
-        private static volatile TimerThread.Queue s_ServicePointIdlingQueue = TimerThread.GetOrCreateQueue(100 * 1000);
+        private static volatile TimerThread.Queue s_ServicePointIdlingQueue =
+            TimerThread.GetOrCreateQueue(100 * 1000);
         private static int s_MaxServicePoints = 0;
 #if !FEATURE_PAL
-        private static volatile CertPolicyValidationCallback s_CertPolicyValidationCallback = new CertPolicyValidationCallback();
+        private static volatile CertPolicyValidationCallback s_CertPolicyValidationCallback =
+            new CertPolicyValidationCallback();
         private static volatile ServerCertValidationCallback s_ServerCertValidationCallback = null;
 
         private static SecurityProtocolType s_SecurityProtocolType;
@@ -79,7 +84,6 @@ namespace System.Net {
         private static bool s_disableSendAuxRecord;
         private static bool s_disableSystemDefaultTlsVersions;
         private static SslProtocols s_defaultSslProtocols;
-
 #endif // !FEATURE_PAL
 
         private static volatile Hashtable s_ConfigTable = null;
@@ -95,16 +99,21 @@ namespace System.Net {
         //
 
         private static volatile bool s_UserChangedLimit;
-        private static int InternalConnectionLimit {
-            get {
-                if (s_ConfigTable == null) {
+        private static int InternalConnectionLimit
+        {
+            get
+            {
+                if (s_ConfigTable == null)
+                {
                     // init config
                     s_ConfigTable = ConfigTable;
                 }
                 return s_ConnectionLimit;
             }
-            set {
-                if (s_ConfigTable == null) {
+            set
+            {
+                if (s_ConfigTable == null)
+                {
                     // init config
                     s_ConfigTable = ConfigTable;
                 }
@@ -124,12 +133,16 @@ namespace System.Net {
         //    5.    If ServicePointManager has a default config connection limit setting, then take that value
         //    6.    If ServicePoint is running under ASP+, then set value to 10, else set it to 2
         //
-        private static int PersistentConnectionLimit {
-            get {
+        private static int PersistentConnectionLimit
+        {
+            get
+            {
 #if !FEATURE_PAL
-                if (ComNetOS.IsAspNetServer) {
+                if (ComNetOS.IsAspNetServer)
+                {
                     return DefaultAspPersistentConnectionLimit;
-                } else
+                }
+                else
 #endif
                 {
                     return DefaultPersistentConnectionLimit;
@@ -150,23 +163,35 @@ namespace System.Net {
         */
 
         [System.Diagnostics.Conditional("DEBUG")]
-        internal static void DebugMembers(int requestHash) {
-            try {
-                foreach (WeakReference servicePointReference in  s_ServicePointTable) {
+        internal static void DebugMembers(int requestHash)
+        {
+            try
+            {
+                foreach (WeakReference servicePointReference in s_ServicePointTable)
+                {
                     ServicePoint servicePoint;
-                    if (servicePointReference != null && servicePointReference.IsAlive) {
+                    if (servicePointReference != null && servicePointReference.IsAlive)
+                    {
                         servicePoint = (ServicePoint)servicePointReference.Target;
                     }
-                    else {
+                    else
+                    {
                         servicePoint = null;
                     }
-                    if (servicePoint!=null) {
+                    if (servicePoint != null)
+                    {
                         servicePoint.DebugMembers(requestHash);
                     }
                 }
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
             }
@@ -178,27 +203,35 @@ namespace System.Net {
         //  a default on failure
         //
 
-        private static Hashtable ConfigTable {
-            get {
-                if (s_ConfigTable == null) {
-                    lock(s_ServicePointTable) {
-                        if (s_ConfigTable == null) {
-                            ConnectionManagementSectionInternal configSection 
-                                = ConnectionManagementSectionInternal.GetSection();
+        private static Hashtable ConfigTable
+        {
+            get
+            {
+                if (s_ConfigTable == null)
+                {
+                    lock (s_ServicePointTable)
+                    {
+                        if (s_ConfigTable == null)
+                        {
+                            ConnectionManagementSectionInternal configSection =
+                                ConnectionManagementSectionInternal.GetSection();
                             Hashtable configTable = null;
                             if (configSection != null)
                             {
                                 configTable = configSection.ConnectionManagement;
                             }
 
-                            if (configTable == null) {
+                            if (configTable == null)
+                            {
                                 configTable = new Hashtable();
                             }
 
                             // we piggy back loading the ConnectionLimit here
-                            if (configTable.ContainsKey("*") ) {
-                                int connectionLimit  = (int) configTable["*"];
-                                if ( connectionLimit < 1 ) {
+                            if (configTable.ContainsKey("*"))
+                            {
+                                int connectionLimit = (int)configTable["*"];
+                                if (connectionLimit < 1)
+                                {
                                     connectionLimit = PersistentConnectionLimit;
                                 }
                                 s_ConnectionLimit = connectionLimit;
@@ -211,21 +244,24 @@ namespace System.Net {
             }
         }
 
-
         internal static TimerThread.Callback IdleServicePointTimeoutDelegate
         {
-            get
-            {
-                return s_IdleServicePointTimeoutDelegate;
-            }
+            get { return s_IdleServicePointTimeoutDelegate; }
         }
 
-        private static void IdleServicePointTimeoutCallback(TimerThread.Timer timer, int timeNoticed, object context)
+        private static void IdleServicePointTimeoutCallback(
+            TimerThread.Timer timer,
+            int timeNoticed,
+            object context
+        )
         {
-            ServicePoint servicePoint = (ServicePoint) context;
+            ServicePoint servicePoint = (ServicePoint)context;
 
-            if (Logging.On) Logging.PrintInfo(Logging.Web, SR.GetString(SR.net_log_closed_idle,
-                "ServicePoint", servicePoint.GetHashCode()));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.Web,
+                    SR.GetString(SR.net_log_closed_idle, "ServicePoint", servicePoint.GetHashCode())
+                );
 
             lock (s_ServicePointTable)
             {
@@ -235,22 +271,27 @@ namespace System.Net {
             servicePoint.ReleaseAllConnectionGroups();
         }
 
-
         //
         // constructors
         //
 
-        private ServicePointManager() {
-        }
+        private ServicePointManager() { }
 
 #if !FEATURE_PAL
-        [SuppressMessage("Microsoft.Concurrency", "CA8001", Justification = "Reviewed for thread-safety")]
-        public static SecurityProtocolType SecurityProtocol {
-            get {
+        [SuppressMessage(
+            "Microsoft.Concurrency",
+            "CA8001",
+            Justification = "Reviewed for thread-safety"
+        )]
+        public static SecurityProtocolType SecurityProtocol
+        {
+            get
+            {
                 EnsureConfigurationLoaded();
                 return s_SecurityProtocolType;
             }
-            set {
+            set
+            {
                 EnsureConfigurationLoaded();
                 ValidateSecurityProtocol(value);
                 s_SecurityProtocolType = value;
@@ -260,8 +301,11 @@ namespace System.Net {
         private static void ValidateSecurityProtocol(SecurityProtocolType value)
         {
             // Do not allow Ssl2 (and others) as explicit SSL version request.
-            SecurityProtocolType allowed = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls
-                | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            SecurityProtocolType allowed =
+                SecurityProtocolType.Ssl3
+                | SecurityProtocolType.Tls
+                | SecurityProtocolType.Tls11
+                | SecurityProtocolType.Tls12;
 
             Debug.Assert((int)SecurityProtocolType.SystemDefault == (int)SslProtocols.None);
             Debug.Assert((int)SecurityProtocolType.Ssl3 == (int)SslProtocols.Ssl3);
@@ -320,14 +364,19 @@ namespace System.Net {
         /// <para>Gets or sets the maximum number of <see cref='System.Net.ServicePoint'/> instances that should be maintained at any
         ///    time.</para>
         /// </devdoc>
-        [SuppressMessage("Microsoft.Concurrency", "CA8001", Justification = "Reviewed for thread-safety")]
-        public static int MaxServicePoints {
-            get {
-                return s_MaxServicePoints;
-            }
-            set {
+        [SuppressMessage(
+            "Microsoft.Concurrency",
+            "CA8001",
+            Justification = "Reviewed for thread-safety"
+        )]
+        public static int MaxServicePoints
+        {
+            get { return s_MaxServicePoints; }
+            set
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-                if (!ValidationHelper.ValidateRange(value, 0, Int32.MaxValue)) {
+                if (!ValidationHelper.ValidateRange(value, 0, Int32.MaxValue))
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 s_MaxServicePoints = value;
@@ -337,34 +386,34 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static int DefaultConnectionLimit {
-            get {
-                return InternalConnectionLimit;
-            }
-            set {
+        public static int DefaultConnectionLimit
+        {
+            get { return InternalConnectionLimit; }
+            set
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-                if (value > 0) {
+                if (value > 0)
+                {
                     InternalConnectionLimit = value;
-
                 }
-                else {
+                else
+                {
                     throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_toosmall));
                 }
             }
         }
 
-
-
         /// <devdoc>
         /// <para>Gets or sets the maximum idle time in seconds of a <see cref='System.Net.ServicePoint'/>.</para>
         /// </devdoc>
-        public static int MaxServicePointIdleTime {
-            get {
-                return s_ServicePointIdlingQueue.Duration;
-            }
-            set {
+        public static int MaxServicePointIdleTime
+        {
+            get { return s_ServicePointIdlingQueue.Duration; }
+            set
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-                if ( !ValidationHelper.ValidateRange(value, Timeout.Infinite, Int32.MaxValue)) {
+                if (!ValidationHelper.ValidateRange(value, Timeout.Infinite, Int32.MaxValue))
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 if (s_ServicePointIdlingQueue.Duration != value)
@@ -380,13 +429,10 @@ namespace System.Net {
         ///       Changing this value does not affect existing <see cref='System.Net.ServicePoint'/> instances but only to new ones that are created from that moment on.
         ///    </para>
         /// </devdoc>
-        public static bool UseNagleAlgorithm {
-            get {
-                return SettingsSectionInternal.Section.UseNagleAlgorithm;
-            }
-            set {
-                SettingsSectionInternal.Section.UseNagleAlgorithm = value;
-            }
+        public static bool UseNagleAlgorithm
+        {
+            get { return SettingsSectionInternal.Section.UseNagleAlgorithm; }
+            set { SettingsSectionInternal.Section.UseNagleAlgorithm = value; }
         }
 
         /// <devdoc>
@@ -395,13 +441,10 @@ namespace System.Net {
         ///       Changing this value does not affect existing <see cref='System.Net.ServicePoint'/> instances but only to new ones that are created from that moment on.
         ///    </para>
         /// </devdoc>
-        public static bool Expect100Continue {
-            get {
-                return SettingsSectionInternal.Section.Expect100Continue;
-            }
-            set {
-                SettingsSectionInternal.Section.Expect100Continue = value;
-            }
+        public static bool Expect100Continue
+        {
+            get { return SettingsSectionInternal.Section.Expect100Continue; }
+            set { SettingsSectionInternal.Section.Expect100Continue = value; }
         }
 
         /// <devdoc>
@@ -410,13 +453,10 @@ namespace System.Net {
         ///         address may be used on each connection, when more than one IP is availble
         ///    </para>
         /// </devdoc>
-        public static bool EnableDnsRoundRobin {
-            get {
-                return SettingsSectionInternal.Section.EnableDnsRoundRobin;
-            }
-            set {
-                SettingsSectionInternal.Section.EnableDnsRoundRobin = value;
-            }
+        public static bool EnableDnsRoundRobin
+        {
+            get { return SettingsSectionInternal.Section.EnableDnsRoundRobin; }
+            set { SettingsSectionInternal.Section.EnableDnsRoundRobin = value; }
         }
 
         /// <devdoc>
@@ -425,15 +465,17 @@ namespace System.Net {
         ///       there were no recorded failures.  -1 is infinite.  Time should be in ms
         ///    </para>
         /// </devdoc>
-        public static int DnsRefreshTimeout {
-            get {
-                return SettingsSectionInternal.Section.DnsRefreshTimeout;
-            }
-            set {
-                if(value < -1){
+        public static int DnsRefreshTimeout
+        {
+            get { return SettingsSectionInternal.Section.DnsRefreshTimeout; }
+            set
+            {
+                if (value < -1)
+                {
                     SettingsSectionInternal.Section.DnsRefreshTimeout = -1;
                 }
-                else{
+                else
+                {
                     SettingsSectionInternal.Section.DnsRefreshTimeout = value;
                 }
             }
@@ -447,40 +489,44 @@ namespace System.Net {
         /// </devdoc>
 
 
-        [Obsolete("CertificatePolicy is obsoleted for this type, please use ServerCertificateValidationCallback instead. http://go.microsoft.com/fwlink/?linkid=14202")]
-        public static ICertificatePolicy CertificatePolicy {
-            get {
-                return GetLegacyCertificatePolicy();
-            }
-            set {
+        [Obsolete(
+            "CertificatePolicy is obsoleted for this type, please use ServerCertificateValidationCallback instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        public static ICertificatePolicy CertificatePolicy
+        {
+            get { return GetLegacyCertificatePolicy(); }
+            set
+            {
                 //Prevent for an applet to override default Certificate Policy
                 ExceptionHelper.UnmanagedPermission.Demand();
                 s_CertPolicyValidationCallback = new CertPolicyValidationCallback(value);
             }
         }
 
-        internal static ICertificatePolicy GetLegacyCertificatePolicy(){
+        internal static ICertificatePolicy GetLegacyCertificatePolicy()
+        {
             if (s_CertPolicyValidationCallback == null)
                 return null;
             else
                 return s_CertPolicyValidationCallback.CertificatePolicy;
         }
 
-        internal static CertPolicyValidationCallback CertPolicyValidationCallback {
-            get {
-                return s_CertPolicyValidationCallback;
-            }
+        internal static CertPolicyValidationCallback CertPolicyValidationCallback
+        {
+            get { return s_CertPolicyValidationCallback; }
         }
 
-
-        public static RemoteCertificateValidationCallback ServerCertificateValidationCallback {
-            get {
+        public static RemoteCertificateValidationCallback ServerCertificateValidationCallback
+        {
+            get
+            {
                 if (s_ServerCertValidationCallback == null)
                     return null;
                 else
                     return s_ServerCertValidationCallback.ValidationCallback;
             }
-            set {
+            set
+            {
                 // Prevent an applet from overriding the default Certificate Policy
                 ExceptionHelper.InfrastructurePermission.Demand();
                 if (value == null)
@@ -494,57 +540,44 @@ namespace System.Net {
             }
         }
 
-        internal static ServerCertValidationCallback ServerCertValidationCallback {
-            get {
-                return s_ServerCertValidationCallback;
-            }
+        internal static ServerCertValidationCallback ServerCertValidationCallback
+        {
+            get { return s_ServerCertValidationCallback; }
         }
 
-        public static bool ReusePort {
-            get {
-                return s_reusePort;
-            }
-            set {
-                s_reusePort = value;
-            }
+        public static bool ReusePort
+        {
+            get { return s_reusePort; }
+            set { s_reusePort = value; }
         }
 
         internal static bool? ReusePortSupported
         {
-            get
-            {
-                return s_reusePortSupported;
-            }
-            set
-            {
-                s_reusePortSupported = value;
-            }
+            get { return s_reusePortSupported; }
+            set { s_reusePortSupported = value; }
         }
 #endif // !FEATURE_PAL
 
-        public static bool CheckCertificateRevocationList {
-            get {
-                return SettingsSectionInternal.Section.CheckCertificateRevocationList;
-            }
-            set {
+        public static bool CheckCertificateRevocationList
+        {
+            get { return SettingsSectionInternal.Section.CheckCertificateRevocationList; }
+            set
+            {
                 //Prevent an applet to override default certificate checking
                 ExceptionHelper.UnmanagedPermission.Demand();
                 SettingsSectionInternal.Section.CheckCertificateRevocationList = value;
             }
         }
 
-        public static EncryptionPolicy EncryptionPolicy {
-            get {
-                return SettingsSectionInternal.Section.EncryptionPolicy;
-            }
-        }
-        
-        internal static bool CheckCertificateName {
-            get {
-                return SettingsSectionInternal.Section.CheckCertificateName;
-            }
+        public static EncryptionPolicy EncryptionPolicy
+        {
+            get { return SettingsSectionInternal.Section.EncryptionPolicy; }
         }
 
+        internal static bool CheckCertificateName
+        {
+            get { return SettingsSectionInternal.Section.CheckCertificateName; }
+        }
 
         //
         // class methods
@@ -554,20 +587,24 @@ namespace System.Net {
         // MakeQueryString - Just a short macro to handle creating the query
         //  string that we search for host ports in the host list
         //
-        internal static string MakeQueryString(Uri address) {
+        internal static string MakeQueryString(Uri address)
+        {
             if (address.IsDefaultPort)
                 return address.Scheme + "://" + address.DnsSafeHost;
             else
                 return address.Scheme + "://" + address.DnsSafeHost + ":" + address.Port.ToString();
         }
 
-        internal static string MakeQueryString(Uri address1, bool isProxy) {
-           if (isProxy) {
-               return MakeQueryString(address1) + "://proxy";
-           }
-           else {
-               return MakeQueryString(address1);
-           }
+        internal static string MakeQueryString(Uri address1, bool isProxy)
+        {
+            if (isProxy)
+            {
+                return MakeQueryString(address1) + "://proxy";
+            }
+            else
+            {
+                return MakeQueryString(address1);
+            }
         }
 
         //
@@ -578,20 +615,20 @@ namespace System.Net {
         /// <para>Finds an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the
         ///    specified Uniform Resource Identifier.</para>
         /// </devdoc>
-        public static ServicePoint FindServicePoint(Uri address) {
+        public static ServicePoint FindServicePoint(Uri address)
+        {
             return FindServicePoint(address, null);
         }
-
 
         /// <devdoc>
         /// <para>Finds an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the
         ///    specified Uniform Resource Identifier.</para>
         /// </devdoc>
-        public static ServicePoint FindServicePoint(string uriString, IWebProxy proxy) {
+        public static ServicePoint FindServicePoint(string uriString, IWebProxy proxy)
+        {
             Uri uri = new Uri(uriString);
             return FindServicePoint(uri, proxy);
         }
-
 
         //
         // FindServicePoint - Query using an Uri for a given server point
@@ -601,7 +638,8 @@ namespace System.Net {
         /// <para>Findes an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the specified <see cref='System.Uri'/>
         /// instance.</para>
         /// </devdoc>
-        public static ServicePoint FindServicePoint(Uri address, IWebProxy proxy) {
+        public static ServicePoint FindServicePoint(Uri address, IWebProxy proxy)
+        {
             ProxyChain chain;
             HttpAbortDelegate abortDelegate = null;
             int abortState = 0;
@@ -609,12 +647,21 @@ namespace System.Net {
         }
 
         // If abortState becomes non-zero, the attempt to find a service point has been aborted.
-        internal static ServicePoint FindServicePoint(Uri address, IWebProxy proxy, out ProxyChain chain, ref HttpAbortDelegate abortDelegate, ref int abortState)
+        internal static ServicePoint FindServicePoint(
+            Uri address,
+            IWebProxy proxy,
+            out ProxyChain chain,
+            ref HttpAbortDelegate abortDelegate,
+            ref int abortState
+        )
         {
-            if (address==null) {
+            if (address == null)
+            {
                 throw new ArgumentNullException("address");
             }
-            GlobalLog.Enter("ServicePointManager::FindServicePoint() address:" + address.ToString());
+            GlobalLog.Enter(
+                "ServicePointManager::FindServicePoint() address:" + address.ToString()
+            );
 
             bool isProxyServicePoint = false;
             chain = null;
@@ -623,7 +670,8 @@ namespace System.Net {
             // find proxy info, and then switch on proxy
             //
             Uri proxyAddress = null;
-            if (proxy!=null  && !address.IsLoopback) {
+            if (proxy != null && !address.IsLoopback)
+            {
                 IAutoWebProxy autoProxy = proxy as IAutoWebProxy;
                 if (autoProxy != null)
                 {
@@ -632,26 +680,37 @@ namespace System.Net {
                     // Set up our ability to abort this MoveNext call.  Note that the current implementations of ProxyChain will only
                     // take time on the first call, so this is the only place we do this.  If a new ProxyChain takes time in later
                     // calls, this logic should be copied to other places MoveNext is called.
-                    GlobalLog.Assert(abortDelegate == null, "ServicePointManager::FindServicePoint()|AbortDelegate already set.");
+                    GlobalLog.Assert(
+                        abortDelegate == null,
+                        "ServicePointManager::FindServicePoint()|AbortDelegate already set."
+                    );
                     abortDelegate = chain.HttpAbortDelegate;
                     try
                     {
                         Thread.MemoryBarrier();
                         if (abortState != 0)
                         {
-                            Exception exception = new WebException(NetRes.GetWebStatusString(WebExceptionStatus.RequestCanceled), WebExceptionStatus.RequestCanceled);
-                            GlobalLog.LeaveException("ServicePointManager::FindServicePoint() Request aborted before proxy lookup.", exception);
+                            Exception exception = new WebException(
+                                NetRes.GetWebStatusString(WebExceptionStatus.RequestCanceled),
+                                WebExceptionStatus.RequestCanceled
+                            );
+                            GlobalLog.LeaveException(
+                                "ServicePointManager::FindServicePoint() Request aborted before proxy lookup.",
+                                exception
+                            );
                             throw exception;
                         }
 
                         if (!chain.Enumerator.MoveNext())
                         {
-                            GlobalLog.Assert("ServicePointManager::FindServicePoint()|GetProxies() returned zero proxies.");
-/*
-                            Exception exception = new WebException(NetRes.GetWebStatusString(WebExceptionStatus.RequestProhibitedByProxy), WebExceptionStatus.RequestProhibitedByProxy);
-                            GlobalLog.LeaveException("ServicePointManager::FindServicePoint() Proxy prevented request.", exception);
-                            throw exception;
-*/
+                            GlobalLog.Assert(
+                                "ServicePointManager::FindServicePoint()|GetProxies() returned zero proxies."
+                            );
+                            /*
+                                                        Exception exception = new WebException(NetRes.GetWebStatusString(WebExceptionStatus.RequestProhibitedByProxy), WebExceptionStatus.RequestProhibitedByProxy);
+                                                        GlobalLog.LeaveException("ServicePointManager::FindServicePoint() Proxy prevented request.", exception);
+                                                        throw exception;
+                            */
                         }
                         proxyAddress = chain.Enumerator.Current;
                     }
@@ -668,14 +727,18 @@ namespace System.Net {
                 }
 
                 // null means DIRECT
-                if (proxyAddress!=null) {
+                if (proxyAddress != null)
+                {
                     address = proxyAddress;
                     isProxyServicePoint = true;
                 }
             }
 
             ServicePoint servicePoint = FindServicePointHelper(address, isProxyServicePoint);
-            GlobalLog.Leave("ServicePointManager::FindServicePoint() servicePoint#" + ValidationHelper.HashString(servicePoint));
+            GlobalLog.Leave(
+                "ServicePointManager::FindServicePoint() servicePoint#"
+                    + ValidationHelper.HashString(servicePoint)
+            );
             return servicePoint;
         }
 
@@ -689,12 +752,17 @@ namespace System.Net {
             }
 
             Uri proxyAddress = chain.Enumerator.Current;
-            return FindServicePointHelper(proxyAddress == null ? chain.Destination : proxyAddress, proxyAddress != null);
+            return FindServicePointHelper(
+                proxyAddress == null ? chain.Destination : proxyAddress,
+                proxyAddress != null
+            );
         }
 
         private static ServicePoint FindServicePointHelper(Uri address, bool isProxyServicePoint)
         {
-            GlobalLog.Enter("ServicePointManager::FindServicePointHelper() address:" + address.ToString());
+            GlobalLog.Enter(
+                "ServicePointManager::FindServicePointHelper() address:" + address.ToString()
+            );
 
             if (isProxyServicePoint)
             {
@@ -704,8 +772,14 @@ namespace System.Net {
 
 
 
-                    Exception exception = new NotSupportedException(SR.GetString(SR.net_proxyschemenotsupported, address.Scheme));
-                    GlobalLog.LeaveException("ServicePointManager::FindServicePointHelper() proxy has unsupported scheme:" + address.Scheme.ToString(), exception);
+                    Exception exception = new NotSupportedException(
+                        SR.GetString(SR.net_proxyschemenotsupported, address.Scheme)
+                    );
+                    GlobalLog.LeaveException(
+                        "ServicePointManager::FindServicePointHelper() proxy has unsupported scheme:"
+                            + address.Scheme.ToString(),
+                        exception
+                    );
                     throw exception;
                 }
             }
@@ -719,41 +793,85 @@ namespace System.Net {
 
             // lookup service point in the table
             ServicePoint servicePoint = null;
-            GlobalLog.Print("ServicePointManager::FindServicePointHelper() locking and looking up tempEntry:[" + tempEntry.ToString() + "]");
-            lock (s_ServicePointTable) {
+            GlobalLog.Print(
+                "ServicePointManager::FindServicePointHelper() locking and looking up tempEntry:["
+                    + tempEntry.ToString()
+                    + "]"
+            );
+            lock (s_ServicePointTable)
+            {
                 // once we grab the lock, check if it wasn't already added
-                WeakReference servicePointReference =  s_ServicePointTable[tempEntry] as WeakReference;
-                GlobalLog.Print("ServicePointManager::FindServicePointHelper() lookup returned WeakReference#" + ValidationHelper.HashString(servicePointReference));
-                if ( servicePointReference != null ) {
+                WeakReference servicePointReference =
+                    s_ServicePointTable[tempEntry] as WeakReference;
+                GlobalLog.Print(
+                    "ServicePointManager::FindServicePointHelper() lookup returned WeakReference#"
+                        + ValidationHelper.HashString(servicePointReference)
+                );
+                if (servicePointReference != null)
+                {
                     servicePoint = (ServicePoint)servicePointReference.Target;
-                    GlobalLog.Print("ServicePointManager::FindServicePointHelper() successful lookup returned ServicePoint#" + ValidationHelper.HashString(servicePoint));
+                    GlobalLog.Print(
+                        "ServicePointManager::FindServicePointHelper() successful lookup returned ServicePoint#"
+                            + ValidationHelper.HashString(servicePoint)
+                    );
                 }
-                if (servicePoint==null) {
+                if (servicePoint == null)
+                {
                     // lookup failure or timeout, we need to create a new ServicePoint
-                    if (s_MaxServicePoints<=0 || s_ServicePointTable.Count<s_MaxServicePoints) {
+                    if (s_MaxServicePoints <= 0 || s_ServicePointTable.Count < s_MaxServicePoints)
+                    {
                         // Determine Connection Limit
                         int connectionLimit = InternalConnectionLimit;
                         string schemeHostPort = MakeQueryString(address);
                         bool userDefined = s_UserChangedLimit;
-                        if (ConfigTable.ContainsKey(schemeHostPort) ) {
-                            connectionLimit = (int) ConfigTable[schemeHostPort];
+                        if (ConfigTable.ContainsKey(schemeHostPort))
+                        {
+                            connectionLimit = (int)ConfigTable[schemeHostPort];
                             userDefined = true;
                         }
-                        servicePoint = new ServicePoint(address, s_ServicePointIdlingQueue, connectionLimit, tempEntry, userDefined, isProxyServicePoint);
-                        GlobalLog.Print("ServicePointManager::FindServicePointHelper() created ServicePoint#" + ValidationHelper.HashString(servicePoint));
+                        servicePoint = new ServicePoint(
+                            address,
+                            s_ServicePointIdlingQueue,
+                            connectionLimit,
+                            tempEntry,
+                            userDefined,
+                            isProxyServicePoint
+                        );
+                        GlobalLog.Print(
+                            "ServicePointManager::FindServicePointHelper() created ServicePoint#"
+                                + ValidationHelper.HashString(servicePoint)
+                        );
                         servicePointReference = new WeakReference(servicePoint);
                         s_ServicePointTable[tempEntry] = servicePointReference;
-                        GlobalLog.Print("ServicePointManager::FindServicePointHelper() adding entry WeakReference#" + ValidationHelper.HashString(servicePointReference) + " key:[" + tempEntry + "]");
+                        GlobalLog.Print(
+                            "ServicePointManager::FindServicePointHelper() adding entry WeakReference#"
+                                + ValidationHelper.HashString(servicePointReference)
+                                + " key:["
+                                + tempEntry
+                                + "]"
+                        );
                     }
-                    else {
-                        Exception exception = new InvalidOperationException(SR.GetString(SR.net_maxsrvpoints));
-                        GlobalLog.LeaveException("ServicePointManager::FindServicePointHelper() reached the limit count:" + s_ServicePointTable.Count.ToString() + " limit:" + s_MaxServicePoints.ToString(), exception);
+                    else
+                    {
+                        Exception exception = new InvalidOperationException(
+                            SR.GetString(SR.net_maxsrvpoints)
+                        );
+                        GlobalLog.LeaveException(
+                            "ServicePointManager::FindServicePointHelper() reached the limit count:"
+                                + s_ServicePointTable.Count.ToString()
+                                + " limit:"
+                                + s_MaxServicePoints.ToString(),
+                            exception
+                        );
                         throw exception;
                     }
                 }
             }
 
-            GlobalLog.Leave("ServicePointManager::FindServicePointHelper() servicePoint#" + ValidationHelper.HashString(servicePoint));
+            GlobalLog.Leave(
+                "ServicePointManager::FindServicePointHelper() servicePoint#"
+                    + ValidationHelper.HashString(servicePoint)
+            );
             return servicePoint;
         }
 
@@ -765,8 +883,10 @@ namespace System.Net {
         /// <para>Findes an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the specified <see cref='System.Uri'/>
         /// instance.</para>
         /// </devdoc>
-        internal static ServicePoint FindServicePoint(string host, int port) {
-            if (host==null) {
+        internal static ServicePoint FindServicePoint(string host, int port)
+        {
+            if (host == null)
+            {
                 throw new ArgumentNullException("address");
             }
             GlobalLog.Enter("ServicePointManager::FindServicePoint() host:" + host.ToString());
@@ -774,65 +894,115 @@ namespace System.Net {
             string tempEntry = null;
             bool isProxyServicePoint = false;
 
-
             //
             // Search for the correct proxy host,
             //  then match its acutal host by using ConnectionGroups
             //  which are located on the actual ServicePoint.
             //
-            tempEntry = "ByHost:"+host+":"+port.ToString(CultureInfo.InvariantCulture);
+            tempEntry = "ByHost:" + host + ":" + port.ToString(CultureInfo.InvariantCulture);
             // lookup service point in the table
             ServicePoint servicePoint = null;
-            GlobalLog.Print("ServicePointManager::FindServicePoint() locking and looking up tempEntry:[" + tempEntry.ToString() + "]");
-            lock (s_ServicePointTable) {
+            GlobalLog.Print(
+                "ServicePointManager::FindServicePoint() locking and looking up tempEntry:["
+                    + tempEntry.ToString()
+                    + "]"
+            );
+            lock (s_ServicePointTable)
+            {
                 // once we grab the lock, check if it wasn't already added
-                WeakReference servicePointReference =  s_ServicePointTable[tempEntry] as WeakReference;
-                GlobalLog.Print("ServicePointManager::FindServicePoint() lookup returned WeakReference#" + ValidationHelper.HashString(servicePointReference));
-                if ( servicePointReference != null ) {
+                WeakReference servicePointReference =
+                    s_ServicePointTable[tempEntry] as WeakReference;
+                GlobalLog.Print(
+                    "ServicePointManager::FindServicePoint() lookup returned WeakReference#"
+                        + ValidationHelper.HashString(servicePointReference)
+                );
+                if (servicePointReference != null)
+                {
                     servicePoint = (ServicePoint)servicePointReference.Target;
-                    GlobalLog.Print("ServicePointManager::FindServicePoint() successfull lookup returned ServicePoint#" + ValidationHelper.HashString(servicePoint));
+                    GlobalLog.Print(
+                        "ServicePointManager::FindServicePoint() successfull lookup returned ServicePoint#"
+                            + ValidationHelper.HashString(servicePoint)
+                    );
                 }
-                if (servicePoint==null) {
+                if (servicePoint == null)
+                {
                     // lookup failure or timeout, we need to create a new ServicePoint
-                    if (s_MaxServicePoints<=0 || s_ServicePointTable.Count<s_MaxServicePoints) {
+                    if (s_MaxServicePoints <= 0 || s_ServicePointTable.Count < s_MaxServicePoints)
+                    {
                         // Determine Connection Limit
                         int connectionLimit = InternalConnectionLimit;
                         bool userDefined = s_UserChangedLimit;
-                        string schemeHostPort =host+":"+port.ToString(CultureInfo.InvariantCulture);
+                        string schemeHostPort =
+                            host + ":" + port.ToString(CultureInfo.InvariantCulture);
 
-                        if (ConfigTable.ContainsKey(schemeHostPort) ) {
-                            connectionLimit = (int) ConfigTable[schemeHostPort];
+                        if (ConfigTable.ContainsKey(schemeHostPort))
+                        {
+                            connectionLimit = (int)ConfigTable[schemeHostPort];
                             userDefined = true;
                         }
-                        servicePoint = new ServicePoint(host, port, s_ServicePointIdlingQueue, connectionLimit, tempEntry, userDefined, isProxyServicePoint);
-                        GlobalLog.Print("ServicePointManager::FindServicePoint() created ServicePoint#" + ValidationHelper.HashString(servicePoint));
+                        servicePoint = new ServicePoint(
+                            host,
+                            port,
+                            s_ServicePointIdlingQueue,
+                            connectionLimit,
+                            tempEntry,
+                            userDefined,
+                            isProxyServicePoint
+                        );
+                        GlobalLog.Print(
+                            "ServicePointManager::FindServicePoint() created ServicePoint#"
+                                + ValidationHelper.HashString(servicePoint)
+                        );
                         servicePointReference = new WeakReference(servicePoint);
                         s_ServicePointTable[tempEntry] = servicePointReference;
-                        GlobalLog.Print("ServicePointManager::FindServicePoint() adding entry WeakReference#" + ValidationHelper.HashString(servicePointReference) + " key:[" + tempEntry + "]");
+                        GlobalLog.Print(
+                            "ServicePointManager::FindServicePoint() adding entry WeakReference#"
+                                + ValidationHelper.HashString(servicePointReference)
+                                + " key:["
+                                + tempEntry
+                                + "]"
+                        );
                     }
-                    else {
-                        Exception exception = new InvalidOperationException(SR.GetString(SR.net_maxsrvpoints));
-                        GlobalLog.LeaveException("ServicePointManager::FindServicePoint() reached the limit count:" + s_ServicePointTable.Count.ToString() + " limit:" + s_MaxServicePoints.ToString(), exception);
+                    else
+                    {
+                        Exception exception = new InvalidOperationException(
+                            SR.GetString(SR.net_maxsrvpoints)
+                        );
+                        GlobalLog.LeaveException(
+                            "ServicePointManager::FindServicePoint() reached the limit count:"
+                                + s_ServicePointTable.Count.ToString()
+                                + " limit:"
+                                + s_MaxServicePoints.ToString(),
+                            exception
+                        );
                         throw exception;
                     }
                 }
             }
 
-            GlobalLog.Leave("ServicePointManager::FindServicePoint() servicePoint#" + ValidationHelper.HashString(servicePoint));
+            GlobalLog.Leave(
+                "ServicePointManager::FindServicePoint() servicePoint#"
+                    + ValidationHelper.HashString(servicePoint)
+            );
             return servicePoint;
         }
 
         [FriendAccessAllowed]
-        internal static void CloseConnectionGroups(string connectionGroupName) {
+        internal static void CloseConnectionGroups(string connectionGroupName)
+        {
             // This method iterates through all service points and closes connection groups with the provided name.
             ServicePoint servicePoint = null;
-            lock (s_ServicePointTable) {
-                foreach (DictionaryEntry item in s_ServicePointTable) {
+            lock (s_ServicePointTable)
+            {
+                foreach (DictionaryEntry item in s_ServicePointTable)
+                {
                     WeakReference servicePointReference = item.Value as WeakReference;
-                    if (servicePointReference != null) {
-                        servicePoint = (ServicePoint)servicePointReference.Target;                    
-                        if (servicePoint != null) {
-                            // We found a service point. Ask the service point to close all internal connection groups 
+                    if (servicePointReference != null)
+                    {
+                        servicePoint = (ServicePoint)servicePointReference.Target;
+                        if (servicePoint != null)
+                        {
+                            // We found a service point. Ask the service point to close all internal connection groups
                             // with name 'connectionGroupName'.
                             servicePoint.CloseConnectionGroupInternal(connectionGroupName);
                         }
@@ -842,55 +1012,59 @@ namespace System.Net {
         }
 
         //
-        // SetTcpKeepAlive 
+        // SetTcpKeepAlive
         //
         // Enable/Disable the use of TCP keepalive option on ServicePoint
         // connections. This method does not affect existing ServicePoints.
-        // When a ServicePoint is constructed it will inherit the current 
+        // When a ServicePoint is constructed it will inherit the current
         // settings.
         //
         // Parameters:
         //
-        // enabled - if true enables the use of the TCP keepalive option 
+        // enabled - if true enables the use of the TCP keepalive option
         // for ServicePoint connections.
         //
         // keepAliveTime - specifies the timeout, in milliseconds, with no
-        // activity until the first keep-alive packet is sent. Ignored if 
+        // activity until the first keep-alive packet is sent. Ignored if
         // enabled parameter is false.
         //
         // keepAliveInterval - specifies the interval, in milliseconds, between
         // when successive keep-alive packets are sent if no acknowledgement is
         // received. Ignored if enabled parameter is false.
         //
-        public static void SetTcpKeepAlive(
-                            bool enabled, 
-                            int keepAliveTime, 
-                            int keepAliveInterval) {
-        
+        public static void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval)
+        {
             GlobalLog.Enter(
-                "ServicePointManager::SetTcpKeepAlive()" + 
-                " enabled: " + enabled.ToString() +
-                " keepAliveTime: " + keepAliveTime.ToString() +
-                " keepAliveInterval: " + keepAliveInterval.ToString()
+                "ServicePointManager::SetTcpKeepAlive()"
+                    + " enabled: "
+                    + enabled.ToString()
+                    + " keepAliveTime: "
+                    + keepAliveTime.ToString()
+                    + " keepAliveInterval: "
+                    + keepAliveInterval.ToString()
             );
-            if (enabled) {
+            if (enabled)
+            {
                 s_UseTcpKeepAlive = true;
-                if (keepAliveTime <= 0) {
+                if (keepAliveTime <= 0)
+                {
                     throw new ArgumentOutOfRangeException("keepAliveTime");
                 }
-                if (keepAliveInterval <= 0) {
+                if (keepAliveInterval <= 0)
+                {
                     throw new ArgumentOutOfRangeException("keepAliveInterval");
                 }
                 s_TcpKeepAliveTime = keepAliveTime;
                 s_TcpKeepAliveInterval = keepAliveInterval;
-            } else {
+            }
+            else
+            {
                 s_UseTcpKeepAlive = false;
                 s_TcpKeepAliveTime = 0;
-                s_TcpKeepAliveInterval =0;
+                s_TcpKeepAliveInterval = 0;
             }
             GlobalLog.Leave("ServicePointManager::SetTcpKeepAlive()");
         }
     }
 }
 #endif
-

@@ -17,7 +17,7 @@ namespace System.Web.Mvc.Test
             NameValueCollection nvc = new NameValueCollection()
             {
                 { "foo", "fooValue" },
-                { "bar", "barValue" }
+                { "bar", "barValue" },
             };
 
             // Act
@@ -34,23 +34,29 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new FormCollection(null); }, "collection");
+                delegate
+                {
+                    new FormCollection(null);
+                },
+                "collection"
+            );
         }
 
         [Fact]
         public void ConstructorUsesValidatedValuesWhenControllerIsNull()
         {
             // Arrange
-            var values = new NameValueCollection()
-            {
-                { "foo", "fooValue" },
-                { "bar", "barValue" }
-            };
+            var values = new NameValueCollection() { { "foo", "fooValue" }, { "bar", "barValue" } };
 
             // Act
-            var result = new FormCollection(controller: null,
-                                            validatedValuesThunk: () => values,
-                                            unvalidatedValuesThunk: () => { throw new NotImplementedException(); });
+            var result = new FormCollection(
+                controller: null,
+                validatedValuesThunk: () => values,
+                unvalidatedValuesThunk: () =>
+                {
+                    throw new NotImplementedException();
+                }
+            );
 
             // Assert
             Assert.Equal(2, result.Count);
@@ -62,18 +68,19 @@ namespace System.Web.Mvc.Test
         public void ConstructorUsesValidatedValuesWhenControllerValidateRequestIsTrue()
         {
             // Arrange
-            var values = new NameValueCollection()
-            {
-                { "foo", "fooValue" },
-                { "bar", "barValue" }
-            };
+            var values = new NameValueCollection() { { "foo", "fooValue" }, { "bar", "barValue" } };
             var controller = new Mock<ControllerBase>().Object;
             controller.ValidateRequest = true;
 
             // Act
-            var result = new FormCollection(controller,
-                                            validatedValuesThunk: () => values,
-                                            unvalidatedValuesThunk: () => { throw new NotImplementedException(); });
+            var result = new FormCollection(
+                controller,
+                validatedValuesThunk: () => values,
+                unvalidatedValuesThunk: () =>
+                {
+                    throw new NotImplementedException();
+                }
+            );
 
             // Assert
             Assert.Equal(2, result.Count);
@@ -85,18 +92,19 @@ namespace System.Web.Mvc.Test
         public void ConstructorUsesUnvalidatedValuesWhenControllerValidateRequestIsFalse()
         {
             // Arrange
-            var values = new NameValueCollection()
-            {
-                { "foo", "fooValue" },
-                { "bar", "barValue" }
-            };
+            var values = new NameValueCollection() { { "foo", "fooValue" }, { "bar", "barValue" } };
             var controller = new Mock<ControllerBase>().Object;
             controller.ValidateRequest = false;
 
             // Act
-            var result = new FormCollection(controller,
-                                            validatedValuesThunk: () => { throw new NotImplementedException(); },
-                                            unvalidatedValuesThunk: () => values);
+            var result = new FormCollection(
+                controller,
+                validatedValuesThunk: () =>
+                {
+                    throw new NotImplementedException();
+                },
+                unvalidatedValuesThunk: () => values
+            );
 
             // Assert
             Assert.Equal(2, result.Count);
@@ -108,14 +116,19 @@ namespace System.Web.Mvc.Test
         public void CustomBinderBindModelReturnsFormCollection()
         {
             // Arrange
-            NameValueCollection nvc = new NameValueCollection() { { "foo", "fooValue" }, { "bar", "barValue" } };
+            NameValueCollection nvc = new NameValueCollection()
+            {
+                { "foo", "fooValue" },
+                { "bar", "barValue" },
+            };
             IModelBinder binder = ModelBinders.Binders.GetBinder(typeof(FormCollection));
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(c => c.HttpContext.Request.Form).Returns(nvc);
 
             // Act
-            FormCollection formCollection = (FormCollection)binder.BindModel(mockControllerContext.Object, null);
+            FormCollection formCollection = (FormCollection)
+                binder.BindModel(mockControllerContext.Object, null);
 
             // Assert
             Assert.NotNull(formCollection);
@@ -132,7 +145,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { binder.BindModel(null, null); }, "controllerContext");
+                delegate
+                {
+                    binder.BindModel(null, null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -143,7 +161,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { formCollection.GetValue(null); }, "name");
+                delegate
+                {
+                    formCollection.GetValue(null);
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -163,11 +186,7 @@ namespace System.Web.Mvc.Test
         public void GetValue_KeyExists_ReturnsResult()
         {
             // Arrange
-            FormCollection formCollection = new FormCollection()
-            {
-                { "foo", "1" },
-                { "foo", "2" }
-            };
+            FormCollection formCollection = new FormCollection() { { "foo", "1" }, { "foo", "2" } };
 
             // Act
             ValueProviderResult vpResult = formCollection.GetValue("foo");

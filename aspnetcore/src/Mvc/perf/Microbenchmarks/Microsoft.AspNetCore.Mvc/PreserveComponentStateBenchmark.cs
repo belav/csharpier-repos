@@ -18,16 +18,14 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
 public class PreserveComponentStateBenchmark
 {
-    private readonly PersistComponentStateTagHelper _tagHelper = new()
-    {
-        PersistenceMode = PersistenceMode.WebAssembly
-    };
+    private readonly PersistComponentStateTagHelper _tagHelper =
+        new() { PersistenceMode = PersistenceMode.WebAssembly };
 
     TagHelperAttributeList _attributes = new();
 
     private TagHelperContext _context;
-    private Func<bool, HtmlEncoder, Task<TagHelperContent>> _childContent =
-        (_, __) => Task.FromResult(new DefaultTagHelperContent() as TagHelperContent);
+    private Func<bool, HtmlEncoder, Task<TagHelperContent>> _childContent = (_, __) =>
+        Task.FromResult(new DefaultTagHelperContent() as TagHelperContent);
     private IServiceProvider _serviceProvider;
     private IServiceScope _serviceScope;
     private TagHelperOutput _output;
@@ -41,7 +39,8 @@ public class PreserveComponentStateBenchmark
         _serviceProvider = new ServiceCollection()
             .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
             .AddScoped(typeof(ILogger<>), typeof(NullLogger<>))
-            .AddMvc().Services.BuildServiceProvider();
+            .AddMvc()
+            .Services.BuildServiceProvider();
     }
 
     // From 30 entries of about 100 bytes (~3K) to 100 entries with 100K per entry (~10MB)
@@ -51,10 +50,14 @@ public class PreserveComponentStateBenchmark
     // The 8386 was selected by serializing 100 weather forecast records as a reference
     // For regular runs we only enable by default 30 entries and 8386 bytes per entry, which is about 250K of serialized
     // state on the limit of the accepted payload size budget for critical resources served from a page.
-    [Params(30 /*, 100*/)]
+    [Params(
+        30 /*, 100*/
+    )]
     public int Entries;
 
-    [Params(/*100,*/ 8386/*, 100_000*/)]
+    [Params( /*100,*/
+        8386 /*, 100_000*/
+    )]
     public int EntrySize;
 
     [GlobalSetup]
@@ -72,7 +75,8 @@ public class PreserveComponentStateBenchmark
     public async Task PersistComponentStateTagHelperWebAssemblyAsync()
     {
         _tagHelper.ViewContext = GetViewContext();
-        var state = _tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<PersistentComponentState>();
+        var state =
+            _tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<PersistentComponentState>();
         foreach (var (key, value) in _entries)
         {
             state.PersistAsJson(key, value);
@@ -90,12 +94,9 @@ public class PreserveComponentStateBenchmark
         _serviceScope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = _serviceScope.ServiceProvider
+            RequestServices = _serviceScope.ServiceProvider,
         };
 
-        return new ViewContext
-        {
-            HttpContext = httpContext,
-        };
+        return new ViewContext { HttpContext = httpContext };
     }
 }

@@ -14,14 +14,22 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void GetAttributes_Skips_ComVisibleAttribute_And_GuidAttribute_And_InterfaceTypeAttribute()
         {
-            AttributeCollection attributeCollection = TypeDescriptor.GetAttributes(typeof(TestClass1));
+            AttributeCollection attributeCollection = TypeDescriptor.GetAttributes(
+                typeof(TestClass1)
+            );
             Assert.NotEmpty(attributeCollection);
             IEnumerable<Attribute> attributes = attributeCollection.Cast<Attribute>();
-            Attribute attribute =  Assert.Single(attributes);
+            Attribute attribute = Assert.Single(attributes);
             Assert.IsType<DescriptionAttribute>(attribute);
-            Assert.DoesNotContain(attributes, attr => attr.GetType() == typeof(ComVisibleAttribute));
+            Assert.DoesNotContain(
+                attributes,
+                attr => attr.GetType() == typeof(ComVisibleAttribute)
+            );
             Assert.DoesNotContain(attributes, attr => attr.GetType() == typeof(GuidAttribute));
-            Assert.DoesNotContain(attributes, attr => attr.GetType() == typeof(InterfaceTypeAttribute));
+            Assert.DoesNotContain(
+                attributes,
+                attr => attr.GetType() == typeof(InterfaceTypeAttribute)
+            );
         }
 
         [Fact]
@@ -30,10 +38,13 @@ namespace System.ComponentModel.Tests
             using ComponentExtendedProvider testComponent = new ComponentExtendedProvider();
             testComponent.Site = new TestSiteWithoutService();
             testComponent.Disposed += (object obj, EventArgs args) => { };
-            PropertyDescriptorCollection propertyDescriptorCollection = TypeDescriptor.GetProperties(testComponent);
+            PropertyDescriptorCollection propertyDescriptorCollection =
+                TypeDescriptor.GetProperties(testComponent);
             PropertyDescriptor testPropDescriptor = propertyDescriptorCollection["TestProp"];
             Assert.NotNull(testPropDescriptor);
-            ExtenderProvidedPropertyAttribute extenderProvidedPropertyAttribute = testPropDescriptor.Attributes[typeof(ExtenderProvidedPropertyAttribute)] as ExtenderProvidedPropertyAttribute;
+            ExtenderProvidedPropertyAttribute extenderProvidedPropertyAttribute =
+                testPropDescriptor.Attributes[typeof(ExtenderProvidedPropertyAttribute)]
+                as ExtenderProvidedPropertyAttribute;
             Assert.NotNull(extenderProvidedPropertyAttribute);
             Assert.IsType<ComponentExtendedProvider>(extenderProvidedPropertyAttribute.Provider);
         }
@@ -44,10 +55,13 @@ namespace System.ComponentModel.Tests
             using TestComponent testComponent = new TestComponent();
             testComponent.Site = new TestSiteWithService();
             testComponent.Disposed += (object obj, EventArgs args) => { };
-            PropertyDescriptorCollection propertyDescriptorCollection = TypeDescriptor.GetProperties(testComponent);
+            PropertyDescriptorCollection propertyDescriptorCollection =
+                TypeDescriptor.GetProperties(testComponent);
             PropertyDescriptor testPropDescriptor = propertyDescriptorCollection["TestProp"];
             Assert.NotNull(testPropDescriptor);
-            ExtenderProvidedPropertyAttribute extenderProvidedPropertyAttribute = testPropDescriptor.Attributes[typeof(ExtenderProvidedPropertyAttribute)] as ExtenderProvidedPropertyAttribute;
+            ExtenderProvidedPropertyAttribute extenderProvidedPropertyAttribute =
+                testPropDescriptor.Attributes[typeof(ExtenderProvidedPropertyAttribute)]
+                as ExtenderProvidedPropertyAttribute;
             Assert.NotNull(extenderProvidedPropertyAttribute);
             Assert.IsType<TestExtenderProvider>(extenderProvidedPropertyAttribute.Provider);
         }
@@ -126,7 +140,8 @@ namespace System.ComponentModel.Tests
         {
             private TestComponent _testComponent = new TestComponent();
             private TestContainer _testContainer = new TestContainer();
-            private TestExtenderListService _testExtenderListService = new TestExtenderListService();
+            private TestExtenderListService _testExtenderListService =
+                new TestExtenderListService();
 
             public IComponent Component => _testComponent;
 
@@ -141,13 +156,19 @@ namespace System.ComponentModel.Tests
 
         internal class TestContainer : IContainer
         {
-            private List<IComponent> _components = new List<IComponent> { new ComponentExtendedProvider() };
+            private List<IComponent> _components = new List<IComponent>
+            {
+                new ComponentExtendedProvider(),
+            };
 
             public ComponentCollection Components => new ComponentCollection(_components.ToArray());
 
             public void Add(IComponent? component) => _components.Add(component);
+
             public void Add(IComponent? component, string? name) => _components.Add(component);
+
             public void Dispose() => _components.Clear();
+
             public void Remove(IComponent? component) => _components.Remove(component);
         }
 

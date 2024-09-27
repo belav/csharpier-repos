@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.Editor
     {
         Project = 0,
         Type = 1,
-        Member = 2
+        Member = 2,
     }
 }

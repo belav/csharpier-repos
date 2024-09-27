@@ -14,7 +14,11 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
     {
         [Theory]
         [MemberData(nameof(GetSupportedTypeRoundtripData))]
-        public static void SupportedTypeRoundtrip<T>(JsonTypeInfo<T> jsonTypeInfo, T value, string expectedJson)
+        public static void SupportedTypeRoundtrip<T>(
+            JsonTypeInfo<T> jsonTypeInfo,
+            T value,
+            string expectedJson
+        )
         {
             string json = JsonSerializer.Serialize(value, jsonTypeInfo);
             JsonTestHelper.AssertJsonEqual(expectedJson, json);
@@ -28,38 +32,58 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
         {
             var ctx = Net70GeneratedContext.Default;
             yield return Wrap(ctx.Int32, 42, "42");
-            yield return Wrap(ctx.DateTimeOffset, DateTimeOffset.MinValue, "\"0001-01-01T00:00:00+00:00\"");
+            yield return Wrap(
+                ctx.DateTimeOffset,
+                DateTimeOffset.MinValue,
+                "\"0001-01-01T00:00:00+00:00\""
+            );
             yield return Wrap(ctx.String, "I am a string", "\"I am a string\"");
-            yield return Wrap(ctx.HighLowTemps, new HighLowTemps { Low = 0, High = 5 }, """{"Low":0,"High":5}""");
-            yield return Wrap(ctx.ListDateTimeOffset, new List<DateTimeOffset> { DateTimeOffset.MinValue }, "[\"0001-01-01T00:00:00+00:00\"]");
-            yield return Wrap(ctx.ClassWithCustomConverter, new ClassWithCustomConverter { Value = 41 }, "42");
-            yield return Wrap(ctx.WeatherForecastWithPOCOs, new WeatherForecastWithPOCOs
-            {
-                Date = DateTimeOffset.MinValue,
-                TemperatureCelsius = 10,
-                Summary = "I am a string",
-                DatesAvailable = new List<DateTimeOffset> { DateTimeOffset.MinValue },
-                TemperatureRanges = new Dictionary<string, HighLowTemps>
+            yield return Wrap(
+                ctx.HighLowTemps,
+                new HighLowTemps { Low = 0, High = 5 },
+                """{"Low":0,"High":5}"""
+            );
+            yield return Wrap(
+                ctx.ListDateTimeOffset,
+                new List<DateTimeOffset> { DateTimeOffset.MinValue },
+                "[\"0001-01-01T00:00:00+00:00\"]"
+            );
+            yield return Wrap(
+                ctx.ClassWithCustomConverter,
+                new ClassWithCustomConverter { Value = 41 },
+                "42"
+            );
+            yield return Wrap(
+                ctx.WeatherForecastWithPOCOs,
+                new WeatherForecastWithPOCOs
                 {
-                    ["key"] = new HighLowTemps { Low = 0, High = 5 }
+                    Date = DateTimeOffset.MinValue,
+                    TemperatureCelsius = 10,
+                    Summary = "I am a string",
+                    DatesAvailable = new List<DateTimeOffset> { DateTimeOffset.MinValue },
+                    TemperatureRanges = new Dictionary<string, HighLowTemps>
+                    {
+                        ["key"] = new HighLowTemps { Low = 0, High = 5 },
+                    },
+                    SummaryWords = new[] { "word1", "word2" },
                 },
-                SummaryWords = new[] { "word1", "word2" },
-            },
-            """
-            {
-                "Date" : "0001-01-01T00:00:00+00:00",
-                "TemperatureCelsius" : 10,
-                "Summary" : "I am a string",
-                "DatesAvailable" : [ "0001-01-01T00:00:00+00:00" ],
-                "TemperatureRanges" :
+                """
                 {
-                    "key" : { "Low" : 0, "High" : 5 }
-                },
-                "SummaryWords" : [ "word1", "word2" ]
-            }
-            """);
+                    "Date" : "0001-01-01T00:00:00+00:00",
+                    "TemperatureCelsius" : 10,
+                    "Summary" : "I am a string",
+                    "DatesAvailable" : [ "0001-01-01T00:00:00+00:00" ],
+                    "TemperatureRanges" :
+                    {
+                        "key" : { "Low" : 0, "High" : 5 }
+                    },
+                    "SummaryWords" : [ "word1", "word2" ]
+                }
+                """
+            );
 
-            static object[] Wrap<T>(JsonTypeInfo<T> jsonTypeInfo, T value, string expectedJson) => new object[] { jsonTypeInfo, value, expectedJson };
+            static object[] Wrap<T>(JsonTypeInfo<T> jsonTypeInfo, T value, string expectedJson) =>
+                new object[] { jsonTypeInfo, value, expectedJson };
         }
 
         [Theory]
@@ -69,8 +93,14 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
             string json = JsonSerializer.Serialize(value, Net70GeneratedContext.Default.Options);
             JsonTestHelper.AssertJsonEqual(expectedJson, json);
 
-            T deserializedValue = JsonSerializer.Deserialize<T>(json, Net70GeneratedContext.Default.Options);
-            json = JsonSerializer.Serialize(deserializedValue, Net70GeneratedContext.Default.Options);
+            T deserializedValue = JsonSerializer.Deserialize<T>(
+                json,
+                Net70GeneratedContext.Default.Options
+            );
+            json = JsonSerializer.Serialize(
+                deserializedValue,
+                Net70GeneratedContext.Default.Options
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, json);
         }
 
@@ -80,40 +110,49 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
             DateTime value = DateTime.MinValue;
             string json = JsonSerializer.Serialize(value);
 
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(value, value.GetType(), Net70GeneratedContext.Default));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize(json, value.GetType(), Net70GeneratedContext.Default));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Serialize(value, value.GetType(), Net70GeneratedContext.Default)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize(json, value.GetType(), Net70GeneratedContext.Default)
+            );
         }
 
         public static IEnumerable<object[]> GetSupportedTypeRoundtripData_OptionsBased()
         {
             yield return Wrap(new ClassWithCustomConverter { Value = 41 }, "42");
-            yield return Wrap(new WeatherForecastWithPOCOs
-            {
-                Date = DateTimeOffset.MinValue,
-                TemperatureCelsius = 10,
-                Summary = "I am a string",
-                DatesAvailable = new List<DateTimeOffset> { DateTimeOffset.MinValue },
-                TemperatureRanges = new Dictionary<string, HighLowTemps>
+            yield return Wrap(
+                new WeatherForecastWithPOCOs
                 {
-                    ["key"] = new HighLowTemps { Low = 0, High = 5 }
+                    Date = DateTimeOffset.MinValue,
+                    TemperatureCelsius = 10,
+                    Summary = "I am a string",
+                    DatesAvailable = new List<DateTimeOffset> { DateTimeOffset.MinValue },
+                    TemperatureRanges = new Dictionary<string, HighLowTemps>
+                    {
+                        ["key"] = new HighLowTemps { Low = 0, High = 5 },
+                    },
+                    SummaryWords = new[] { "word1", "word2" },
                 },
-                SummaryWords = new[] { "word1", "word2" },
-            },
-            """
-            {
-                "Date" : "0001-01-01T00:00:00+00:00",
-                "TemperatureCelsius" : 10,
-                "Summary" : "I am a string",
-                "DatesAvailable" : [ "0001-01-01T00:00:00+00:00" ],
-                "TemperatureRanges" :
+                """
                 {
-                    "key" : { "Low" : 0, "High" : 5 }
-                },
-                "SummaryWords" : [ "word1", "word2" ]
-            }
-            """);
+                    "Date" : "0001-01-01T00:00:00+00:00",
+                    "TemperatureCelsius" : 10,
+                    "Summary" : "I am a string",
+                    "DatesAvailable" : [ "0001-01-01T00:00:00+00:00" ],
+                    "TemperatureRanges" :
+                    {
+                        "key" : { "Low" : 0, "High" : 5 }
+                    },
+                    "SummaryWords" : [ "word1", "word2" ]
+                }
+                """
+            );
 
-            static object[] Wrap<T>(T value, string expectedJson) => new object[] { value, expectedJson };
+            static object[] Wrap<T>(T value, string expectedJson) =>
+                new object[] { value, expectedJson };
         }
 
         [Fact]
@@ -145,16 +184,14 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
         {
             JsonTypeInfo<MyLinkedList> jsonTypeInfo = Net70GeneratedContext.Default.MyLinkedList;
 
-            MyLinkedList linkedList = new(
-                value: 0,
-                nested: new(
-                    value: 1,
-                    nested: new(
-                        value: 2,
-                        nested: null)));
+            MyLinkedList linkedList =
+                new(value: 0, nested: new(value: 1, nested: new(value: 2, nested: null)));
 
             string json = JsonSerializer.Serialize(linkedList, jsonTypeInfo);
-            Assert.Equal("""{"Value":0,"Nested":{"Value":1,"Nested":{"Value":2,"Nested":null}}}""", json);
+            Assert.Equal(
+                """{"Value":0,"Nested":{"Value":1,"Nested":{"Value":2,"Nested":null}}}""",
+                json
+            );
 
             linkedList = JsonSerializer.Deserialize(json, jsonTypeInfo);
             Assert.Equal(2, linkedList.Nested.Nested.Value);
@@ -165,11 +202,17 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = JsonTypeInfoResolver.Combine(Net70GeneratedContext.Default, new DefaultJsonTypeInfoResolver())
+                TypeInfoResolver = JsonTypeInfoResolver.Combine(
+                    Net70GeneratedContext.Default,
+                    new DefaultJsonTypeInfoResolver()
+                ),
             };
 
             // Unlike v6, v7 Contexts do implement IJsonTypeInfoResolver so combined resolvers will produce the expected output.
-            string expected = JsonSerializer.Serialize(new HighLowTemps(), Net70GeneratedContext.Default.HighLowTemps);
+            string expected = JsonSerializer.Serialize(
+                new HighLowTemps(),
+                Net70GeneratedContext.Default.HighLowTemps
+            );
             string actual = JsonSerializer.Serialize(new HighLowTemps(), options);
             Assert.Equal(expected, actual);
         }

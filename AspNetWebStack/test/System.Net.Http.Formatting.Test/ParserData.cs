@@ -120,7 +120,7 @@ namespace System.Net.Http
                     "path ",
                     " path ",
                     "æææø ø øååå",
-                    "いくつか の テキスト"
+                    "いくつか の テキスト",
                 };
             }
         }
@@ -140,23 +140,26 @@ namespace System.Net.Http
                     Int32.MinValue.ToString(),
                     Int32.MaxValue.ToString(),
                     "æææøøøååå",
-                    "いくつかのテキスト"
+                    "いくつかのテキスト",
                 };
             }
         }
 
-        public static readonly Dictionary<string, string> ValidHeaders = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> ValidHeaders = new Dictionary<
+            string,
+            string
+        >
         {
-            { "N0", "V0"},
-            { "N1", "V1"},
-            { "N2", "V2"},
-            { "N3", "V3"},
-            { "N4", "V4"},
-            { "N5", "V5"},
-            { "N6", "V6"},
-            { "N7", "V7"},
-            { "N8", "V8"},
-            { "N9", "V9"},
+            { "N0", "V0" },
+            { "N1", "V1" },
+            { "N2", "V2" },
+            { "N3", "V3" },
+            { "N4", "V4" },
+            { "N5", "V5" },
+            { "N6", "V6" },
+            { "N7", "V7" },
+            { "N8", "V8" },
+            { "N9", "V9" },
         };
 
         public static readonly string HttpMethod = "TEG";
@@ -164,61 +167,73 @@ namespace System.Net.Http
         public static readonly string HttpReasonPhrase = "ReasonPhrase";
         public static readonly string HttpHostName = "example.com";
         public static readonly int HttpHostPort = 1234;
-        public static readonly string HttpMessageEntity = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+        public static readonly string HttpMessageEntity =
+            "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 
-        public static readonly Uri HttpRequestUri = new Uri("http://" + HttpHostName + "/some/path");
-        public static readonly Uri HttpRequestUriWithPortAndQuery = new Uri("http://" + HttpHostName + ":" + HttpHostPort + "/some/path?%C3%A6%C3%B8%C3%A5");
-        public static readonly Uri HttpsRequestUri = new Uri("https://" + HttpHostName + "/some/path");
+        public static readonly Uri HttpRequestUri = new Uri(
+            "http://" + HttpHostName + "/some/path"
+        );
+        public static readonly Uri HttpRequestUriWithPortAndQuery = new Uri(
+            "http://" + HttpHostName + ":" + HttpHostPort + "/some/path?%C3%A6%C3%B8%C3%A5"
+        );
+        public static readonly Uri HttpsRequestUri = new Uri(
+            "https://" + HttpHostName + "/some/path"
+        );
 
         public static readonly string TextContentType = "text/plain; charset=utf-8";
 
-        public static readonly MediaTypeHeaderValue HttpRequestMediaType = MediaTypeHeaderValue.Parse("application/http; msgtype=request");
-        public static readonly MediaTypeHeaderValue HttpResponseMediaType = MediaTypeHeaderValue.Parse("application/http; msgtype=response");
+        public static readonly MediaTypeHeaderValue HttpRequestMediaType =
+            MediaTypeHeaderValue.Parse("application/http; msgtype=request");
+        public static readonly MediaTypeHeaderValue HttpResponseMediaType =
+            MediaTypeHeaderValue.Parse("application/http; msgtype=response");
 
         public static readonly string HttpRequest =
-            HttpMethod +
-            " /some/path HTTP/1.2\r\nHost: " +
-            HttpHostName +
-            "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\n\r\n";
+            HttpMethod
+            + " /some/path HTTP/1.2\r\nHost: "
+            + HttpHostName
+            + "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\n\r\n";
 
         public static readonly string HttpRequestWithHost =
-            HttpMethod +
-            " /some/path HTTP/1.2\r\n" +
-            "N1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nHost: " +
-            HttpHostName + "\r\n\r\n";
+            HttpMethod
+            + " /some/path HTTP/1.2\r\n"
+            + "N1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nHost: "
+            + HttpHostName
+            + "\r\n\r\n";
 
         public static readonly string HttpRequestWithPortAndQuery =
-            HttpMethod +
-            " /some/path?%C3%A6%C3%B8%C3%A5 HTTP/1.2\r\nHost: " +
-            HttpHostName + ":" + HttpHostPort.ToString() +
-            "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\n\r\n";
+            HttpMethod
+            + " /some/path?%C3%A6%C3%B8%C3%A5 HTTP/1.2\r\nHost: "
+            + HttpHostName
+            + ":"
+            + HttpHostPort.ToString()
+            + "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\n\r\n";
 
         public static readonly string HttpResponse =
-            "HTTP/1.2 " +
-            ((int)HttpStatus).ToString() +
-            " " +
-            HttpReasonPhrase +
-            "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nContent-Length: 0\r\n\r\n";
+            "HTTP/1.2 "
+            + ((int)HttpStatus).ToString()
+            + " "
+            + HttpReasonPhrase
+            + "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nContent-Length: 0\r\n\r\n";
 
         public static readonly string HttpRequestWithEntity =
-            HttpMethod +
-            " /some/path HTTP/1.2\r\nHost: " +
-            HttpHostName +
-            "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nContent-Type: " +
-            TextContentType +
-            "\r\nContent-Length: 100" +
-            "\r\n\r\n" +
-            HttpMessageEntity;
+            HttpMethod
+            + " /some/path HTTP/1.2\r\nHost: "
+            + HttpHostName
+            + "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nContent-Type: "
+            + TextContentType
+            + "\r\nContent-Length: 100"
+            + "\r\n\r\n"
+            + HttpMessageEntity;
 
         public static readonly string HttpResponseWithEntity =
-            "HTTP/1.2 " +
-            ((int)HttpStatus).ToString() +
-            " " +
-            HttpReasonPhrase +
-            "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nContent-Type: " +
-            TextContentType +
-            "\r\nContent-Length: 100" +
-            "\r\n\r\n" +
-            HttpMessageEntity;
+            "HTTP/1.2 "
+            + ((int)HttpStatus).ToString()
+            + " "
+            + HttpReasonPhrase
+            + "\r\nN1: V1a, V1b, V1c, V1d, V1e\r\nN2: V2\r\nContent-Type: "
+            + TextContentType
+            + "\r\nContent-Length: 100"
+            + "\r\n\r\n"
+            + HttpMessageEntity;
     }
 }

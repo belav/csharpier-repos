@@ -4,9 +4,9 @@
 using System.Collections.Generic;
 using System.CommandLine.Parsing;
 using System.IO;
-using FluentAssertions;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -29,12 +29,13 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x none-of-those");
 
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain("Argument 'none-of-those' not recognized. Must be one of:\n\t'this'\n\t'that'\n\t'the-other-thing'");
+            result
+                .Errors.Select(e => e.Message)
+                .Should()
+                .HaveCount(1)
+                .And.Contain(
+                    "Argument 'none-of-those' not recognized. Must be one of:\n\t'this'\n\t'that'\n\t'the-other-thing'"
+                );
         }
 
         [Fact]
@@ -45,10 +46,10 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x something_else");
 
-            result.Errors
-                  .Where(e => e.SymbolResult != null)
-                  .Should()
-                  .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == option.Name);
+            result
+                .Errors.Where(e => e.SymbolResult != null)
+                .Should()
+                .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == option.Name);
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1475
@@ -63,14 +64,9 @@ namespace System.CommandLine.Tests
             var error = parseResult.Errors.Single();
 
             error
-               .Message
-               .Should()
-               .Be(LocalizationResources.UnrecognizedArgument("c", new []{ "a", "b"}));
-            error
-                .SymbolResult
-                .Should()
-                .BeOfType<OptionResult>();
-
+                .Message.Should()
+                .Be(LocalizationResources.UnrecognizedArgument("c", new[] { "a", "b" }));
+            error.SymbolResult.Should().BeOfType<OptionResult>();
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1475
@@ -86,13 +82,9 @@ namespace System.CommandLine.Tests
             var error = parseResult.Errors.Single();
 
             error
-                .Message
-                .Should()
-                .Be(LocalizationResources.UnrecognizedArgument("c", new []{ "a", "b"}));
-            error
-                .SymbolResult
-                .Should()
-                .BeOfType<ArgumentResult>();
+                .Message.Should()
+                .Be(LocalizationResources.UnrecognizedArgument("c", new[] { "a", "b" }));
+            error.SymbolResult.Should().BeOfType<ArgumentResult>();
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1556
@@ -101,7 +93,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("set")
             {
                 CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
-                CreateArgumentWithAcceptOnlyFromAmong(name : "value", "value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2"),
             };
 
             var result = command.Parse("set key1 value1");
@@ -114,19 +106,19 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("set")
             {
-                CreateArgumentWithAcceptOnlyFromAmong(name : "key", "key1", "key2"),
-                CreateArgumentWithAcceptOnlyFromAmong(name : "value", "value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
+                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2"),
             };
 
             var result = command.Parse("set not-key1 value1");
 
-            result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be(LocalizationResources.UnrecognizedArgument("not-key1", new[] { "key1", "key2" }));
+            result
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be(
+                    LocalizationResources.UnrecognizedArgument("not-key1", new[] { "key1", "key2" })
+                );
         }
 
         [Fact]
@@ -135,20 +127,15 @@ namespace System.CommandLine.Tests
             CliArgument<string> argument = new("key");
             argument.AcceptOnlyFromAmong("key1");
 
-            var command = new CliCommand("set")
-            {
-                argument
-            };
+            var command = new CliCommand("set") { argument };
 
             var result = command.Parse("set key2");
 
-            result.Errors
-              .Should()
-              .ContainSingle()
-              .Which
-              .Message
-              .Should()
-              .Be(LocalizationResources.UnrecognizedArgument("key2", new[] { "key1" }));
+            result
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be(LocalizationResources.UnrecognizedArgument("key2", new[] { "key1" }));
 
             argument.AcceptOnlyFromAmong("key2");
 
@@ -162,19 +149,22 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("set")
             {
-                CreateArgumentWithAcceptOnlyFromAmong(name : "key", "key1", "key2"),
-                CreateArgumentWithAcceptOnlyFromAmong(name : "value", "value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
+                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2"),
             };
 
             var result = command.Parse("set key1 not-value1");
 
-            result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be(LocalizationResources.UnrecognizedArgument("not-value1", new[] { "value1", "value2" }));
+            result
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be(
+                    LocalizationResources.UnrecognizedArgument(
+                        "not-value1",
+                        new[] { "value1", "value2" }
+                    )
+                );
         }
 
         [Fact]
@@ -185,24 +175,31 @@ namespace System.CommandLine.Tests
             option.Arity = new ArgumentArity(1, 4);
             option.AllowMultipleArgumentsPerToken = true;
 
-            var command = new CliCommand("list")
-            {
-                option
-            };
+            var command = new CliCommand("list") { option };
 
             var result = command.Parse("list --columns c1 c2");
 
             result.Errors.Count.Should().Be(2);
 
-            result.Errors[0]
-                .Message
-                .Should()
-                .Be(LocalizationResources.UnrecognizedArgument("c1", new[] { "author", "language", "tags", "type" }));
+            result
+                .Errors[0]
+                .Message.Should()
+                .Be(
+                    LocalizationResources.UnrecognizedArgument(
+                        "c1",
+                        new[] { "author", "language", "tags", "type" }
+                    )
+                );
 
-            result.Errors[1]
-                .Message
-                .Should()
-                .Be(LocalizationResources.UnrecognizedArgument("c2", new[] { "author", "language", "tags", "type" }));
+            result
+                .Errors[1]
+                .Message.Should()
+                .Be(
+                    LocalizationResources.UnrecognizedArgument(
+                        "c2",
+                        new[] { "author", "language", "tags", "type" }
+                    )
+                );
         }
 
         [Fact]
@@ -212,11 +209,10 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => e.Message == "Required argument missing for option: '-x'.");
+            result
+                .Errors.Should()
+                .HaveCount(1)
+                .And.Contain(e => e.Message == "Required argument missing for option: '-x'.");
         }
 
         [Fact]
@@ -224,23 +220,17 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("command")
             {
-                new CliOption<string>("-x")
-                {
-                    Required = true
-                }
+                new CliOption<string>("-x") { Required = true },
             };
 
             var result = command.Parse("");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .ContainSingle()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Option '-x' is required.");
+            result
+                .Errors.Should()
+                .HaveCount(1)
+                .And.ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '-x' is required.");
         }
 
         [Fact]
@@ -248,42 +238,32 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("command")
             {
-                new CliOption<string>("--xray", "-x")
-                {
-                    Required = true
-                }
+                new CliOption<string>("--xray", "-x") { Required = true },
             };
 
             var result = command.Parse("");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .ContainSingle()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Option '--xray' is required.");
+            result
+                .Errors.Should()
+                .HaveCount(1)
+                .And.ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '--xray' is required.");
         }
 
         [Theory]
         [InlineData("subcommand -x arg")]
         [InlineData("-x arg subcommand")]
-        public void When_a_required_option_is_allowed_at_more_than_one_position_it_only_needs_to_be_satisfied_in_one(string commandLine)
+        public void When_a_required_option_is_allowed_at_more_than_one_position_it_only_needs_to_be_satisfied_in_one(
+            string commandLine
+        )
         {
-            var option = new CliOption<string>("-x")
-            {
-                Required = true
-            };
+            var option = new CliOption<string>("-x") { Required = true };
 
             var command = new CliRootCommand
             {
                 option,
-                new CliCommand("subcommand")
-                {
-                    option
-                }
+                new CliCommand("subcommand") { option },
             };
 
             var result = command.Parse(commandLine);
@@ -299,7 +279,7 @@ namespace System.CommandLine.Tests
             var parent = new CliCommand("parent")
             {
                 new CliOption<string>("-x") { Required = true },
-                child
+                child,
             };
 
             var result = parent.Parse("child");
@@ -310,25 +290,20 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_no_option_accepts_arguments_but_one_is_supplied_then_an_error_is_returned()
         {
-            var command =
-                new CliCommand("the-command")
-                {
-                    new CliOption<bool>("-x")
-                    {
-                        Arity = ArgumentArity.Zero
-                    }
-                };
+            var command = new CliCommand("the-command")
+            {
+                new CliOption<bool>("-x") { Arity = ArgumentArity.Zero },
+            };
 
             var result = command.Parse("the-command -x some-arg");
 
             _output.WriteLine(result.ToString());
 
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => e == "Unrecognized command or argument 'some-arg'.");
+            result
+                .Errors.Select(e => e.Message)
+                .Should()
+                .HaveCount(1)
+                .And.Contain(e => e == "Unrecognized command or argument 'some-arg'.");
         }
 
         [Fact]
@@ -337,13 +312,19 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<bool>("--one"),
-                new CliOption<bool>("--two")
+                new CliOption<bool>("--two"),
             };
 
             command.Validators.Add(commandResult =>
             {
-                if (commandResult.Children.Any(sr => ((OptionResult)sr).Option.Name == "--one" &&
-                    commandResult.Children.Any(sr => ((OptionResult)sr).Option.Name == "--two")))
+                if (
+                    commandResult.Children.Any(sr =>
+                        ((OptionResult)sr).Option.Name == "--one"
+                        && commandResult.Children.Any(sr =>
+                            ((OptionResult)sr).Option.Name == "--two"
+                        )
+                    )
+                )
                 {
                     commandResult.AddError("Options '--one' and '--two' cannot be used together.");
                 }
@@ -352,12 +333,10 @@ namespace System.CommandLine.Tests
             var result = command.Parse("the-command --one --two");
 
             result
-                .Errors
-                .Select(e => e.Message)
+                .Errors.Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
-                .And
-                .Contain("Options '--one' and '--two' cannot be used together.");
+                .And.Contain("Options '--one' and '--two' cannot be used together.");
         }
 
         [Fact]
@@ -376,15 +355,12 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("-x 123");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => ((OptionResult)e.SymbolResult).Option == option)
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Option -x cannot be set to 123");
+            result
+                .Errors.Should()
+                .HaveCount(1)
+                .And.Contain(e => ((OptionResult)e.SymbolResult).Option == option)
+                .Which.Message.Should()
+                .Be("Option -x cannot be set to 123");
         }
 
         [Fact]
@@ -403,15 +379,12 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("123");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => ((ArgumentResult)e.SymbolResult).Argument == argument)
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Argument x cannot be set to 123");
+            result
+                .Errors.Should()
+                .HaveCount(1)
+                .And.Contain(e => ((ArgumentResult)e.SymbolResult).Argument == argument)
+                .Which.Message.Should()
+                .Be("Argument x cannot be set to 123");
         }
 
         [Theory]
@@ -435,11 +408,7 @@ namespace System.CommandLine.Tests
                 argumentValidatorWasCalled = true;
             });
 
-            var rootCommand = new CliRootCommand
-            {
-                option,
-                argument
-            };
+            var rootCommand = new CliRootCommand { option, argument };
             rootCommand.Validators.Add(_ =>
             {
                 commandValidatorWasCalled = true;
@@ -455,7 +424,9 @@ namespace System.CommandLine.Tests
         [Theory]
         [InlineData("--file \"Foo\" subcommand")]
         [InlineData("subcommand --file \"Foo\"")]
-        public void Validators_on_global_options_are_executed_when_invoking_a_subcommand(string commandLine)
+        public void Validators_on_global_options_are_executed_when_invoking_a_subcommand(
+            string commandLine
+        )
         {
             var option = new CliOption<FileInfo>("--file") { Recursive = true };
             option.Validators.Add(r =>
@@ -464,23 +435,17 @@ namespace System.CommandLine.Tests
             });
 
             var subCommand = new CliCommand("subcommand");
-            var rootCommand = new CliRootCommand 
-            {
-                subCommand
-            };
+            var rootCommand = new CliRootCommand { subCommand };
             rootCommand.Options.Add(option);
 
             var result = rootCommand.Parse(commandLine);
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => ((OptionResult)e.SymbolResult).Option == option)
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Invoked validator");
+            result
+                .Errors.Should()
+                .HaveCount(1)
+                .And.Contain(e => ((OptionResult)e.SymbolResult).Option == option)
+                .Which.Message.Should()
+                .Be("Invoked validator");
         }
 
         [Theory]
@@ -494,23 +459,14 @@ namespace System.CommandLine.Tests
         {
             var handlerWasCalled = false;
 
-            var globalOption = new CliOption<int>("--value")
-            { 
-                Recursive = true
-            };
+            var globalOption = new CliOption<int>("--value") { Recursive = true };
 
             globalOption.Validators.Add(r => r.AddError("oops!"));
 
             var grandchildCommand = new CliCommand("grandchild");
 
-            var childCommand = new CliCommand("child")
-            {
-                grandchildCommand
-            };
-            var rootCommand = new CliRootCommand
-            {
-                childCommand
-            };
+            var childCommand = new CliCommand("child") { grandchildCommand };
+            var rootCommand = new CliRootCommand { childCommand };
 
             rootCommand.Options.Add(globalOption);
 
@@ -531,18 +487,11 @@ namespace System.CommandLine.Tests
             var argument = new CliArgument<string>("arg");
             argument.Validators.Add(r => r.AddError(errorMessage));
 
-            var cmd = new CliCommand("get")
-            {
-                argument
-            };
+            var cmd = new CliCommand("get") { argument };
 
             var result = cmd.Parse("get something");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => e.Message == errorMessage);
+            result.Errors.Should().HaveCount(1).And.Contain(e => e.Message == errorMessage);
         }
 
         [Fact]
@@ -562,11 +511,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand() { argument }.Parse("-1");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => e.Message == errorMessage);
+            result.Errors.Should().HaveCount(1).And.Contain(e => e.Message == errorMessage);
         }
 
         [Fact]
@@ -586,11 +531,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x -1");
 
-            result.Errors
-                  .Should()
-                  .HaveCount(1)
-                  .And
-                  .Contain(e => e.Message == errorMessage);
+            result.Errors.Should().HaveCount(1).And.Contain(e => e.Message == errorMessage);
         }
 
         public class PathValidity
@@ -600,78 +541,78 @@ namespace System.CommandLine.Tests
             {
                 CliArgument<string> argument = new("arg");
                 argument.AcceptLegalFilePathsOnly();
-                var command = new CliCommand("the-command")
-                {
-                    argument
-                };
+                var command = new CliCommand("the-command") { argument };
 
                 var invalidCharacter = Path.GetInvalidPathChars().First(c => c != '"');
 
                 var result = command.Parse($"the-command {invalidCharacter}");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((ArgumentResult)e.SymbolResult).Argument == command.Arguments.First() &&
-                                    e.Message == $"Character not allowed in a path: '{invalidCharacter}'.");
-            }   
-            
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument == command.Arguments.First()
+                        && e.Message == $"Character not allowed in a path: '{invalidCharacter}'."
+                    );
+            }
+
             [Fact]
             public void LegalFilePathsOnly_rejects_option_arguments_containing_invalid_path_characters()
             {
-                CliOption<string> option = new ("-x");
+                CliOption<string> option = new("-x");
                 option.AcceptLegalFilePathsOnly();
-                var command = new CliCommand("the-command")
-                {
-                    option
-                };
+                var command = new CliCommand("the-command") { option };
 
                 var invalidCharacter = Path.GetInvalidPathChars().First(c => c != '"');
 
                 var result = command.Parse($"the-command -x {invalidCharacter}");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == "-x" &&
-                                    e.Message == $"Character not allowed in a path: '{invalidCharacter}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "-x"
+                        && e.Message == $"Character not allowed in a path: '{invalidCharacter}'."
+                    );
             }
 
             [Fact]
             public void LegalFilePathsOnly_accepts_command_arguments_containing_valid_path_characters()
             {
-                CliArgument<string[]> argument = new ("arg");
+                CliArgument<string[]> argument = new("arg");
                 argument.AcceptLegalFilePathsOnly();
-                var command = new CliCommand("the-command")
-                {
-                    argument
-                };
+                var command = new CliCommand("the-command") { argument };
 
                 var validPathName = Directory.GetCurrentDirectory();
-                var validNonExistingFileName = Path.Combine(validPathName, Guid.NewGuid().ToString());
+                var validNonExistingFileName = Path.Combine(
+                    validPathName,
+                    Guid.NewGuid().ToString()
+                );
 
-                var result = command.Parse($"the-command {validPathName} {validNonExistingFileName}");
+                var result = command.Parse(
+                    $"the-command {validPathName} {validNonExistingFileName}"
+                );
 
                 result.Errors.Should().BeEmpty();
             }
-            
+
             [Fact]
             public void LegalFilePathsOnly_accepts_option_arguments_containing_valid_path_characters()
             {
-                CliOption<string[]> option = new ("-x");
+                CliOption<string[]> option = new("-x");
                 option.AcceptLegalFilePathsOnly();
 
-                var command = new CliCommand("the-command")
-                {
-                    option
-                };
+                var command = new CliCommand("the-command") { option };
 
                 var validPathName = Directory.GetCurrentDirectory();
-                var validNonExistingFileName = Path.Combine(validPathName, Guid.NewGuid().ToString());
+                var validNonExistingFileName = Path.Combine(
+                    validPathName,
+                    Guid.NewGuid().ToString()
+                );
 
-                var result = command.Parse($"the-command -x {validPathName} -x {validNonExistingFileName}");
+                var result = command.Parse(
+                    $"the-command -x {validPathName} -x {validNonExistingFileName}"
+                );
 
                 result.Errors.Should().BeEmpty();
             }
@@ -685,21 +626,20 @@ namespace System.CommandLine.Tests
                 CliArgument<string> argument = new("arg");
                 argument.AcceptLegalFileNamesOnly();
 
-                var command = new CliCommand("the-command")
-                {
-                    argument
-                };
+                var command = new CliCommand("the-command") { argument };
 
                 var invalidCharacter = Path.GetInvalidFileNameChars().First(c => c != '"');
 
                 var result = command.Parse($"the-command {invalidCharacter}");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((ArgumentResult)e.SymbolResult).Argument == command.Arguments.First() &&
-                                    e.Message == $"Character not allowed in a file name: '{invalidCharacter}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument == command.Arguments.First()
+                        && e.Message
+                            == $"Character not allowed in a file name: '{invalidCharacter}'."
+                    );
             }
 
             [Fact]
@@ -708,38 +648,36 @@ namespace System.CommandLine.Tests
                 CliOption<string> option = new("-x");
                 option.AcceptLegalFileNamesOnly();
 
-                var command = new CliCommand("the-command")
-                {
-                    option
-                };
+                var command = new CliCommand("the-command") { option };
 
                 var invalidCharacter = Path.GetInvalidFileNameChars().First(c => c != '"');
 
                 var result = command.Parse($"the-command -x {invalidCharacter}");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == "-x" &&
-                                    e.Message == $"Character not allowed in a file name: '{invalidCharacter}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "-x"
+                        && e.Message
+                            == $"Character not allowed in a file name: '{invalidCharacter}'."
+                    );
             }
 
             [Fact]
             public void LegalFileNamesOnly_accepts_command_arguments_containing_valid_file_name_characters()
             {
-                CliArgument<string[]> argument = new ("arg");
+                CliArgument<string[]> argument = new("arg");
                 argument.AcceptLegalFileNamesOnly();
 
-                var command = new CliCommand("the-command")
-                {
-                    argument
-                };
+                var command = new CliCommand("the-command") { argument };
 
                 var validFileName = Path.GetFileName(Directory.GetCurrentDirectory());
                 var validNonExistingFileName = Guid.NewGuid().ToString();
 
-                var result = command.Parse($"the-command {validFileName} {validNonExistingFileName}");
+                var result = command.Parse(
+                    $"the-command {validFileName} {validNonExistingFileName}"
+                );
 
                 result.Errors.Should().BeEmpty();
             }
@@ -750,15 +688,14 @@ namespace System.CommandLine.Tests
                 CliOption<string[]> option = new("-x");
                 option.AcceptLegalFileNamesOnly();
 
-                var command = new CliCommand("the-command")
-                {
-                    option
-                };
+                var command = new CliCommand("the-command") { option };
 
                 var validFileName = Path.GetFileName(Directory.GetCurrentDirectory());
                 var validNonExistingFileName = Guid.NewGuid().ToString();
 
-                var result = command.Parse($"the-command -x {validFileName} -x {validNonExistingFileName}");
+                var result = command.Parse(
+                    $"the-command -x {validFileName} -x {validNonExistingFileName}"
+                );
 
                 result.Errors.Should().BeEmpty();
             }
@@ -771,18 +708,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileInfo>("to").AcceptExistingOnly()
+                    new CliArgument<FileInfo>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((ArgumentResult)e.SymbolResult).Argument.Name == "to" &&
-                                    e.Message == $"File does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
+                        && e.Message == $"File does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -790,18 +728,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileInfo>("--to").AcceptExistingOnly()
+                    new CliOption<FileInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" &&
-                                    e.Message == $"File does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"File does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -809,18 +748,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<DirectoryInfo>("to").AcceptExistingOnly()
+                    new CliArgument<DirectoryInfo>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((ArgumentResult)e.SymbolResult).Argument.Name == "to" &&
-                                    e.Message == $"Directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
+                        && e.Message == $"Directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -828,18 +768,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly()
+                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" &&
-                                    e.Message == $"Directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"Directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -847,18 +788,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileSystemInfo>("arg").AcceptExistingOnly()
+                    new CliArgument<FileSystemInfo>("arg").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($"move \"{path}\"");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((ArgumentResult)e.SymbolResult).Argument == command.Arguments.First() &&
-                                    e.Message == $"File or directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument == command.Arguments.First()
+                        && e.Message == $"File or directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -866,18 +808,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileSystemInfo>("--to").AcceptExistingOnly()
+                    new CliOption<FileSystemInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" &&
-                                    e.Message == $"File or directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"File or directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -885,37 +828,39 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<IEnumerable<FileInfo>>("to").AcceptExistingOnly()
+                    new CliArgument<IEnumerable<FileInfo>>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((ArgumentResult)e.SymbolResult).Argument.Name == "to" && 
-                                    e.Message == $"File does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
+                        && e.Message == $"File does not exist: '{path}'."
+                    );
             }
-            
+
             [Fact]
             public void An_option_argument_with_multiple_files_can_be_invalid_based_on_file_existence()
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<IEnumerable<FileInfo>>("--to").AcceptExistingOnly()
+                    new CliOption<IEnumerable<FileInfo>>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" && 
-                                    e.Message == $"File does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.Contain(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"File does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -923,18 +868,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<List<DirectoryInfo>>("to").AcceptExistingOnly()
+                    new CliArgument<List<DirectoryInfo>>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .ContainSingle(e => ((ArgumentResult)e.SymbolResult).Argument.Name == "to" &&
-                                          e.Message == $"Directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.ContainSingle(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
+                        && e.Message == $"Directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -942,18 +888,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<DirectoryInfo[]>("--to").AcceptExistingOnly()
+                    new CliOption<DirectoryInfo[]>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .ContainSingle(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" &&
-                                          e.Message == $"Directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.ContainSingle(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"Directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -963,18 +910,20 @@ namespace System.CommandLine.Tests
                 {
                     new CliArgument<FileSystemInfo[]>("to")
                     {
-                        Arity = ArgumentArity.ZeroOrMore
+                        Arity = ArgumentArity.ZeroOrMore,
                     }.AcceptExistingOnly(),
-                    new CliOption<string>("--to")
+                    new CliOption<string>("--to"),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .ContainSingle(e => ((ArgumentResult)e.SymbolResult).Argument.Name == "to" &&
-                                          e.Message == $"File or directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .ContainSingle(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
+                        && e.Message == $"File or directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -982,18 +931,18 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly()
+                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
-                var result =
-                    command.Parse(
-                        $@"move --to ""{path}""");
+                var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .ContainSingle(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" &&
-                                          e.Message == $"File or directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .ContainSingle(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"File or directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -1001,18 +950,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileSystemInfo>("to").AcceptExistingOnly()
+                    new CliArgument<FileSystemInfo>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .ContainSingle(e => ((ArgumentResult)e.SymbolResult).Argument.Name == "to" &&
-                                          e.Message == $"File or directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.ContainSingle(e =>
+                        ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
+                        && e.Message == $"File or directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -1020,18 +970,19 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly()
+                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result.Errors
-                      .Should()
-                      .HaveCount(1)
-                      .And
-                      .ContainSingle(e => ((OptionResult)e.SymbolResult).Option.Name == "--to" &&
-                                          e.Message == $"File or directory does not exist: '{path}'.");
+                result
+                    .Errors.Should()
+                    .HaveCount(1)
+                    .And.ContainSingle(e =>
+                        ((OptionResult)e.SymbolResult).Option.Name == "--to"
+                        && e.Message == $"File or directory does not exist: '{path}'."
+                    );
             }
 
             [Fact]
@@ -1039,7 +990,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileInfo>("arg").AcceptExistingOnly()
+                    new CliArgument<FileInfo>("arg").AcceptExistingOnly(),
                 };
 
                 var path = ExistingFile();
@@ -1053,7 +1004,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileInfo>("--to").AcceptExistingOnly()
+                    new CliOption<FileInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = ExistingFile();
@@ -1067,7 +1018,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<DirectoryInfo>("arg").AcceptExistingOnly()
+                    new CliArgument<DirectoryInfo>("arg").AcceptExistingOnly(),
                 };
 
                 var path = ExistingDirectory();
@@ -1081,7 +1032,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly()
+                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = ExistingDirectory();
@@ -1099,7 +1050,7 @@ namespace System.CommandLine.Tests
             {
                 return Directory.GetCurrentDirectory();
             }
-            
+
             private string ExistingFile()
             {
                 return new DirectoryInfo(Directory.GetCurrentDirectory()).GetFiles()[0].FullName;
@@ -1111,19 +1062,17 @@ namespace System.CommandLine.Tests
         {
             var outer = new CliCommand("outer")
             {
-                new CliCommand("inner")
-                {
-                    new CliCommand("inner-er")
-                }
+                new CliCommand("inner") { new CliCommand("inner-er") },
             };
 
             var result = outer.Parse("outer inner");
 
-            result.Errors
-                  .Should()
-                  .ContainSingle(
-                      e => e.Message.Equals(LocalizationResources.RequiredCommandWasNotProvided()) &&
-                           ((CommandResult)e.SymbolResult).Command.Name.Equals("inner"));
+            result
+                .Errors.Should()
+                .ContainSingle(e =>
+                    e.Message.Equals(LocalizationResources.RequiredCommandWasNotProvided())
+                    && ((CommandResult)e.SymbolResult).Command.Name.Equals("inner")
+                );
         }
 
         [Fact]
@@ -1135,11 +1084,12 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("");
 
-            result.Errors
-                  .Should()
-                  .ContainSingle(
-                      e => e.Message.Equals(LocalizationResources.RequiredCommandWasNotProvided()) &&
-                           ((CommandResult)e.SymbolResult).Command == rootCommand);
+            result
+                .Errors.Should()
+                .ContainSingle(e =>
+                    e.Message.Equals(LocalizationResources.RequiredCommandWasNotProvided())
+                    && ((CommandResult)e.SymbolResult).Command == rootCommand
+                );
         }
 
         [Fact]
@@ -1165,10 +1115,10 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x");
 
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain("Required argument missing for option: '-x'.");
+            result
+                .Errors.Select(e => e.Message)
+                .Should()
+                .Contain("Required argument missing for option: '-x'.");
         }
 
         [Fact]
@@ -1177,11 +1127,7 @@ namespace System.CommandLine.Tests
             var optionX = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
             var optionY = new CliOption<int>("-y") { DefaultValueFactory = (_) => 456 };
 
-            var parser = new CliRootCommand
-            {
-                optionX,
-                optionY
-            };
+            var parser = new CliRootCommand { optionX, optionY };
 
             var result = parser.Parse("");
 
@@ -1193,20 +1139,15 @@ namespace System.CommandLine.Tests
         [Fact] // https://github.com/dotnet/command-line-api/issues/1505
         public void Arity_failures_are_not_reported_for_both_an_argument_and_its_parent_option()
         {
-            var newCommand = new CliCommand("test")
-            {
-                new CliOption<string>("--opt")
-            };
+            var newCommand = new CliCommand("test") { new CliOption<string>("--opt") };
 
             var parseResult = newCommand.Parse("test --opt");
-            
-            parseResult.Errors
-                       .Should()
-                       .ContainSingle()
-                       .Which
-                       .Message
-                       .Should()
-                       .Be("Required argument missing for option: '--opt'.");
+
+            parseResult
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Required argument missing for option: '--opt'.");
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1573
@@ -1218,13 +1159,7 @@ namespace System.CommandLine.Tests
 
             var parseResult = command.Parse("");
 
-            parseResult.Errors
-                       .Should()
-                       .ContainSingle()
-                       .Which
-                       .Message
-                       .Should()
-                       .Be("Wrong");
+            parseResult.Errors.Should().ContainSingle().Which.Message.Should().Be("Wrong");
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1573
@@ -1234,22 +1169,13 @@ namespace System.CommandLine.Tests
             option.Validators.Add(result => result.AddError("Wrong"));
             option.Validators.Add(_ => { });
 
-            var command = new CliRootCommand
-            {
-                option
-            };
+            var command = new CliRootCommand { option };
 
             var parseResult = command.Parse("-x b");
 
-            parseResult.Errors
-                       .Should()
-                       .ContainSingle()
-                       .Which
-                       .Message
-                       .Should()
-                       .Be("Wrong");
-        }   
-        
+            parseResult.Errors.Should().ContainSingle().Which.Message.Should().Be("Wrong");
+        }
+
         [Fact] // https://github.com/dotnet/command-line-api/issues/1573
         public void Multiple_validators_on_the_same_argument_do_not_report_duplicate_errors()
         {
@@ -1257,20 +1183,11 @@ namespace System.CommandLine.Tests
             argument.Validators.Add(result => result.AddError("Wrong"));
             argument.Validators.Add(_ => { });
 
-            var command = new CliRootCommand
-            {
-                argument
-            };
+            var command = new CliRootCommand { argument };
 
             var parseResult = command.Parse("b");
 
-            parseResult.Errors
-                       .Should()
-                       .ContainSingle()
-                       .Which
-                       .Message
-                       .Should()
-                       .Be("Wrong");
+            parseResult.Errors.Should().ContainSingle().Which.Message.Should().Be("Wrong");
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1609
@@ -1282,23 +1199,21 @@ namespace System.CommandLine.Tests
                 result.AddError("OOPS");
             }); //all good;
 
-            var command = new CliCommand("comm")
-            {
-                option
-            };
+            var command = new CliCommand("comm") { option };
 
             var parseResult = command.Parse("comm -o");
 
-            parseResult.Errors
-                       .Should()
-                       .ContainSingle()
-                       .Which
-                       .Message
-                       .Should()
-                       .Be("Required argument missing for option: '-o'.");
+            parseResult
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Required argument missing for option: '-o'.");
         }
-        
-        private CliArgument<string> CreateArgumentWithAcceptOnlyFromAmong(string name, params string[] values)
+
+        private CliArgument<string> CreateArgumentWithAcceptOnlyFromAmong(
+            string name,
+            params string[] values
+        )
         {
             CliArgument<string> argument = new(name);
             argument.AcceptOnlyFromAmong(values);

@@ -18,28 +18,29 @@ public class StartupGetAllStrings
     public void Configure(
         IApplicationBuilder app,
         ILoggerFactory loggerFactory,
-        IStringLocalizer<Customer> customerStringLocalizer)
+        IStringLocalizer<Customer> customerStringLocalizer
+    )
     {
-        app.UseRequestLocalization(new RequestLocalizationOptions
-        {
-            DefaultRequestCulture = new RequestCulture("en-US"),
-            SupportedCultures = new List<CultureInfo>()
-                {
-                    new CultureInfo("fr-FR")
-                },
-            SupportedUICultures = new List<CultureInfo>()
-                {
-                    new CultureInfo("fr-FR")
-                }
-        });
+        app.UseRequestLocalization(
+            new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = new List<CultureInfo>() { new CultureInfo("fr-FR") },
+                SupportedUICultures = new List<CultureInfo>() { new CultureInfo("fr-FR") },
+            }
+        );
 
-        app.Run(async (context) =>
-        {
-            var strings = customerStringLocalizer.GetAllStrings();
+        app.Run(
+            async (context) =>
+            {
+                var strings = customerStringLocalizer.GetAllStrings();
 
-            await context.Response.WriteAsync(strings.Count().ToString(CultureInfo.InvariantCulture));
-            await context.Response.WriteAsync(" ");
-            await context.Response.WriteAsync(string.Join(" ", strings));
-        });
+                await context.Response.WriteAsync(
+                    strings.Count().ToString(CultureInfo.InvariantCulture)
+                );
+                await context.Response.WriteAsync(" ");
+                await context.Response.WriteAsync(string.Join(" ", strings));
+            }
+        );
     }
 }

@@ -3,18 +3,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-[StructLayout (LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
 public class EventTestClass : IEventTest
 {
-	int i;
-	public event EventHandler Elapsed;
+    int i;
+    public event EventHandler Elapsed;
 
-	public static void Main ()
-	{		
-	}
+    public static void Main() { }
 }
 
-public interface IEventTest 
+public interface IEventTest
 {
-	event EventHandler Elapsed;
+    event EventHandler Elapsed;
 }

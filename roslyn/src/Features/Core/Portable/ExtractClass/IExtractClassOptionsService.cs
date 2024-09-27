@@ -11,6 +11,11 @@ namespace Microsoft.CodeAnalysis.ExtractClass
 {
     internal interface IExtractClassOptionsService : IWorkspaceService
     {
-        Task<ExtractClassOptions?> GetExtractClassOptionsAsync(Document document, INamedTypeSymbol originalType, ImmutableArray<ISymbol> selectedMembers, CancellationToken cancellationToken);
+        Task<ExtractClassOptions?> GetExtractClassOptionsAsync(
+            Document document,
+            INamedTypeSymbol originalType,
+            ImmutableArray<ISymbol> selectedMembers,
+            CancellationToken cancellationToken
+        );
     }
 }

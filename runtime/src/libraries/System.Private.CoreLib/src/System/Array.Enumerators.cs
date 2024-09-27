@@ -92,9 +92,7 @@ namespace System
 
         public void Reset() => _index = -1;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     internal sealed class SZGenericArrayEnumerator<T> : SZGenericArrayEnumeratorBase, IEnumerator<T>
@@ -107,7 +105,8 @@ namespace System
         /// to be using T[] elsewhere, this singleton should be used.  Otherwise, GenericEmptyEnumerator's
         /// singleton should be used instead, as it doesn't reference T[] in order to reduce footprint.
         /// </remarks>
-        internal static readonly SZGenericArrayEnumerator<T> Empty = new SZGenericArrayEnumerator<T>(null, 0);
+        internal static readonly SZGenericArrayEnumerator<T> Empty =
+            new SZGenericArrayEnumerator<T>(null, 0);
 
         internal SZGenericArrayEnumerator(T[]? array, int endIndex)
             : base(endIndex)

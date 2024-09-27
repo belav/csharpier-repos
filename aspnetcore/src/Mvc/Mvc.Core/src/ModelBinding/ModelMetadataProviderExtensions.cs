@@ -23,7 +23,8 @@ public static class ModelMetadataProviderExtensions
     public static ModelMetadata GetMetadataForProperty(
         this IModelMetadataProvider provider,
         Type containerType,
-        string propertyName)
+        string propertyName
+    )
     {
         ArgumentNullException.ThrowIfNull(provider);
         ArgumentNullException.ThrowIfNull(containerType);

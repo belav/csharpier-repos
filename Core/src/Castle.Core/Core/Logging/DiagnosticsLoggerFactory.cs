@@ -1,11 +1,11 @@
 // Copyright 2004-2022 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,28 +14,28 @@
 
 namespace Castle.Core.Logging
 {
-	using System;
+    using System;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
 #if NET6_0_OR_GREATER
-	[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 #endif
-	public class DiagnosticsLoggerFactory : AbstractLoggerFactory
-	{
-		private const string DefaultLogName = "CastleDefaultLogger";
+    public class DiagnosticsLoggerFactory : AbstractLoggerFactory
+    {
+        private const string DefaultLogName = "CastleDefaultLogger";
 
-		public override ILogger Create(string name)
-		{
-			return new DiagnosticsLogger(DefaultLogName, name);
-		}
+        public override ILogger Create(string name)
+        {
+            return new DiagnosticsLogger(DefaultLogName, name);
+        }
 
-		public override ILogger Create(string name, LoggerLevel level)
-		{
-			var logger = new DiagnosticsLogger(DefaultLogName, name);
-			logger.Level = level;
-			return logger;
-		}
-	}
+        public override ILogger Create(string name, LoggerLevel level)
+        {
+            var logger = new DiagnosticsLogger(DefaultLogName, name);
+            logger.Level = level;
+            return logger;
+        }
+    }
 }

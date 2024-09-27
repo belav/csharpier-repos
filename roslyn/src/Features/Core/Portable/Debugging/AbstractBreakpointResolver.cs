@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Debugging
 {
     internal abstract partial class AbstractBreakpointResolver
     {
-        // I believe this is a close approximation of the IVsDebugName string format produced 
+        // I believe this is a close approximation of the IVsDebugName string format produced
         // by the native language service implementations:
         //
         //   C#: csharp\radmanaged\DebuggerInteraction\BreakpointNameResolver.cs
@@ -37,23 +37,17 @@ namespace Microsoft.CodeAnalysis.Debugging
         // declaration (same as C# behavior).
         private static readonly SymbolDisplayFormat s_vsDebugNameFormat =
             new(
-                globalNamespaceStyle:
-                    SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle:
-                    SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions:
-                    SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions:
-                    SymbolDisplayMemberOptions.IncludeContainingType |
-                    SymbolDisplayMemberOptions.IncludeParameters,
-                parameterOptions:
-                    SymbolDisplayParameterOptions.IncludeOptionalBrackets |
-                    SymbolDisplayParameterOptions.IncludeType,
-                propertyStyle:
-                    SymbolDisplayPropertyStyle.NameOnly,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+                    | SymbolDisplayMemberOptions.IncludeParameters,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeOptionalBrackets
+                    | SymbolDisplayParameterOptions.IncludeType,
+                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         protected readonly string Text;
         private readonly string _language;
@@ -64,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Debugging
             Solution solution,
             string text,
             string language,
-            IEqualityComparer<string> identifierComparer)
+            IEqualityComparer<string> identifierComparer
+        )
         {
             _solution = solution;
             Text = text;
@@ -72,9 +67,15 @@ namespace Microsoft.CodeAnalysis.Debugging
             _identifierComparer = identifierComparer;
         }
 
-        protected abstract void ParseText(out IList<NameAndArity> nameParts, out int? parameterCount);
+        protected abstract void ParseText(
+            out IList<NameAndArity> nameParts,
+            out int? parameterCount
+        );
         protected abstract IEnumerable<ISymbol> GetMembers(INamedTypeSymbol type, string name);
-        protected abstract bool HasMethodBody(IMethodSymbol method, CancellationToken cancellationToken);
+        protected abstract bool HasMethodBody(
+            IMethodSymbol method,
+            CancellationToken cancellationToken
+        );
 
         private BreakpointResolutionResult CreateBreakpoint(ISymbol methodSymbol)
         {
@@ -87,7 +88,9 @@ namespace Microsoft.CodeAnalysis.Debugging
             return BreakpointResolutionResult.CreateSpanResult(document, textSpan, vsDebugName);
         }
 
-        public async Task<IEnumerable<BreakpointResolutionResult>> DoAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<BreakpointResolutionResult>> DoAsync(
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Debugging
                 //         representation will use C# language format ("C.~C()").  I verified that this works with
                 //         "Break at Function" (breakpoint is correctly set and can be hit), so I don't see a reason
                 //         to prohibit this (even though the old language service didn't support it).
-                var members = await FindMembersAsync(nameParts, cancellationToken).ConfigureAwait(false);
+                var members = await FindMembersAsync(nameParts, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // Filter down the list of symbols to "applicable methods", specifically:
                 // - "regular" methods
@@ -111,8 +115,10 @@ namespace Microsoft.CodeAnalysis.Debugging
                 // - conversions?
                 // where "applicable" means that the method or property represents a valid place to set a breakpoint
                 // and that it has the expected number of parameters
-                return members.Where(m => IsApplicable(m, parameterCount, cancellationToken)).
-                    Select(CreateBreakpoint).ToImmutableArrayOrEmpty();
+                return members
+                    .Where(m => IsApplicable(m, parameterCount, cancellationToken))
+                    .Select(CreateBreakpoint)
+                    .ToImmutableArrayOrEmpty();
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
             {
@@ -121,7 +127,9 @@ namespace Microsoft.CodeAnalysis.Debugging
         }
 
         private async Task<IEnumerable<ISymbol>> FindMembersAsync(
-            IList<NameAndArity> nameParts, CancellationToken cancellationToken)
+            IList<NameAndArity> nameParts,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -135,7 +143,10 @@ namespace Microsoft.CodeAnalysis.Debugging
                     case 1:
                         // They're just searching for a method name.  Have to look through every type to find
                         // it.
-                        return FindMembers(await GetAllTypesAsync(cancellationToken).ConfigureAwait(false), nameParts[0]);
+                        return FindMembers(
+                            await GetAllTypesAsync(cancellationToken).ConfigureAwait(false),
+                            nameParts[0]
+                        );
 
                     case 2:
                         // They have a type name and a method name.  Find a type with a matching name and a
@@ -146,7 +157,9 @@ namespace Microsoft.CodeAnalysis.Debugging
 
                     default:
                         // They have a namespace or nested type qualified name.  Walk up to the root namespace trying to match.
-                        var containers = await _solution.GetGlobalNamespacesAsync(cancellationToken).ConfigureAwait(false);
+                        var containers = await _solution
+                            .GetGlobalNamespacesAsync(cancellationToken)
+                            .ConfigureAwait(false);
                         return FindMembers(containers, nameParts.ToArray());
                 }
             }
@@ -156,21 +169,33 @@ namespace Microsoft.CodeAnalysis.Debugging
             }
         }
 
-        private static bool MatchesName(INamespaceOrTypeSymbol typeOrNamespace, NameAndArity nameAndArity, IEqualityComparer<string> comparer)
+        private static bool MatchesName(
+            INamespaceOrTypeSymbol typeOrNamespace,
+            NameAndArity nameAndArity,
+            IEqualityComparer<string> comparer
+        )
         {
             switch (typeOrNamespace)
             {
                 case INamespaceSymbol namespaceSymbol:
-                    return comparer.Equals(namespaceSymbol.Name, nameAndArity.Name) && nameAndArity.Arity == 0;
+                    return comparer.Equals(namespaceSymbol.Name, nameAndArity.Name)
+                        && nameAndArity.Arity == 0;
                 case INamedTypeSymbol typeSymbol:
-                    return comparer.Equals(typeSymbol.Name, nameAndArity.Name) &&
-                        (nameAndArity.Arity == 0 || nameAndArity.Arity == typeSymbol.TypeArguments.Length);
+                    return comparer.Equals(typeSymbol.Name, nameAndArity.Name)
+                        && (
+                            nameAndArity.Arity == 0
+                            || nameAndArity.Arity == typeSymbol.TypeArguments.Length
+                        );
                 default:
                     return false;
             }
         }
 
-        private static bool MatchesNames(INamedTypeSymbol type, NameAndArity[] names, IEqualityComparer<string> comparer)
+        private static bool MatchesNames(
+            INamedTypeSymbol type,
+            NameAndArity[] names,
+            IEqualityComparer<string> comparer
+        )
         {
             Debug.Assert(type != null);
             Debug.Assert(names.Length >= 2);
@@ -186,7 +211,9 @@ namespace Microsoft.CodeAnalysis.Debugging
                     return false;
                 }
 
-                container = ((INamespaceOrTypeSymbol)container.ContainingType) ?? container.ContainingNamespace;
+                container =
+                    ((INamespaceOrTypeSymbol)container.ContainingType)
+                    ?? container.ContainingNamespace;
 
                 // We ran out of containers to match against before we matched all the names, so this type isn't a match.
                 if (container == null && i > 0)
@@ -198,43 +225,64 @@ namespace Microsoft.CodeAnalysis.Debugging
             return true;
         }
 
-        private IEnumerable<ISymbol> FindMembers(IEnumerable<INamespaceOrTypeSymbol> containers, params NameAndArity[] names)
+        private IEnumerable<ISymbol> FindMembers(
+            IEnumerable<INamespaceOrTypeSymbol> containers,
+            params NameAndArity[] names
+        )
         {
             // Recursively expand the list of containers to include all types in all nested containers, then filter down to a
             // set of candidate types by walking the up the enclosing containers matching by simple name.
-            var types = containers.SelectMany(GetTypeMembersRecursive).Where(t => MatchesNames(t, names, _identifierComparer));
+            var types = containers
+                .SelectMany(GetTypeMembersRecursive)
+                .Where(t => MatchesNames(t, names, _identifierComparer));
 
             var lastName = names.Last();
 
             return FindMembers(types, lastName);
         }
 
-        private IEnumerable<ISymbol> FindMembers(IEnumerable<INamedTypeSymbol> types, NameAndArity nameAndArity)
+        private IEnumerable<ISymbol> FindMembers(
+            IEnumerable<INamedTypeSymbol> types,
+            NameAndArity nameAndArity
+        )
         {
             // Get the matching members from all types (including constructors and explicit interface
             // implementations).  If there is a partial method, prefer returning the implementation over
             // the definition (since the definition will not be a candidate for setting a breakpoint).
-            var members = types.SelectMany(t => GetMembers(t, nameAndArity.Name))
-                               .Select(s => GetPartialImplementationPartOrNull(s) ?? s);
+            var members = types
+                .SelectMany(t => GetMembers(t, nameAndArity.Name))
+                .Select(s => GetPartialImplementationPartOrNull(s) ?? s);
 
             return nameAndArity.Arity == 0
                 ? members
-                : members.OfType<IMethodSymbol>().Where(m => m.TypeParameters.Length == nameAndArity.Arity);
+                : members
+                    .OfType<IMethodSymbol>()
+                    .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
         }
 
-        private async Task<IEnumerable<INamedTypeSymbol>> GetAllTypesAsync(CancellationToken cancellationToken)
+        private async Task<IEnumerable<INamedTypeSymbol>> GetAllTypesAsync(
+            CancellationToken cancellationToken
+        )
         {
-            var namespaces = await _solution.GetGlobalNamespacesAsync(cancellationToken).ConfigureAwait(false);
+            var namespaces = await _solution
+                .GetGlobalNamespacesAsync(cancellationToken)
+                .ConfigureAwait(false);
             return namespaces.GetAllTypes(cancellationToken);
         }
 
-        private static IMethodSymbol GetPartialImplementationPartOrNull(ISymbol symbol)
-            => (symbol.Kind == SymbolKind.Method) ? ((IMethodSymbol)symbol).PartialImplementationPart : null;
+        private static IMethodSymbol GetPartialImplementationPartOrNull(ISymbol symbol) =>
+            (symbol.Kind == SymbolKind.Method)
+                ? ((IMethodSymbol)symbol).PartialImplementationPart
+                : null;
 
         /// <summary>
         /// Is this method or property a valid place to set a breakpoint and does it match the expected parameter count?
         /// </summary>
-        private bool IsApplicable(ISymbol methodOrProperty, int? parameterCount, CancellationToken cancellationToken)
+        private bool IsApplicable(
+            ISymbol methodOrProperty,
+            int? parameterCount,
+            CancellationToken cancellationToken
+        )
         {
             // You can only set a breakpoint on methods (including constructors/destructors) and properties.
             var kind = methodOrProperty.Kind;
@@ -263,7 +311,10 @@ namespace Microsoft.CodeAnalysis.Debugging
 
             // Finally, check to make sure we have source, and if we've got a method symbol, make sure it
             // has a body to set a breakpoint on.
-            if ((methodOrProperty.Language == _language) && methodOrProperty.Locations.Any(static location => location.IsInSource))
+            if (
+                (methodOrProperty.Language == _language)
+                && methodOrProperty.Locations.Any(static location => location.IsInSource)
+            )
             {
                 if (methodOrProperty.IsKind(SymbolKind.Method))
                 {
@@ -278,19 +329,26 @@ namespace Microsoft.CodeAnalysis.Debugging
             return false;
         }
 
-        private static bool IsMismatch(ISymbol methodOrProperty, int? parameterCount)
-            => methodOrProperty switch
+        private static bool IsMismatch(ISymbol methodOrProperty, int? parameterCount) =>
+            methodOrProperty switch
             {
                 IMethodSymbol method => method.Parameters.Length != parameterCount,
                 IPropertySymbol property => property.Parameters.Length != parameterCount,
                 _ => false,
             };
 
-        private static IEnumerable<INamedTypeSymbol> GetTypeMembersRecursive(INamespaceOrTypeSymbol container)
-            => container switch
+        private static IEnumerable<INamedTypeSymbol> GetTypeMembersRecursive(
+            INamespaceOrTypeSymbol container
+        ) =>
+            container switch
             {
-                INamespaceSymbol namespaceSymbol => namespaceSymbol.GetMembers().SelectMany(GetTypeMembersRecursive),
-                INamedTypeSymbol typeSymbol => typeSymbol.GetTypeMembers().SelectMany(GetTypeMembersRecursive).Concat(typeSymbol),
+                INamespaceSymbol namespaceSymbol => namespaceSymbol
+                    .GetMembers()
+                    .SelectMany(GetTypeMembersRecursive),
+                INamedTypeSymbol typeSymbol => typeSymbol
+                    .GetTypeMembers()
+                    .SelectMany(GetTypeMembersRecursive)
+                    .Concat(typeSymbol),
                 _ => null,
             };
     }

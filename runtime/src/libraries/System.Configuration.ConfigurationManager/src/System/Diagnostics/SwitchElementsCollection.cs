@@ -12,16 +12,28 @@ namespace System.Diagnostics
     internal sealed class SwitchElementsCollection : ConfigurationElementCollection
     {
         public new SwitchElement this[string name] => (SwitchElement)BaseGet(name);
-        public override ConfigurationElementCollectionType CollectionType => ConfigurationElementCollectionType.AddRemoveClearMap;
+        public override ConfigurationElementCollectionType CollectionType =>
+            ConfigurationElementCollectionType.AddRemoveClearMap;
+
         protected override ConfigurationElement CreateNewElement() => new SwitchElement();
-        protected override object GetElementKey(ConfigurationElement element) => ((SwitchElement)element).Name;
+
+        protected override object GetElementKey(ConfigurationElement element) =>
+            ((SwitchElement)element).Name;
     }
 
     internal sealed class SwitchElement : ConfigurationElement
     {
-        private static readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
-        private static readonly ConfigurationProperty _propName = new("name", typeof(string), "", ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-        private static readonly ConfigurationProperty _propValue = new("value", typeof(string), null, ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationPropertyCollection _properties =
+            new ConfigurationPropertyCollection();
+        private static readonly ConfigurationProperty _propName =
+            new(
+                "name",
+                typeof(string),
+                "",
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+        private static readonly ConfigurationProperty _propValue =
+            new("value", typeof(string), null, ConfigurationPropertyOptions.IsRequired);
 
         private StringDictionary _attributes;
 
@@ -78,16 +90,21 @@ namespace System.Diagnostics
         }
 
         // Account for optional attributes from custom listeners.
-        protected internal override bool SerializeElement(XmlWriter writer, bool serializeCollectionKey)
+        protected internal override bool SerializeElement(
+            XmlWriter writer,
+            bool serializeCollectionKey
+        )
         {
             bool DataToWrite = base.SerializeElement(writer, serializeCollectionKey);
             DataToWrite = DataToWrite || ((_attributes != null) && (_attributes.Count > 0));
             return DataToWrite;
         }
 
-        protected internal override void Unmerge(ConfigurationElement sourceElement,
-                                                 ConfigurationElement parentElement,
-                                                 ConfigurationSaveMode saveMode)
+        protected internal override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             base.Unmerge(sourceElement, parentElement, saveMode);
 

@@ -3,7 +3,12 @@
 public class EnumToNullableEnum : AutoMapperSpecBase
 {
     Destination _destination;
-    public enum SomeEnum { Foo, Bar }
+
+    public enum SomeEnum
+    {
+        Foo,
+        Bar,
+    }
 
     public class Source
     {
@@ -15,14 +20,15 @@ public class EnumToNullableEnum : AutoMapperSpecBase
         public SomeEnum? EnumValue { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(new Source{ EnumValue = SomeEnum.Bar });
+        _destination = Mapper.Map<Source, Destination>(new Source { EnumValue = SomeEnum.Bar });
     }
 
     [Fact]

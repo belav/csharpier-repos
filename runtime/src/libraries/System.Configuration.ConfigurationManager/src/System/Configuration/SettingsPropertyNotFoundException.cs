@@ -7,31 +7,31 @@ using System.Runtime.Serialization;
 namespace System.Configuration
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SettingsPropertyNotFoundException : Exception
     {
         public SettingsPropertyNotFoundException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SettingsPropertyNotFoundException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected SettingsPropertyNotFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected SettingsPropertyNotFoundException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 
-        public SettingsPropertyNotFoundException()
-        {
-        }
+        public SettingsPropertyNotFoundException() { }
     }
-
 }

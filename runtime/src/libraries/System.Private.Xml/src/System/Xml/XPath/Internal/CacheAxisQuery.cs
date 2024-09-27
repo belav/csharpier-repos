@@ -12,12 +12,15 @@ namespace MS.Internal.Xml.XPath
         // int count; -- we reusing it here
         protected List<XPathNavigator> outputBuffer;
 
-        public CacheAxisQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest) : base(qyInput, name, prefix, typeTest)
+        public CacheAxisQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest)
         {
             this.outputBuffer = new List<XPathNavigator>();
             this.count = 0;
         }
-        protected CacheAxisQuery(CacheAxisQuery other) : base(other)
+
+        protected CacheAxisQuery(CacheAxisQuery other)
+            : base(other)
         {
             this.outputBuffer = new List<XPathNavigator>(other.outputBuffer);
             this.count = other.count;
@@ -58,8 +61,23 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override int CurrentPosition { get { return count; } }
-        public override int Count { get { return outputBuffer.Count; } }
-        public override QueryProps Properties { get { return QueryProps.Merge | QueryProps.Cached | QueryProps.Position | QueryProps.Count; } }
+        public override int CurrentPosition
+        {
+            get { return count; }
+        }
+        public override int Count
+        {
+            get { return outputBuffer.Count; }
+        }
+        public override QueryProps Properties
+        {
+            get
+            {
+                return QueryProps.Merge
+                    | QueryProps.Cached
+                    | QueryProps.Position
+                    | QueryProps.Count;
+            }
+        }
     }
 }

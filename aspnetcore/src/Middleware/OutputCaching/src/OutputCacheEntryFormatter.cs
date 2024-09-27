@@ -12,6 +12,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.OutputCaching;
+
 /// <summary>
 /// Formats <see cref="OutputCacheEntry"/> instance to match structures supported by the <see cref="IOutputCacheStore"/> implementations.
 /// </summary>
@@ -23,7 +24,11 @@ internal static class OutputCacheEntryFormatter
         V2_OriginalWithCommonHeaders = 2,
     }
 
-    public static async ValueTask<OutputCacheEntry?> GetAsync(string key, IOutputCacheStore store, CancellationToken cancellationToken)
+    public static async ValueTask<OutputCacheEntry?> GetAsync(
+        string key,
+        IOutputCacheStore store,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(key);
 
@@ -37,7 +42,15 @@ internal static class OutputCacheEntryFormatter
         return Deserialize(content);
     }
 
-    public static async ValueTask StoreAsync(string key, OutputCacheEntry value, HashSet<string>? tags, TimeSpan duration, IOutputCacheStore store, ILogger logger, CancellationToken cancellationToken)
+    public static async ValueTask StoreAsync(
+        string key,
+        OutputCacheEntry value,
+        HashSet<string>? tags,
+        TimeSpan duration,
+        IOutputCacheStore store,
+        ILogger logger,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(value);
         ArgumentNullException.ThrowIfNull(value.Body);
@@ -50,7 +63,13 @@ internal static class OutputCacheEntryFormatter
         {
             if (store is IOutputCacheBufferStore bufferStore)
             {
-                await bufferStore.SetAsync(key, new(buffer.GetCommittedMemory()), CopyToLeasedMemory(tags, out var lease), duration, cancellationToken);
+                await bufferStore.SetAsync(
+                    key,
+                    new(buffer.GetCommittedMemory()),
+                    CopyToLeasedMemory(tags, out var lease),
+                    duration,
+                    cancellationToken
+                );
                 if (lease is not null)
                 {
                     ArrayPool<string>.Shared.Return(lease);
@@ -286,21 +305,27 @@ internal static class OutputCacheEntryFormatter
                         value = StringValues.Empty;
                         break;
                     case 1:
-                        value = new(useCommonHeaders ? ReadCommonHeader(ref reader) : reader.ReadString());
+                        value = new(
+                            useCommonHeaders ? ReadCommonHeader(ref reader) : reader.ReadString()
+                        );
                         break;
                     default:
                         var values = new string[valuesCount];
 
                         for (var j = 0; j < valuesCount; j++)
                         {
-                            values[j] = useCommonHeaders ? ReadCommonHeader(ref reader) : reader.ReadString();
+                            values[j] = useCommonHeaders
+                                ? ReadCommonHeader(ref reader)
+                                : reader.ReadString();
                         }
                         value = new(values);
                         break;
                 }
                 headerArr[i] = (key, value);
             }
-            result.SetHeaders(new ReadOnlyMemory<(string Name, StringValues Values)>(headerArr, 0, headersCount));
+            result.SetHeaders(
+                new ReadOnlyMemory<(string Name, StringValues Values)>(headerArr, 0, headersCount)
+            );
         }
 
         if (revision == SerializationRevision.V1_Original)
@@ -320,17 +345,30 @@ internal static class OutputCacheEntryFormatter
                     // nothing to do
                     break;
                 case 1:
-                    result.SetBody(new ReadOnlySequence<byte>(ReadSegment(ref reader)), recycleBuffers: false); // we're reusing the live payload buffers
+                    result.SetBody(
+                        new ReadOnlySequence<byte>(ReadSegment(ref reader)),
+                        recycleBuffers: false
+                    ); // we're reusing the live payload buffers
                     break;
                 case < 0:
                     throw new InvalidOperationException();
                 default:
-                    RecyclableReadOnlySequenceSegment first = RecyclableReadOnlySequenceSegment.Create(ReadSegment(ref reader), null), last = first;
+                    RecyclableReadOnlySequenceSegment first = RecyclableReadOnlySequenceSegment.Create(
+                            ReadSegment(ref reader),
+                            null
+                        ),
+                        last = first;
                     for (int i = 1; i < segmentsCount; i++)
                     {
-                        last = RecyclableReadOnlySequenceSegment.Create(ReadSegment(ref reader), last);
+                        last = RecyclableReadOnlySequenceSegment.Create(
+                            ReadSegment(ref reader),
+                            last
+                        );
                     }
-                    result.SetBody(new ReadOnlySequence<byte>(first, 0, last, last.Length), recycleBuffers: false);  // we're reusing the live payload buffers
+                    result.SetBody(
+                        new ReadOnlySequence<byte>(first, 0, last, last.Length),
+                        recycleBuffers: false
+                    ); // we're reusing the live payload buffers
                     break;
             }
 
@@ -369,7 +407,7 @@ internal static class OutputCacheEntryFormatter
 
             var payloadLength = checked((int)reader.Read7BitEncodedInt64());
             if (payloadLength != 0)
-            {   // since the reader only supports linear memory currently, read the entire chunk as a single piece
+            { // since the reader only supports linear memory currently, read the entire chunk as a single piece
                 result.SetBody(new(reader.ReadBytesMemory(payloadLength)), recycleBuffers: false); // we're reusing the live payload buffers
             }
         }
@@ -476,7 +514,6 @@ internal static class OutputCacheEntryFormatter
         // additional MSFT headers
         "X-Rtag",
         "X-Vhost",
-
         // for Content-Type
         "text/html",
         "text/html; charset=utf-8",
@@ -497,16 +534,18 @@ internal static class OutputCacheEntryFormatter
         "SAMEORIGIN",
         "DENY",
         // for X-Content-Type
-        "nosniff"
+        "nosniff",
 
         // if you add new options here, you should rev the api version
     };
 
-    private static readonly FrozenSet<string> IgnoredHeaders = FrozenSet.ToFrozenSet(new[] {
-            HeaderNames.RequestId, HeaderNames.ContentLength, HeaderNames.Age
-    }, StringComparer.OrdinalIgnoreCase);
+    private static readonly FrozenSet<string> IgnoredHeaders = FrozenSet.ToFrozenSet(
+        new[] { HeaderNames.RequestId, HeaderNames.ContentLength, HeaderNames.Age },
+        StringComparer.OrdinalIgnoreCase
+    );
 
-    private static readonly FrozenDictionary<string, int> CommonHeadersLookup = BuildCommonHeadersLookup();
+    private static readonly FrozenDictionary<string, int> CommonHeadersLookup =
+        BuildCommonHeadersLookup();
 
     static FrozenDictionary<string, int> BuildCommonHeadersLookup()
     {

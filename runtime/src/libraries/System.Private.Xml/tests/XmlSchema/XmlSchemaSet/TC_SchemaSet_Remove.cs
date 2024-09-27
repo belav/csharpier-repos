@@ -19,7 +19,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         //[Variation(Desc = "v1 - Remove with null", Priority = 0)]
         [Fact]

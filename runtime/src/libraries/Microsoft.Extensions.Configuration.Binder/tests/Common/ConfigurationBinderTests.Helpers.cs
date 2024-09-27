@@ -8,17 +8,17 @@ using Microsoft.Extensions.Configuration.Test;
 
 namespace Microsoft.Extensions
 #if BUILDING_SOURCE_GENERATOR_TESTS
-    .SourceGeneration
+.SourceGeneration
 #endif
-    .Configuration.Binder.Tests
+.Configuration.Binder.Tests
 {
     internal static class TestHelpers
     {
         public const bool NotSourceGenMode
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            = false;
+        = false;
 #else
-            = true;
+        = true;
 #endif
 
         public static IConfiguration GetConfigurationFromJsonString(string json)
@@ -34,11 +34,8 @@ namespace Microsoft.Extensions
     #region // Shared test classes
     public class ComplexOptions
     {
-        private static Dictionary<string, int> _existingDictionary = new()
-            {
-                {"existing-item1", 1},
-                {"existing-item2", 2},
-            };
+        private static Dictionary<string, int> _existingDictionary =
+            new() { { "existing-item1", 1 }, { "existing-item2", 2 } };
 
         public ComplexOptions()
         {
@@ -77,14 +74,21 @@ namespace Microsoft.Extensions
 
         public ISet<string> NonInstantiatedISet { get; set; } = null!;
         public HashSet<string> NonInstantiatedHashSet { get; set; } = null!;
-        public IDictionary<string, ISet<string>> NonInstantiatedDictionaryWithISet { get; set; } = null!;
-        public IDictionary<string, HashSet<string>> InstantiatedDictionaryWithHashSet { get; set; } =
+        public IDictionary<string, ISet<string>> NonInstantiatedDictionaryWithISet { get; set; } =
+            null!;
+        public IDictionary<
+            string,
+            HashSet<string>
+        > InstantiatedDictionaryWithHashSet { get; set; } =
             new Dictionary<string, HashSet<string>>();
 
-        public IDictionary<string, HashSet<string>> InstantiatedDictionaryWithHashSetWithSomeValues { get; set; } =
+        public IDictionary<
+            string,
+            HashSet<string>
+        > InstantiatedDictionaryWithHashSetWithSomeValues { get; set; } =
             new Dictionary<string, HashSet<string>>
             {
-                {"item1", new HashSet<string>(new[] {"existing1", "existing2"})}
+                { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) },
             };
 
         public IEnumerable<string> NonInstantiatedIEnumerable { get; set; } = null!;
@@ -114,23 +118,30 @@ namespace Microsoft.Extensions
         public IReadOnlySet<string> InstantiatedIReadOnlySetWithSomeValues { get; set; } =
             new HashSet<string>(new[] { "existing1", "existing2" });
         public IReadOnlySet<string> NonInstantiatedIReadOnlySet { get; set; }
-        public IDictionary<string, IReadOnlySet<string>> InstantiatedDictionaryWithReadOnlySetWithSomeValues { get; set; } =
+        public IDictionary<
+            string,
+            IReadOnlySet<string>
+        > InstantiatedDictionaryWithReadOnlySetWithSomeValues { get; set; } =
             new Dictionary<string, IReadOnlySet<string>>
             {
-                            {"item1", new HashSet<string>(new[] {"existing1", "existing2"})}
+                { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) },
             };
 #endif
-        public IReadOnlyDictionary<string, int> InstantiatedReadOnlyDictionaryWithWithSomeValues { get; set; } =
-            _existingDictionary;
+        public IReadOnlyDictionary<
+            string,
+            int
+        > InstantiatedReadOnlyDictionaryWithWithSomeValues { get; set; } = _existingDictionary;
 
         public IReadOnlyDictionary<string, int> NonInstantiatedReadOnlyDictionary { get; set; }
 
-        public CustomICollectionWithoutAnAddMethod InstantiatedCustomICollectionWithoutAnAddMethod { get; set; } = new();
+        public CustomICollectionWithoutAnAddMethod InstantiatedCustomICollectionWithoutAnAddMethod { get; set; } =
+            new();
         public CustomICollectionWithoutAnAddMethod NonInstantiatedCustomICollectionWithoutAnAddMethod { get; set; }
 
         public IEnumerable<string> InstantiatedIEnumerable { get; set; } = new List<string>();
         public ICollection<string> InstantiatedICollection { get; set; } = new List<string>();
-        public IReadOnlyCollection<string> InstantiatedIReadOnlyCollection { get; set; } = new List<string>();
+        public IReadOnlyCollection<string> InstantiatedIReadOnlyCollection { get; set; } =
+            new List<string>();
     }
 
     public class NestedOptions
@@ -143,6 +154,7 @@ namespace Microsoft.Extensions
     public class CustomICollectionWithoutAnAddMethod : ICollection<string>
     {
         private readonly List<string> _items = new();
+
         public IEnumerator<string> GetEnumerator() => _items.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

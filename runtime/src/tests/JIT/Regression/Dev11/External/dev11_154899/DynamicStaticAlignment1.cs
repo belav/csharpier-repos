@@ -23,7 +23,6 @@ namespace Test
         }
     }
 
-
     public static class App
     {
         [Fact]

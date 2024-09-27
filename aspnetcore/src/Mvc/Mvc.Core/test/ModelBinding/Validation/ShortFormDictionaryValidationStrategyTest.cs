@@ -10,22 +10,24 @@ public class ShortFormDictionaryValidationStrategyTest
     {
         // Arrange
         var model = new Dictionary<int, string>()
-            {
-                { 2, "two" },
-                { 3, "three" },
-                { 5, "five" },
-            };
+        {
+            { 2, "two" },
+            { 3, "three" },
+            { 5, "five" },
+        };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));
         var valueMetadata = metadataProvider.GetMetadataForType(typeof(string));
-        var strategy = new ShortFormDictionaryValidationStrategy<int, string>(new Dictionary<string, int>()
+        var strategy = new ShortFormDictionaryValidationStrategy<int, string>(
+            new Dictionary<string, int>()
             {
                 { "prefix[2]", 2 },
                 { "prefix[3]", 3 },
                 { "prefix[5]", 5 },
             },
-        valueMetadata);
+            valueMetadata
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "ignored prefix", model);
@@ -50,7 +52,8 @@ public class ShortFormDictionaryValidationStrategyTest
                 Assert.Equal("prefix[5]", e.Key);
                 Assert.Equal("five", e.Model);
                 Assert.Same(valueMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -58,21 +61,19 @@ public class ShortFormDictionaryValidationStrategyTest
     {
         // Arrange
         var model = new Dictionary<int, string>()
-            {
-                { 2, "two" },
-                { 3, "three" },
-                { 5, "five" },
-            };
+        {
+            { 2, "two" },
+            { 3, "three" },
+            { 5, "five" },
+        };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));
         var valueMetadata = metadataProvider.GetMetadataForType(typeof(string));
-        var strategy = new ShortFormDictionaryValidationStrategy<int, string>(new Dictionary<string, int>()
-            {
-                { "prefix[2]", 2 },
-                { "prefix[3]", 3 },
-            },
-        valueMetadata);
+        var strategy = new ShortFormDictionaryValidationStrategy<int, string>(
+            new Dictionary<string, int>() { { "prefix[2]", 2 }, { "prefix[3]", 3 } },
+            valueMetadata
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "ignored prefix", model);
@@ -91,29 +92,28 @@ public class ShortFormDictionaryValidationStrategyTest
                 Assert.Equal("prefix[3]", e.Key);
                 Assert.Equal("three", e.Model);
                 Assert.Same(valueMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     [Fact]
     public void EnumerateElements_RunOutOfElements()
     {
         // Arrange
-        var model = new Dictionary<int, string>()
-            {
-                { 2, "two" },
-                { 3, "three" },
-            };
+        var model = new Dictionary<int, string>() { { 2, "two" }, { 3, "three" } };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));
         var valueMetadata = metadataProvider.GetMetadataForType(typeof(string));
-        var strategy = new ShortFormDictionaryValidationStrategy<int, string>(new Dictionary<string, int>()
+        var strategy = new ShortFormDictionaryValidationStrategy<int, string>(
+            new Dictionary<string, int>()
             {
                 { "prefix[2]", 2 },
                 { "prefix[3]", 3 },
                 { "prefix[5]", 5 },
             },
-        valueMetadata);
+            valueMetadata
+        );
 
         // Act
         var enumerator = strategy.GetChildren(metadata, "ignored prefix", model);
@@ -132,7 +132,8 @@ public class ShortFormDictionaryValidationStrategyTest
                 Assert.Equal("prefix[3]", e.Key);
                 Assert.Equal("three", e.Model);
                 Assert.Same(valueMetadata, e.Metadata);
-            });
+            }
+        );
     }
 
     private List<ValidationEntry> BufferEntries(IEnumerator<ValidationEntry> enumerator)

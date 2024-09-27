@@ -4,9 +4,9 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Roslyn.Utilities;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // all try blocks with yields in them and complete set of labels inside those try blocks
             // NOTE: non-yielding try blocks are transparently ignored - i.e. their labels are included
-            //       in the label set of the nearest yielding-try parent  
+            //       in the label set of the nearest yielding-try parent
             private Dictionary<BoundTryStatement, HashSet<LabelSymbol>> _labelsInYieldingTrys;
 
             // transient accumulators.
@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             public bool ContainsYields(BoundTryStatement statement)
             {
-                return _labelsInYieldingTrys != null && _labelsInYieldingTrys.ContainsKey(statement);
+                return _labelsInYieldingTrys != null
+                    && _labelsInYieldingTrys.ContainsKey(statement);
             }
 
             /// <summary>
@@ -48,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Labels reachable from within this frame without invoking its finally. 
+            /// Labels reachable from within this frame without invoking its finally.
             /// null if there are none such labels.
             /// </summary>
             internal HashSet<LabelSymbol> Labels(BoundTryStatement statement)
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var yieldingTryLabels = _labelsInYieldingTrys;
                     if (yieldingTryLabels == null)
                     {
-                        _labelsInYieldingTrys = yieldingTryLabels = new Dictionary<BoundTryStatement, HashSet<LabelSymbol>>();
+                        _labelsInYieldingTrys = yieldingTryLabels =
+                            new Dictionary<BoundTryStatement, HashSet<LabelSymbol>>();
                     }
 
                     yieldingTryLabels.Add(node, currentLabels);
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// Analyzes method body for labels.
     /// </summary>
-    internal abstract class LabelCollector : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal abstract class LabelCollector
+        : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
         // transient accumulator.
         protected HashSet<LabelSymbol> currentLabels;

@@ -31,10 +31,9 @@ public class StringTimeOnlyConverter<TModel, TProvider> : ValueConverter<TModel,
     public StringTimeOnlyConverter(
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-        ConverterMappingHints? mappingHints = null)
-        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-    {
-    }
+        ConverterMappingHints? mappingHints = null
+    )
+        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,10 +41,11 @@ public class StringTimeOnlyConverter<TModel, TProvider> : ValueConverter<TModel,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static new Expression<Func<TimeOnly, string>> ToString()
-        => v => v.Ticks % 10000000 == 0
-            ? string.Format(CultureInfo.InvariantCulture, @"{0:HH\:mm\:ss}", v)
-            : v.ToString("o");
+    protected static new Expression<Func<TimeOnly, string>> ToString() =>
+        v =>
+            v.Ticks % 10000000 == 0
+                ? string.Format(CultureInfo.InvariantCulture, @"{0:HH\:mm\:ss}", v)
+                : v.ToString("o");
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,6 +53,6 @@ public class StringTimeOnlyConverter<TModel, TProvider> : ValueConverter<TModel,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static Expression<Func<string, TimeOnly>> ToTimeOnly()
-        => v => TimeOnly.Parse(v, CultureInfo.InvariantCulture, DateTimeStyles.None);
+    protected static Expression<Func<string, TimeOnly>> ToTimeOnly() =>
+        v => TimeOnly.Parse(v, CultureInfo.InvariantCulture, DateTimeStyles.None);
 }

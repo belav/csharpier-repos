@@ -27,7 +27,10 @@ namespace System.Web.Http
         {
             HttpControllerContext controllerContext = ContextUtil.CreateControllerContext();
             HttpActionDescriptor actionDescriptor = new Mock<HttpActionDescriptor>().Object;
-            HttpActionContext actionContext = new HttpActionContext(controllerContext, actionDescriptor);
+            HttpActionContext actionContext = new HttpActionContext(
+                controllerContext,
+                actionDescriptor
+            );
 
             Assert.Same(controllerContext, actionContext.ControllerContext);
             Assert.Same(actionDescriptor, actionContext.ActionDescriptor);
@@ -42,7 +45,8 @@ namespace System.Web.Http
         {
             Assert.ThrowsArgumentNull(
                 () => new HttpActionContext(null, new Mock<HttpActionDescriptor>().Object),
-                "controllerContext");
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -50,7 +54,8 @@ namespace System.Web.Http
         {
             Assert.ThrowsArgumentNull(
                 () => new HttpActionContext(ContextUtil.CreateControllerContext(), null),
-                "actionDescriptor");
+                "actionDescriptor"
+            );
         }
 
         [Fact]
@@ -61,7 +66,8 @@ namespace System.Web.Http
                 propertyGetter: ac => ac.ControllerContext,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: ContextUtil.CreateControllerContext());
+                roundTripTestValue: ContextUtil.CreateControllerContext()
+            );
         }
 
         [Fact]
@@ -72,7 +78,8 @@ namespace System.Web.Http
                 propertyGetter: ac => ac.ActionDescriptor,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: new Mock<HttpActionDescriptor>().Object);
+                roundTripTestValue: new Mock<HttpActionDescriptor>().Object
+            );
         }
 
         [Fact]
@@ -84,7 +91,7 @@ namespace System.Web.Http
             HttpActionContext product = new HttpActionContext();
             product.ControllerContext = new HttpControllerContext
             {
-                RequestContext = expectedRequestContext
+                RequestContext = expectedRequestContext,
             };
 
             // Act

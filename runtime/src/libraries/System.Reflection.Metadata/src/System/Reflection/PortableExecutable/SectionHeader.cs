@@ -75,16 +75,24 @@ namespace System.Reflection.PortableExecutable
         internal const int NameSize = 8;
 
         internal const int Size =
-            NameSize +
-            sizeof(int) +   // VirtualSize
-            sizeof(int) +   // VirtualAddress
-            sizeof(int) +   // SizeOfRawData
-            sizeof(int) +   // PointerToRawData
-            sizeof(int) +   // PointerToRelocations
-            sizeof(int) +   // PointerToLineNumbers
-            sizeof(short) + // NumberOfRelocations
-            sizeof(short) + // NumberOfLineNumbers
-            sizeof(int);    // SectionCharacteristics
+            NameSize
+            + sizeof(int)
+            + // VirtualSize
+            sizeof(int)
+            + // VirtualAddress
+            sizeof(int)
+            + // SizeOfRawData
+            sizeof(int)
+            + // PointerToRawData
+            sizeof(int)
+            + // PointerToRelocations
+            sizeof(int)
+            + // PointerToLineNumbers
+            sizeof(short)
+            + // NumberOfRelocations
+            sizeof(short)
+            + // NumberOfLineNumbers
+            sizeof(int); // SectionCharacteristics
 
         internal SectionHeader(ref PEBinaryReader reader)
         {

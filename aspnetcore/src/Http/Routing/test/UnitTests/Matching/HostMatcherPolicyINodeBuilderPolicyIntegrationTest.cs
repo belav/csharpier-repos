@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 // End-to-end tests for the host matching functionality
-public class HostMatcherPolicyINodeBuilderPolicyIntegrationTest : HostMatcherPolicyIntegrationTestBase
+public class HostMatcherPolicyINodeBuilderPolicyIntegrationTest
+    : HostMatcherPolicyIntegrationTestBase
 {
     protected override bool HasDynamicMetadata => false;
 }

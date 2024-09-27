@@ -13,8 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteDateTimeMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping
-        = new()
+    private static readonly Dictionary<string, string> DatePartMapping =
+        new()
         {
             { nameof(DateTime.Year), "%Y" },
             { nameof(DateTime.Month), "%m" },
@@ -23,7 +23,7 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
             { nameof(DateTime.Hour), "%H" },
             { nameof(DateTime.Minute), "%M" },
             { nameof(DateTime.Second), "%S" },
-            { nameof(DateTime.DayOfWeek), "%w" }
+            { nameof(DateTime.DayOfWeek), "%w" },
         };
 
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
@@ -49,7 +49,8 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (member.DeclaringType == typeof(DateTime))
         {
@@ -58,11 +59,9 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
             if (DatePartMapping.TryGetValue(memberName, out var datePart))
             {
                 return _sqlExpressionFactory.Convert(
-                    _sqlExpressionFactory.Strftime(
-                        typeof(string),
-                        datePart,
-                        instance!),
-                    returnType);
+                    _sqlExpressionFactory.Strftime(typeof(string), datePart, instance!),
+                    returnType
+                );
             }
 
             if (memberName == nameof(DateTime.Ticks))
@@ -75,10 +74,14 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                                 new[] { instance! },
                                 nullable: true,
                                 argumentsPropagateNullability: new[] { true },
-                                typeof(double)),
-                            _sqlExpressionFactory.Constant(1721425.5)), // NB: Result of julianday('0001-01-01 00:00:00')
-                        _sqlExpressionFactory.Constant(TimeSpan.TicksPerDay)),
-                    typeof(long));
+                                typeof(double)
+                            ),
+                            _sqlExpressionFactory.Constant(1721425.5)
+                        ), // NB: Result of julianday('0001-01-01 00:00:00')
+                        _sqlExpressionFactory.Constant(TimeSpan.TicksPerDay)
+                    ),
+                    typeof(long)
+                );
             }
 
             if (memberName == nameof(DateTime.Millisecond))
@@ -86,13 +89,13 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                 return _sqlExpressionFactory.Modulo(
                     _sqlExpressionFactory.Multiply(
                         _sqlExpressionFactory.Convert(
-                            _sqlExpressionFactory.Strftime(
-                                typeof(string),
-                                "%f",
-                                instance!),
-                            typeof(double)),
-                        _sqlExpressionFactory.Constant(1000)),
-                    _sqlExpressionFactory.Constant(1000));
+                            _sqlExpressionFactory.Strftime(typeof(string), "%f", instance!),
+                            typeof(double)
+                        ),
+                        _sqlExpressionFactory.Constant(1000)
+                    ),
+                    _sqlExpressionFactory.Constant(1000)
+                );
             }
 
             var format = "%Y-%m-%d %H:%M:%f";
@@ -144,17 +147,20 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                                 returnType,
                                 format,
                                 timestring,
-                                modifiers),
-                            _sqlExpressionFactory.Constant("0")
+                                modifiers
+                            ),
+                            _sqlExpressionFactory.Constant("0"),
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, false },
-                        returnType),
-                    _sqlExpressionFactory.Constant(".")
+                        returnType
+                    ),
+                    _sqlExpressionFactory.Constant("."),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, false },
-                returnType);
+                returnType
+            );
         }
 
         return null;

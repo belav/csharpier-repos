@@ -1,34 +1,34 @@
 // Compiler options: -target:library
 
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("gtest-433")]
+[assembly: InternalsVisibleTo("gtest-433")]
 
-namespace Blah {
-
-// internal by default
-class Class1 
+namespace Blah
 {
-    public void Test() 
+    // internal by default
+    class Class1
     {
-        Console.WriteLine("Class1.Test");
+        public void Test()
+        {
+            Console.WriteLine("Class1.Test");
+        }
     }
-}
 
-// public type with internal member
-public class Class2 
-{
-    internal void Test() 
+    // public type with internal member
+    public class Class2
     {
-        Console.WriteLine("Class2.Test");
-    }
+        internal void Test()
+        {
+            Console.WriteLine("Class2.Test");
+        }
 
-    internal enum Citrus {
-        Lemon,
-        Lime,
-        Orange
+        internal enum Citrus
+        {
+            Lemon,
+            Lime,
+            Orange,
+        }
     }
-}
-
 }
